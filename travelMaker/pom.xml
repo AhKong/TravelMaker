@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>travelMaker-1</artifactId>
+	<artifactId>travelMaker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>travelMaker-1</name>
+	<name>travelMaker</name>
 	<description>team project _ travelMaker</description>
 
 	<properties>
@@ -94,5 +94,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
