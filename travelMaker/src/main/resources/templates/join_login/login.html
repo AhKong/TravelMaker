@@ -6,64 +6,49 @@
 	 <title>TravelMaker |  Log in</title>
 </th:block>
  <th:block layout:fragment="customCss">
-  <style>
-      body,html{
-    	margin:0;
-    	padding:0;
-
-    }
- 
-    .row{
-    	margin-left:12%;
-    }
-   	.card{
-   		 width:450px;
-   		 margin-left:30px;
-   		 }
-   .login-logo{
-   	font-size :50px;
-   }
-   .login-page{
-  	 	width:100%;
-   		
-   }
-   </style>
+ <style type="text/css">
+  	.login-box{width: 50% !important;}
+  	.login-page{height: 100% !important;}
+  	.login-logo {margin-top: 100px;}  
+  	
+  </style>
  </th:block>
 <th:block layout:fragment="customContents">
-<div class="login-page container-fluid">
+
 <div class="login-box">
   <div class="login-logo">
     <a href="/"><b>Travel</b>Maker</a>
   </div>
- </div>
   <!-- /.login-logo -->
   <div class="row">
-  <div class="card col-md-3 col-md-offset-1">
+  	<div class="col-md-6">
+  		<div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">일반 회원 로그인🔒</p>
-         <form action="/loginMember" method="post">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form action="../../index3.html" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="ID" name="mId">
+          <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-           <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="mPw">
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
-        <div class="row" style ="margin-left:-10px; margin-bottom:10px;">
+        <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                 자동 로그인
+                Remember Me
               </label>
             </div>
           </div>
@@ -74,94 +59,44 @@
           <!-- /.col -->
         </div>
       </form>
-      
-      <div class="text-center mb-3">
-        <p>- OR -</p>
-        <a href="#"> 아이디 찾기 |
-        </a>
-        <a href="#" >
-    	 비밀 번호 찾기
-        </a> <br>
-        <a href="/addMember"> 아직 TravelMaker 회원이 아니신가요?</a>
-      </div>
-	 </div>
-    <!-- /.login-card-body -->
-  </div>
-  <div class="card col-md-3">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">제휴업체 로그인🔒</p>
-              <form action="/loginAffiliates" method="post">
-           <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="ID" name="mId">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-           <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="mPw">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row" style ="margin-left:-10px; margin-bottom:10px;">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                자동 로그인
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      
-      <div class="text-center mb-3">
-        <p>- OR -</p>
-        <a href="#"> 아이디 찾기 |
-        </a>
-        <a href="#" >
-    	 비밀 번호 찾기
-        </a> <br>
-        <a href="/addAffiliate"> TravelMaker와 제휴를 맺으시겠어요?</a>
-      </div>
+      <p class="mb-1">
+        <a href="forgot-password.html">I forgot my password</a>
+      </p>
+      <p class="mb-0">
+        <a href="register.html" class="text-center">Register a new membership</a>
+      </p>
     </div>
     <!-- /.login-card-body -->
   </div>
-  <div class="card col-md-3">
+  	</div>
+  	<div class="col-md-6">
+  		<div class="card">
     <div class="card-body login-card-body">
-    <p class="login-box-msg">관리자 로그인🔒</p>
-           <form action="/loginAdmin" method="post">
-     	  <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="ID" name="mId">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form action="../../index3.html" method="post">
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-           <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="mPw">
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
-        <div class="row" style ="margin-left:-10px; margin-bottom:10px;">
+        <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                자동 로그인
+                Remember Me
               </label>
             </div>
           </div>
@@ -172,20 +107,21 @@
           <!-- /.col -->
         </div>
       </form>
-      
-      <div class="text-center mb-3">
-        <p>- OR -</p>
-        <a href="#"> 아이디 찾기 |
-        </a>
-        <a href="#" >
-    	 비밀 번호 찾기
-        </a> <br>
-        <a> 아직 TravelMaker 회원이 아니신가요?</a>
-      </div>
+      <p class="mb-1">
+        <a href="forgot-password.html">I forgot my password</a>
+      </p>
+      <p class="mb-0">
+        <a href="register.html" class="text-center">Register a new membership</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
   	</div>
+  	
   </div>
-</div>
   </div>
+ 
+
 
 </th:block>
 <th:block layout:fragment="customFooterScript">
