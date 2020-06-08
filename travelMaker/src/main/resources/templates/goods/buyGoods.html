@@ -1,0 +1,78 @@
+411<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>상품구매</title>
+</th:block>
+<th:block layout:fragment="customContents">
+	<div class="content-wrapper">
+    	<body>
+	<div class="container">
+		<div class="title">
+			<h3>상품목록</h3>
+		</div>
+	</div>
+	<div class="col-lg-8 col-md-10 ml-auto mr-auto">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="text-center">No</th>
+						<th class="text-center">상품카테고리</th>
+						<th class="text-center">상품이름</th>
+						<th class="text-center">상품사진</th>
+						<th class="text-center">상품설명</th>
+						<th class="text-center">상품가격</th>
+						<th class="text-center">등록자</th>
+						<th class="text-center">등록시간</th>
+						<th class="text-center">구매하기</th>
+
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="b : ${list}">
+						<td class="text-center" th:text="${b.boardNo}"></td>
+						<td><a th:href="@{#}" th:text="${b.boardTitle}"></a></td>
+						<td class="text-center" th:text="${b.boardUser}"></td>
+						<td class="text-center" th:text="${b.boardDate}"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer p-0">
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center mt-3 mr-3">
+                        <li class="page-item">
+                        	<a class="page-link" th:href="@{/boardList}">맨처음</a>
+                        </li>
+                        <li class="page-item" th:if="${currentPage > 1}">
+                        	<a class="page-link" th:href="@{/boardList(currentPage=${currentPage-1})}">이전</a>
+                        </li>
+                
+						<li class="page-item" th:if="${currentPage < lastPage}">
+                        	<a class="page-link" th:href="@{/boardList(currentPage=${currentPage+1})}">다음</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/boardList(currentPage=${lastPage})}">마지막</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+		</div>
+	</div>	
+</body>
+  	</div>
+  <!-- /.content-wrapper -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	<script>
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		*/
+	</script>	
+</th:block>
+</html>

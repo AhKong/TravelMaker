@@ -4,8 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MemberController {
-
-	
-	
+public class MemberController{
+	@GetMapping("/myPage")
+	public String myPage() {
+		return "/member/myPage";
+	}
 }
