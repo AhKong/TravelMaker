@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title>전주의 관광명소</title>
+	<title>전주의 음식점</title>
 </th:block>
 <th:block layout:fragment="customCss">
 	<style>
@@ -12,7 +12,7 @@ span {
 	font-weight: bold
 }
 
-.bestSights {
+.bestRes {
 	padding-top: 10px;
 	margin-bottom: 20px;
 }
@@ -60,7 +60,9 @@ span {
 	margin-bottom:10px;
 	padding-bottom:10px;
 }
-
+.info-box{
+	height: 180px;
+}
 </style>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -71,12 +73,12 @@ span {
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>SightsList - 관광지 리스트</h1>
+						<h1>ResList - 음식점 리스트</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">sights</a></li>
-							<li class="breadcrumb-item active">sightsList.html</li>
+							<li class="breadcrumb-item"><a href="#">res</a></li>
+							<li class="breadcrumb-item active">ressList.html</li>
 						</ol>
 					</div>
 				</div>
@@ -105,97 +107,92 @@ span {
 										</div>
 									</div>
 								</form>
-							</div>
+							</div>							
 							<div class="sightCate">
-								<p>명소 종류</p>
+								<p>음식점 종류</p>
 								<div class="radio">
 									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 랜드마크
+										id="optionsRadios1" value="option1"> 중국집
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 박물관
+										id="optionsRadios1" value="option1"> 한식
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 자연공원
+										id="optionsRadios1" value="option1"> 일식
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 밤문화
+										id="optionsRadios1" value="option1"> 치킨/피자
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 즐길거리/게임
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 스파/웰니스
+										id="optionsRadios1" value="option1"> 분식
 									</label>
 								</div>
 							</div>
 						</div>
 						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
 							<h1>Best 3</h1>
-							<div class="bestSights row">
+							<div class="bestRes row">
 								<div class="col-12 col-sm-4">
-									<div class=" info-box bg-light ">
-										<img src="/dist/img/avatar6.jpg" alt="User Image" width="100"
+									<div class="info-box bg-light ">
+										<img src="/dist/img/ck.jpg" alt="User Image" width="100"
 											height="150">
 										<div class="desc">
-											<span>Jonna</span><br> <i class="fas fa-star"></i> <i
+											<span>맛난치킨</span><br> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
+											<p>치킨/피자</p>
+											<p>치킨먹으려면 이 주소로 오시오</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-sm-4">
+									<div class="info-box bg-light">
+										<img src="/dist/img/jok.jpg" alt="User Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>더 맛난 족발</span><br> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> 529건의 리뷰<br>
+											<p>한식</p>
 											<p>주소작성하는부분이야</p>
 										</div>
 									</div>
 								</div>
 								<div class="col-12 col-sm-4">
 									<div class="info-box bg-light">
-										<img src="/dist/img/test.jpeg" alt="User Image" width="100"
+										<img src="/dist/img/res1.jpg" alt="User Image" width="100"
 											height="150">
 										<div class="desc">
-											<span>HandSome</span><br> <i class="fas fa-star"></i> <i
+											<span>더더 맛난 곱창</span><br> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/test2.jpeg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>Michinnom</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
+											<p>한식</p>
 											<p>주소작성하는부분이야</p>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<span class="sightListTitle">관광명소</span>
+								<span class="sightListTitle">음식점</span>
 								<div class="col-12">
 									<div class="sights row">
 										<div class="sightsImg col-2">
-										  <img src="/dist/img/avatar6.jpg" alt="User Image" width="150" height="150">
+										  <img src="/dist/img/ck.jpg" alt="User Image" width="150" height="150">
 										</div>
 										<div class="sightsDesc">
-											<span>Jonna</span><br> <i class="fas fa-star"></i> <i
+										<span>맛난치킨</span><br> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
+											<p>치킨/피자</p>
+											<p>치킨먹으려면 이 주소로 오시오</p>
 											<p>상세설명 이고야 왜냐면 나는 여기다가 상세설명 쓸거야 !!!!!!!!!!!!!!!!그럼 여기에 상세설명 넣을게 길어지면 어떻게
 												보이나
 										</div>
@@ -204,13 +201,13 @@ span {
 								<div class="col-12">
 									<div class="sights row">
 										<div class="sightsImg col-2">
-										  <img src="/dist/img/avatar6.jpg" alt="User Image" width="150" height="150">
+										 <img src="/dist/img/res1.jpg" alt="User Image"  width="150" height="150">>
 										</div>
 										<div class="sightsDesc">
-											<span>Jonna</span><br> <i class="fas fa-star"></i> <i
+											<span>더더 맛난 곱창</span><br> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
+											<p>한식</p>
 											<p>주소작성하는부분이야</p>
 											<p>상세설명 이고야 왜냐면 나는 여기다가 상세설명 쓸거야 !!!!!!!!!!!!!!!!그럼 여기에 상세설명 넣을게 길어지면 어떻게
 												보이나
