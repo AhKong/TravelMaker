@@ -5,21 +5,28 @@
 <th:block layout:fragment="customTitle">
 	<title>index 화면 입니다  :)</title>
 	<style>
+	
+.jumbotron {
+background-image: url(/img/bg.jpg);
+background-size: cover;
+height: 100%;
+}
+
 #recommend{
 	margin-left: 20px;
 }
-#myTripA{
+#TripRecom{
 	text-align: conter;
 	padding-top: 85px;
 	padding-bottom: 85px;
 }
-#img{
+/* #img{
 	background-image: url(img/bg-masthead.jpg);
 	background-position: top;
 	background-size: 100%;
 	padding-bottom: 280px;
 	
-}
+} */
 #searchBtn{
 	margin-top: 90px;
 }
@@ -35,29 +42,34 @@
 }
 </style>
 </th:block>
+<div class="jumbotron" style="background-image: url(dist/img/bg-masthead.jpg); background-size: 50%;">
 <th:block layout:fragment="customContents">
-	
+
 	<div class="content-wrapper">
-		<div id="img">
 		<div id="h1">
 		<h1>TravelMaker</h1>
     	</div>
-    	
+
     	<section class="content">
 			
 				<div class="row">
-					<div class="col-10 col-md-7 col-lg-10">
+					<div class="col-10 col-md-7 col-lg-10 col-xs-5">
 					  <div class="input-group">
 					    <input type="text" class="form-control" placeholder="Search for..." id="searchText">
 					    <span class="input-group-btn">
-					      <button class="btn btn-default" type="button" id="searchBtn">Go!</button>
+					      <button class="btn btn-default" type="button" id="searchBtn">
+					      		<svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+									<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+								</svg>
+							</button>
 					    </span>
+					    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					  </div>
 					</div>
 				</div>
-	   		
     	</section>
- 		</div>
+ 		
  		<div id="recommend">
  			<h3>추천 여행지 top3</h3>
  		</div>
@@ -67,20 +79,16 @@
         <div class="row">
           <div class="col-lg-4 col-7">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box">
               <div class="inner">
-				<div data-toggle="modal" data-target="#myModal">
+				<div>
 					<div id="root">
-						<div id="myTripA">
-							<a>내여행 만들기</a>
+						<div id="TripRecom">
+							<a>추천 여행1</a>
 						</div>
 					</div>
 				</div>
               </div>
-              <div class="icon" data-toggle="modal" data-target="#myModal">
-                <i class="ion ion-bag"></i>
-              </div>
-              
             </div>
           </div>
           <!-- ./col -->
@@ -90,8 +98,8 @@
                <div class="inner">
 				<div>
 					<div id="root">
-						<div id="myTripA">
-							<a>내여행 1</a>
+						<div id="TripRecom">
+							<a>추천 여행2</a>
 						</div>
 					</div>
 				</div>
@@ -105,8 +113,8 @@
               <div class="inner">
 				<div>
 					<div id="root">
-						<div id="myTripA">
-							<a>내여행 2</a>
+						<div id="TripRecom">
+							<a>추천 여행3</a>
 						</div>
 					</div>
 				</div>
@@ -125,6 +133,9 @@
 
   <!-- /.content-wrapper -->
 </th:block>
+
+</div>
+
 <th:block layout:fragment="customFooterScript">
 	<script>
 		/*
