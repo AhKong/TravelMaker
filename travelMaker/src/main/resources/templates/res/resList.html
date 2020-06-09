@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>전주의 음식점</title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<style>
+span {
+	font-size: 20px;
+	font-weight: bold
+}
+
+.bestRes {
+	padding-top: 10px;
+	margin-bottom: 20px;
+}
+
+.desc {
+	display: block;
+	padding-left: 10px;
+	margin-top: 10px;
+}
+
+.radio {
+	margin-top: 10px;
+}
+
+.sightListTitle {
+	font-size: 35px;
+	padding-bottom: 30px;
+}
+
+.post {
+	margin-top: 15px;
+}
+
+.sightCate {
+	margin-top: 40px;
+	border-top: 1px solid black;
+	padding-top: 10px;
+}
+
+.sightCate p {
+	font-size: 20px;
+}
+
+.warp-searchForm {
+	margin-left: 13%;
+	margin-top: 20px;
+}
+
+.warp-searchForm input {
+	width: 200px;
+}
+
+.sights{
+	border-bottom:1px solid #efefef;
+	margin-bottom:10px;
+	padding-bottom:10px;
+}
+.info-box{
+	height: 180px;
+}
+</style>
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>ResList - 음식점 리스트</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">res</a></li>
+							<li class="breadcrumb-item active">ressList.html</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+
+			<!-- Default box -->
+			<div class="card">
+
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-md-6 col-lg-2 order-1 order-md-1">
+							<div class="warp-searchForm">
+								<form class="form-inline ">
+									<div class="input-group input-lg">
+										<input class="form-control" type="search"
+											placeholder="Search" aria-label="Search">
+										<div class="input-group-append">
+											<button class="btn btn-navbar" type="submit">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>							
+							<div class="sightCate">
+								<p>음식점 종류</p>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 중국집
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 한식
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 일식
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 치킨/피자
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 분식
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
+							<h1>Best 3</h1>
+							<div class="bestRes row">
+								<div class="col-12 col-sm-4">
+									<div class="info-box bg-light ">
+										<img src="/dist/img/ck.jpg" alt="User Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>맛난치킨</span><br> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> 529건의 리뷰<br>
+											<p>치킨/피자</p>
+											<p>치킨먹으려면 이 주소로 오시오</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-sm-4">
+									<div class="info-box bg-light">
+										<img src="/dist/img/jok.jpg" alt="User Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>더 맛난 족발</span><br> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> 529건의 리뷰<br>
+											<p>한식</p>
+											<p>주소작성하는부분이야</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-sm-4">
+									<div class="info-box bg-light">
+										<img src="/dist/img/res1.jpg" alt="User Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>더더 맛난 곱창</span><br> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> 529건의 리뷰<br>
+											<p>한식</p>
+											<p>주소작성하는부분이야</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<span class="sightListTitle">음식점</span>
+								<div class="col-12">
+									<div class="sights row">
+										<div class="sightsImg col-2">
+										  <img src="/dist/img/ck.jpg" alt="User Image" width="150" height="150">
+										</div>
+										<div class="sightsDesc">
+										<span>맛난치킨</span><br> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> 529건의 리뷰<br>
+											<p>치킨/피자</p>
+											<p>치킨먹으려면 이 주소로 오시오</p>
+											<p>상세설명 이고야 왜냐면 나는 여기다가 상세설명 쓸거야 !!!!!!!!!!!!!!!!그럼 여기에 상세설명 넣을게 길어지면 어떻게
+												보이나
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="sights row">
+										<div class="sightsImg col-2">
+										 <img src="/dist/img/res1.jpg" alt="User Image"  width="150" height="150">>
+										</div>
+										<div class="sightsDesc">
+											<span>더더 맛난 곱창</span><br> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+												class="fas fa-star"></i> 529건의 리뷰<br>
+											<p>한식</p>
+											<p>주소작성하는부분이야</p>
+											<p>상세설명 이고야 왜냐면 나는 여기다가 상세설명 쓸거야 !!!!!!!!!!!!!!!!그럼 여기에 상세설명 넣을게 길어지면 어떻게
+												보이나
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+</th:block>
+<th:block layout:fragment="customFooterScript">
+
+</th:block>
+</html>
