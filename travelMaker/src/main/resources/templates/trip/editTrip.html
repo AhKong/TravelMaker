@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>ADD 화면 입니다  :)</title>
+	<style>
+
+.mySightsBorder{
+	
+	text-align: center;
+}
+.border{
+	width: 400px;
+	height: 350px;
+	border-width: 3px;
+	text-align: center;
+
+}
+
+
+</style>
+	
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div class="content-wrapper">
+	
+    	<section class="content">
+    	   	<div class="mySightsBorder">
+		<!-- Button trigger modal -->
+		<div data-toggle="modal" data-target="#myModal" class="border">
+			<div id="root">
+				<a>내여행 만들기</a>
+			</div>
+		</div>
+		
+		<div data-toggle="modal" data-target="#myModal" class="border">
+			<div id="root">
+				<a>내여행 만들기</a>
+			</div>
+		</div>	
+		
+		<div data-toggle="modal" data-target="#myModal" class="border">
+			<div id="root">
+				<a>내여행 만들기</a>
+			</div>
+		</div>	
+		
+		<div data-toggle="modal" data-target="#myModal" class="border">
+			<div id="root">
+				<a>내여행 만들기</a>
+			</div>
+		</div>	
+		
+		<div data-toggle="modal" data-target="#myModal" class="border">
+			<div id="root">
+				<a>내여행 만들기</a>
+			</div>
+		</div>	
+			
+	</div>
+   		
+    	</section>
+    
+  	</div>
+  <!-- /.content-wrapper -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	<script>
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		*/
+	</script>	
+</th:block>
+</html>
