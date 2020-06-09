@@ -5,9 +5,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class QnAController{
-	@GetMapping("/question")
-	public String question() {
-		return "/question/question";
+	@GetMapping("/faq")
+	public String faq() {
+		return "/question/faq";
 	}
-
+	
+	@GetMapping("/myQuestionList")
+	public String myQuestionList() {
+		return "/question/myQuestionList";
+	}
+	
+	@GetMapping("/myQuestion")
+	public String myQuestion() {
+		return "/question/myQuestion";
+	}
+	
+	@GetMapping("/answer")
+	public String answer() {
+		return "/question/answer";
+	}
 }
