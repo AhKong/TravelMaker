@@ -1,131 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-  layout:decorator="@{layout/loginJoinLayout.html}">
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="@{layout/loginJoinLayout.html}">
 <th:block layout:fragment="customTitle">
-    <title>TravelMaker |  Log in</title>
+	<title>TravelMaker | Log in</title>
 </th:block>
- <th:block layout:fragment="customCss">
- <style type="text/css">
-     .login-box{width: 50% !important;}
-     .login-page{height: 100% !important;}
-     .login-logo {margin-top: 100px;}  
-     
-  </style>
- </th:block>
+<th:block layout:fragment="customCss">
+	<style type="text/css">
+.login-box {
+	width: 50% !important;
+}
+
+.login-page {
+	height: 100% !important;
+}
+
+.login-logo {
+	margin-top: 200px;
+}
+.card-body {
+	padding-top:20%;
+	height: 300px;
+}
+.loginLink{
+	margin-top:30px;
+}
+
+button{
+	margin-top:10px
+}
+
+span{
+	font-size:14px;
+}
+</style>
+</th:block>
 <th:block layout:fragment="customContents">
-
-<div class="login-box">
-  <div class="login-logo">
-    <a href="/"><b>Travel</b>Maker</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="row">
-     <div class="col-md-6">
-        <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
-      <form action="../../index3.html" method="post">
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-     </div>
-     <div class="col-md-6">
-        <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
-      <form action="../../index3.html" method="post">
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-     </div>
-     
-  </div>
-  </div>
- 
-
-
+	<div class="login-box">
+		<div class="login-logo">
+			<a href="/"><b>Travel</b>Maker</a>
+		</div>
+		<!-- /.login-logo -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body login-card-body text-center" >
+						<i class="fas fa-user fa-2x" ></i><br>
+					      <span>TravelMaker의 회원이 되어 더 많은 서비스를 이용하세요!</span> <br>
+						   	<a href="/addMember">
+						   	 <button  class= "btn btn-block btn-outline-primary ">회원가입 하기</button>
+						   	</a>
+					      <div class="loginLink">
+					      	<a href="/login">이미 travelMaker의 회원입니다.</a>
+					      </div>
+					</div>
+					<!-- /.login-card-body -->
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body login-card-body text-center">
+					<i class="far fa-building fa-2x"></i><br>
+					  <span>TravelMaker와 제휴를 맺어주세요!</span> <br>
+					  <a href="/addAffiliate">
+						  <button  class= "btn btn-block btn-outline-primary ">제휴업체 등록하기</button>
+					  </a>
+				      <div class="loginLink">
+				      	<a href="/login">이미 travelMaker와 제휴를 맺었습니다.</a>
+				      </div>
+					</div>
+					<!-- /.login-card-body -->
+				</div>
+			</div>
+		</div>
+	</div>
 </th:block>
 <th:block layout:fragment="customFooterScript">
-   <script>
-   </script>   
+	<script>
+   </script>
 </th:block>
 </html>
