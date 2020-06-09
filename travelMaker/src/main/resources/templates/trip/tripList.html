@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>LIST 화면 입니다  :)</title>
+	
+<style>
+#myTripA{
+	text-align: conter;
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+.mySightsBorder{
+	margin-top: 50px;
+	margin-left:  20px
+}
+.border{
+	width: 500px;
+	height: 300px;
+	border-width: 3px;
+	text-align: center;
+
+}
+#id{
+	width: 100px;
+	height: 50px;
+	border-width: 3px;
+	text-align: center;
+}
+#h1 {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+}
+
+</style>
+
+</th:block>
+
+<script src="/static/js/jquery-3.4.1.min.js/>"></script>
+<th:block layout:fragment="customContents">
+
+<div class="content-wrapper">
+		<div id="h1">
+			<h1>여행 </h1>
+		</div>
+		
+	<section class="content">
+   	   <div id="sightsBtn">
+			<button type="button" class="btn btn-primary">모든여행</button> <!-- 버튼 클릭하면 버튼별로 나오는데 url은 안바뀜... 제이쿼리 자바스크립트 사용--> 
+			<button type="button" class="btn btn-primary">여행(공개)</button>
+			<button type="button" class="btn btn-primary">여행(비공개)</button>
+			<button type="button" class="btn btn-primary">스크랩</button>
+		</div>
+		
+	<div class="mySightsBorder">
+		<!-- Button trigger modal -->
+		
+<section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+				<div data-toggle="modal" data-target="#myModal">
+					<div id="root">
+						<div id="myTripA">
+							<a>내여행 만들기</a>
+						</div>
+					</div>
+				</div>
+              </div>
+              <div class="icon" data-toggle="modal" data-target="#myModal">
+                <i class="ion ion-bag"></i>
+              </div>
+              
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+               <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>여1</a>
+						</div>
+					</div>
+				</div>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+              <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>행 2</a>
+						</div>
+					</div>
+				</div>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+               <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>가 3</a>
+						</div>
+					</div>
+				</div>
+              </div>
+             
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+               <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>고 4</a>
+						</div>
+					</div>
+				</div>
+              </div>
+             
+            </div>
+          </div>
+          <!-- ./col -->
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+               <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>싶 5</a>
+						</div>
+					</div>
+				</div>
+              </div>
+             
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+               <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>당 6</a>
+						</div>
+					</div>
+				</div>
+              </div>
+             
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box">
+               <div class="inner">
+				<div>
+					<div id="root">
+						<div id="myTripA">
+							<a>777</a>
+						</div>
+					</div>
+				</div>
+              </div>
+             
+            </div>
+          </div>
+          <!-- ./col -->
+          
+        </div>
+</div>
+  <!-- /.content-wrapper -->
+</section>
+	</div>
+	</section>
+</div>
+	
+
+	
+	<!-- Modal -->
+		<form action="/editTrip">
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        	내여행 추가
+			      </div>
+			      <div class="modal-body">
+			        <div>
+			        	<input type="text">
+			        </div>
+			      </div>
+				      <div>
+				      	공개
+				      </div>
+				      <div>
+				      	비공개
+				      </div>
+			      <div class="modal-footer">
+			      	
+			        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			       	<button type="submit" class="btn btn-primary">만들기</button>
+			        
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</form>
+	
+	
+ 
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	<script>
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		*/
+	</script>
+</th:block>
+</html>
