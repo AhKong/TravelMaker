@@ -21,6 +21,7 @@ public class MemberController{
 	}
 	
 	@GetMapping("/confirmId")
+	
 	public String confirmId() {
 		
 		return "/member/confirmId";
