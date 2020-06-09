@@ -9,4 +9,8 @@ public class GoodsController{
 	public String buyGoods() {
 		return "/goods/buyGoods";
 	}
+	@GetMapping("/detailGoods")
+	public String detailGoods() {
+		return "/goods/detailGoods";
+	}
 }
