@@ -16,7 +16,7 @@ public class MemberController{
 	
 	@GetMapping("/memberFindId") 
 	public String memberFindId() {
-		
+		 
 		return "/member/memberFindId";
 	}
 	
