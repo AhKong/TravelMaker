@@ -33,4 +33,9 @@ public class JoinLoginController {
 	public String addAffiliate() {
 		return "/join_login/addAffiliate";
 	}
+	
+	@GetMapping("/checkMemberLevel")
+	public String checkMemberLevel() {
+		return "/join_login/checkMemberLevel.html";
+	}
 }
