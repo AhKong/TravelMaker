@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title> 탈퇴 화면 입니다  :) 하지 마세요 </title>
+</th:block>
+<th:block layout:fragment="customContents">
+
+<div class="content-wrapper">
+	
+    <section class="content">
+			
+		<div class="container-fluid">
+		 
+		 
+	
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal">
+				탈퇴 안돼 돌아가 안바꿔줘 
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">4팀 어쩔수없조</h4>
+						</div>
+						<div class="modal-body">
+							탈,,,퇴요,,,,,?
+							2000포인트 드릴테니까 가지마세요.,,...ㅠ
+						</div>
+						<div class="modal-footer">
+	 						<button type="button" class="btn btn-danger btn-xs " data-dismiss="modal">미안</button>
+							<button type="button" class="btn btn-primary btn-md" data-dismiss="modal"> 2000 포인트 받고 탈퇴 안하기  </button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+				
+		</div>
+
+	
+	</section>
+	
+</div>
+
+
+    
+  	
+  <!-- /.content-wrapper -->
+  
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+	<script>
+
+	
+	$('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').focus()
+		})
+	
+	
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		*/
+	</script>	
+</th:block>
+</html>
