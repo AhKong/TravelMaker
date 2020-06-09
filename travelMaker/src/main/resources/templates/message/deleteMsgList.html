@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/msgLayout}">
+ <th:block layout:fragment="customTitle">
+	<title>'id001'님의 휴지통</title>
+</th:block>
+<th:block layout:fragment="msgIntro">
+	 <div class="col-sm-6">
+            <h1>휴지통</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">message</a></li>
+              <li class="breadcrumb-item active">delMsgList</li>
+            </ol>
+          </div>
+</th:block>
+<th:block layout:fragment="msgIntro">
+<h3 class="card-title">휴지통</h3>
+</th:block>
+<th:block layout:fragment="msgList">
+	<table>
+		
+	</table>
+</th:block>
+</html>
