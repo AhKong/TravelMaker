@@ -5,15 +5,26 @@
 <th:block layout:fragment="customTitle">
 	<title>index 화면 입니다  :)</title>
 	<style>
+
+#small-text{
+color: white;
+}
+.small-box1 {
+  border-radius: 0.25rem;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: block;
+  position: relative;
+}
 #backCol{
 	background-color: #3095FA;
+	padding-bottom: 30px;
 }
 #index{
 	padding-top: 180px;
 }
 #h3{
 color:white;
-margin-top: 50px;
+margin-top: 40px;
 }
 .jumbotron {
 background-size: cover;
@@ -103,22 +114,23 @@ height: 100%;
         <div class="row">
           <div class="col-lg-4 col-7">
             <!-- small box -->
-            <div id="backCol" class="small-box">
+            <div id="backCol" class="small-box1">
               <div class="inner">
 				<div>
 					<div id="root">
 						<div id="TripRecom">
-							<a>추천 여행1</a>
+							<a> 이미지........a</a>
 						</div>
 					</div>
 				</div>
               </div>
             </div>
+            <div><a id="small-text">효자동</a></div>
           </div>
           <!-- ./col -->
           <div class="col-lg-4 col-7">
             <!-- small box -->
-			<div id="backCol" class="small-box">
+			<div id="backCol" class="small-box1">
                <div class="inner">
 				<div>
 					<div id="root">
@@ -129,11 +141,12 @@ height: 100%;
 				</div>
               </div>
             </div>
+            <div><a id="small-text">평화동</a></div>
           </div>
           <!-- ./col -->
           <div class="col-lg-4 col-7">
             <!-- small box -->
-            <div id="backCol" class="small-box">
+            <div id="backCol" class="small-box1">
               <div class="inner">
 				<div>
 					<div id="root">
@@ -144,6 +157,7 @@ height: 100%;
 				</div>
               </div>
             </div>
+            <div><a id="small-text">삼천동</a></div>
           </div>
             </div>
           </div>
