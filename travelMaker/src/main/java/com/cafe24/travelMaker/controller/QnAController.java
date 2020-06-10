@@ -29,4 +29,14 @@ public class QnAController{
 	public String myQuestion() {
 		return "/question/myQuestion";
 	}
+	
+	@GetMapping("/answerForm")
+	public String answerForm() {
+		return "/question/answerForm";
+	}
+	
+	@GetMapping("/detailQuestion")
+	public String detailQuestion() {
+		return "/question/detailQuestion";
+	}
 }
