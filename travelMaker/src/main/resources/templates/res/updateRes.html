@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>음식점  수정하기</title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<style>
+		.localSelect .custom-select{
+			width:200px;
+			margin-right:10px;
+			margin-left:10px;
+		}
+		
+		.local input{
+			width:200px;
+			margin-right:10px;
+			margin-left:10px;
+		}
+	</style>
+</th:block>
+<th:block layout:fragment="customContents">
+	<div class="content-wrapper" >
+    <!-- Content Header (Page header) -->
+    <section class="content-header" >
+      <div class="container-fluid ">
+        <div class="row mb-2">
+          <div class="col-sm-6" >
+            <h1>음식점 수정하기</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">res</a></li>
+              <li class="breadcrumb-item active">updateRes</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+       <div class="col-md-3"></div>
+        <div class="col-md-6 ">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">음식점 수정하기</h3>
+            </div>
+            <div class="card-body">
+              <form>
+              <input type="hidden" value="id002">
+              <div class="form-group ">
+                <label for="inputName">음식점 코드</label>
+                <input type="text" id="inputName" class="form-control" value="sights_1" readonly >
+              </div>
+              <div class="form-group ">
+                <label for="inputName">음식점 이름</label>
+                <input type="text" id="inputName" class="form-control">
+              </div>
+           	  <div class="form-group localSelect ">
+                <label for="inputStatus">도</label>
+                <select class="form-control custom-select" style="width:200px !important;">
+                  <option selected disabled>도를 선택하세요</option>
+                  <option>전라북도</option>
+                  <option>서울특별시</option>
+                  <option>대전광역시</option>
+                </select>
+                <label for="inputStatus">시</label>
+                <select class="form-control custom-select" style="width:200px !important;">
+                  <option selected disabled>시군구를 선택하세요</option>
+                  <option>전주시</option>
+                  <option>익산시</option>
+                  <option>군산시</option>
+                </select>
+              </div>
+               <div class="form-group">
+                <label for="inputName">음식점 주소</label>
+                <input type="text" id="inputName" class="form-control">
+              </div>
+               <div class="form-group local form-inline">
+                <label for="inputName">위도</label>
+                <input type="text" id="inputName" class="form-control" placeholder="위도를 입력해주세요">
+                 <label for="inputName">경도</label>
+                <input type="text" id="inputName" class="form-control" placeholder="경도를 입력해주세요">
+              </div>
+               <div class="form-group">
+                <label for="inputName">웹사이트</label>
+                <input type="text" id="inputName" class="form-control">
+              </div>
+               <div class="form-group">
+                <label for="inputName">전화번호</label>
+                <input type="text" id="inputName" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">음식점 종류</label>
+                <select class="form-control custom-select">
+                  <option selected disabled>음식점 종류를 선택하세요</option>
+                  <option>한식</option>
+                  <option>중식</option>
+                  <option>일식</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">평균 가격대</label>
+                <input id="inputDescription" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">상세설명</label>
+                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+              </div>
+            
+              <div class="form-group">
+                <label for="inputClientCompany">전화번호</label>
+                <input type="text" id="inputClientCompany" class="form-control">
+              </div>
+              <div class="form-group local form-inline">
+                <label for="inputName">영업시간</label>
+                <input type="text" id="inputName" class="form-control" placeholder="영업시작시각"> -
+              
+                <input type="text" id="inputName" class="form-control" placeholder="영업마감시각">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">사진</label>
+                <input type="file" id="inputProjectLeader" class="form-control">
+              </div>
+              
+              </form>
+            
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+
+      </div>
+      <div class="row">
+      	<div class="col-3"></div>
+        <div class="col-6">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="수정" class="btn btn-success float-right">
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+
+</th:block>
+</html>
