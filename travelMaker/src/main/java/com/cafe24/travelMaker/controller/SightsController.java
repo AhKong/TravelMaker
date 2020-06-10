@@ -15,4 +15,9 @@ public class SightsController{
 	public String addSights() {
 		return "/sights/addSights";
 	}
+	
+	@GetMapping("/updateSights")
+	public String updateSights() {
+		return "/sights/updateSights";
+	}
 }
