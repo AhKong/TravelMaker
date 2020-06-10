@@ -7,12 +7,11 @@
 		<div th:replace="fragments/leftmenu :: leftmenuFragment"></div>
 		<div id="rightcolumn">
 			<th:block layout:fragment="customContents"></th:block>
-		</div>
 		<footer th:replace="fragments/footer :: footerFragment"></footer>
+		</div>
 	</div>
 	<!-- 사용자 지정 자바스크립트 라이브러리 파일 -->
-		<th:block layout:fragment="customFooterScript">
-		</th:block>
+		<th:block layout:fragment="customFooterScript"></th:block>
 </body>
 </html>
 

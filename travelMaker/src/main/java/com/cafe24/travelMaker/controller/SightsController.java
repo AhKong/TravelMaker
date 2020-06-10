@@ -10,4 +10,19 @@ public class SightsController{
 	public String sightsList() {
 		return "/sights/sightsList";
 	}
+	
+	@GetMapping ("/addSights")
+	public String addSights() {
+		return "/sights/addSights";
+	}
+	
+	@GetMapping("/updateSights")
+	public String updateSights() {
+		return "/sights/updateSights";
+	}
+	
+	@GetMapping("/detailSights")
+	public String detailSights() {
+		return "/sights/detailSights";
+	}
 }

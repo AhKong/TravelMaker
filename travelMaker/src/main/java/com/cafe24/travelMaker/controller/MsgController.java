@@ -19,4 +19,10 @@ public class MsgController {
 	public String deleteMsgList(){
 		return "/message/deleteMsgList";
 	}
+	
+	@GetMapping("/detailMsg")
+	
+	public String detailMsg() {
+		return "/message/detailMsg";
+	}
 }
