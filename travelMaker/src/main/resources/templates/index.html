@@ -5,9 +5,28 @@
 <th:block layout:fragment="customTitle">
 	<title>index 화면 입니다  :)</title>
 	<style>
-	
+
+#small-text{
+color: white;
+}
+.small-box1 {
+  border-radius: 0.25rem;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: block;
+  position: relative;
+}
+#backCol{
+	background-color: #3095FA;
+	padding-bottom: 30px;
+}
+#index{
+	padding-top: 180px;
+}
+#h3{
+color:white;
+margin-top: 40px;
+}
 .jumbotron {
-background-image: url(/img/bg.jpg);
 background-size: cover;
 height: 100%;
 }
@@ -20,13 +39,13 @@ height: 100%;
 	padding-top: 85px;
 	padding-bottom: 85px;
 }
-/* #img{
-	background-image: url(img/bg-masthead.jpg);
+#img{
+	background-image: url(/dist/img/landscape.jpg);
 	background-position: top;
 	background-size: 100%;
-	padding-bottom: 280px;
+
 	
-} */
+}
 #searchBtn{
 	margin-top: 90px;
 }
@@ -42,14 +61,29 @@ height: 100%;
 }
 </style>
 </th:block>
-<div class="jumbotron" style="background-image: url(dist/img/bg-masthead.jpg); background-size: 50%;">
 <th:block layout:fragment="customContents">
-
+	
 	<div class="content-wrapper">
+	
+	<div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>내 여행 수정</h1>
+          </div>  
+         <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Trip</a></li>
+              <li class="breadcrumb-item active">tripList</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+	
+		<div id="img">
 		<div id="h1">
 		<h1>TravelMaker</h1>
     	</div>
-
+    	
     	<section class="content">
 			
 				<div class="row">
@@ -68,10 +102,11 @@ height: 100%;
 					  </div>
 					</div>
 				</div>
+	   		
     	</section>
- 		
+ 		<div id="index">
  		<div id="recommend">
- 			<h3>추천 여행지 top3</h3>
+ 			<h3 id="h3">추천 여행지 top3</h3>
  		</div>
  <section class="content">
       <div class="container-fluid">
@@ -79,22 +114,23 @@ height: 100%;
         <div class="row">
           <div class="col-lg-4 col-7">
             <!-- small box -->
-            <div class="small-box">
+            <div id="backCol" class="small-box1">
               <div class="inner">
 				<div>
 					<div id="root">
 						<div id="TripRecom">
-							<a>추천 여행1</a>
+							<a> 이미지........a</a>
 						</div>
 					</div>
 				</div>
               </div>
             </div>
+            <div><a id="small-text">효자동</a></div>
           </div>
           <!-- ./col -->
           <div class="col-lg-4 col-7">
             <!-- small box -->
-            <div class="small-box">
+			<div id="backCol" class="small-box1">
                <div class="inner">
 				<div>
 					<div id="root">
@@ -105,11 +141,12 @@ height: 100%;
 				</div>
               </div>
             </div>
+            <div><a id="small-text">평화동</a></div>
           </div>
           <!-- ./col -->
           <div class="col-lg-4 col-7">
             <!-- small box -->
-            <div class="small-box">
+            <div id="backCol" class="small-box1">
               <div class="inner">
 				<div>
 					<div id="root">
@@ -120,22 +157,20 @@ height: 100%;
 				</div>
               </div>
             </div>
+            <div><a id="small-text">삼천동</a></div>
           </div>
             </div>
           </div>
           <!-- ./col -->
     </section>
         </div>
-
+</div>
   <!-- /.content-wrapper -->
- 		
+ 		</div>
 	
 
   <!-- /.content-wrapper -->
 </th:block>
-
-</div>
-
 <th:block layout:fragment="customFooterScript">
 	<script>
 		/*

@@ -1,73 +1,183 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-  layout:decorator="@{layout/default}">
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title>ADD 화면 입니다  :)</title>
-	<style>
-#root{
-	width: 100%;
-	height: 300px;     
-	border: 1px solid #000;
-}
-#picture{
-margin-top: 80px;
-margin-bottom: 80px;
-}
-.borderRight{
-	width: 70%;
-	float: right;
-	text-align: center;
-	box-sizing: border-box; 
-    background: #0ff;
-
-}
-.borderLeft{
-	width: 30%;
-	float: left;
-	text-align: center;
-	box-sizing: border-box;
-    background: #00f;
-}
-
-</style>
+	<title>Edit 화면 입니다 :)</title>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474"></script>
 	
+	<style>
+#myTripBox {
+	text-align: conter;
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+
+.map {
+	width: 100%;
+	text-align: center;
+
+	background: #0ff;
+}
+#photo{
+/* 	padding-top: 50px;
+	padding-bottom: 50px; */
+	max-width: 100%;
+	height: auto;
+	display: block;
+	height: 200px;
+	width: 100px;
+}
+</style>
+
 </th:block>
 
 <th:block layout:fragment="customContents">
-	<div class="content-wrapper">
-    	<section class="content">   	
-		<!-- Button trigger modal -->
-			<div class="borderLeft">
-				<div id="root">
-					<div id="picture">내여행 만들기</div>
-					<div id="divDetail">상세(회원)
-					<div>장소명</div>
-					<div>ㄴㅇㄹㄴㅁㅇㄹ</div>
+      
+	<section class="content">
+		<div class="content-wrapper">
+		 <!-- START ALERTS AND CALLOUTS -->
+<div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>내 여행 수정</h1>
+          </div>  
+         <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Trip</a></li>
+              <li class="breadcrumb-item active">editTrip</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  	제목
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                
+                <div class="alert alert-info alert-dismissible">
+                  <button data-toggle="modal" data-target="#myModal" type="button" class="close">&times;</button><!-- 클릭시 삭제  -->
+                  <h5><i class="icon fas fa-info"></i> 이름!</h5>
+                  <div id="photo">
+                 	<img src="/dist/img/landscape-thumbnail.jpg;" class="img-responsive img-rounded" alt="">
+                 	날짜블럭...
+                 	</div>
+                 	<div>
+	                 	제목 - 
+                 	</div>
+                 	<div>
+	                 	<h3>작성자 : <a>안종일</a></h3>
+                 	</div>
+
+                 	<div>
+	                 	설명
+                 	</div>
+                </div>
+                
+                <div class="alert alert-info alert-dismissible">
+                  <button data-toggle="modal" data-target="#myModal" type="button" class="close">&times;</button><!-- 클릭시 삭제  -->
+                  <h5><i class="icon fas fa-info"></i> 이름!</h5>
+                  <div id="photo">
+                 	<img src="/dist/img/landscape-thumbnail.jpg;" class="img-responsive img-rounded" alt="">
+                 	사진
+                 	</div>
+                 	<div>
+	                 	<a href="#">상세</a>
+                 	</div>
+                 	<div>
+	                 	<a href="#">상세</a>
+                 	</div>
+                 	<div>
+	                 	<a href="#">상세</a>
+                 	</div>
+                </div>
+                
+                <div class="alert alert-info alert-dismissible">
+                  <button data-toggle="modal" data-target="#myModal" type="button" class="close">&times;</button><!-- 클릭시 삭제  -->
+                  <h5><i class="icon fas fa-info"></i> 이름!</h5>
+                  <div id="photo">
+                 	<img src="/dist/img/landscape-thumbnail.jpg;" class="img-responsive img-rounded" alt="">
+                 	사진
+                 	</div>
+                 	<div>
+	                 	<a href="#">상세</a>
+                 	</div>
+                 	<div>
+	                 	<a href="#">상세</a>
+                 	</div>
+                 	<div>
+	                 	<a href="#">상세</a>
+                 	</div>
+                </div>
+                
+              </div>
+              <!-- /.card-body -->
+     <form action="/editTrip"> <!-- 포워드 써먹냐? -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header"><strong>!!!!!!</strong></div>
+				<div id="modalMid">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div><strong>서운하게</strong></div>
+								<strong>진짜 지우려고?</strong>
+							</div>
+						</div>
+					</div>	
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">ㅈㅅ</button>
+						<button type="submit" class="btn btn-primary">ㅇㅇ</button><!-- 삭제처리 -->
 					</div>
 				</div>
+			</div>
+		</div>
+		</div>
+	</form>
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+
+          <div class="col-md-6">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-bullhorn"></i>
+                  Map
+                </h3>
+              </div>
+                <div class="borderRight">
+				<div>
+					<div id="map" style="width:800px;height:800px;"></div>
+				</div>
+			</div>
+              <!-- /.card-header -->
+              
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- END ALERTS AND CALLOUTS -->
 			
-				<div id="root">
-					<div id="picture">내여행 만들기</div>
-					<div id="divDetail">상세(회원)
-					<div>장소명</div>
-					<div>ㄴㅇㄹㄴㅁㅇㄹ</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="borderRight">
-				<div id="root">
-					<div id="picture">내여행 만들기</div>
-					<div id="divDetail">상세(회원)
-					<div>장소명</div>
-					<div>RRRRRRRR</div>
-					</div>
-				</div>
-			</div>
-    	</section>  
-  	</div>
-  <!-- /.content-wrapper -->
+
+
+		</div>
+	
+	</section>
+
+	<!-- /.content-wrapper -->
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
@@ -77,6 +187,15 @@ margin-bottom: 80px;
 			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		*/
-	</script>	
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+			level: 3 //지도의 레벨(확대, 축소 정도)
+		};
+
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+	</script>
+	
 </th:block>
 </html>
