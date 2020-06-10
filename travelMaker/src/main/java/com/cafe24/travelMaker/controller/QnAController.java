@@ -10,18 +10,23 @@ public class QnAController{
 		return "/question/faq";
 	}
 	
-	@GetMapping("/myQuestionList")
-	public String myQuestionList() {
-		return "/question/myQuestionList";
+	@GetMapping("/questionList")
+	public String questionList() {
+		return "/question/questionList";
 	}
 	
-	@GetMapping("/myQuestion")
-	public String myQuestion() {
-		return "/question/myQuestion";
+	@GetMapping("/newQuestion")
+	public String newQuestion() {
+		return "/question/newQuestion";
 	}
 	
 	@GetMapping("/answer")
 	public String answer() {
 		return "/question/answer";
+	}
+	
+	@GetMapping("/myQuestion")
+	public String myQuestion() {
+		return "/question/myQuestion";
 	}
 }
