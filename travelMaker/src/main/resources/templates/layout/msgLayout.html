@@ -4,14 +4,20 @@
   layout:decorator="@{layout/default}">
 
 <th:block layout:fragment="customContents">
-<div class="content-wrapper">
 <div th:replace="fragments/sendMsg :: sendMsgModalFragement"></div>
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-        <th:block layout:fragment="msgIntro"></th:block>
-         
+          <div class="col-sm-6">
+          <th:block layout:fragment="mailListTitle"></th:block> 
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            	<th:block layout:fragment="mainIntro"></th:block>
+            </ol>
+          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -20,7 +26,8 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="compose.html"  data-toggle="modal" class="btn btn-primary btn-block mb-3" data-target="#myModal">쪽지보내기</a>
+          <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
+
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">내 쪽지함</h3>
@@ -52,17 +59,24 @@
             </div>
             <!-- /.card-body -->
           </div>
-          <!-- /.card -->
 
         </div>
-        <!-- 기본적으ㅡ로 들어가는 틀  -->
         <!-- /.col -->
         <div class="col-md-9">
-        	<th:block layout:fragment="msgList">
-        	<th:block layout:fragment="msgRead">
+          <div class="card card-primary card-outline">
+            <div class="card-header">
+            <th:block layout:fragment="mailCardTitle"></th:block>
+			<th:block layout:fragment="mailSearchForm"></th:block>
+            </div>
+            <!-- /.card-header -->
+            <!-- /.card-body -->
+            <th:block layout:fragment ="mailList"></th:block>
+            <th:block layout:fragment ="mailFooter"></th:block>
+
           <!-- /.card -->
         </div>
         <!-- /.col -->
+      </div>
       </div>
       <!-- /.row -->
     </section>

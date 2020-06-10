@@ -3,23 +3,41 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/msgLayout}">
 <th:block layout:fragment="customTitle">
-	<title>'id001'님의 휴지통</title>
+	<title>상세쪽지내역</title>
 </th:block>
-<th:block layout:fragment="msgIntro">
-	 <div class="col-sm-6">
-            <h1>휴지통</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">message</a></li>
-              <li class="breadcrumb-item active">deleteMsg</li>
-            </ol>
-          </div>
+ <th:block layout:fragment="mailListTitle">
+ <h1>쪽지 상세 내역</h1>
+ </th:block>
+       
+<th:block layout:fragment="mainIntro">
+	<li class="breadcrumb-item"><a href="#">message</a></li>
+    <li class="breadcrumb-item active">detailMsg</li>
 </th:block>
-<th:block layout:fragment="msgListTitle">
-<h3 class="card-title">휴지통</h3>
+<th:block layout:fragment="mailCardTitle">
+     <h3 class="card-title">쪽지 상세내역</h3></th:block>
+<th:block layout:fragment="mailSearchForm">
+    <div class="card-tools">
+        <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fas fa-chevron-left"></i></a>
+         <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Next"><i class="fas fa-chevron-right"></i></a>
+    </div>
 </th:block>
-<th:block layout:fragment="msgList">
-	
+  <th:block layout:fragment ="mailList">
+  <div class="mailbox-read-info">
+      <h6>From: id002
+      <span class="mailbox-read-time float-right">15 Feb. 2015 11:03 PM</span></h6>
+  </div>
+  <div class="mailbox-read-message">
+       <p> ㅎㅇ?</p>
+  </div>
+  
+ <th:block layout:fragment ="mailFooter">
+  <div class="card-footer">
+              <div class="float-right">
+                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
+             
+              <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
+              </div>
+            </div>
+  </th:block>
 </th:block>
 </html>
