@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title> 휴면회원관리 화면입니다  :) </title>
+</th:block>
+<th:block layout:fragment="customContents">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>휴면회원 관리페이지</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">휴면회원 리스트</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+	                  <tr>
+	                      <th>번호</th>
+	                      <th>아이디</th>
+	                      <th>권한</th>
+	                      <th>이름</th>
+	                      <th>이메일</th>
+	                      <th>성별</th>
+	                      <th>생년월일</th>
+	                      <th>회원가입시각</th>
+	                  </tr>
+                  </thead>
+                  <tbody>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                  <tr>
+	                    <th>number</th>
+	                    <th>mId</th>
+	                    <th>mLevel</th>
+	                    <th>mName</th>
+	                    <th>mEmail</th>
+	                    <th>mGender</th>
+	                    <th>mBirth</th>
+	                    <th>mRegDate</th>
+	                  </tr>
+	                </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+	<script>
+
+	</script>	
+</th:block>
+</html>

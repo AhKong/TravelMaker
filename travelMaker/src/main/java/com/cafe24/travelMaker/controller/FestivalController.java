@@ -10,7 +10,6 @@ public class FestivalController {
 	
 	@GetMapping("/festivalList")
 	public String Festival() {
-		System.out.println("Festival 컨트롤러 도착~~~~!");
 		
 		return "festival/festivalList";
 	}

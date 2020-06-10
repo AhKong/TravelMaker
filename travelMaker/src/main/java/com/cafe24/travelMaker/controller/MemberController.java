@@ -38,30 +38,32 @@ public class MemberController{
 	public String deleteMember(Member member) {
 		System.out.println("<post> deleteMember 컨트롤러 도착~! 장하다 장해 !!");
 		
-		return "Member/myPage";
+		return "member/myPage";
 	}
 	
 	@GetMapping("/deleteMember")
 	public String deleteMember(Model model) {
-		// System.out.println("<get> deleteMember 컨트롤러 도착~! 장하다 장해 !!");
 		
-		return "Member/deleteMember";
+		return "member/deleteMember";
 	}
 	
 	@PostMapping("/updateMember")
 	public String updateMember(Member member) {
-		// System.out.println("<post> updateMember 컨트롤러 도착~! 장하다 장해 !!");
 		
-		return "Member/myPage";
+		return "member/myPage";
 	}
 	
 	@GetMapping("/updateMember")
 	public String updateMember(Model model) {
-		// System.out.println("<get> updateMember 컨트롤러 도착~! 장하다 장해 !!");
 		
-		return "Member/updateMember";
+		return "member/updateMember";
 	}
 	
+	@GetMapping("/dormantMember")
+	public String dormantMember() {
+		
+		return "member/dormantMember";
+	}
 	
 	
 	

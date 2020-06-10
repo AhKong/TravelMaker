@@ -3,32 +3,247 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title> 축제 리스트 </title>
+<title>전국의 축제리스트</title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<style>
+span {
+	font-size: 20px;
+	font-weight: bold
+}
+
+.bestSights {
+	padding-top: 10px;
+	margin-bottom: 20px;
+}
+
+.desc {
+	display: block;
+	padding-left: 10px;
+	margin-top: 10px;
+}
+
+.radio {
+	margin-top: 10px;
+}
+
+.sightListTitle {
+	font-size: 35px;
+	padding-bottom: 30px;
+}
+
+.post {
+	margin-top: 15px;
+}
+
+.sightCate {
+	margin-top: 40px;
+	border-top: 1px solid black;
+	padding-top: 10px;
+}
+
+.sightCate p {
+	font-size: 20px;
+}
+
+.warp-searchForm {
+	margin-left: 13%;
+	margin-top: 20px;
+}
+
+.warp-searchForm input {
+	width: 200px;
+}
+
+.sights{
+	border-bottom:1px solid #efefef;
+	margin-bottom:10px;
+	padding-bottom:10px;
+}
+
+</style>
 </th:block>
 <th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<div class="container-fluid">
-   		 <div class="row">
-				<h1>축제 리스트 화면</h1>
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>축제 리스트</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/festival">festival</a></li>
+							<li class="breadcrumb-item active">festivalList.html</li>
+						</ol>
+					</div>
+				</div>
 			</div>
-			
-			
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+
+			<!-- Default box -->
+			<div class="card">
+
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-md-6 col-lg-2 order-1 order-md-1">
+							<div class="warp-searchForm">
+								<form class="form-inline">
+									<div class="input-group input-lg">
+										<input class="form-control" type="search"
+											placeholder="Search" aria-label="Search">
+										<div class="input-group-append">
+											<button class="btn btn-navbar" type="submit">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							
+							<div class="sightCate">
+								<p>축제</p>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 현재 진행중인 축제
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 진행 예정인 축제
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios1" value="option1"> 지난 축제
+									</label>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
+							<h1>현재 진행중인 축제</h1>
+							<div class="bestSights row">
+								<div class="col-12 col-sm-4">
+									<div class=" info-box bg-light ">
+										<img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
+										</div>
+									</div> 
+								</div>
+								<div class="col-12 col-sm-4">
+									<div class="info-box bg-light">
+										<img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-sm-4">
+									<div class="info-box bg-light">
+										<img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100"
+											height="150">
+										<div class="desc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+							  	<span class="sightListTitle"></span>
+									<h2>축제 정보 더보기</h2>
+								<div class="col-12">
+									<div class="sights row">
+										<div class="sightsImg col-2">
+										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
+										</div>
+										<div class="sightsDesc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="sights row">
+										<div class="sightsImg col-2">
+										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
+										</div>
+										<div class="sightsDesc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>축제 상세설명:</p>
+											<p>축제 시작일:</p>
+											<p>축제 종료일일:</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="sights row">
+										<div class="sightsImg col-2">
+										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
+										</div>
+										<div class="sightsDesc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>축제 상세설명:</p>
+											<p>축제 시작일:</p>
+											<p>축제 종료일일:</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="sights row">
+										<div class="sightsImg col-2">
+										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
+										</div>
+										<div class="sightsDesc">
+											<span>festivalName1</span>
+											<p>로운 얼굴이 더 장관</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- /.card-body -->
 			</div>
- 		 </div>
-   </div>
-    	   
-   		
-    
-  	</div>
-  <!-- /.content-wrapper -->
+			<!-- /.card -->
+
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
 </th:block>
-<th:block layout:fragment="customFooterScript">
-	<script>
-		/*
-			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
-			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		*/
-	</script>	
 </th:block>
 </html>
