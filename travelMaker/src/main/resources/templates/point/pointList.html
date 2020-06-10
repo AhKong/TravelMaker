@@ -3,7 +3,7 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title> 휴면회원관리 화면입니다  :) </title>
+	<title> 포인트관리 화면입니다  :) </title>
 </th:block>
 <th:block layout:fragment="customContents">
 
@@ -14,12 +14,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>휴면회원 관리</h1>
+            <h1>포인트 관리</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">dormantMember.html</li>
+              <li class="breadcrumb-item"><a href="#">point</a></li>
+              <li class="breadcrumb-item active">pointList.html</li>
             </ol>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">휴면회원 리스트</h3>
+                <h3 class="card-title">포인트 관리</h3>
               </div>
               <!-- /.card-header -->
               
@@ -41,116 +41,171 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
 	                  <tr>
-	                      <th>번호</th>
+	                      <th>포인트 사용 번호</th>
 	                      <th>아이디</th>
 	                      <th>권한</th>
 	                      <th>이름</th>
-	                      <th>이메일</th>
 	                      <th>성별</th>
 	                      <th>생년월일</th>
-	                      <th>회원가입시각</th>
+	                      <th>상품번호</th>
+	                      <th>상품카테고리</th>
+	                      <th>상품이름</th>
+	                      <th>추가된포인트</th>
+	                      <th>차감된포인트</th>
+	                      <th>최종포인트(점)</th>
+	                      <th>최종포인트등록시각</th>
 	                  </tr>
                   </thead>
                   <tbody>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                  <tr>
-	                    <th>number</th>
+	                    <th>pointUseNumber</th>
 	                    <th>mId</th>
 	                    <th>mLevel</th>
 	                    <th>mName</th>
-	                    <th>mEmail</th>
 	                    <th>mGender</th>
 	                    <th>mBirth</th>
-	                    <th>mRegDate</th>
+	                    <th>allianceGoodsNumber</th>
+	                    <th>allianceGoodsCate</th>
+	                    <th>allianceGoodsName</th>
+	                    <th>pointAdd</th>
+	                    <th>pointRemove</th>
+	                    <th>pointFinal</th>
+	                    <th>pointRedDate</th>
 	                  </tr>
 	                </tbody>
                 </table>
