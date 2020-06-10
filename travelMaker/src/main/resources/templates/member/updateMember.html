@@ -13,9 +13,13 @@
 		}
 		.card-body {
 			padding: 50px;
+			font-size: small;
 		}
 		.label-control {
 			float: left;
+		}
+		.form-button {
+			margin:0 auto;
 		}
 		
 	</style>
@@ -54,49 +58,49 @@
 			
             <div class="card-body">
               <div class="form-group">
-                <label for="up-mId" class="label-control col-md-4">아이디</label>
+                <label for="up-mId" class="label-control col-md-3">아이디</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mId" class="form-control" id="up-mId" placeholder="Id">
+                  <input type="text" name="mId" class="form-control" id="up-mId" placeholder="Id" readonly>
                 </div>
               </div>
     				  
     		  <div class="form-group form-group-lg">
-                <label for="up-mPw" class=" label-control col-md-4">비밀번호</label>
+                <label for="up-mPw" class=" label-control col-md-3">비밀번호</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="password" name="mPw" class="form-control" id="up-mPw" placeholder="Password">
                 </div>
               </div>
                       
               <div class="form-group form-group-lg">
-                <label for="up-mPwCheck" class=" label-control col-md-4">비밀번호 확인</label>
+                <label for="up-mPwCheck" class=" label-control col-md-3">비밀번호 확인</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="password" name="mPwCheck" class="form-control" id="up-mPwCheck" placeholder="PasswordCheck">
                 </div>
               </div>
                      
               <div class="form-group form-group-lg">
-                <label for="up-mName" class="label-control col-md-4">이름</label>
+                <label for="up-mName" class="label-control col-md-3">이름</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="text" name="mName" class="form-control" id="up-mName" placeholder="Name" >
                 </div>
               </div>
                      
               <div class="form-group form-group-lg">
-                <label for="up-mEmail" class="label-control col-md-4">이메일</label>
+                <label for="up-mEmail" class="label-control col-md-3">이메일</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="text" name="mEmail" class="form-control" id="up-mEmail" placeholder="Email" >
                 </div>
               </div>
                   
               <div class="form-group form-group-lg">
-              <label for="up-mTel" class=" label-control col-md-4">전화번호</label>
+              <label for="up-mTel" class=" label-control col-md-3">전화번호</label>
               <div class="input-control col-sm-8 col-md-8 col-lg-10">
               <input type="tel" name="mTel" class="form-control" id="up-mTel" placeholder="Tel" >
               </div>
               </div>
                      
               <div class="form-group form-group-lg">
-                <label for="up-mGender" class=" label-control col-md-4">성별</label>
+                <label for="up-mGender" class=" label-control col-md-3">성별</label>
                 <div id="up-mGender" class="btn-control">
                   <button type="button" name="mGender" class="btn btn-info col-xs-3 col-sm-3 col-md-3" value="여" > 여  </button>
                   <button type="button" name="mGender" class="btn btn-info col-xs-3 col-sm-3 col-md-3" value="남" > 남  </button>
@@ -104,28 +108,28 @@
               </div>
                      
               <div class="form-group">
-                <label for="up-mBirth" class="label-control col-md-4">생년월일</label>
+                <label for="up-mBirth" class="label-control col-md-3">생년월일</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="date" name="mBirth" class="form-control" id="up-mBirth" placeholder="Date of Birth" >
                 </div> 
               </div>
                       
               <div class="form-group">
-                <label for="up-mAddr" class="label-control col-md-4">주소</label>
+                <label for="up-mAddr" class="label-control col-md-3">주소</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="text" name="mAddr" class="form-control" id="up-mAddr" placeholder="Address" >
                 </div>
               </div>
                       
               <div class="form-group">
-                <label for="up-mProPhoto" class="label-control col-md-4">프로필사진</label>
+                <label for="up-mProPhoto" class="label-control col-md-3">프로필사진</label>
                 <div class="input-control col-sm-6 col-md-6 col-lg-10">
                   <input type="text" name="mProPhoto" class="form-control" id="up-mProPhoto" placeholder="Profile-photo">
                 </div>
               </div>
                       
               <div class="form-group">
-                <label for="up-mIntrod" class="label-control col-md-4">한줄소개</label>
+                <label for="up-mIntrod" class="label-control col-md-3">한줄소개</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="text" name="mIntrod" class="form-control" id="up-mIntrod" placeholder="Profile-introduction" >
                 </div>
@@ -135,15 +139,72 @@
                 <div class="col-sm-offset-2 col-xs-6">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" > 수정할 정보를 모두 확인했나요?
+                      <input type="checkbox">수정할 정보를 모두 확인했나요?
                     </label>
                   </div>
                 </div>
               </div>
 
-			  <div class="form-group col-sm-8">
-			    <button type="submit" class="btn btn-md btn-default ">수정 취소 !</button>
-			    <button type="submit" class="btn btn-md btn-primary ">수정완료 :)</button>
+			  <div class="form-button col-sm-8">
+			  	<!-- Button trigger modal -->
+			    <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
+			    
+				<!-- Modal -->
+				<div class="modal fade" id="cancleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							
+							<div class="modal-body">
+								정말 취소하시겠습니까? 	<br>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal"> 예 </button>
+			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->		
+			    
+			    <button type="submit" class="btn btn-sm btn-primary" onclick="location.href='/myPage'">수정완료 :)</button>
+			    
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">계정 탈퇴하기</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							
+							<div class="modal-body">
+								TravelMaker 는 30000000건의 리뷰와 							<br>
+								22222건의 여행기록을 가지고 있고									<br>
+								앞으로 더 많은 기능들이 추가될 것입니다								<br>
+																						<br>
+								지금 탈퇴하기를 멈추면 2000점의 포인트를 받을 수 있습니다					<br>
+								정말 계정을 탈퇴하시겠습니까?										<br>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"> 2000 포인트 받고 탈퇴 안하기  </button>
+		 						<button type="button" class="btn btn-danger btn-sm col-sm-2" data-dismiss="modal">미안</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->		
+					
 			  </div>
               
             </div>
@@ -155,8 +216,20 @@
     </section>
   </div>
 
+
+
 </th:block>
 <th:block layout:fragment="customFooterScript">
+	
+	<script>
+		$('#deleteModal').on('shown.bs.modal', function () {
+			$('#myInput').focus()
+		})
+		
+		$('#calcelModal').on('shown.bs.modal', function () {
+			$('#myInput').focus()
+		})
+	</script>
 	
 </th:block>
 </html>
