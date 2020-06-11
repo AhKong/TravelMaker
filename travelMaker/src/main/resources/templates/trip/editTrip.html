@@ -76,7 +76,7 @@
 					<div class="card card-default">
 						<div class="card-header">
 							<h3 class="card-title">
-								<i class="fas fa-exclamation-triangle"></i> 제목
+								<i class="fas fa-camera-retro"></i> 제목
 							</h3>
 						</div>
 						<!-- /.card-header -->
@@ -106,6 +106,8 @@
 						</div>
 
 						<div id="editBox" class="small-box">
+							<button data-toggle="modal" data-target="#myModal" type="button"
+								class="close">&times;</button>
 							<!-- 클릭시 삭제  -->
 							<div>
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
@@ -117,6 +119,8 @@
 
 
 						<div id="editBox" class="small-box">
+							<button data-toggle="modal" data-target="#myModal" type="button"
+								class="close">&times;</button>
 							<!-- 클릭시 삭제  -->
 							<div>
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
@@ -124,12 +128,6 @@
 							</div>
 							스크랩한 정보
 						</div>
-
-
-
-
-
-
 
 						<!-- /.card-body -->
 						<form action="/editTrip">
@@ -139,7 +137,7 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<strong>!!!!!!</strong>
+											<strong><i class="fas fa-biohazard"></i></strong>
 										</div>
 										<div id="modalMid">
 											<div class="container">
@@ -154,7 +152,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
-													data-dismiss="modal">ㄴㄴ</button>
+													data-dismiss="modal">미안</button>
 												<button type="submit" class="btn btn-primary">ㅇㅇ</button>
 												<!-- 삭제처리 -->
 											</div>
@@ -171,7 +169,7 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<strong>설명 추가하기</strong>
+											<strong><i class="fas fa-book-open"></i>설명 추가하기</strong>
 										</div>
 										<div class="modal-body">
 											<section class="content">
@@ -197,8 +195,7 @@
 										</div>
 										<div id="modalMid">
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal"> 미안..</button>
 												<button type="submit" class="btn btn-primary">추가하기</button>
 											</div>
 										</div>
@@ -217,7 +214,7 @@
 					<div class="card card-default">
 						<div class="card-header">
 							<h3 class="card-title">
-								<i class="fas fa-bullhorn"></i> Map
+								<i class="fas fa-map-marked-alt"></i> Map
 							</h3>
 						</div>
 						<div class="borderRight">
@@ -258,8 +255,8 @@
 			$('.textarea').summernote()
 		})
 
-		var container = document.getElementById('map'), options = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667),
+		var container = document.getElementById('map')/*//지도를 담을 영역의 DOM 레퍼런스  */, options = {
+			center : new kakao.maps.LatLng(33.450701, 126.570667),/* //지도의 중심좌표. */
 			level : 3
 		};
 		var map = new kakao.maps.Map(container, options);
@@ -269,35 +266,26 @@
 
 		map.relayout();
 
-		/* var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-		var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new kakao.maps.LatLng(35.821260, 127.117187), //지도의 중심좌표.
-			level: 3 //지도의 레벨(확대, 축소 정도)
-		
-		};
-		
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 		map.relayout();
-		
+
 		var control = new kakao.maps.ZoomControl();
-		map.addControl(control, kakao.maps.ControlPosition.TOPRIGHT); 
+		map.addControl(control, kakao.maps.ControlPosition.TOPRIGHT);
 		map.panTo(moveLatLng);
 		map.panBy(100, 50);
 		// 최대 줌
 		map.setMaxLevel(13);
-		
-		
+
 		var places = new kakao.maps.services.Places();
 
 		//검색
 		var callback = function(result, status) {
-		    if (status === kakao.maps.services.Status.OK) {
-		        console.log(result);
-		    }
+			if (status === kakao.maps.services.Status.OK) {
+				console.log(result);
+			}
 		};
 
 		places.keywordSearch('판교 치킨', callback);
-		 */
 
 		// 주소-좌표 변환 객체를 생성합니다
 		//var geocoder = new daum.maps.services.Geocoder();
