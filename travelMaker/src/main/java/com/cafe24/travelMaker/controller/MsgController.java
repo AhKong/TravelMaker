@@ -21,8 +21,11 @@ public class MsgController {
 	}
 	
 	@GetMapping("/detailMsg")
-	
 	public String detailMsg() {
 		return "/message/detailMsg";
+	}
+	@GetMapping("/notifyDetail")
+	public String notifyDetail() {
+		return "/message/notifyDetail";
 	}
 }
