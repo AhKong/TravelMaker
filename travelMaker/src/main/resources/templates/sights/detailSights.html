@@ -31,7 +31,9 @@ span {
 }
 </style>
 </th:block>
+<th:block >
 <th:block layout:fragment="customContents">
+<div th:replace="fragments/addReveiwModal :: addReviewFragment"></div>
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 <section class="content-header">
@@ -177,8 +179,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		role="tabpanel" aria-labelledby="sights-review-tab">
 		<div class="reviewTitle">
 			<span>review</span>
-			<button type="submit"
-				class="btn btn-outline-danger btn-lg float-right">리뷰작성</button>
+			<button type="submit" class="btn btn-outline-danger btn-lg float-right"  data-toggle="modal" data-target="#addReview">리뷰작성</button>
 			<hr>
 		</div>
 		<div class="chart col-12 col-sm-4">
@@ -250,6 +251,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 </div>
 <!-- /.card-body -->
 </div>
+
+<!-- Modal -->
+
 <!-- /.card -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
