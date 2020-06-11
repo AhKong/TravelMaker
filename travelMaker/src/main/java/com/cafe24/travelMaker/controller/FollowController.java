@@ -8,7 +8,7 @@ public class FollowController {
 	@GetMapping("/followers")
 	public String follow(){
 		return "member/followers";
-	}
+	}  
 	
 	@GetMapping("/following")
 	public String following(){

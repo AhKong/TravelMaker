@@ -23,17 +23,10 @@ public class MemberController{
 		return "/member/memberFindId";
 	}
 	
-	//비밀번호 찾을 아이디 확인
-	@GetMapping("/confirmId")
+	//비밀번호 찾기
+	@GetMapping("/memberFindPw")
 	
 	public String confirmId() {
-		
-		return "/member/confirmId";
-	}
-	
-	//비밀번호 찾기
-	@PostMapping("memberFindPw")
-	public String memberFindPw() {
 		
 		return "/member/memberFindPw";
 	}
