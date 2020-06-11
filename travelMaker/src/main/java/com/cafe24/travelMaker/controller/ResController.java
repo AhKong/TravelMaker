@@ -24,4 +24,15 @@ public class ResController {
 	public String deleteRes() {
 		return "res/deleteRes";
 	}
+	
+	@GetMapping("/detailRes")
+	
+	public String detailRes() {
+		return "res/detailRes";
+	}
+	
+	@GetMapping("/moreResPhoto")
+	public String moreResPhoto() {
+		return "res/morePhotos";
+	}
 }

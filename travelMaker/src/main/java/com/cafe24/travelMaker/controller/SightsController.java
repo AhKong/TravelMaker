@@ -25,4 +25,9 @@ public class SightsController{
 	public String detailSights() {
 		return "/sights/detailSights";
 	}
+	
+	@GetMapping("/moreSightsPhoto")
+	public String moreSightsPhoto() {
+		return "/sights/morePhotos";
+	}
 }
