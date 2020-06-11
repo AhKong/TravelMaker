@@ -10,7 +10,15 @@ public class PointController {
 	@GetMapping("/pointList")
 	public String pointList() {
 		
-		return "point/pointList.html";
+		return "point/pointList";
 	}
+	
+	//포인트 사용내역
+	@GetMapping("/pointUse")
+	public String pointUse() {
+		
+		return "point/pointUse";
+	}
+	
 	
 }
