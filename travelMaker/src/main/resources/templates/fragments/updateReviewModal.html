@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <!-- Modal -->
-<div class="modal fade" id="addReview" th:fragment="addReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateReview" th:fragment="updateReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-      	<h3>리뷰 작성하기</h3>
+      	<h3>리뷰 수정하기</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span></button>
  
@@ -21,7 +21,7 @@
                       <!-- text input -->
                       <div class="form-group">
                         <label>Title</label>
-                        <input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요">
+                        <input type="text" class="form-control" value="원래작성했던제목.,,,">
                       </div>
                     </div>
                   </div>
