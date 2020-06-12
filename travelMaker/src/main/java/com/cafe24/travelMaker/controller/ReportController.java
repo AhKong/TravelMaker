@@ -14,4 +14,5 @@ public class ReportController {
 	public String manageSightsReviewReport() {
 		return "/report/manageSightsReviewReport";
 	}
+	
 }

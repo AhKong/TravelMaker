@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+
+<th:block layout:fragment="customContents">
+<div th:replace="fragments/sendMsg :: sendMsgModalFragement"></div>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+             <th:block layout:fragment="reportTitle"></th:block>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+             <th:block layout:fragment="pathInfo"></th:block>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+         <th:block layout:fragment="subTitle"></th:block>
+       
+         
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-2 order-1 order-md-1">
+              
+      			 <div class="card-body p-0">
+              <ul class="nav nav-pills flex-column">
+                <li class="nav-item active">
+                  <a href="/manageSightsReviewReport" class="nav-link">
+                    <i class="fas fa-inbox"></i> 리뷰신고내역(관광명소)
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/manageResReviewReport" class="nav-link">
+                     <i class="fas fa-inbox"></i> 리뷰신고내역(음식점)
+                  </a>
+                </li>
+              </ul>
+            <!-- /.card-body -->
+          </div>
+           
+            </div>
+       
+            <div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
+              <div class="card">
+              <div class="card-header">
+           			<div class="btn-group float-right">
+                        <button type="button" class="btn btn-primary">미처리</button>    
+                        <button type="button" class="btn btn-primary">처리</button>
+                        <button type="button" class="btn btn-primary">전체</button>
+                    </div>
+      			</div>
+            
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>신고자</th>
+                    <th>신고리뷰번호</th>
+                    <th>신고사유</th>
+                    <th>처리여부</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                 <th:block layout:fragment="reportList"></th:block>
+                  </tbody>
+                  
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+ 
+</th:block>
+<th:block layout:fragment="customFooterScript">
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+  </script>
+</th:block>	
+</html>
