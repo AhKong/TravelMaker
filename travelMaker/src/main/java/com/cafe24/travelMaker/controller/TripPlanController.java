@@ -4,16 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PlanTripController {
-
+public class TripPlanController {
 	@GetMapping("/tripList")
-	public String sightsList() {
+	public String sightsList() {// 여행 계획 리스트
 		return "/trip/tripList";
 		
 	}
 	
 	@GetMapping("/editTrip")
-	public String sightsAdd() {
+	public String sightsAdd() {// 여행수정..
 		return "/trip/editTrip";
 	}
 }
