@@ -48,6 +48,13 @@ public class JoinLoginController {
 	public String addMember() {
 		return "join_login/addMember";
 	}
+	
+	@PostMapping("/addMember")
+	public String addMember(Member member) {
+		System.out.println(member);
+		
+		return "redirect:/login";
+	}
 	@GetMapping("/addAffiliate")
 	public String addAffiliate() {
 		return "/join_login/addAffiliate";

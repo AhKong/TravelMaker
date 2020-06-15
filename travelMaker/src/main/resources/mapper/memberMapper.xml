@@ -3,6 +3,31 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.MemberMapper">
+	
+	<insert id="addMember" parameterType="Member">
+		INSERT INTO tb_member(
+			
+			m_id,
+			m_pw,
+			level_num,
+			m_name,
+			m_tel,
+			m_gender,
+			m_birth,
+			m_avatar,
+			m_introd
+			
+		)VALUES(
+			 #{mId}
+			,#{mPw}
+			,#{mLevel}
+			,#{mName}
+			,#{mTel}
+			,#{mTel}
+			,#{memberEmail}
+		)
+	</insert>
+	
  	<resultMap type="Member" id="memberSelect">
  		<result property="mId"  	column="m_id"/>
  		<result property="mPw"   	column="m_pw"/>
