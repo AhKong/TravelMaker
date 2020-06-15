@@ -15,15 +15,21 @@
  		padding-right:10px;
  		padding-top:5px;
  	}
+<<<<<<< HEAD
  	
  	p{
  		display:none;
+=======
+ 	p{
+ 		display:none;
+ 		color:#ff0000;
+>>>>>>> branch 'KAR' of https://github.com/AhKong/TravelMaker.git
  	}
    </style>
  </th:block>
 
 <th:block layout:fragment="customContents">
-<div class="hold-transition register-page">
+
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Travel</b>Maker</a>
@@ -33,7 +39,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Welcome To TravelMaker!
       </p>
-      <form action="/addMember" method="post">
+      <form action="/addMember" id="memberJoinForm" method="post">
         <div class="input-group form-group mb-3">
            <input type="text" id="memberId" class="form-control" placeholder="ID" name="mId">
           <div class="input-group-append">
@@ -43,8 +49,13 @@
           </div>
         
         </div>
+<<<<<<< HEAD
           <p class="idCheck" > 내가 망할거 같아?</p>
      
+=======
+        <p id="idCheckMsg">중복되는 아이디 입니다.</p>
+        <p id="idRexExpMsg">아이디는 영문,숫자 포함 8자 이상 15자 이하로 작성하세요</p>
+>>>>>>> branch 'KAR' of https://github.com/AhKong/TravelMaker.git
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Password" name="mPw">
           <div class="input-group-append">
@@ -54,7 +65,11 @@
           </div>
         </div>
         <div class="input-group mb-3">
+<<<<<<< HEAD
           <input type="password" class="form-control" placeholder="Retype password" >
+=======
+          <input type="password" class="form-control mPwCheck" placeholder="Retype password" >
+>>>>>>> branch 'KAR' of https://github.com/AhKong/TravelMaker.git
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -123,8 +138,12 @@
           </div>
         </div>
         <div class="input-group mb-3">
+<<<<<<< HEAD
           <input type="text"class="form-control" placeholder="Introduce your self" name="mIntrod">
           
+=======
+          <input type="text"class="form-control" placeholder="Introduce your self" name ="mIntrod">      
+>>>>>>> branch 'KAR' of https://github.com/AhKong/TravelMaker.git
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-child"></span>
@@ -142,7 +161,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="button" class="btn btn-primary btn-block">Register</button>
+            <button type="button" class="btn btn-primary btn-block joinBtn">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -152,21 +171,68 @@
     <!-- /.form-box -->
   </div><!-- /.card -->
 </div>
-</div>
 </th:block>
-<th:block layout:fragment="customScript">
-<script>
+ <th:block layout:fragment="customScript">
+	<script>
+		$(function(){
+			var mId = $('input[name=mId]');
+			var mPw = $('input[name=mPw]');
+			var mPwCheck = $('.mPwCheck');
+			var mName =$('input[name=mName]');
+			var mEmail =$('input[name=mEmail]');
+			var mTel =$('input[name=mTel]');
+			var mAddr = $('input[name=mAddr]');
+			var mBirth = $('input[name=mBirth]');
+			var mGentder = $('input[name=mGender]');
+			var mAvatar =$('input[name=mAvatar]');
+			var mIntrod = $('input[name=mIntrod]');
+			var idCheck = false; 
+			var pwCheck = false;
+			/*  아이디 정규식 및 중복여부 확인  ajax, 키보드를 누를때마다 중복검사 여부 확인하겠음.,,!!
+			*/
+			mId.keyup(function(){
+				var mIdCheck = RegExp(/^[A-Za-z0-9_\-]{8,15}$/);
+				if(mIdCheck.test(mId.val())==true){
+					$('#idRexExpMsg').css('display','none');
+					var request = $.ajax({
+						  url: "/idCheck",  
+						  method: "Post",
+						  data: {mId :mId.val()}, 
+						  dataType: "json"
+					});
+	    
+					request.done(function( data ) {	
+						if(data.result =='N'){ // 아이디 중복 안되는 경우
+							idCheck = true;
+							$('#idCheckMsg').css('display','none')
+						} else {
+							$('#idCheckMsg').css('display','block')
+							idCheck = false;
+						}
+					});	
+	   
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+					});
+					
+				} else if(mIdCheck.test(mId.val())==false) {
+					$('#idRexExpMsg').css('display','block');
+				}
+			})
+			
+			mPw.keyup(function(){
+				var mPwCheck = RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{15,}$/);
+				console.log()
+				if(mPwCheck.test(mPw.val())==true){
+					console.log('유효성검사!!')
+				}
+				
+			})
 
-	$(function(){
-		 var mId = $('input[name=mId]');
-		 var mPw = $('input[name=mPw]');
-		 var mPwCheck = $('')
-		 
-		 mId.keyup(function(){
-			 $('.idCheck').css('display','block');
-			 console.log(mId.val())
-		 })
 	})
-</script>
+			
+
+	</script>
 </th:block>
+
 </html>

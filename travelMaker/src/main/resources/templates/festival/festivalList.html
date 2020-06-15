@@ -12,7 +12,7 @@ span {
 	font-weight: bold
 }
 
-.bestSights {
+.int-festival {
 	padding-top: 10px;
 	margin-bottom: 20px;
 }
@@ -27,7 +27,7 @@ span {
 	margin-top: 10px;
 }
 
-.sightListTitle {
+.festivalListTitle {
 	font-size: 35px;
 	padding-bottom: 30px;
 }
@@ -36,18 +36,21 @@ span {
 	margin-top: 15px;
 }
 
-.sightCate {
+.festivalCate {
 	margin-top: 40px;
 	border-top: 1px solid black;
 	padding-top: 10px;
 }
 
-.sightCate p {
+.festivalCate p {
 	font-size: 20px;
 }
 
+.btn-group {
+	margin: 10px;
+}
+
 .warp-searchForm {
-	margin-left: 13%;
 	margin-top: 20px;
 }
 
@@ -55,15 +58,19 @@ span {
 	width: 200px;
 }
 
-.sights{
+.festival{
 	border-bottom:1px solid #efefef;
 	margin-bottom:10px;
 	padding-bottom:10px;
+}
+.form-check {
+	margin-top: 10px;
 }
 
 </style>
 </th:block>
 <th:block layout:fragment="customContents">
+<div class="wrapper">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -96,8 +103,7 @@ span {
 							<div class="warp-searchForm">
 								<form class="form-inline">
 									<div class="input-group input-lg">
-										<input class="form-control" type="search"
-											placeholder="Search" aria-label="Search">
+										<input class="form-control" type="search" placeholder="Search" aria-label="Search">
 										<div class="input-group-append">
 											<button class="btn btn-navbar" type="submit">
 												<i class="fas fa-search"></i>
@@ -107,29 +113,230 @@ span {
 								</form>
 							</div>
 							
-							<div class="sightCate">
+							<div class="festivalCate">
 								<p>축제</p>
 								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 현재 진행중인 축제
+									<label> <input type="radio" name="ing-festival"
+										id="ing-festival" value="ing-festival"> 현재 진행중인 축제
 									</label>
 								</div>
 								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 진행 예정인 축제
+									<label> <input type="radio" name="pre-festival"
+										id="pre-festival" value="pre-festival"> 진행 예정인 축제
 									</label>
 								</div>
 								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 지난 축제
+									<label> <input type="radio" name="post-festival"
+										id="post-festival" value="post-festival"> 지난 축제
 									</label>
 								</div>
 							</div>
+							<div class="festivalCate">
+								<p>관리자 페이지</p>
+								<div class="btn-group col-8">
+									<button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-addFestival"
+										name="optionsRadios" id="optionsRadios1" value="addFestival"> 축제 등록
+									</button>
+								</div>
+								<div class="btn-group col-8">
+									<button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-updateFestival"
+										name="optionsRadios" id="optionsRadios1" value="updateFestival"> 축제  수정
+									</button>
+								</div>	
+							</div>
+							
+							<!-- modal-addFestival -->
+							<div class="modal fade" id="modal-addFestival">
+						        <div class="modal-dialog modal-lg">
+						          <div class="modal-content">
+						            <div class="modal-header bg-primary">
+						              <h4 class="modal-title">축제 등록</h4>
+						              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                <span aria-hidden="true">&times;</span>
+						              </button>
+						            </div>
+						            
+						            <div class="modal-body">
+						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
+							              <div class="modal-form">
+							                <form role="form">
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
+							                        <input type="text" class="form-control" placeholder="축제 이름을 입력하세요">
+							                      </div>
+							                    </div>
+							                  </div>
+											  <div class="form-group">
+							                    <label for="exampleInputFile"><i class="fas fa-music"></i>&nbsp;festival-photo</label>
+							                    <div class="input-group">
+							                      <div class="custom-file">
+							                        <input type="file" class="custom-file-input" id="exampleInputFile">
+							                        <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-startDate</label>
+							                        <textarea class="form-control" rows="1" placeholder="축제 시작날짜를 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-endDate</label>
+							                        <textarea class="form-control" rows="1" placeholder="축제 종료날짜를 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-description</label><i class="fas fa-music"></i>
+							                        <textarea class="form-control" rows="3" placeholder="축제 상세설명을 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-webSite</label>
+							                        <textarea class="form-control" rows="1" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+												
+							                  <div class="row">
+							                    <div class="col-sm-6">
+							                      <!-- radio -->
+							                      <div class="form-group">
+							                        <div class="form-check">
+							                          <input class="form-check-input" type="radio" name="radio1"checked>
+							                          <label class="form-check-label">현재 진행중인 축제</label>
+							                        </div>
+							                        <div class="form-check">
+							                          <input class="form-check-input" type="radio" name="radio1">
+							                          <label class="form-check-label">예정중인 축제</label>
+							                        </div>
+							                      </div>
+							                    </div>
+							                  </div>
+							
+							                </form>
+							              </div>
+							              <!-- /.modal-body -->
+						          	  </div>
+						            <div class="modal-footer justify-content-between">
+						              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
+						              <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+						            </div>
+						          </div>
+						        </div>
+						    </div>
+						    
+						    <!-- modal-updateFestival -->
+							<div class="modal fade" id="modal-updateFestival">
+						        <div class="modal-dialog modal-lg">
+						          <div class="modal-content">
+						            <div class="modal-header bg-primary">
+						              <h4 class="modal-title">축제 수정</h4>
+						              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                <span aria-hidden="true">&times;</span>
+						              </button>
+						            </div>
+						            <div class="modal-body">
+						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
+							              <div class="modal-form">
+							                <form role="form">
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
+							                        <input type="text" class="form-control" placeholder="축제 이름을 입력하세요">
+							                      </div>
+							                    </div>
+							                  </div>
+											  <div class="form-group">
+							                    <label for="exampleInputFile"><i class="fas fa-camera-retro"></i>&nbsp;festival-photo</label>
+							                    <div class="input-group">
+							                      <div class="custom-file">
+							                        <input type="file" class="custom-file-input" id="exampleInputFile">
+							                        <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-startDate</label>
+							                        <textarea class="form-control" rows="1" placeholder="축제 시작날짜를 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-endDate</label>
+							                        <textarea class="form-control" rows="1" placeholder="축제 종료날짜를 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-description</label><i class="fas fa-music"></i>
+							                        <textarea class="form-control" rows="3" placeholder="축제 상세설명을 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-webSite</label>
+							                        <textarea class="form-control" rows="1" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
+							                      </div>
+							                    </div>
+							                  </div>
+												
+							                  <div class="row">
+							                    <div class="col-sm-6">
+							                      <!-- radio -->
+							                      <div class="form-group">
+							                        <div class="form-check">
+							                          <input class="form-check-input" type="radio" name="radio1"checked>
+							                          <label class="form-check-label">현재 진행중인 축제</label>
+							                        </div>
+							                        <div class="form-check">
+							                          <input class="form-check-input" type="radio" name="radio1">
+							                          <label class="form-check-label">예정중인 축제</label>
+							                        </div>
+							                      </div>
+							                    </div>
+							                  </div>
+							
+							                </form>
+							              </div>
+							           </div>
+						            <!-- /.modal-body -->
+						            <div class="modal-footer justify-content-between">
+						              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
+						              <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+						            </div>
+						          </div>
+						        </div>
+						    </div>
+						    <!-- .modal -->
+						    
 						</div>
+						<!-- /.card-body -->
 						
 						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
 							<h1>현재 진행중인 축제</h1>
-							<div class="bestSights row">
+							<div class="ing-festival row">
 								<div class="col-12 col-sm-4">
 									<div class=" info-box bg-light ">
 										<img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100"
@@ -171,14 +378,14 @@ span {
 								</div>
 							</div>
 							<div class="row">
-							  	<span class="sightListTitle"></span>
+							  	<span class="festivalListTitle"></span>
 									<h2>축제 정보 더보기</h2>
 								<div class="col-12">
-									<div class="sights row">
+									<div class="festival row">
 										<div class="sightsImg col-2">
 										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
 										</div>
-										<div class="sightsDesc">
+										<div class="festivalDesc">
 											<span>festivalName1</span>
 											<p>로운 얼굴이 더 장관</p>
 											<p>상세설명:</p>
@@ -188,39 +395,39 @@ span {
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="sights row">
+									<div class="festival row">
 										<div class="sightsImg col-2">
 										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
 										</div>
-										<div class="sightsDesc">
+										<div class="festivalDesc">
 											<span>festivalName1</span>
 											<p>로운 얼굴이 더 장관</p>
-											<p>축제 상세설명:</p>
-											<p>축제 시작일:</p>
-											<p>축제 종료일일:</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
 										</div>
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="sights row">
-										<div class="sightsImg col-2">
+									<div class="festival row">
+										<div class="festivalImg col-2">
 										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
 										</div>
-										<div class="sightsDesc">
+										<div class="festivalDesc">
 											<span>festivalName1</span>
 											<p>로운 얼굴이 더 장관</p>
-											<p>축제 상세설명:</p>
-											<p>축제 시작일:</p>
-											<p>축제 종료일일:</p>
+											<p>상세설명:</p>
+											<p>시작일:</p>
+											<p>종료일:</p>
 										</div>
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="sights row">
-										<div class="sightsImg col-2">
+									<div class="festival row">
+										<div class="festivalImg col-2">
 										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
 										</div>
-										<div class="sightsDesc">
+										<div class="festivalDesc">
 											<span>festivalName1</span>
 											<p>로운 얼굴이 더 장관</p>
 											<p>상세설명:</p>
@@ -243,7 +450,10 @@ span {
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+</div>
+</th:block>
 
+<th:block layout:fragment="customFooterScript">
 </th:block>
-</th:block>
+
 </html>
