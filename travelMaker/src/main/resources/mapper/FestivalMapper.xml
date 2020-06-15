@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.FestivalMapper">
+	<resultMap type="Festival" id="fesSelect">
+		<result property="fesNum" column="fes_num" />
+		<result property="fesName" column="fes_name" />
+		<result property="fesPhoto" column="fes_photo" />
+		<result property="fesStartDate" column="fes_start_date" />
+		<result property="fesEndDate" column="fes_end_date" />
+		<result property="fesDetail" column="fes_detail" />
+		<result property="fesWeb" column="fes_web" />
+		<result property="fesRegDate" column="fes_reg_date" />
+		<result property="fesState" column="fes_state" />
+		<!-- <association property="member" javaType="Member">
+			<result property="mId" column="m_id"/>
+		</association> -->
+	</resultMap>
+	
+	<insert id="addFestival" parameterType="Festival">
+		<selectKey order="BEFORE" keyProperty="fes_num" resultType="String">
+		<!-- keyProperty="fesNum" 는 select 의  fesNum 와 이름이 같아야 한다  -->
+		<!--  또한 Goods 클래스의 g_code 컬럼의 변수명과 같아야 한다  -->
+			SELECT
+				(case COUNT(*)
+				when 0 then 'fes_1'
+				ELSE CONCAT('fes_', (MAX(CAST(substring('fes_',5) AS DECIMAL))+1))
+				END) AS fesNum
+			FROM
+				tb_festival
+		</selectKey>
+			INSERT INTO tb_festival
+			(fes_num, fes_name, fes_photo, fes_start_date, fes_end_date, fes_detail, fes_web, fes_reg_date, fes_state)			
+			
+			VALUES ( #{fesNum}	
+					,#{fesName}
+					,#{fesPhoto}
+					,#{fesStartDate}
+					,#{fesEndDate}
+					,#{fesDetail}
+					,#{fesWeb}
+					,now()
+					,#{fesState}
+					)
+	</insert>
+	
+</mapper>

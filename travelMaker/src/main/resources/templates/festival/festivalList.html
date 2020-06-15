@@ -83,7 +83,7 @@ span {
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="/festival">festival</a></li>
-							<li class="breadcrumb-item active">festivalList.html</li>
+							<li class="breadcrumb-item">festivalList</li>
 						</ol>
 					</div>
 				</div>
@@ -159,12 +159,12 @@ span {
 						            <div class="modal-body">
 						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
-							                <form role="form">
+							                <form role="form" action="/addFestival" method="post">
 							                  <div class="row">
 							                    <div class="col-12">
 							                      <div class="form-group">
 							                        <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
-							                        <input type="text" class="form-control" placeholder="축제 이름을 입력하세요">
+							                        <input type="text" class="form-control" name="fesName" placeholder="축제 이름을 입력하세요">
 							                      </div>
 							                    </div>
 							                  </div>
@@ -172,7 +172,7 @@ span {
 							                    <label for="exampleInputFile"><i class="fas fa-music"></i>&nbsp;festival-photo</label>
 							                    <div class="input-group">
 							                      <div class="custom-file">
-							                        <input type="file" class="custom-file-input" id="exampleInputFile">
+							                        <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto">
 							                        <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
 							                      </div>
 							                    </div>
@@ -181,7 +181,7 @@ span {
 							                    <div class="col-12">
 							                      <div class="form-group">
 							                        <label><i class="fas fa-music"></i>&nbsp;festival-startDate</label>
-							                        <textarea class="form-control" rows="1" placeholder="축제 시작날짜를 입력하세요"></textarea>
+							                        <textarea class="form-control" rows="1" name="fesStartDate" placeholder="축제 시작날짜를 입력하세요"></textarea>
 							                      </div>
 							                    </div>
 							                  </div>
@@ -189,7 +189,7 @@ span {
 							                    <div class="col-12">
 							                      <div class="form-group">
 							                        <label><i class="fas fa-music"></i>&nbsp;festival-endDate</label>
-							                        <textarea class="form-control" rows="1" placeholder="축제 종료날짜를 입력하세요"></textarea>
+							                        <textarea class="form-control" rows="1" name="fesEndDate" placeholder="축제 종료날짜를 입력하세요"></textarea>
 							                      </div>
 							                    </div>
 							                  </div>
@@ -197,7 +197,7 @@ span {
 							                    <div class="col-12">
 							                      <div class="form-group">
 							                        <label><i class="fas fa-music"></i>&nbsp;festival-description</label><i class="fas fa-music"></i>
-							                        <textarea class="form-control" rows="3" placeholder="축제 상세설명을 입력하세요"></textarea>
+							                        <textarea class="form-control" rows="3" name="fesDetail" placeholder="축제 상세설명을 입력하세요"></textarea>
 							                      </div>
 							                    </div>
 							                  </div>
@@ -205,7 +205,7 @@ span {
 							                    <div class="col-12">
 							                      <div class="form-group">
 							                        <label><i class="fas fa-music"></i>&nbsp;festival-webSite</label>
-							                        <textarea class="form-control" rows="1" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
+							                        <textarea class="form-control" rows="1" name="fesWeb" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
 							                      </div>
 							                    </div>
 							                  </div>
@@ -224,19 +224,19 @@ span {
 							                        </div>
 							                      </div>
 							                    </div>
-							                  </div>
-							
-							                </form>
-							              </div>
-							              <!-- /.modal-body -->
+							                  </div>	
+								            <div class="modal-footer justify-content-between">
+								              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
+								              <button type="submit" class="btn btn-primary"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+								            </div>
+							              </form>
+							            </div>
+							            <!-- /.modal-form -->
 						          	  </div>
-						            <div class="modal-footer justify-content-between">
-						              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
-						              <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
-						            </div>
 						          </div>
 						        </div>
 						    </div>
+						    <!-- modal-addFestival -->
 						    
 						    <!-- modal-updateFestival -->
 							<div class="modal fade" id="modal-updateFestival">
@@ -249,7 +249,7 @@ span {
 						              </button>
 						            </div>
 						            <div class="modal-body">
-						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
+						             <p><i class="fas fa-headphones"></i>&nbsp;축제수정&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
 							                <form role="form">
 							                  <div class="row">
