@@ -15,6 +15,10 @@
  		padding-right:10px;
  		padding-top:5px;
  	}
+ 	
+ 	p{
+ 		display:none;
+ 	}
    </style>
  </th:block>
 
@@ -37,9 +41,12 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
+        
         </div>
+          <p class="idCheck" > 내가 망할거 같아?</p>
+     
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="mPw">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -47,7 +54,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="password" class="form-control" placeholder="Retype password" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -55,7 +62,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full Name" name="mId">
+          <input type="text" class="form-control" placeholder="Full Name" name="mName">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -63,7 +70,7 @@
           </div>
         </div>	
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="mEmail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -72,7 +79,7 @@
             <button type="button" class="btn btn-default">이멜인증</button>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Phone Number">
+          <input type="text" class="form-control" placeholder="Phone Number" name="mTel">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-mobile"></span>
@@ -80,7 +87,7 @@
           </div>
         </div>
           <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Address">
+          <input type="text" class="form-control" placeholder="Address" name="mAddr">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-home"></span>
@@ -88,7 +95,7 @@
           </div>
         </div>
        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="BirthDay">
+          <input type="text" class="form-control" placeholder="BirthDay" name="mBirth">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-calendar-o"></span>
@@ -96,7 +103,7 @@
           </div>
         </div>
             <div class="input-group mb-3">
-          <select class="form-control">
+          <select class="form-control" name="mGender">
           	<option value='none'> 성별을 선택하세요 </option>
           	<option value='남'> 남자 </option>
           	<option value='여'> 여자 </option>
@@ -108,7 +115,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="file"class="form-control" placeholder="Profile">
+          <input type="file"class="form-control" placeholder="Profile" name="mAvatar">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-camera"></span>
@@ -116,7 +123,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text"class="form-control" placeholder="Introduce your self">
+          <input type="text"class="form-control" placeholder="Introduce your self" name="mIntrod">
           
           <div class="input-group-append">
             <div class="input-group-text">
@@ -147,8 +154,19 @@
 </div>
 </div>
 </th:block>
-<th:block layout:fragment="customFooterScript">
-	<script>
-	</script>	
+<th:block layout:fragment="customScript">
+<script>
+
+	$(function(){
+		 var mId = $('input[name=mId]');
+		 var mPw = $('input[name=mPw]');
+		 var mPwCheck = $('')
+		 
+		 mId.keyup(function(){
+			 $('.idCheck').css('display','block');
+			 console.log(mId.val())
+		 })
+	})
+</script>
 </th:block>
 </html>

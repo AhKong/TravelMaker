@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/manageReportLayout}">
-
+<div th:replace="fragments/reportReview :: showReportedSightsReviewFragement"></div>
  <th:block layout:fragment="reportTitle">
  	<h1>리뷰신고내역(음식점)</h1>
  </th:block>
@@ -20,7 +20,7 @@
 	  <td>
 	  	id001	
 	  </td>
-	  <td>res_review_1</td>
+	  <td><a href="#" data-toggle="modal" data-target="#showReportedSightsReview">res_review_1</a></td>
 	  <td> 4</td>
 	  <td>X</td>
 	</tr>
