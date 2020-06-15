@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-<div class="wrapper">
+
 <th:block layout:fragment="customTitle">
 	<title>buy goods</title>
 </th:block>
@@ -55,58 +55,20 @@
                     <th>상세보기/주문</th>
                   </tr>
                   </thead>
+                  	
                   <tbody>
-                 <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a href="/detailGoods" class="btn btn-primary btn-block"><b>click</b></a></td>
-                  </tr>
-                  <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a href="/detailGoods" class="btn btn-primary btn-block"><b>click</b></a></td>
-                  </tr>
-                  <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a href="/detailGoods" class="btn btn-primary btn-block"><b>click</b></a></td>
-                  </tr>
-                  <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a href="/detailGoods" class="btn btn-primary btn-block"><b>click</b></a></td>
-                  </tr>
-                  <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a href="/detailGoods" class="btn btn-primary btn-block"><b>click</b></a></td>
-                  </tr>
-                  <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a href="/detailGoods" class="btn btn-primary btn-block"><b>click</b></a></td>
+                  
+                 <tr th:each="gl:${goodsList}">
+                    <td th:text="${gl.goodsCode}"></td>
+                    <td th:text="${gl.goodsCate}"></td>
+                    <td th:text="${gl.goodsName}"></td>
+                    <td th:text="${gl.goodsPrice}"></td>
+                    <td th:text="${gl.goodsRegDate}"></td>
+                    <td><a th:href="@{/detailGoods(gCode=${gl.goodsCode})}" class="btn btn-primary">click</a></td>
                   </tr>
                   </tbody>
-                  <tfoot>
-                  </tfoot>
+         	
+         		
                 </table>
                 	
                 </div>
@@ -114,7 +76,7 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-          </div>
+       
           <!-- /.col -->
   <!-- /.content-wrapper -->
 
@@ -123,8 +85,7 @@
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-  </body>
-<!-- ./wrapper -->
+
 
 
 </th:block>
