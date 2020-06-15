@@ -1,5 +1,6 @@
 package com.cafe24.travelMaker.domain;
 
+
 import java.util.List;
 
 public class Member {
