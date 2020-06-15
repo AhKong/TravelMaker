@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.MemberMapper">
+ 	<resultMap type="Member" id="memberSelect">
+ 		<result property="mId"  	column="m_id"/>
+ 		<result property="mPw"   	column="m_pw"/>
+ 		<result property="mLevel"  column="level_num"/>
+ 		<result property="mName" 	column="m_name"/>
+ 		<result property="mEmail"  column="m_email"/>
+ 		<result property="mGender"  column="m_gender"/>
+ 		<result property="mTel"  column="m_tel"/>
+ 		<result property="mRegDate"  column="m_reg_date"/>
+ 		<result property="mAvatar"  column="m_avatar"/>
+ 		<result property="mIntrod"  column="m_introd"/>
+ 		<result property="mFollow"  column="m_follow"/>
+ 	</resultMap>
+	
+	<select id="mIdCheck" parameterType ="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			tb_member
+		WHERE 
+			m_id = #{mId}
+	</select>
+	
+	<select id="getMemberInfo" parameterType ="String" resultMap="memberSelect">
+		SELECT
+			*
+		FROM
+			tb_member
+		WHERE
+			m_id = #{mId}	
+	</select>
+
+</mapper>

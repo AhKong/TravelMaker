@@ -103,13 +103,23 @@
           <a href="/notifyDetail" class="dropdown-item dropdown-footer">알람 전체보기</a>
         </div>
       </li>
+     
+      <th:block th:if="${session.SID== null}" >
+      
       <li class="nav-item" style="margin-left: 10px; ">
         <a class="nav-link btn btn-block btn-outline-secondary btn-sm" href="/login" role="button">Login</a>
       </li>
        <li class="nav-item" style="margin-left: 10px; margin-right:10px;">
         <a class="nav-link btn btn-block btn-outline-secondary btn-sm" href="/checkMemberLevel" role="button">Join</a>
       </li>
+      </th:block>
+       <th:block th:if="${session.SID != null}" >
+	       <li class="nav-item" style="margin-left: 10px; margin-right:10px;">
+	        <a class="nav-link btn btn-block btn-outline-secondary btn-sm" href="/logout" role="button">Logout</a>
+	      </li>
+      </th:block>
     </ul>
+   
   </nav>
   <!-- /.navbar -->
 </html>
