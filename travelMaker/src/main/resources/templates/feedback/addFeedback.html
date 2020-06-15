@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+<title>피드백 등록</title>
+</th:block>
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customContents">
+<div class="wrapper">
+  <div class="content-wrapper">
+  
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>피드백 등록하기</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/feedback">feedback</a></li>
+              <li class="breadcrumb-item active">feedback.html</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+          <div class="feedback-group">
+            <div class="btn-group">	
+              <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-addFeedback">피드백 보내기</button>
+            </div>
+						
+            <div class="modal fade" id="modal-addFeedback" tabindex="-1" role="dialog" aria-labelledby="#modal-addFeedback" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header bg-info">
+                    <h4 class="modal-title">피드백 보내기</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="feedback-name" class="control-label"></label>
+                        <input type="text" class="form-control" id="feedback-name" placeholder="관광지역" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label for="feedback-name" class="control-label"></label>
+                        <input type="text" class="form-control" id="feedback-name" placeholder="피드백 보내는 관광명소/음식점 의 이름" disabled>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <!-- radio -->
+                          <div class="form-group">
+                            <div class="form-check" style="margin: 10px;">
+                              <input class="form-check-input" type="checkbox" name="checkbox">
+                              <label class="form-check-label"> 더이상 존재하지 않는 장소입니다</label>
+                            </div>
+                            <div class="form-check" style="margin: 10px;">
+                              <input class="form-check-input" type="checkbox" name="checkbox">
+                              <label class="form-check-label"> 잘못된 정보가 포함되어 있습니다</label>
+                            </div>
+                            <div class="form-check" style="margin: 10px;">
+                              <input class="form-check-input" type="checkbox" name="checkbox">
+                              <label class="form-check-label"> 정보가 너무 빈약합니다</label>
+                            </div>
+                            <div class="form-check" style="margin: 10px;">
+                              <input class="form-check-input" type="checkbox" name="checkbox">
+                              <label class="form-check-label"> 추가하고 싶은 유용한 정보를 알고 있습니다</label>
+                            </div>
+                            <div class="form-check" style="margin: 10px;">
+                              <input class="form-check-input" type="checkbox" name="checkbox">
+                              <label class="form-check-label"> 기타</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+						                        
+                      <div class="form-group">
+                        <label for="feedback-text" class="control-label"></label>
+                        <textarea class="form-control" id="feedback-text" rows="4" placeholder="내용을 작성해주세요"></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm float-left" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">피드백 전송하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- .modal -->
+            
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </section>
+    
+  </div>
+</div>
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+	<script>
+	
+		$('#exampleModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var recipient = button.data('whatever') // Extract info from data-* attributes
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  var modal = $(this)
+		  modal.find('.modal-title').text(recipient)
+		  modal.find('.modal-body input').val(recipient)
+		})
+		
+	</script>
+</th:block>
+</html>

@@ -130,7 +130,7 @@
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">내 리뷰보기</a></li>
                   <li class="nav-item"><a class="nav-link" href="#aa" data-toggle="tab">내 여행 계획</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#aa" data-toggle="tab">내 여행 기록</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/tripMemo">내 여행 기록</a></li>
                   <li class="nav-item"><a class="nav-link" href="#goodsBuyList" data-toggle="tab">상품 구매내역</a></li>
                   <li class="nav-item"><a class="nav-link" href="/receivedMsgList">쪽지 보관함</a></li>
                   <li class="nav-item"><a class="nav-link" href="/updateMember">프로필 수정</a></li>
@@ -139,7 +139,8 @@
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="active tab-pane" id="activity">
+                
+                  <div class="tab-pane" id="activity">
                     <!-- Post -->
                     <div class="post">
                       <h1 align="center" style="color:#819FF7">궁금한 목록을 선택하세요!</h1>
@@ -148,7 +149,8 @@
                     <!-- /.post -->
                   </div>
                   <!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
+                  
+                  <div class="active tab-pane" id="timeline">
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
                       <!-- timeline time label -->
@@ -218,6 +220,8 @@
                     	ㄱㄱ
                   </div>
 
+				 
+                  
                   <div class="tab-pane" id="goodsBuyList">
                     <div class="card">
 
@@ -373,21 +377,17 @@
               <!-- /.card-body -->
             </div>
             
-            
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.nav-tabs-custom -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
 
-
+       </div>
+       <!-- /.tab-content -->
+     </div><!-- /.card-body -->
+   </div><!-- /.nav-tabs-custom -->
+ </div>
+ <!-- /.col -->
+</div>
+<!-- /.row -->
 
 </th:block>
 <th:block layout:fragment="customFooterScript">
