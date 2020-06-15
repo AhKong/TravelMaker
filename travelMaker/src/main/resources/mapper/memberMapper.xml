@@ -35,4 +35,18 @@
 			m_id = #{mId}	
 	</select>
 
+<select id="findId" parameterType="String" resultType="String">
+		SELECT 
+			 m_name 	
+			,m_tel 		
+			,m_email 	
+			,m_pw 
+		FROM 
+			tb_member
+		WHERE
+				m_name = #{mName}
+			and m_tel = #{mTel}
+			and m_email = #{mEmail}
+	</select>
+
 </mapper>
