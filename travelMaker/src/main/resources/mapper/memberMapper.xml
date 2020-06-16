@@ -5,27 +5,28 @@
 <mapper namespace="com.cafe24.travelMaker.mapper.MemberMapper">
 	
 	<insert id="addMember" parameterType="Member">
-		INSERT INTO tb_member(
-			
-			m_id,
-			m_pw,
-			level_num,
-			m_name,
-			m_tel,
-			m_gender,
-			m_birth,
-			m_avatar,
-			m_introd
-			
+		INSERT INTO 
+				tb_member(
+				m_id,
+				m_pw,
+				level_num,
+				m_name,
+				m_tel,
+				m_gender,
+				m_birth,
+				m_avatar,
+				m_introd		
 		)VALUES(
-			 #{mId}
-			,#{mPw}
-			,#{mLevel}
-			,#{mName}
-			,#{mTel}
-			,#{mTel}
-			,#{memberEmail}
-		)
+				 #{mId}
+				,#{mPw}
+				,#{mLevel}
+				,#{mName}
+				,#{mTel}
+				,#{mGender}
+				,#{mBirth}
+				,#{mAvatar}
+				,#{mIntrod}
+				)
 	</insert>
 	
  	<resultMap type="Member" id="memberSelect">

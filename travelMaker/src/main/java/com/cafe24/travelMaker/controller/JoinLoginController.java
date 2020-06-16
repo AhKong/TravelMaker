@@ -39,6 +39,7 @@ public class JoinLoginController {
 		    		return "redirect:/";
 				}
 			}
+			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
 			redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
 		}
 		return "redirect:/login";
