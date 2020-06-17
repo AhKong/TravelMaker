@@ -18,6 +18,8 @@
  	p{
  		display:none;
  		color:#ff0000;
+ 		font-size:12px;
+
  	}
    </style>
  </th:block>
@@ -33,7 +35,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Welcome To TravelMaker!
       </p>
-      <form action="/addMember" id="memberJoinForm" method="post">
+      <form action="/addMember" id="memberJoinForm" method="post" enctype="multipart/form-data">
         <div class="input-group form-group mb-3">
            <input type="text" id="memberId" class="form-control" placeholder="ID" name="mId">
           <div class="input-group-append">
@@ -41,7 +43,9 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
+        
         </div>
+
         <p id="idCheckMsg">중복되는 아이디 입니다.</p>
         <p id="idRexExpMsg">아이디는 영문,숫자 포함 8자 이상 15자 이하로 작성하세요</p>
         <div class="input-group mb-3">
@@ -52,6 +56,7 @@
             </div>
           </div>
         </div>
+        <p id="pwRexExpMsg">비밀번호는 대소문자,숫자,특수기호 포함하여 8자 이상이여합니다.</p>
         <div class="input-group mb-3">
           <input type="password" class="form-control mPwCheck" placeholder="Retype password" >
           <div class="input-group-append">
@@ -60,6 +65,7 @@
             </div>
           </div>
         </div>
+        <p id="pwCheckMsg">비밀번호가 일치하지 않습니다. </p>
          <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Full Name" name="mName">
           <div class="input-group-append">
@@ -77,6 +83,7 @@
           </div>
             <button type="button" class="btn btn-default">이멜인증</button>
         </div>
+        <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Phone Number" name="mTel">
           <div class="input-group-append">
@@ -85,6 +92,7 @@
             </div>
           </div>
         </div>
+          <p id="mTelRegExpMsg"> 010-1999-0529 와 같은 형식이여야 합니다. </p>
           <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Address" name="mAddr">
           <div class="input-group-append">
@@ -94,14 +102,15 @@
           </div>
         </div>
        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="BirthDay" name="mBirth">
+          <input type="text" class="form-control" placeholder="BirthDay ex 1999-05-29" name="mBirth">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-calendar-o"></span>
             </div>
           </div>
         </div>
-            <div class="input-group mb-3">
+        <p id="mBirthRegExpMsg">1999-05-29와 같은 형식이여야 합니다. </p>
+        <div class="input-group mb-3">
           <select class="form-control" name="mGender">
           	<option value='none'> 성별을 선택하세요 </option>
           	<option value='남'> 남자 </option>
@@ -114,7 +123,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="file"class="form-control" placeholder="Profile" name="mAvatar">
+          <input type="file" class="form-control" placeholder="Profile" name="file">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-camera"></span>
@@ -122,7 +131,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text"class="form-control" placeholder="Introduce your self" name ="mIntrod">      
+          <input type="text"class="form-control" placeholder="Introduce your self" name="mIntrod">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-child"></span>
@@ -162,11 +171,16 @@
 			var mTel =$('input[name=mTel]');
 			var mAddr = $('input[name=mAddr]');
 			var mBirth = $('input[name=mBirth]');
-			var mGentder = $('input[name=mGender]');
+			var mGender = $('select[name=mGender]');
 			var mAvatar =$('input[name=mAvatar]');
 			var mIntrod = $('input[name=mIntrod]');
 			var idCheck = false; 
 			var pwCheck = false;
+			var pwCheck2 = false ; //비밀번호 재확인 일치 여부
+			var emailCheck = false;
+			var telCheck = false;
+			var birthCheck= false;
+			
 			/*  아이디 정규식 및 중복여부 확인  ajax, 키보드를 누를때마다 중복검사 여부 확인하겠음.,,!!
 			*/
 			mId.keyup(function(){
@@ -200,17 +214,111 @@
 			})
 			
 			mPw.keyup(function(){
-				var mPwCheck = RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{15,}$/);
-				console.log()
+				var mPwCheck = RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
 				if(mPwCheck.test(mPw.val())==true){
-					console.log('유효성검사!!')
+					pwCheck = true;
+					$('#pwRexExpMsg').css('display','none')
+				} else {
+					pwCheck = false;
+					$('#pwRexExpMsg').css('display','block')
 				}
 				
 			})
+			
+			mPwCheck.keyup(function(){
+				if(mPw.val() == mPwCheck.val()){
+					pwCheck2 = true;
+					$('#pwCheckMsg').css('display','none')
+					
+				} else {
+					pwCheck2 = false;
+					$('#pwCheckMsg').css('display','block')
+				}
+			})
+			
+			mEmail.keyup(function(){
+				var mEmailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+				if(mEmailCheck.test(mEmail.val())==true){
+					$('#mEmailRegExpMsg').css('display','none');
+					emailCheck = true;
+				} else {
+					$('#mEmailRegExpMsg').css('display','block');
+					emailCheck=false;
+				}
+			})
+			
+			mTel.keyup(function(){
+				var mTelCheck = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+				if(mTelCheck.test(mTel.val())==true){
+					$('#mTelRegExpMsg').css('display','none');
+					telCheck = true;
+				} else{
+					$('#mTelRegExpMsg').css('display','block');
+					telCheck = false;
+				}
+			})
+			
+			mBirth.keyup(function(){
+				var mBirthCheck = RegExp(/^\d{4}-\d{2}-\d{2}$/);
+				if(mBirthCheck.test(mBirth.val())==true){
+					$('#mBirthRegExpMsg').css('display','none');
+					birthCheck=true;
+				} else{
+					$('#mBirthRegExpMsg').css('display','block');
+					birthCheck=false;
+				}
+			})
+			
+			
+		$('.joinBtn').click(function(){
+			console.log(pwCheck);
+		
+			if(idCheck==false){
+				alert('아이디를 다시 확인하세요');
+				mId.focus();
+				return false;
+			}
+			
+			if(pwCheck==false){
+				alert('비밀번호를 다시 확인하세요');
+				mPw.focus();
+				return false;
+			} 
+			
+			if(pwCheck2==false){
+				alert('비밀번호가 일치하지 않습니다');
+				mPwCheck.focus();
+				mPwCheck.val('');
+				return false;
+			}
+			
+			if(mName.val() ==''){
+				alert('이름을 입력하세요');
+				mName.focus();
+				return false;
+			}
+			
+			if(emailCheck==false){
+				alert('이메일을 다시 확인하세요');
+				mEmail.focus();
+				return false;
+			}
+			if(telCheck==false){
+				alert('전화번호를 다시 확인하세요');
+				mTel.focus();
+				return false;
+			}
+			if(mGender.val()=='none'){
+				alert('성별을 선택하세요');
+				mGender.focus();
+				return false;	
+			}
+			
+			$('#memberJoinForm').submit();
+		})
 
 	})
-			
-
+		
 	</script>
 </th:block>
 
