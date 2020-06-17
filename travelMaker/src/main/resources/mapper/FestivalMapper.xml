@@ -19,13 +19,13 @@
 	</resultMap>
 	
 	<insert id="addFestival" parameterType="Festival">
-		<selectKey order="BEFORE" keyProperty="fes_num" resultType="String">
+		<selectKey order="BEFORE" keyProperty="fesNum" resultType="String">
 		<!-- keyProperty="fesNum" 는 select 의  fesNum 와 이름이 같아야 한다  -->
 		<!--  또한 Goods 클래스의 g_code 컬럼의 변수명과 같아야 한다  -->
 			SELECT
 				(case COUNT(*)
 				when 0 then 'fes_1'
-				ELSE CONCAT('fes_', (MAX(CAST(substring('fes_',5) AS DECIMAL))+1))
+				ELSE CONCAT('fes_', (MAX(CAST(substring(fes_num,5) AS DECIMAL))+1))
 				END) AS fesNum
 			FROM
 				tb_festival
