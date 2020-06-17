@@ -14,11 +14,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.service.JoinLoginService;
+import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
 
 public class JoinLoginController {	
-	public  @Autowired JoinLoginService joinLoginServcie;
+	private  @Autowired JoinLoginService joinLoginServcie;
+	private @Autowired StorageService storageService;
 	@GetMapping("/login")
 	public String login() {
 		return "join_login/login";
@@ -47,12 +49,22 @@ public class JoinLoginController {
 	
 	@GetMapping("/addMember")
 	public String addMember() {
+		
 		return "join_login/addMember";
 	}
 	
 	@PostMapping("/addMember")
 	public String addMember(Member member) {
-		System.out.println(member);
+		
+		//System.out.println(result +"<----result");
+
+		member.setmAvatar(member.getFile().getOriginalFilename());
+		if(!"".equals(member.getmAvatar())) {
+			storageService.store(member.getFile());
+		}
+		
+		int result = joinLoginServcie.addMember(member);
+		System.out.println(result +"<---insert result ");
 		
 		return "redirect:/login";
 	}

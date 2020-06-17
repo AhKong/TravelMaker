@@ -1,5 +1,8 @@
 package com.cafe24.travelMaker.domain;
 
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member {
 	private String mId;
 	private String mPw;
@@ -11,10 +14,10 @@ public class Member {
 	private String mBirth;
 	private String mAddr;
 	private String mRegDate;
+	private MultipartFile file = null;
 	private String mAvatar;
 	private String mIntrod;
 	private int mFollow;
-	
 	public String getmId() {
 		return mId;
 	}
@@ -75,6 +78,12 @@ public class Member {
 	public void setmRegDate(String mRegDate) {
 		this.mRegDate = mRegDate;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public String getmAvatar() {
 		return mAvatar;
 	}
@@ -97,11 +106,9 @@ public class Member {
 	public String toString() {
 		return "Member [mId=" + mId + ", mPw=" + mPw + ", mLevel=" + mLevel + ", mName=" + mName + ", mEmail=" + mEmail
 				+ ", mTel=" + mTel + ", mGender=" + mGender + ", mBirth=" + mBirth + ", mAddr=" + mAddr + ", mRegDate="
-				+ mRegDate + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", mFollow=" + mFollow + "]";
+				+ mRegDate + ", file=" + file + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", mFollow=" + mFollow
+				+ "]";
 	}
-	
-	
 
-	
 }
 
