@@ -6,6 +6,8 @@
 	 <title>Welcome To TravleMaker</title>
 </th:block>
 <th:block layout:fragment="customCss">
+<link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
   <style>
       html,body{
     	margin:0;
@@ -25,7 +27,7 @@
  </th:block>
 
 <th:block layout:fragment="customContents">
-
+<div id="toastsContainerBottomRight" class="toasts-bottom-right fixed"><div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-header"><strong class="mr-auto">Toast Title</strong><button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close"><span aria-hidden="true">×</span></button></div><div class="toast-body">Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</div></div></div>
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Travel</b>Maker</a>
@@ -81,12 +83,18 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-         
-         <div><button type="button" class="btn btn-default certEmailBtn">이멜인증</button><br></div>   
-      
+         	<button type="button" class="btn btn-default certEmailBtn" data-toggle="modal" data-target="#certEmailModal">메일전송</button>  
         </div>
         <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
-        <div><input></div>   
+      <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" name="mEmail">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+         	<button type="button" class="btn btn-default certEmailBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
+        </div>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Phone Number" name="mTel">
           <div class="input-group-append">
@@ -158,12 +166,18 @@
         </div>
       </form>
       <a href="/login" class="text-center">I already have a membership</a>
+      <button type="button" class="btn btn-info swalDefaultInfo">
+                  Launch Info Toast
+                </button>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
 </div>
 </th:block>
  <th:block layout:fragment="customScript">
+ <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
 	<script>
 		$(function(){
 			var mId = $('input[name=mId]');
@@ -186,6 +200,12 @@
 			
 			/*  아이디 정규식 및 중복여부 확인  ajax, 키보드를 누를때마다 중복검사 여부 확인하겠음.,,!!
 			*/
+			 $('.swalDefaultInfo').click(function() {
+			      Toast.fire({
+			        icon: 'info',
+			        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+			      })
+			    });
 			mId.keyup(function(){
 				var mIdCheck = RegExp(/^[A-Za-z0-9_\-]{8,15}$/);
 				if(mIdCheck.test(mId.val())==true){
@@ -320,7 +340,7 @@
 			$('#memberJoinForm').submit();
 		})
 		
-		$('.certEmailBtn').click(function(){
+		$('.ecertEmailBtn').click(function(){
 			var email = mEmail.val();
 			if(email ==''){
 				alert('이메일을 입력하세요!');
@@ -331,7 +351,7 @@
 						  method: "GET",
 						  data: {email :mEmail.val()}, 
 						  dataType: "json"
-					});
+					}); 	     
 	    
 					request.done(function( data ) {
 						console.log(data.randomCode);
