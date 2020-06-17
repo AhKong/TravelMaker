@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.JoinLoginService;
+import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
@@ -21,6 +24,8 @@ import com.cafe24.travelMaker.service.StorageService;
 public class JoinLoginController {	
 	private  @Autowired JoinLoginService joinLoginServcie;
 	private @Autowired StorageService storageService;
+	private @Autowired  MailService mailService;
+	private @Autowired  CertSerivce certService;
 	@GetMapping("/login")
 	public String login() {
 		return "join_login/login";
@@ -62,12 +67,22 @@ public class JoinLoginController {
 		if(!"".equals(member.getmAvatar())) {
 			storageService.store(member.getFile());
 		}
-		
-		int result = joinLoginServcie.addMember(member);
-		System.out.println(result +"<---insert result ");
-		
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/certEmail")
+	public @ResponseBody HashMap<String,String> certEmail(@RequestParam(name="email" ) String email){
+		/*
+		 * 이메일 인증 
+		 * 
+		 * */
+		HashMap<String, String> certEmailResult = new HashMap<String,String>();
+		Mail mail = (Mail) certService.certEmail(email).get("mail");
+		mailService.sendMail(mail);
+		certEmailResult.put("randomCode", (String)certService.certEmail(email).get("randomCode"));
+		return certEmailResult;
+	}
+	
 	@GetMapping("/addAffiliate")
 	public String addAffiliate() {
 		return "/join_login/addAffiliate";

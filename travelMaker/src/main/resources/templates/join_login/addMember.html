@@ -81,9 +81,12 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-            <button type="button" class="btn btn-default">이멜인증</button>
+         
+         <div><button type="button" class="btn btn-default certEmailBtn">이멜인증</button><br></div>   
+      
         </div>
         <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
+        <div><input></div>   
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Phone Number" name="mTel">
           <div class="input-group-append">
@@ -194,7 +197,7 @@
 						  dataType: "json"
 					});
 	    
-					request.done(function( data ) {	
+					request.done(function( data ) {
 						if(data.result =='N'){ // 아이디 중복 안되는 경우
 							idCheck = true;
 							$('#idCheckMsg').css('display','none')
@@ -315,6 +318,29 @@
 			}
 			
 			$('#memberJoinForm').submit();
+		})
+		
+		$('.certEmailBtn').click(function(){
+			var email = mEmail.val();
+			if(email ==''){
+				alert('이메일을 입력하세요!');
+			 	return false;
+			}
+			var request = $.ajax({
+						  url: "/certEmail",  
+						  method: "GET",
+						  data: {email :mEmail.val()}, 
+						  dataType: "json"
+					});
+	    
+					request.done(function( data ) {
+						console.log(data.randomCode);
+					
+					});	
+	   
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+					});
 		})
 
 	})
