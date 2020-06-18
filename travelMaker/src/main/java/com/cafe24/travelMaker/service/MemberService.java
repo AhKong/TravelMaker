@@ -7,12 +7,10 @@ import com.cafe24.travelMaker.mapper.MemberMapper;
 
 public class MemberService {
 	
-	@Autowired private MemberMapper memberMapper;
+	@Autowired public MemberMapper memberMapper;
 	
-	/*
-	 * public Member findId(String mName, String mTel, String mEmail) { return
-	 * memberMapper.findId(mName, mTel, mEmail);
-	 * 
-	 * }
-	 */
+	public Member findId(Member member) { 
+	return memberMapper.findId(member);  
+	}
+	 
 }
