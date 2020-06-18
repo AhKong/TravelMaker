@@ -30,6 +30,7 @@ public class MailService {
         }
         catch(Exception e){
             e.printStackTrace();
+            System.out.println("hih");
         }
     }
 }

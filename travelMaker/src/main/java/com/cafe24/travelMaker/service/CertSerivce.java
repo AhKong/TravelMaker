@@ -25,6 +25,7 @@ public class CertSerivce {
         for(int i = 0; i < pwdLength; i++) {
             buf.append(passwordTable[random.nextInt(tablelength)]);
         }
+        System.out.println(buf.toString()+"<-----1");
         
         return buf.toString();
 	
@@ -33,11 +34,13 @@ public class CertSerivce {
 	public HashMap<String,Object> certEmail(String mailAddr) {
 		HashMap <String,Object> emailCert = new HashMap<String,Object>();
 		String randomCode = setRandomCode();
+		System.out.println(randomCode+"<---호출후");
 		mail.setAddress(mailAddr);
-		mail.setTitle("TravelMake 이메일 인증 코드입니다");
-		mail.setMessage("인증코드는"+randomCode+"입니다");
+		mail.setTitle("TravelMaker 이메일 인증 코드입니다");
+		mail.setMessage("인증코드는 "+randomCode+" 입니다");
 		emailCert.put("randomCode",randomCode);
 		emailCert.put("mail", mail);
+
 		return emailCert;
 	}
 }

@@ -76,10 +76,11 @@ public class JoinLoginController {
 		 * 이메일 인증 
 		 * 
 		 * */
+		System.out.println("email>>>>"+email);
 		HashMap<String, String> certEmailResult = new HashMap<String,String>();
-		Mail mail = (Mail) certService.certEmail(email).get("mail");
-		mailService.sendMail(mail);
-		certEmailResult.put("randomCode", (String)certService.certEmail(email).get("randomCode"));
+		HashMap<String, Object> certEmail = certService.certEmail(email);
+		mailService.sendMail((Mail)certEmail.get("mail"));
+		certEmailResult.put("randomCode", (String)certEmail.get("randomCode"));
 		return certEmailResult;
 	}
 	

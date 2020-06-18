@@ -21,13 +21,11 @@
  		display:none;
  		color:#ff0000;
  		font-size:12px;
-
  	}
    </style>
  </th:block>
 
 <th:block layout:fragment="customContents">
-<div id="toastsContainerBottomRight" class="toasts-bottom-right fixed"><div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-header"><strong class="mr-auto">Toast Title</strong><button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close"><span aria-hidden="true">×</span></button></div><div class="toast-body">Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</div></div></div>
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Travel</b>Maker</a>
@@ -45,9 +43,7 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-        
         </div>
-
         <p id="idCheckMsg">중복되는 아이디 입니다.</p>
         <p id="idRexExpMsg">아이디는 영문,숫자 포함 8자 이상 15자 이하로 작성하세요</p>
         <div class="input-group mb-3">
@@ -83,17 +79,17 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-         	<button type="button" class="btn btn-default certEmailBtn" data-toggle="modal" data-target="#certEmailModal">메일전송</button>  
+         	<button type="button" class="btn btn-default certEmailBtn">메일전송</button>  
         </div>
         <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
       <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="mEmail">
+          <input type="email" class="form-control certCode" placeholder="인증코드">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-         	<button type="button" class="btn btn-default certEmailBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
+         	<button type="button" class="btn btn-default certCodeBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
         </div>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Phone Number" name="mTel">
@@ -166,18 +162,14 @@
         </div>
       </form>
       <a href="/login" class="text-center">I already have a membership</a>
-      <button type="button" class="btn btn-info swalDefaultInfo">
-                  Launch Info Toast
-                </button>
+
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
 </div>
 </th:block>
  <th:block layout:fragment="customScript">
- <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-<!-- Toastr -->
-<script src="../../plugins/toastr/toastr.min.js"></script>
+
 	<script>
 		$(function(){
 			var mId = $('input[name=mId]');
@@ -185,6 +177,7 @@
 			var mPwCheck = $('.mPwCheck');
 			var mName =$('input[name=mName]');
 			var mEmail =$('input[name=mEmail]');
+			var cert =$('.certCode');
 			var mTel =$('input[name=mTel]');
 			var mAddr = $('input[name=mAddr]');
 			var mBirth = $('input[name=mBirth]');
@@ -197,6 +190,7 @@
 			var emailCheck = false;
 			var telCheck = false;
 			var birthCheck= false;
+			var certCode='';
 			
 			/*  아이디 정규식 및 중복여부 확인  ajax, 키보드를 누를때마다 중복검사 여부 확인하겠음.,,!!
 			*/
@@ -336,11 +330,16 @@
 				mGender.focus();
 				return false;	
 			}
+			if(certCode!=='success'){
+				console.log(certCode);
+				alert('이메일 인증을 해주세요');
+				return false;
+			}
 			
 			$('#memberJoinForm').submit();
 		})
 		
-		$('.ecertEmailBtn').click(function(){
+		$('.certEmailBtn').click(function(){
 			var email = mEmail.val();
 			if(email ==''){
 				alert('이메일을 입력하세요!');
@@ -354,13 +353,25 @@
 					}); 	     
 	    
 					request.done(function( data ) {
+						certCode=data.randomCode
 						console.log(data.randomCode);
-					
 					});	
 	   
 					request.fail(function( jqXHR, textStatus ) {
 						  alert( "Request failed: " + textStatus );
 					});
+		})
+		
+		$('.certCodeBtn').click(function(){
+	
+			if( cert.val()==certCode && emailCheck==true){
+				alert('인증성공!');
+				certCode='success';
+			} else if(emailCheck ==false) {
+				alert('이메일을 다시 확인해주세요');
+				mEmail.focus();
+				return false;
+			}
 		})
 
 	})
