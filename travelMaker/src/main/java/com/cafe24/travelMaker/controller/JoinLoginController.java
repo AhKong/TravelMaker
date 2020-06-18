@@ -18,6 +18,7 @@ import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.JoinLoginService;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.StorageService;
+import com.cafe24.travelMaker.service.PointSerivce;
 
 @Controller
 
@@ -26,6 +27,8 @@ public class JoinLoginController {
 	private @Autowired StorageService storageService;
 	private @Autowired  MailService mailService;
 	private @Autowired  CertSerivce certService;
+	private @Autowired PointSerivce pointService;
+	
 	@GetMapping("/login")
 	public String login() {
 		return "join_login/login";
@@ -43,6 +46,7 @@ public class JoinLoginController {
 		    		System.out.println(session.getAttribute("SID"));
 		    		System.out.println(session.getAttribute("SLEVEL"));
 		    		System.out.println(session.getAttribute("SNAME"));
+		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
 		    		return "redirect:/";
 				}
 			}
@@ -66,6 +70,15 @@ public class JoinLoginController {
 		member.setmAvatar(member.getFile().getOriginalFilename());
 		if(!"".equals(member.getmAvatar())) {
 			storageService.store(member.getFile());
+		}
+		int result = joinLoginServcie.addMember(member);
+		if(result >0) {// 회원가입 성공
+ 			System.out.println(result +"<----ryesult");
+ 			pointService.setSavePointForJoin(member.getmId());
+ 			int pointAddResult = pointService.savePoint();
+ 			System.out.println(pointAddResult+"<----point 적립 성공!");
+ 			int pointResult = pointService.setPoint();
+ 			System.out.println(pointResult+"<----point insert 성공!");
 		}
 		return "redirect:/login";
 	}
@@ -105,16 +118,12 @@ public class JoinLoginController {
 			idCheckResult.put("result", "Y");
 		}
 
-		
 		return idCheckResult;
 	}
 
-	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
-
-	
 }
