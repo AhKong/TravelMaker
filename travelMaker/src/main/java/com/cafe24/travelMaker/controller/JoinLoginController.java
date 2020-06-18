@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,27 +29,40 @@ public class JoinLoginController {
 		return "join_login/login";
 	}
 	
-	@RequestMapping("/findIdPw")
-	public String findIdPw(Member member) {
-			if(!"".equals(member.getmName())  && !"".equals(member.getmTel()) &&!"".equals(member.getmEmail())) {
+	@RequestMapping("/findId")
+	public String findId(Member member) {
+			if(!"".equals(member.getmName())  && !"".equals(member.getmTel()) && !"".equals(member.getmEmail())) {
 				System.out.println("아이디 찾기");
-				System.out.println(member.getmName());
-				System.out.println(member.getmTel());
-				System.out.println(member.getmEmail());
-				//아이디 찾기 메일 아이디 찾기 비밀번호 찾기 나눠
-			}else if(!"".equals(member.getmId())  && !"".equals(member.getmTel()) &&!"".equals(member.getmEmail())) {
-				//비밀번호 찾기 메일
-				System.out.println("비밀번호 찾기");
+				System.out.println(member.getmName() + "<-------- 아이디 찾기 이름");
+				System.out.println(member.getmTel() + "<-------- 아이디 찾기 전화번호");
+				System.out.println(member.getmEmail() + "<-------- 아이디 찾기 이메일");
+				Member result = memberService.findId(member);
+				System.out.println(result.getmId() +"<----------- 찾은 아이디");
+				//아이디 찾기  입력 정보가 다르면 메일에 "입력 정보가 일치하지 않습니다."
+				//메일 추가
 			}
-		
+			return "join_login/login";
+	}
+	
+	@RequestMapping("/findPw")
+	public String findPw(Member member) {
+		if(!"".equals(member.getmId())  && !"".equals(member.getmTel()) && !"".equals(member.getmEmail())) {
+			//비밀번호 찾기 메일
+			System.out.println("비밀번호 찾기");
+			System.out.println(member.getmId() + "<-------- 비번찾기 아이디");
+			System.out.println(member.getmTel() + "<-------- 비번찾기 전화번호");
+			System.out.println(member.getmEmail() + "<-------- 비번찾기 이메일");
+			Member result = memberService.findPw(member);
+			System.out.println(result.getmPw() + "<------------ 찾은 비밀번호");
+			//비번 찾기 
+		}
 		return "join_login/login";
-		
 	}
 	
 	@PostMapping("/loginMember")	
 	public String loginMember(Member member, HttpSession session, RedirectAttributes redirectAttr) {
 		if(member.getmId() != null &&  member.getmPw() != null && !"".equals(member.getmPw()) &&  !"".equals(member.getmId())) {
-			Member result =joinLoginServcie.memberLogin(member.getmId());
+			Member result = joinLoginServcie.memberLogin(member.getmId());
 			if(result !=null) {
 				if(member.getmPw().equals(result.getmPw())) {
 					session.setAttribute("SID", result.getmId());

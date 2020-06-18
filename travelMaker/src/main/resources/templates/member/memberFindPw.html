@@ -34,9 +34,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">비밀번호 찾기</p>
 
-      <form id="findPw" action="/findIdPw" method="POST">
+      <form id="findPw" action="/findPw" method="POST">
         <div class="input-group mb-3">
-          <input id="findPwId" type="text" class="form-control" placeholder="아이디">
+          <input id="findPwId" name="mId" type="text" class="form-control" placeholder="아이디">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input id="findPwTel" type="text" class="form-control" placeholder="전화번호">
+          <input id="findPwTel" name="mTel" type="text" class="form-control" placeholder="전화번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-mobile"></span>
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input id="findPwEmail" type="email" class="form-control" placeholder="이메일">
+          <input id="findPwEmail" name="mEmail" type="email" class="form-control" placeholder="이메일">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
