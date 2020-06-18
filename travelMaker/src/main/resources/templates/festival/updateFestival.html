@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>축제수정</title>
+</th:block>
+
+<th:block layout:fragment="customCss">
+		<style>
+		.card-edit {
+			margin:0 auto;
+		}
+		.card-body {
+			padding: 50px;
+			font-size: small;
+		}
+		.label-control {
+			float: left;
+		}
+		.form-button {
+			margin:0 auto;
+		}
+		
+	</style>
+</th:block>
+
+
+<th:block layout:fragment="customContents">
+  <!-- Content Wrapper. updateMember page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="content-title col-sm-6">
+            <h1>축제 수정</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/myPage"></a></li>
+              <li class="breadcrumb-item"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="card-edit col-md-6" >
+        
+          <div class="card card-primary">
+            <div class="card-header">
+              <h2 class="card-title">축제수정</h2>
+			</div>
+			
+            <div class="card-body">
+              <form role="form" action="/updateFesftival" method="post">
+			    <div class="row">
+				  <div class="col-12">
+				    <div class="form-group">
+					  <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
+					  <input type="text" class="form-control" name="fesName" th:value="${#}">
+					</div>
+			      </div>
+				</div>
+			    <div class="form-group">
+				  <label for="exampleInputFile"><i class="fas fa-camera-retro"></i>&nbsp;festival-photo</label>
+				  <div class="input-group">
+					<div class="custom-file">
+					  <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto">
+					  <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
+				    </div>
+			      </div>
+				</div>
+			    <div class="row">
+				  <div class="col-12">
+				    <div class="form-group">
+					  <label><i class="fas fa-music"></i>&nbsp;festival-startDate</label>
+					  <input type="date"  class="form-control" name="fesStartDate" placeholder="축제 시작날짜를 입력하세요">
+					</div>
+			      </div>
+				</div>
+				<div class="row">
+				  <div class="col-12">
+				    <div class="form-group">
+					  <label><i class="fas fa-music"></i>&nbsp;festival-endDate</label>
+					  <input type="date"  class="form-control" name="fesEndDate" placeholder="축제 종료날짜를 입력하세요">
+					</div>
+			      </div>
+			    </div>
+				<div class="row">
+				  <div class="col-12">
+				    <div class="form-group">
+					  <label><i class="fas fa-music"></i>&nbsp;festival-description</label><i class="fas fa-music"></i>
+					  <textarea class="form-control" rows="3" name="fesDetail" placeholder="축제 상세설명을 입력하세요"></textarea>
+			        </div>
+			      </div>
+				</div>
+				<div class="row">
+				  <div class="col-12">
+				    <div class="form-group">
+					  <label><i class="fas fa-music"></i>&nbsp;festival-webSite</label>
+					  <textarea class="form-control" rows="1" name="fesWeb" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
+				    </div>
+			      </div>
+				</div>							
+				<div class="row">
+				  <div class="col-12">
+			  	    <!-- radio -->
+					<div class="form-group">
+					  <div class="form-radio" style="margin: 20px;">
+						<input class="form-check-input" type="radio" name="fesState" value="ingFestival" checked>
+						<label class="form-check-label">현재 진행중인 축제</label>
+					  </div>
+					  <div class="form-radio" style="margin: 20px;">
+					    <input class="form-check-input" type="radio" name="fesState" value="preFestival">
+						<label class="form-check-label">예정중인 축제</label>
+					  </div>
+					</div>
+			      </div>
+				</div>					
+			  </form>
+
+			  <div class="form-button col-sm-8">
+			  	<!-- Button trigger modal -->
+			    <button type="button" class="btn btn-default col-4" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
+			    <button type="submit" class="btn btn-primary float-right col-4" onclick="location.href='/festivalList'">수정완료 :)</button>
+				<!-- Modal -->
+				<div class="modal fade" id="cancleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							
+							<div class="modal-body">
+								정말 취소하시겠습니까? 	<br>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal"> 예 </button>
+			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->		
+			    
+			  </div>
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </section>
+  </div>
+  
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	
+	<script>
+		$('#calcelModal').on('shown.bs.modal', function () {
+			$('#myInput').focus()
+		})
+	</script>
+	
+</th:block>
+</html>

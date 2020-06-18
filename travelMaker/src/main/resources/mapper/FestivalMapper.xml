@@ -18,6 +18,24 @@
 		</association> -->
 	</resultMap>
 	
+	
+	
+	<select id="festivalSelect" parameterType="String" resultMap="fesSelect">
+		SELECT
+			 fes_num
+			,fes_name		
+			,fes_photo
+			,fes_start_date		
+			,fes_end_date
+			,fes_detail
+			,fes_web
+			,fes_reg_date
+			,fes_state
+		FROM tb_festival
+		WHERE fes_num = #{fesNum};
+	</select>
+	
+	
 	<insert id="addFestival" parameterType="Festival">
 		<selectKey order="BEFORE" keyProperty="fesNum" resultType="String">
 		<!-- keyProperty="fesNum" 는 select 의  fesNum 와 이름이 같아야 한다  -->

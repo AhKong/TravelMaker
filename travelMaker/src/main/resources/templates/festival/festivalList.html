@@ -117,17 +117,17 @@ span {
 								<p>축제</p>
 								<div class="radio">
 									<label> <input type="radio" name="ing-festival"
-										id="ing-festival" value="ing-festival"> 현재 진행중인 축제
+										id="ing-festival" value="ingFestival"> 현재 진행중인 축제
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="pre-festival"
-										id="pre-festival" value="pre-festival"> 진행 예정인 축제
+										id="pre-festival" value="preFestival"> 진행 예정인 축제
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="post-festival"
-										id="post-festival" value="post-festival"> 지난 축제
+										id="post-festival" value="postFestival"> 지난 축제
 									</label>
 								</div>
 							</div>
@@ -140,7 +140,7 @@ span {
 								</div>
 								<div class="btn-group col-8">
 									<button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-updateFestival"
-										name="optionsRadios" id="optionsRadios1" value="updateFestival"> 축제  수정
+										 onclick="location.href='/updateFestival'" name="optionsRadios" id="optionsRadios1" value="updateFestival"> 축제  수정
 									</button>
 								</div>	
 							</div>
@@ -251,7 +251,7 @@ span {
 						            <div class="modal-body">
 						             <p><i class="fas fa-headphones"></i>&nbsp;축제수정&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
-							                <form role="form">
+							                <form role="form" action="/updateFesftival" method="post">
 							                  <div class="row">
 							                    <div class="col-12">
 							                      <div class="form-group">
