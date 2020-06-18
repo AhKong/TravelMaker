@@ -28,7 +28,6 @@ public class FestivalController {
 	public String addFestival(Festival festival) {
 		int result = festivalservice.addFestival(festival);
 		System.out.println("addFestival result: "+result);
-		
 		return "festival/festivalList";
 	}
 	
