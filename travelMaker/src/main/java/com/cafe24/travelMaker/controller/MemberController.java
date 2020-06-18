@@ -18,15 +18,14 @@ public class MemberController{
 	
 	//아이디 찾기
 	@GetMapping("/memberFindId") 
-	public String memberFindId() {
+	public String memberFindId(Member member) {
 		 
 		return "/member/memberFindId";
 	}
 	
 	//비밀번호 찾기
 	@GetMapping("/memberFindPw")
-	
-	public String confirmId() {
+	public String memberFindPw(Member member) {
 		
 		return "/member/memberFindPw";
 	}

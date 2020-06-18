@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.PointMapper">
+ 	<resultMap type="Point" id="pointSelect">
+ 		
+ 	</resultMap>
+	<insert	id="savePoint" parameterType="SavePoint">
+	<selectKey order ="BEFORE" keyProperty="savePointNum" resultType ="String"> 
+	 	 SELECT 
+			case COUNT(*)
+			when 0 then 'save_point_1'
+			ELSE CONCAT('save_point_',MAX(CAST(SUBSTRING(save_point_num,12) AS DECIMAL))+1) 
+			END AS save_point_num
+		FROM
+			tb_save_point 
+ 	</selectKey>
+ 		INSERT INTO tb_save_point
+			(save_point_num, m_id, save_point_cause, save_point_detail, save_point_charge)
+		VALUES (#{savePointNum}, #{mId} ,#{savePointCause} , #{savePointDetail}, #{savePointCharge})
+ 	</insert>
+	
+	<select id="isMyPoint" parameterType="String" resultType="int">
+		select 
+			count(*)
+		from 	
+			tb_point_use_admin
+		where
+			 m_id =#{mId}
+	</select>
+	
+	<insert id="addMyPoint" parameterType="Point">
+		<selectKey order ="BEFORE" keyProperty="pointNum" resultType ="String"> 
+	 	 SELECT 
+			case COUNT(*)
+			when 0 then 'point_1'
+			ELSE CONCAT('point_',MAX(CAST(SUBSTRING(point_num,7) AS DECIMAL))+1) 
+			END AS save_point_num
+		FROM
+			tb_point_admin 
+ 		</selectKey>
+			INSERT INTO tb_point_admin
+				(point_num, m_id, point_final_point)
+			VALUES (#{pointNum}, #{mId}, #{finalPoint})
+	</insert>
+</mapper>

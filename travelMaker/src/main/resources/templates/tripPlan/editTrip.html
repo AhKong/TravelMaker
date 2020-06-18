@@ -16,6 +16,9 @@
 	<script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
 
 	<style>
+#memberTb{
+padding: 0;
+}
 .map_wrap, .map_wrap * {
 	margin: 0;
 	padding: 0;
@@ -276,6 +279,36 @@
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 									class="img-rounded">
 							</div>
+
+<div>
+       <table id="example1" class="table table-striped projects">
+              <tbody>
+                  <tr>        
+                      <td id="memberTb">
+                          <ul class="list-inline">
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                              </li>
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                              </li>
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                              </li>
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                              </li>
+                          </ul>
+                      </td>
+                      <td id="memberTb">
+                      	<a href="#"><i class="fas fa-plus"></i></a>친구초대하기
+                      </td>
+                  </tr>
+              </tbody>
+          </table>	
+      </div>
+
+
 							<div>
 								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
 									<input type='date' name='userBirthday' /> ~ <input type='date'
@@ -287,12 +320,15 @@
 							</div>
 							<div>
 								<h4>
-									작성자 : <a>이승환</a>
+									생성자 : <a>이승환</a>
 								</h4>
 							</div>
-							<div></div>
-							<div data-toggle="modal" data-target="#myModal1">
-								<a><strong>설명추가 모달창 name Explanation</strong></a>
+							
+							<div data-toggle="modal" data-target="#myModalExpenses">
+								<a>여행 경비 --- </a>
+							</div>
+							<div data-toggle="modal" data-target="#myModalMaterials">
+								<a>여행 준비물 --- </a>
 							</div>
 						</div>
 						<div id="editBox" class="small-box">
@@ -358,12 +394,12 @@
 							</div>
 						</form>
 						<form action="/editTrip">
-							<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+							<div class="modal fade" id="myModalExpenses" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<strong><i class="fas fa-book-open"></i>설명 추가하기</strong>
+											<strong><i class="fas fa-book-open"></i>여행 경비</strong>
 										</div>
 										<div class="modal-body">
 											<section class="content">
@@ -398,6 +434,49 @@
 								</div>
 							</div>
 						</form>
+						
+						<form action="/editTrip">
+							<div class="modal fade" id="myModalMaterials" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<strong><i class="fas fa-book-open"></i>준비물!</strong>
+										</div>
+										<div class="modal-body">
+											<section class="content">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="card card-outline card-info">
+															<!-- /.card-header -->
+															<div class="card-body pad">
+																<div class="mb-3">
+																	<textarea class="textarea"
+																		placeholder="Place some text here"
+																		style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+																		name="Explanation"></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- /.col-->
+												</div>
+												<!-- ./row -->
+											</section>
+											<!-- /.content -->
+										</div>
+										<div id="modalMid">
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">미안..</button>
+												<button type="submit" class="btn btn-primary">추가하기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						
 					</div>
 					<!-- /.card -->
 				</div>
@@ -419,7 +498,7 @@
 									<div class="option">
 										<div>
 											<form onsubmit="searchPlaces(); return false;">
-												키워드 : <input type="text" value="이태원 맛집" id="keyword"
+												키워드 : <input type="text" value="전북대" id="keyword"
 													size="15">
 												<button type="submit">검색하기</button>
 											</form>
