@@ -72,8 +72,7 @@ public class JoinLoginController {
 	
 	@GetMapping("/certEmail")
 	public @ResponseBody HashMap<String,String> certEmail(@RequestParam(name="email" ) String email){
-		/*
-		 * 이메일 인증 
+		/* 이메일 인증 
 		 * 
 		 * */
 		System.out.println("email>>>>"+email);
