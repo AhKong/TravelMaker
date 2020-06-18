@@ -12,13 +12,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.JoinLoginService;
+import com.cafe24.travelMaker.service.MailService;
+import com.cafe24.travelMaker.service.StorageService;
+import com.cafe24.travelMaker.service.PointSerivce;
 
 @Controller
 
 public class JoinLoginController {	
-	public  @Autowired JoinLoginService joinLoginServcie;
+	private  @Autowired JoinLoginService joinLoginServcie;
+	private @Autowired StorageService storageService;
+	private @Autowired  MailService mailService;
+	private @Autowired  CertSerivce certService;
+	private @Autowired PointSerivce pointService;
+	
 	@GetMapping("/login")
 	public String login() {
 		return "join_login/login";
@@ -36,9 +46,11 @@ public class JoinLoginController {
 		    		System.out.println(session.getAttribute("SID"));
 		    		System.out.println(session.getAttribute("SLEVEL"));
 		    		System.out.println(session.getAttribute("SNAME"));
+		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
 		    		return "redirect:/";
 				}
 			}
+			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
 			redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
 		}
 		return "redirect:/login";
@@ -46,8 +58,44 @@ public class JoinLoginController {
 	
 	@GetMapping("/addMember")
 	public String addMember() {
+		
 		return "join_login/addMember";
 	}
+	
+	@PostMapping("/addMember")
+	public String addMember(Member member) {
+		
+		//System.out.println(result +"<----result");
+
+		member.setmAvatar(member.getFile().getOriginalFilename());
+		if(!"".equals(member.getmAvatar())) {
+			storageService.store(member.getFile());
+		}
+		int result = joinLoginServcie.addMember(member);
+		if(result >0) {// 회원가입 성공
+ 			System.out.println(result +"<----ryesult");
+ 			pointService.setSavePointForJoin(member.getmId());
+ 			int pointAddResult = pointService.savePoint();
+ 			System.out.println(pointAddResult+"<----point 적립 성공!");
+ 			int pointResult = pointService.setPoint();
+ 			System.out.println(pointResult+"<----point insert 성공!");
+		}
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/certEmail")
+	public @ResponseBody HashMap<String,String> certEmail(@RequestParam(name="email" ) String email){
+		/* 이메일 인증 
+		 * 
+		 * */
+		System.out.println("email>>>>"+email);
+		HashMap<String, String> certEmailResult = new HashMap<String,String>();
+		HashMap<String, Object> certEmail = certService.certEmail(email);
+		mailService.sendMail((Mail)certEmail.get("mail"));
+		certEmailResult.put("randomCode", (String)certEmail.get("randomCode"));
+		return certEmailResult;
+	}
+	
 	@GetMapping("/addAffiliate")
 	public String addAffiliate() {
 		return "/join_login/addAffiliate";
@@ -70,16 +118,12 @@ public class JoinLoginController {
 			idCheckResult.put("result", "Y");
 		}
 
-		
 		return idCheckResult;
 	}
 
-	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
-
-	
 }

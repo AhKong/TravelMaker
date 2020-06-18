@@ -22,4 +22,8 @@ public Member memberLogin(String mId) {
 	return memberMapper.getMemberInfo(mId);
 }
 
+public int addMember(Member member) {
+	return memberMapper.addMember(member);
+}
+
 }
