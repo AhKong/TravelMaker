@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.QuestionMapper">
+	
+	<insert id="newQuestion" parameterType="Question">
+	<selectKey order="BEFORE" keyProperty="questionCode" resultType="String">
+	select
+		case COUNT(*)
+		when 0 then '001'
+		ELSE CONCAT('00', MAX(CAST(SUBSTRING(qna_num,3) AS DECIMAL))+1)
+		END AS qna_num
+	FROM
+		tb_qna
+	</selectKey>
+		INSERT INTO tb_qna
+	(qna_num, m_id, qna_title, qna_contents, qna_reg_date, qna_cate, qna_check)
+	VALUES (#{questionCode}, #{memberId}, #{qName}, #{qContents}, NOW(), #{qCate}, "N");
+	</insert>
+	
+</mapper>
