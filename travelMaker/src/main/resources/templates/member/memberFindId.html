@@ -34,7 +34,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">아이디 찾기</p>
 
-      <form id="findId1" action="login" method="Get">
+      <form id="findId" action="/findId" method="POST">
         <div class="input-group mb-3">
           <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName">
           <div class="input-group-append">
@@ -62,7 +62,7 @@
         
         <div class="row">
           <div class="col-12">
-            <button id="mfindId" type="button" class="btn btn-primary btn-block">확인</button>
+            <button id="findIdBtn" type="button" class="btn btn-primary btn-block">확인</button>
           </div>
           <!-- /.col -->
         </div>
@@ -89,25 +89,25 @@
 <script type="text/javascript">
 
 $(function(){
-	$('#mfindId').click(function(){
+	$('#findIdBtn').click(function(){
 		
 		if($('#findIdName').val() == ''){
 			alert('이름을 입력해주세요');
-			form-control.focus();
+			findIdName.focus();
 			return;
 		}	
 		if($('#findIdTel').val() == ''){
 			alert('전화번호를 입력해주세요');
-			form-control.focus();
+			findIdTel.focus();
 			return;
 		}
 		if($('#findIdEmail').val() == ''){
 			alert('이메일을 입력해주세요');
-			form-control.focus();
+			findIdEmail.focus();
 			return;
 		}
 		alert('등록된 이메일로 아이디를 보냈습니다.')
-		$('#findId1').submit();	
+		$('#findId').submit();	
 	}); 
 	
 });	
