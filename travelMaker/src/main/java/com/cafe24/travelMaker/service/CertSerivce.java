@@ -30,12 +30,12 @@ public class CertSerivce {
         return buf.toString();
 	
 	}
-	
+	/* 회원가입시 본인인증 코드 포함하여 메일 보내기 */
 	public HashMap<String,Object> certEmail(String mailAddr) {
 		HashMap <String,Object> emailCert = new HashMap<String,Object>();
 		String randomCode = setRandomCode();
 		System.out.println(randomCode+"<---호출후");
-		mail.setAddress(mailAddr);
+		mail.setAddress(mailAddr); 
 		mail.setTitle("TravelMaker 이메일 인증 코드입니다");
 		mail.setMessage("인증코드는 "+randomCode+" 입니다");
 		emailCert.put("randomCode",randomCode);
