@@ -67,6 +67,13 @@ public class Festival {
 		this.fesState = fesState;
 	}
 	
+	@Override
+	public String toString() {
+		return "Festival [fesNum=" + fesNum + ", fesName=" + fesName + ", fesPhoto=" + fesPhoto + ", fesStartDate="
+				+ fesStartDate + ", fesEndDate=" + fesEndDate + ", fesDetail=" + fesDetail + ", fesWeb=" + fesWeb
+				+ ", fesRegDate=" + fesRegDate + ", fesState=" + fesState + "]";
+	}
+	
 	
 	
 }

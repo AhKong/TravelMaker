@@ -57,12 +57,12 @@
 			</div>
 			
             <div class="card-body">
-              <form role="form" action="/updateFesftival" method="post">
+              <form role="form" action="/updateFestival" method="post">
 			    <div class="row">
 				  <div class="col-12">
 				    <div class="form-group">
 					  <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
-					  <input type="text" class="form-control" name="fesName">
+					  <input type="text" class="form-control" name="fesName" th:value="${festival.fesName}">
 					</div>
 			      </div>
 				</div>
@@ -70,8 +70,8 @@
 				  <label for="exampleInputFile"><i class="fas fa-camera-retro"></i>&nbsp;festival-photo</label>
 				  <div class="input-group">
 					<div class="custom-file">
-					  <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto">
-					  <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
+					  <label class="custom-file-label" for="exampleInputFile"></label>
+					  <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto" th:value="${festival.fesPhoto}">
 				    </div>
 			      </div>
 				</div>
@@ -79,7 +79,7 @@
 				  <div class="col-12">
 				    <div class="form-group">
 					  <label><i class="fas fa-music"></i>&nbsp;festival-startDate</label>
-					  <input type="date"  class="form-control" name="fesStartDate" placeholder="축제 시작날짜를 입력하세요">
+					  <input type="date"  class="form-control" name="fesStartDate" th:value="${festival.fesStartDate}">
 					</div>
 			      </div>
 				</div>
@@ -87,7 +87,7 @@
 				  <div class="col-12">
 				    <div class="form-group">
 					  <label><i class="fas fa-music"></i>&nbsp;festival-endDate</label>
-					  <input type="date"  class="form-control" name="fesEndDate" placeholder="축제 종료날짜를 입력하세요">
+					  <input type="date"  class="form-control" name="fesEndDate" th:value="${festival.fesEndDate}">
 					</div>
 			      </div>
 			    </div>
@@ -95,7 +95,7 @@
 				  <div class="col-12">
 				    <div class="form-group">
 					  <label><i class="fas fa-music"></i>&nbsp;festival-description</label><i class="fas fa-music"></i>
-					  <textarea class="form-control" rows="3" name="fesDetail" placeholder="축제 상세설명을 입력하세요"></textarea>
+					  <textarea class="form-control" rows="3" name="fesDetail">[[${festival.fesDetail}]]</textarea>
 			        </div>
 			      </div>
 				</div>
@@ -103,7 +103,7 @@
 				  <div class="col-12">
 				    <div class="form-group">
 					  <label><i class="fas fa-music"></i>&nbsp;festival-webSite</label>
-					  <textarea class="form-control" rows="1" name="fesWeb" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
+					  <textarea class="form-control" rows="1" name="fesWeb">[[${festival.fesWeb}]]</textarea>
 				    </div>
 			      </div>
 				</div>							
@@ -121,13 +121,15 @@
 					  </div>
 					</div>
 			      </div>
-				</div>					
+				</div>	
+				<div>
+				  <button type="button" class="btn btn-default col-4" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
+			      <button type="button" class="btn btn-primary float-right col-4">수정완료 :)</button>
+			    </div>
 			  </form>
 
 			  <div class="form-button col-sm-8">
-			  	<!-- Button trigger modal -->
-			    <button type="button" class="btn btn-default col-4" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
-			    <button type="submit" class="btn btn-primary float-right col-4" onclick="location.href='/festivalList'">수정완료 :)</button>
+			  	
 				<!-- Modal -->
 				<div class="modal fade" id="cancleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">

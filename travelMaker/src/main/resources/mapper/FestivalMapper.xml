@@ -18,6 +18,39 @@
 		</association> -->
 	</resultMap>
 	
+		
+	<select id="getFestivalList" parameterType="String" resultMap="fesSelect">
+		SELECT
+			 fes_num
+			,fes_name		
+			,fes_photo
+			,fes_start_date		
+			,fes_end_date
+			,fes_detail
+			,fes_web
+			,fes_reg_date
+			,fes_state
+		FROM tb_festival
+	</select>
+	
+	
+	<update id="updateFestival" parameterType="Festival">
+		UPDATE tb_festival
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="fesName != null and fesName != ''.toString()">fes_name=#{fesName},</if>
+			fes_photo=#{fesPhoto},
+			<if test="fesStartDate != null and fesStartDate != ''.toString()">fes_start_date=#{fesStartDate},</if>
+			<if test="fesEndDate != null and fesEndDate != ''.toString()">fes_end_date=#{fesEndDate},</if>
+			<if test="fesDetail != null and fesDetail != ''.toString()">fes_detail=#{fesDetail},</if>
+			<if test="fesWeb != null and fesWeb != ''.toString()">fes_web=#{fesWeb},</if>
+			<if test="fesRegDate != null and fesRegDate != ''.toString()">fes_reg_date=#{now()},</if>
+			<if test="fesState != null and fesState != ''.toString()">fes_state=#{fesState}</if>
+		</trim>
+		<where>
+			<if test="fesNum != null and fesNum != ''.toString()">fes_num=#{fesNum}</if>
+		</where>
+		
+	</update>
 	
 	
 	<select id="festivalSelect" parameterType="String" resultMap="fesSelect">
