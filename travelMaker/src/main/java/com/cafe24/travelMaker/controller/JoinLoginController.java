@@ -128,8 +128,8 @@ public class JoinLoginController {
 		 * */
 		System.out.println("email>>>>"+email);
 		HashMap<String, String> certEmailResult = new HashMap<String,String>();
-		HashMap<String, Object> certEmail = certService.certEmail(email);
-		mailService.sendMail((Mail)certEmail.get("mail"));
+		HashMap<String, Object> certEmail = certService.certEmail(email); // 보낼 메일 생성, 랜덤코드 생성 
+		mailService.sendMail((Mail)certEmail.get("mail"));//메일 보내기 
 		certEmailResult.put("randomCode", (String)certEmail.get("randomCode"));
 		return certEmailResult;
 	}
