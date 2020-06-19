@@ -25,8 +25,7 @@ public class MemberController{
 	
 	//비밀번호 찾기
 	@GetMapping("/memberFindPw")
-	
-	public String confirmId(Member member) {
+	public String memberFindPw(Member member) {
 		
 		return "/member/memberFindPw";
 	}
