@@ -16,9 +16,14 @@
 	<script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
 
 	<style>
-#memberTb{
-padding: 0;
+#modalText {
+	color: red;
 }
+
+#memberTb {
+	padding: 0;
+}
+
 .map_wrap, .map_wrap * {
 	margin: 0;
 	padding: 0;
@@ -267,8 +272,8 @@ padding: 0;
 						</div>
 						<!-- /.card-header -->
 						<div id="editBox" class="small-box">
-							<button data-toggle="modal" data-target="#myModal" type="button"
-								class="close">&times;</button>
+							<button data-toggle="modal" data-target="#deleteModal"
+								type="button" class="close">&times;</button>
 							<!-- 클릭시 삭제  -->
 							<div>
 								<h5>
@@ -280,35 +285,32 @@ padding: 0;
 									class="img-rounded">
 							</div>
 
-<div>
-       <table id="example1" class="table table-striped projects">
-              <tbody>
-                  <tr>        
-                      <td id="memberTb">
-                          <ul class="list-inline">
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                          </ul>
-                      </td>
-                      <td id="memberTb">
-                      	<a href="#"><i class="fas fa-plus"></i></a>친구초대하기
-                      </td>
-                  </tr>
-              </tbody>
-          </table>	
-      </div>
-
-
+							<div>
+								<table id="example1" class="table table-striped projects">
+									<tbody>
+										<tr>
+											<td id="memberTb">
+												<ul class="list-inline">
+													<li class="list-inline-item"><img alt="Avatar"
+														class="table-avatar" src="../../dist/img/avatar.png">
+													</li>
+													<li class="list-inline-item"><img alt="Avatar"
+														class="table-avatar" src="../../dist/img/avatar.png">
+													</li>
+													<li class="list-inline-item"><img alt="Avatar"
+														class="table-avatar" src="../../dist/img/avatar.png">
+													</li>
+													<li class="list-inline-item"><img alt="Avatar"
+														class="table-avatar" src="../../dist/img/avatar.png">
+													</li>
+												</ul>
+											</td>
+											<td id="memberTb"><a href="#"><i class="fas fa-plus"></i>친구초대하기</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							<div>
 								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
 									<input type='date' name='userBirthday' /> ~ <input type='date'
@@ -323,7 +325,7 @@ padding: 0;
 									생성자 : <a>이승환</a>
 								</h4>
 							</div>
-							
+
 							<div data-toggle="modal" data-target="#myModalExpenses">
 								<a>여행 경비 --- </a>
 							</div>
@@ -339,7 +341,8 @@ padding: 0;
 								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
 									<input type='date' name='userBirthday' />
 								</form>
-								<div>
+								<div style="cursor: pointer;"
+									onclick="location.href='/detailSights'">
 									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 										class="img-rounded">
 								</div>
@@ -354,7 +357,8 @@ padding: 0;
 								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
 									<input type='date' name='userBirthday' />
 								</form>
-								<div>
+								<div style="cursor: pointer;"
+									onclick="location.href='/detailSights'">
 									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 										class="img-rounded">
 								</div>
@@ -362,14 +366,45 @@ padding: 0;
 							</div>
 						</div>
 						<!-- /.card-body -->
+
+						<div class="modal fade" id="deleteModal" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<strong id="modalText"><i class="fas fa-biohazard"></i>여행
+											계획 삭제입니다. </strong>
+									</div>
+									<div id="modalMid">
+										<div class="container">
+											<div class="row">
+												<div class="col">
+													<div>
+														<strong>설마?</strong>
+													</div>
+													<strong>진짜로 삭제하시려구여?</strong>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">ㅅㄹ</button>
+											<button type="submit" class="btn btn-primary">응 삭제할래</button>
+											<!-- 삭제처리 -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<form action="/editTrip">
-							<!-- 포워드 써먹냐? -->
+
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<strong><i class="fas fa-biohazard"></i></strong>
+											<strong><i class="fas fa-biohazard"></i>일정 삭제하시게??</strong>
 										</div>
 										<div id="modalMid">
 											<div class="container">
@@ -393,9 +428,10 @@ padding: 0;
 								</div>
 							</div>
 						</form>
+
 						<form action="/editTrip">
-							<div class="modal fade" id="myModalExpenses" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal fade" id="myModalExpenses" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -434,10 +470,10 @@ padding: 0;
 								</div>
 							</div>
 						</form>
-						
+
 						<form action="/editTrip">
-							<div class="modal fade" id="myModalMaterials" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal fade" id="myModalMaterials" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -476,7 +512,7 @@ padding: 0;
 								</div>
 							</div>
 						</form>
-						
+
 					</div>
 					<!-- /.card -->
 				</div>
@@ -498,8 +534,7 @@ padding: 0;
 									<div class="option">
 										<div>
 											<form onsubmit="searchPlaces(); return false;">
-												키워드 : <input type="text" value="전북대" id="keyword"
-													size="15">
+												키워드 : <input type="text" value="전북대" id="keyword" size="15">
 												<button type="submit">검색하기</button>
 											</form>
 										</div>
