@@ -36,7 +36,7 @@ public class FestivalController {
 	public String festivalSelect(Model model, @RequestParam(name="fes_num", required=false) String fesNum) {
 		
 		
-		return "redirect:festival/updateFestival";
+		return "festival/updateFestival";
 	}
 	
 	//축제 수정하기
