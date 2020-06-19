@@ -6,6 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>TravelMaker</title>
   <style>
+  #mEmailRegExpMsg{
+ 		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ 	}
+ #mTelRegExpMsg{
+  		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ }
   #login{
   float: right;
   }
@@ -43,6 +53,7 @@
             </div>
           </div>
         </div>
+
         <div class="input-group mb-3">
           <input id="findIdTel" type="text" class="form-control" placeholder="전화번호" name="mTel">
           <div class="input-group-append">
@@ -51,13 +62,26 @@
             </div>
           </div>
         </div>
+          <p id="mTelRegExpMsg"> 010-1999-0529 와 같은 형식이여야 합니다. </p>
+        
         <div class="input-group mb-3">
-          <input id="findIdEmail" type="email" class="form-control" placeholder="이메일" name="mEmail">
+          <input type="email" class="form-control" placeholder="Email" name="mEmail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+         	<button type="button" class="btn btn-default certEmailBtn">메일전송</button>  
+        </div>
+        <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
+      <div class="input-group mb-3">
+          <input type="email" class="form-control certCode" placeholder="인증코드">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+         	<button type="button" class="btn btn-default certCodeBtn">인증하기</button>  
         </div>
         
         <div class="row">
@@ -67,6 +91,7 @@
           <!-- /.col -->
         </div>
       </form>
+      <div>
       <p class="mt-3 mb-1">
         <a href="/addMember" class="text-center">sing up</a>
         <a id="login" href="/login">Login </a>
@@ -74,6 +99,7 @@
     </div>
     <!-- /.login-card-body -->
   </div>
+</div>
 </div>
 <!-- /.login-box -->
 
@@ -88,29 +114,115 @@
 
 <script type="text/javascript">
 
+ 	
 $(function(){
-	$('#findIdBtn').click(function(){
-		
-		if($('#findIdName').val() == ''){
-			alert('이름을 입력해주세요');
-			findIdName.focus();
-			return;
-		}	
-		if($('#findIdTel').val() == ''){
-			alert('전화번호를 입력해주세요');
-			findIdTel.focus();
-			return;
-		}
-		if($('#findIdEmail').val() == ''){
-			alert('이메일을 입력해주세요');
-			findIdEmail.focus();
-			return;
-		}
-		alert('등록된 이메일로 아이디를 보냈습니다.')
-		$('#findId').submit();	
-	}); 
 	
-});	
+	var mEmail =$('input[name=mEmail]');
+	var cert =$('.certCode');
+	var mTel =$('input[name=mTel]');
+	var pwCheck2 = false ; //비밀번호 재확인 일치 여부
+	var emailCheck = false;
+	var telCheck = false;
+	var certCode='';
+
+	
+	mEmail.keyup(function(){
+		var mEmailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		if(mEmailCheck.test(mEmail.val())==true){
+			$('#mEmailRegExpMsg').css('display','none');
+			emailCheck = true;
+		} else {
+			$('#mEmailRegExpMsg').css('display','block');
+			emailCheck=false;
+		}
+	})
+	
+	mTel.keyup(function(){
+		var mTelCheck = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+		if(mTelCheck.test(mTel.val())==true){
+			$('#mTelRegExpMsg').css('display','none');
+			telCheck = true;
+		} else{
+			$('#mTelRegExpMsg').css('display','block');
+			telCheck = false;
+		}
+	})
+	
+	
+		$('#findIdBtn').click(function(){
+			
+			if($('#findIdName').val() == ''){
+				alert('이름을 입력하세요');
+				findIdName.focus();
+				return;
+			}	
+			
+			if($('#findIdTel').val() == ''){
+				alert('전화번호를 입력하세요');
+				findIdTel.focus();
+				return;
+			}
+			if($('#findPwEmail').val() == ''){
+				alert('이메일을 입력해주세요');
+				findPwEmail.focus();
+				return;
+			}
+
+			if(emailCheck==false){
+				alert('이메일을 다시 확인하세요');
+				mEmail.focus();
+				return false;
+			}
+			
+			if(certCode!=='success'){
+				console.log(certCode);
+				alert('이메일 인증을 해주세요');
+				return false;
+			}
+			
+			alert('회원님의 아이디는'+'DB아이디값 추출'+'입니다')
+			$('#findId').submit();	
+		}); 
+
+	$('.certEmailBtn').click(function(){
+		var email = mEmail.val();
+		if(email ==''){
+			alert('이메일을 입력하세요!');
+		 	return false;
+		}
+		
+		var request = $.ajax({
+					  url: "/certEmail",  
+					  method: "GET",
+					  data: {email :mEmail.val()}, 
+					  dataType: "json"
+				}); 	     
+    
+				request.done(function( data ) {
+					certCode=data.randomCode
+					console.log(data.randomCode);
+				});	
+   
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+				});
+	})
+	
+	$('.certCodeBtn').click(function(){
+
+		if( cert.val()==certCode && emailCheck==true){
+			alert('인증성공!');
+			certCode='success';
+		} else if(emailCheck ==false) {
+			alert('이메일을 다시 확인해주세요');
+			mEmail.focus();
+			return false;
+		}
+	})
+
+})
+	
+
  	
 </script>
 
