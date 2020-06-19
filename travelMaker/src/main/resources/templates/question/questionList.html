@@ -45,6 +45,7 @@
                   <thead>
                   <tr>
                     <th>번호</th>
+                    <th style="visibility:hidden;position:absolute;">질문고유번호</th>
                     <th>등록자아이디</th>
                     <th>카테고리</th>
                     <th>제목</th>
@@ -54,22 +55,21 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><button type="button" onclick="location.href='detailQuestion'" class="btn btn-default">
-                  	<i class="fas fa-search" data-toggle="modal" data-target="#modal-default"></i>
-                      </button></td>
-                    <td>ㅇㅇ</td>
+                  <tr th:each="ql, i : ${questionList}">
+                    <td th:text="${i.count}"></td>
+                    <td th:text="${ql.questionCode}" style="visibility:hidden;position:absolute;"></td>
+                    <td th:text="${ql.memberId}"></td>
+                    <td th:text="${ql.qCate}"></td>
+                    <td th:text="${ql.qName}"></td>
+                    <td th:text="${ql.qDate}"></td>
+                    <td><a th:href="@{/detailQuestion(qCode=${ql.questionCode})}" class="btn btn-primary">
+                  	<i class="fas fa-search"></i></a></td>
+            		<td><span class="badge badge-success" th:text="${ql.qYesNo}"></span></td>
                   </tr>
                   </tbody>
                   <tfoot>
                   </tfoot>
                 </table>
-                	
                 </div>
               </div>
               <!-- /.card-body -->
