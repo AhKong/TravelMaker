@@ -9,6 +9,16 @@
   #login{
   float: right;
   }
+    #mEmailRegExpMsg{
+ 		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ 	}
+ #mTelRegExpMsg{
+  		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ }
   </style>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,22 +53,37 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input id="findPwTel" name="mTel" type="text" class="form-control" placeholder="전화번호">
+        
+         <div class="input-group mb-3">
+          <input id="findPwTel" type="text" class="form-control" placeholder="전화번호" name="mTel">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-mobile"></span>
             </div>
           </div>
         </div>
+          <p id="mTelRegExpMsg"> 010-1999-0529 와 같은 형식이여야 합니다. </p>
+        
         <div class="input-group mb-3">
-          <input id="findPwEmail" name="mEmail" type="email" class="form-control" placeholder="이메일">
+          <input id="findPwEmail" type="email" class="form-control" placeholder="Email" name="mEmail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+         	<button type="button" class="btn btn-default certEmailBtn">메일전송</button>  
         </div>
+        <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
+      <div class="input-group mb-3">
+          <input type="email" class="form-control certCode" placeholder="인증코드">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+         	<button type="button" class="btn btn-default certCodeBtn">인증하기</button>  
+        </div>
+        
         <div class="row">
           <div class="col-12">
             <button id="findPwBtn" type="button" class="btn btn-primary btn-block">확인</button>
@@ -86,29 +111,109 @@
 </body>
 
 <script type="text/javascript">
-
 $(function(){
+	
+	var mEmail =$('input[name=mEmail]');
+	var cert =$('.certCode');
+	var mTel =$('input[name=mTel]');
+	var emailCheck = false;
+	var telCheck = false;
+	var certCode='';
+
+	
+	mEmail.keyup(function(){
+		var mEmailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		if(mEmailCheck.test(mEmail.val())==true){
+			$('#mEmailRegExpMsg').css('display','none');
+			emailCheck = true;
+		} else {
+			$('#mEmailRegExpMsg').css('display','block');
+			emailCheck=false;
+		}
+	})
+	
+	mTel.keyup(function(){
+		var mTelCheck = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+		if(mTelCheck.test(mTel.val())==true){
+			$('#mTelRegExpMsg').css('display','none');
+			telCheck = true;
+		} else{
+			$('#mTelRegExpMsg').css('display','block');
+			telCheck = false;
+		}
+	})
+	
+	
+
 	$('#findPwBtn').click(function(){
 		
 		if($('#findPwId').val() == ''){
 			alert('아이디를 입력해주세요');
 			findPwId.focus();
-			return;
+			return false;
 		}	
 		if($('#findPwTel').val() == ''){
 			alert('전화번호를 입력해주세요');
 			findPwTel.focus();
-			return;
+			return false;
 		}
 		if($('#findPwEmail').val() == ''){
 			alert('이메일을 입력해주세요');
 			findPwEmail.focus();
-			return;
+			return false;
 		}
+		
+		if(emailCheck==false){
+			alert('이메일을 다시 확인하세요');
+			mEmail.focus();
+			return false;
+		}
+		
+		if(certCode!=='success'){
+			console.log(certCode);
+			alert('이메일 인증을 해주세요');
+			return false;
+		}
+		
 		alert('등록된 이메일로 비밀번호를 보냈습니다.')
 		$('#findPw').submit();	
 	}); 
 	
+	$('.certEmailBtn').click(function(){
+		var email = mEmail.val();
+		if(email ==''){
+			alert('이메일을 입력하세요!');
+		 	return false;
+		}
+		
+		var request = $.ajax({
+					  url: "/certEmail",  
+					  method: "GET",
+					  data: {email :mEmail.val()}, 
+					  dataType: "json"
+				}); 	     
+    
+				request.done(function( data ) {
+					certCode=data.randomCode
+					console.log(data.randomCode);
+				});	
+   
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+				});
+	})
+	
+	$('.certCodeBtn').click(function(){
+
+		if( cert.val()==certCode && emailCheck==true){
+			alert('인증성공!');
+			certCode='success';
+		} else if(emailCheck ==false) {
+			alert('이메일을 다시 확인해주세요');
+			mEmail.focus();
+			return false;
+		}
+	})
 });	
  	
 </script>
