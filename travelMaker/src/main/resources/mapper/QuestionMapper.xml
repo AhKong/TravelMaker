@@ -51,4 +51,17 @@
 		DELETE FROM tb_qna WHERE qna_num=#{qCode}
 	</delete>
 	
+	<select id="getAllQuestionResultList" resultType="Question">
+		SELECT 
+			qna_num AS questionCode
+			, m_id AS memberId
+			, qna_title AS qName
+			, qna_contents AS qContents
+			, qna_reg_date AS qDate
+			, qna_cate AS qCate
+			, qna_check AS qYesNo
+		FROM 
+			tb_qna
+	</select>
+	
 </mapper>

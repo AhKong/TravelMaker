@@ -47,7 +47,8 @@ public class QnAController{
 	}
 	
 	@GetMapping("/answer")
-	public String answer() {
+	public String answer(Model model) {
+		model.addAttribute("questionList", questionService.getAllQuestionList());
 		return "/question/answer";
 	}
 	
@@ -57,7 +58,9 @@ public class QnAController{
 	}
 	
 	@GetMapping("/answerForm")
-	public String answerForm() {
+	public String answerForm(Model model, Question question, @RequestParam(name="qCode", required=false) String qCode) {
+		question = questionService.getQuestionInfo(qCode);
+		model.addAttribute("question", question);
 		return "/question/answerForm";
 	}
 	

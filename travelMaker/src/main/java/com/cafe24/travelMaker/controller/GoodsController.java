@@ -16,7 +16,6 @@ public class GoodsController{
 
 	@GetMapping("/buyGoods")
 	public String buyGoods(Model model) {
-		
 		model.addAttribute("goodsList", goodsService.getGoodsList());
 		return "/goods/buyGoods";
 	}
@@ -33,6 +32,11 @@ public class GoodsController{
 	@GetMapping("/addGoods")
 	public String addGoods() {
 		return "/goods/addGoods";
+	}
+	
+	@GetMapping("/myRegGoods")
+	public String myRegGoods() {
+		return "/goods/myRegGoods";
 	}
 }
 
