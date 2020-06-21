@@ -64,9 +64,6 @@
 	
 	<select id="findPw" parameterType = "Member" resultMap="memberSelect">
 		SELECT
-			m_id,
-			m_tel,
-			m_email,
 			m_pw
 		FROM
 			tb_member

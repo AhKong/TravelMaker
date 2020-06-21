@@ -47,7 +47,7 @@
               
       <form id="findId" action="/findId" method="POST">
         <div class="input-group mb-3">
-          <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName" value="승환이오빠">
+          <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="findIdTel" type="text" class="form-control" placeholder="전화번호" name="mTel" value="제 20분">
+          <input id="findIdTel" type="text" class="form-control" placeholder="전화번호" name="mTel">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-mobile"></span>
@@ -66,7 +66,7 @@
           <p id="mTelRegExpMsg"> 010-1999-0529 와 같은 형식이여야 합니다. </p>
         
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="mEmail" value="책임지세요">
+          <input type="email" class="form-control" placeholder="Email" name="mEmail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -82,14 +82,14 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-         	<button type="button" class="btn btn-default certCodeBtn">인증하기</button>  
+         	<button type="button" class="btn btn-default certCodeBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
         </div>
         
         
       </form>
       <div class="row">
           <div class="col-12">
-            <button id="findIdBtn" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#deleteModal">확인</button>
+            <button id="findIdBtn" type="button" class="btn btn-primary btn-block">확인</button>
           </div>
           <!-- /.col -->
        </div>
@@ -122,7 +122,9 @@
 
  	
 $(function(){
-	
+	var mName =$('input[name=mName]');
+	var mTel =$('input[name=mTel]');
+
 	var mEmail =$('input[name=mEmail]');
 	var cert =$('.certCode');
 	var mTel =$('input[name=mTel]');
@@ -192,10 +194,10 @@ $(function(){
 		
 			var request = $.ajax({
 				  url: "/findId",  
-				  method: "GET",
-				  data: {mName: $('#findIdName').val(),
+				  method: "POST",
+				  data: {mName: mName.val(),
 					     mEmail: mEmail.val() ,
-					     mTel:$('#findIdTel').val() 
+					     mTel: mTel.val() 
 					     }, 
 				  dataType: "json"
 			});
@@ -216,8 +218,7 @@ $(function(){
 		
           })
 			
-			
-	 
+
 
 	$('.certEmailBtn').click(function(){
 		var email = mEmail.val();
@@ -225,6 +226,7 @@ $(function(){
 			alert('이메일을 입력하세요!');
 		 	return false;
 		}
+	})
 		
 		var request = $.ajax({
 					  url: "/certEmail",  
@@ -241,7 +243,6 @@ $(function(){
 				request.fail(function( jqXHR, textStatus ) {
 					  alert( "Request failed: " + textStatus );
 				});
-	})
 	
 	$('.certCodeBtn').click(function(){
 
@@ -254,9 +255,7 @@ $(function(){
 			return false;
 		}
 	})
-
 })
-	
 
  	
 </script>
