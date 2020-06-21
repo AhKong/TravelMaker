@@ -58,6 +58,7 @@
 			
             <div class="card-body">
               <form role="form" th:action="@{/updateFestival}" method="post">
+				<input type="hidden" class="form-control" name="fesNum" th:value="${festival.fesNum}">
 			    <div class="row">
 				  <div class="col-12">
 				    <div class="form-group">
@@ -145,7 +146,7 @@
 							</div>
 							
 							<div class="modal-footer">
-								<button type="button" th:onclick="@{/festivalList}" class="btn btn-primary btn-sm col-sm-2"> 예 </button>
+								<button type="button" onclick="location.href='/festivalList'" class="btn btn-primary btn-sm col-sm-2"> 예 </button>
 			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
 							</div>
 						</div>

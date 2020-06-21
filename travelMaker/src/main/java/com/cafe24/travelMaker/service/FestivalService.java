@@ -17,6 +17,7 @@ public class FestivalService {
 	public int addFestival(Festival festival) {
 		//System.out.println("addFestival FestivalService 도착");
 		int result = festivalMapper.addFestival(festival);
+		System.out.println(result+" <- result addFestival FestivalService");
 		
 		return result;
 	}
@@ -25,8 +26,8 @@ public class FestivalService {
 	public Festival festivalSelect(String fesNum) {
 		System.out.println("festivalSelect FestivalService 도착");
 		Festival festival = festivalMapper.festivalSelect(fesNum);
-		System.out.println("fesNum: "+fesNum);
-		System.out.println("festivalSelect service festival: "+festival);
+		System.out.println(fesNum+" <- fesNum festivalSelect FestivalService");
+		System.out.println(festival+" <- festival festivalSelect FestivalService");
 		
 		return festival;
 	}
@@ -35,14 +36,16 @@ public class FestivalService {
 	public int updateFestival(Festival festival) {
 		System.out.println("updateFestival FestivalService 도착");
 		int result = festivalMapper.updateFestival(festival);
-		System.out.println("service updateFestival festival: "+festival);
-		System.out.println("service updateFestival result: "+result);
+		System.out.println(festival+" <- festival updateFestival FestivalService");
+		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalService");
+		System.out.println(result+" <- result updateFestival FestivalService");
 		
 		return 5;
 	}
 	
 	//축제 리스트
 	public List<Festival> getFestivalList(){
+		System.out.println("getFestivalList FestivalService 도착");
 		
 		return festivalMapper.getFestivalList();
 	}

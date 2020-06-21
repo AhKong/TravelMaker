@@ -31,17 +31,17 @@ public class FestivalController {
 	@PostMapping("/addFestival")
 	public String addFestival(Festival festival) {
 		int result = festivalService.addFestival(festival);
-		System.out.println("addFestival result: "+result);
-		return "festival/festivalList";
+		System.out.println(result+" <- result addFestival FestivalController");
+		return "redirect:/festivalList";
 	}
 	
 	//축제 수정 화면으로 이동 
 	@GetMapping("/updateFestival")
 	public String festivalSelect(Model model, @RequestParam(name="fesNum", required=false) String fesNum) {
 		
-		System.out.println("fesNum-->"+fesNum);
+		System.out.println(fesNum+" <- fesNum festivalSelect FestivalController");
 		Festival festival = festivalService.festivalSelect(fesNum);	
-		System.out.println("controller festival: "+festival);
+		System.out.println(festival+" <- festival festivalSelect FestivalController");
 		model.addAttribute("festival", festival);
 		
 		return "festival/updateFestival";
@@ -50,18 +50,21 @@ public class FestivalController {
 	//축제 수정하기 
 	@PostMapping("/updateFestival")
 	public String updateFestival(Festival festival) {
+		System.out.println("updateFestival FestivalController 도착");
 		int result = festivalService.updateFestival(festival);
-		System.out.println("controller updateFestival festival: "+festival);
-		System.out.println("controller updateFestival result: "+result);
+		System.out.println(festival+" <- festival updateFestival FestivalController");
+		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalController");
+		System.out.println(result+" <- result updateFestival FestivalController");
 		
 		return "redirect:/festivalList";
 	}
 	
 	//축제 리스트
 	@GetMapping("/festivalList")
-	public String gettFestivalList(Model model){
+	public String getFestivalList(Model model){
+		System.out.println("getFestivalList FestivalController 도착");
 		List<Festival> getFestivalList = festivalService.getFestivalList();
-		System.out.println("getFestivalList :"+ getFestivalList);
+		System.out.println(getFestivalList+" <- getFestivalList getFestivalList FestivalController");
 		model.addAttribute("getFestivalList", getFestivalList);
 		
 		return "festival/festivalList";
