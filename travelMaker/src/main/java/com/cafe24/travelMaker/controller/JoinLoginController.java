@@ -43,18 +43,27 @@ public class JoinLoginController {
 	}
 	
 	@RequestMapping("/findId")
-	public String findId(Member member) {
+	@ResponseBody
+	public HashMap<String,String> findId(Member member) {
+			HashMap<String,String> getId = new HashMap<String,String>();
 			if(!"".equals(member.getmName())  && !"".equals(member.getmTel()) && !"".equals(member.getmEmail())) {
 				System.out.println("아이디 찾기");
 				System.out.println(member.getmName());
 				System.out.println(member.getmTel());
 				System.out.println(member.getmEmail());
 				Member result = memberService.findId(member);
-				System.out.println(result.getmId() +"<----------- 찾은 아이디");
+				//System.out.println(result.getmId() +"<----------- 찾은 아이디");
 				//아이디 찾기 입력 정보가 다르면 메일에 "입력 정보가 일치하지 않습니다."
-				//메일 추가
-			}
-			return "join_login/login";
+				//메일 추가		
+			
+				if(result!=null) {
+					getId.put("result", result.getmId());
+				}else {
+					getId.put("result", "none");
+				}
+			} 
+			
+			return getId;
 	}
 	
 	@RequestMapping("/findPw")
@@ -67,6 +76,8 @@ public class JoinLoginController {
 			System.out.println(member.getmEmail());
 			Member result = memberService.findPw(member);
 			System.out.println(result.getmPw() + "<------------ 찾은 비밀번호");
+			
+		
 			//비번 찾기 
 		}
 		return "join_login/login";

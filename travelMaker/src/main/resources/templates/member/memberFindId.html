@@ -45,9 +45,9 @@
 
     <!--  <td th:text="${mId}"></td> -->
               
-      <form id="findId" action="/findId" method="POST" onsubmit="return false;">
+      <form id="findId" action="/findId" method="POST">
         <div class="input-group mb-3">
-          <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName">
+          <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName" value="승환이오빠">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="findIdTel" type="text" class="form-control" placeholder="전화번호" name="mTel">
+          <input id="findIdTel" type="text" class="form-control" placeholder="전화번호" name="mTel" value="제 20분">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-mobile"></span>
@@ -66,7 +66,7 @@
           <p id="mTelRegExpMsg"> 010-1999-0529 와 같은 형식이여야 합니다. </p>
         
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="mEmail">
+          <input type="email" class="form-control" placeholder="Email" name="mEmail" value="책임지세요">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -98,8 +98,8 @@
 	        <a href="/addMember" class="text-center">sing up</a>
 	        <a id="login" href="/login">Login </a>
 	      </p>
-	      <label th:text="${mId}"></label>
-
+	      
+	  
     </div>
     <!-- /.login-card-body -->
   </div>
@@ -189,28 +189,35 @@ $(function(){
 				return false;
 			}
 			
-			// 
-			$.ajax({
+		
+			var request = $.ajax({
 				  url: "/findId",  
-				  method: "POST",
-				  data: {member : mId }, 
-				  dataType: "json",
-				  result : function(data) {
-					  if(data == "noData") {
-						  alert('검색된 결과가 없습니다.');
-					  } else {
-						  alert('검색된 아이디는 ' + data  + '입니다.');
-							$('#findId').submit();
-					  }
-				  }
+				  method: "GET",
+				  data: {mName: $('#findIdName').val(),
+					     mEmail: mEmail.val() ,
+					     mTel:$('#findIdTel').val() 
+					     }, 
+				  dataType: "json"
 			});
-						
+
+			request.done(function( data ) {
+				console.log(data.result);
+				if(data.result == 'none'){
+					alert('등록된 회원 정보가 아닙니다!');
+				} else{
+					alert('회원님의 아이디는 ' + data.result+ '입니다')
+					window.location.href = '/login';
+				}
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			});	
+		
+          })
 			
-			/* var result = [[${mId}]];		
-			alert('회원님의 아이디는' + result +'입니다');
-			console.log(result); */
 			
-		}); 
+	 
 
 	$('.certEmailBtn').click(function(){
 		var email = mEmail.val();
