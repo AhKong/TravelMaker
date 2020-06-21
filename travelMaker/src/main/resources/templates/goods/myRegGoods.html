@@ -25,11 +25,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>문의내역(강민수)</h1>
+            <h1>내 등록상품 관리(강민수)</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">문의게시판</li>
+              <li class="breadcrumb-item active">내 등록상품 관리</li>
             </ol>
           </div>
         </div>
@@ -39,38 +39,67 @@
    
 
             <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">회원들을 위한 상품을 등록해주세요.</h3>
+              </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>번호</th>
-                    <th style="visibility:hidden;position:absolute;">질문고유번호</th>
-                    <th>등록자아이디</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>등록날짜</th>
-                    <th>상세보기</th>
-                    <th>답변여부</th>
+                    <th>상품번호</th>
+                    <th>상품분류</th>
+                    <th>상품이름</th>
+                    <th>상품가격</th>
+                    <th>상품등록일자</th>
+                    <th>자세히보기</th>
+                    <th>판매유무</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="ql, i : ${questionList}">
-                    <td th:text="${i.count}"></td>
-                    <td th:text="${ql.questionCode}" style="visibility:hidden;position:absolute;"></td>
-                    <td th:text="${ql.memberId}"></td>
-                    <td th:text="${ql.qCate}"></td>
-                    <td th:text="${ql.qName}"></td>
-                    <td th:text="${ql.qDate}"></td>
-                    <td><a th:href="@{/detailQuestion(qCode=${ql.questionCode})}" class="btn btn-primary">
-                  	<i class="fas fa-search"></i></a></td>
-            		<td><span class="badge badge-success" th:text="${ql.qYesNo}"></span></td>
+                 <tr>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td><button type="button" onclick="location.href='detailGoodsAllience'" class="btn btn-default">
+                  	<i class="fas fa-search"></i>
+                      </button></td>
+                     <td>ㅇㅇ</td>
+                  </tr>
+                  <tr>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td><button type="button" onclick="location.href='detailGoodsAllience'" class="btn btn-default">
+                  	<i class="fas fa-search"></i>
+                      </button></td>
+                     <td>ㅇㅇ</td>
+                  </tr>
+                  <tr>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td>ㅇㅇ</td>
+                    <td><button type="button" onclick="location.href='detailGoodsAllience'" class="btn btn-default">
+                  	<i class="fas fa-search"></i>
+                      </button></td>
+                     <td>ㅇㅇ</td>
                   </tr>
                   </tbody>
-                  <tfoot>
-                  </tfoot>
                 </table>
-                </div>
+                
+              
+                <div class="col-sm-7">
+                	<br>
+            		<ol class="breadcrumb float-sm-right">
+            			<a href="/addGoods" class="btn btn-primary btn-block"><b>새 상품등록</b></a>
+           		 	</ol>
+         		</div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -79,7 +108,6 @@
           <!-- /.col -->
      
   <!-- /.content-wrapper -->
-
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

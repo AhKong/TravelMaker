@@ -30,7 +30,7 @@
 			,fes_web
 			,fes_reg_date
 			,fes_state
-		FROM tb_festival
+		FROM tb_festival;
 	</select>
 	
 	
@@ -79,7 +79,7 @@
 				ELSE CONCAT('fes_', (MAX(CAST(substring(fes_num,5) AS DECIMAL))+1))
 				END) AS fesNum
 			FROM
-				tb_festival
+				tb_festival;
 		</selectKey>
 			INSERT INTO tb_festival
 			(fes_num, fes_name, fes_photo, fes_start_date, fes_end_date, fes_detail, fes_web, fes_reg_date, fes_state)			
@@ -93,7 +93,7 @@
 					,#{fesWeb}
 					,now()
 					,#{fesState}
-					)
+					);
 	</insert>
 	
 </mapper>

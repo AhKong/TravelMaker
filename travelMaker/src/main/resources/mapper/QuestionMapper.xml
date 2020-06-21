@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.QuestionMapper">
+	
+	<insert id="newQuestion" parameterType="Question">
+	<selectKey order="BEFORE" keyProperty="questionCode" resultType="String">
+	select
+		case COUNT(*)
+		when 0 then '001'
+		ELSE CONCAT('00', MAX(CAST(SUBSTRING(qna_num,3) AS DECIMAL))+1)
+		END AS qna_num
+	FROM
+		tb_qna
+	</selectKey>
+		INSERT INTO tb_qna
+	(qna_num, m_id, qna_title, qna_contents, qna_reg_date, qna_cate, qna_check)
+	VALUES (#{questionCode}, #{memberId}, #{qName}, #{qContents}, NOW(), #{qCate}, "미답변");
+	</insert>
+	
+	<select id="getQuestionResultList" parameterType="String" resultType="Question">
+		SELECT 
+			 m_id AS memberId
+			, qna_num AS questionCode
+			, qna_title AS qName
+			, qna_contents AS qContents
+			, qna_reg_date AS qDate
+			, qna_cate AS qCate
+			, qna_check AS qYesNo
+		FROM tb_qna
+		WHERE m_id=#{mId};
+	</select>
+	
+	<select id="getQuestionInfo" resultType="Question">
+		SELECT 
+			qna_num AS questionCode
+			, m_id AS memberId
+			, qna_title AS qName
+			, qna_contents AS qContents
+			, qna_reg_date AS qDate
+			, qna_cate AS qCate
+			, qna_check AS qYesNo
+		FROM 
+			tb_qna
+		WHERE
+			qna_num =#{qCode}
+	</select>
+	
+	<delete id="deleteQnA" parameterType="String">
+		DELETE FROM tb_qna WHERE qna_num=#{qCode}
+	</delete>
+	
+	<select id="getAllQuestionResultList" resultType="Question">
+		SELECT 
+			qna_num AS questionCode
+			, m_id AS memberId
+			, qna_title AS qName
+			, qna_contents AS qContents
+			, qna_reg_date AS qDate
+			, qna_cate AS qCate
+			, qna_check AS qYesNo
+		FROM 
+			tb_qna
+	</select>
+	
+</mapper>

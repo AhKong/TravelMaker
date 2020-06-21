@@ -34,10 +34,11 @@ public class FestivalService {
 	//축제 수정 
 	public int updateFestival(Festival festival) {
 		System.out.println("updateFestival FestivalService 도착");
-		festivalMapper.updateFestival(festival);
-		System.out.println("updateFestival service festival: "+festival);
+		int result = festivalMapper.updateFestival(festival);
+		System.out.println("service updateFestival festival: "+festival);
+		System.out.println("service updateFestival result: "+result);
 		
-		return 1;
+		return 5;
 	}
 	
 	//축제 리스트

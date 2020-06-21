@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.GoodsMapper">
+	
+	<select id="getGoodsResultList" resultType="Goods">
+		SELECT 
+	  g_num AS goodsCode
+	, m_id	AS memberId
+	, g_photo AS goodsPhoto
+	, g_cate	AS goodsCate
+	, g_name	AS goodsName
+	, g_point AS goodsPrice
+	, g_detail AS goodsDetail
+	, g_reg_date AS goodsRegDate
+	FROM tb_Alliance_g
+	</select>
+	
+	<select id="getGoodsInfo" resultType="Goods">
+		SELECT
+	  g.g_num AS goodsCode 
+	,  g.g_photo AS goodsPhoto
+	, g.g_name AS goodsName 
+	, g.g_detail AS goodsDetail
+	, g.m_id	AS memberId
+	, g.g_cate	AS goodsCate
+	, g.g_point AS goodsPrice
+	, g.g_reg_date AS goodsRegDate
+	, m.m_name AS memberName
+	FROM 
+	tb_Alliance_g as g
+	INNER JOIN
+	tb_member as m
+	on
+	g.m_id = m.m_id
+	WHERE g_num = #{goodsCode}
+	</select>
+</mapper>

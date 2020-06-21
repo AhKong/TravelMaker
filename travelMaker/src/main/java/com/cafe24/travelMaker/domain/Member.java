@@ -1,5 +1,6 @@
 package com.cafe24.travelMaker.domain;
 
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,15 @@ public class Member {
 	private MultipartFile file = null;
 	private String mAvatar;
 	private String mIntrod;
+	private List<Goods> goodsList;
+	
+	public List<Goods> getGoodsList() {
+		return goodsList;
+	}
+	public void setGoodsList(List<Goods> goodsList) {
+		this.goodsList = goodsList;
+	}
+
 	private int mFollow;
 	public String getmId() {
 		return mId;
@@ -106,9 +116,9 @@ public class Member {
 	public String toString() {
 		return "Member [mId=" + mId + ", mPw=" + mPw + ", mLevel=" + mLevel + ", mName=" + mName + ", mEmail=" + mEmail
 				+ ", mTel=" + mTel + ", mGender=" + mGender + ", mBirth=" + mBirth + ", mAddr=" + mAddr + ", mRegDate="
-				+ mRegDate + ", file=" + file + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", mFollow=" + mFollow
-				+ "]";
+				+ mRegDate + ", file=" + file + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", goodsList="
+				+ goodsList + ", mFollow=" + mFollow + "]";
 	}
+	
 
 }
-

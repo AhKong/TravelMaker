@@ -50,7 +50,9 @@ public class FestivalController {
 	//축제 수정하기 
 	@PostMapping("/updateFestival")
 	public String updateFestival(Festival festival) {
-		festivalService.updateFestival(festival);
+		int result = festivalService.updateFestival(festival);
+		System.out.println("controller updateFestival festival: "+festival);
+		System.out.println("controller updateFestival result: "+result);
 		
 		return "redirect:/festivalList";
 	}
