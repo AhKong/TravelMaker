@@ -11,4 +11,5 @@ public interface QuestionMapper {
 	public List<Question> getQuestionResultList(String mId);
 	public Question getQuestionInfo(String qCode);
 	public int deleteQnA(String qCode);
+	public List<Question> getAllQuestionResultList();
 }

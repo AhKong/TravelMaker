@@ -29,4 +29,8 @@ public class QuestionService {
 	public int deleteQnA(String qCode) {
 		return questionMapper.deleteQnA(qCode);
 	}
+	
+	public List<Question> getAllQuestionList(){
+		return questionMapper.getAllQuestionResultList();
+	}
 }
