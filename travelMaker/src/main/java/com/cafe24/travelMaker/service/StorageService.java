@@ -1,6 +1,7 @@
 package com.cafe24.travelMaker.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class StorageService {
 	 * @return
 	 */
 	private Path getPath() {
-		return Paths.get(fileUploadPath);
+		return Paths.get("src/main/resources/static/"+fileUploadPath);
 	}
 
 }
