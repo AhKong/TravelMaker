@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.ResMapper">
+	<select id="selectResCate" resultType="ResCate">
+		select 
+			res_cate_num as resCateNum,
+			res_type as resType
+		from
+			tb_res_cate
+	
+	</select>
+	<insert id="addRes" parameterType="Res">
+	  <selectKey order ="BEFORE" keyProperty="resNum" resultType ="String"> 
+	 	 SELECT 
+			case COUNT(*)
+			when 0 then 'res_1'
+			ELSE CONCAT('res_',MAX(CAST(SUBSTRING(res_num,5) AS DECIMAL))+1) 
+			END AS res_num
+		FROM
+			tb_res
+ 	  </selectKey>
+ 	INSERT INTO 
+ 		tb_res(
+	 		res_num,
+	 		si_num,
+	 		m_id,
+	 		res_cate_num,
+	 		res_name,
+	 		res_lat,
+	 		res_long,
+	 		res_photo,
+	 	    res_addr,
+	 	    res_price,
+	 	    res_tel,
+	 	    res_web,
+	 	    res_detail, 
+	 	    res_start_time, 
+	 	    res_close_time
+  	 ) VALUES (
+   			#{resNum},
+   			#{siNum},
+   			#{mId}, 
+   			#{resCateNum},
+   			#{resName}, 
+   			#{resLat}, 
+   			#{resLong}, 
+   			#{resPhoto}, 
+   			#{resAddr}, 
+   			#{resPrice},
+			#{resTel}, 
+			#{resWeb}, 
+			#{resDetail}, 
+			#{resStartTime}, 
+			#{resCloseTime}
+		)
+	</insert>
+</mapper>

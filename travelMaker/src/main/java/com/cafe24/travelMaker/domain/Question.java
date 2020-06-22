@@ -8,6 +8,7 @@ public class Question {
 	private String qContents;
 	private String qDate;
 	private String qYesNo;
+	private String qAnswer;
 
 	public String getQuestionCode() {
 		return questionCode;
@@ -51,10 +52,18 @@ public class Question {
 	public void setqYesNo(String qYesNo) {
 		this.qYesNo = qYesNo;
 	}
+	public String getqAnswer() {
+		return qAnswer;
+	}
+	public void setqAnswer(String qAnswer) {
+		this.qAnswer = qAnswer;
+	}
 	@Override
 	public String toString() {
 		return "Question [questionCode=" + questionCode + ", memberId=" + memberId + ", qCate=" + qCate + ", qName="
-				+ qName + ", qContents=" + qContents + ", qDate=" + qDate + ", qYesNo=" + qYesNo + "]";
+				+ qName + ", qContents=" + qContents + ", qDate=" + qDate + ", qYesNo=" + qYesNo + ", qAnswer="
+				+ qAnswer + "]";
 	}
+	
 }
 

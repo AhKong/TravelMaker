@@ -84,8 +84,9 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">답변하기</label>
-                <textarea id="inputDescription" class="form-control" rows="4" placeholder="답변내용을 작성해주세요."></textarea>
+                <textarea id="inputDescription" class="form-control" rows="8" name="qAnswer" th:text="${question.qAnswer}" placeholder="답변 내용을 작성해주세요."></textarea>
               </div>
+              <input id="answer2" type="submit" value="답변완료/답변수정" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-primary_answer">
             </div>
             
             <!-- /.card-body -->
@@ -95,14 +96,33 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <input type="submit" value="질문삭제" class="btn btn-danger float-left" data-toggle="modal" data-target="#modal-primary">
-          <input type="submit" value="답변삭제" class="btn btn-danger float-left" data-toggle="modal" data-target="#modal-primary">
-          <input type="submit" value="답변하기" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-primary">
+          <input type="submit" value="질문삭제" class="btn btn-danger float-left" data-toggle="modal" data-target="#modal-danger_qDelete">
         </div>
       </div>
       
       
-      <div class="modal fade" id="modal-primary">
+      <div class="modal fade" id="modal-danger_qDelete">
+			        <div class="modal-dialog">
+			          <div class="modal-content bg-danger">
+			            <div class="modal-header">
+			              <h4 class="modal-title">질문삭제</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">&times;</span></button>
+			            </div>
+			            <div class="modal-body">
+			              <p>질문을 삭제하시겠습니까?</p>
+			            </div>
+			            <div class="modal-footer justify-content-between">
+			            	<a th:href="@{/deleteQnA2(qCode=${question.questionCode})}" class="btn btn-outline-light">확인</a>
+			            </div>
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
+			      <!-- /.modal -->
+			      
+			      <div class="modal fade" id="modal-primary_answer">
 			        <div class="modal-dialog">
 			          <div class="modal-content bg-primary">
 			            <div class="modal-header">
@@ -111,10 +131,10 @@
 			                <span aria-hidden="true">&times;</span></button>
 			            </div>
 			            <div class="modal-body">
-			              <p>답변이 완료되었습니다</p>
+			              <p>답변을 등록하시겠습니까?</p>
 			            </div>
 			            <div class="modal-footer justify-content-between">
-			              <button   onclick="location.href='/answer'" type="button" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+			              <button id="sendBtn" type="button" class="btn btn-outline-light">확인</button>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->
@@ -140,6 +160,26 @@
 <th:block layout:fragment="customFooterScript">
 	<!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	$(function(){
+		$('#sendBtn').click(function(){
+			var qCode = /*[[${question.questionCode}]]*/;
+			var inputDescription = $('#inputDescription').val()
+			console.log(inputDescription + " " + qCode);
+			location.href = '/answerSuccess?qCode='+ qCode + '&inputDescription=' + inputDescription;
+		});
+	});
+/*]]>*/
+
+$('#answer2').click(function(){
+	if($("#inputDescription").val() == ''){
+		alert('답변 내용을 작성해주세요.');
+		$("#inputDescription").focus();
+		return false;
+}
+});
+</script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 </th:block>

@@ -49,82 +49,76 @@
               <h3 class="card-title">음식점 등록하기</h3>
             </div>
             <div class="card-body">
-              <form>
-              <input type="hidden" value="id002">
+              <form action="/addRes" method="Post" enctype="multipart/form-data">
+              <input type="hidden" name="mId"  th:value="${session.SID}">
               <div class="form-group ">
                 <label for="inputName">음식점 이름</label>
-                <input type="text" id="inputName" class="form-control">
+                <input type="text" id="inputName" class="form-control" name="resName">
               </div>
            	  <div class="form-group localSelect ">
                 <label for="inputStatus">도</label>
-                <select class="form-control custom-select" style="width:200px !important;">
-                  <option selected disabled>도를 선택하세요</option>
-                  <option>전라북도</option>
-                  <option>서울특별시</option>
-                  <option>대전광역시</option>
+                <select class="form-control custom-select selectDo" style="width:200px !important;">
+                 <option selected >도를 선택하세요</option>
+                  <th:block th:each ="d:${doList}">
+                  	 <option th:value="${d.doNum}" th:text="${d.doName}"></option>
+                  </th:block>
                 </select>
-                <label for="inputStatus">시</label>
-                <select class="form-control custom-select" style="width:200px !important;">
-                  <option selected disabled>시군구를 선택하세요</option>
-                  <option>전주시</option>
-                  <option>익산시</option>
-                  <option>군산시</option>
+                 <label for="inputStatus">시</label>
+                <select class="form-control custom-select" name="siNum" style="width:35%!important;">
+                  <option selected disabled >시군구를 선택하세요</option>
+                 
                 </select>
               </div>
-               <div class="form-group">
-                <label for="inputName">음식점 주소</label>
-                <input type="text" id="inputName" class="form-control">
+              <div class="form-group form-inline">
+                <label for="inputName">주소</label>
+                <input type="text" id="inputName" class="form-control" name="resAddr" style="width:50% !important; margin-right:2%;margin-left:8px;">
+                <button type="button" class="btn btn-primary float-right" id="findLangBtn" style="width:30% !important">위도/경도찾기</button>
               </div>
+              <p> (유효한 주소를 입력하면 카카오 맵api 를 통해 위도 경도를 찾아줌) </p>
                <div class="form-group local form-inline">
                 <label for="inputName">위도</label>
-                <input type="text" id="inputName" class="form-control" placeholder="위도를 입력해주세요">
+                <input type="text" id="inputName" name="resLat" class="form-control" style="width:35%!important;" placeholder="위도를 입력해주세요">
                  <label for="inputName">경도</label>
-                <input type="text" id="inputName" class="form-control" placeholder="경도를 입력해주세요">
+                <input type="text" id="inputName" class="form-control" name="resLong"  style="width:35%!important;"placeholder="경도를 입력해주세요">
               </div>
                <div class="form-group">
                 <label for="inputName">웹사이트</label>
-                <input type="text" id="inputName" class="form-control">
+                <input type="text" id="inputName" class="form-control" name="resWeb">
               </div>
                <div class="form-group">
                 <label for="inputName">전화번호</label>
-                <input type="text" id="inputName" class="form-control">
+                <input type="text" id="inputName" class="form-control" name="resTel">
               </div>
               <div class="form-group">
                 <label for="inputStatus">음식점 종류</label>
-                <select class="form-control custom-select">
+                <select class="form-control custom-select" name="resCateNum">
                   <option selected disabled>음식점 종류를 선택하세요</option>
-                  <option>한식</option>
-                  <option>중식</option>
-                  <option>일식</option>
+                   <th:block th:each ="r : ${resList}">
+                 	 <option th:value="${r.resCateNum}" th:text="${r.resType}"></option>
+                  </th:block>
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputDescription">평균 가격대</label>
-                <input id="inputDescription" class="form-control">
+                <input id="inputDescription" class="form-control" name="resPrice">
               </div>
               <div class="form-group">
                 <label for="inputDescription">상세설명</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-              </div>
-            
-              <div class="form-group">
-                <label for="inputClientCompany">전화번호</label>
-                <input type="text" id="inputClientCompany" class="form-control">
+                <textarea id="inputDescription" class="form-control" rows="4" name="resDetail"></textarea>
               </div>
               <div class="form-group local form-inline">
                 <label for="inputName">영업시간</label>
-                <input type="text" id="inputName" class="form-control" placeholder="영업시작시각"> -
+                <input type="text" id="inputName" class="form-control"  name="resStartTime" placeholder="영업시작시각"> -
               
-                <input type="text" id="inputName" class="form-control" placeholder="영업마감시각">
+                <input type="text" id="inputName" class="form-control" name="resCloseTime" placeholder="영업마감시각">
               </div>
               <div class="form-group">
                 <label for="inputProjectLeader">사진</label>
-                <input type="file" id="inputProjectLeader" class="form-control">
-              </div>
-              
-              </form>
-            
-              
+                <input type="file" id="inputProjectLeader" class="form-control" name="file">
+              </div>  
+                 <button type="reset" class="btn btn-secondary">Cancel</button>
+         		 <button type="submit" class="btn btn-success float-right">음식점 등록하기</button>
+             </form>
             </div>
             <!-- /.card-body -->
           </div>
@@ -132,19 +126,73 @@
         </div>
 
       </div>
-      <div class="row">
-      	<div class="col-3"></div>
-        <div class="col-6">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="등록하기" class="btn btn-success float-right">
-        </div>
-      </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=&libraries=services"></script>
+<script>
+$(function(){
+	var siNum =$('select[name=siNum]');
+	var doNum =$('.selectDo');
+	var addr = $('input[name=resAddr]');
+	var lat =$('input[name=resLat]');
+	var resLong =$('input[name=resLong]');
+	
+	$('#findLangBtn').click(function(){
+		if(addr.val()=='undefined' || addr.val()==''){
+			alert('주소를 입력하세요!');
+			addr.focus();
+			return false;
+		}
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(addr.val() , function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		        
+		        lat.val(coords.Ha);
+		        resLong.val(coords.Ga)
+		        
+		    } else {
+		    	alert('해당 주소의 위치를 찾지 못하였습니다. 직접 위도와 경도를 입력해주세요');
+		    }
+		});  
+	})
+	$(doNum).click(function(){
+		var number = $(this).val();
+		var request = $.ajax({
+			  url: "/getSiList",  
+			  method: "GET",
+			  data: {num:number}, 
+			  dataType: "json"
+		}); 	     
 
+		request.done(function( data ) {
+			var html = '<option value="none"> 시군구를 선택하시오 </option>';
+			console.log(data);
+			var siList = data.siList
+			for(var i=0; i<siList.length;i++){
+				html +='<option value="'+siList[i].siNum+'">';
+				html += siList[i].siName+'</option>';
+			}
+			
+			siNum.html(html);
+		});	
+
+		request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+		});
+	})
+	
+})
+
+</script>
 </th:block>
 </html>

@@ -18,9 +18,12 @@ import com.cafe24.travelMaker.service.StorageService;
 public class SightsController{
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;
-	@GetMapping("/sightsList")
 	
-	public String sightsList() {
+	@GetMapping("/sightsList")
+	public String sightsList(Model model,@RequestParam(name="search") String search) {
+		System.out.println(search+"<---");
+		model.addAttribute("searchWord", search);
+		model.addAttribute("sightsList", sightsService.selectSightsList(search));
 		return "/sights/sightsList";
 	}
 	
