@@ -74,12 +74,16 @@
 		<result property ="sightsStartTime" column ="sights_start_time"/>
 		<result property ="sightsCloseTime" column ="sights_close_time"/>
 		<result property ="sightsRegDate" column ="sights_reg_time"/>
+		<association property="sightsCate" javaType ="SightsCate">
+ 			<result property="sightsCateNum"  	column="sights_cate_num"/>
+ 			<result property="sightsType"   	column="sights_type"/>
+ 		</association>
 	</resultMap>
 	
 	<select id="selectSightsList" parameterType="String" resultMap ="sightsSelect">
 	
 		SELECT 
-			s.sights_num,s.sights_name, s.sights_detail,s.sights_photo,s.sights_addr
+			s.sights_num,s.sights_name, s.sights_detail,s.sights_photo,s.sights_addr,sc.sights_cate_num,sc.sights_type
 		FROM 
 			tb_sights  AS s 
 			INNER JOIN tb_si AS si 

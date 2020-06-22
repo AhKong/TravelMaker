@@ -19,7 +19,7 @@ public class Sights {
 	private String sightsStartTime;
 	private String sightsCloseTime;
 	private String sightsRegDate;
-	private SightsCate sightCate;
+	private SightsCate sightsCate;
 	public String getSightsNum() {
 		return sightsNum;
 	}
@@ -117,11 +117,11 @@ public class Sights {
 		this.sightsRegDate = sightsRegDate;
 	}
 	
-	public SightsCate getSightCate() {
-		return sightCate;
+	public SightsCate getSightsCate() {
+		return sightsCate;
 	}
-	public void setSightCate(SightsCate sightCate) {
-		this.sightCate = sightCate;
+	public void setSightsCate(SightsCate sightsCate) {
+		this.sightsCate = sightsCate;
 	}
 	@Override
 	public String toString() {
@@ -130,6 +130,6 @@ public class Sights {
 				+ ", sightsDetail=" + sightsDetail + ", sightsLat=" + sightsLat + ", sightsLong=" + sightsLong
 				+ ", sightsAddr=" + sightsAddr + ", sightsWeb=" + sightsWeb + ", sightsTel=" + sightsTel
 				+ ", sightsStartTime=" + sightsStartTime + ", sightsCloseTime=" + sightsCloseTime + ", sightsRegDate="
-				+ sightsRegDate + ", sightCate=" + sightCate + "]";
+				+ sightsRegDate + ", sightCate=" + sightsCate + "]";
 	}	
 }
