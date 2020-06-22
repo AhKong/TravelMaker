@@ -22,7 +22,6 @@ public class SightsController{
 	@GetMapping("/sightsList")
 	public String sightsList(Model model,@RequestParam(name="search") String search) {
 		System.out.println(search+"<---");
-		System.out.println(sightsService.selectSightsList(search));
 		model.addAttribute("searchWord", search);
 		model.addAttribute("sightsList", sightsService.selectSightsList(search));
 		return "/sights/sightsList";
