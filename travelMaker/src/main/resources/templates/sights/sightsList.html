@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title>전주의 관광명소</title>
+	<title th:text="${searchWord}+의관광명소"></title>
 </th:block>
 <th:block layout:fragment="customCss">
 	<style>
@@ -71,7 +71,7 @@ span {
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>SightsList - 관광지 리스트</h1>
+						<h1>SightsList - 관광지 리스트 (김아름)</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -185,42 +185,29 @@ span {
 							</div>
 							<div class="row">
 								<span class="sightListTitle">관광명소</span>
-								<div class="col-12">
-									<div class="sights row">
-										<div class="sightsImg col-2">
-										  <img src="/dist/img/avatar6.jpg" alt="User Image" width="150" height="150">
-										</div>
-										<div class="sightsDesc">
-											<span>Jonna</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-											<p>상세설명 이고야 왜냐면 나는 여기다가 상세설명 쓸거야 !!!!!!!!!!!!!!!!그럼 여기에 상세설명 넣을게 길어지면 어떻게
-												보이나
-										</div>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="sights row">
-										<div class="sightsImg col-2">
-										  <img src="/dist/img/avatar6.jpg" alt="User Image" width="150" height="150">
-										</div>
-										<div class="sightsDesc">
-											<span>Jonna</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-											<p>상세설명 이고야 왜냐면 나는 여기다가 상세설명 쓸거야 !!!!!!!!!!!!!!!!그럼 여기에 상세설명 넣을게 길어지면 어떻게
-												보이나
-										</div>
-									</div>
+									<th:block th:each ="l: ${sightsList}">
+                      					 <div class="col-12">
+                          					 <div class="sights row">
+                           					   <div class="sightsImg col-12 col-md-2">
+                              					 <img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}" alt="User Image" width="150" height="150">
+                              					</div>
+                              				   <div class="sightsDesc col-12 col-md-10">
+                                                  <span th:text="${l.sightsName}"></span><br>
+                                                   <i class="fas fa-star"></i> 
+                                                   <i class="fas fa-star"></i> 
+                                                   <i class="fas fa-star"></i> 
+                                                   <i class="fas fa-star"></i>
+					                               <p>카테고리</p>
+					                               <p th:text="${l.sightsAddr}"></p>
+					                               <p th:text="${l.sightsDetail}">  </p>  
+					                            </div>
+                           					</div>
+                        				</div>
+									</th:block>
 								</div>
 							</div>
 						</div>
 
-					</div>
 				</div>
 				<!-- /.card-body -->
 			</div>
