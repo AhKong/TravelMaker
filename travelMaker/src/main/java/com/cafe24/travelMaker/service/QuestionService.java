@@ -30,7 +30,15 @@ public class QuestionService {
 		return questionMapper.deleteQnA(qCode);
 	}
 	
+	public int deleteQnA2(String qCode) {
+		return questionMapper.deleteQnA2(qCode);
+	}
+	
 	public List<Question> getAllQuestionList(){
 		return questionMapper.getAllQuestionResultList();
+	}
+	
+	public int answer(Question question) {
+		return questionMapper.answer(question);
 	}
 }
