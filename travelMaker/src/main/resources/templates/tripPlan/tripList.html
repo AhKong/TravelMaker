@@ -230,7 +230,7 @@
 						</div>
 
 						<div class=" col-lg-12">
-							<input class="form-control input-lg" type="text">
+							<input id="modalinput" class="form-control input-lg" type="text" placeholder="여행명" name="modalinput">
 						</div>
 					</div>
 
@@ -283,7 +283,7 @@
 
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">닫기</button>
-							<button type="submit" class="btn btn-primary">만들기</button>
+							<button id="makeBtn" type="submit" class="btn btn-primary">만들기</button>
 
 						</div>
 					</div>
@@ -295,6 +295,9 @@
 
 
 </th:block>
+
+	<script src="../../dist/js/adminlte.min.js"></script>
+
 <th:block layout:fragment="customFooterScript">
 	<script>
 		/*
@@ -302,6 +305,51 @@
 			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		 */
+		 
+		 $(function(){
+				$('#makeBtn').click(function(){
+					
+					/* var modaltext=$('input[name=modaltext]') */
+					
+					if($('#modalinput').val() == ''){
+						alert('여행이름을 해주세요');
+						modalinput.focus();
+						return false;
+					}
+					if($(':radio[name="jb-radio"]:checked').length < 1){
+						alert('여행 공개여부를 선택해주세요');						
+						//jb-radio-2.focus();
+						event.preventDefault();
+					}
+		          }) 
+			});
+					
+						/* var request = $.ajax({ // 이름 라디오박스 체크값 넘길떄
+							  url: "/findId",  
+							  method: "POST",
+							  data: {mName: mName.val(),
+								     mEmail: mEmail.val() ,
+								     mTel: mTel.val() 
+								     }, 
+							  dataType: "json"
+						});
+
+						request.done(function( data ) {
+							console.log(data.result);
+							if(data.result == 'none'){
+								alert('등록된 회원 정보가 아닙니다!');
+							} else{
+								alert('회원님의 아이디는 ' + data.result+ '입니다')
+								window.location.href = '/login';
+							}
+						});	
+
+						request.fail(function( jqXHR, textStatus ) {
+							  alert( "Request failed: " + textStatus );
+						});	
+						*/
+
+			 	
 	</script>
 </th:block>
 </html>

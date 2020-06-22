@@ -2,6 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="fragments/head :: headFragment"></head>
 <body>
+<div class="modal fade" id="test" th:fragment="addReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+		 <form action="/sightsList" id="sightsSeachForm" method ="Get">
+			<div class="input-group input-lg">
+				<input class="form-control" type="search" placeholder="여행지역을 입력해주세요 : )" aria-label="Search" name="search">
+				<button  id="searchBtn" class="btn btn-navbar" type="button" > <i class="fas fa-search"></i></button>
+			</div>
+		</form>
+		
+		<div style="height: 400px; padding-top:20px">
+		    여기에 검색기록 보여주기
+		
+		</div>
+    </div>
+  </div>
+  </div>
+  </div>
+
 	<div id="wrapper">
 		<nav th:replace="fragments/header :: headerFragement"></nav>
 		<div th:replace="fragments/leftmenu :: leftmenuFragment"></div>
@@ -11,6 +31,20 @@
 		</div>
 	</div>
 	<!-- 사용자 지정 자바스크립트 라이브러리 파일 -->
+		<script>
+			$(function(){
+				$('#searchBtn').click(function(){
+					if($('input[name=search]').val()==''){
+						alert('검색어를 입력해주세요 : )');
+						$('input[name=search]').focus();
+						return false
+					}
+					
+					$('#sightsSeachForm').submit();
+				})
+			})
+		
+		</script>
 		<th:block layout:fragment="customFooterScript"></th:block>
 </body>
 </html>

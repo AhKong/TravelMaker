@@ -30,4 +30,8 @@ public class SightsService {
 	public int addSights(Sights sights) {
 		return sightsMapper.addSights(sights);
 	}
+	
+	public List<Sights> selectSightsList(String search){
+		return sightsMapper.selectSightsList(search);
+	}
 }

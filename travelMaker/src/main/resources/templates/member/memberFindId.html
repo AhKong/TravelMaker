@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,6 +43,8 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">아이디 찾기</p>
 
+    <!--  <td th:text="${mId}"></td> -->
+              
       <form id="findId" action="/findId" method="POST">
         <div class="input-group mb-3">
           <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName">
@@ -81,26 +82,31 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-         	<button type="button" class="btn btn-default certCodeBtn">인증하기</button>  
+         	<button type="button" class="btn btn-default certCodeBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
         </div>
         
-        <div class="row">
+        
+      </form>
+      <div class="row">
           <div class="col-12">
             <button id="findIdBtn" type="button" class="btn btn-primary btn-block">확인</button>
           </div>
           <!-- /.col -->
-        </div>
-      </form>
+       </div>
       <div>
-      <p class="mt-3 mb-1">
-        <a href="/addMember" class="text-center">sing up</a>
-        <a id="login" href="/login">Login </a>
-      </p>
+	      <p class="mt-3 mb-1">
+	        <a href="/addMember" class="text-center">sing up</a>
+	        <a id="login" href="/login">Login </a>
+	      </p>
+	      
+	  
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
 </div>
+
+						
 <!-- /.login-box -->
 
 <!-- jQuery -->
@@ -112,11 +118,13 @@
 
 </body>
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 
  	
 $(function(){
-	
+	var mName =$('input[name=mName]');
+	var mTel =$('input[name=mTel]');
+
 	var mEmail =$('input[name=mEmail]');
 	var cert =$('.certCode');
 	var mTel =$('input[name=mTel]');
@@ -148,8 +156,11 @@ $(function(){
 		}
 	})
 	
-	
 		$('#findIdBtn').click(function(){
+			var name;
+			var telNo;
+			var email;
+			var emailChk = false;
 			
 			if($('#findIdName').val() == ''){
 				alert('이름을 입력하세요');
@@ -180,9 +191,34 @@ $(function(){
 				return false;
 			}
 			
-			alert('회원님의 아이디는'+'DB아이디값 추출'+'입니다')
-			$('#findId').submit();	
-		}); 
+		
+			var request = $.ajax({
+				  url: "/findId",  
+				  method: "POST",
+				  data: {mName: mName.val(),
+					     mEmail: mEmail.val() ,
+					     mTel: mTel.val() 
+					     }, 
+				  dataType: "json"
+			});
+
+			request.done(function( data ) {
+				console.log(data.result);
+				if(data.result == 'none'){
+					alert('등록된 회원 정보가 아닙니다!');
+				} else{
+					alert('회원님의 아이디는 ' + data.result+ '입니다')
+					window.location.href = '/login';
+				}
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			});	
+		
+          })
+			
+
 
 	$('.certEmailBtn').click(function(){
 		var email = mEmail.val();
@@ -219,9 +255,7 @@ $(function(){
 			return false;
 		}
 	})
-
 })
-	
 
  	
 </script>
