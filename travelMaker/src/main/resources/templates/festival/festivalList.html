@@ -66,6 +66,9 @@ span {
 .form-check {
 	margin-top: 10px;
 }
+.modal-body {
+	padding: 50px;
+}
 
 </style>
 </th:block>
@@ -155,6 +158,17 @@ span {
 						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
 							                <form role="form" action="/addFestival" method="post">
+							                  <input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-sight</label>
+							                        <select type="text" class="form-control" name="fesName" placeholder="관련 지역 명소를 고르세요">
+							                        	<option></option>
+							                        </select>
+							                      </div>
+							                    </div>
+							                  </div>
 							                  <div class="row">
 							                    <div class="col-12">
 							                      <div class="form-group">
@@ -283,24 +297,27 @@ span {
 							  	<span class="festivalListTitle"></span>
 									<h2>축제 정보 더보기</h2>
 									
-								<div th:each=" fList : ${getFestivalList}" class="col-12">
-									<div class="festival row">
-										<div class="sightsImg col-sm-2">
-										  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
-										</div>
-										<div class="festivalDesc col-sm-6 col-md-8">
-										   <a th:href="@{/updateFestival(fesNum=${fList.fesNum})}" class="btn btn-info float-right"> 수정하기 </a>
-											<input type="hidden" th:value="${fList.fesNum}">
-											<span>[[${fList.fesName}]]</span>
-											<p th:text="${fList.fesPhoto}"></p>
-											<p>시작일 [[${fList.fesStartDate}]]</p>
-											<p>종료일 [[${fList.fesEndDate}]]</p>
-											<p th:text="${fList.fesDetail}">로운 얼굴이 곧 축제</p>
-											<p th:text="${fList.fesWeb}"></p>
-											<input type="hidden" th:value="${fList.fesRegDate}">
-											<p th:text="${fList.fesState}">진행중</p>
-										</div>
-									</div>
+								<div th:each=" fList : ${getFestivalList}"  class="col-12">
+									<th:block th:each=" m : ${fList.member}">										
+											<div class="festival row">
+												<div class="sightsImg col-sm-2">
+												  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
+												</div>
+												<div class="festivalDesc col-sm-6 col-md-8">
+												   <a th:href="@{/updateFestival(fesNum=${fList.fesNum})}" class="btn btn-info float-right"> 수정하기 </a>
+													<input type="hidden" th:value="${fList.fesNum}">
+													<input type="hidden" th:value="${m.mId}">
+													<span>[[${fList.fesName}]]</span>
+													<p th:text="${fList.fesPhoto}"></p>
+													<p>시작일 [[${fList.fesStartDate}]]</p>
+													<p>종료일 [[${fList.fesEndDate}]]</p>
+													<p th:text="${fList.fesDetail}">로운 얼굴이 곧 축제</p>
+													<p th:text="${fList.fesWeb}"></p>
+													<input type="hidden" th:value="${fList.fesRegDate}">
+													<p th:text="${fList.fesState}">진행중</p>
+												</div>
+											</div>
+									</th:block>
 								</div>
 							</div>
 						</div>

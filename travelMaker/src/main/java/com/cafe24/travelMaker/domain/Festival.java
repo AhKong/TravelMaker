@@ -4,13 +4,15 @@ public class Festival {
 
 	private String fesNum;
 	private String fesName;
-	private String fesPhoto;
+	private String fesPhoto = null;
 	private String fesStartDate;
 	private String fesEndDate;
 	private String fesDetail;
 	private String fesWeb;
 	private String fesRegDate;
 	private String fesState;
+	private Member member;
+	private Sights sights;
 	
 	public String getFesNum() {
 		return fesNum;
@@ -66,14 +68,26 @@ public class Festival {
 	public void setFesState(String fesState) {
 		this.fesState = fesState;
 	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	public Sights getSights() {
+		return sights;
+	}
+	public void setSights(Sights sights) {
+		this.sights = sights;
+	}
 	
 	@Override
 	public String toString() {
 		return "Festival [fesNum=" + fesNum + ", fesName=" + fesName + ", fesPhoto=" + fesPhoto + ", fesStartDate="
 				+ fesStartDate + ", fesEndDate=" + fesEndDate + ", fesDetail=" + fesDetail + ", fesWeb=" + fesWeb
-				+ ", fesRegDate=" + fesRegDate + ", fesState=" + fesState + "]";
+				+ ", fesRegDate=" + fesRegDate + ", fesState=" + fesState + ", member=" + member + ", sights=" + sights
+				+ "]";
 	}
-	
 	
 	
 }

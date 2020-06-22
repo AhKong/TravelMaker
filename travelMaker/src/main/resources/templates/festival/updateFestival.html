@@ -59,6 +59,7 @@
             <div class="card-body">
               <form role="form" th:action="@{/updateFestival}" method="post">
 				<input type="hidden" class="form-control" name="fesNum" th:value="${festival.fesNum}">
+				<input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
 			    <div class="row">
 				  <div class="col-12">
 				    <div class="form-group">

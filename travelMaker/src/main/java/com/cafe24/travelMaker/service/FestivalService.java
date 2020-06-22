@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.cafe24.travelMaker.mapper.FestivalMapper;
 import com.cafe24.travelMaker.domain.Festival;
@@ -15,7 +16,7 @@ public class FestivalService {
 	
 	//축제 등록 
 	public int addFestival(Festival festival) {
-		//System.out.println("addFestival FestivalService 도착");
+		System.out.println("addFestival FestivalService 도착");
 		int result = festivalMapper.addFestival(festival);
 		System.out.println(result+" <- result addFestival FestivalService");
 		
@@ -46,8 +47,10 @@ public class FestivalService {
 	//축제 리스트
 	public List<Festival> getFestivalList(){
 		System.out.println("getFestivalList FestivalService 도착");
+		List<Festival> getFestivalList = festivalMapper.getFestivalList();
+		System.out.println(getFestivalList+"getFestivalList getFestivalList FestivalService");
 		
-		return festivalMapper.getFestivalList();
+		return getFestivalList;
 	}
 	
 	//축제 삭제

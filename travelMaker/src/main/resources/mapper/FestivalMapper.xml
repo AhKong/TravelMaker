@@ -13,9 +13,9 @@
 		<result property="fesWeb" column="fes_web" />
 		<result property="fesRegDate" column="fes_reg_date" />
 		<result property="fesState" column="fes_state" />
-		<!-- <association property="member" javaType="Member">
+		<association property="member" javaType="Member">
 			<result property="mId" column="m_id"/>
-		</association> -->
+		</association>
 	</resultMap>
 	
 	
@@ -33,6 +33,7 @@
 	<select id="getFestivalList" parameterType="String" resultMap="fesSelect">
 		SELECT
 			 fes_num
+			,m_id
 			,fes_name		
 			,fes_photo
 			,fes_start_date		
@@ -49,6 +50,7 @@
 		UPDATE tb_festival
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="fesName != null and fesName != ''.toString()">fes_name=#{fesName},</if>
+			<if test="fesName != null and fesName != ''.toString()">m_id=#{member.mId},</if>
 			fes_photo=#{fesPhoto},
 			<if test="fesStartDate != null and fesStartDate != ''.toString()">fes_start_date=#{fesStartDate},</if>
 			<if test="fesEndDate != null and fesEndDate != ''.toString()">fes_end_date=#{fesEndDate},</if>
@@ -67,6 +69,7 @@
 	<select id="festivalSelect" parameterType="String" resultMap="fesSelect">
 		SELECT
 			 fes_num
+			,m_id
 			,fes_name		
 			,fes_photo
 			,fes_start_date		
@@ -93,9 +96,10 @@
 				tb_festival;
 		</selectKey>
 			INSERT INTO tb_festival
-			(fes_num, fes_name, fes_photo, fes_start_date, fes_end_date, fes_detail, fes_web, fes_reg_date, fes_state)			
+			(fes_num, m_id, fes_name, fes_photo, fes_start_date, fes_end_date, fes_detail, fes_web, fes_reg_date, fes_state)			
 			
 			VALUES ( #{fesNum}	
+					,#{member.mId}
 					,#{fesName}
 					,#{fesPhoto}
 					,#{fesStartDate}

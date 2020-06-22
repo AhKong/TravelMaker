@@ -2,6 +2,8 @@ package com.cafe24.travelMaker.controller;
 
 import java.util.List;
 
+import javax.mail.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +32,12 @@ public class FestivalController {
 	//축제 등록하기 
 	@PostMapping("/addFestival")
 	public String addFestival(Festival festival) {
+		System.out.println("addFestival FestivalController 도착");
 		int result = festivalService.addFestival(festival);
+		System.out.println(festival+" <- festival addFestival FestivalController");
 		System.out.println(result+" <- result addFestival FestivalController");
+		System.out.println(festival.getMember().toString()+" <- festival.getMember().toString() addFestival FestivalController");
+		
 		return "redirect:/festivalList";
 	}
 	
@@ -43,6 +49,7 @@ public class FestivalController {
 		Festival festival = festivalService.festivalSelect(fesNum);	
 		System.out.println(festival+" <- festival festivalSelect FestivalController");
 		model.addAttribute("festival", festival);
+		
 		
 		return "festival/updateFestival";
 	}
