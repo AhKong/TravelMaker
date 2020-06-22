@@ -59,14 +59,14 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-6 col-md-3 text-center">
-										<input type="text" class="knob" value="30" data-width="90"
+										<input type="text" class="knob" th:value="${sigGenderM}" data-width="90"
 											data-height="90" data-fgColor="#3c8dbc">
 
 										<div class="knob-label">남</div>
 									</div>
 									<!-- ./col -->
 									<div class="col-6 col-md-3 text-center">
-										<input type="text" class="knob" value="70" data-width="90"
+										<input type="text" class="knob" th:value="${siggenderG}" data-width="90"
 											data-height="90" data-fgColor="#f56954">
 
 										<div class="knob-label">여자</div>
@@ -95,7 +95,7 @@
 										<input type="text" class="knob" value="90" data-width="90"
 											data-height="90" data-fgColor="#932ab6">
 
-										<div class="knob-label">나이</div>
+										<div class="knob-label">댓글</div>
 									</div>
 									<!-- ./col -->
 									<div class="col-6 text-center">
@@ -163,7 +163,7 @@
 										data-thickness="0.1" data-width="90" data-height="90"
 										data-fgColor="#00a65a">
 
-									<div class="knob-label">나이 data-thickness="0.1"</div>
+									<div class="knob-label">리뷰수 data-thickness="0.1"</div>
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
@@ -172,7 +172,7 @@
 										data-angleOffset="-125" data-width="120" data-height="120"
 										data-fgColor="#00c0ef">
 
-									<div class="knob-label">총 별점 data-angleArc="250"</div>
+									<div class="knob-label">별점평균 data-angleArc="250"</div>
 								</div>
 								<!-- ./col -->
 							</div>

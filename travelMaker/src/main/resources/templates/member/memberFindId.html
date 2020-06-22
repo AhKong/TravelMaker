@@ -226,7 +226,6 @@ $(function(){
 			alert('이메일을 입력하세요!');
 		 	return false;
 		}
-	})
 		
 		var request = $.ajax({
 					  url: "/certEmail",  
@@ -243,6 +242,7 @@ $(function(){
 				request.fail(function( jqXHR, textStatus ) {
 					  alert( "Request failed: " + textStatus );
 				});
+	})
 	
 	$('.certCodeBtn').click(function(){
 

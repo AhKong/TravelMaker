@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.StatsMapper">
+
+<select id="sigGenderM" resultType="string">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+
+<select id="siggenderG" resultType="String">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '여';
+
+
+</select>
+
+<select id="review" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+
+<select id="like" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+
+</select>
+
+<select id="comment" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+
+<select id="grade" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+
+</select>
+
+
+<select id="resGenderM" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+
+<select id="resGenderG" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+
+<select id="resReview" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+
+<select id="resGrade" resultType="Stats">
+SELECT 
+COUNT(m_gender)
+ FROM
+  tb_sights_review AS sReview 
+ INNER JOIN 
+ tb_member AS member
+ ON
+  sReview.m_id = member.m_id
+ WHERE
+  member.m_gender = '남';
+
+</select>
+</mapper>
