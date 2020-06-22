@@ -22,4 +22,7 @@ public interface FestivalMapper {
 	//축제 리스트
 	public List<Festival> getFestivalList();
 	
+	//축제 삭제
+	public int deleteFestival(String fesNum);
+	
 }

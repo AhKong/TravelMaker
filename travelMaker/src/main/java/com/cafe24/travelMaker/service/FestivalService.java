@@ -50,4 +50,12 @@ public class FestivalService {
 		return festivalMapper.getFestivalList();
 	}
 	
+	//축제 삭제
+	public int deleteFestival(String fesNum) {
+		System.out.println("deleteFestival FestivalService 도착");
+		System.out.println(fesNum+" <- fesNum deleteFestival FestivalService");
+		
+		return festivalMapper.deleteFestival(fesNum);
+	}
+	
 }

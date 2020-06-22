@@ -70,4 +70,15 @@ public class FestivalController {
 		return "festival/festivalList";
 	}
 	
+	//축제 삭제
+	@GetMapping("/deleteFestival")
+	public String deleteFestival(Model model, @RequestParam(name="fes_num", required=false) String fesNum) {
+		System.out.println("deleteFestival FestivalController 도착");
+		System.out.println(fesNum+" <- fesNum deleteFestival FestivalController");
+		int result = festivalService.deleteFestival(fesNum);
+		System.out.println(result+" <- result deleteFestival FestivalController");
+		
+		return "redirect:/festivalList";
+	}
+	
 }

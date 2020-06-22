@@ -124,8 +124,9 @@
 			      </div>
 				</div>	
 				<div>
-				  <button type="button" class="btn btn-default col-4" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
-			      <button type="submit" class="btn btn-primary float-right col-4">수정완료 :)</button>
+				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
+				  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#deleteModal">축제 삭제</button>
+			      <button type="submit" class="btn btn-primary float-right col-4">수정완료 :))</button>
 			    </div>
 			  </form>
 
@@ -152,7 +153,30 @@
 						</div>
 					</div>
 				</div>
-				<!-- End Modal -->		
+				<!-- End Modal -->	
+				
+				<!-- Modal -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							
+							<div class="modal-body">
+								 축제 정보를 정말 삭제하시겠습니까..?
+							</div>
+							
+							<div class="modal-footer">
+								<a th:href="@{/deleteFestival(fes_num=${festival.fesNum})}" class="btn btn-default btn-sm col-sm-2"> 예 </a>
+		 						<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal">아니오</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->	
 			    
 			  </div>
               

@@ -18,6 +18,17 @@
 		</association> -->
 	</resultMap>
 	
+	
+	<delete id="deleteFestival" parameterType="String">
+		DELETE
+		FROM tb_festival
+		
+		<where>
+			<if test="fesNum != null and fesNum != ''.toString()">fes_num=#{fesNum}</if>
+		</where>
+		
+	</delete>
+	
 		
 	<select id="getFestivalList" parameterType="String" resultMap="fesSelect">
 		SELECT
