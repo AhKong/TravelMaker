@@ -33,36 +33,25 @@ COUNT(m_gender)
 
 </select>
 
-<select id="review" resultType="Stats">
-SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
+<select id="review" resultType="String">
+SELECT
+COUNT(sights_num)
+FROM
+tb_sights_review;
 
 </select>
 
-<select id="like" resultType="Stats">
-SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
+<select id="like" resultType="int">
+SELECT
+COUNT(sights_review_like_num)
+FROM
+tb_sights_review_like;
+
 
 
 </select>
 
-<select id="comment" resultType="Stats">
+<select id="comment" resultType="int">
 SELECT 
 COUNT(m_gender)
  FROM

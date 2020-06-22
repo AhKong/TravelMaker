@@ -9,9 +9,9 @@ public interface StatsMapper {
 	//관광지
 	public String sigGenderM();
 	public String siggenderG();
-	public Stats review(Stats review);
-	public Stats like(Stats like);
-	public Stats comment(Stats comment);
+	public String review();
+	public int like();
+	public int comment();
 	public Stats grade(Stats grade);
 	//음식점
 	public Stats resGenderM(Stats resGenderM);

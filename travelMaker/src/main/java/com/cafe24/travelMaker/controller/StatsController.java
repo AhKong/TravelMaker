@@ -14,14 +14,25 @@ public class StatsController {
 	@GetMapping("/stats")
 	public String stats(Model model) {
 		String cntsm = statsMapper.sigGenderM();
-		System.out.println(cntsm);
+		System.out.println(cntsm + "<--- 관광지 남자");
 		model.addAttribute("sigGenderM", cntsm);
 		
 		String nctsg = statsMapper.siggenderG();
-		System.out.println(nctsg);
+		System.out.println(nctsg + "<--- 관광지 여자");
 		model.addAttribute("siggenderG", nctsg);
-		//Stats genderM = statsMapper.sigGenderM(sigGenderM);
-		//System.out.println(genderM);
+		
+		String cntreview = statsMapper.review();
+			System.out.println(cntreview + "<--- 관광지 리뷰");
+			model.addAttribute("review", cntreview);
+			
+		int cntlike = statsMapper.like();
+		System.out.println(cntlike + "<--- 좋아유");
+		model.addAttribute("like", cntlike);
+
+		int cntcomment = statsMapper.comment();
+		System.out.println(cntcomment + "<--- 댓글");
+		model.addAttribute("comment", cntcomment);
+		
 		return "stats/stats";
 	}
 }

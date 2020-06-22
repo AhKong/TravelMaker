@@ -60,29 +60,29 @@
 								<div class="row">
 									<div class="col-6 col-md-3 text-center">
 										<input type="text" class="knob" th:value="${sigGenderM}" data-width="90"
-											data-height="90" data-fgColor="#3c8dbc">
+											data-height="90" data-fgColor="#3c8dbc" readonly="readonly">
 
 										<div class="knob-label">남</div>
 									</div>
 									<!-- ./col -->
 									<div class="col-6 col-md-3 text-center">
 										<input type="text" class="knob" th:value="${siggenderG}" data-width="90"
-											data-height="90" data-fgColor="#f56954">
+											data-height="90" data-fgColor="#f56954" readonly="readonly">
 
 										<div class="knob-label">여자</div>
 									</div>
 									<!-- ./col -->
 									<div class="col-6 col-md-3 text-center">
-										<input type="text" class="knob" value="-80" data-min="-150"
+										<input type="text" class="knob" th:value="${review}" data-min="-150"
 											data-max="150" data-width="90" data-height="90"
-											data-fgColor="#00a65a">
+											data-fgColor="#00a65a" readonly="readonly">
 
 										<div class="knob-label">리뷰</div>
 									</div>
 									<!-- ./col -->
 									<div class="col-6 col-md-3 text-center">
-										<input type="text" class="knob" value="40" data-width="90"
-											data-height="90" data-fgColor="#00c0ef">
+										<input type="text" class="knob" th:value="${like}" data-width="90"
+											data-height="90" data-fgColor="#00c0ef" readonly="readonly">
 
 										<div class="knob-label">좋아여</div>
 									</div>
@@ -92,15 +92,15 @@
 
 								<div class="row">
 									<div class="col-6 text-center">
-										<input type="text" class="knob" value="90" data-width="90"
-											data-height="90" data-fgColor="#932ab6">
+										<input type="text" class="knob" th:value="${comment}" data-width="90"
+											data-height="90" data-fgColor="#932ab6" readonly="readonly">
 
 										<div class="knob-label">댓글</div>
 									</div>
 									<!-- ./col -->
 									<div class="col-6 text-center">
 										<input type="text" class="knob" value="50" data-width="90"
-											data-height="90" data-fgColor="#39CCCC">
+											data-height="90" data-fgColor="#39CCCC" readonly="readonly">
 
 										<div class="knob-label">총 별점</div>
 									</div>
@@ -147,32 +147,32 @@
 										data-thickness="0.2" data-width="90" data-height="90"
 										data-fgColor="#3c8dbc" data-readonly="true">
 
-									<div class="knob-label">남자 data-width="90"</div>
+									<div class="knob-label">남자</div>
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
 									<input type="text" class="knob" value="60" data-skin="tron"
 										data-thickness="0.2" data-width="120" data-height="120"
-										data-fgColor="#f56954">
+										data-fgColor="#f56954" readonly="readonly">
 
-									<div class="knob-label">여자 data-width="120"</div>
+									<div class="knob-label">여자</div>
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
 									<input type="text" class="knob" value="10" data-skin="tron"
 										data-thickness="0.1" data-width="90" data-height="90"
-										data-fgColor="#00a65a">
+										data-fgColor="#00a65a" readonly="readonly">
 
-									<div class="knob-label">리뷰수 data-thickness="0.1"</div>
+									<div class="knob-label">리뷰수</div>
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
 									<input type="text" class="knob" value="100" data-skin="tron"
 										data-thickness="0.2" data-angleArc="250"
 										data-angleOffset="-125" data-width="120" data-height="120"
-										data-fgColor="#00c0ef">
+										data-fgColor="#00c0ef" readonly="readonly">
 
-									<div class="knob-label">별점평균 data-angleArc="250"</div>
+									<div class="knob-label">별점평균</div>
 								</div>
 								<!-- ./col -->
 							</div>
