@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.FeedbackMapper">
+	<resultMap type="SightsFeedback" id="feedbackSelect">
+		<result property="sightsFbNum" column="sights_fb_num" />
+		<result property="sightsFbCode" column="sights_fb_code" />
+		<result property="sightsFbContents" column="sights_fb_contents" />
+		<result property="sightsFbRegDate" column="sights_fb_reg_date" />
+		<result property="sightsFbCheck" column="sights_fb_check" />
+		<association property="member" javaType="Member">
+			<result property="mId" column="m_id"/>
+		</association>
+		<collection property="sights" javaType="Sights">
+			<result property="sightsNum" column="sights_num"/>
+			<result property="sightsName" column="sights_name"/>
+		</collection>
+		<collection property="fbcode" javaType="FbCode">
+			<result property="fbNum" column="fb_num"/>
+			<result property="fbReason" column="fb_reason"/>
+		</collection>
+	</resultMap>
+	
+	
+	<insert id="addFeedback" parameterType="SightsFeedback">
+		<selectKey order="BEFORE" keyProperty="sightsFbNum" resultType="String">
+		<!-- keyProperty="sightsFbNum" 는 select 의  sightsFbNum 와 이름이 같아야 한다  -->
+		<!--  또한 Goods 클래스의 g_code 컬럼의 변수명과 같아야 한다  -->
+			SELECT
+				(case COUNT(*) 
+				when 0 then 'sights_fb_1'
+				ELSE CONCAT('sights_fb_', (MAX(CAST(substring(sights_fb_num,11) AS DECIMAL))+1))
+				END) AS sightsFbNum
+			FROM
+				tb_sights_fb;
+		</selectKey>
+			INSERT INTO tb_sights_fb
+			(sights_fb_num, sights_fb_reg_date, sights_num, sights_name, fb_num, sights_fb_contents, m_id, sights_fb_check)			
+			
+			VALUES ( #{sightsFbNum}
+					,now()
+					,#{sights.sightsNum}
+					,#{sights.sightsName}
+					,#{fbcode.fbNum}
+					,#{sightsFbContents}
+					,#{member.mId}
+					,#{sightsFbCheck}
+					);
+	</insert>
+	
+</mapper>
