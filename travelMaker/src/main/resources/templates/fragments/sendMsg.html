@@ -15,7 +15,7 @@
 				  <div class="form-group">
     				<label for="inputEmail3" class="col-sm-4 control-label">받는사람</label>
 				    <div class="col-sm-12">
-				      <input type="text" id="targetId" class="form-control targetId" name="targetId" >
+				      <input type="text" id="targetId" class="form-control targetId" name="targetId"  >
 				    </div>
 				  </div>
 				   <div class="form-group">
@@ -55,5 +55,40 @@
   	})
   </script>
 </div>
+<!-- Modal -->
+<th:block th:fragment="sendMsgModalFragment2(targetId)">
 
+	<div class="modal fade" id="sendMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	         	<form action="/sendMsg" method="post" class="form-horizontal" id="sendMsgForm">
+	         		<div class="form-group">
+	    				<label for="inputEmail3" class="col-sm-4 control-label" >보내는사람</label>
+					    <div class="col-sm-12">
+					      <input type="text" id="mId" class="form-control" name ="mId" th:value="${session.SID}" readonly>
+					    </div>
+					  </div>
+					  <div class="form-group">
+	    				<label for="inputEmail3" class="col-sm-4 control-label">받는사람</label>
+					    <div class="col-sm-12">
+					      <input type="text" id="targetId" class="form-control targetId" name="targetId" th:value="${targetId}" >
+					    </div>
+					  </div>
+					   <div class="form-group">
+	    				<label for="inputEmail3" class="col-sm-4 control-label">내용</label>
+					    <div class="col-sm-12">
+					      <textarea id="contents" class="form-control"  rows="5" name="contents"></textarea>
+					    </div>
+					  </div>
+	         	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+	        <button type="button" id="sendMsgBtn" class="btn btn-primary">Send</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</th:block>
 </html>
