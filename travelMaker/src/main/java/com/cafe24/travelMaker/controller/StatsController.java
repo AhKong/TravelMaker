@@ -10,29 +10,55 @@ import com.cafe24.travelMaker.mapper.StatsMapper;
 @Controller
 public class StatsController {
 
-	@Autowired StatsMapper statsMapper;
+	@Autowired
+	StatsMapper statsMapper;
+
 	@GetMapping("/stats")
 	public String stats(Model model) {
-		String cntsm = statsMapper.sigGenderM();
-		System.out.println(cntsm + "<--- 관광지 남자");
-		model.addAttribute("sigGenderM", cntsm);
-		
-		String nctsg = statsMapper.siggenderG();
-		System.out.println(nctsg + "<--- 관광지 여자");
-		model.addAttribute("siggenderG", nctsg);
-		
-		String cntreview = statsMapper.review();
-			System.out.println(cntreview + "<--- 관광지 리뷰");
-			model.addAttribute("review", cntreview);
-			
-		int cntlike = statsMapper.like();
-		System.out.println(cntlike + "<--- 좋아유");
-		model.addAttribute("like", cntlike);
 
-		int cntcomment = statsMapper.comment();
-		System.out.println(cntcomment + "<--- 댓글");
-		model.addAttribute("comment", cntcomment);
+		// 관광지
+		String cntSM = statsMapper.sigGenderM();
+		System.out.println(cntSM + "<--- 관광지 남자");
+		model.addAttribute("sigGenderM", cntSM);
+
+		String nctSG = statsMapper.siggenderG();
+		System.out.println(nctSG + "<--- 관광지 여자");
+		model.addAttribute("siggenderG", nctSG);
+
+		String cntReview = statsMapper.review();
+		System.out.println(cntReview + "<--- 관광지 리뷰");
+		model.addAttribute("review", cntReview);
+
+		int cntLike = statsMapper.like();
+		System.out.println(cntLike + "<--- 좋아유");
+		model.addAttribute("like", cntLike);
+
+		int cntComment = statsMapper.comment();
+		System.out.println(cntComment + "<--- 댓글");
+		model.addAttribute("comment", cntComment);
+
+		int cntSightGrade = statsMapper.grade();
+		System.out.println(cntSightGrade + "<--- 별점");
+		model.addAttribute("grade", cntSightGrade);
+
 		
+		// 음식점
+		int cntRM = statsMapper.resGenderM();
+		System.out.println(cntRM + "<--- 음식점 남자");
+		model.addAttribute("resGenderM", cntRM);
+
+		int cntRG = statsMapper.resGenderG();
+		System.out.println(cntRG + "<--- 음식점 여자");
+		model.addAttribute("resGenderG", cntRG);
+
+		int cntResReview = statsMapper.resReview();
+		System.out.println(cntResReview);
+		model.addAttribute("resReview", cntResReview);
+
+		int cntResGrade = statsMapper.resGrade();
+		System.out.println(cntResGrade + "<--- 별점평균");
+		model.addAttribute("resGrade", cntResGrade);
+
 		return "stats/stats";
 	}
 }

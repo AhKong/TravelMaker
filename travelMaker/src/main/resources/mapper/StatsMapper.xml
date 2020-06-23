@@ -3,137 +3,133 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.StatsMapper">
-
+<!-- 관광지 -->
 <select id="sigGenderM" resultType="string">
 SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
+	COUNT(m_gender)
+FROM
+	tb_sights_review AS sr 
+INNER JOIN 
+	tb_member AS m
+ON
+	sr.m_id = m.m_id
+WHERE
+	m.m_gender = '남';
 
 </select>
 
 <select id="siggenderG" resultType="String">
 SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '여';
+	COUNT(m_gender)
+FROM
+	tb_sights_review AS sr 
+INNER JOIN 
+	tb_member AS m
+ON
+	sr.m_id = m.m_id
+WHERE
+	m.m_gender = '여';
 
 
 </select>
 
 <select id="review" resultType="String">
 SELECT
-COUNT(sights_num)
+	COUNT(sights_num)
 FROM
-tb_sights_review;
+	tb_sights_review;
 
 </select>
 
 <select id="like" resultType="int">
 SELECT
-COUNT(sights_review_like_num)
+	COUNT(sights_review_like_num)
 FROM
-tb_sights_review_like;
+	tb_sights_review_like;
 
 
 
 </select>
 
 <select id="comment" resultType="int">
-SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
+SELECT
+	COUNT(sights_comment_num)
+FROM
+	tb_sights_comment;
 
 </select>
 
-<select id="grade" resultType="Stats">
-SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
+<select id="grade" resultType="int">
+SELECT
+	ROUND((hap.total/(cnt*4)), 1)
+FROM
+	(SELECT
+		(
+		 SUM(sights_review_grade_traffic)
+		+SUM(sights_review_grade_satis)
+		+SUM(sights_review_grade_amenity)
+		+SUM(sights_review_grade_revisit)
+		) AS total
+			,(SELECT 
+				COUNT(1)
+			From 
+				tb_sights_review) AS cnt
+		FROM
+			tb_sights_review) AS hap
+</select>
 
+<!-- 음식점 -->
+<select id="resGenderM" resultType="int">
+SELECT 
+	COUNT(m_gender)
+FROM
+	tb_res_review AS rReview 
+INNER JOIN 
+	tb_member AS m
+ON
+	rReview.m_id = m.m_id
+WHERE
+	m.m_gender = '남';
 
 </select>
 
-
-<select id="resGenderM" resultType="Stats">
+<select id="resGenderG" resultType="int">
 SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
-
+	COUNT(m_gender)
+FROM
+	tb_res_review AS rReview 
+INNER JOIN 
+	tb_member AS m
+ON
+	rReview.m_id = m.m_id
+WHERE
+	m.m_gender = '여';
 </select>
 
-<select id="resGenderG" resultType="Stats">
+<select id="resReview" resultType="int">
 SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
-
+	COUNT(res_review_num)
+FROM
+	tb_res_review;
 </select>
 
-<select id="resReview" resultType="Stats">
-SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
-
-</select>
-
-<select id="resGrade" resultType="Stats">
-SELECT 
-COUNT(m_gender)
- FROM
-  tb_sights_review AS sReview 
- INNER JOIN 
- tb_member AS member
- ON
-  sReview.m_id = member.m_id
- WHERE
-  member.m_gender = '남';
-
+<select id="resGrade" resultType="int">
+SELECT
+ROUND((hap.total/(cnt*5)), 1)
+FROM
+(SELECT
+	(
+	 SUM(res_review_taste_grade)
+	+SUM(res_review_grade_hygiene)
+	+SUM(res_review_grade_mood)
+	+SUM(res_review_grade_kind)
+	+SUM(res_review_grade_cheap)
+	) AS total
+		,(SELECT 
+			COUNT(1)
+		From 
+			tb_res_review) AS cnt
+	FROM
+		tb_res_review) AS hap
 </select>
 </mapper>

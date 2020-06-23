@@ -84,7 +84,7 @@
 										<input type="text" class="knob" th:value="${like}" data-width="90"
 											data-height="90" data-fgColor="#00c0ef" readonly="readonly">
 
-										<div class="knob-label">좋아여</div>
+										<div class="knob-label">좋아요</div>
 									</div>
 									<!-- ./col -->
 								</div>
@@ -99,10 +99,10 @@
 									</div>
 									<!-- ./col -->
 									<div class="col-6 text-center">
-										<input type="text" class="knob" value="50" data-width="90"
+										<input type="text" class="knob" th:value="${grade}" data-width="90"
 											data-height="90" data-fgColor="#39CCCC" readonly="readonly">
 
-										<div class="knob-label">총 별점</div>
+										<div class="knob-label">별점평균</div>
 									</div>
 									<!-- ./col -->
 								</div>
@@ -143,7 +143,7 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-6 col-md-3 text-center">
-									<input type="text" class="knob" value="80" data-skin="tron"
+									<input type="text" class="knob" th:value="${resGenderM}" data-skin="tron"
 										data-thickness="0.2" data-width="90" data-height="90"
 										data-fgColor="#3c8dbc" data-readonly="true">
 
@@ -151,7 +151,7 @@
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
-									<input type="text" class="knob" value="60" data-skin="tron"
+									<input type="text" class="knob" th:value="${resGenderG}" data-skin="tron"
 										data-thickness="0.2" data-width="120" data-height="120"
 										data-fgColor="#f56954" readonly="readonly">
 
@@ -159,15 +159,15 @@
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
-									<input type="text" class="knob" value="10" data-skin="tron"
+									<input type="text" class="knob" th:value="${resReview}" data-skin="tron"
 										data-thickness="0.1" data-width="90" data-height="90"
 										data-fgColor="#00a65a" readonly="readonly">
 
-									<div class="knob-label">리뷰수</div>
+									<div class="knob-label">리뷰</div>
 								</div>
 								<!-- ./col -->
 								<div class="col-6 col-md-3 text-center">
-									<input type="text" class="knob" value="100" data-skin="tron"
+									<input type="text" class="knob" th:value="${resGrade}" data-skin="tron"
 										data-thickness="0.2" data-angleArc="250"
 										data-angleOffset="-125" data-width="120" data-height="120"
 										data-fgColor="#00c0ef" readonly="readonly">

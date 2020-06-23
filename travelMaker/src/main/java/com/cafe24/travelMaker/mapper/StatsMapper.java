@@ -6,16 +6,25 @@ import com.cafe24.travelMaker.domain.Stats;
 
 @Mapper
 public interface StatsMapper {
-	//관광지
+	// 관광지
 	public String sigGenderM();
+
 	public String siggenderG();
+
 	public String review();
+
 	public int like();
+
 	public int comment();
-	public Stats grade(Stats grade);
-	//음식점
-	public Stats resGenderM(Stats resGenderM);
-	public Stats resGenderG(Stats resGenderG);
-	public Stats resReview(Stats resReview);
-	public Stats resGrade(Stats resReview);
+
+	public int grade();
+
+	// 음식점
+	public int resGenderM();
+
+	public int resGenderG();
+
+	public int resReview();
+
+	public int resGrade();
 }
