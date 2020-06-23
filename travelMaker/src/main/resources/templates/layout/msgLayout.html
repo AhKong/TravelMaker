@@ -27,7 +27,6 @@
       <div class="row">
         <div class="col-md-3">
           <a href="#" class="btn btn-primary btn-block mb-3 " data-toggle="modal" data-target="#myModal">쪽지보내기</a>
-
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">내 쪽지함</h3>
@@ -41,7 +40,7 @@
                 <li class="nav-item active">
                   <a href="/receivedMsgList" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은 쪽지함
-                    <span class="badge bg-primary float-right">12</span>
+                    <span class="badge bg-primary float-right" th:text="${msgCnt}"></span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -85,15 +84,42 @@
 </th:block>
 <th:block layout:fragment="customFooterScript">
 	<script>
-	/*  $(function(){
-		$('.targetId').val('123'); 
-		 
-	 }); */
-		/*
-			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
-			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		*/
-	</script>	
+		$(function(){
+			var checkArr =[];
+			var checkList = $('input[name=check]');
+			
+			$('#deleteBtn').click(function(){
+			 	$('input[name=check]:checked').each(function() {
+					 checkArr.push($(this).val())
+		         });
+			 	
+			 	if(checkArr.length==0){
+			 		alert('삭제할 쪽지를 선택해주세요');
+			 		return false;
+			 	}
+			 	
+			 	var isDeleted = confirm('정말 삭제하시겠습니까?');
+			 	if(isDeleted==false){
+			 		return false;
+			 	}
+			 	
+				var request = $.ajax({
+					  url: "/deleteMsg",  
+					  method: "Post",
+					  data: {"checkList":checkArr}, 
+					  dataType: "json"
+				}); 	     
+  
+				request.done(function( data ) {
+					location.reload();
+				});	
+ 
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+				});
+			})	
+		});
+	</script>
+
 </th:block>
 </html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.MsgMapper">
+	<resultMap  type="Message" id="msgResultMap" >
+ 		<result property="messageNum"  	column="message_num"/>
+ 		<result property="mId"   	column="m_id"/>
+ 		<result property="targetId"  column="target_id"/>
+ 		<result property="contents" 	column="message_contents"/>
+ 		<result property="isChecked"  column="message_check"/>
+ 		<result property="msgSendTime"  column="message_send"/>
+ 		<result property="msgReadTime"  column="message_read"/>		
+	</resultMap>
+
+	<insert id="sendMsg" parameterType="Message">
+		<selectKey order ="BEFORE" keyProperty="messageNum" resultType ="String"> 
+		 	 SELECT 
+				case COUNT(*)
+				when 0 then 'message_1'
+				ELSE CONCAT('message_',MAX(CAST(SUBSTRING(message_num,9) AS DECIMAL))+1) 
+				END AS message_num
+			FROM
+				tb_message
+			</selectKey>
+			INSERT INTO 
+				tb_message(
+					message_num,
+					m_id, 
+					target_id, 
+					message_contents)
+			VALUES (#{messageNum}, #{mId}, #{targetId}, #{contents})
+	</insert>
+
+	<select id="receivedMsgList" parameterType="String" resultMap="msgResultMap">
+		select
+			*
+		from 
+			tb_message
+		where 
+			target_id =#{mId} and message_active='Y'
+	</select>
+	
+	<select id="getDetailMsg" parameterType="String" resultMap="msgResultMap">
+		select
+			*
+		from 
+			tb_message
+		where 
+			message_num = #{messageNum}
+	</select>
+	
+	<update id="readMsg" parameterType="String">
+		UPDATE tb_message
+		SET
+			message_check='Y',
+			message_read=NOW()
+		WHERE 
+			message_num = #{messageNum}	
+	</update>
+	
+	<select id="countUnReadMsg" parameterType="String" resultType="int">
+		select
+			count(*)
+		from
+			tb_message
+		where
+			target_id=#{mId} and message_check ='N'
+	</select>
+	
+	<select id="sendMsgList" parameterType="String" resultMap="msgResultMap">
+		select
+			*
+		from 
+			tb_message
+		where 
+			m_id = #{mId}
+			 and message_active='Y'
+	</select>
+	
+	<update id="deleteMsg" >
+		UPDATE
+			tb_message
+		SET
+			message_active='N'
+		WHERE message_num IN
+		<foreach collection="array" item="arr" open="(" close=")" separator=",">
+ 			#{arr}
+		</foreach>
+	
+	</update>
+	
+	<select id="deleteMsgList" parameterType="String" resultMap="msgResultMap" >
+		select
+			*
+		from 
+			tb_message
+		where 
+			m_id = #{mId} or target_id =#{mId}
+			 and message_active='N'
+	</select>
+</mapper>
