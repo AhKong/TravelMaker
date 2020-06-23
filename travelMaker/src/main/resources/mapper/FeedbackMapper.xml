@@ -5,22 +5,33 @@
 <mapper namespace="com.cafe24.travelMaker.mapper.FeedbackMapper">
 	<resultMap type="SightsFeedback" id="feedbackSelect">
 		<result property="sightsFbNum" column="sights_fb_num" />
-		<result property="sightsFbCode" column="sights_fb_code" />
 		<result property="sightsFbContents" column="sights_fb_contents" />
 		<result property="sightsFbRegDate" column="sights_fb_reg_date" />
 		<result property="sightsFbCheck" column="sights_fb_check" />
 		<association property="member" javaType="Member">
 			<result property="mId" column="m_id"/>
 		</association>
+		<association property="fbcode" javaType="FbCode">
+			<result property="fbNum" column="fb_num"/>
+		</association>
 		<collection property="sights" javaType="Sights">
 			<result property="sightsNum" column="sights_num"/>
 			<result property="sightsName" column="sights_name"/>
 		</collection>
-		<collection property="fbcode" javaType="FbCode">
-			<result property="fbNum" column="fb_num"/>
-			<result property="fbReason" column="fb_reason"/>
-		</collection>
 	</resultMap>
+	
+	
+	<select id="formFeedback" parameterType="String" resultMap="feedbackSelect">
+		SELECT
+		FROM
+			tb_sights_fb AS f
+			RIGHT outer join
+			tb_sights AS s 
+			ON 
+			f.sights_num = s.sights_num
+		WHERE s.sights_num = #{sightsNum};
+		
+	</select>
 	
 	
 	<insert id="addFeedback" parameterType="SightsFeedback">
@@ -33,15 +44,14 @@
 				ELSE CONCAT('sights_fb_', (MAX(CAST(substring(sights_fb_num,11) AS DECIMAL))+1))
 				END) AS sightsFbNum
 			FROM
-				tb_sights_fb;
+				tb_sights_fb
 		</selectKey>
 			INSERT INTO tb_sights_fb
-			(sights_fb_num, sights_fb_reg_date, sights_num, sights_name, fb_num, sights_fb_contents, m_id, sights_fb_check)			
+			(sights_fb_num, sights_fb_reg_date, sights_num, fb_num, sights_fb_contents, m_id, sights_fb_check)			
 			
 			VALUES ( #{sightsFbNum}
 					,now()
 					,#{sights.sightsNum}
-					,#{sights.sightsName}
 					,#{fbcode.fbNum}
 					,#{sightsFbContents}
 					,#{member.mId}

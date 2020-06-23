@@ -10,7 +10,7 @@ public class SightsFeedback {
 	private String sightsFbCheck;
 	private Member member;
 	private List<Sights> sights;
-	private List<FbCode> fbcode;
+	private FbCode fbcode;
 	
 	public String getSightsFbNum() {
 		return sightsFbNum;
@@ -48,18 +48,12 @@ public class SightsFeedback {
 	public void setSights(List<Sights> sights) {
 		this.sights = sights;
 	}
-	public List<FbCode> getFbcode() {
+	public FbCode getFbcode() {
 		return fbcode;
 	}
-	public void setFbcode(List<FbCode> fbcode) {
+	public void setFbcode(FbCode fbcode) {
 		this.fbcode = fbcode;
 	}
 	
-	@Override
-	public String toString() {
-		return "SightsFeedback [sightsFbNum=" + sightsFbNum + ", sightsFbContents=" + sightsFbContents
-				+ ", sightsFbRegDate=" + sightsFbRegDate + ", sightsFbCheck=" + sightsFbCheck + ", member=" + member
-				+ ", sights=" + sights + ", fbcode=" + fbcode + "]";
-	}
 	
 }
