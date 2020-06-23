@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.MsgMapper">
+<insert id="sendMsg" parameterType="Message">
+		<selectKey order ="BEFORE" keyProperty="messageNum" resultType ="String"> 
+		 	 SELECT 
+				case COUNT(*)
+				when 0 then 'message_1'
+				ELSE CONCAT('message_',MAX(CAST(SUBSTRING(message_num,9) AS DECIMAL))+1) 
+				END AS message_num
+			FROM
+				tb_message
+ 		</selectKey>
+			INSERT INTO 
+				tb_message(
+					message_num,
+					m_id, 
+					target_id, 
+					message_contents)
+			VALUES (#{messageNum}, #{mId}, #{targetId}, #{contents})
+	</insert>
+	
+</mapper>
