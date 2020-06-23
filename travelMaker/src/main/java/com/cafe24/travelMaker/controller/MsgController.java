@@ -31,7 +31,9 @@ public class MsgController {
 	}
 	
 	@GetMapping("/detailMsg")
-	public String detailMsg() {
+	public String detailMsg(Model model,@RequestParam(name="massageNum") String massageNum) {
+		System.out.println( massageNum+"<---massageNum");
+		model.addAttribute("msg",msgService.getDetailMsg(massageNum));
 		return "/message/detailMsg";
 	}
 	@GetMapping("/notifyDetail")
@@ -45,4 +47,6 @@ public class MsgController {
 		msgService.sendMsg(msg);
 		return "redirect:/receivedMsgList";
 	}
+	
+	
 }

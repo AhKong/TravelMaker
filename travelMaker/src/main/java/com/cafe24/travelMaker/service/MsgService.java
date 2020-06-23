@@ -18,5 +18,10 @@ public class MsgService {
 	public List<Message> receivedMsgList(String mId){
 		return msgMapper.receivedMsgList(mId);
 	}
+	
+	public Message getDetailMsg(String messageNum) {
+		msgMapper.readMsg(messageNum); // 메시지 읽음여부로 변경
+		return msgMapper.getDetailMsg(messageNum);
+	}
 
 }

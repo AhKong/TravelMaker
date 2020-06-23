@@ -41,5 +41,22 @@
 			target_id =#{mId};
 	</select>
 	
+	<select id="getDetailMsg" parameterType="String" resultMap="msgResultMap">
+		select
+			*
+		from 
+			tb_message
+		where 
+			message_num = #{messageNum}
+	</select>
+	
+	<update id="readMsg" parameterType="String">
+		UPDATE tb_message
+		SET
+			message_check='Y',
+			message_read=NOW()
+		WHERE 
+			message_num = #{messageNum}	
+	</update>
 	
 </mapper>
