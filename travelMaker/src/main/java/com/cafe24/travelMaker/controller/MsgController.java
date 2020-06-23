@@ -34,7 +34,10 @@ public class MsgController {
 	}
 	
 	@GetMapping("/deleteMsgList")
-	public String deleteMsgList(){
+	public String deleteMsgList(Model model,HttpSession session){
+		String mId= (String)session.getAttribute("SID");
+		model.addAttribute("deleteMsgList",msgService.deleteMsgList(mId));
+		model.addAttribute("msgCnt",msgService.countUnReadMsg(mId));
 		return "/message/deleteMsgList";
 	}
 	
@@ -59,7 +62,6 @@ public class MsgController {
 	@PostMapping("/deleteMsg")
 	@ResponseBody 
 	public HashMap<String,String> deleteMsg(@RequestParam(name="checkList[]") String[] checkList){
-		 
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("test", "hihi");
 		msgService.deleteMsg(checkList);

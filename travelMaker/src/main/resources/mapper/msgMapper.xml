@@ -90,4 +90,13 @@
 	
 	</update>
 	
+	<select id="deleteMsgList" parameterType="String" resultMap="msgResultMap" >
+		select
+			*
+		from 
+			tb_message
+		where 
+			m_id = #{mId} or target_id =#{mId}
+			 and message_active='N'
+	</select>
 </mapper>

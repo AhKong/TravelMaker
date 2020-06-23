@@ -82,5 +82,44 @@
   </div>
   <!-- /.content-wrapper -->
 </th:block>
-<th:block layout:fragment="customFooterScript"></th:block>
+<th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			var checkArr =[];
+			var checkList = $('input[name=check]');
+			
+			$('#deleteBtn').click(function(){
+			 	$('input[name=check]:checked').each(function() {
+					 checkArr.push($(this).val())
+		         });
+			 	
+			 	if(checkArr.length==0){
+			 		alert('삭제할 쪽지를 선택해주세요');
+			 		return false;
+			 	}
+			 	
+			 	var isDeleted = confirm('정말 삭제하시겠습니까?');
+			 	if(isDeleted==false){
+			 		return false;
+			 	}
+			 	
+				var request = $.ajax({
+					  url: "/deleteMsg",  
+					  method: "Post",
+					  data: {"checkList":checkArr}, 
+					  dataType: "json"
+				}); 	     
+  
+				request.done(function( data ) {
+					location.reload();
+				});	
+ 
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+				});
+			})	
+		});
+	</script>
+
+</th:block>
 </html>

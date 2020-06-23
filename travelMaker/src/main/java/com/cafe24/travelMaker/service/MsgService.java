@@ -35,5 +35,10 @@ public class MsgService {
 	public int deleteMsg(String[] checkList) {
 		return msgMapper.deleteMsg(checkList);
 	}
+	
+	public List<Message> deleteMsgList(String mId){
+		return msgMapper.deleteMsgList(mId);
+	}
+	
 
 }
