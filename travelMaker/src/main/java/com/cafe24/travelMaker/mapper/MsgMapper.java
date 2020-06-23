@@ -1,5 +1,7 @@
 package com.cafe24.travelMaker.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.travelMaker.domain.Message;
@@ -7,4 +9,6 @@ import com.cafe24.travelMaker.domain.Message;
 @Mapper
 public interface MsgMapper {
 	public int sendMsg(Message msg);
+	public List<Message> receivedMsgList(String mId);
+	public Message getDetailMsg(String messageNum);
 }
