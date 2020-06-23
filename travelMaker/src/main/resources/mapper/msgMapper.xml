@@ -59,4 +59,22 @@
 			message_num = #{messageNum}	
 	</update>
 	
+	<select id="countUnReadMsg" parameterType="String" resultType="int">
+		select
+			count(*)
+		from
+			tb_message
+		where
+			target_id=#{mId} and message_check ='N'
+	</select>
+	
+	<select id="sendMsgList" parameterType="String" resultMap="msgResultMap">
+		select
+			*
+		from 
+			tb_message
+		where 
+			m_id = #{mId}
+	</select>
+	
 </mapper>

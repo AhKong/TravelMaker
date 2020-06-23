@@ -23,5 +23,13 @@ public class MsgService {
 		msgMapper.readMsg(messageNum); // 메시지 읽음여부로 변경
 		return msgMapper.getDetailMsg(messageNum);
 	}
+	
+	public int countUnReadMsg(String mId) {
+		return msgMapper.countUnReadMsg(mId);
+	}
+	
+	public List<Message> sendMsgList(String mId){
+		return msgMapper.sendMsgList(mId);
+	}
 
 }

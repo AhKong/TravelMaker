@@ -12,4 +12,6 @@ public interface MsgMapper {
 	public List<Message> receivedMsgList(String mId);
 	public Message getDetailMsg(String messageNum);
 	public int readMsg(String messageNum);
+	public int countUnReadMsg(String mId);
+	public List<Message> sendMsgList(String mId);
 }

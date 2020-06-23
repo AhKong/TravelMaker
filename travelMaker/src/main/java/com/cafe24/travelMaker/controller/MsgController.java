@@ -16,12 +16,17 @@ public class MsgController {
 	@Autowired private MsgService msgService;
 	@GetMapping("/receivedMsgList")
 	public String receivedMsgList(HttpSession session,Model model) {
-		model.addAttribute("receivedMsgList",msgService.receivedMsgList((String)session.getAttribute("SID")));
+		String mId= (String)session.getAttribute("SID");
+		model.addAttribute("receivedMsgList",msgService.receivedMsgList(mId));
+		model.addAttribute("msgCnt",msgService.countUnReadMsg(mId));
 		return "/message/receivedMsgList";
 	}
 	
 	@GetMapping("/sendMsgList")
-	public String sendMsgList() {
+	public String sendMsgList(HttpSession session, Model model) {
+		String mId= (String)session.getAttribute("SID");
+		model.addAttribute("sendMsgList",msgService.sendMsgList(mId));
+		model.addAttribute("msgCnt",msgService.countUnReadMsg(mId));
 		return "/message/sendMsgList";
 	}
 	
