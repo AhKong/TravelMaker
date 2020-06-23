@@ -38,7 +38,7 @@
 		from 
 			tb_message
 		where 
-			target_id =#{mId};
+			target_id =#{mId} and message_active='Y'
 	</select>
 	
 	<select id="getDetailMsg" parameterType="String" resultMap="msgResultMap">
@@ -75,6 +75,19 @@
 			tb_message
 		where 
 			m_id = #{mId}
+			 and message_active='Y'
 	</select>
+	
+	<update id="deleteMsg" >
+		UPDATE
+			tb_message
+		SET
+			message_active='N'
+		WHERE message_num IN
+		<foreach collection="array" item="arr" open="(" close=")" separator=",">
+ 			#{arr}
+		</foreach>
+	
+	</update>
 	
 </mapper>

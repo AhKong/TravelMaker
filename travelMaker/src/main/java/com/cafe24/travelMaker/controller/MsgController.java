@@ -1,5 +1,7 @@
 package com.cafe24.travelMaker.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Message;
 import com.cafe24.travelMaker.service.MsgService;
@@ -53,5 +56,13 @@ public class MsgController {
 		return "redirect:/receivedMsgList";
 	}
 	
-	
+	@PostMapping("/deleteMsg")
+	@ResponseBody 
+	public HashMap<String,String> deleteMsg(@RequestParam(name="checkList[]") String[] checkList){
+		 
+		HashMap<String,String> result = new HashMap<String,String>();
+		result.put("test", "hihi");
+		msgService.deleteMsg(checkList);
+		return result;
+	}
 }

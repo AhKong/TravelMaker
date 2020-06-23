@@ -31,5 +31,9 @@ public class MsgService {
 	public List<Message> sendMsgList(String mId){
 		return msgMapper.sendMsgList(mId);
 	}
+	
+	public int deleteMsg(String[] checkList) {
+		return msgMapper.deleteMsg(checkList);
+	}
 
 }

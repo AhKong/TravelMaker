@@ -30,11 +30,11 @@
   <th:block layout:fragment ="mailList">
   <div class="table-responsive mailbox-messages">
     <table class="table table-hover ">
-      <tbody th:each ="i : ${receivedMsgList}" th:style="${i.isChecked=='N' ? 'color:blue;' : 'color:black;'}">
+      <tbody th:if="${receivedMsgList neq null}" th:each ="i : ${receivedMsgList}" th:style="${i.isChecked=='N' ? 'color:blue;' : 'color:black;'}">
       <tr>
         <td>
           <div class="icheck-primary">
-            <input type="checkbox" value="" id="check1">
+            <input type="checkbox" th:value="${i.messageNum}" name="check">
             <label for="check1"></label>
           </div>
         </td>
@@ -48,7 +48,11 @@
         <td class="mailbox-date " th:text="${i.isChecked}"></td>
       </tr>
       </tbody>
-
+	<tbody th:unless="${receivedMsgList== null}">
+		<tr>
+		 <td> 받은 쪽지가 없습니다</td>
+		</tr>
+	</tbody>
     </table>
     <!-- /.table -->
   </div>
@@ -61,14 +65,13 @@
     <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
     </button>
     <div class="btn-group">
-      <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+      <button type="button" class="btn btn-default btn-sm" id="deleteBtn"><i class="far fa-trash-alt"></i></button>
       <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
       <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
     </div>
     <!-- /.btn-group -->
     <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
     <div class="float-right">
-      1-50/200
       <div class="btn-group">
         <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
         <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
@@ -77,5 +80,50 @@
   </div>
 </div>  
   </th:block>
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			var checkArr =[];
+			var checkList = $('input[name=check]');
+			
+			$('#deleteBtn').click(function(){
+			 	$('input[name=check]:checked').each(function() {
+					 checkArr.push($(this).val())
+		         });
+			 	
+			 	if(checkArr.length==0){
+			 		alert('삭제할 쪽지를 선택해주세요');
+			 		return false;
+			 	}
+			 	
+			 	var isDeleted = confirm('정말 삭제하시겠습니까?');
+			 	if(isDeleted==false){
+			 		return false;
+			 	}
+			 	
+				var request = $.ajax({
+					  url: "/deleteMsg",  
+					  method: "Post",
+					  data: {"checkList":checkArr}, 
+					  dataType: "json"
+				}); 	     
+  
+				request.done(function( data ) {
+					console.log(1);
+				});	
+ 
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+				});
+			 	
+					
+			})
+			
+			
+			
+		})
+	
+	</script>
 </th:block>
 </html>
