@@ -5,7 +5,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-         	<form action="/sendMsg" method="post" class="form-horizontal" id="sendMsgForm">
+         	<form action="/msg/sendMsg" method="post" class="form-horizontal" id="sendMsgForm">
          		<div class="form-group">
     				<label for="inputEmail3" class="col-sm-4 control-label" >보내는사람</label>
 				    <div class="col-sm-12">
@@ -56,7 +56,7 @@
   </script>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="sendMsg" th:fragment="sendMsgModalFragement2('targetId')" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="/msg/sendMsg" th:fragment="sendMsgModalFragement2('targetId')" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">

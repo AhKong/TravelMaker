@@ -79,11 +79,10 @@
 			<version>2.3.0</version>
 		</dependency>
 		<dependency>
-   			 <groupId>com.github.ulisesbocchio</groupId>
-   			 <artifactId>jasypt-spring-boot-starter</artifactId>
-  			  <version>1.16</version>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+		    <version>1.16</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>

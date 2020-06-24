@@ -37,18 +37,18 @@
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                  <a href="/receivedMsgList" class="nav-link">
+                  <a href="/msg/receivedMsgList" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은 쪽지함
                     <span class="badge bg-primary float-right" th:text="${msgCnt}"></span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/sendMsgList" class="nav-link">
+                  <a href="/msg/sendMsgList" class="nav-link">
                     <i class="far fa-envelope"></i> 보낸 쪽지함
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/deleteMsgList" class="nav-link">
+                  <a href="/msg/deleteMsgList" class="nav-link">
                     <i class="far fa-trash-alt"></i> 휴지통
                   </a>
                 </li>
@@ -105,7 +105,7 @@
 			 	}
 			 	
 				var request = $.ajax({
-					  url: "/deleteMsg",  
+					  url: "/msg/deleteMsg",  
 					  method: "Post",
 					  data: {"checkList":checkArr}, 
 					  dataType: "json"
@@ -118,24 +118,7 @@
 				request.fail(function( jqXHR, textStatus ) {
 					  alert( "Request failed: " + textStatus );
 				});
-			})
-			
-			$('.deleteBtn').click(function(){
-				var isDeleted = confirm('정말 삭제하시겠습니까?');
-				if(isDeleted == false){
-					return false;
-				}
-				
-				 
-				/*<![CDATA[*/
-
-				var msgNum = /*[[ ${msg.messageNum} ]]*/;
-
-				/*]]*/
-
-			    $('.deleteBtn').attr('href','/deleteMsg?messageNum='+msgNum);
-
-			})
+			});
 			
 		});
 	</script>
