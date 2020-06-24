@@ -58,13 +58,14 @@ public class MsgController {
 	public String sendMsg(Message msg) {
 		System.out.println(msg);
 		msgService.sendMsg(msg);
-		return "redirect:/receivedMsgList";
+		return "redirect:/msg/receivedMsgList";
 	}
 	
 	@PostMapping("/deleteMsg")
 	@ResponseBody 
 	public HashMap<String,String> deleteMsg(@RequestParam(name="checkList[]") String[] checkList){
 		HashMap<String,String> result = new HashMap<String,String>();
+		System.out.println(checkList.length +"<----zzz");
 		result.put("test", "hihi");
 		msgService.deleteMsgs(checkList);
 		return result;
@@ -73,6 +74,6 @@ public class MsgController {
 	@GetMapping("/deleteMsg")
 	public String deleteMsg(@RequestParam(name="messageNum") String messageNum) {
 		msgService.deleteMsg(messageNum);
-		return "redirect:/deleteMsgList";
+		return "redirect:/msg/deleteMsgList";
 	}
 }

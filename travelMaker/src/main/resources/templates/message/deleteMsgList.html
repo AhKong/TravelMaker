@@ -41,10 +41,10 @@
         <td class="mailbox-name" th:text="${i.mId}"></td>
  
         <td class="mailbox-subject">
-        	<a th:href="@{/detailMsg(massageNum=${i.messageNum})}" th:text ="${i.contents}"  th:style="${i.isChecked=='N' ? 'color:blue;' : 'color:black;'}"></a>
+        	<a th:href="@{/msg/detailMsg(massageNum=${i.messageNum})}" th:text ="${i.contents}"  th:style="${i.isChecked=='N' ? 'color:blue;' : 'color:black;'}"></a>
         </td>
         <td class="mailbox-attachment"></td>
-        <td class="mailbox-date " th:utext="|<a href='/detailMsg?massageNum=${i.messageNum}'>${i.msgSendTime}</a>|"></td>
+        <td class="mailbox-date "></td>
         <td class="mailbox-date " th:text="${i.isChecked}"></td>
       </tr>
       </tbody>
@@ -76,9 +76,7 @@
     
     </div>
   </div>
-</div>
-
-  
+</div>  
   </th:block>
 </th:block>
 </html>

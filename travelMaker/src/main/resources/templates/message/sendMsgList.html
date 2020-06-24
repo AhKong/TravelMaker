@@ -40,7 +40,7 @@
         </td>
         <td class="mailbox-name" th:text="${i.mId}"></td>
         <td class="mailbox-subject">
-        	<a th:href="@{/detailMsg(massageNum=${i.messageNum})}" th:text ="${i.contents}"  style="color:black;"></a>
+        	<a th:href="@{/msg/detailMsg(massageNum=${i.messageNum})}" th:text ="${i.contents}"  style="color:black;"></a>
         </td>
         <td class="mailbox-date" th:text="${i.msgSendTime}"></td>
         <td class="mailbox-date " th:text="${i.isChecked}=='Y'? |확인(${i.msgReadTime})| : '읽지않음'  "></td>
