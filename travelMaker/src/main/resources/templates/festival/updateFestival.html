@@ -57,7 +57,7 @@
 			</div>
 			
             <div class="card-body">
-              <form role="form" th:action="@{/updateFestival}" method="post">
+              <form role="form" th:action="@{/festival/updateFestival}" method="post">
 				<input type="hidden" class="form-control" name="fesNum" th:value="${festival.fesNum}">
 				<input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
 			    <div class="row">
@@ -148,7 +148,7 @@
 							</div>
 							
 							<div class="modal-footer">
-								<button type="button" onclick="location.href='/festivalList'" class="btn btn-primary btn-sm col-sm-2"> 예 </button>
+								<button type="button" onclick="location.href='/festival/festivalList'" class="btn btn-primary btn-sm col-sm-2"> 예 </button>
 			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
 							</div>
 						</div>
@@ -171,7 +171,7 @@
 							</div>
 							
 							<div class="modal-footer">
-								<a th:href="@{/deleteFestival(fes_num=${festival.fesNum})}" class="btn btn-default btn-sm col-sm-2"> 예 </a>
+								<a th:href="@{/festival/deleteFestival(fes_num=${festival.fesNum})}" class="btn btn-default btn-sm col-sm-2"> 예 </a>
 		 						<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal">아니오</button>
 							</div>
 						</div>

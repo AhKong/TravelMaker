@@ -2,13 +2,12 @@ package com.cafe24.travelMaker.controller;
 
 import java.util.List;
 
-import javax.mail.Session;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.service.FestivalService;
@@ -16,19 +15,14 @@ import com.cafe24.travelMaker.service.StorageService;
 import com.cafe24.travelMaker.domain.Festival;
 
 
-@Controller
+@Controller()
+@RequestMapping("/festival")
 public class FestivalController {
 
 @Autowired FestivalService festivalService;
 @Autowired StorageService storageService;
 	
-	//축제화면으로 이동 
-/*	@GetMapping("/festivalList")
-	public String Festival(Model model) {
-		
-		return "festival/festivalList";
-	}
-*/	
+	
 	//축제 등록하기 
 	@PostMapping("/addFestival")
 	public String addFestival(Festival festival) {
@@ -38,7 +32,7 @@ public class FestivalController {
 		System.out.println(result+" <- result addFestival FestivalController");
 		System.out.println(festival.getMember().toString()+" <- festival.getMember().toString() addFestival FestivalController");
 		
-		return "redirect:/festivalList";
+		return "redirect:/festival/festivalList";
 	}
 	
 	//축제 수정 화면으로 이동 
@@ -63,7 +57,7 @@ public class FestivalController {
 		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalController");
 		System.out.println(result+" <- result updateFestival FestivalController");
 		
-		return "redirect:/festivalList";
+		return "redirect:/festival/festivalList";
 	}
 	
 	//축제 리스트
@@ -85,7 +79,7 @@ public class FestivalController {
 		int result = festivalService.deleteFestival(fesNum);
 		System.out.println(result+" <- result deleteFestival FestivalController");
 		
-		return "redirect:/festivalList";
+		return "redirect:/festival/festivalList";
 	}
 	
 }

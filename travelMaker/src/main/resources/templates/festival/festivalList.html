@@ -85,7 +85,7 @@ span {
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="/festival">festival</a></li>
+							<li class="breadcrumb-item">festival</li>
 							<li class="breadcrumb-item">festivalList</li>
 						</ol>
 					</div>
@@ -157,7 +157,7 @@ span {
 						            <div class="modal-body">
 						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
-							                <form role="form" action="/addFestival" method="post">
+							                <form role="form" action="/festival/addFestival" method="post">
 							                  <input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
 							                  <div class="row">
 							                    <div class="col-12">
@@ -294,7 +294,7 @@ span {
 												  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
 												</div>
 												<div class="festivalDesc col-sm-6 col-md-8">
-												   <a th:href="@{/updateFestival(fesNum=${fList.fesNum})}" class="btn btn-info float-right"> 수정하기 </a>
+												   <a th:href="@{/festival/updateFestival(fesNum=${fList.fesNum})}" class="btn btn-info float-right"> 수정하기 </a>
 													<input type="hidden" th:value="${fList.fesNum}">
 													<input type="hidden" th:value="${m.mId}">
 													<span>[[${fList.fesName}]]</span>
