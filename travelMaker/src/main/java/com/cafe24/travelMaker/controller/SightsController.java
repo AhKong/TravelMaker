@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
@@ -15,6 +16,7 @@ import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
+@RequestMapping("/sights")
 public class SightsController{
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;

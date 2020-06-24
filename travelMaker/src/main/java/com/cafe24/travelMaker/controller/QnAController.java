@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Question;
 import com.cafe24.travelMaker.service.QuestionService;
 
 @Controller
+@RequestMapping("/question")
 public class QnAController{
 	@Autowired private QuestionService questionService;
 	@GetMapping("/faq")
@@ -41,7 +43,7 @@ public class QnAController{
 	@PostMapping("/newQuestion")
 	public String newQuestion(Question question) {
 		int result = questionService.newQuestion(question);
-		return "redirect:/questionList";
+		return "redirect:/question/questionList";
 	}
 	
 	@GetMapping("/answer")
@@ -60,7 +62,7 @@ public class QnAController{
 		question.setQuestionCode(qCode);
 		question.setqAnswer(inputDescription);
 		questionService.answer(question);
-		return "redirect:/answer";
+		return "redirect:/question/answer";
 	}
 	
 	@GetMapping("/myQuestion")
@@ -85,13 +87,13 @@ public class QnAController{
 	@GetMapping("/deleteQnA")
 	public String deleteQnA(@RequestParam(name="qCode", required=false) String qCode) {
 	    questionService.deleteQnA(qCode);
-		return "redirect:/questionList";
+		return "redirect:/question/questionList";
 	}
 	
 	@GetMapping("/deleteQnA2")
 	public String deleteQnA2(@RequestParam(name="qCode", required=false) String qCode) {
 	    questionService.deleteQnA2(qCode);
-		return "redirect:/answer";
+		return "redirect:/question/answer";
 	}
 
 }

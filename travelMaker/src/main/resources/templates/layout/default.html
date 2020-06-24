@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="fragments/head :: headFragment"></head>
 <body>
-<div class="modal fade" id="test" th:fragment="addReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="searchSightsList" th:fragment="addReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-		 <form action="/sightsList" id="sightsSeachForm" method ="Get">
+		 <form action="/sights/sightsList" id="sightsSeachForm" method ="Get">
 			<div class="input-group input-lg">
 				<input class="form-control" type="search" placeholder="여행지역을 입력해주세요 : )" aria-label="Search" name="search">
 				<button  id="searchBtn" class="btn btn-navbar" type="button" > <i class="fas fa-search"></i></button>

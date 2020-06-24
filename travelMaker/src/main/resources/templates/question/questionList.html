@@ -62,7 +62,7 @@
                     <td th:text="${ql.qCate}"></td>
                     <td th:text="${ql.qName}"></td>
                     <td th:text="${ql.qDate}"></td>
-                    <td><a th:href="@{/detailQuestion(qCode=${ql.questionCode})}" class="btn btn-primary">
+                    <td><a th:href="@{/question/detailQuestion(qCode=${ql.questionCode})}" class="btn btn-primary">
                   	<i class="fas fa-search"></i></a></td>
             		<td><span class="badge badge-success" th:text="${ql.qYesNo}"></span></td>
                   </tr>

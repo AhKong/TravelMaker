@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,6 +16,7 @@ import com.cafe24.travelMaker.domain.Message;
 import com.cafe24.travelMaker.service.MsgService;
 
 @Controller
+@RequestMapping("/msg")
 public class MsgController {
 	@Autowired private MsgService msgService;
 	@GetMapping("/receivedMsgList")
@@ -56,22 +58,22 @@ public class MsgController {
 	public String sendMsg(Message msg) {
 		System.out.println(msg);
 		msgService.sendMsg(msg);
-		return "redirect:/receivedMsgList";
+		return "redirect:/msg/receivedMsgList";
 	}
 	
 	@PostMapping("/deleteMsg")
 	@ResponseBody 
 	public HashMap<String,String> deleteMsg(@RequestParam(name="checkList[]") String[] checkList){
 		HashMap<String,String> result = new HashMap<String,String>();
+		System.out.println(checkList.length +"<----zzz");
 		result.put("test", "hihi");
 		msgService.deleteMsgs(checkList);
 		return result;
 	}
 	
-	@GetMapping("deleteMsg")
+	@GetMapping("/deleteMsg")
 	public String deleteMsg(@RequestParam(name="messageNum") String messageNum) {
-		
 		msgService.deleteMsg(messageNum);
-		return "redirect:/deleteMsgList";
+		return "redirect:/msg/deleteMsgList";
 	}
 }
