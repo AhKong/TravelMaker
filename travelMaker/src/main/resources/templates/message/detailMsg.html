@@ -7,8 +7,7 @@
 </th:block>
  <th:block layout:fragment="mailListTitle">
  <h1>쪽지 상세 내역</h1>
- </th:block>
-       
+ </th:block> 
 <th:block layout:fragment="mainIntro">
 	<li class="breadcrumb-item"><a href="#">message</a></li>
     <li class="breadcrumb-item active">detailMsg</li>
@@ -16,6 +15,7 @@
 <th:block layout:fragment="mailCardTitle">
      <h3 class="card-title">쪽지 상세내역</h3></th:block>
 <th:block layout:fragment="mailSearchForm">
+<div th:replace="fragments/sendMsg :: sendMsgModalFragement2(${msg.mId})"></div>
     <div class="card-tools">
         <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fas fa-chevron-left"></i></a>
         <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Next"><i class="fas fa-chevron-right"></i></a>
@@ -29,15 +29,13 @@
   <div class="mailbox-read-message">
        <p th:text="${msg.contents}" ></p>
   </div>
-  
  <th:block layout:fragment ="mailFooter">
   <div class="card-footer">
-              <div class="float-right">
-                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
-             
-              <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-              </div>
-            </div>
+      <div class="float-right" th:if ="${msg.msgActive != 'N' }">
+        <button  th:if ="${msg.mId != session.SID}"type="button" class="btn btn-default" data-toggle="modal" data-target="#sendMsg"><i class="fas fa-reply" ></i> Reply</button>
+      	<a class="btn btn-default deleteBtn"><i class="far fa-trash-alt"></i>Delete</a>
+      </div>
+  </div>
   </th:block>
 </th:block>
 </html>

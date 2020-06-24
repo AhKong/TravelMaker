@@ -8,6 +8,8 @@ public class Message {
 	private String isChecked;
 	private String msgSendTime;
 	private String msgReadTime;
+	private String msgActive;
+	
 	public String getMessageNum() {
 		return messageNum;
 	}
@@ -50,11 +52,21 @@ public class Message {
 	public void setMsgReadTime(String msgReadTime) {
 		this.msgReadTime = msgReadTime;
 	}
+	
+	
+	public String getMsgActive() {
+		return msgActive;
+	}
+	public void setMsgActive(String msgActive) {
+		this.msgActive = msgActive;
+	}
 	@Override
 	public String toString() {
 		return "Message [messageNum=" + messageNum + ", mId=" + mId + ", targetId=" + targetId + ", contents="
 				+ contents + ", isChecked=" + isChecked + ", msgSendTime=" + msgSendTime + ", msgReadTime="
-				+ msgReadTime + "]";
+				+ msgReadTime + ", msgActive=" + msgActive + "]";
 	}
+
+
 
 }

@@ -36,4 +36,36 @@
 	g.m_id = m.m_id
 	WHERE g_num = #{goodsCode}
 	</select>
+	
+	<select id="getMyGoodsList" parameterType="String" resultType="Goods">
+		SELECT 
+			g_num AS goodsCode
+			, m_id AS memberId
+			, g_photo AS goodsPhoto 
+			, g_cate AS goodsCate
+			, g_name AS goodsName
+			, g_point AS goodsPrice
+			, g_detail AS goodsDetail
+			, g_reg_date AS goodsRegDate
+			, g_sale_yesno as goodsSaleYesNo
+		FROM 
+			tb_Alliance_g
+		WHERE
+			m_id=#{mId};
+	</select>
+	
+	<insert id="addGoods" parameterType="Goods">
+	<selectKey order="BEFORE" keyProperty="goodsCode" resultType="String">
+		SELECT
+			case COUNT(*)
+			WHEN 0 THEN 'g001'
+			ELSE CONCAT('g00', MAX(CAST(SUBSTRING(g_num,4) AS DECIMAL))+1)
+			END AS g_num
+		FROM
+			tb_Alliance_g
+	</selectKey>
+		INSERT INTO tb_Alliance_g
+	(g_num, m_id, g_photo, g_cate, g_name, g_point, g_detail, g_reg_date, g_sale_yesno)
+	VALUES (#{goodsCode}, #{memberId}, #{goodsPhoto}, #{goodsCate}, #{goodsName}, #{goodsPrice}, #{goodsDetail}, NOW(), "판매중");
+	</insert>
 </mapper>
