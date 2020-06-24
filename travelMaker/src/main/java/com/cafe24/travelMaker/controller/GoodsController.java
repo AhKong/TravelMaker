@@ -1,18 +1,25 @@
 package com.cafe24.travelMaker.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.service.GoodsService;
+import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
 public class GoodsController{
 	
 	@Autowired private GoodsService goodsService;
+	@Autowired private StorageService storageService;
 
 	@GetMapping("/buyGoods")
 	public String buyGoods(Model model) {
@@ -33,10 +40,24 @@ public class GoodsController{
 	public String addGoods() {
 		return "/goods/addGoods";
 	}
+	@PostMapping("/addGoods")
+	public String addGoods(Goods goods) {
+		goods.setGoodsPhoto(goods.getFile().getOriginalFilename());
+		if(!"".equals(goods.getGoodsPhoto())) {
+			storageService.store(goods.getFile());
+		}
+		int result = goodsService.addGoods(goods);
+		return "redirect:/myRegGoods";
+	}
 	
 	@GetMapping("/myRegGoods")
-	public String myRegGoods() {
+	public String myRegGoods(Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute("SID");
+		List<Goods> goodsList = goodsService.getMyGoodsList(loginId);
+		model.addAttribute("goodsList", goodsList);
 		return "/goods/myRegGoods";
 	}
+	
+	
 }
 

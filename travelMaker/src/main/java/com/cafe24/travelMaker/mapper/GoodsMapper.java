@@ -12,4 +12,6 @@ public interface GoodsMapper {
 	
 	public List<Member> getGoodsResultList();
 	public Goods getGoodsInfo(String gCode);
+	public List<Goods> getMyGoodsList(String mId);
+	public int addGoods(Goods goods);
 }

@@ -22,4 +22,12 @@ public class GoodsService {
 	public Goods getGoodsInfo(String gCode) {
 		return goodsMapper.getGoodsInfo(gCode);
 	}
+	
+	public List<Goods> getMyGoodsList(String mId){
+		return goodsMapper.getMyGoodsList(mId);
+	}
+	
+	public int addGoods(Goods goods) {
+		return goodsMapper.addGoods(goods);
+	}
 }
