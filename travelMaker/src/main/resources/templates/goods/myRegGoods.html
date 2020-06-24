@@ -66,7 +66,7 @@
                     <td th:text="${ql.goodsName}"></td>
                     <td th:text="${ql.goodsPrice}+원"></td>
                     <td th:text="${ql.goodsRegDate}"></td>
-                    <td><button type="button" onclick="location.href='detailGoodsAllience'" class="btn btn-default">
+                    <td><button type="button" onclick="location.href='/goods/detailGoodsAllience'" class="btn btn-default">
                   	<i class="fas fa-search"></i>
                       </button></td>
                     <td><span class="badge badge-success" th:text="${ql.goodsSaleYesNo}"></span></td>
@@ -76,7 +76,7 @@
                 
               
                 <div class="col-sm-6">
-            			<a href="/addGoods" class="btn btn-primary float-sm-right"><b>상품등록</b></a>
+            			<a href="/goods/addGoods" class="btn btn-primary float-sm-right"><b>상품등록</b></a>
          		</div>
               </div>
               <!-- /.card-body -->

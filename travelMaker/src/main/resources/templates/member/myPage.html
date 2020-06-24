@@ -46,7 +46,7 @@
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
                     <b>Followers</b> <a class="float-right">100</a>
-                    <button type="button" class="btn btn-default" onclick="location.href='/followers'">
+                    <button type="button" class="btn btn-default" onclick="location.href='/follow/followers'">
                   	<i class="fas fa-search"></i>
                       </button>
                   </li>
@@ -54,13 +54,13 @@
                   <li class="list-group-item">
                     <b>Following</b> <a class="float-right">120</a>
                     
-                    <button type="button" class="btn btn-default" onclick="location.href='/following'">
+                    <button type="button" class="btn btn-default" onclick="location.href='/follow/following'">
                   	<i class="fas fa-search"></i>
                       </button>
                   </li>
                   <li class="list-group-item">
                     <b>my point</b> <a class="float-right">2000</a>
-                    <button type="button" class="btn btn-default" onclick="location.href='/pointUse'">
+                    <button type="button" class="btn btn-default" onclick="location.href='/point/pointUse'">
                   	<i class="fas fa-search" data-toggle="modal"></i>
                       </button>
                   </li>
@@ -129,11 +129,11 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">내 리뷰보기</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/tripList">내 여행 계획</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/tripMemo">내 여행 기록</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/myTrip/tripList">내 여행 계획</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/tripMemo/tripMemo">내 여행 기록</a></li>
                   <li class="nav-item"><a class="nav-link" href="#goodsBuyList" data-toggle="tab">상품 구매내역</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/receivedMsgList">쪽지 보관함</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/updateMember">프로필 수정</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/msg/receivedMsgList">쪽지 보관함</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/member/updateMember">프로필 수정</a></li>
                   
                 </ul>
               </div><!-- /.card-header -->
@@ -263,7 +263,7 @@
 			              <p>구매를 취소하시겠습니까?</p>
 			            </div>
 			            <div class="modal-footer justify-content-between">
-			              <button   onclick="location.href='/myPage'" type="button" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+			              <button   onclick="location.href='/member/myPage'" type="button" class="btn btn-outline-light" data-dismiss="modal">확인</button>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->

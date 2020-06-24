@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Goods;
@@ -16,6 +17,7 @@ import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
+@RequestMapping("/goods")
 public class GoodsController{
 	
 	@Autowired private GoodsService goodsService;
@@ -47,7 +49,7 @@ public class GoodsController{
 			storageService.store(goods.getFile());
 		}
 		int result = goodsService.addGoods(goods);
-		return "redirect:/myRegGoods";
+		return "redirect:/goods/myRegGoods";
 	}
 	
 	@GetMapping("/myRegGoods")

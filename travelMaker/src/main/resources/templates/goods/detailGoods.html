@@ -65,27 +65,30 @@
 					&nbsp 등록자 : <input class="my-3" th:value="${goods.memberId}" readonly id="optionCss" style="width:25%;">
 				</h3>
 				<hr>
+			<div class="small-box bg-info" style="text-align:center;">
+              <div class="inner">
+                <h3 class="mb-0" th:text="${goods.goodsPrice}+원"></h3>
 
-				
-              <div class="bg-gray py-2 px-3 mt-4">
-                <h2 class="mb-0" th:text="${goods.goodsPrice}+원">
-                </h2>
-                <h4 class="mt-0">
-                  <small>부가세 별도 </small>
-                </h4>
-              </div>
-              <div class="mt-4" style="text-align:center">
-                <div class="btn btn-primary btn-lg btn-flat">
-                  <i class="fas fa-cart-plus fa-lg mr-2" ></i> 
-                  	  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                <p>(부가세 별도)</p>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-primary" style="border:solid;outline-color:white;">
+                  	  <i class="fas fa-cart-plus fa-lg mr-2" ></i>
                   	구매하기
                 </button>
-                </div>
+              </div>
+              <div class="icon">
+              
+                <i class="ion ion-bag"></i>
+                
               </div>
               
+              <div class="mt-4" style="text-align:center">
+              </div>
+            </div>
+          </div>
+          </div>
 				<div class="modal fade" id="modal-primary">
 		        <div class="modal-dialog">
-		          <div class="modal-content bg-primary">
+		          <div class="modal-content bg-info">
 		            <div class="modal-header">
 		              <h4 class="modal-title">구매하기</h4>
 		              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -95,7 +98,7 @@
 		              <p>상품을 구매하시겠습니까?</p>
 		            </div>
 		            <div class="modal-footer justify-content-between">
-		              <button onclick="location.href='buyGoods'" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+		              <button onclick="location.href='/goods/buyGoods'" class="btn btn-outline-light" data-dismiss="modal">확인</button>
 		            </div>
 		          </div>
 		          <!-- /.modal-content -->
