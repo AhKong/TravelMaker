@@ -81,8 +81,10 @@
   </div>
   <!-- /.content-wrapper -->
 </th:block>
+
+
 <th:block layout:fragment="customFooterScript">
-	<script>
+	<script th:inline="javascript">
 		$(function(){
 			var checkArr =[];
 			var checkList = $('input[name=check]');
@@ -116,7 +118,25 @@
 				request.fail(function( jqXHR, textStatus ) {
 					  alert( "Request failed: " + textStatus );
 				});
-			})	
+			})
+			
+			$('.deleteBtn').click(function(){
+				var isDeleted = confirm('정말 삭제하시겠습니까?');
+				if(isDeleted == false){
+					return false;
+				}
+				
+				 
+				/*<![CDATA[*/
+
+				var msgNum = /*[[ ${msg.messageNum} ]]*/;
+
+				/*]]*/
+
+			    $('.deleteBtn').attr('href','/deleteMsg?messageNum='+msgNum);
+
+			})
+			
 		});
 	</script>
 

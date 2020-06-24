@@ -11,6 +11,7 @@
  		<result property="isChecked"  column="message_check"/>
  		<result property="msgSendTime"  column="message_send"/>
  		<result property="msgReadTime"  column="message_read"/>		
+ 		<result property="msgActive"  column="message_active"/>		
 	</resultMap>
 
 	<insert id="sendMsg" parameterType="Message">
