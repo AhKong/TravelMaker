@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.travelMaker.domain.Member;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController{
 	
 	
@@ -51,7 +53,7 @@ public class MemberController{
 		return "member/myPage";
 	}
 	
-	//회원정 수정
+	//회원정보 수정
 	@GetMapping("/updateMember")
 	public String updateMember(Model model) {
 		

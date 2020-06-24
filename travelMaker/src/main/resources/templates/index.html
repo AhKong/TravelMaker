@@ -39,24 +39,27 @@
 
 #indexing {
 	background-image: url(/dist/img/landscape.jpg);
-	background-position: top;
+	background-position: center top;
 	background-size: 100%;
-	padding-bottom: 480px;
-}
-
-#searchBtn {
-	margin-top: 90px;
-}
-
-#searchText {
-	margin-top: 90px;
-	margin-left: 300px;
+	/* padding-bottom: 480px;*/
+	background-repeat: no-repeat;
+	padding: 150px 0;
 }
 
 #h1 {
-	padding-top: 130px;
+	/* padding-top: 130px;*/
 	text-align: center;
+	margin-bottom: 50px;
 }
+
+@media screen and (max-width: 576px) {
+	.serch-input-group{width: 90% !important; margin: auto !important;}
+	#indexing{
+		padding: 50px 0;
+	}
+}
+
+
 </style>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -82,30 +85,30 @@
 				<h1>TravelMaker</h1>
 			</div>
 
-			<section class="content">
-
-				<div class="row">
-					<div class=" col-md-7 col-lg-10 col-xs-5">
-						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..." id="searchText" style="height:55px"> <span
-								class="input-group-btn" >
-								<button class="btn btn-default" type="button" id="searchBtn" style="height:55px">
-									<svg class="bi bi-search" width="1em" height="1em"
-										viewBox="0 0 16 16" fill="currentColor"
-										xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd"
-											d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-									<path fill-rule="evenodd"
-											d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-								</svg>
-								</button>
-							</span> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</div>
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10 serch-input-group">
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="Search for..." id="searchText" style="height: 55px">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="searchBtn"
+								style="height: 55px">
+								<svg class="bi bi-search" width="1em" height="1em"
+									viewBox="0 0 16 16" fill="currentColor"
+									xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd"
+										d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+								<path fill-rule="evenodd"
+										d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+							</svg>
+							</button>
+						</span> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</div>
 				</div>
-
-			</section>
+				<div class="col-sm-1"></div>
+			</div>
+			
 		</div>
 
 		<div id="index">
@@ -117,28 +120,31 @@
 				<div class="container-fluid">
 					<!-- Small boxes (Stat box) -->
 					<div class="row">
-						<div class="col-lg-4 col-7" id="top3Box" style="cursor: pointer;"
-							onclick="location.href='detailSights'">
+						<div class="col-lg-4 col-7" id="top3Box">
 							<!-- small box -->
 							<div class="small-box1">
 								<div>
-									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
-										class="img-rounded">
+									<img style="cursor: pointer;"
+										onclick="location.href='detailSights'" id="img"
+										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
 								</div>
 							</div>
 							<div>
 								<a id="small-text">효자동</a>
 							</div>
-							<div id="small-text">평점 리뷰 0000개</div>
+							<div id="small-text">
+								평점 리뷰 0000개 <i class="fas fa-hand-point-up"
+									style="text-align: right;"></i><i class="far fa-hand-point-up"></i>
+							</div>
 						</div>
 						<!-- ./col -->
-						<div class="col-lg-4 col-7" id="top3Box" style="cursor: pointer;"
-							onclick="location.href='detailSights'">
+						<div class="col-lg-4 col-7" id="top3Box">
 							<!-- small box -->
 							<div class="small-box1">
 								<div>
-									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
-										class="img-rounded">
+									<img style="cursor: pointer;"
+										onclick="location.href='detailSights'" id="img"
+										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
 								</div>
 							</div>
 							<div>
@@ -147,13 +153,13 @@
 							<div id="small-text">평점 리뷰 0000개</div>
 						</div>
 						<!-- ./col -->
-						<div class="col-lg-4 col-7" id="top3Box" style="cursor: pointer;"
-							onclick="location.href='detailSights'">
+						<div class="col-lg-4 col-7" id="top3Box">
 							<!-- small box -->
 							<div class="small-box1">
 								<div>
-									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
-										class="img-rounded">
+									<img style="cursor: pointer;"
+										onclick="location.href='detailSights'" id="img"
+										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
 								</div>
 							</div>
 							<div>
@@ -178,10 +184,7 @@
 			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
 			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		*/
-		
-		
-		
+		 */
 	</script>
 </th:block>
 </html>
