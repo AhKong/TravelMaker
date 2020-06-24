@@ -1,7 +1,7 @@
 package com.cafe24.travelMaker.domain;
 
 public class Stats {
-	//관광명소 통계 하위3개 별점
+	//관광명소 통계 
 	private String m_gender;
 	private String sig_review;
 	private String sig_like;
@@ -11,5 +11,10 @@ public class Stats {
 	private String sig_amenity;
 	//음식점 통계
 	private String res_review;
-	private String res_like;
+	private String res_taste;
+	private String res__hygiene;
+	private String res_mood;
+	private String res_kind;
+	private String res_cheap;
+	
 }

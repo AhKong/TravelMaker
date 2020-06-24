@@ -13,7 +13,7 @@ import com.cafe24.travelMaker.mapper.StatsMapper;
 public class StatsController {
 
 	@Autowired
-	StatsMapper statsMapper;
+	public StatsMapper statsMapper;
 
 	@GetMapping("/stats")
 	public String stats(Model model) {

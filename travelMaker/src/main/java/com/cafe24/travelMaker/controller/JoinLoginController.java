@@ -42,47 +42,6 @@ public class JoinLoginController {
 		return "join_login/login";
 	}
 	
-	@RequestMapping("/findId")
-	@ResponseBody
-	public HashMap<String,String> findId(Member member) {
-			HashMap<String,String> getId = new HashMap<String,String>();
-				System.out.println("아이디 찾기");
-				System.out.println(member.getmName());
-				System.out.println(member.getmTel());
-				System.out.println(member.getmEmail());
-				Member result = memberService.findId(member);
-				//System.out.println(result.getmId() +"<----------- 찾은 아이디");
-	
-				System.out.println(result+"<---------- result");
-				if(result!=null) {
-					getId.put("result", result.getmId());
-				}else {
-					getId.put("result", "none");
-				}
-			return getId;
-	}
-	
-	@RequestMapping("/findPw")
-	@ResponseBody
-	public HashMap<String, String> findPw(Member member) {//비번찾기
-		HashMap<String, String> getPw = new HashMap<String, String>();
-	
-			System.out.println("비밀번호 찾기");
-			System.out.println(member.getmId());
-			System.out.println(member.getmTel());
-			System.out.println(member.getmEmail());
-			Member result = memberService.findPw(member);
-			//System.out.println(result.getmPw() + "<------------ 찾은 비밀번호");
-			
-			System.out.println(result+"<---------- result");
-			if(result!=null) {
-				getPw.put("result", result.getmPw());
-			}else {
-				getPw.put("result", "none");
-			}
-		return getPw;
-	}
-	
 	@PostMapping("/loginMember")	
 	public String loginMember(Member member, HttpSession session, RedirectAttributes redirectAttr) {
 		if(member.getmId() != null &&  member.getmPw() != null && !"".equals(member.getmPw()) &&  !"".equals(member.getmId())) {
