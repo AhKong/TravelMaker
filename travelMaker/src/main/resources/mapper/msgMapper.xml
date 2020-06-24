@@ -79,7 +79,7 @@
 			 and message_active='Y'
 	</select>
 	
-	<update id="deleteMsg" >
+	<update id="deleteMsgs" >
 		UPDATE
 			tb_message
 		SET
@@ -100,4 +100,12 @@
 			m_id = #{mId} or target_id =#{mId}
 			 and message_active='N'
 	</select>
+	
+	<update id="deleteMsg" parameterType="String" >
+		UPDATE
+			tb_message
+		SET
+			message_active='N'
+		WHERE message_num =#{messageNum}
+	</update>
 </mapper>

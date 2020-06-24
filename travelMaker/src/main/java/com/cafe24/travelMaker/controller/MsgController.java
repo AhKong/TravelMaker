@@ -64,7 +64,14 @@ public class MsgController {
 	public HashMap<String,String> deleteMsg(@RequestParam(name="checkList[]") String[] checkList){
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("test", "hihi");
-		msgService.deleteMsg(checkList);
+		msgService.deleteMsgs(checkList);
 		return result;
+	}
+	
+	@GetMapping("deleteMsg")
+	public String deleteMsg(@RequestParam(name="messageNum") String messageNum) {
+		
+		msgService.deleteMsg(messageNum);
+		return "redirect:/deleteMsgList";
 	}
 }
