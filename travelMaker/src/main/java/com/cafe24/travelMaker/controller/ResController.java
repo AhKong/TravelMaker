@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.service.ResService;
@@ -11,6 +12,7 @@ import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
+@RequestMapping("/res")
 public class ResController {
 	@Autowired private ResService resService;
 	@Autowired private SightsService sightsService;
