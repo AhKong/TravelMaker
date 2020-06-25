@@ -179,7 +179,7 @@ $(function(){
 		}
 		
 		var request = $.ajax({
-			  url: "/member/findPw",  
+			  url: "/ajax/findPw",  
 			  method: "POST",
 			  data: {mId: mId.val(),
 				     mEmail: mEmail.val() ,
@@ -212,7 +212,7 @@ $(function(){
 		}
 		
 		var request = $.ajax({
-					  url: "/certEmail",  
+					  url: "/ajax/certEmail",  
 					  method: "GET",
 					  data: {email :mEmail.val()}, 
 					  dataType: "json"

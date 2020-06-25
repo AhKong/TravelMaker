@@ -193,7 +193,7 @@ $(function(){
 			
 		
 			var request = $.ajax({
-				  url: "/member/findId",  
+				  url: "/ajax/findId",  
 				  method: "POST",
 				  data: {mName: mName.val(),
 					     mEmail: mEmail.val() ,
@@ -228,7 +228,7 @@ $(function(){
 		}
 		
 		var request = $.ajax({
-					  url: "/certEmail",  
+					  url: "/ajax/certEmail",  
 					  method: "GET",
 					  data: {email :mEmail.val()}, 
 					  dataType: "json"
