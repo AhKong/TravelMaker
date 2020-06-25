@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.cafe24.travelMaker.domain.Member;
+
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.PointSerivce;
 import com.cafe24.travelMaker.service.StorageService;
-
 
 @Controller
 @RequestMapping("/member")
