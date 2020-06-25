@@ -17,14 +17,6 @@
 	<title>detailGoods</title>
 </th:block>
 <th:block layout:fragment="customContents">
-	<style>
-	#optionCss {
-		border: 2px solid #66ccff;
-		text-align:center;
-		width:80%;
-	}
-	</style>
-	
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -90,7 +82,7 @@
 				<div class="bg-gray py-2 px-3 mt-4">
                 <div class="form-group">
                 <label for="inputName" style = " font-size:1.5em;">결제가격(부가세 별도)</label>
-                <input type="text" id="goodsPrice" class="form-control" th:value="${goods.goodsPrice}+원" style = " font-size:1.5em;" readonly>
+                <input type="number" id="goodsPrice" class="form-control" th:value="${goods.goodsPrice}" style = " font-size:1.5em;" readonly>
               </div>
               </div>
 				<hr>
@@ -181,7 +173,14 @@
     		
     		var sub = Number(gAmount) * Number(gPrice);
     		$('#goodsPrice').val(sub)
-    	})
+    	});
+    	$('#buyAmount').click(function(){
+    		var gAmount = $('#buyAmount').val();
+    		var gPrice = /*[[${goods.goodsPrice}]]*/;
+    		
+    		var sub = Number(gAmount) * Number(gPrice);
+    		$('#goodsPrice').val(sub)
+    	});
     });
 /*]]>*/
 </script>

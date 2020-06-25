@@ -35,7 +35,9 @@ public class GoodsController{
 		return "/goods/detailGoods";
 	}
 	@GetMapping("/detailGoodsAllience")
-	public String detailGoodsAllience() {
+	public String detailGoodsAllience(Model model, Goods goods, @RequestParam(name="gCode",required=false) String gCode) {
+		goods = goodsService.getGoodsInfo(gCode);
+		model.addAttribute("goods", goods);
 		return "/goods/detailGoodsAllience";
 	}
 	@GetMapping("/addGoods")
