@@ -71,6 +71,10 @@
                 <input type="number" id="goodsPirce" class="form-control" name="goodsPrice" placeholder="숫자만 입력하세요.">
               </div>
               <div class="form-group">
+                <label for="inputClientCompany">상품수량</label>
+                <input type="number" id="goodsAmount" class="form-control" name="goodsAmount"  placeholder="숫자만 입력하세요.">
+              </div>
+              <div class="form-group">
                 <label for="inputProjectLeader">상품사진 </label>
                 <input type="file" name="file" id="my_file" class="form-control">
                 <input type="button" id="cancel_file" value="취소">
@@ -145,10 +149,21 @@
 			alert('상품상세설명을 입력해주세요.');
 			$("#goodsDescription").focus();
 			return false;
-		}
-		else if($("#goodsPirce").val() == ''){
+		}else if($("#goodsPirce").val() == ''){
 			alert('상품가격을 입력해주세요.');
 			$("#goodsPirce").focus();
+			return false;
+		}else if($("#goodsPirce").val() < 1 || $("#goodsPirce").val() > 100000){
+			alert('1~100000까지만 입력이 가능합니다.');
+			$("#goodsPirce").focus();
+			return false;
+		}else if($("#goodsAmount").val() == ''){
+			alert('상품수량을 입력해주세요.');
+			$("#goodsAmount").focus();
+			return false;
+		}else if($("#goodsAmount").val() < 1 || $("#goodsAmount").val() > 100){
+			alert('1~100까지만 입력이 가능합니다.');
+			$("#goodsAmount").focus();
 			return false;
 		}else if($("#my_file").val() == ''){
 			alert('상품사진을 선택해주세요.');
@@ -157,8 +172,6 @@
 		}
 		$("#modalBtn").submit();
 	});
-    
-    
 </script>
 </th:block>
 </html>

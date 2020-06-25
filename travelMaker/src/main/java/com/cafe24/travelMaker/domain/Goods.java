@@ -13,6 +13,7 @@ public class Goods {
 	private String goodsDetail;
 	private String goodsRegDate;
 	private String goodsSaleYesNo;
+	private String goodsAmount;
 
 	public String getGoodsCode() {
 		return goodsCode;
@@ -75,14 +76,19 @@ public class Goods {
 		this.file = file;
 	}
 	
+	public String getGoodsAmount() {
+		return goodsAmount;
+	}
+	public void setGoodsAmount(String goodsAmount) {
+		this.goodsAmount = goodsAmount;
+	}
 	@Override
 	public String toString() {
 		return "Goods [goodsCode=" + goodsCode + ", memberId=" + memberId + ", file=" + file + ", goodsPhoto="
 				+ goodsPhoto + ", goodsCate=" + goodsCate + ", goodsName=" + goodsName + ", goodsPrice=" + goodsPrice
 				+ ", goodsDetail=" + goodsDetail + ", goodsRegDate=" + goodsRegDate + ", goodsSaleYesNo="
-				+ goodsSaleYesNo + "]";
+				+ goodsSaleYesNo + ", goodsAmount=" + goodsAmount + "]";
 	}
-
 	
 }
 

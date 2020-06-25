@@ -24,6 +24,7 @@
 		width:80%;
 	}
 	</style>
+	
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,46 +47,60 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card card-solid">
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
               <div class="col-12">
                 <img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image">
               </div>
+              <div class="col-12 product-image-thumbs">
+                <div class="product-image-thumb active"><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+              </div>
             </div>
             <div class="col-12 col-sm-6">
-            <h1>상품명 : <input class="my-3" th:value="${goods.goodsName}" readonly id="optionCss" style="width:55%;">
-            	
-            </h1>
+              <div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">상품이름</label>
+                <input type="text" id="inputName" class="form-control" th:value="${goods.goodsName}" readonly>
+              </div>
               <hr>
-             <textarea class="my-3" th:text="${goods.goodsDetail}" readonly id="optionCss" rows="3" style="width:100%; font-size: 25px;" ></textarea>
+              <div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">한줄설명</label>
+                <input type="text" id="inputName" class="form-control" th:value="${goods.goodsDetail}" readonly >
+              </div>
               <hr>
-				<h3>분류 : <input class="my-3" th:value="${goods.goodsCate}" readonly id="optionCss" style="width:29%;">
-					&nbsp 등록자 : <input class="my-3" th:value="${goods.memberId}" readonly id="optionCss" style="width:25%;">
-				</h3>
+              <div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">등록자</label>
+                <input type="text" id="inputName" class="form-control" th:value="${goods.memberId}" readonly>
+              </div>
+              	<hr>
+               <div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">분류</label>
+                <input type="text" id="inputName" class="form-control" th:value="${goods.goodsCate}" readonly>
+              </div>
 				<hr>
-			<div class="small-box bg-info" style="text-align:center;">
-              <div class="inner">
-                <h3 class="mb-0" th:text="${goods.goodsPrice}+원"></h3>
-
-                <p>(부가세 별도)</p>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-primary" style="border:solid;outline-color:white;">
-                  	  <i class="fas fa-cart-plus fa-lg mr-2" ></i>
+				<div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">상품수량</label>
+                <input type="text" id="goodsAmount" class="form-control" th:value="${goods.goodsAmount}" readonly>
+              </div>
+				<hr>    
+				<div class="bg-gray py-2 px-3 mt-4">
+                <div class="form-group">
+                <label for="inputName" style = " font-size:1.5em;">결제가격(부가세 별도)</label>
+                <input type="text" id="goodsPrice" class="form-control" th:value="${goods.goodsPrice}+원" style = " font-size:1.5em;" readonly>
+              </div>
+              </div>
+				<hr>
+				<div style="text-align:center;">
+					수량선택 : <input type="text" class="btn btn-info btn-sm" id="buyAmount"></input> &emsp;
+              		<button type="button" id="buyBtn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-primary" style="border:solid;outline-color:white;">
+                  	  <i class="fas fa-cart-plus fa-lg mr-3" ></i>
                   	구매하기
-                </button>
-              </div>
-              <div class="icon">
-              
-                <i class="ion ion-bag"></i>
-                
-              </div>
-              
-              <div class="mt-4" style="text-align:center">
-              </div>
-            </div>
-          </div>
-          </div>
+                	</button>
+                </div>
 				<div class="modal fade" id="modal-primary">
 		        <div class="modal-dialog">
 		          <div class="modal-content bg-info">
@@ -98,7 +113,7 @@
 		              <p>상품을 구매하시겠습니까?</p>
 		            </div>
 		            <div class="modal-footer justify-content-between">
-		              <button onclick="location.href='/goods/buyGoods'" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+		              <button onclick="location.href='/goods/buyGoods'" class="btn btn-outline-light" data-dismiss="modal" id="buySuccess">확인</button>
 		            </div>
 		          </div>
 		          <!-- /.modal-content -->
@@ -107,8 +122,20 @@
 		      </div>
 		      <!-- /.modal -->
             </div>
+            <div class="row mt-4">
+            <nav class="w-100">
+              <div class="nav nav-tabs" id="product-tab" role="tablist">
+                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">환불</a>
+                <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">배송</a>
+                <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">구매</a>
+              </div>
+            </nav>
+            <div class="tab-content p-3" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab" style = " font-size:1.5em;">환불은 저희 travelmaker 문의게시판에 남겨주세요!</div>
+              <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab" style = " font-size:1.5em;">배송은 평균2~3일 정도 소요됩니다. 상황에 따라 오차가 있을 수 있습니다.</div>
+              <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab" style = " font-size:1.5em;">구매시 포인트가 차감됩니다.</div>
+            </div>
           </div>
-          
         </div>
         <!-- /.card-body -->
       </div>
@@ -118,7 +145,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -134,6 +160,31 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    $(function(){
+    	$('#buyBtn').click(function(){
+    		if($("#buyAmount").val() == ''){
+    			alert('구매수량을 입력해주세요.');
+    			$("#buyAmount").focus();
+    			return false;
+    		}else if($("#buyAmount").val() < 1 || $("#buyAmount").val() > Number($("#goodsAmount").val())){
+    			alert('"1 ~ 상품수량" 까지만 입력이 가능합니다.');
+    			$("#buyAmount").focus();
+    			return false;
+    		}
+    		$("#buySuccess").submit();
+    	});
+    	$('#buyAmount').keyup(function(){
+    		var gAmount = $('#buyAmount').val();
+    		var gPrice = /*[[${goods.goodsPrice}]]*/;
+    		
+    		var sub = Number(gAmount) * Number(gPrice);
+    		$('#goodsPrice').val(sub)
+    	})
+    });
+/*]]>*/
+</script>
 </body>
 </th:block>
 </html>
