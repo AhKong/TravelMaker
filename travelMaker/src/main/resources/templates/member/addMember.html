@@ -6,8 +6,7 @@
 	 <title>Welcome To TravleMaker</title>
 </th:block>
 <th:block layout:fragment="customCss">
-<link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-<link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+
   <style>
       html,body{
     	margin:0;
@@ -35,7 +34,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Welcome To TravelMaker!
       </p>
-      <form action="/addMember" id="memberJoinForm" method="post" enctype="multipart/form-data">
+      <form action="/member/addMember" id="memberJoinForm" method="post" enctype="multipart/form-data">
         <div class="input-group form-group mb-3">
            <input type="text" id="memberId" class="form-control" placeholder="ID" name="mId">
           <div class="input-group-append">
@@ -161,8 +160,7 @@
           <!-- /.col -->
         </div>
       </form>
-      <a href="/login" class="text-center">I already have a membership</a>
-
+      <a href="/member/login" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
@@ -204,7 +202,7 @@
 				if(mIdCheck.test(mId.val())==true){
 					$('#idRexExpMsg').css('display','none');
 					var request = $.ajax({
-						  url: "/idCheck",  
+						  url: "/ajax/idCheck",  
 						  method: "Post",
 						  data: {mId :mId.val()}, 
 						  dataType: "json"

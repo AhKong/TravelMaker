@@ -5,42 +5,26 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
-import com.cafe24.travelMaker.service.AffiliateService;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
-
 
 /*ajax 컨트롤러*/
 @Controller
 @RequestMapping("/ajax")
 public class AjaxController {
-	@Autowired private AffiliateService affService;
+
 	@Autowired private  MailService mailService;
 	@Autowired private  CertSerivce certService;
-	@Autowired MemberService memberService;
-	
-	@GetMapping("/affIdCheck")
-	@ResponseBody
-	public HashMap<String,String> affIdCheck( @RequestParam(name="affId") String affId){
-		
-		System.out.println(affId);
-		HashMap<String,String> result = new HashMap<String,String> ();
-		int check = affService.checkAffId(affId);
-		if(check >0) {
-			result.put("result", "Y");
-		} else {
-			result.put("result", "N");
-		}		
-		return result;	
-	}
-	
+	@Autowired private MemberService memberService;
+
 	//아이디 찾기 기능
 	@RequestMapping("/findId")
 	@ResponseBody
@@ -97,4 +81,22 @@ public class AjaxController {
 		certEmailResult.put("randomCode", (String)certEmail.get("randomCode"));
 		return certEmailResult;
 	}
+	
+   /*
+    * 아이디 중복검사
+    * */
+	@PostMapping("/idCheck")
+	public @ResponseBody HashMap<String,String> idCheck(@RequestParam(name="mId") String mId ){
+		System.out.println(mId);
+		
+		HashMap<String, String> idCheckResult = new HashMap<String,String>();
+
+		if(memberService.mIdCheck(mId)==0) {
+			idCheckResult.put("result", "N");
+		} else {
+			idCheckResult.put("result", "Y");
+		}
+		return idCheckResult;
+	}
+
 }
