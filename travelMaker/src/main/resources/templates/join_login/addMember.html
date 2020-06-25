@@ -169,7 +169,6 @@
 </div>
 </th:block>
  <th:block layout:fragment="customScript">
-
 	<script>
 		$(function(){
 			var mId = $('input[name=mId]');
@@ -346,7 +345,7 @@
 			 	return false;
 			}
 			var request = $.ajax({
-						  url: "/certEmail",  
+						  url: "/ajax/certEmail",  
 						  method: "GET",
 						  data: {email :mEmail.val()}, 
 						  dataType: "json"

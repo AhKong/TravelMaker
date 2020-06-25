@@ -15,6 +15,12 @@
  		padding-right:10px;
  		padding-top:5px;
  	}
+ 	
+ 	.msg{
+ 		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ 	}
    </style>
  </th:block>
 
@@ -29,17 +35,19 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Let's work together!
       </p>
-      <form action="/addMember" method="post">
+      <form action="/addAffiliate" method="post" >
         <div class="input-group form-group mb-3">
-           <input type="text" id="memberId" class="form-control" placeholder="ID" name="mId">
+           <input type="text" id="memberId" class="form-control" placeholder="ID" name="affId">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-handshake-o"></span>
             </div>
           </div>
         </div>
+        <p class="msg" id="idCheckMsg">중복되는 아이디 입니다.</p>
+        
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="affPw" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -47,7 +55,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="password" class="form-control affPwCheck" placeholder="Retype password" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -55,7 +63,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Company Name" name="mId">
+          <input type="text" class="form-control" placeholder="Company Name" name="affName">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-building-o"></span>
@@ -63,16 +71,25 @@
           </div>
         </div>	
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="affEmail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-            <button type="button" class="btn btn-default">이멜인증</button>
+            <button type="button" class="btn btn-default certEmailBtn">이멜인증</button>
+        </div>
+         <div class="input-group mb-3">
+          <input type="email" class="form-control certCode" placeholder="인증코드">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+         	<button type="button" class="btn btn-default certCodeBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Company Tel Number">
+          <input type="text" class="form-control" placeholder="Company Tel Number" name="affTel">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-volume-control-phone"></span>
@@ -81,7 +98,7 @@
         </div>
     
           <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Company Address">
+          <input type="text" class="form-control" placeholder="Company Address" name="affAddr">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-building-o"></span>
@@ -99,7 +116,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="button" class="btn btn-primary btn-block">Register</button>
+            <button id="addBtn" type="button" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -111,8 +128,136 @@
 </div>
 </div>
 </th:block>
-<th:block layout:fragment="customFooterScript">
+<th:block layout:fragment="customScript">
 	<script>
+	
+	$(function(){
+		
+		var affId = $('input[name=affId]');
+		var affPw = $('input[name=affPw]');
+		var affPwCheck= $('.affPwCheck');
+		var affName =$('input[name=affName]');
+		var affTel = $('input[name=affTel]');
+		var affEmail=  $('input[name=affEmail]');
+		var affAddr =$('input[name=affAddr]');
+		var idCheck = false;
+		var isCerted = false;
+		var certCode=undefined;
+		var cert =$('.certCode');
+		affId.keyup(function(){
+			var request = $.ajax({
+				  url: "/ajax/affIdCheck",  
+				  method: "GET",
+				  data: {"affId" :affId.val()}, 
+				  dataType: "json"
+			});
+
+			request.done(function( data ) {
+				if(data.result =='N'){ // 아이디 중복 안되는 경우
+					idCheck = true;
+					$('#idCheckMsg').css('display','none')
+				} else {
+					$('#idCheckMsg').css('display','block')
+					idCheck = false;
+				}
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			});
+		})
+		
+		$('.certEmailBtn').click(function(){
+			if(affEmail.val()=='' || affEmail.val()==undefined){
+				alert('이메일 입력하시오');
+				affEmail.focus();
+				return false;
+			}
+			var request = $.ajax({
+				  url: "/ajax/certEmail",  
+				  method: "GET",
+				  data: {email :affEmail.val()}, 
+				  dataType: "json"
+			}); 	     
+
+			request.done(function( data ) {
+				certCode=data.randomCode
+				console.log(data.randomCode);
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			});
+		})
+		
+		$('.certCodeBtn').click(function(){
+			
+			if( cert.val()==certCode){
+				alert('인증성공!');
+				isCerted=true;
+				certCode ='success';
+			} else  {
+				alert('이메일을 다시 확인해주세요');
+				return false;
+			}
+		})
+		
+		$('#addBtn').click(function(){
+			if(affId.val()==''){
+				alert('아이디를 입력하세요');
+				affId.focus();
+				return false;
+			}
+			if(idCheck==false){
+				alert('중복된 아이디는 사용하실 수 없습니다.');
+				affId.focus();
+				return false;
+			}
+			if(affPw.val()==''){
+				alert('비밀번호를 입력하세요');
+				affPw.focus();
+				return false;
+			}
+			if(affPwCheck.val() != affPw.val()){
+				alert('비밀번호가 일치하지 않습니다.');
+				affPwCheck.val('');
+				affPwCheck.focus();
+				return false;
+			}
+			if(affName.val()==''){
+				alert('업체명을 입력하세요');
+				affName.focus();
+				return false;
+			}
+			if(affEmail.val()==''){
+				alert('이메일을 입력하세요');
+				affEmail.focus();
+				return false;
+			}
+			
+			if(isCerted == false){
+				alert('이메일 인증번호가 일치하지 않습니다');
+				return false;
+			}
+			
+			if(affTel.val()==''){
+				alert('업체 전화번호를 입력해주세요');
+				affTel.focus();
+				return false;
+			}
+			
+			if(affAddr.val()==''){
+				alert('업체 주소를 입력해주세요');
+				affAddr.focus();
+				return false;
+			}
+			
+			$('form').submit();
+		})
+		
+
+		
+	})
 	</script>	
 </th:block>
 </html>
