@@ -14,6 +14,8 @@
 	, g_point AS goodsPrice
 	, g_detail AS goodsDetail
 	, g_reg_date AS goodsRegDate
+	, g_amount as goodsAmount
+	, g_sale_yesno as goodsSaleYesNo
 	FROM tb_Alliance_g
 	</select>
 	
@@ -27,6 +29,8 @@
 	, g.g_cate	AS goodsCate
 	, g.g_point AS goodsPrice
 	, g.g_reg_date AS goodsRegDate
+	, g_amount as goodsAmount
+	, g_sale_yesno as goodsSaleYesNo
 	, m.m_name AS memberName
 	FROM 
 	tb_Alliance_g as g
@@ -48,6 +52,7 @@
 			, g_detail AS goodsDetail
 			, g_reg_date AS goodsRegDate
 			, g_sale_yesno as goodsSaleYesNo
+			, g_amount as goodsAmount
 		FROM 
 			tb_Alliance_g
 		WHERE
@@ -65,7 +70,7 @@
 			tb_Alliance_g
 	</selectKey>
 		INSERT INTO tb_Alliance_g
-	(g_num, m_id, g_photo, g_cate, g_name, g_point, g_detail, g_reg_date, g_sale_yesno)
-	VALUES (#{goodsCode}, #{memberId}, #{goodsPhoto}, #{goodsCate}, #{goodsName}, #{goodsPrice}, #{goodsDetail}, NOW(), "판매중");
+	(g_num, m_id, g_photo, g_cate, g_name, g_point, g_detail, g_reg_date, g_sale_yesno, g_amount)
+	VALUES (#{goodsCode}, #{memberId}, #{goodsPhoto}, #{goodsCate}, #{goodsName}, #{goodsPrice}, #{goodsDetail}, NOW(), "판매중", #{goodsAmount});
 	</insert>
 </mapper>

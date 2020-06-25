@@ -35,9 +35,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-   
-
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">포인트를 통해 원하시는 상품을 구매하세요 !</h3>
@@ -51,8 +48,10 @@
                     <th>상품분류 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
                     <th>상품이름 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
                     <th>상품가격 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
-                    <th>상품등록일자 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>상품수량<i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>상품등록일자<i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
                     <th>상세보기/주문</th>
+                    <th>판매유무 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
                   </tr>
                   </thead>
                   	
@@ -63,8 +62,10 @@
                     <td th:text="${gl.goodsCate}"></td>
                     <td th:text="${gl.goodsName}"></td>
                     <td th:text="${gl.goodsPrice}"></td>
+                    <td th:text="${gl.goodsAmount}"></td>
                     <td th:text="${gl.goodsRegDate}"></td>
-                    <td><a th:href="@{/goods/detailGoods(gCode=${gl.goodsCode})}" class="btn btn-primary">click</a></td>
+                    <td><a th:href="@{/goods/detailGoods(gCode=${gl.goodsCode})}" class="btn btn-primary"><i class="fas fa-search"></i></a></td>
+					<td><span class="badge badge-success" th:text="${gl.goodsSaleYesNo}"></span></td>
                   </tr>
                   </tbody>
          	

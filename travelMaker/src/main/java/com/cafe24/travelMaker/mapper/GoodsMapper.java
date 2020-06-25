@@ -10,7 +10,7 @@ import com.cafe24.travelMaker.domain.Member;
 @Mapper
 public interface GoodsMapper {
 	
-	public List<Member> getGoodsResultList();
+	public List<Goods> getGoodsResultList();
 	public Goods getGoodsInfo(String gCode);
 	public List<Goods> getMyGoodsList(String mId);
 	public int addGoods(Goods goods);

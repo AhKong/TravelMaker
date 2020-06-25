@@ -15,7 +15,7 @@ import com.cafe24.travelMaker.mapper.GoodsMapper;
 public class GoodsService {
 	@Autowired private GoodsMapper goodsMapper;
 	
-	public List<Member> getGoodsList(){
+	public List<Goods> getGoodsList(){
 		return goodsMapper.getGoodsResultList();
 	}
 	
