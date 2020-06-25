@@ -2,21 +2,29 @@ package com.cafe24.travelMaker.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.service.MemberService;
+import com.cafe24.travelMaker.service.PointSerivce;
+import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController{
 	@Autowired MemberService memberService;
+	@Autowired private StorageService storageService;
+	@Autowired private PointSerivce pointService;
 	
 	@GetMapping("/myPage")
 	public String myPage() {
@@ -113,8 +121,65 @@ public class MemberController{
 		
 		return "member/dormantMember";
 	}
+
+	@GetMapping("/login")
+	public String login() {
+		return "member/login";
+	}
+	/*일반회원 로그인*/
+	@PostMapping("/login")	
+	public String loginMember(Member member, HttpSession session, RedirectAttributes redirectAttr) {
+		if(member.getmId() != null &&  member.getmPw() != null && !"".equals(member.getmPw()) &&  !"".equals(member.getmId())) {
+			Member result = memberService.memberLogin(member.getmId());
+			if(result !=null) {
+				if(member.getmPw().equals(result.getmPw())) {
+					session.setAttribute("SID", result.getmId());
+		    		session.setAttribute("SLEVEL",result.getmLevel());
+		    		session.setAttribute("SNAME", result.getmName());	
+		    		System.out.println(session.getAttribute("SID"));
+		    		System.out.println(session.getAttribute("SLEVEL"));
+		    		System.out.println(session.getAttribute("SNAME"));
+		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
+		    		return "redirect:/";
+				}
+			}
+			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
+			redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
+		}
+		return "redirect:/login";
+	}
+
+	/*회원가입 페이지 */
+	@GetMapping("/join")
+	public String addMember() {
+		
+		return "member/addMember";
+	}
 	
-	
-	
-	
+	@PostMapping("/addMember")
+	public String addMember(Member member) {
+		
+		//System.out.println(result +"<----result");
+
+		member.setmAvatar(member.getFile().getOriginalFilename());
+		if(!"".equals(member.getmAvatar())) {
+			storageService.store(member.getFile());
+		}
+		int result = memberService.addMember(member);
+		if(result >0) {// 회원가입 성공
+ 			System.out.println(result +"<----ryesult");
+ 			pointService.setSavePointForJoin(member.getmId());
+ 			int pointAddResult = pointService.savePoint();
+ 			System.out.println(pointAddResult+"<----point 적립 성공!");
+ 			int pointResult = pointService.setPoint();
+ 			System.out.println(pointResult+"<----point insert 성공!");
+		}
+		return "redirect:/member/login";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+
 }

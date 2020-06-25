@@ -22,5 +22,17 @@ public class MemberService {
 		System.out.println(member + " <---------- Service findPw");	
 	return memberMapper.findPw(member);
 	}
+	
+	public int mIdCheck(String mId) {
+		return memberMapper.mIdCheck(mId);
+	}
+
+	public Member memberLogin(String mId) {
+		return memberMapper.getMemberInfo(mId);
+	}
+
+	public int addMember(Member member) {
+		return memberMapper.addMember(member);
+	}
 
 }

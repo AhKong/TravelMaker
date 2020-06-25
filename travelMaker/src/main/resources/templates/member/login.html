@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/loginJoinLayout.html}">
+<th:block layout:fragment="customTitle">
+    <title>TravelMaker |  Log in</title>
+</th:block>
+ <th:block layout:fragment="customCss">
+
+ </th:block>
+<th:block layout:fragment="customContents">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/"><b>Travel</b>Maker</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">안녕하세요  travelMaker 입니다!</p>
+
+      <form  id="loginForm" action="/member/login" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="ID" name="mId" value="id001">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" name="mPw" value="pw001">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button id ="loginBtn" type="button" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <!-- /.social-auth-links -->
+
+      <p class="mb-1 text-center"  >
+        <a href="/member/memberFindId">아이디 찾기</a> |
+        <a href="/member/memberFindPw">비밀 번호 찾기</a> 
+      </p>
+      <p class="mb-0 text-center">
+        <a href="/member/join" class="text-center">Register a new membership</a>
+      </p>
+      <p class="mb-0 text-center">
+        <a href="register.html" class="text-center">관리자</a> | 
+        <a href="register.html" class="text-center">제휴업체</a>  
+        
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+
+ </th:block>
+ <th:block layout:fragment="customScript">
+ 	<script>
+ 		$(function(){
+ 			$('#loginBtn').click(function(){
+ 				var mId =$('input[name=mId]');
+ 				var mPw =$('input[name=mPw]');
+ 				if(mId.val()=='' || mId.val()==undefined){
+ 					alert('아이디를 입력하세요.');
+ 					mId.focus();
+ 					return false;
+ 				}
+ 				if(mPw.val()=='' || mPw.val()==undefined){
+ 					alert('비밀번호를 입력하세요.');
+ 					mPw.focus();
+ 					return false;
+ 				}
+ 				$('#loginForm').submit();
+ 			})
+ 			
+ 		})
+ 	</script>
+ 
+  </th:block>
+
+</html>
