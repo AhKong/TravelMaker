@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cafe24.travelMaker.domain.Affiliate;
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.service.CertSerivce;
@@ -29,14 +30,12 @@ import com.cafe24.travelMaker.service.MemberService;
 
 public class JoinLoginController {	
 
-	private  @Autowired JoinLoginService joinLoginServcie;
-	private @Autowired StorageService storageService;
-	private @Autowired  MailService mailService;
-	private @Autowired  CertSerivce certService;
-	private @Autowired PointSerivce pointService;
-	public @Autowired MemberService memberService;
+	@Autowired private JoinLoginService joinLoginServcie;
+	@Autowired private StorageService storageService;
+	@Autowired private  MailService mailService;
+	@Autowired private  CertSerivce certService;
+	@Autowired private PointSerivce pointService;
 
-	
 	@GetMapping("/login")
 	public String login() {
 		return "join_login/login";
@@ -109,6 +108,12 @@ public class JoinLoginController {
 		return "/join_login/addAffiliate";
 	}
 	
+	@PostMapping("/addAffiliate")
+	public String addAffiliate(Affiliate aff) {
+		System.out.println(aff +"<----aff");
+		joinLoginServcie.addAffiliate(aff);
+		return "redirect:/login";
+	}
 	@GetMapping("/checkMemberLevel")
 	public String checkMemberLevel() {
 		return "/join_login/checkMemberLevel.html";
