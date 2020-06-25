@@ -29,9 +29,9 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Let's work together!
       </p>
-      <form action="/addMember" method="post">
+      <form action="/addAffiliate" method="post">
         <div class="input-group form-group mb-3">
-           <input type="text" id="memberId" class="form-control" placeholder="ID" name="mId">
+           <input type="text" id="memberId" class="form-control" placeholder="ID" name="affId">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-handshake-o"></span>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="affPw" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="password" class="form-control affPwCheck" placeholder="Retype password" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -55,7 +55,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Company Name" name="mId">
+          <input type="text" class="form-control" placeholder="Company Name" name="affName">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-building-o"></span>
@@ -63,7 +63,7 @@
           </div>
         </div>	
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="affEmail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -72,7 +72,7 @@
             <button type="button" class="btn btn-default">이멜인증</button>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Company Tel Number">
+          <input type="text" class="form-control" placeholder="Company Tel Number" name="affTel">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-volume-control-phone"></span>
@@ -81,7 +81,7 @@
         </div>
     
           <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Company Address">
+          <input type="text" class="form-control" placeholder="Company Address" name="affAddr">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fa fa-building-o"></span>
@@ -99,7 +99,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="button" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -113,6 +113,7 @@
 </th:block>
 <th:block layout:fragment="customFooterScript">
 	<script>
+	
 	</script>	
 </th:block>
 </html>

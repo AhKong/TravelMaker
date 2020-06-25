@@ -3,5 +3,23 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.AffiliateMapper">
-
+	<insert id="addAffiliate" parameterType ="Affiliate">
+		INSERT INTO 
+			tb_affiliate(
+				aff_id, 
+				aff_pw, 
+				aff_name, 
+				aff_tel, 
+				aff_addr, 
+				aff_email
+			) VALUES (
+				#{affId},
+				#{affPw},
+				#{affName},
+				#{affTel},
+				#{affAddr},
+				#{affEmail}
+			)
+	
+	</insert>
 </mapper>
