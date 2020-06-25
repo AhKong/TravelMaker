@@ -11,4 +11,5 @@ import com.cafe24.travelMaker.domain.Affiliate;
 public interface AffiliateMapper {
 
 	public int addAffiliate(Affiliate aff);
+	public int checkAffId(String affId);
 }

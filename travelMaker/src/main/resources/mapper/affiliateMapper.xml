@@ -22,4 +22,12 @@
 			)
 	
 	</insert>
+	
+	<select id="checkAffId" parameterType="String" resultType="int">
+	 	select 
+	 		count(*)
+	 	from
+	 		tb_affiliate
+	 	where aff_id =#{affId}
+	</select>
 </mapper>

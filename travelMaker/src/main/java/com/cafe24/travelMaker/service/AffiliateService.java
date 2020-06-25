@@ -13,4 +13,8 @@ public class AffiliateService {
 	public int addAffiliate(Affiliate aff) {
 		return affiliateMapper.addAffiliate(aff);
 	}
+	
+	public int checkAffId(String affId) {
+		return affiliateMapper.checkAffId(affId);
+	}
 }
