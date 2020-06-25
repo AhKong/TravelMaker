@@ -181,5 +181,20 @@ public class MemberController{
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	@GetMapping("/adminLogin")
+	public String adminLogin(HttpSession session) {
+		session.setAttribute("SID", "id002");
+		session.setAttribute("SLEVEL","1");
+		session.setAttribute("SNAME", "강민수");
+		return "redirect:/";
+	}
 
+	@GetMapping("/affLogin")
+	public String affLogin(HttpSession session) {
+		session.setAttribute("SID", "id005");
+		session.setAttribute("SLEVEL","6");
+		session.setAttribute("SNAME", "이승환");
+		return "redirect:/";
+	}
 }
