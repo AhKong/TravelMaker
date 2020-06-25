@@ -27,7 +27,7 @@
 		<div th:replace="fragments/leftmenu :: leftmenuFragment"></div>
 		<div id="rightcolumn">
 			<th:block layout:fragment="customContents"></th:block>
-		<footer th:replace="fragments/footer :: footerFragment"></footer>
+		<footer th:replace="fragments/footer :: footerFragment" th:remove="tag"></footer>
 		</div>
 	</div>
 	<!-- 사용자 지정 자바스크립트 라이브러리 파일 -->
