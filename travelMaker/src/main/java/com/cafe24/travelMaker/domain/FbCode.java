@@ -2,15 +2,15 @@ package com.cafe24.travelMaker.domain;
 
 public class FbCode {
 
-	private String fbNum;
+	private String fbCodeNum;
 	private String fbReason;
-	private String fbRegDate;
+	private String fbCodeRegDate;
 	
-	public String getFbNum() {
-		return fbNum;
+	public String getFbCodeNum() {
+		return fbCodeNum;
 	}
-	public void setFbNum(String fbNum) {
-		this.fbNum = fbNum;
+	public void setFbCodeNum(String fbCodeNum) {
+		this.fbCodeNum = fbCodeNum;
 	}
 	public String getFbReason() {
 		return fbReason;
@@ -18,16 +18,16 @@ public class FbCode {
 	public void setFbReason(String fbReason) {
 		this.fbReason = fbReason;
 	}
-	public String getFbRegDate() {
-		return fbRegDate;
+	public String getFbCodeRegDate() {
+		return fbCodeRegDate;
 	}
-	public void setFbRegDate(String fbRegDate) {
-		this.fbRegDate = fbRegDate;
+	public void setFbCodeRegDate(String fbCodeRegDate) {
+		this.fbCodeRegDate = fbCodeRegDate;
 	}
 	
 	@Override
 	public String toString() {
-		return "FbCode [fbNum=" + fbNum + ", fbReason=" + fbReason + ", fbRegDate=" + fbRegDate + "]";
+		return "FbCode [fbCodeNum=" + fbCodeNum + ", fbReason=" + fbReason + ", fbCodeRegDate=" + fbCodeRegDate + "]";
 	}
 	
 }

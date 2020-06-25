@@ -1,9 +1,12 @@
 package com.cafe24.travelMaker.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import com.cafe24.travelMaker.domain.SightsFeedback;
+import com.cafe24.travelMaker.domain.FeedbackSights;
 import com.cafe24.travelMaker.mapper.FeedbackMapper;
 
 @Service
@@ -11,22 +14,23 @@ public class FeedbackService {
 
 @Autowired FeedbackMapper feedbackMapper;
 
-	public String formFeedback(String sightsNum) {
-		System.out.println("formFeedback FeedbackService 도착");
-		System.out.println(sightsNum+" <- sightsNum formFeedback FeedbackService");
-		String result = feedbackMapper.formFeedback(sightsNum);
-		System.out.println(result+" <- result formFeedback FeedbackService");
-		
-		return result;
-	}
-
-	public int addFeedback(SightsFeedback sightsFeedback) {
+	//피드백 전송
+	public int addFeedback(FeedbackSights feedbackSights) {
 		System.out.println("addFeedback FeedbackService 도착");
-		System.out.println(sightsFeedback+" <- sightsFeedback addFeedback FeedbackService");
-		int result = feedbackMapper.addFeedback(sightsFeedback);
-		System.out.println(result+" <- result addFeedback Feedbackservice");
+		System.out.println(feedbackSights+" <- feedbackSights addFeedback FeedbackService");
+		int num = feedbackMapper.addFeedback(feedbackSights);
+		System.out.println(num+" <- result addFeedback Feedbackservice");
 		
-		return result;
+		return num;
+	}
+	
+	//피드백 리스트
+	public List<FeedbackSights> feedbackList(Model model){
+		System.out.println("feedbackList FeedbackService 도착");
+		List<FeedbackSights> fbList = feedbackMapper.feedbackList(model);
+		System.out.println(fbList+" <- fbList feedbackList FeedbackService");
+		
+		return fbList;
 	}
 	
 }

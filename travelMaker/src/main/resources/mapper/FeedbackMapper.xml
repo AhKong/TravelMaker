@@ -3,59 +3,52 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.FeedbackMapper">
-	<resultMap type="SightsFeedback" id="feedbackSelect">
-		<result property="sightsFbNum" column="sights_fb_num" />
-		<result property="sightsFbContents" column="sights_fb_contents" />
-		<result property="sightsFbRegDate" column="sights_fb_reg_date" />
-		<result property="sightsFbCheck" column="sights_fb_check" />
+	<resultMap type="FeedbackSights" id="feedbackSelect">
+		<result property="fbSightsNum" column="fb_sights_num" />
+		<result property="fbSightsContents" column="fb_sights_contents" />
+		<result property="fbSightsRegDate" column="fb_sights_reg_date" />
+		<result property="fbSightsCheck" column="fb_sights_check" />
 		<association property="member" javaType="Member">
 			<result property="mId" column="m_id"/>
 		</association>
-		<association property="fbcode" javaType="FbCode">
-			<result property="fbNum" column="fb_num"/>
+		<association property="fbCode" javaType="FbCode">
+			<result property="fbCodeNum" column="fb_code_num"/>
 		</association>
-		<collection property="sights" javaType="Sights">
+		<association property="sights" javaType="Sights">
 			<result property="sightsNum" column="sights_num"/>
 			<result property="sightsName" column="sights_name"/>
-		</collection>
+		</association>
 	</resultMap>
 	
-	
-	<select id="formFeedback" parameterType="String" resultMap="feedbackSelect">
-		SELECT
-		FROM
-			tb_sights_fb AS f
-			RIGHT outer join
-			tb_sights AS s 
-			ON 
-			f.sights_num = s.sights_num
-		WHERE s.sights_num = #{sightsNum};
-		
+	<select id="feedbackList" resultType="String" resultMap="feedbackSelect">
+		SELECT 
+			fb_sights_num, fb_sights_reg_date, sights_num, fb_code_num, fb_sights_contents, m_id, fb_sights_check
+		FROM tb_fb_sights
+		ORDER BY fb_sights_reg_date ASC
 	</select>
-	
-	
-	<insert id="addFeedback" parameterType="SightsFeedback">
-		<selectKey order="BEFORE" keyProperty="sightsFbNum" resultType="String">
-		<!-- keyProperty="sightsFbNum" 는 select 의  sightsFbNum 와 이름이 같아야 한다  -->
-		<!--  또한 Goods 클래스의 g_code 컬럼의 변수명과 같아야 한다  -->
+
+	<insert id="addFeedback" parameterType="FeedbackSights">
+		<selectKey order="BEFORE" keyProperty="fbSightsNum" resultType="String">
+			<!-- keyProperty="sightsFbNum" 는 select 의  sightsFbNum 와 이름이 같아야 한다  -->
+			<!--  또한 FeedbackSights 클래스의 fb_sights_num 컬럼의 변수명과 같아야 한다  -->
 			SELECT
 				(case COUNT(*) 
-				when 0 then 'sights_fb_1'
-				ELSE CONCAT('sights_fb_', (MAX(CAST(substring(sights_fb_num,11) AS DECIMAL))+1))
-				END) AS sightsFbNum
+				when 0 then 'fb_sights_1'
+				ELSE CONCAT('fb_sights_', (MAX(CAST(substring(fb_sights_num,11) AS DECIMAL))+1))
+				END) AS fbSightsNum
 			FROM
-				tb_sights_fb
+				tb_fb_sights
 		</selectKey>
-			INSERT INTO tb_sights_fb
-			(sights_fb_num, sights_fb_reg_date, sights_num, fb_num, sights_fb_contents, m_id, sights_fb_check)			
+			INSERT INTO tb_fb_sights
+			(fb_sights_num, fb_sights_reg_date, sights_num, fb_code_num, fb_sights_contents, m_id, fb_sights_check)			
 			
-			VALUES ( #{sightsFbNum}
+			VALUES ( #{fbSightsNum}
 					,now()
 					,#{sights.sightsNum}
-					,#{fbcode.fbNum}
-					,#{sightsFbContents}
+					,#{fbCode.fbCodeNum}
+					,#{fbSightsContents}
 					,#{member.mId}
-					,#{sightsFbCheck}
+					,#{fbSightsCheck}
 					);
 	</insert>
 	
