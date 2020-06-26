@@ -66,7 +66,9 @@ public class SightsController{
 	}
 	
 	@GetMapping("/detailSights")
-	public String detailSights() {
+	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum) {
+		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
+		System.out.println(sightsService.getDetailSights(sightsNum));
 		return "/sights/detailSights";
 	}
 	

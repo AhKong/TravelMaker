@@ -70,31 +70,28 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-12 col-sm-7">
-					<h2 class="my-3">관광명소 이름</h2>
+					<h2 class="my-3 " th:text="${sights.sightsName}">관광명소 이름</h2>
 					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
 						리뷰</span>
 					<hr>
-					<p>상세설명은 여기에 자세하게 나올거야 상세설명은 여기에 자세하게 나올거야상세설명은 여기에 자세하게
-						나올거야상세설명은 여기에 자세하게 나올거야상세설명은 여기에 자세하게 나올거야</p>
-					<p>
-						<i class="far fa-clock"></i> 08:00 - 18 :00
+					<p th:text="${sights.sightsDetail}"></p>
+					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}|">
+						 08:00 - 18 :00
 					</p>
-					<p>
+					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|">
 						<i class="fas fa-map-marker-alt"></i> 전주시 덕진구 금암동 1111
 					</p>
 					<p>이 여행지는 여성이 선호하는 여행지입니다</p>
 					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
-					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
-					<p>
-						<i class="fas fa-tv"></i> www.tavelMaker4.cafe24.com
+					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|">
+						<i class="fas fa-tv"></i> 
 					</p>
-					<p>
-						<i class="fa fa-volume-control-phone"></i>
-						www.tavelMaker4.cafe24.com
+					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|">
+
 					</p>
 						<p>
-						<a>
+						<a th:href="@{/feedback/addFeedback(sightsNum=${sights.sightsNum})}">
 							<i class="far fa-edit"></i>
 							이 게시물에 대한 피드백 남기기 						
 						</a>
@@ -129,7 +126,7 @@
 									</ol>
 									<div class="carousel-inner">
 										<div class="carousel-item active" style="">
-											<img class="d-block w-100" src="/dist/img/test.jpeg"
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${sights.sightsPhoto})}"
 												alt="First slide">
 										</div>
 										<div class="carousel-item">

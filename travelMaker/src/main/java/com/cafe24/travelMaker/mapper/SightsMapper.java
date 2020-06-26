@@ -16,5 +16,6 @@ public interface SightsMapper {
 	public List<Si> selectSi(String doNum);
 	public int addSights(Sights sights);
 	public List<Sights> selectSightsList(String search);
+	public Sights getDetailSights(String sightsNum);
 
 }

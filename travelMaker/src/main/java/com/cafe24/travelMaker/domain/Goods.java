@@ -3,6 +3,7 @@ package com.cafe24.travelMaker.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Goods {
+	private String goodsBuyCode;
 	private String goodsCode;
 	private String memberId;
 	private MultipartFile file = null;
@@ -14,7 +15,15 @@ public class Goods {
 	private String goodsRegDate;
 	private String goodsSaleYesNo;
 	private String goodsAmount;
+	private String goodsBuyAmount;
+	private String goodsPayPrice;
 
+	public String getGoodsBuyCode() {
+		return goodsBuyCode;
+	}
+	public void setGoodsBuyCode(String goodsBuyCode) {
+		this.goodsBuyCode = goodsBuyCode;
+	}
 	public String getGoodsCode() {
 		return goodsCode;
 	}
@@ -82,12 +91,25 @@ public class Goods {
 	public void setGoodsAmount(String goodsAmount) {
 		this.goodsAmount = goodsAmount;
 	}
+	public String getGoodsBuyAmount() {
+		return goodsBuyAmount;
+	}
+	public void setGoodsBuyAmount(String goodsBuyAmount) {
+		this.goodsBuyAmount = goodsBuyAmount;
+	}
+	public String getGoodsPayPrice() {
+		return goodsPayPrice;
+	}
+	public void setGoodsPayPrice(String goodsPayPrice) {
+		this.goodsPayPrice = goodsPayPrice;
+	}
 	@Override
 	public String toString() {
-		return "Goods [goodsCode=" + goodsCode + ", memberId=" + memberId + ", file=" + file + ", goodsPhoto="
-				+ goodsPhoto + ", goodsCate=" + goodsCate + ", goodsName=" + goodsName + ", goodsPrice=" + goodsPrice
-				+ ", goodsDetail=" + goodsDetail + ", goodsRegDate=" + goodsRegDate + ", goodsSaleYesNo="
-				+ goodsSaleYesNo + ", goodsAmount=" + goodsAmount + "]";
+		return "Goods [goodsBuyCode=" + goodsBuyCode + ", goodsCode=" + goodsCode + ", memberId=" + memberId + ", file="
+				+ file + ", goodsPhoto=" + goodsPhoto + ", goodsCate=" + goodsCate + ", goodsName=" + goodsName
+				+ ", goodsPrice=" + goodsPrice + ", goodsDetail=" + goodsDetail + ", goodsRegDate=" + goodsRegDate
+				+ ", goodsSaleYesNo=" + goodsSaleYesNo + ", goodsAmount=" + goodsAmount + ", goodsBuyAmount="
+				+ goodsBuyAmount + ", goodsPayPrice=" + goodsPayPrice + "]";
 	}
 	
 }

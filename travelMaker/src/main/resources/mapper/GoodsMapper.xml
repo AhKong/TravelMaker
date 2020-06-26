@@ -73,4 +73,38 @@
 	(g_num, m_id, g_photo, g_cate, g_name, g_point, g_detail, g_reg_date, g_sale_yesno, g_amount)
 	VALUES (#{goodsCode}, #{memberId}, #{goodsPhoto}, #{goodsCate}, #{goodsName}, #{goodsPrice}, #{goodsDetail}, NOW(), "판매중", #{goodsAmount});
 	</insert>
+	
+	<delete id="deleteGoods" parameterType="String">
+		DELETE FROM tb_Alliance_g WHERE g_num=#{gCode}
+	</delete>
+	
+	<update id="goodsModify" parameterType="String">
+		UPDATE 
+			tb_Alliance_g
+		SET
+			g_cate=#{goodsCate},
+			g_name=#{goodsName},
+			g_point=#{goodsPrice},
+			g_detail=#{goodsDetail},
+			g_amount=#{goodsAmount}
+		WHERE 
+			g_num=#{goodsCode}
+	</update>
+	
+	<insert id="goodsBuy" parameterType="Goods">
+		<selectKey keyProperty="goodsBuyCode" resultType="String" order="BEFORE">
+			SELECT
+				case COUNT(*)
+				WHEN 0 THEN 'g_b_001'
+				ELSE CONCAT('g_b_00', MAX(CAST(SUBSTRING(g_b_num,7) AS DECIMAL))+1)
+				END AS goodsBuyCode
+			FROM
+				tb_goods_buyer
+		</selectKey>
+		INSERT INTO 
+			tb_goods_buyer
+			(g_b_num, g_photo, g_name, g_cate, g_num, g_point, m_id, g_b_date, g_b_amount)
+		VALUES (#{goodsBuyCode}, #{goodsPhoto}, #{goodsName}, #{goodsCate}, #{goodsCode}, #{goodsPayPrice}, #{memberId}, NOW(), #{goodsBuyAmount});
+		</insert>
+	
 </mapper>

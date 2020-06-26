@@ -43,5 +43,9 @@ public class MsgService {
 	public int deleteMsg(String messageNum) {
 		return msgMapper.deleteMsg(messageNum);
 	}
+	
+	public List<Message> unReadMsgList(String targetId){
+		return msgMapper.unReadMsgList(targetId);
+	}
 
 }

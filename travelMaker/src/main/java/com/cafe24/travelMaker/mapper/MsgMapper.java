@@ -17,4 +17,5 @@ public interface MsgMapper {
 	public int deleteMsgs(String[] checkList);
 	public List<Message> deleteMsgList(String mId);
 	public int deleteMsg(String messageNum);
+	public List<Message> unReadMsgList(String targetId);
 }
