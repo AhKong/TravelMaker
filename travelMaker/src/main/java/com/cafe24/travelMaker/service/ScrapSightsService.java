@@ -5,24 +5,17 @@ import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.ResScrap;
 import com.cafe24.travelMaker.domain.SightsScrap;
-import com.cafe24.travelMaker.mapper.ScrapMapper;
+import com.cafe24.travelMaker.mapper.ScrapSightsMapper;
 @Service
-public class ScrapService {
+public class ScrapSightsService {
 
-	@Autowired ScrapMapper scrapMapper;
+	@Autowired ScrapSightsMapper scrapMapper;
 	public SightsScrap sInsertScrap(SightsScrap sInsertScrap) { //관광지 스크랩 추가
 		return scrapMapper.sInsertScrap(sInsertScrap);
 	};
 	
 	public SightsScrap sDeleteScrap(SightsScrap sDeleteScrap) { //관광지 스크랩 삭제
 		return scrapMapper.sDeleteScrap(sDeleteScrap);
-	}
-	
-	public ResScrap rInsertScrap(ResScrap rInsertScrap) { //음식점 스크랩 추가
-		return scrapMapper.rInsertScrap(rInsertScrap);
-	}
-	public ResScrap rDeleteScrap(ResScrap rDeleteScrap) { // 음식점 스크랩 삭제
-		return scrapMapper.rDeleteScrap(rDeleteScrap);
 	}
 	
 }
