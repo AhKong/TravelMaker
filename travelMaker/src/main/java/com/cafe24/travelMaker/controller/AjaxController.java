@@ -1,6 +1,8 @@
 package com.cafe24.travelMaker.controller;
 
-import java.util.HashMap;
+import java.util.*;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.domain.Message;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
+import com.cafe24.travelMaker.service.MsgService;
 
 /*ajax 컨트롤러*/
 @Controller
@@ -24,6 +28,7 @@ public class AjaxController {
 	@Autowired private  MailService mailService;
 	@Autowired private  CertSerivce certService;
 	@Autowired private MemberService memberService;
+	@Autowired private MsgService msgService;
 
 	//아이디 찾기 기능
 	@RequestMapping("/findId")
@@ -98,5 +103,16 @@ public class AjaxController {
 		}
 		return idCheckResult;
 	}
+	
+	@GetMapping("/unReadMsgList")	
+	public @ResponseBody HashMap<String,List<Message>> unReadMsgList(HttpSession session){
+	
+		HashMap<String,List<Message>> unReadMsgList = new HashMap<String,List<Message>>();
+		String targetId = (String) session.getAttribute("SID");
+		System.out.println(msgService.unReadMsgList(targetId));
+		unReadMsgList.put("result", msgService.unReadMsgList(targetId));
+		return unReadMsgList;
+	}
+	
 
 }
