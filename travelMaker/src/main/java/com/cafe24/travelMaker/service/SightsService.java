@@ -34,4 +34,7 @@ public class SightsService {
 	public List<Sights> selectSightsList(String search){
 		return sightsMapper.selectSightsList(search);
 	}
+	public Sights getDetailSights(String sightsNum) {
+		return sightsMapper.getDetailSights(sightsNum);
+	}
 }

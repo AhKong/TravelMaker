@@ -93,4 +93,13 @@
 			si.si_name LIKE CONCAT('%',#{search},'%')
 	</select>
 	
+	<select id="getDetailSights" parameterType="String" resultMap ="sightsSelect" >
+		SELECT 
+			*
+		FROM
+			tb_sights
+		WHERE
+			sights_num = #{sightsNum}
+	</select>
+	
 </mapper>
