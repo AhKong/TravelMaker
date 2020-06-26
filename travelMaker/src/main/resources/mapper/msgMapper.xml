@@ -12,6 +12,9 @@
  		<result property="msgSendTime"  column="message_send"/>
  		<result property="msgReadTime"  column="message_read"/>		
  		<result property="msgActive"  column="message_active"/>		
+ 		<association property="member" javaType ="Member">
+ 			<result property="mAvatar"  	column="m_avatar"/>
+ 		</association>
 	</resultMap>
 
 	<insert id="sendMsg" parameterType="Message">
@@ -66,7 +69,7 @@
 		from
 			tb_message
 		where
-			target_id=#{mId} and message_check ='N'
+			target_id=#{mId} and message_check ='N' and message_active='Y'
 	</select>
 	
 	<select id="sendMsgList" parameterType="String" resultMap="msgResultMap">
@@ -99,6 +102,24 @@
 		where 
 			m_id = #{mId} or target_id =#{mId}
 			 and message_active='N'
+	</select>
+	
+	<select id="unReadMsgList" parameterType="String" resultMap="msgResultMap" >
+	SELECT 
+		m.message_num,
+		m.m_id,
+		m.message_contents,
+		m.message_send,
+		mem.m_avatar
+	FROM 
+		tb_message AS m
+	INNER JOIN
+	  tb_member AS mem
+	ON m.m_id = mem.m_id
+	WHERE 
+		m.target_id =#{targetId} AND 
+		m.message_check ='N' AND 
+		m.message_active='Y';
 	</select>
 	
 	<update id="deleteMsg" parameterType="String" >

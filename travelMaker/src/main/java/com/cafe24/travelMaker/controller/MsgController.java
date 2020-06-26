@@ -23,7 +23,7 @@ public class MsgController {
 	public String receivedMsgList(HttpSession session,Model model) {
 		String mId= (String)session.getAttribute("SID");
 		model.addAttribute("receivedMsgList",msgService.receivedMsgList(mId));
-		model.addAttribute("msgCnt",msgService.countUnReadMsg(mId));
+
 		return "/message/receivedMsgList";
 	}
 	
@@ -31,7 +31,7 @@ public class MsgController {
 	public String sendMsgList(HttpSession session, Model model) {
 		String mId= (String)session.getAttribute("SID");
 		model.addAttribute("sendMsgList",msgService.sendMsgList(mId));
-		model.addAttribute("msgCnt",msgService.countUnReadMsg(mId));
+
 		return "/message/sendMsgList";
 	}
 	
@@ -39,7 +39,7 @@ public class MsgController {
 	public String deleteMsgList(Model model,HttpSession session){
 		String mId= (String)session.getAttribute("SID");
 		model.addAttribute("deleteMsgList",msgService.deleteMsgList(mId));
-		model.addAttribute("msgCnt",msgService.countUnReadMsg(mId));
+	
 		return "/message/deleteMsgList";
 	}
 	
