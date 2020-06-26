@@ -7,9 +7,10 @@
 </th:block>
 <th:block layout:fragment="customCss">
 	<style>
-span {
+.sightsName {
 	font-size: 20px;
-	font-weight: bold
+	font-weight: bold;
+	color: black;
 }
 
 .bestSights {
@@ -149,7 +150,7 @@ span {
 											height="150">
 										<div class="desc">
 
-											<a href="/detail/detailSights"><span>Jonna</span></a><br> <i class="fas fa-star"></i> <i
+											<a href="/sights/detailSights"><span>Jonna</span></a><br> <i class="fas fa-star"></i> <i
 
 												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 												class="fas fa-star"></i> 529건의 리뷰<br>
@@ -194,7 +195,7 @@ span {
                               					 <img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}" alt="User Image" width="150" height="150">
                               					</div>
                               				   <div class="sightsDesc col-12 col-md-10">
-                                                  <span th:text="${l.sightsName}"></span><br>
+                                                  <a th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:text="${l.sightsName}"></a><br>
                                                    <i class="fas fa-star"></i> 
                                                    <i class="fas fa-star"></i> 
                                                    <i class="fas fa-star"></i> 
