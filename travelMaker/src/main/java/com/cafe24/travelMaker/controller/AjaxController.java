@@ -30,6 +30,8 @@ import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.MsgService;
+import com.cafe24.travelMaker.service.ScrapSightsService;
+
 
 /*ajax 컨트롤러*/
 @Controller
@@ -40,6 +42,7 @@ public class AjaxController {
 	@Autowired private  CertSerivce certService;
 	@Autowired private MemberService memberService;
 	@Autowired private MsgService msgService;
+	@Autowired private  ScrapSightsService scrapsightsservice;
 
 	//아이디 찾기 기능
 	@RequestMapping("/findId")
