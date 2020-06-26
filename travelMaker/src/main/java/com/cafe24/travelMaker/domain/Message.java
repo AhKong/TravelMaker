@@ -9,6 +9,7 @@ public class Message {
 	private String msgSendTime;
 	private String msgReadTime;
 	private String msgActive;
+	private Member member;
 	
 	public String getMessageNum() {
 		return messageNum;
@@ -60,13 +61,19 @@ public class Message {
 	public void setMsgActive(String msgActive) {
 		this.msgActive = msgActive;
 	}
+	
+	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	@Override
 	public String toString() {
 		return "Message [messageNum=" + messageNum + ", mId=" + mId + ", targetId=" + targetId + ", contents="
 				+ contents + ", isChecked=" + isChecked + ", msgSendTime=" + msgSendTime + ", msgReadTime="
-				+ msgReadTime + ", msgActive=" + msgActive + "]";
+				+ msgReadTime + ", msgActive=" + msgActive + ", member=" + member + "]";
 	}
-
-
 
 }
