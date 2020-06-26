@@ -21,14 +21,13 @@
 	
 	<logger name="jdbc" level="OFF" />
 
-	<logger name="jdbc.sqlonly" level="info" additivity="false">
+	<logger name="jdbc.sqlonly" level="error" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<logger name="jdbc.resultsettable" level="OFF" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-
 	<root level="error">
 		<appender-ref ref="STDOUT" />
 	</root>
