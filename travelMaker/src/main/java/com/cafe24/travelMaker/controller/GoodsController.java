@@ -62,6 +62,55 @@ public class GoodsController{
 		return "/goods/myRegGoods";
 	}
 	
+	@GetMapping("/deleteGoods")
+	public String deleteGoods(@RequestParam(name="gCode", required=false) String gCode) {
+		goodsService.deleteGoods(gCode);
+		return "redirect:/goods/myRegGoods";
+	}
 	
+	@GetMapping("/goodsModify")
+	public String goodsModify(Goods goods,
+		@RequestParam(name = "gCode", required = false) String gCode,
+		@RequestParam(name = "goodsName", required = false) String goodsName,
+		@RequestParam(name = "goodsDescription", required = false) String goodsDescription,
+		@RequestParam(name = "selectCate", required = false) String selectCate,
+		@RequestParam(name = "goodsAmount", required = false) String goodsAmount,
+		@RequestParam(name = "goodsPrice", required = false) String goodsPrice) {
+			System.out.println(gCode + "<<<<<<<<<<<<<<<<<<");
+			System.out.println(goodsName + "<<<<<<<<<<<<<<<<<<");
+			System.out.println(goodsDescription + "<<<<<<<<<<<<<<<<<<");
+			System.out.println(selectCate + "<<<<<<<<<<<<<<<<<<");
+			System.out.println(goodsAmount + "<<<<<<<<<<<<<<<<<<");
+			System.out.println(goodsPrice + "<<<<<<<<<<<<<<<<<<");
+			goods.setGoodsCode(gCode);
+			goods.setGoodsName(goodsName);
+			goods.setGoodsDetail(goodsDescription);
+			goods.setGoodsCate(selectCate);
+			goods.setGoodsAmount(goodsAmount);
+			goods.setGoodsPrice(goodsPrice);
+			goodsService.goodsModify(goods);
+			return "redirect:/goods/myRegGoods";
+		}
+	@GetMapping("/goodsBuy")
+	public String buyGoods(Goods goods, HttpSession session,
+			@RequestParam(name = "gCode", required = false) String gCode,
+			@RequestParam(name = "goodsName", required = false) String goodsName,
+			@RequestParam(name = "selectCate", required = false) String selectCate,
+			@RequestParam(name = "goodsPhoto", required = false) String goodsPhoto,
+			@RequestParam(name = "buyAmount", required = false) String buyAmount,
+			@RequestParam(name = "payPrice", required = false) String payPrice) {
+				String loginId = (String)session.getAttribute("SID");
+				goods.setMemberId(loginId);
+				goods.setGoodsCode(gCode);
+				goods.setGoodsName(goodsName);
+				goods.setGoodsCate(selectCate);
+				goods.setGoodsPhoto(goodsPhoto);
+				goods.setGoodsBuyAmount(buyAmount);
+				goods.setGoodsPayPrice(payPrice);
+				goodsService.goodsBuy(goods);
+				return "redirect:/goods/buyGoods";
+		
+	}
+			
 }
 

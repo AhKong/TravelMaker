@@ -60,7 +60,7 @@
               </div>
               <div class="form-group">
                 <label for="inputName">상품명</label>
-                <input type="text" id="goodsName" class="form-control" name="goodsName" placeholder="상품명을 입력해주세요.">
+                <input type="text" id="goodsName" class="form-control" name="goodsName" placeholder="상품명을 입력해주세요." >
               </div>
               <div class="form-group">
                 <label for="inputDescription">상품한줄설명</label>
@@ -154,7 +154,7 @@
 			$("#goodsPirce").focus();
 			return false;
 		}else if($("#goodsPirce").val() < 1 || $("#goodsPirce").val() > 100000){
-			alert('1~100000까지만 입력이 가능합니다.');
+			alert('상품가격은 1~100000까지만 입력이 가능합니다.');
 			$("#goodsPirce").focus();
 			return false;
 		}else if($("#goodsAmount").val() == ''){
@@ -162,7 +162,7 @@
 			$("#goodsAmount").focus();
 			return false;
 		}else if($("#goodsAmount").val() < 1 || $("#goodsAmount").val() > 100){
-			alert('1~100까지만 입력이 가능합니다.');
+			alert('상품수량은 1~100까지만 입력이 가능합니다.');
 			$("#goodsAmount").focus();
 			return false;
 		}else if($("#my_file").val() == ''){

@@ -29,4 +29,16 @@ public class GoodsService {
 	public int addGoods(Goods goods) {
 		return goodsMapper.addGoods(goods);
 	}
+	
+	public int deleteGoods(String gCode) {
+		return goodsMapper.deleteGoods(gCode);
+	}
+	
+	public int goodsModify(Goods goods) {
+		return goodsMapper.goodsModify(goods);
+	}
+	
+	public int goodsBuy(Goods goods) {
+		return goodsMapper.goodsBuy(goods);
+	}
 }
