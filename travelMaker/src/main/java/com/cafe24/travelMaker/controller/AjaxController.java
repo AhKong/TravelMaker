@@ -4,6 +4,13 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
+
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.domain.Message;
+
+import com.cafe24.travelMaker.domain.ResScrap;
+
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
@@ -115,4 +126,31 @@ public class AjaxController {
 	}
 	
 
+	@RequestMapping(value = "/SightsScrap") // 관광지 스크랩	
+	@ResponseBody
+	public String SightsScrap(@RequestParam(value="mId") String mId,
+			HttpServletResponse response, HttpSession session) throws IOException {
+		System.out.println("/SightsScrap 요청 호출 " + mId);
+		String loginId = mId;
+		if(!"".equals(loginId)) { 
+			if("".equals(loginId)) { 
+				//insert 스크랩 추가 / id값으로 스크랩 테이블 검색해서 없으면 인설트 있으면 딜리트
+			}else {
+				//delete 스크랩 삭제
+			}
+		} else {
+			//java alert
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("로그인이 필요한 기능입니다. 로그인 하세여");
+			out.flush(); 
+		}
+			
+		return loginId;
+	}
+	@GetMapping("/resScrap") // 음식점 스크랩
+	public ResScrap resScrap() {
+		
+		return null;
+	}
 }

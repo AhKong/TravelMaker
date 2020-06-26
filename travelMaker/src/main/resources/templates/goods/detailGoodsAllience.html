@@ -40,59 +40,63 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card card-solid">
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">하늘을 나는 신발</h3>
               <div class="col-12">
-                <img src="../../dist/img/prod-1.jpg" class="product-image" alt="Product Image">
+                <img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image">
               </div>
               <div class="col-12 product-image-thumbs">
-                <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+                <div class="product-image-thumb active"><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
+                <div class="product-image-thumb" ><img th:src="@{/fileupload/{file}(file=${goods.goodsPhoto})}" class="product-image"></div>
               </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="form-group">
-                <label for="inputName">상품이름</label>
-                <input type="text" id="inputName" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputName">상품설명</label>
-                <input type="text" id="inputName" class="form-control">
+                <label for="inputName" style = "color: #148CFF;">상품이름</label>
+                <input type="text" id="goodsName" class="form-control" th:value="${goods.goodsName}" maxlength="10">
               </div>
               <hr>
-              <h4 class="mt-3">등록자 <small>이승환</small></h4>
-				<hr>
-				 <div class="form-group">
-                <label for="inputStatus">카테고리</label>
-                <select class="form-control custom-select">
-                  <option selected disabled>장비류</option>
-                  <option>식기류</option>
-                  <option>음식</option>
-                  <option>ㅜㅜ</option>
+              <div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">한줄설명</label>
+                <textarea type="text" id="goodsDescription" class="form-control" th:text="${goods.goodsDetail}" maxlength="100"></textarea>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">등록자</label>
+                <input type="text" id="inputName" class="form-control" th:value="${goods.memberId}" readonly>
+              </div>
+              	<hr>
+              <div class="form-group">
+                <label for="inputStatus">분류</label>
+                <select class="form-control custom-select" name="qCate" id="selectCate">
+                  <option value="의류" th:selected="${goods.goodsCate == '의류'}">의류</option>
+                  <option value="식기류" th:selected="${goods.goodsCate == '식기류'}">식기류</option>
+                  <option value="음식" th:selected="${goods.goodsCate == '음식'}">음식</option>
+                  <option value="세면용품" th:selected="${goods.goodsCate == '세면용품'}">세면용품</option>
+                  <option value="구급용품" th:selected="${goods.goodsCate == '구급용품'}">구급용품</option>
+                  <option value="기타" th:selected="${goods.goodsCate == '기타'}">기타</option>
                 </select>
               </div>
 				<hr>
-				
-				
-              <div class="bg-gray py-2 px-3 mt-4">
+				<div class="form-group">
+                <label for="inputName" style = "color: #148CFF;">상품수량</label>
+                <input type="number" id="goodsAmount" class="form-control" th:value="${goods.goodsAmount}">
+              </div>
+				<hr>    
+				<div class="bg-gray py-2 px-3 mt-4">
                 <div class="form-group">
-                <label for="inputName">가격</label>
-                <input type="text" id="inputName" class="form-control">
+                <label for="inputName" style = " font-size:1.5em;">상품가격</label>
+                <input type="number" id="goodsPrice" class="form-control" th:value="${goods.goodsPrice}" style = " font-size:1.5em;">
               </div>
-                <h4 class="mt-0">
-                  <small>부가세 별도 </small>
-                </h4>
               </div>
-
-              <div class="mt-4">
-                <div class="btn btn-primary btn-lg btn-flat">
-                  	  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+				<hr>
+				<div class="mt-4">
+                <div class="btn btn-primary btn-lg btn-flat2">
+                  	  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary" id="goodsModifyBtn">
                   	수정하기
                 </button>
                 </div>
@@ -112,10 +116,10 @@
 		                <span aria-hidden="true">&times;</span></button>
 		            </div>
 		            <div class="modal-body">
-		              <p>상품이 정상적으로 수정되었습니다&hellip;</p>
+		              <p>상품내용을 수정하시겠습니까?</p>
 		            </div>
 		            <div class="modal-footer justify-content-between">
-		              <button onclick="location.href='/member/myPage'" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+		              <button id="sendBtn" type="button" class="btn btn-outline-light">확인</button>
 		            </div>
 		          </div>
 		          <!-- /.modal-content -->
@@ -132,10 +136,10 @@
 		                <span aria-hidden="true">&times;</span></button>
 		            </div>
 		            <div class="modal-body">
-		              <p>상품이 정상적으로 삭제되었습니다&hellip;</p>
+		              <p>상품을 삭제하시겠습니까?</p>
 		            </div>
 		            <div class="modal-footer justify-content-between">
-		              <button onclick="location.href='/member/myPage'" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+		              <a th:href="@{/goods/deleteGoods(gCode=${goods.goodsCode})}" class="btn btn-outline-light">확인</a>
 		            </div>
 		          </div>
 		          <!-- /.modal-content -->
@@ -143,11 +147,7 @@
 		        <!-- /.modal-dialog -->
 		      </div>
 		      <!-- /.modal -->
-              
-
             </div>
-          </div>
-          
         </div>
         <!-- /.card-body -->
       </div>
@@ -157,7 +157,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -166,13 +165,57 @@
   </body>
 <!-- ./wrapper -->
 
-
 </th:block>
 <th:block layout:fragment="customFooterScript">
 	<!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    $(function(){
+   $('#goodsModifyBtn').click(function(){
+		if($("#goodsName").val() == ''){
+			alert('상품명을 입력해주세요.');
+			$("#goodsName").focus();
+			return false;
+		}else if($("#goodsDescription").val() == ''){
+			alert('한줄설명을 입력해주세요.');
+			$("#goodsDescription").focus();
+			return false;
+		}else if($("#goodsAmount").val() == ''){
+			alert('상품수량을 입력해주세요.');
+			$("#goodsAmount").focus();
+			return false;
+		}else if($("#goodsAmount").val() < 1 || $("#goodsAmount").val() > 100){
+			alert('수량은 1~100까지만 입력이 가능합니다.');
+			$("#goodsAmount").focus();
+			return false;
+		}else if($("#goodsPrice").val() == ''){
+			alert('상품가격을 입력해주세요.');
+			$("#goodsPrice").focus();
+			return false;
+		}else if($("#goodsPrice").val() < 1 || $("#goodsPrice").val() > 100000){
+			alert('상품가격은 1~100000까지만 입력이 가능합니다.');
+			$("#goodsPrice").focus();
+			return false;
+		}
+		$("#modalBtn").submit();
+	});
+   
+   $('#sendBtn').click(function(){
+	   var gCode = /*[[${goods.goodsCode}]]*/;
+	   var goodsName = $('#goodsName').val();
+	   var goodsDescription = $('#goodsDescription').val();
+	   var selectCate = $('#selectCate').val();
+	   console.log(selectCate + "<<<<<<<<<<<<<<<<<<<<");
+	   var goodsAmount = $('#goodsAmount').val();
+	   var goodsPrice = $('#goodsPrice').val();
+	location.href='/goods/goodsModify?gCode=' + gCode + '&goodsName=' + goodsName + '&goodsDescription=' + goodsDescription + '&selectCate=' + selectCate + '&goodsAmount=' + goodsAmount + '&goodsPrice=' + goodsPrice ;
+   });
+});
+    /*]]>*/
+</script>
 </body>
 </th:block>
 </html>
