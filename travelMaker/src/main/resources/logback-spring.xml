@@ -15,13 +15,13 @@
 		</encoder>
 	</appender>
 	<!-- ksmart35.springboot : 루트 패키지 info level 은 전체정보 ?같은 느낌  -->
-	<logger name="com.cafe24.travelMaker" level="info" additivity="false">
+	<logger name="com.cafe24.travelMaker" level="error" additivity="false">
 		<appender-ref ref="STDOUT" /> 
 	</logger>
 	
 	<logger name="jdbc" level="OFF" />
 
-	<logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+	<logger name="jdbc.sqlonly" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
@@ -29,7 +29,7 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<root level="ERROR">
+	<root level="error">
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>
