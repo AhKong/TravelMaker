@@ -9,6 +9,8 @@
 <th:block layout:fragment="customTitle">
 	<title> 피드백 관리 페이지 :)) </title>
 </th:block>
+<th:block layout:fragment="customCss">
+</th:block>
 <th:block layout:fragment="customContents">
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
@@ -22,8 +24,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/feedbackList">feedback</a></li>
-              <li class="breadcrumb-item active"><a href="/feedbackList">feedbackList</a></li>
+              <li class="breadcrumb-item">feedback</li>
+              <li class="breadcrumb-item active"><a href="/feedback/feedbackList">feedbackList</a></li>
             </ol>
           </div>
         </div>
@@ -55,7 +57,7 @@
 		                  	<th>#</th>
 		                    <th>등록시각</th>
 		                    <th>관광명소</th>
-		                    <th>피드백코드번호</th>
+		                    <th>피드백코드/사유</th>
 		                    <th>피드백내용</th>
 		                    <th>등록아이디</th>
 		                    <th>수용여부</th>
@@ -63,18 +65,33 @@
 		                </thead>
 		                <tbody>
 		                  <th:block>
-		                  <tr th:each="fb, i : ${fbList}">
-		                    <input type="hidden" th:value="${fb.fbSightsNum}">
-		                    <th th:text="${i.count}"></th>
-		                    <th>[[${fb.fbSightsRegDate}]]</th>
-		                    <th>[[${fb.sights.sightsNum}]]</th>
-		                    <th>[[${fb.fbCode.fbCodeNum}]]</th>
-		                    <th>[[${fb.fbSightsContents}]]</th>
-		                    <th>[[${fb.member.mId}]]</th>
-		                    <th>[[${fb.fbSightsCheck}]]</th>
-		                  </tr>
+		                    <tr th:each="fb, i : ${fbList}">
+		                      <input type="hidden" th:value="${fb.fbSightsNum}">
+		                      <th th:text="${i.count}"></th>
+		                      <th>[[${fb.fbSightsRegDate}]]</th>
+		                      <th>[[${fb.sights.sightsName}]]</th>
+		                      <th>코드[[${fb.fbCode.fbCodeNum}]]&nbsp;&nbsp;[[${fb.fbCode.fbReason}]]</th>
+		                      <th>[[${fb.fbSightsContents}]]</th>
+		                      <th>[[${fb.member.mId}]]</th>
+		                      <th th:if="${fb.fbSightsCheck} eq 'D' ">
+		                      	<a type="submit" class="btn btn-A btn-outline-primary" 
+		                      		th:href="@{/feedback/acceptFeedback(fbSightsCheck='A', fbSightsNum=${fb.fbSightsNum})}">수용</a>
+		                    	<a type="button" class="btn btn-I btn-outline-warning" 
+		                    		th:href="@{/feedback/acceptFeedback(fbSightsCheck='I', fbSightsNum=${fb.fbSightsNum})}">무시</a>
+		                      </th>
+		                      <th th:if="${fb.fbSightsCheck} eq 'A' ">
+		                      	<button type="button" class="btn btn-A btn-primary">수용</button>
+		                    	<a type="button" class="btn btn-I btn-outline-warning" 
+		                    		th:href="@{/feedback/acceptFeedback(fbSightsCheck='I', fbSightsNum=${fb.fbSightsNum})}">무시</a>
+		                      </th>
+		                      <th th:if="${fb.fbSightsCheck} eq 'I' ">
+		                        <a type="submit" class="btn btn-A btn-outline-primary" 
+		                      		th:href="@{/feedback/acceptFeedback(fbSightsCheck='A', fbSightsNum=${fb.fbSightsNum})}">수용</a>
+		                    	<button type="button" class="btn btn-I btn-warning">무시</button>
+		                      </th>
+		                    </tr>
 		                  </th:block>
-		                 </tbody>
+		                </tbody>
 		              </table>
                     </div>
 	              </div>
@@ -165,24 +182,6 @@
 	      "autoWidth": false,
 	    });
 	  });
-	  
-		$(function() {
-	
-		    $('.btn-Y').click(function(){
-		        if( $(this).hasClass('btn-outline-primary') ) $(this).removeClass('btn-outline-primary');
-		        if( !$(this).hasClass('btn-primary') ) $(this).addClass('btn-primary');
-		        if( $('.btn-I').hasClass('btn-warning') ) $('.btn-I').removeClass('btn-warning');
-		        if( !$('.btn-I').hasClass('btn-outline-warning') ) $('.btn-I').addClass('btn-outline-warning');
-		    });
-		    
-		    $('.btn-I').click(function(){
-		        if( $(this).hasClass('btn-outline-warning') ) $(this).removeClass('btn-outline-warning');
-		        if( !$(this).hasClass('btn-warning') ) $(this).addClass('btn-warning');
-		        if( $('.btn-Y').hasClass('btn-primary') ) $('.btn-Y').removeClass('btn-primary');
-		        if( !$('.btn-Y').hasClass('btn-outline-primary') ) $('.btn-Y').addClass('btn-outline-primary');
-		    });
-	
-		});
 	</script>
 </th:block>
 </html>

@@ -15,4 +15,7 @@ public interface FeedbackMapper {
 	
 	//피드백 리스트
 	public List<FeedbackSights> feedbackList(Model model);
+	
+	//피드백 수용
+	public int acceptFeedback(String fbSightsCheck, String fbSightsNum);
 }

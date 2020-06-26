@@ -13,6 +13,7 @@
 		</association>
 		<association property="fbCode" javaType="FbCode">
 			<result property="fbCodeNum" column="fb_code_num"/>
+			<result property="fbReason" column="fb_reason"/>
 		</association>
 		<association property="sights" javaType="Sights">
 			<result property="sightsNum" column="sights_num"/>
@@ -20,12 +21,28 @@
 		</association>
 	</resultMap>
 	
+	<update id="acceptFeedback" parameterType="String">
+		UPDATE tb_fb_sights
+		SET 
+			fb_sights_check = #{fbSightsCheck}
+		WHERE 
+			fb_sights_num = #{fbSightsNum};
+	</update>
+	
+	
 	<select id="feedbackList" resultType="String" resultMap="feedbackSelect">
 		SELECT 
-			fb_sights_num, fb_sights_reg_date, sights_num, fb_code_num, fb_sights_contents, m_id, fb_sights_check
-		FROM tb_fb_sights
-		ORDER BY fb_sights_reg_date ASC
+			 f.fb_sights_num, f.fb_sights_reg_date, s.sights_name, SUBSTRING(f.fb_code_num,9) AS fb_code_num
+			,c.fb_reason, f.fb_sights_contents, f.m_id, f.fb_sights_check
+		FROM 
+			tb_fb_sights AS f
+			INNER JOIN 
+				tb_sights AS s ON f.sights_num = s.sights_num
+			INNER JOIN 
+				tb_fb_code AS c ON f.fb_code_num = c.fb_code_num
+		ORDER BY fb_sights_reg_date ASC;
 	</select>
+
 
 	<insert id="addFeedback" parameterType="FeedbackSights">
 		<selectKey order="BEFORE" keyProperty="fbSightsNum" resultType="String">

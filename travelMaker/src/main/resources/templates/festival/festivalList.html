@@ -86,7 +86,7 @@ span {
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item">festival</li>
-							<li class="breadcrumb-item">festivalList</li>
+							<li class="breadcrumb-item"><a href="/feedback/feedbackList">festivalList</a></li>
 						</ol>
 					</div>
 				</div>
@@ -154,6 +154,7 @@ span {
 						              </button>
 						            </div>
 						            
+						            <th:block th:each=" g : ${getFestivalList}">	
 						            <div class="modal-body">
 						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
@@ -173,6 +174,14 @@ span {
 							                      <div class="custom-file">
 							                        <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto">
 							                        <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-sightsName</label>
+							                        <input type="text" th:value="${g.sights}" class="form-control" name="sights.sightsName">
 							                      </div>
 							                    </div>
 							                  </div>
@@ -232,6 +241,7 @@ span {
 							            </div>
 							            <!-- /.modal-form -->
 						          	  </div>
+						          	</th:block>
 						          </div>
 						        </div>
 						    </div>
