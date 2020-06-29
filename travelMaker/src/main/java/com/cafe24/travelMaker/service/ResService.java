@@ -23,5 +23,9 @@ public class ResService {
 	public int addRes(Res res) {
 		return resMapper.addRes(res);
 	}
+	
+	public Res getDetailRes(String resNum) {
+		return resMapper.getDetailRes(resNum);
+	}
 
 }

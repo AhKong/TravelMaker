@@ -58,9 +58,9 @@ public class ResController {
 		return "res/deleteRes";
 	}
 	
-	@GetMapping("/detailRes")
-	
-	public String detailRes() {
+	@GetMapping("/resDetail")
+	public String detailRes(Model model, @RequestParam(name="resNum") String resNum) {
+		model.addAttribute("res",resService.getDetailRes(resNum));
 		return "res/detailRes";
 	}
 	

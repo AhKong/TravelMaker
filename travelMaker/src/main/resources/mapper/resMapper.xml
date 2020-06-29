@@ -98,4 +98,13 @@
 			si.si_name LIKE CONCAT('%',#{search},'%')	
 	</select>
 	
+	<select id="getDetailRes" parameterType="String" resultMap="resResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_res  
+		WHERE 
+			res_num = #{resNum}
+	</select>
+	
 </mapper>
