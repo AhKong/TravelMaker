@@ -1,7 +1,6 @@
 package com.cafe24.travelMaker.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
