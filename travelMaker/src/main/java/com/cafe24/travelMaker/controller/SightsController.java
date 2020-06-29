@@ -50,16 +50,6 @@ public class SightsController{
 		
 		return "redirect:/";
 	}
-	@GetMapping("/getSiList")
-
-	public @ResponseBody HashMap<String,List<Si>> getSiList(@RequestParam(name="num") String doNum) {
-		System.out.println(doNum+"<----doNum");
-		HashMap <String,List<Si>> result = new HashMap <String,List<Si>>();
-		result.put("siList",sightsService.selectSi(doNum));
-		return result;
-		
-	}
-	
 	@GetMapping("/updateSights")
 	public String updateSights() {
 		return "/sights/updateSights";

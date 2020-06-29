@@ -141,7 +141,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
+						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2" th:if="${!#lists.isEmpty(sightsList)}">
 							<h1>Best 3</h1>
 							<div class="bestSights row">
 								<div class="col-12 col-sm-4">
@@ -201,7 +201,6 @@
                                                    <i class="fas fa-star"></i> 
                                                    <i class="fas fa-star"></i>
 					                               <p th:text ="${l.sightsCate.sightsType}"></p>
-					                            
 					                               <p th:text="${l.sightsAddr}"></p>
 					                               <p th:text="${l.sightsDetail}">  </p>  
 					                            </div>
@@ -210,20 +209,20 @@
 									</th:block>
 								</div>
 							</div>
+							<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2" th:unless="${!#lists.isEmpty(sightsList)}">
+								<h1 th:text ="|'${searchWord}'에 대한 검색 결과가 없습니다|"> </h1>
+							</div>
 						</div>
-
 				</div>
 				<!-- /.card-body -->
 			</div>
 			<!-- /.card -->
-
 		</section>
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-
 </th:block>
 <th:block layout:fragment="customFooterScript">
-
+	
 </th:block>
 </html>
