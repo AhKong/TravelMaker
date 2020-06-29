@@ -16,11 +16,12 @@
 		<result property ="resLong" column ="res_long"/>
 		<result property ="resAddr" column ="res_addr"/>
 		<result property ="resWeb" column ="res_web"/>
-		<result property ="resPrice" column ="res_web"/>
+		<result property ="resPrice" column ="res_price"/>
 		<result property ="resTel" column ="res_tel"/>
 		<result property ="resStartTime" column ="res_start_time"/>
 		<result property ="resCloseTime" column ="res_close_time"/>	
-		<result property ="resRegTime" column ="res_reg_time"/>	
+		<result property ="resRegTime" column ="res_reg_date"/>	
+		<result property ="resOpen" column ="resOpen"/>	
 		<association property="resCate" javaType ="ResCate">
  			<result property="resCateNum"  	column="res_cate_num"/>
  			<result property="resType"   	column="res_type"/>
@@ -99,12 +100,25 @@
 	</select>
 	
 	<select id="getDetailRes" parameterType="String" resultMap="resResultMap">
-		SELECT 
-			*
-		FROM 
-			tb_res  
-		WHERE 
-			res_num = #{resNum}
+		<![CDATA[
+			SELECT
+				 *,
+				(case
+					when TIMEDIFF(res_close_time,TIME(NOW())) BETWEEN  TIME('00:00:00') AND TIME('00:30:00')
+	   				then '곧 마감'
+					when res_start_time <= TIME(NOW()) AND res_close_time >= TIME(NOW()) 
+					then '영업중'
+					ELSE '영업종료'
+				END) AS resOpen 
+			FROM 
+				tb_res  
+			INNER join
+				tb_res_cate 
+			ON tb_res.res_cate_num = tb_res_cate.res_cate_num
+			WHERE 
+				res_num = #{resNum}
+		]]>
+	
 	</select>
 	
 </mapper>
