@@ -59,6 +59,8 @@
                 <label for="inputName" style = "color: #148CFF;">상품이름</label>
                 <input type="text" id="goodsName" class="form-control" th:value="${goods.goodsName}" readonly>
               </div>
+              	<input type="text" id="myPoint" class="form-control" th:value="${point.finalPoint}" readonly style="visibility:hidden;position:absolute;">
+              	<input type="text" id="goodsNum" class="form-control" th:value="${goods.goodsCode}" readonly style="visibility:hidden;position:absolute;">
               <hr>
               <div class="form-group">
                 <label for="inputName" style = "color: #148CFF;">한줄설명</label>
@@ -159,9 +161,13 @@
 /*<![CDATA[*/
     $(function(){
     	$('#buyBtn').click(function(){
+    		var myPoint = /*[[${point.finalPoint}]]*/;
     		if($("#buyAmount").val() == ''){
     			alert('구매수량을 입력해주세요.');
     			$("#buyAmount").focus();
+    			return false;
+    		}else if(Number(myPoint) < $('#payPrice').val()){
+    			alert('포인트가 부족합니다.');
     			return false;
     		}
     		$("#buySuccess").submit();
@@ -194,8 +200,10 @@
     		var selectCate = $('#selectCate').val();
     		var goodsPhoto = $('#goodsPhoto').val();
     		var buyAmount = $('#buyAmount').val();
+    		console.log(buyAmount + "<<<<<<<<<<<<<<<<<<1")
     		var payPrice = $('#payPrice').val();
-    		location.href='/goods/goodsBuy?gCode=' + gCode + '&goodsName=' + goodsName + '&selectCate=' + selectCate + '&goodsPhoto=' + goodsPhoto + '&buyAmount=' + buyAmount + '&payPrice=' + payPrice;
+    		var goodsNum = $('#goodsNum').val();
+    		location.href='/goods/goodsBuy?gCode=' + gCode + '&goodsName=' + goodsName + '&selectCate=' + selectCate + '&goodsPhoto=' + goodsPhoto + '&buyAmount=' + buyAmount + '&payPrice=' + payPrice + '&goodsNum=' + goodsNum;
     	});
     });
 /*]]>*/

@@ -17,6 +17,7 @@ public class Goods {
 	private String goodsAmount;
 	private String goodsBuyAmount;
 	private String goodsPayPrice;
+	private String goodsBuyDate;
 
 	public String getGoodsBuyCode() {
 		return goodsBuyCode;
@@ -103,14 +104,19 @@ public class Goods {
 	public void setGoodsPayPrice(String goodsPayPrice) {
 		this.goodsPayPrice = goodsPayPrice;
 	}
+	public String getGoodsBuyDate() {
+		return goodsBuyDate;
+	}
+	public void setGoodsBuyDate(String goodsBuyDate) {
+		this.goodsBuyDate = goodsBuyDate;
+	}
 	@Override
 	public String toString() {
 		return "Goods [goodsBuyCode=" + goodsBuyCode + ", goodsCode=" + goodsCode + ", memberId=" + memberId + ", file="
 				+ file + ", goodsPhoto=" + goodsPhoto + ", goodsCate=" + goodsCate + ", goodsName=" + goodsName
 				+ ", goodsPrice=" + goodsPrice + ", goodsDetail=" + goodsDetail + ", goodsRegDate=" + goodsRegDate
 				+ ", goodsSaleYesNo=" + goodsSaleYesNo + ", goodsAmount=" + goodsAmount + ", goodsBuyAmount="
-				+ goodsBuyAmount + ", goodsPayPrice=" + goodsPayPrice + "]";
+				+ goodsBuyAmount + ", goodsPayPrice=" + goodsPayPrice + ", goodsBuyDate=" + goodsBuyDate + "]";
 	}
-	
 }
 

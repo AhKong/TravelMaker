@@ -1,6 +1,8 @@
 package com.cafe24.travelMaker.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
-
+import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.PointSerivce;
 import com.cafe24.travelMaker.service.StorageService;
@@ -28,10 +31,14 @@ public class MemberController{
 	@Autowired MemberService memberService;
 	@Autowired private StorageService storageService;
 	@Autowired private PointSerivce pointService;
+	@Autowired private GoodsService goodsService;
 
 	
 	@GetMapping("/myPage")
-	public String myPage() {
+	public String myPage(Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute("SID");
+		List<Goods> goodsList = goodsService.getMyBuyGoods(loginId);
+		model.addAttribute("goodsList", goodsList);
 		return "/member/myPage";
 	}
 	

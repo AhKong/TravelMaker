@@ -41,4 +41,37 @@ public class GoodsService {
 	public int goodsBuy(Goods goods) {
 		return goodsMapper.goodsBuy(goods);
 	}
+	
+	public int updateGoodsAmount(Goods goods) {
+		int gAmount = goodsMapper.getGAmount(goods);
+		int result = 0;
+		if(gAmount == Integer.parseInt(goods.getGoodsBuyAmount())) {
+			result = goodsMapper.updateGoodsAmount(goods);
+			result = goodsMapper.updateYesNo(goods);
+		}else {
+			result = goodsMapper.updateGoodsAmount(goods);
+		}
+		return result;
+	}
+	
+	public List<Goods> getMyBuyGoods(String mId){
+		return goodsMapper.getMyBuyGoods(mId);
+	}
+	
+	public int GoodsBuyDelete(String goodsBuyCode) {
+		
+		return goodsMapper.GoodsBuyDelete(goodsBuyCode);
+	}
+	
+	public int deleteGoodsAmount(Goods goods) {
+		
+		// delete
+		int result = goodsMapper.deleteGoodsAmount(goods); 
+		// update
+		if(result>0) {
+			
+		}
+		return result;
+		}
+	
 }

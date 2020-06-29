@@ -106,5 +106,57 @@
 			(g_b_num, g_photo, g_name, g_cate, g_num, g_point, m_id, g_b_date, g_b_amount)
 		VALUES (#{goodsBuyCode}, #{goodsPhoto}, #{goodsName}, #{goodsCate}, #{goodsCode}, #{goodsPayPrice}, #{memberId}, NOW(), #{goodsBuyAmount});
 		</insert>
+		
+	<update id="updateGoodsAmount" parameterType="Goods">
+		UPDATE 
+			tb_Alliance_g
+		SET
+			g_amount= g_amount - #{goodsBuyAmount}
+		WHERE 
+			g_num=#{goodsCode}
+	</update>
+	
+	<select id="getGAmount" parameterType="Goods" resultType="int">
+		SELECT 
+			 g_amount as goodsAmount
+		FROM 
+			tb_Alliance_g
+		WHERE
+			g_num=#{goodsCode};
+	</select>
+	<update id="updateYesNo" parameterType="Goods">
+		UPDATE 
+			tb_Alliance_g
+		SET
+			g_sale_yesno = '판매종료'
+		WHERE 
+			g_num=#{goodsCode}
+	</update>
+	
+	<select id="getMyBuyGoods" parameterType="String" resultType="Goods">
+		SELECT 
+			g_b_num as goodsBuyCode
+			, g_name as goodsName
+			, g_point as goodsPayPrice
+			, g_b_date as goodsBuyDate
+			, g_b_amount as goodsBuyAmount
+		FROM 
+			tb_goods_buyer
+		WHERE
+			m_id=#{mId};
+	</select>
+	
+	<delete id="GoodsBuyDelete" parameterType="String">
+		DELETE FROM tb_goods_buyer WHERE g_b_num=#{goodsBuyCode};
+	</delete>
+	
+	<update id="deleteGoodsAmount" parameterType="Goods">
+	UPDATE 
+		tb_Alliance_g
+	SET
+		g_amount = g_amount + #{goodsBuyAmount}
+	WHERE 
+		g_num=#{goodsCode}
+	</update>
 	
 </mapper>
