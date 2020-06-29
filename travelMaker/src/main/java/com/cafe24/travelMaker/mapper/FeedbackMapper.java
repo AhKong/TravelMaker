@@ -5,11 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.ui.Model;
 
+import com.cafe24.travelMaker.domain.FbCode;
 import com.cafe24.travelMaker.domain.FeedbackSights;
 
 @Mapper
 public interface FeedbackMapper {
 
+	//피드백 폼으로 이동
+	public List<FbCode> formFeedback(FbCode fbCode);
+	
 	//피드백 보내기
 	public int addFeedback(FeedbackSights feedbackSights);
 	

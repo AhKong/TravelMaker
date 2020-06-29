@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.cafe24.travelMaker.domain.FbCode;
 import com.cafe24.travelMaker.domain.FeedbackSights;
 import com.cafe24.travelMaker.mapper.FeedbackMapper;
 
@@ -13,6 +14,15 @@ import com.cafe24.travelMaker.mapper.FeedbackMapper;
 public class FeedbackService {
 
 @Autowired FeedbackMapper feedbackMapper;
+
+	//피드백 폼으로 이동
+	public List<FbCode> formFeedback(FbCode fbCode) {
+		System.out.println("formFeedback FeedbackService 도착");
+		List<FbCode> fCode = feedbackMapper.formFeedback(fbCode);
+		System.out.println(fCode+" <- fCode addFeedback FeedbackService");
+		
+		return fCode;
+	}
 
 	//피드백 전송
 	public int addFeedback(FeedbackSights feedbackSights) {

@@ -21,9 +21,23 @@
 		</association>
 	</resultMap>
 	
+	<resultMap type="FbCode" id="fbCodeSelect">
+		<result property="fbCodeNum" column="fb_code_num"/>
+		<result property="fbReason" column="fb_reason"/>
+	</resultMap>
+	
+	<select id="formFeedback" resultType="String" resultMap="fbCodeSelect">
+		SELECT 
+			 fb_code_num
+			,fb_reason
+		FROM
+			tb_fb_code;
+	</select>
+	
+	
 	<update id="acceptFeedback" parameterType="String">
 		UPDATE tb_fb_sights
-		SET 
+		SET
 			fb_sights_check = #{fbSightsCheck}
 		WHERE 
 			fb_sights_num = #{fbSightsNum};
