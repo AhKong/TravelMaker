@@ -11,4 +11,6 @@ import com.cafe24.travelMaker.domain.ResCate;
 public interface ResMapper {
 	public List<ResCate> selectResCate();
 	public int addRes(Res res);
+	public List<Res> getResList(String search);
+	public Res getDetailRes(String resNum);
 }
