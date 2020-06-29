@@ -137,7 +137,7 @@ span {
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
+						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"  th:if="${!#lists.isEmpty(resList)}">
 							<h1>Best 3</h1>
 							<div class="bestRes row">
 								<div class="col-12 col-sm-4">
@@ -203,6 +203,9 @@ span {
 								</div>
 								</th:block>
 							</div>
+						</div>
+						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"  th:unless="${!#lists.isEmpty(resList)}">
+							<h1 th:text ="|'${search}'에 대한 검색 결과가 없습니다|"> </h1>
 						</div>
 					</div>
 				</div>
