@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.service.ResService;
@@ -19,7 +20,11 @@ public class ResController {
 	@Autowired private StorageService storageService;
 	
 	@GetMapping("/resList")
-	public String resList() {
+	public String resList(Model model, @RequestParam (name="search") String search) {
+		System.out.println(search +"<---search");
+		System.out.println(resService.getResList(search));
+		model.addAttribute("search", search);
+		model.addAttribute("resList", resService.getResList(search));
 		return "/res/resList";
 	}
 	
