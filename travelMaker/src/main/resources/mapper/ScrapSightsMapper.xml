@@ -18,7 +18,7 @@ SELECT
 			case COUNT(*)
 			WHEN 0 THEN 'scrap_code1'
 			ELSE CONCAT('scrap_code', MAX(CAST(SUBSTRING(scrap_code,11) AS DECIMAL))+1)
-			END AS scrapNum
+			END AS ssNum
 		FROM
 			tb_scrap_sights;
 	</selectKey>
@@ -26,7 +26,7 @@ SELECT
 	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date)
 	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW());
 </insert>
-
+<!-- 그림은 조인으로 쓰기 -->
 
 <delete id="sDeleteScrap" >
 DELETE
@@ -34,8 +34,8 @@ FROM
 tb_scrap_sights
 WHERE
 m_id = #{mId}
-<!-- AND
-sights_num = #{sightsNum} -->;
+AND
+sights_num = #{sightsNum};
 </delete>
 
 <select id="sSelect" resultType="SightsScrap" resultMap="memberSelect">
@@ -45,8 +45,8 @@ FROM
 tb_scrap_sights
 WHERE
 m_id = #{mId}
-<!-- AND
-sights_num = #{sightsNum} -->;
+AND
+sights_num = #{sightsNum};
 </select>
 
 </mapper>

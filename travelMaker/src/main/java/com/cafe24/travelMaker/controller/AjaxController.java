@@ -77,37 +77,37 @@ public class AjaxController {
 	// 관광지 스크랩
 	@RequestMapping(value = "/SightsScrap") 
 	@ResponseBody
-	public HashMap<String, String> SightsScrap(@RequestParam(value="mId") String mId,
-											@RequestParam(value="sights") String sights, 
+	public SightsScrap SightsScrap(@RequestParam(name="mId") String mId,
+									@RequestParam(name="sightsNum") String sightsNum,
 			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
 		
-		HashMap<String, String> scrap = new HashMap<String, String>();
-		System.out.println("/SightsScrap 요청 호출 " + mId);
-		//String sights1 = sights;
-		//System.out.println(sights1);
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
+		System.out.println("/SightsScrap 요청 호출 " + mId);
 		System.out.println(scrapselect+"<---------- sSelect");
 
 		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
-			scrap.put("mid", scrapselect.getmId());
-			scrap.put("sightsNum", scrapselect.getSightsNum());
-			scrap.put("tripNum", scrapselect.gettNum());
-			scrap.put("sNum", scrapselect.getSsNum());
-			// 딜리트
-			System.out.println(scrap+"<--------------- 해쉬맵ㅂ");
 			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
+			//scrapsightsservice.sDeleteScrap(sightsScrap);
+			System.out.println("delete");
 		} else {
 			//scrapsightsservice.sInsertScrap(sightsScrap);
+			System.out.println("insert");
 			//인설트
 		}
 		
 		
-		return scrap;
+		return scrapselect;
 	}
 	
 	// 음식점 스크랩
 	@GetMapping("/resScrap") 
 	public ResScrap resScrap() {
+		
+		return null;
+	}
+	
+	@GetMapping("/scrapModal")
+	public String moda() {
 		
 		return null;
 	}
