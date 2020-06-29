@@ -27,5 +27,6 @@ public class ResService {
 	public Res getDetailRes(String resNum) {
 		return resMapper.getDetailRes(resNum);
 	}
+	
 
 }

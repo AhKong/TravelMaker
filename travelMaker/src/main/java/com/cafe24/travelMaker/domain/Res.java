@@ -20,6 +20,7 @@ public class Res {
 	private String resStartTime;
 	private String resCloseTime;
 	private String resRegTime;
+	private String resOpen;	
 	private ResCate resCate;
 	
 	public String getResNum() {
@@ -131,13 +132,24 @@ public class Res {
 	public void setResCate(ResCate resCate) {
 		this.resCate = resCate;
 	}
+	public String getResOpen() {
+		return resOpen;
+	}
+	public void setResOpen(String resOpen) {
+		this.resOpen = resOpen;
+	}
 	@Override
 	public String toString() {
 		return "Res [resNum=" + resNum + ", siNum=" + siNum + ", mId=" + mId + ", resCateNum=" + resCateNum
 				+ ", resName=" + resName + ", file=" + file + ", resPhoto=" + resPhoto + ", resLat=" + resLat
 				+ ", resLong=" + resLong + ", resAddr=" + resAddr + ", resPrice=" + resPrice + ", resTel=" + resTel
 				+ ", resWeb=" + resWeb + ", resDetail=" + resDetail + ", resStartTime=" + resStartTime
-				+ ", resCloseTime=" + resCloseTime + ", resRegTime=" + resRegTime + ", resCate=" + resCate + "]";
+				+ ", resCloseTime=" + resCloseTime + ", resRegTime=" + resRegTime + ", resOpen=" + resOpen
+				+ ", resCate=" + resCate + "]";
 	}
+	
+	
+
+
 
 }
