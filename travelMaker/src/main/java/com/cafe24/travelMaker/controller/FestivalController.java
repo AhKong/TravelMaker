@@ -32,7 +32,7 @@ public class FestivalController {
 		System.out.println(result+" <- result addFestival FestivalController");
 		System.out.println(festival.getMember().toString()+" <- festival.getMember().toString() addFestival FestivalController");
 		
-		return "redirect:/festival/festivalList";
+		return "redirect:/festival/ingFestivalList";
 	}
 	
 	//축제 수정 화면으로 이동 
@@ -41,8 +41,11 @@ public class FestivalController {
 		
 		System.out.println(fesNum+" <- fesNum festivalSelect FestivalController");
 		Festival festival = festivalService.festivalSelect(fesNum);	
+		List<Festival> upList = festivalService.ingFestivalList();
 		System.out.println(festival+" <- festival festivalSelect FestivalController");
+		System.out.println(upList+" <- upList festivalSelect FestivalController");
 		model.addAttribute("festival", festival);
+		model.addAttribute("upList", upList);
 		
 		
 		return "festival/updateFestival";
@@ -57,19 +60,42 @@ public class FestivalController {
 		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalController");
 		System.out.println(result+" <- result updateFestival FestivalController");
 		
-		return "redirect:/festival/festivalList";
+		return "redirect:/festival/ingFestivalList";
 	}
 	
-	//축제 리스트
-	@GetMapping("/festivalList")
-	public String getFestivalList(Model model){
-		System.out.println("getFestivalList FestivalController 도착");
-		List<Festival> getFestivalList = festivalService.getFestivalList();
-		System.out.println(getFestivalList+" <- getFestivalList getFestivalList FestivalController");
-		model.addAttribute("getFestivalList", getFestivalList);
+	//축제 리스트 (현재 진행중)
+	@GetMapping("/ingFestivalList")
+	public String ingFestivalList(Model model){
+		System.out.println("ingFestivalList FestivalController 도착");
+		List<Festival> fList = festivalService.ingFestivalList();
+		System.out.println(fList+" <- fList ingFestivalList FestivalController");
+		model.addAttribute("fList", fList);
 		
 		return "festival/festivalList";
 	}
+	
+	//축제 리스트 (진행 예정)
+	@GetMapping("/preFestivalList")
+	public String preFestivalList(Model model){
+		System.out.println("preFestivalList FestivalController 도착");
+		List<Festival> fList = festivalService.preFestivalList();
+		System.out.println(fList+" <- fList preFestivalList FestivalController");
+		model.addAttribute("fList", fList);
+		
+		return "festival/festivalList";
+	}
+	
+	//축제 리스트 (진행 종료)
+	@GetMapping("/postFestivalList")
+	public String postFestivalList(Model model){
+		System.out.println("postFestivalList FestivalController 도착");
+		List<Festival> fList = festivalService.postFestivalList();
+		System.out.println(fList+" <- fList postFestivalList FestivalController");
+		model.addAttribute("fList", fList);
+		
+		return "festival/festivalList";
+	}
+	
 	
 	//축제 삭제
 	@GetMapping("/deleteFestival")
@@ -79,7 +105,7 @@ public class FestivalController {
 		int result = festivalService.deleteFestival(fesNum);
 		System.out.println(result+" <- result deleteFestival FestivalController");
 		
-		return "redirect:/festival/festivalList";
+		return "redirect:/festival/ingFestivalList";
 	}
 	
 }

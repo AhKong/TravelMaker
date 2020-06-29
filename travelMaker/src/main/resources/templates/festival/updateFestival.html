@@ -38,8 +38,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/myPage"></a></li>
-              <li class="breadcrumb-item"></li>
+              <li class="breadcrumb-item"><a href="/festival/festivalList">festival</a></li>
+              <li class="breadcrumb-item"><a href="/festival/updateFestival">updateFestival</a></li>
             </ol>
           </div>
         </div>
@@ -76,6 +76,18 @@
 					  <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto" th:value="${festival.fesPhoto}">
 				    </div>
 			      </div>
+				</div>
+				<div class="row" >
+				  <div class="col-12">
+				    <div class="form-group">
+				      <label><i class="fas fa-music"></i>&nbsp;festival-sightsName</label><br/>
+				      <select name="sights.sightsNum" class="col-md-6 col-sm-8">
+				        <th:block th:each="up : ${upList}">
+			 	          <option th:value="${up.sights.sightsNum}">[[${up.sights.sightsNum}]] : [[${up.sights.sightsName}]]</option>
+			 	        </th:block>
+			  	      </select>
+  				    </div>
+				  </div>
 				</div>
 			    <div class="row">
 				  <div class="col-12">
@@ -171,7 +183,7 @@
 							</div>
 							
 							<div class="modal-footer">
-								<a th:href="@{/festival/deleteFestival(fes_num=${festival.fesNum})}" class="btn btn-default btn-sm col-sm-2"> 예 </a>
+								<a th:href="@{/festival/deleteFestival(fes_num=${festival.fesNum})}" class="btn btn-default btn-sm col-sm-2"> 미안 </a>
 		 						<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal">아니오</button>
 							</div>
 						</div>

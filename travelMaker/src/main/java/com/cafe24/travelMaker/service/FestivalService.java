@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.cafe24.travelMaker.mapper.FestivalMapper;
 import com.cafe24.travelMaker.domain.Festival;
@@ -41,16 +40,34 @@ public class FestivalService {
 		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalService");
 		System.out.println(result+" <- result updateFestival FestivalService");
 		
-		return 5;
+		return result;
 	}
 	
-	//축제 리스트
-	public List<Festival> getFestivalList(){
-		System.out.println("getFestivalList FestivalService 도착");
-		List<Festival> getFestivalList = festivalMapper.getFestivalList();
-		System.out.println(getFestivalList+"getFestivalList getFestivalList FestivalService");
+	//축제 리스트 (현재 진행중)
+	public List<Festival> ingFestivalList(){
+		System.out.println("ingFestivalList FestivalService 도착");
+		List<Festival> fList = festivalMapper.ingFestivalList();
+		System.out.println(fList+" <- fList ingFestivalList FestivalService");
 		
-		return getFestivalList;
+		return fList;
+	}
+	
+	//축제 리스트 (진행 예정)
+	public List<Festival> preFestivalList(){
+		System.out.println("preFestivalList FestivalService 도착");
+		List<Festival> fList = festivalMapper.preFestivalList();
+		System.out.println(fList+" <- fList preFestivalList FestivalService");
+		
+		return fList;
+	}
+	
+	//축제 리스트 (진행 종료)
+	public List<Festival> postFestivalList(){
+		System.out.println("postFestivalList FestivalService 도착");
+		List<Festival> fList = festivalMapper.postFestivalList();
+		System.out.println(fList+" <- fList postFestivalList FestivalService");
+		
+		return fList;
 	}
 	
 	//축제 삭제
