@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Message;
+import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.MsgService;
+import com.cafe24.travelMaker.service.SightsService;
 
 /*ajax 컨트롤러*/
 @Controller
@@ -30,6 +32,7 @@ public class AjaxControllerKAR {
 	@Autowired private  CertSerivce certService;
 	@Autowired private MemberService memberService;
 	@Autowired private MsgService msgService;
+	@Autowired private SightsService sightsService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -69,5 +72,16 @@ public class AjaxControllerKAR {
 		unReadMsgList.put("result", msgService.unReadMsgList(targetId));
 		return unReadMsgList;
 	}
+	
+	@GetMapping("/getSiList")
+
+	public @ResponseBody HashMap<String,List<Si>> getSiList(@RequestParam(name="num") String doNum) {
+		System.out.println(doNum+"<----doNum");
+		HashMap <String,List<Si>> result = new HashMap <String,List<Si>>();
+		result.put("siList",sightsService.selectSi(doNum));
+		return result;
+		
+	}
+	
 
 }

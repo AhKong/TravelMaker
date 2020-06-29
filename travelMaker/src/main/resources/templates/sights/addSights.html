@@ -179,7 +179,7 @@ $(function(){
 	$(doNum).click(function(){
 		var number = $(this).val();
 		var request = $.ajax({
-			  url: "/getSiList",  
+			  url: "/ajax/getSiList",  
 			  method: "GET",
 			  data: {num:number}, 
 			  dataType: "json"
