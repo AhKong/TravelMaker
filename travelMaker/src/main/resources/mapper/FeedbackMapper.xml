@@ -33,7 +33,7 @@
 	<select id="feedbackList" resultType="String" resultMap="feedbackSelect">
 		SELECT 
 			 f.fb_sights_num, f.fb_sights_reg_date, s.sights_name, SUBSTRING(f.fb_code_num,9) AS fb_code_num
-			,c.fb_reason, f.fb_sights_contents, f.m_id, f.fb_sights_check
+			, c.fb_reason, f.fb_sights_contents, f.m_id, f.fb_sights_check
 		FROM 
 			tb_fb_sights AS f
 			INNER JOIN 

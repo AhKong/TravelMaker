@@ -16,9 +16,17 @@ public class ResService {
 	public List<ResCate> selectResCate(){
 		return resMapper.selectResCate();
 	}
-	
+
+	public List<Res> getResList(String search){
+		return resMapper.getResList(search);
+	}
 	public int addRes(Res res) {
 		return resMapper.addRes(res);
 	}
+	
+	public Res getDetailRes(String resNum) {
+		return resMapper.getDetailRes(resNum);
+	}
+	
 
 }
