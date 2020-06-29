@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- Modal -->
+<th:block  th:fragment="searchModalFragment">
+<div class="modal fade" id="searchModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+		 <form id="searchForm" method ="Get">
+			<div class="input-group input-lg">
+				<input class="form-control" type="search" placeholder="여행지역을 입력해주세요 : )" aria-label="Search" name="search">
+				<button  id="searchBtn" class="btn btn-navbar" type="button" > <i class="fas fa-search"></i></button>
+			</div>
+		</form>
+		
+		<div style="height: 400px; padding-top:20px">
+		    여기에 검색기록 보여주기
+		</div>
+    </div>
+  </div>
+  </div>
+ </div>
+</th:block>
+
+</html>
