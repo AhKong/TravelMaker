@@ -1,16 +1,12 @@
 package com.cafe24.travelMaker.controller;
 
-import java.util.*;
-
-import javax.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,19 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.travelMaker.domain.SightsScrap;
 import com.cafe24.travelMaker.domain.Mail;
-
 import com.cafe24.travelMaker.domain.Member;
-import com.cafe24.travelMaker.domain.Message;
-
 import com.cafe24.travelMaker.domain.ResScrap;
-
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
-import com.cafe24.travelMaker.service.MsgService;
 import com.cafe24.travelMaker.service.ScrapSightsService;
-
 
 /*ajax 컨트롤러*/
 @Controller
@@ -41,7 +32,6 @@ public class AjaxController {
 	@Autowired private  MailService mailService;
 	@Autowired private  CertSerivce certService;
 	@Autowired private MemberService memberService;
-	@Autowired private MsgService msgService;
 	@Autowired private  ScrapSightsService scrapsightsservice;
 
 	//아이디 찾기 기능
@@ -118,42 +108,43 @@ public class AjaxController {
 		return idCheckResult;
 	}
 	
-	@GetMapping("/unReadMsgList")	
-	public @ResponseBody HashMap<String,List<Message>> unReadMsgList(HttpSession session){
-	
-		HashMap<String,List<Message>> unReadMsgList = new HashMap<String,List<Message>>();
-		String targetId = (String) session.getAttribute("SID");
-		System.out.println(msgService.unReadMsgList(targetId));
-		unReadMsgList.put("result", msgService.unReadMsgList(targetId));
-		return unReadMsgList;
-	}
-	
 
-	@RequestMapping(value = "/SightsScrap") // 관광지 스크랩	
+	// 관광지 스크랩
+	@RequestMapping(value = "/SightsScrap") 
 	@ResponseBody
-	public String SightsScrap(@RequestParam(value="mId") String mId,
-			HttpServletResponse response, HttpSession session) throws IOException {
+	public HashMap<String, String> SightsScrap(@RequestParam(value="mId") String mId,
+											@RequestParam(value="sights") String sights, 
+			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
+		
+		HashMap<String, String> scrap = new HashMap<String, String>();
 		System.out.println("/SightsScrap 요청 호출 " + mId);
-		String loginId = mId;
-		if(!"".equals(loginId)) { 
-			if("".equals(loginId)) { 
-				//insert 스크랩 추가 / id값으로 스크랩 테이블 검색해서 없으면 인설트 있으면 딜리트
-			}else {
-				//delete 스크랩 삭제
-			}
+		//String sights1 = sights;
+		//System.out.println(sights1);
+		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
+		System.out.println(scrapselect+"<---------- sSelect");
+
+		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
+			scrap.put("mid", scrapselect.getmId());
+			scrap.put("sightsNum", scrapselect.getSightsNum());
+			scrap.put("tripNum", scrapselect.gettNum());
+			scrap.put("sNum", scrapselect.getSsNum());
+			// 딜리트
+			System.out.println(scrap+"<--------------- 해쉬맵ㅂ");
+			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
 		} else {
-			//java alert
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("로그인이 필요한 기능입니다. 로그인 하세여");
-			out.flush(); 
+			//scrapsightsservice.sInsertScrap(sightsScrap);
+			//인설트
 		}
-			
-		return loginId;
+		
+		
+		return scrap;
 	}
-	@GetMapping("/resScrap") // 음식점 스크랩
+	
+	// 음식점 스크랩
+	@GetMapping("/resScrap") 
 	public ResScrap resScrap() {
 		
 		return null;
 	}
+
 }
