@@ -70,13 +70,13 @@
 						console.log(msgArr[i]);
 						html+='<a href="/msg/detailMsg/?massageNum='+msgArr[i].messageNum+'" class="dropdown-item">';
 						html+='<div class="media">'
-						html+=' <img src="/fileupload/'+msgArr[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
-						html+=' <div class="media-body">'
+						html+='<img src="/fileupload/'+msgArr[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
+						html+='<div class="media-body">'
 			            html+='<h3 class="dropdown-item-title">'+ msgArr[i].mId+'</h3>';
-						html+= '<p class="text-sm">'+msgArr[i].contents+'+</p>';
-					    html+= '<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>'+ msgArr[i].msgSendTime+'</p>';
-					    html+= '   </div> </div></a>'	;
-					    html+=' <div class="dropdown-divider"></div>'
+						html+='<p class="text-sm">'+msgArr[i].contents+'+</p>';
+					    html+='<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>'+ msgArr[i].msgSendTime+'</p>';
+					    html+='</div></div></a>'	;
+					    html+='<div class="dropdown-divider"></div>'
 					}
 				}  
 		    	msgList.html(html);

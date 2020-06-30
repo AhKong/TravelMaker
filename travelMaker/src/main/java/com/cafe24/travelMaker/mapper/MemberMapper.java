@@ -13,5 +13,4 @@ public interface MemberMapper {
 	public Member getMemberInfo(String mId);
 	public Member findId(Member member); //아이디 찾기
 	public Member findPw(Member member); //비번 찾기
-
 }

@@ -135,7 +135,8 @@
 	
 	<select id="getMyBuyGoods" parameterType="String" resultType="Goods">
 		SELECT 
-			g_b_num as goodsBuyCode
+			g_num as goodsCode
+			, g_b_num as goodsBuyCode
 			, g_name as goodsName
 			, g_point as goodsPayPrice
 			, g_b_date as goodsBuyDate
@@ -157,6 +158,15 @@
 		g_amount = g_amount + #{goodsBuyAmount}
 	WHERE 
 		g_num=#{goodsCode}
+	</update>
+	
+	<update id="goodsBuyDeletePoint" parameterType="Goods">
+	UPDATE 
+		tb_point_admin
+	SET
+		point_final_point = point_final_point + #{goodsPayPrice}
+	WHERE 
+		m_id=#{mId};
 	</update>
 	
 </mapper>

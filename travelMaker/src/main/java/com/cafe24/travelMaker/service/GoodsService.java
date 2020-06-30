@@ -63,15 +63,12 @@ public class GoodsService {
 		return goodsMapper.GoodsBuyDelete(goodsBuyCode);
 	}
 	
-	public int deleteGoodsAmount(Goods goods) {
-		
-		// delete
-		int result = goodsMapper.deleteGoodsAmount(goods); 
-		// update
-		if(result>0) {
-			
-		}
-		return result;
-		}
+	public int deleteGoodsAmount(String goodsBuyAmount, String goodsCode) {
+		System.out.println(goodsBuyAmount + "ㅎㅎㅎㅎ" + goodsCode);
+		return goodsMapper.deleteGoodsAmount(goodsBuyAmount, goodsCode); 
+	}
 	
+	public int goodsBuyDeletePoint(String mId, String goodsPayPrice) {
+		return goodsMapper.goodsBuyDeletePoint(mId, goodsPayPrice);
+	}
 }

@@ -39,6 +39,9 @@
 			font-size:20px;
 			font-weight:bold;
 		}
+		.badge{
+		font-size:16px;
+		}
 </style>
 </th:block>
 <th:block>
@@ -70,7 +73,7 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-12 col-sm-7">
-					<h2 class="my-3 " th:text="${sights.sightsName}">관광명소 이름</h2>
+					<p class="my-3" style="font-size:30px;" th:utext="|${sights.sightsName} <span class='badge ${sights.btnColor}'>${sights.sightsOpen}</span><br> |"></p>
 					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
 						리뷰</span>

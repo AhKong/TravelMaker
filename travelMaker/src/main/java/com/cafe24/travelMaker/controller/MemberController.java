@@ -35,10 +35,12 @@ public class MemberController{
 
 	
 	@GetMapping("/myPage")
-	public String myPage(Model model, HttpSession session) {
+	public String myPage(Model model, HttpSession session, Member member) {
 		String loginId = (String)session.getAttribute("SID");
 		List<Goods> goodsList = goodsService.getMyBuyGoods(loginId);
 		model.addAttribute("goodsList", goodsList);
+		member = memberService.getMemberInfo(loginId);
+		model.addAttribute("member", member);
 		return "/member/myPage";
 	}
 	
