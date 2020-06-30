@@ -6,6 +6,7 @@
 	<title>음식점 상세페이지</title>
 </th:block>
 <th:block layout:fragment="customCss">
+<link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
 	<style>
 		.carousel-item img {
 			width: 400px;
@@ -158,7 +159,7 @@
 			<nav class="w-100">
 				<div class="nav nav-tabs" id="product-tab" role="tablist">
 					<a class="nav-item nav-link" id="res-review-tab" data-toggle="tab" href="#res-review" role="tab" aria-controls="res-review" aria-selected="true">리뷰</a>
-					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변 즐길거리,음식점</a> 
+					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변</a> 
 					<a class="nav-item nav-link active" id="event-tab" data-toggle="tab" href="#res-event" role="tab" aria-controls="res-event" aria-selected="false">이벤트</a>
 				</div>
 			</nav>
@@ -321,7 +322,31 @@
 					</div>		
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-					<div id="map" style="width:500px;height:400px;"></div>
+				<div class="map_wrap">
+					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+					    <ul id="category">    
+					        <li id="CE7"  data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					         	   카페
+					        </li>  
+					        <li id="CS2" data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					                        편의점
+					        </li>  
+					        <li id="AT4"data-order="2"> 
+					            <span class="category_bg pharmacy"></span>
+					                       관광명소
+					        </li> 
+					        <li id="FD6"data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					                        음식점
+					        </li>     
+					        <li id="AD5"data-order="2"> 
+					            <span class="category_bg pharmacy"></span>
+					                        숙박
+					        </li>     
+					    </ul>
+					</div>
 				</div>
 				<div class="tab-pane fade" id="res-event" role="tabpanel" aria-labelledby="event-tab">			
 					이벤트 준비중,,
@@ -336,18 +361,19 @@
 <!-- /.card -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474"></script>
-	<script src="/plugins/chart.js/Chart.min.js"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+<script src="/plugins/chart.js/Chart.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474&libraries=services"></script>
+<script src="/dist/js/kakaoMap.js"></script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	var lat = /*[[${res.resLat}]]*/;
+	var lng = /*[[${res.resLong}]]*/;	
+	/*]]>*/
 	
-		var map = new kakao.maps.Map(container, options);
-		
-		
+	console.log(1);
+	var myFn = kakaoMap(lat,lng);	
+	console.log(lat,lng)
+	console.log(2);
 		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
 		var donutData = {
 			labels : [ '5점', '4점', '3점', '2점', '1점', ],
