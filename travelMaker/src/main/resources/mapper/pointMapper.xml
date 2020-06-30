@@ -14,7 +14,7 @@
 			ELSE CONCAT('save_point_',MAX(CAST(SUBSTRING(save_point_num,12) AS DECIMAL))+1) 
 			END AS save_point_num
 		FROM
-			tb_save_point 
+			tb_point_save
  	</selectKey>
  		INSERT INTO tb_save_point
 			(save_point_num, m_id, save_point_cause, save_point_detail, save_point_charge)
@@ -62,6 +62,5 @@
 		WHERE
 			m_id=#{memberId};
 	</update>
-	
 	
 </mapper>
