@@ -3,17 +3,15 @@
  */
 
 $(function() {
-
-	$(document).ready(function(){
-		$("#scrapModal").click(function(){
-			$("#scrapTripModal").modal();
-		});
-	});
 	
-	$('#scrapModal').click(function() {
-		var mId = $('#mId').val();
+	var mId = $('#mId').val();
+	var sightsNum =$('#sightsNum').val();
+	console.log(JSON.stringify(sightsNum)+"aaaaaaaaaaaaa");
+	
+	$(document).on('click','#scrapModal',function() {
+		$(".modal-backdrop").remove();
 		console.log(mId);
-
+		
 		if (mId != '' || mId == undefined) {
 			var request = $.ajax({
 				url : "/ajax/scrapModal",
@@ -28,39 +26,25 @@ $(function() {
 				var html ='';
 				var myTripList = data.result.length
 				var listInfo = data.result;
-				var tName = $(tName)
-
-				for(var i = 0; i < myTripList;i++){
-					html+='<th:block th:each="l: ${tripList}">'
-						html+='<div class="col-12">'
-							html+='<div class="sights row">'
-								html+='<div class="sightsImg col-12 col-md-2">'
-					html+=' <img src="/fileupload/'+listInfo[i] +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
-					html+=' <div class="media-body">'
-						html+='</div>'
-							html+='<div class="sightsDesc col-12 col-md-10"><p th:text="${'+ tName +}"></p>'" +
-									"" +
-									"" +
-									"" +
-									"
-		            html+='<h3 class="dropdown-item-title">'+ listInfo[i]+'</h3>';
-					html+= '<p class="text-sm">'+listInfo[i]+'+</p>';
-				    html+= '<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>'+ listInfo[i]+'</p>'
-				    html+= '   </div> </div> </div>'	
-				    html+= '</th:block>';
+				
+				for(var i = 0; i < myTripList;i++){				
+					html+='<div class="col-12">'
+					html+='<div class="row">'
+					html+='<div class="col-12 col-md-2">'
+					html+=' <img src="/fileupload/'+ listInfo[i].tPhoto +'"width="80" height="80">'
+					html+='</div>'
+						html+='<div class="col-12 col-md-10">'
+				    html+= '<p style="text-align: center"><input type="radio" name="myTrip" id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
+				    html+= '</div> </div>'	
 				}
+				
+				
+				console.log(html)
 				var myTripList = $('#myTripList');
-				myTripList.html(html)
+				myTripList.html(html);
+				$("#scrapTripModal").modal();
 					
-						
-							<img th:src="@{/fileupload/{file}(file=${l.tPphto1})}"
-								alt="User Image" width="50" height="50">
-						
-
-			
 			});
-
-			
 			
 			request.fail(function(jqXHR, textStatus) {
 				alert("Request failed: " + textStatus);
@@ -71,5 +55,25 @@ $(function() {
 		}
 
 	});
+	
+/*	$(document).on('click','#scrapBtn',function() {
+		 var request = $.ajax({
+			  url: "/ajax/SightsScrap", 
+			  method: "POST",
+			  dataType: "text",
+			  data: {"mId": mId,sightsNum: sightsNum}
+		  });
 
-});
+		 	request.done(function( data ) {
+				alert(data);
+				console.log(data);
+			});	
+		 
+			request.fail(function(jqXHR, textStatus) {
+				alert("Request failed: " + textStatus);
+			});
+		 
+		});*/
+	});
+		
+		

@@ -8,39 +8,25 @@
 <body>
 
 
-<th:block th:fragment="scrapModalFragment">
-		<div class="modal fade" id="scrapTripModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<strong>스크랩</strong>
-					</div>
-					<div class="modal-body">
-						<div>
-							<strong>내여행 리스트</strong>
+	<th:block th:fragment="scrapModalFragment">
+			<div class="modal fade" id="scrapTripModal" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<strong>스크랩 내여행 리스트</strong>
 						</div>
-						<div id="myTripList">
-						<th:block th:each="l: ${tripList}">
-							<div class="col-12">
-								<div class="sights row">
-									<div class="sightsImg col-12 col-md-2">
-										<img th:src="@{/fileupload/{file}(file=${l.tPphto1})}"
-											alt="User Image" width="50" height="50">
-									</div>
-									<div class="sightsDesc col-12 col-md-10">
-										<p th:text="${l.tName}"></p>
-
-									</div>
-								</div>
-							</div>
-						</th:block>
+						<div class="modal-body">
+							<div id="myTripList"></div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="scrapBtn" class="btn btn-primary" data-dismiss="modal">스크랩 하기</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">닫기</button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-</th:block>
+	</th:block>
 
 </body>
 </html>

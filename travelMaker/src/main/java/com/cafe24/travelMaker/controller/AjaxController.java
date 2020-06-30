@@ -89,14 +89,14 @@ public class AjaxController {
 		
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
 		System.out.println("/SightsScrap 요청 호출 " + mId);
-		System.out.println(scrapselect+"<---------- sSelect");
+		System.out.println(scrapselect+"<---------- sSelect 컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러");
 
 		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
 			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
-			//scrapsightsservice.sDeleteScrap(sightsScrap);
+			scrapsightsservice.sDeleteScrap(sightsScrap);
 			System.out.println("delete");
 		} else {
-			//scrapsightsservice.sInsertScrap(sightsScrap);
+			scrapsightsservice.sInsertScrap(sightsScrap);
 			System.out.println("insert");
 			//인설트
 		}

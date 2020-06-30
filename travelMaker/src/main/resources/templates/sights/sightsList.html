@@ -63,7 +63,7 @@
 }
 </style>
 </th:block>
-<th:block layout:fragment="customContents">
+<th:block layout:fragment="customContents" >
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 			<input type="hidden" id="mId" th:value="${session.SID}"/>
@@ -86,7 +86,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" >
 			<input type="hidden" id="mId" th:value="${session.SID}" />
 			<!-- Default box -->
 			<div class="card">
@@ -187,7 +187,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" style="">
 								<span class="sightListTitle">관광명소</span>
 								<th:block th:each="l: ${sightsList}">
 									<div class="col-12">
@@ -197,8 +197,8 @@
 													alt="User Image" width="150" height="150">
 											</div>
 											<div class="sightsDesc col-12 col-md-10">
-												<button  data-toggle="modal" data-target="#scrapModal" style="float: right;"
-													class="btn btn-primary scrapBtn">
+												<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" style="float: right;"
+													class="btn btn-primary">
 													<i class="fas fa-hand-point-up"></i><i
 														class="far fa-hand-point-up"></i>
 												</button>
