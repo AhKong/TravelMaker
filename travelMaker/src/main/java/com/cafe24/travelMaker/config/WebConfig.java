@@ -9,8 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.cafe24.travelMaker.interceptor.MsgIntercepter;
 
-
-
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 
@@ -30,7 +28,5 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addInterceptor(msgInterceptor)
 				.addPathPatterns("/**")
 				.excludePathPatterns(exlucdList);
-				
-
 	}
 }
