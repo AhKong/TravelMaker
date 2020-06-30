@@ -3,7 +3,7 @@ package com.cafe24.travelMaker.domain;
 public class MyTrip {
 
 	private String tNum;
-	private String m_id;
+	private String mId;
 	private String tName;
 	private String oCheck;
 	private String tUrl;
@@ -11,17 +11,18 @@ public class MyTrip {
 	private String eDate;
 	private String status;
 	private String rDate;
+	private String tPhoto;
 	public String gettNum() {
 		return tNum;
 	}
 	public void settNum(String tNum) {
 		this.tNum = tNum;
 	}
-	public String getM_id() {
-		return m_id;
+	public String getmId() {
+		return mId;
 	}
-	public void setM_id(String m_id) {
-		this.m_id = m_id;
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
 	public String gettName() {
 		return tName;
@@ -65,10 +66,18 @@ public class MyTrip {
 	public void setrDate(String rDate) {
 		this.rDate = rDate;
 	}
+	public String gettPhoto() {
+		return tPhoto;
+	}
+	public void settPhoto(String tPhoto) {
+		this.tPhoto = tPhoto;
+	}
 	@Override
 	public String toString() {
-		return "MyTrip [tNum=" + tNum + ", m_id=" + m_id + ", tName=" + tName + ", oCheck=" + oCheck + ", tUrl=" + tUrl
-				+ ", sDate=" + sDate + ", eDate=" + eDate + ", status=" + status + ", rDate=" + rDate + "]";
+		return "MyTrip [tNum=" + tNum + ", mId=" + mId + ", tName=" + tName + ", oCheck=" + oCheck + ", tUrl=" + tUrl
+				+ ", sDate=" + sDate + ", eDate=" + eDate + ", status=" + status + ", rDate=" + rDate + ", tPhoto="
+				+ tPhoto + "]";
 	}
+	
 	
 }
