@@ -19,5 +19,6 @@ public interface GoodsMapper {
 	public int updateYesNo(Goods goods);
 	public List<Goods> getMyBuyGoods(String mId);
 	public int GoodsBuyDelete(String goodsBuyCode);
-	public int deleteGoodsAmount(Goods goods);
+	public int deleteGoodsAmount(String goodsBuyAmount, String goodsCode);
+	public int goodsBuyDeletePoint(String mId, String goodsPayPrice);
 }

@@ -20,7 +20,7 @@
         </div>
 
         <div class="info" style="width:150px">
-          <a href="/member/myPage" class="d-block">!김아름 강민수</a>
+          <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>
 
         </div>
       </div>
