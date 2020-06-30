@@ -35,10 +35,9 @@ public class MemberService {
 		return memberMapper.addMember(member);
 	}
 
-<<<<<<< HEAD
-=======
+
 	public Member getMemberInfo(String mId) {
 		return memberMapper.getMemberInfo(mId);
 	}
->>>>>>> refs/heads/develop
+
 }

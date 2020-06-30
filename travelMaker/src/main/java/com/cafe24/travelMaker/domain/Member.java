@@ -133,9 +133,5 @@ public class Member {
 				+ mRegDate + ", file=" + file + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", goodsList="
 				+ goodsList + ", mFollowing=" + mFollowing + ", point=" + point + ", mFollow=" + mFollow + "]";
 	}
-<<<<<<< HEAD
-	
 
-=======
->>>>>>> refs/heads/develop
 }

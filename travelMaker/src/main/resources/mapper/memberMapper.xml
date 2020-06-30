@@ -59,11 +59,7 @@
 		WHERE
 			m.m_id=#{mId};
 	</select>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> refs/heads/develop
 	<select id="findId" parameterType = "Member" resultMap="memberSelect">
 		SELECT
 			m_id
