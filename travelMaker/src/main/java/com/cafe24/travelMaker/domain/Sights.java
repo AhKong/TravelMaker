@@ -20,6 +20,8 @@ public class Sights {
 	private String sightsCloseTime;
 	private String sightsRegDate;
 	private SightsCate sightsCate;
+	private String sightsOpen;
+	private String btnColor;
 	public String getSightsNum() {
 		return sightsNum;
 	}
@@ -123,6 +125,20 @@ public class Sights {
 	public void setSightsCate(SightsCate sightsCate) {
 		this.sightsCate = sightsCate;
 	}
+	
+	public String getSightsOpen() {
+		return sightsOpen;
+	}
+	public void setSightsOpen(String sightsOpen) {
+		this.sightsOpen = sightsOpen;
+	}
+	
+	public String getBtnColor() {
+		return btnColor;
+	}
+	public void setBtnColor(String btnColor) {
+		this.btnColor = btnColor;
+	}
 	@Override
 	public String toString() {
 		return "Sights [sightsNum=" + sightsNum + ", siNum=" + siNum + ", mId=" + mId + ", sightsCateNum="
@@ -130,6 +146,7 @@ public class Sights {
 				+ ", sightsDetail=" + sightsDetail + ", sightsLat=" + sightsLat + ", sightsLong=" + sightsLong
 				+ ", sightsAddr=" + sightsAddr + ", sightsWeb=" + sightsWeb + ", sightsTel=" + sightsTel
 				+ ", sightsStartTime=" + sightsStartTime + ", sightsCloseTime=" + sightsCloseTime + ", sightsRegDate="
-				+ sightsRegDate + ", sightCate=" + sightsCate + "]";
-	}	
+				+ sightsRegDate + ", sightsCate=" + sightsCate + ", sightsOpen=" + sightsOpen + ", btnColor=" + btnColor
+				+ "]";
+	}
 }

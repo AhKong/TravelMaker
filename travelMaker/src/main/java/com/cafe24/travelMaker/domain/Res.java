@@ -22,6 +22,7 @@ public class Res {
 	private String resRegTime;
 	private String resOpen;	
 	private ResCate resCate;
+	private String btnColor;
 	
 	public String getResNum() {
 		return resNum;
@@ -138,6 +139,14 @@ public class Res {
 	public void setResOpen(String resOpen) {
 		this.resOpen = resOpen;
 	}
+	
+	
+	public String getBtnColor() {
+		return btnColor;
+	}
+	public void setBtnColor(String btnColor) {
+		this.btnColor = btnColor;
+	}
 	@Override
 	public String toString() {
 		return "Res [resNum=" + resNum + ", siNum=" + siNum + ", mId=" + mId + ", resCateNum=" + resCateNum
@@ -145,9 +154,9 @@ public class Res {
 				+ ", resLong=" + resLong + ", resAddr=" + resAddr + ", resPrice=" + resPrice + ", resTel=" + resTel
 				+ ", resWeb=" + resWeb + ", resDetail=" + resDetail + ", resStartTime=" + resStartTime
 				+ ", resCloseTime=" + resCloseTime + ", resRegTime=" + resRegTime + ", resOpen=" + resOpen
-				+ ", resCate=" + resCate + "]";
+				+ ", resCate=" + resCate + ", btnColor=" + btnColor + "]";
 	}
-	
+
 	
 
 
