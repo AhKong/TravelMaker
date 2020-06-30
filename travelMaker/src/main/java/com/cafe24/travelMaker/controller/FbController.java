@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.travelMaker.domain.FbCode;
 import com.cafe24.travelMaker.domain.FeedbackSights;
 import com.cafe24.travelMaker.service.FeedbackService;
 
@@ -21,9 +22,12 @@ public class FbController {
 	
 	//회원이 피드백 등록 폼으로 이동
 	@GetMapping("/addFeedback")
-	public String addFeedback(Model model, @RequestParam(name="sightsNum", required=false) String sightsNum) {
+	public String formFeedback(Model model, FbCode fbCode,
+								@RequestParam(name="sightsNum", required=false) String sightsNum) {
 		System.out.println("(Get) addFeedback FbController 도착");
 		System.out.println(sightsNum+" <- sightsNum addFeedback FbController");
+		List<FbCode> fCode = feedbackService.formFeedback(fbCode);
+		model.addAttribute("fCode", fCode);
 		model.addAttribute("sightsNum", sightsNum);
 		
 		return "feedback/addFeedback";

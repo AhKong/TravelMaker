@@ -67,24 +67,10 @@
                     <!-- check box -->
                     <div class="form-group">
                       <div class="form-check" style="margin: 10px;">
-                        <input class="form-check-input" type="checkbox" id="checkbox1" name="fbCode.fbCodeNum" value="fb_code_1">
-                        <label class="form-check-label"> 더이상 존재하지 않는 장소입니다</label>
-                      </div>
-                      <div class="form-check" style="margin: 10px;">
-                         <input class="form-check-input" type="checkbox" id="checkbox2" name="fbCode.fbCodeNum" value="fb_code_2">
-                         <label class="form-check-label"> 잘못된 정보가 포함되어 있습니다</label>
-                      </div>
-                      <div class="form-check" style="margin: 10px;">
-                        <input class="form-check-input" type="checkbox" id="checkbox3" name="fbCode.fbCodeNum" value="fb_code_3">
-                        <label class="form-check-label"> 정보가 너무 빈약합니다</label>
-                      </div>
-                      <div class="form-check" style="margin: 10px;">
-                        <input class="form-check-input" type="checkbox" id="checkbox4" name="fbCode.fbCodeNum" value="fb_code_4">
-                        <label class="form-check-label"> 추가하고 싶은 유용한 정보를 알고 있습니다</label>
-                      </div>
-                      <div class="form-check" style="margin: 10px;">
-                        <input class="form-check-input" type="checkbox" id="checkbox5" name="fbCode.fbCodeNum" value="fb_code_5">
-                        <label class="form-check-label"> 기타</label>
+                        <th:block th:each=" c : ${fCode}">
+                          <input type="hidden" name="fbCode.fbCodeNum" value="${c.fbCodeNum}">
+                          <p><input type="checkbox" name="fbCode.fbReason">&nbsp;[[${c.fbReason}]] </p>
+                        </th:block>
                       </div>
                     </div>
                   </div>

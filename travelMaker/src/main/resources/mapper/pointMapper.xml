@@ -44,4 +44,24 @@
 				(point_num, m_id, point_final_point)
 			VALUES (#{pointNum}, #{mId}, #{finalPoint})
 	</insert>
+	
+	<select id="getPointInfo" parameterType="String" resultType="Point">
+		SELECT 
+			point_final_point AS finalPoint
+		FROM 
+			tb_point_admin
+		WHERE
+			m_id=#{mId};
+	</select>
+	
+	<update id="updatePointFinal" parameterType="Goods">
+		UPDATE 
+			tb_point_admin
+		SET
+			point_final_point = point_final_point - #{goodsPayPrice}
+		WHERE
+			m_id=#{memberId};
+	</update>
+	
+	
 </mapper>

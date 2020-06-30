@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+<script>
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		 */
+		 /* id값으로 검색해서 테이블내 데이터 유무에 따라 그립보여줌... */
+	 $(function(){
+			 
+			 $('#scrapIcon').click(function(){
+				 var mId = $('#mId').val();
+				 var sightsNum = $('#sightsNum').attr('data-sightsNum');
+
+				 console.log(mId);
+				 console.log(sightsNum);
+				 if(mId !='' || mId == undefined){
+					 var sights ='sights_1';
+					 var request = $.ajax({
+						  url: "/ajax/SightsScrap", 
+						  method: "POST",
+						  dataType: "text",
+						  data: {mId: mId,
+							  sightsNum: sightsNum  
+						  	} 
+					});
+					 
+					 request.done(function( data ) {
+						alert(data);
+						
+					});	
+
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+					});		 
+				 } else {
+					 alert('스크랩은 회원만 가능합니다 로그인 해주세욥 ');
+					window.location.href = '/member/login';
+				 }
+				
+			 
+			});
+			 
+		 });
+	</script>
+</html>

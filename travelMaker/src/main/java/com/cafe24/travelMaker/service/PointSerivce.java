@@ -4,6 +4,7 @@ package com.cafe24.travelMaker.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.domain.SavePoint;
@@ -54,6 +55,14 @@ public class PointSerivce {
 	public int process() {
 		
 		return 0;
+	}
+	
+	public Point getPointInfo(String mId) {
+		return pointMapper.getPointInfo(mId);
+	}
+	
+	public int updatePointFinal(Goods goods) {
+		return pointMapper.updatePointFinal(goods);
 	}
 	
 	

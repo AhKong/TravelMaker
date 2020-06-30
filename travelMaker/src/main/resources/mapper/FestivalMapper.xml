@@ -18,6 +18,7 @@
 		</association>
 		<association property="sights" javaType="Sights">
 			<result property="sightsNum" column="sights_num"/>
+			<result property="sightsName" column="sights_name"/>
 		</association>
 	</resultMap>
 	
@@ -32,12 +33,14 @@
 	</delete>
 	
 		
-	<select id="getFestivalList" parameterType="String" resultMap="fesSelect">
+	<select id="ingFestivalList" parameterType="String" resultMap="fesSelect">
+		<![CDATA[
 		SELECT
 			 f.fes_num
 			,f.m_id
 			,f.fes_name		
 			,f.fes_photo
+			,s.sights_num
 			,s.sights_name
 			,f.fes_start_date		
 			,f.fes_end_date
@@ -47,9 +50,59 @@
 			,f.fes_state
 		FROM 
 			tb_festival AS f
-			INNER JOIN 
+			RIGHT OUTER JOIN 
 			tb_sights AS s 
-			ON f.sights_num = s.sights_num;
+			ON f.sights_num = s.sights_num
+		WHERE (f.fes_start_date <= NOW()) and (f.fes_end_date >= NOW());
+		]]>
+	</select>
+	
+	<select id="preFestivalList" parameterType="String" resultMap="fesSelect">
+		<![CDATA[
+		SELECT
+			 f.fes_num
+			,f.m_id
+			,f.fes_name		
+			,f.fes_photo
+			,s.sights_num
+			,s.sights_name
+			,f.fes_start_date		
+			,f.fes_end_date
+			,f.fes_detail
+			,f.fes_web
+			,f.fes_reg_date
+			,f.fes_state
+		FROM 
+			tb_festival AS f
+			RIGHT OUTER JOIN 
+			tb_sights AS s 
+			ON f.sights_num = s.sights_num
+		WHERE (f.fes_start_date > NOW()) and (f.fes_end_date > NOW());
+		]]>
+	</select>
+	
+	<select id="postFestivalList" parameterType="String" resultMap="fesSelect">
+		<![CDATA[
+		SELECT
+			 f.fes_num
+			,f.m_id
+			,f.fes_name		
+			,f.fes_photo
+			,s.sights_num
+			,s.sights_name
+			,f.fes_start_date		
+			,f.fes_end_date
+			,f.fes_detail
+			,f.fes_web
+			,f.fes_reg_date
+			,f.fes_state
+		FROM 
+			tb_festival AS f
+			RIGHT OUTER JOIN 
+			tb_sights AS s 
+			ON f.sights_num = s.sights_num
+		WHERE (f.fes_start_date < NOW()) and (f.fes_end_date < NOW());
+		]]>
 	</select>
 	
 	
@@ -59,6 +112,7 @@
 			<if test="fesName != null and fesName != ''.toString()">fes_name=#{fesName},</if>
 			<if test="fesName != null and fesName != ''.toString()">m_id=#{member.mId},</if>
 			fes_photo=#{fesPhoto},
+			<if test="fesStartDate != null and fesStartDate != ''.toString()">sights_num=#{sights.sightsNum},</if>
 			<if test="fesStartDate != null and fesStartDate != ''.toString()">fes_start_date=#{fesStartDate},</if>
 			<if test="fesEndDate != null and fesEndDate != ''.toString()">fes_end_date=#{fesEndDate},</if>
 			<if test="fesDetail != null and fesDetail != ''.toString()">fes_detail=#{fesDetail},</if>
@@ -103,9 +157,10 @@
 				tb_festival;
 		</selectKey>
 			INSERT INTO tb_festival
-			(fes_num, m_id, fes_name, fes_photo, fes_start_date, fes_end_date, fes_detail, fes_web, fes_reg_date, fes_state)			
+			(fes_num, sights_num, m_id, fes_name, fes_photo, fes_start_date, fes_end_date, fes_detail, fes_web, fes_reg_date, fes_state)			
 			
 			VALUES ( #{fesNum}	
+					,#{sights.sightsNum}
 					,#{member.mId}
 					,#{fesName}
 					,#{fesPhoto}
