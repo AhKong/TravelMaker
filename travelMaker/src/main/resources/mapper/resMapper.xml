@@ -107,7 +107,7 @@
 				(case 
 					when resOpen = '곧 마감' then 'bg-danger'
 					when resOpen = '영업중' then 'bg-warning'
-					when resOpen = '영업종료' then 'bg-default'
+					when resOpen = '영업종료' then 'bg-secondary'
 					ELSE ''
 				END ) AS btnColor 
 			FROM (SELECT
