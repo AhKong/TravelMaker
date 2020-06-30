@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.mapper.FollowMapper;
 import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.PointSerivce;
@@ -35,10 +36,12 @@ public class MemberController{
 
 	
 	@GetMapping("/myPage")
-	public String myPage(Model model, HttpSession session) {
+	public String myPage(Model model, HttpSession session, Member member) {
 		String loginId = (String)session.getAttribute("SID");
 		List<Goods> goodsList = goodsService.getMyBuyGoods(loginId);
 		model.addAttribute("goodsList", goodsList);
+		member = memberService.getMemberInfo(loginId);
+		model.addAttribute("member", member);
 		return "/member/myPage";
 	}
 	

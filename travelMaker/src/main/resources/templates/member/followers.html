@@ -52,22 +52,18 @@
                           	상태
                       </th>
                       <th style="width: 15%" >
+                    		 프로필
+                      </th>
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                        1
-                      </td>
-                      <td>
-                          <a>
-                              	민수
-                          </a>
-                      </td>
+                  <tr th:each="fl, i : ${followList}">
+                      <td th:text="${i.count}"></td>
+                      <td th:text="${fl.mId}"></td>
                       <td>
                           <ul class="list-inline">
                               <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                  <img alt="Avatar" class="table-avatar" th:src="@{/fileupload/{file}(file=${fl.member.mAvatar})}">
                               </li>
                           </ul>
                       </td>

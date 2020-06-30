@@ -57,7 +57,7 @@
 			</div>
 			
             <div class="card-body">
-              <form role="form" th:action="@{/festival/updateFestival}" method="post">
+              <form role="form" th:action="@{/festival/updateFestival}" method="post" enctype="multipart/form-data">
 				<input type="hidden" class="form-control" name="fesNum" th:value="${festival.fesNum}">
 				<input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
 			    <div class="row">
@@ -68,14 +68,13 @@
 					</div>
 			      </div>
 				</div>
-			    <div class="form-group">
-				  <label for="exampleInputFile"><i class="fas fa-camera-retro"></i>&nbsp;festival-photo</label>
-				  <div class="input-group">
-					<div class="custom-file">
-					  <label class="custom-file-label" for="exampleInputFile"></label>
-					  <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto" th:value="${festival.fesPhoto}">
+			    <div class="row">
+				  <div class="col-12">
+			  	    <div class="form-group">
+				      <label for="inputFile"><i class="fas fa-music"></i>&nbsp;festival-photo</label>
+				      <input type="file" class="form-control" name="file" id="inputFile" accept="image/git, image/jpeg, image/png">
 				    </div>
-			      </div>
+				  </div>
 				</div>
 				<div class="row" >
 				  <div class="col-12">
@@ -126,12 +125,16 @@
 			  	    <!-- radio -->
 					<div class="form-group">
 					  <div class="form-radio" style="margin: 20px;">
-						<input class="form-check-input" type="radio" name="fesState" value="ingFestival" checked>
+						<input class="form-check-input" type="radio" name="fesState" value="진행중" checked>
 						<label class="form-check-label">현재 진행중인 축제</label>
 					  </div>
 					  <div class="form-radio" style="margin: 20px;">
-					    <input class="form-check-input" type="radio" name="fesState" value="preFestival">
-						<label class="form-check-label">예정중인 축제</label>
+					    <input class="form-check-input" type="radio" name="fesState" value="진행예정">
+						<label class="form-check-label">진행 예정인 축제</label>
+					  </div>
+					  <div class="form-radio" style="margin: 20px;">
+					    <input class="form-check-input" type="radio" name="fesState" value="진행종료">
+						<label class="form-check-label">진행 종료된 축제</label>
 					  </div>
 					</div>
 			      </div>
@@ -160,7 +163,7 @@
 							</div>
 							
 							<div class="modal-footer">
-								<button type="button" onclick="location.href='/festival/festivalList'" class="btn btn-primary btn-sm col-sm-2"> 예 </button>
+								<button type="button" onclick="location.href='/festival/ingFestivalList'" class="btn btn-primary btn-sm col-sm-2"> 예 </button>
 			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
 							</div>
 						</div>

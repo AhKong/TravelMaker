@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.travelMaker.service.FestivalService;
 import com.cafe24.travelMaker.service.StorageService;
@@ -27,8 +28,13 @@ public class FestivalController {
 	@PostMapping("/addFestival")
 	public String addFestival(Festival festival) {
 		System.out.println("addFestival FestivalController 도착");
+		System.out.println(festival.getFile().getOriginalFilename()+" <- getOriginalFilename");
+		festival.setFesPhoto(festival.getFile().getOriginalFilename());
+		if(!"".equals(festival.getFesPhoto())) {
+			storageService.store(festival.getFile());
+		}
 		int result = festivalService.addFestival(festival);
-		System.out.println(festival+" <- festival addFestival FestivalController");
+		System.out.println(festival.getFile()+" <- festival.getFile() addFestival FestivalController");
 		System.out.println(result+" <- result addFestival FestivalController");
 		System.out.println(festival.getMember().toString()+" <- festival.getMember().toString() addFestival FestivalController");
 		
@@ -40,8 +46,8 @@ public class FestivalController {
 	public String festivalSelect(Model model, @RequestParam(name="fesNum", required=false) String fesNum) {
 		
 		System.out.println(fesNum+" <- fesNum festivalSelect FestivalController");
-		Festival festival = festivalService.festivalSelect(fesNum);	
-		List<Festival> upList = festivalService.ingFestivalList();
+		Festival festival = festivalService.festivalSelect(fesNum);		//fesNum 의 값으로 선택 조회하여 담아진 festival 객체
+		List<Festival> upList = festivalService.ingFestivalList();		//현재진행중인 축제를 조회하여 담은 리스트
 		System.out.println(festival+" <- festival festivalSelect FestivalController");
 		System.out.println(upList+" <- upList festivalSelect FestivalController");
 		model.addAttribute("festival", festival);
@@ -55,6 +61,11 @@ public class FestivalController {
 	@PostMapping("/updateFestival")
 	public String updateFestival(Festival festival) {
 		System.out.println("updateFestival FestivalController 도착");
+		System.out.println(festival.getFile().getOriginalFilename()+" <- getOriginalFilename");
+		festival.setFesPhoto(festival.getFile().getOriginalFilename());
+		if(!"".equals(festival.getFesPhoto())) {
+			storageService.store(festival.getFile());
+		}
 		int result = festivalService.updateFestival(festival);
 		System.out.println(festival+" <- festival updateFestival FestivalController");
 		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalController");
