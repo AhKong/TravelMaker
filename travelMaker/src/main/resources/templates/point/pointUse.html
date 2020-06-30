@@ -17,6 +17,9 @@
   		margin: 20px;
   		padding: 20px;
   	}
+  	table {
+  		width: 100%;
+  	}
   </style>
 </th:block>
 
@@ -30,7 +33,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>포인트 사용내역</h1>
+            <h1>포인트 사용내역 - 이승연</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -46,35 +49,46 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="card-control col-8">
+          
+          <div class="card-control col-10">
             <div class="card card-primary">
               <div class="card-header">
                 <h4 class="card-title">포인트 사용내역</h4>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
+              <div class="card-body col-12">
+                <table class="table table-bordered col-12">
+                  <colgroup>
+                	<col width="*" />
+                	<col width="*" />
+                	<col width="*" />
+                	<col width="*" />
+                	<col width="*" />
+                	<col width="*" />
+                  </colgroup>
                   <thead>                  
                     <tr>
-                      <th style="width: 20px">0</th>
+                      <th style="width: 20px">#</th>
                       <th>u.point_use_reg_date</th>
                       <th style="width: 20px; height: 20px;">g.g_photo</th>
                       <th>g.g_name</th>
-                      <th>u.point_use_used</th>
                       <th>g.g_amount</th>
+                      <th>u.point_use_used</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each=" p : ${pointUseList}">
-                      <input type="hidden" name="pointUseNum" th:value="${p.pointUseNum}">
-                      <input type="hidden" name="mId" th:value="${loginId}">
-                      <td>숫자</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
+                  	<th:block th:each=" u, i : ${pointUseList}">
+                      <tr th:each=" g : ${u.goods}">
+                        <input type="hidden" th:value="${u.pointUseNum}">
+                        <input type="hidden" th:value="${loginId}">
+                        <td th:text="${i.count}"></td>
+                        <td th:text="${u.pointUseRegDate}"></td>
+                        <td th:text="${g.goodsPhoto}"></td>
+                        <td th:text="${g.goodsName}"></td>
+                        <td th:text="${g.goodsAmount}"></td>
+                        <td th:text="${u.pointUseUsed}"></td>
                     </tr>
+                    </th:block>
                   </tbody>
                 </table>
               </div>
@@ -91,7 +105,55 @@
             </div>
             <!-- /.card -->
 		  </div>
-          <!-- /.col -->
+          <!-- /.col 포인트 사용내역 -->
+          
+          <div class="card-control col-10">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4 class="card-title">포인트 적립내역</h4>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body col-12">
+                <table class="table table-bordered">
+                  <thead>                  
+                    <tr>
+                      <th style="width: 20px">#</th>
+                      <th>save_point_reg_date</th>
+                      <th>save_point_cause</th>
+                      <th>save_point_detail</th>
+                      <th>save_point_charge</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <th:block>
+                    <tr th:each=" s, i : ${pointSaveList}">
+                      <input type="hidden" th:value="${s.savePointNum}">
+                      <input type="hidden" th:value="${loginId}">
+                      <td th:text="${i.count}"></td>
+                      <td th:text="${s.savePointRegDate}"></td>
+                      <td th:text="${s.savePointCause}"></td>
+                      <td th:text="${s.savePointDetail}"></td>
+                      <td th:text="${s.savePointCharge}"></td>
+                    </tr>
+                    </th:block>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- /.card -->
+		  </div>
+          <!-- /.col 포인트 적립내역 -->
+          
          </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -99,13 +161,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 

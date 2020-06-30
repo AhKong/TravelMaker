@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.service.GoodsService;
-import com.cafe24.travelMaker.service.PointSerivce;
+import com.cafe24.travelMaker.service.PointService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
 @RequestMapping("/goods")
 public class GoodsController{
 	
-	@Autowired private PointSerivce pointService;
+	@Autowired private PointService pointService;
 	@Autowired private GoodsService goodsService;
 	@Autowired private StorageService storageService;
 

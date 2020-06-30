@@ -1,6 +1,5 @@
 package com.cafe24.travelMaker.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +21,7 @@ import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.mapper.FollowMapper;
 import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
-import com.cafe24.travelMaker.service.PointSerivce;
+import com.cafe24.travelMaker.service.PointService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
@@ -31,7 +30,7 @@ public class MemberController{
 
 	@Autowired MemberService memberService;
 	@Autowired private StorageService storageService;
-	@Autowired private PointSerivce pointService;
+	@Autowired private PointService pointService;
 	@Autowired private GoodsService goodsService;
 
 	
