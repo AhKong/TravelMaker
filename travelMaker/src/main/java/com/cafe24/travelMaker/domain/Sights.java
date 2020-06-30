@@ -21,7 +21,7 @@ public class Sights {
 	private String sightsRegDate;
 	private SightsCate sightsCate;
 	private String sightsOpen;
-	private Si si;
+	private String btnColor;
 	public String getSightsNum() {
 		return sightsNum;
 	}
@@ -133,11 +133,11 @@ public class Sights {
 		this.sightsOpen = sightsOpen;
 	}
 	
-	public Si getSi() {
-		return si;
+	public String getBtnColor() {
+		return btnColor;
 	}
-	public void setSi(Si si) {
-		this.si = si;
+	public void setBtnColor(String btnColor) {
+		this.btnColor = btnColor;
 	}
 	@Override
 	public String toString() {
@@ -146,7 +146,7 @@ public class Sights {
 				+ ", sightsDetail=" + sightsDetail + ", sightsLat=" + sightsLat + ", sightsLong=" + sightsLong
 				+ ", sightsAddr=" + sightsAddr + ", sightsWeb=" + sightsWeb + ", sightsTel=" + sightsTel
 				+ ", sightsStartTime=" + sightsStartTime + ", sightsCloseTime=" + sightsCloseTime + ", sightsRegDate="
-				+ sightsRegDate + ", sightsCate=" + sightsCate + ", sightsOpen=" + sightsOpen + ", si=" + si + "]";
+				+ sightsRegDate + ", sightsCate=" + sightsCate + ", sightsOpen=" + sightsOpen + ", btnColor=" + btnColor
+				+ "]";
 	}
-
 }

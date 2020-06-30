@@ -75,13 +75,12 @@
 		<result property ="sightsCloseTime" column ="sights_close_time"/>
 		<result property ="sightsRegDate" column ="sights_reg_time"/>
 		<result property ="sightsOpen" column ="sightsOpen"/>
+		<result property ="btnColor" column ="btnColor"/>
 		<association property="sightsCate" javaType ="SightsCate">
  			<result property="sightsCateNum"  	column="sights_cate_num"/>
  			<result property="sightsType"   	column="sights_type"/>
  		</association>
- 		<association property="si" javaType ="Si">
- 			<result property="siNum"  	column="si_num"/>
- 		</association>
+
 	</resultMap>
 	
 	<select id="selectSightsList" parameterType="String" resultMap ="sightsSelect">
@@ -99,23 +98,28 @@
 	
 	<select id="getDetailSights" parameterType="String" resultMap ="sightsSelect" >
 		<![CDATA[
-			SELECT 
-				*,
+			SELECT b.*,
 				(case 
-					when TIMEDIFF(sights_close_time,TIME(NOW())) BETWEEN  TIME('00:00:00') AND TIME('00:30:00') then '곧 마감'
-					when sights_start_time <= TIME(NOW()) AND sights_close_time >= TIME(NOW()) then '영업중'	
-					when sights_start_time > TIME(NOW()) AND sights_close_time < TIME(NOW()) then '영업마감'	
+					when sightsOpen = '곧 마감' then 'bg-danger'
+					when sightsOpen = '영업중' then 'bg-warning'
+					when sightsOpen = '영업종료' then 'bg-secondary'
 					ELSE ''
-				END) 	AS sightsOpen
-			FROM 
-				tb_sights AS s
-			INNER join
-				tb_sights_cate AS sc 
-			INNER join
-				tb_si AS si 
-			ON 
-				s.sights_cate_num = sc.sights_cate_num 
-			AND si.si_num = s.si_num
+				END ) AS btnColor 
+			FROM (SELECT
+					 s.*,
+					 sc.sights_type,
+					(case 
+						when TIMEDIFF(sights_close_time,TIME(NOW())) BETWEEN  TIME('00:00:00') AND TIME('00:30:00') then '곧 마감'
+						when sights_start_time <= TIME(NOW()) AND sights_close_time >= TIME(NOW()) then '영업중'	
+						when sights_start_time > TIME(NOW()) AND sights_close_time < TIME(NOW()) then '영업마감'	
+						ELSE ''
+					END) 	AS sightsOpen
+					FROM 
+						tb_sights AS s 
+					INNER join
+						tb_sights_cate  AS sc
+					ON s.sights_cate_num = sc.sights_cate_num	
+					) AS b
 			WHERE
 				sights_num =#{sightsNum}
 		]]>
