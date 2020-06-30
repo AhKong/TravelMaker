@@ -20,7 +20,7 @@
         </div>
 
         <div class="info" style="width:150px">
-          <a href="/member/myPage" class="d-block">!김아름 강민수</a>
+          <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>
 
         </div>
       </div>
@@ -33,18 +33,18 @@
                with font-awesome or any other icon font library -->
          	<li class="nav-header">사용자 페이지</li>
           <li class="nav-item has-treeview">
-            <a href="/sights/sightsList" class="nav-link"  data-toggle="modal" data-target="#searchSightsList">
+            <a href="/sights/sightsList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="sights">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               	 !관광명소 김아름
             </a>
           <li class="nav-item">
-            <a href="/res/resList" class="nav-link">
+            <a href="/res/resList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="res">
               <i class="nav-icon fas fa-th"></i>
               	 !음식점 김아름
             </a>
           </li>
           <li class="nav-item">
-            <a href="/festival/festivalList" class="nav-link ">
+            <a href="/festival/ingFestivalList" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
              	!축제 이승연
             </a>

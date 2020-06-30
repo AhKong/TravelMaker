@@ -15,6 +15,11 @@
  		<result property="mAvatar"  column="m_avatar"/>
  		<result property="mIntrod"  column="m_introd"/>
  		<result property="mFollow"  column="m_follow"/>
+ 		<result property="mFollowing"  column="m_following"/>
+ 		<result property="mAddr"  column="m_addr"/>
+ 		<association property="point" javaType="Point">
+ 			<result property="finalPoint" column="point_final_point"/>
+ 		</association>
  	</resultMap>
 	<insert id="addMember" parameterType="Member">
 		INSERT INTO
@@ -43,12 +48,16 @@
 	</select>
 	
 	<select id="getMemberInfo" parameterType ="String" resultMap="memberSelect">
-		SELECT
-			*
+		SELECT 
+   			m.*, p.point_final_point
 		FROM
-			tb_member
+   			tb_member AS m
+		INNER JOIN
+   			tb_point_admin AS p 
+		ON 
+ 			m.m_id = p.m_id
 		WHERE
-			m_id = #{mId}	
+			m.m_id=#{mId};
 	</select>
 
 	<select id="findId" parameterType = "Member" resultMap="memberSelect">

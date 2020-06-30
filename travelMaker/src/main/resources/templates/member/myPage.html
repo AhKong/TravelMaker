@@ -35,31 +35,30 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="../../dist/img/avatar6.jpg"
+                       th:src="@{/fileupload/{file}(file=${member.mAvatar})}"
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">종일이</h3>
+                <h3 class="profile-username text-center" th:text="${session.SID}" style = " font-size:2em;"></h3>
 
-                <p class="text-muted text-center">아이디</p>
+                <p class="text-muted text-center" th:text="${member.mName}"></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">100</a>
+                    <b>Followers</b> <a class="float-right" th:text="${member.mFollow}" style = " font-size:1.5em;"></a>
                     <button type="button" class="btn btn-default" onclick="location.href='/follow/followers'">
                   	<i class="fas fa-search"></i>
                       </button>
                   </li>
                   
                   <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">120</a>
-                    
+                    <b>Following</b> <a class="float-right" th:text="${member.mFollowing}" style = " font-size:1.5em;"></a>
                     <button type="button" class="btn btn-default" onclick="location.href='/follow/following'">
                   	<i class="fas fa-search"></i>
                       </button>
                   </li>
                   <li class="list-group-item">
-                    <b>my point</b> <a class="float-right">2000</a>
+                    <b>my point</b> <a class="float-right" style = " font-size:1.5em;" th:text="${member.point.finalPoint}"></a>
                     <button type="button" class="btn btn-default" onclick="location.href='/point/pointUse'">
                   	<i class="fas fa-search" data-toggle="modal"></i>
                       </button>
@@ -82,39 +81,38 @@
               <div class="card-body">
                 <strong><i class="fas fa-pencil-alt mr-1"></i> 한줄 자기소개</strong>
 
-                <p class="text-muted">
-                 	안녕, 나를 소개하지
+                <p class="text-muted" th:text="${member.mIntrod}">
                 </p>
 
                 <hr>
 
                 <strong><i class="fas fa-map-marker-alt mr-1"></i>주소</strong>
 
-                <p class="text-muted">전주 싱시가지</p>
+                <p class="text-muted" th:text="${member.mAddr}"></p>
 
                 <hr>
                 
                  <strong><i class="fas fa-map-marker-alt mr-1"></i>이메일</strong>
 
-                <p class="text-muted">minsu@naver.com</p>
+                <p class="text-muted" th:text="${member.mEmail}"></p>
 
                 <hr>
                 
                  <strong><i class="fas fa-map-marker-alt mr-1"></i>성별</strong>
 
-                <p class="text-muted">남</p>
+                <p class="text-muted" th:text="${member.mGender}"></p>
 
                 <hr>
                 
                  <strong><i class="fas fa-map-marker-alt mr-1"></i>전화번호</strong>
 
-                <p class="text-muted">01010101010</p>
+                <p class="text-muted" th:text="${member.mTel}"></p>
 
                 <hr>
                 
                  <strong><i class="fas fa-map-marker-alt mr-1"></i>가입날짜</strong>
 
-                <p class="text-muted">2010</p>
+                <p class="text-muted" th:text="${member.mRegDate}"></p>
 
                 <hr>
 
@@ -230,22 +228,26 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>상품번호 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
-                    <th>상품분류 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
-                    <th>상품이름 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
-                    <th>상품가격 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
-                    <th>상품구매일자 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
-                    <th>구매 취소</th>
+                  	<th>번호 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>주문번호 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th style="visibility:hidden; position:absolute;">상품번호 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>상품명 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>구매수량 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>결제가격 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>주문일자 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i></th>
+                    <th>주문취소</th>
                   </tr>
                   </thead>
                   <tbody>
-                 <tr>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td>ㅇㅇ</td>
-                    <td><a class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-primary" style="color:white"><b>click</b></a></td>
+                 <tr th:each="gl, i : ${goodsList}">
+                    <td th:text="${i.count}"></td>
+                    <td th:text=${gl.goodsBuyCode}></td>
+                    <td th:text=${gl.goodsCode} style="visibility:hidden; position:absolute;"></td>
+                    <td th:text=${gl.goodsName}></td>
+                    <td th:text=${gl.goodsBuyAmount}></td>
+                    <td th:text=${gl.goodsPayPrice}></td>
+                    <td th:text=${gl.goodsBuyDate}></td>
+                    <td><a class="btn btn-primary btn-block modalDelBtn" th:data-goodsBuyCode="${gl.goodsBuyCode}" th:data-goodsPayPrice="${gl.goodsPayPrice}" th:data-goodsCode="${gl.goodsCode}" th:data-goodsBuyAmount="${gl.goodsBuyAmount}" data-toggle="modal" data-target="#modal-primary" style="color:white"><i class="fas fa-trash-alt"></i></a></td>
                   </tr>
                   </tbody>
                   <tfoot>
@@ -255,15 +257,15 @@
 			        <div class="modal-dialog">
 			          <div class="modal-content bg-primary">
 			            <div class="modal-header">
-			              <h4 class="modal-title">구매 취소</h4>
+			              <h4 class="modal-title">주문 취소</h4>
 			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			                <span aria-hidden="true">&times;</span></button>
 			            </div>
 			            <div class="modal-body">
-			              <p>구매를 취소하시겠습니까?</p>
+			              <p>주문를 취소하시겠습니까?</p>
 			            </div>
 			            <div class="modal-footer justify-content-between">
-			              <button   onclick="location.href='/member/myPage'" type="button" class="btn btn-outline-light" data-dismiss="modal">확인</button>
+			              <a class="btn btn-outline-light deleteBtn">확인</a>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->
@@ -275,33 +277,6 @@
               </div>
               <!-- /.card-body -->
             </div>
-            
-            <div class="tab-pane" id="myGoodsAlliance">
-                    <div class="card">
-
-                	<div class="modal fade" id="modal-primary">
-			        <div class="modal-dialog">
-			          <div class="modal-content bg-primary">
-			            <div class="modal-header">
-			              <h4 class="modal-title">구매 취소</h4>
-			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			                <span aria-hidden="true">&times;</span></button>
-			            </div>
-			            <div class="modal-body">
-			              <p>구매가 정상적으로 취소되었습니다&hellip;</p>
-			            </div>
-			            <div class="modal-footer justify-content-between">
-			              <button   onclick="location.href='/myPage'" type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-			            </div>
-			          </div>
-			          <!-- /.modal-content -->
-			        </div>
-			        <!-- /.modal-dialog -->
-			      </div>
-			      <!-- /.modal -->
-                </div>
-              </div>
-              <!-- /.card-body -->
             </div>
             
           </div>
@@ -332,10 +307,6 @@
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -344,6 +315,18 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+    
+    $('.modalDelBtn').click(function(){
+    	var goodsBuyCode = $(this).attr('data-goodsBuyCode')
+    	var goodsBuyAmount = $(this).attr('data-goodsBuyAmount')
+    	var goodsCode = $(this).attr('data-goodsCode')
+    	var goodsPayPrice = $(this).attr('data-goodsPayPrice')
+    	console.log(goodsBuyCode);
+    	console.log(goodsBuyAmount);
+    	console.log(goodsCode);
+    	console.log(goodsPayPrice);
+    	$('.deleteBtn').attr('href','/goods/GoodsBuyDelete?goodsBuyCode='+goodsBuyCode+'&goodsBuyAmount='+goodsBuyAmount+'&goodsCode='+goodsCode+'&goodsPayPrice='+goodsPayPrice)
     });
   });
 </script>

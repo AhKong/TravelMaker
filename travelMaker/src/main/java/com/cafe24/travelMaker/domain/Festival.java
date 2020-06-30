@@ -1,10 +1,13 @@
 package com.cafe24.travelMaker.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Festival {
 
 	private String fesNum;
 	private String fesName;
-	private String fesPhoto = null;
+	private String fesPhoto;
+	private MultipartFile file;
 	private String fesStartDate;
 	private String fesEndDate;
 	private String fesDetail;
@@ -31,6 +34,12 @@ public class Festival {
 	}
 	public void setFesPhoto(String fesPhoto) {
 		this.fesPhoto = fesPhoto;
+	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 	public String getFesStartDate() {
 		return fesStartDate;
@@ -83,11 +92,9 @@ public class Festival {
 	
 	@Override
 	public String toString() {
-		return "Festival [fesNum=" + fesNum + ", fesName=" + fesName + ", fesPhoto=" + fesPhoto + ", fesStartDate="
-				+ fesStartDate + ", fesEndDate=" + fesEndDate + ", fesDetail=" + fesDetail + ", fesWeb=" + fesWeb
-				+ ", fesRegDate=" + fesRegDate + ", fesState=" + fesState + ", member=" + member + ", sights=" + sights
-				+ "]";
+		return "Festival [fesNum=" + fesNum + ", fesName=" + fesName + ", fesPhoto=" + fesPhoto + ", file=" + file
+				+ ", fesStartDate=" + fesStartDate + ", fesEndDate=" + fesEndDate + ", fesDetail=" + fesDetail
+				+ ", fesWeb=" + fesWeb + ", fesRegDate=" + fesRegDate + ", fesState=" + fesState + ", member=" + member
+				+ ", sights=" + sights + "]";
 	}
-	
-	
 }

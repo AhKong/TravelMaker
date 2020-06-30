@@ -19,6 +19,8 @@ public class Member {
 	private String mAvatar;
 	private String mIntrod;
 	private List<Goods> goodsList;
+	private int mFollowing;
+	private Point point;
 	
 	public List<Goods> getGoodsList() {
 		return goodsList;
@@ -112,13 +114,24 @@ public class Member {
 	public void setmFollow(int mFollow) {
 		this.mFollow = mFollow;
 	}
+	public int getmFollowing() {
+		return mFollowing;
+	}
+	public void setmFollowing(int mFollowing) {
+		this.mFollowing = mFollowing;
+	}
+	public Point getPoint() {
+		return point;
+	}
+	public void setPoint(Point point) {
+		this.point = point;
+	}
 	@Override
 	public String toString() {
 		return "Member [mId=" + mId + ", mPw=" + mPw + ", mLevel=" + mLevel + ", mName=" + mName + ", mEmail=" + mEmail
 				+ ", mTel=" + mTel + ", mGender=" + mGender + ", mBirth=" + mBirth + ", mAddr=" + mAddr + ", mRegDate="
 				+ mRegDate + ", file=" + file + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", goodsList="
-				+ goodsList + ", mFollow=" + mFollow + "]";
+				+ goodsList + ", mFollowing=" + mFollowing + ", point=" + point + ", mFollow=" + mFollow + "]";
 	}
-	
 
 }

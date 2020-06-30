@@ -3,6 +3,31 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.ResMapper">
+
+	<resultMap type="Res" id="resResultMap">
+		<result property ="resNum" column ="res_num"/>
+		<result property ="siNum" column ="si_num"/>
+		<result property ="mId" column ="m_id"/>
+		<result property ="resCateNum" column ="res_cate_num"/>
+		<result property ="resName" column ="res_name"/>
+		<result property ="resPhoto" column ="res_photo"/>
+		<result property ="resDetail" column ="res_detail"/>
+		<result property ="resLat" column ="res_lat"/>
+		<result property ="resLong" column ="res_long"/>
+		<result property ="resAddr" column ="res_addr"/>
+		<result property ="resWeb" column ="res_web"/>
+		<result property ="resPrice" column ="res_price"/>
+		<result property ="resTel" column ="res_tel"/>
+		<result property ="resStartTime" column ="res_start_time"/>
+		<result property ="resCloseTime" column ="res_close_time"/>	
+		<result property ="resRegTime" column ="res_reg_date"/>	
+		<result property ="resOpen" column ="resOpen"/>	
+		<result property ="btnColor" column ="btnColor"/>	
+		<association property="resCate" javaType ="ResCate">
+ 			<result property="resCateNum"  	column="res_cate_num"/>
+ 			<result property="resType"   	column="res_type"/>
+ 		</association>
+	</resultMap>
 	<select id="selectResCate" resultType="ResCate">
 		select 
 			res_cate_num as resCateNum,
@@ -56,4 +81,53 @@
 			#{resCloseTime}
 		)
 	</insert>
+
+	
+	<select id="getResList" parameterType="String" resultMap="resResultMap">
+		SELECT 
+			r.res_num,
+			r.res_name,
+			r.res_detail,
+			r.res_photo,
+			r.res_addr,
+			rc.res_cate_num,
+			rc.res_type
+		FROM 
+			tb_res  AS r 
+			INNER JOIN tb_si AS si 
+			INNER JOIN tb_res_cate AS rc
+			ON r.si_num = si.si_num AND rc.res_cate_num = r.res_cate_num
+		WHERE 
+			si.si_name LIKE CONCAT('%',#{search},'%')	
+	</select>
+	
+	<select id="getDetailRes" parameterType="String" resultMap="resResultMap">
+		<![CDATA[
+			SELECT b.*,
+				(case 
+					when resOpen = '곧 마감' then 'bg-danger'
+					when resOpen = '영업중' then 'bg-warning'
+					when resOpen = '영업종료' then 'bg-secondary'
+					ELSE ''
+				END ) AS btnColor 
+			FROM (SELECT
+					 r.*,
+					 rc.res_type,
+					(case
+						when TIMEDIFF(res_close_time,TIME(NOW())) BETWEEN  TIME('00:00:00') AND TIME('00:30:00') then '곧 마감'
+						when res_start_time <= TIME(NOW()) AND res_close_time >= TIME(NOW()) then '영업중'
+						ELSE '영업종료'
+					END) AS resOpen
+					FROM 
+						tb_res AS r 
+					INNER join
+						tb_res_cate  AS rc
+					ON rc.res_cate_num = r.res_cate_num	
+					) AS b
+						WHERE 
+							res_num = #{resNum}
+		]]>
+	
+	</select>
+	
 </mapper>

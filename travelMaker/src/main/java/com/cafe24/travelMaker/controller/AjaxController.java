@@ -1,7 +1,6 @@
 package com.cafe24.travelMaker.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,21 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.travelMaker.domain.SightsScrap;
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.domain.ResScrap;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
+import com.cafe24.travelMaker.service.ScrapSightsService;
 
 /*ajax 컨트롤러*/
 @Controller
 @RequestMapping("/ajax")
 public class AjaxController {
 
-	@Autowired private  MailService mailService;
-	@Autowired private  CertSerivce certService;
 	@Autowired private MemberService memberService;
+	@Autowired private  ScrapSightsService scrapsightsservice;
 
 	//아이디 찾기 기능
 	@RequestMapping("/findId")
@@ -74,62 +74,40 @@ public class AjaxController {
 			return getPw;
 		}
 		
-	@GetMapping("/certEmail")
+	// 관광지 스크랩
+	@RequestMapping(value = "/SightsScrap") 
 	@ResponseBody
-	public HashMap<String,String> certEmail(@RequestParam(name="email" ) String email){
-		/* 이메일 인증 
-		 * 
-		 * */
-		System.out.println("email>>>>"+email);
-		HashMap<String, String> certEmailResult = new HashMap<String,String>();
-		HashMap<String, Object> certEmail = certService.certEmail(email); // 보낼 메일 생성, 랜덤코드 생성 
-		mailService.sendMail((Mail)certEmail.get("mail"));//메일 보내기 
-		certEmailResult.put("randomCode", (String)certEmail.get("randomCode"));
-		return certEmailResult;
-	}
-	
-   /*
-    * 아이디 중복검사
-    * */
-	@PostMapping("/idCheck")
-	public @ResponseBody HashMap<String,String> idCheck(@RequestParam(name="mId") String mId ){
-		System.out.println(mId);
+	public SightsScrap SightsScrap(@RequestParam(name="mId") String mId,
+									@RequestParam(name="sightsNum") String sightsNum,
+			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
 		
-		HashMap<String, String> idCheckResult = new HashMap<String,String>();
+		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
+		System.out.println("/SightsScrap 요청 호출 " + mId);
+		System.out.println(scrapselect+"<---------- sSelect");
 
-		if(memberService.mIdCheck(mId)==0) {
-			idCheckResult.put("result", "N");
+		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
+			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
+			//scrapsightsservice.sDeleteScrap(sightsScrap);
+			System.out.println("delete");
 		} else {
-			idCheckResult.put("result", "Y");
+			//scrapsightsservice.sInsertScrap(sightsScrap);
+			System.out.println("insert");
+			//인설트
 		}
-		return idCheckResult;
+		
+		
+		return scrapselect;
 	}
 	
-
-	@RequestMapping(value = "/SightsScrap") // 관광지 스크랩	
-	@ResponseBody
-	public String SightsScrap(@RequestParam(value="mId") String mId,
-			HttpServletResponse response, HttpSession session) throws IOException {
-		System.out.println("/SightsScrap 요청 호출 " + mId);
-		String loginId = mId;
-		if(!"".equals(loginId)) { 
-			if("".equals(loginId)) { 
-				//insert 스크랩 추가 / id값으로 스크랩 테이블 검색해서 없으면 인설트 있으면 딜리트
-			}else {
-				//delete 스크랩 삭제
-			}
-		} else {
-			//java alert
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("로그인이 필요한 기능입니다. 로그인 하세여");
-			out.flush(); 
-		}
-			
-		return loginId;
-	}
-	@GetMapping("/resScrap") // 음식점 스크랩
+	// 음식점 스크랩
+	@GetMapping("/resScrap") 
 	public ResScrap resScrap() {
+		
+		return null;
+	}
+	
+	@GetMapping("/scrapModal")
+	public String moda() {
 		
 		return null;
 	}

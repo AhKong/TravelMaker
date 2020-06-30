@@ -20,6 +20,10 @@ public class Res {
 	private String resStartTime;
 	private String resCloseTime;
 	private String resRegTime;
+	private String resOpen;	
+	private ResCate resCate;
+	private String btnColor;
+	
 	public String getResNum() {
 		return resNum;
 	}
@@ -122,13 +126,39 @@ public class Res {
 	public void setResRegTime(String resRegTime) {
 		this.resRegTime = resRegTime;
 	}
+	
+	public ResCate getResCate() {
+		return resCate;
+	}
+	public void setResCate(ResCate resCate) {
+		this.resCate = resCate;
+	}
+	public String getResOpen() {
+		return resOpen;
+	}
+	public void setResOpen(String resOpen) {
+		this.resOpen = resOpen;
+	}
+	
+	
+	public String getBtnColor() {
+		return btnColor;
+	}
+	public void setBtnColor(String btnColor) {
+		this.btnColor = btnColor;
+	}
 	@Override
 	public String toString() {
 		return "Res [resNum=" + resNum + ", siNum=" + siNum + ", mId=" + mId + ", resCateNum=" + resCateNum
 				+ ", resName=" + resName + ", file=" + file + ", resPhoto=" + resPhoto + ", resLat=" + resLat
 				+ ", resLong=" + resLong + ", resAddr=" + resAddr + ", resPrice=" + resPrice + ", resTel=" + resTel
 				+ ", resWeb=" + resWeb + ", resDetail=" + resDetail + ", resStartTime=" + resStartTime
-				+ ", resCloseTime=" + resCloseTime + ", resRegTime=" + resRegTime + "]";
+				+ ", resCloseTime=" + resCloseTime + ", resRegTime=" + resRegTime + ", resOpen=" + resOpen
+				+ ", resCate=" + resCate + ", btnColor=" + btnColor + "]";
 	}
+
+	
+
+
 
 }

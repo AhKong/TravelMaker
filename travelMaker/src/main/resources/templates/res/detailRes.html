@@ -6,6 +6,7 @@
 	<title>음식점 상세페이지</title>
 </th:block>
 <th:block layout:fragment="customCss">
+<link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
 	<style>
 		.carousel-item img {
 			width: 400px;
@@ -39,6 +40,9 @@
 			font-size:20px;
 			font-weight:bold;
 		}
+		.badge{
+		font-size:16px;
+		}
 </style>
 </th:block>
 <th:block>
@@ -70,30 +74,22 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-12 col-sm-7">
-					<h2 class="my-3">맛난 치킨</h2>
+					<p class="my-3" style="font-size:30px;" th:utext="|${res.resName} <span class='badge ${res.btnColor}'>${res.resOpen}</span><br> |"></p>
+
 					<i class="fas fa-star"></i> <i class="fas fa-star"></i> 
 					<i class="fas fa-star"></i> <i class="fas fa-star"></i>
 					<span class="reveiwCnt">529개의 리뷰</span>
 					<hr>
-					<p>상세설명은 여기에 자세하게 나올거야 상세설명은 여기에 자세하게 나올거야상세설명은 여기에 자세하게
-						나올거야상세설명은 여기에 자세하게 나올거야상세설명은 여기에 자세하게 나올거야</p>
-					<p>
-						<i class="far fa-clock"></i> 08:00 - 18 :00
-					</p>
-					<p>
-						<i class="fas fa-map-marker-alt"></i> 전주시 덕진구 금암동 1111
-					</p>
+					<p th:text="${res.resDetail}"></p>
+					
+					<p th:utext="|<i class='far fa-clock'></i> &nbsp; ${res.resStartTime}- ${res.resCloseTime}|"></p>
+					<p th:utext="|<i class='fas fa-map-marker-alt'></i>  &nbsp; ${res.resAddr} |"></p>
 					<p>이 음식점을 주로 남성이 선호합니다</p>
 					<p>이 음식점은 주로 혼자 여행온 사람들이 즐깁니다.</p>
+					<p th:utext="|<i class='fas fa-tv'></i> ${res.resWeb}|"></p>
+					<p th:utext="|<i class='fa fa-volume-control-phone'></i> ${res.resTel}|"></p>
 					<p>
-						<i class="fas fa-tv"></i> www.tavelMaker4.cafe24.com
-					</p>
-					<p>
-						<i class="fa fa-volume-control-phone"></i>
-						www.tavelMaker4.cafe24.com
-					</p>
-					<p>
-						<a>
+						<a th:href="@{/feedback/addFeedback(resNum=${res.resNum})}">
 							<i class="far fa-edit"></i>
 							이 게시물에 대한 피드백 남기기 						
 						</a>
@@ -127,7 +123,7 @@
 									</ol>
 									<div class="carousel-inner">
 										<div class="carousel-item active" style="">
-											<img class="d-block w-100" src="/dist/img/test.jpeg"
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${res.resPhoto})}"
 												alt="First slide">
 										</div>
 										<div class="carousel-item">
@@ -163,7 +159,7 @@
 			<nav class="w-100">
 				<div class="nav nav-tabs" id="product-tab" role="tablist">
 					<a class="nav-item nav-link" id="res-review-tab" data-toggle="tab" href="#res-review" role="tab" aria-controls="res-review" aria-selected="true">리뷰</a>
-					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변 즐길거리,음식점</a> 
+					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변</a> 
 					<a class="nav-item nav-link active" id="event-tab" data-toggle="tab" href="#res-event" role="tab" aria-controls="res-event" aria-selected="false">이벤트</a>
 				</div>
 			</nav>
@@ -183,7 +179,7 @@
 					  <h4>여행자 유형 </h4>
 					  <div class="form-group">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose" checked>
+                          <input class="form-check-input" type="radio" name="purpose" >
                           <label class="form-check-label">가족여행</label>
                         </div>
                         <div class="form-check">
@@ -326,7 +322,31 @@
 					</div>		
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-					<div id="map" style="width:500px;height:400px;"></div>
+				<div class="map_wrap">
+					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+					    <ul id="category">    
+					        <li id="CE7"  data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					         	   카페
+					        </li>  
+					        <li id="CS2" data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					                        편의점
+					        </li>  
+					        <li id="AT4"data-order="2"> 
+					            <span class="category_bg pharmacy"></span>
+					                       관광명소
+					        </li> 
+					        <li id="FD6"data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					                        음식점
+					        </li>     
+					        <li id="AD5"data-order="2"> 
+					            <span class="category_bg pharmacy"></span>
+					                        숙박
+					        </li>     
+					    </ul>
+					</div>
 				</div>
 				<div class="tab-pane fade" id="res-event" role="tabpanel" aria-labelledby="event-tab">			
 					이벤트 준비중,,
@@ -341,18 +361,19 @@
 <!-- /.card -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474"></script>
-	<script src="/plugins/chart.js/Chart.min.js"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+<script src="/plugins/chart.js/Chart.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474&libraries=services"></script>
+<script src="/dist/js/kakaoMap.js"></script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	var lat = /*[[${res.resLat}]]*/;
+	var lng = /*[[${res.resLong}]]*/;	
+	/*]]>*/
 	
-		var map = new kakao.maps.Map(container, options);
-		
-		
+	console.log(1);
+	var myFn = kakaoMap(lat,lng);	
+	console.log(lat,lng)
+	console.log(2);
 		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
 		var donutData = {
 			labels : [ '5점', '4점', '3점', '2점', '1점', ],

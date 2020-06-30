@@ -1,15 +1,25 @@
 package com.cafe24.travelMaker.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 
-import com.cafe24.travelMaker.domain.SightsFeedback;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.ui.Model;
+
+import com.cafe24.travelMaker.domain.FbCode;
+import com.cafe24.travelMaker.domain.FeedbackSights;
 
 @Mapper
 public interface FeedbackMapper {
 
-	//피드백 폼 이동
-	public String formFeedback(String sightsNum);
+	//피드백 폼으로 이동
+	public List<FbCode> formFeedback(FbCode fbCode);
 	
 	//피드백 보내기
-	public int addFeedback(SightsFeedback sightsFeedback);
+	public int addFeedback(FeedbackSights feedbackSights);
+	
+	//피드백 리스트
+	public List<FeedbackSights> feedbackList(Model model);
+	
+	//피드백 수용
+	public int acceptFeedback(String fbSightsCheck, String fbSightsNum);
 }

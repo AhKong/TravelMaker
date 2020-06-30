@@ -6,7 +6,8 @@
 	<title>관광명소 상세페이지</title>
 </th:block>
 <th:block layout:fragment="customCss">
-	<style>
+<link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
+		<style>
 		.carousel-item img {
 			width: 400px;
 			height: 400px;
@@ -39,6 +40,10 @@
 			font-size:20px;
 			font-weight:bold;
 		}
+		.badge{
+		font-size:16px;
+		}
+
 </style>
 </th:block>
 <th:block>
@@ -70,37 +75,32 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-12 col-sm-7">
-					<h2 class="my-3">관광명소 이름</h2>
+					<p class="my-3" style="font-size:30px;" th:utext="|${sights.sightsName} <span class='badge ${sights.btnColor}'>${sights.sightsOpen}</span><br> |"></p>
 					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
 						리뷰</span>
 					<hr>
-					<p>상세설명은 여기에 자세하게 나올거야 상세설명은 여기에 자세하게 나올거야상세설명은 여기에 자세하게
-						나올거야상세설명은 여기에 자세하게 나올거야상세설명은 여기에 자세하게 나올거야</p>
-					<p>
-						<i class="far fa-clock"></i> 08:00 - 18 :00
+					<p th:text="${sights.sightsDetail}"></p>
+					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}|">
+						 08:00 - 18 :00
 					</p>
-					<p>
+					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|">
 						<i class="fas fa-map-marker-alt"></i> 전주시 덕진구 금암동 1111
 					</p>
 					<p>이 여행지는 여성이 선호하는 여행지입니다</p>
 					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
-					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
-					<p>
-						<i class="fas fa-tv"></i> www.tavelMaker4.cafe24.com
+					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|">
+						<i class="fas fa-tv"></i> 
+					</p>
+					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|">
+
 					</p>
 					<p>
-						<i class="fa fa-volume-control-phone"></i>
-						www.tavelMaker4.cafe24.com
-					</p>
-						<p>
-						<a>
+						<a th:href="@{/feedback/addFeedback(sightsNum=${sights.sightsNum})}">
 							<i class="far fa-edit"></i>
 							이 게시물에 대한 피드백 남기기 						
 						</a>
 					</p>
-
-
 				</div>
 				<div class="col-12 col-sm-5">
 					<div class="col-12">
@@ -129,7 +129,7 @@
 									</ol>
 									<div class="carousel-inner">
 										<div class="carousel-item active" style="">
-											<img class="d-block w-100" src="/dist/img/test.jpeg"
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${sights.sightsPhoto})}"
 												alt="First slide">
 										</div>
 										<div class="carousel-item">
@@ -165,7 +165,7 @@
 			<nav class="w-100">
 				<div class="nav nav-tabs" id="product-tab" role="tablist">
 					<a class="nav-item nav-link" id="sights-review-tab" data-toggle="tab" href="#sights-review" role="tab" aria-controls="sights-review" aria-selected="true">리뷰</a>
-					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변 즐길거리,음식점</a> 
+					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변</a> 
 					<a class="nav-item nav-link active" id="festival-tab" data-toggle="tab" href="#festival" role="tab" aria-controls="festival" aria-selected="false">축제</a>
 				</div>
 			</nav>
@@ -174,7 +174,31 @@
 					축제 리스트 준비중..
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-					<div id="map" style="width:500px;height:400px;"></div>
+					<div class="map_wrap">
+					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+					    <ul id="category">    
+					        <li id="CE7"  data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					         	   카페
+					        </li>  
+					        <li id="CS2" data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					                        편의점
+					        </li>  
+					        <li id="AT4"data-order="2"> 
+					            <span class="category_bg pharmacy"></span>
+					                       관광명소
+					        </li> 
+					        <li id="FD6"data-order="2">
+					            <span class="category_bg pharmacy"></span>
+					                        음식점
+					        </li>     
+					        <li id="AD5"data-order="2"> 
+					            <span class="category_bg pharmacy"></span>
+					                        숙박
+					        </li>     
+					    </ul>
+					</div>
 				</div>
 				<div class="tab-pane fade  show active row" id="sights-review" role="tabpanel" aria-labelledby="sights-review-tab">
 					<div class="reviewIntroTitle">
@@ -343,18 +367,16 @@
 <!-- /.card -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474"></script>
 	<script src="/plugins/chart.js/Chart.min.js"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474&libraries=services"></script>
+	<script src="/dist/js/kakaoMap.js"></script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		var lat = /*[[${sights.sightsLat}]]*/;
+		var lng = /*[[${sights.sightsLong}]]*/;	
+	/*]]>*/
+	var myFn = kakaoMap(lat,lng);
 	
-		var map = new kakao.maps.Map(container, options);
-		
-		
 		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
 		var donutData = {
 			labels : [ '5점', '4점', '3점', '2점', '1점', ],

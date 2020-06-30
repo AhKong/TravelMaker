@@ -114,7 +114,7 @@
               </div>
               <div class="form-group">
                 <label for="inputProjectLeader">사진</label>
-                <input type="file" id="inputProjectLeader" class="form-control" name="file">
+                <input type="file" id="inputProjectLeader" class="form-control" name="file" accept="image/jpeg,image/png">
               </div>  
                  <button type="reset" class="btn btn-secondary">Cancel</button>
          		 <button type="submit" class="btn btn-success float-right">음식점 등록하기</button>
@@ -168,7 +168,7 @@ $(function(){
 	$(doNum).click(function(){
 		var number = $(this).val();
 		var request = $.ajax({
-			  url: "/sights/getSiList",  
+			  url: "/ajax/getSiList",  
 			  method: "GET",
 			  data: {num:number}, 
 			  dataType: "json"

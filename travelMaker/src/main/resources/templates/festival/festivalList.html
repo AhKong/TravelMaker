@@ -67,7 +67,7 @@ span {
 	margin-top: 10px;
 }
 .modal-body {
-	padding: 50px;
+	padding: 40px;
 }
 
 </style>
@@ -86,7 +86,7 @@ span {
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item">festival</li>
-							<li class="breadcrumb-item">festivalList</li>
+							<li class="breadcrumb-item"><a href="/festival/ingFestivalList">festivalList</a></li>
 						</ol>
 					</div>
 				</div>
@@ -119,18 +119,15 @@ span {
 							<div class="festivalCate">
 								<p>축제</p>
 								<div class="radio">
-									<label> <input type="radio" name="ing-festival"
-										id="ing-festival" value="ingFestival"> 현재 진행중인 축제
+									<label> <input type="radio" onclick="location.href='/festival/ingFestivalList'" > 현재 진행중인 축제
 									</label>
 								</div>
 								<div class="radio">
-									<label> <input type="radio" name="pre-festival"
-										id="pre-festival" value="preFestival"> 진행 예정인 축제
+									<label> <input type="radio" onclick="location.href='/festival/preFestivalList'"> 진행 예정인 축제
 									</label>
 								</div>
 								<div class="radio">
-									<label> <input type="radio" name="post-festival"
-										id="post-festival" value="postFestival"> 지난 축제
+									<label> <input type="radio" onclick="location.href='/festival/postFestivalList'"> 진행 종료된 축제
 									</label>
 								</div>
 							</div>
@@ -157,8 +154,9 @@ span {
 						            <div class="modal-body">
 						             <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
 							              <div class="modal-form">
-							                <form role="form" action="/festival/addFestival" method="post">
+							                <form action="/festival/addFestival" method="post" enctype="multipart/form-data">
 							                  <input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
+							                  
 							                  <div class="row">
 							                    <div class="col-12">
 							                      <div class="form-group">
@@ -167,12 +165,23 @@ span {
 							                      </div>
 							                    </div>
 							                  </div>
-											  <div class="form-group">
-							                    <label for="exampleInputFile"><i class="fas fa-music"></i>&nbsp;festival-photo</label>
-							                    <div class="input-group">
-							                      <div class="custom-file">
-							                        <input type="file" class="custom-file-input" id="exampleInputFile" name="fesPhoto">
-							                        <label class="custom-file-label" for="exampleInputFile">축제 사진</label>
+											  <div class="row">
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label for="inputFile"><i class="fas fa-music"></i>&nbsp;festival-photo</label>
+							                        <input type="file" class="form-control" name="file" id="inputFile" accept="image/git, image/jpeg, image/png">
+							                      </div>
+							                    </div>
+							                  </div>
+							                  <div class="row" >
+							                    <div class="col-12">
+							                      <div class="form-group">
+							                        <label><i class="fas fa-music"></i>&nbsp;festival-sightsName</label><br/>
+							                        <select name="sights.sightsNum" class="col-md-6 col-sm-8">
+							                          <th:block th:each="f: ${fList}">
+							                            <option th:value="${f.sights.sightsNum}">[[${f.sights.sightsNum}]] : [[${f.sights.sightsName}]]</option>
+							                          </th:block>
+							                        </select>
 							                      </div>
 							                    </div>
 							                  </div>
@@ -214,23 +223,27 @@ span {
 							                      <!-- radio -->
 							                      <div class="form-group">
 							                        <div class="form-check">
-							                          <input class="form-check-input" type="radio" name="fesState" value="ingFestival" checked>
+							                          <input class="form-check-input" type="radio" name="fesState" value="진행중" checked>
 							                          <label class="form-check-label">현재 진행중인 축제</label>
 							                        </div>
 							                        <div class="form-check">
-							                          <input class="form-check-input" type="radio" name="fesState" value="preFestival">
-							                          <label class="form-check-label">예정중인 축제</label>
+							                          <input class="form-check-input" type="radio" name="fesState" value="진행예정">
+							                          <label class="form-check-label">진행 예정인 축제</label>
+							                        </div>
+							                        <div class="form-check">
+							                          <input class="form-check-input" type="radio" name="fesState" value="진행종료">
+							                          <label class="form-check-label">진행 종료된 축제</label>
 							                        </div>
 							                      </div>
 							                    </div>
 							                  </div>	
-								            <div class="modal-footer justify-content-between">
-								              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
-								              <button type="submit" class="btn btn-primary"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
-								            </div>
-							              </form>
-							            </div>
-							            <!-- /.modal-form -->
+								              <div class="modal-footer justify-content-between">
+								                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
+								                <button type="submit" class="btn btn-primary"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+								              </div>
+							               </form>
+							             </div>
+							             <!-- /.modal-form -->
 						          	  </div>
 						          </div>
 						        </div>
@@ -284,27 +297,27 @@ span {
 								</div>
 							</div>
 							<div class="row">
-							  	<span class="festivalListTitle"></span>
+							  	<div class="festivalListTitle">
 									<h2>축제 정보 더보기</h2>
-									
-								<div th:each=" fList : ${getFestivalList}"  class="col-12">
-									<th:block th:each=" m : ${fList.member}">										
-											<div class="festival row">
+								</div>	
+								<div th:each=" f : ${fList}"  class="col-10">
+									<th:block th:each=" m : ${f.member}">										
+											<div class="festival row bg-light">
 												<div class="sightsImg col-sm-2">
-												  <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="150" height="150">
+												  <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="150" height="150">
 												</div>
 												<div class="festivalDesc col-sm-6 col-md-8">
-												   <a th:href="@{/festival/updateFestival(fesNum=${fList.fesNum})}" class="btn btn-info float-right"> 수정하기 </a>
-													<input type="hidden" th:value="${fList.fesNum}">
+												    <a th:href="@{/festival/updateFestival(fesNum=${f.fesNum})}" class="btn btn-info float-right"> 수정하기 </a>
+													<input type="hidden" th:value="${f.fesNum}">
 													<input type="hidden" th:value="${m.mId}">
-													<span>[[${fList.fesName}]]</span>
-													<p th:text="${fList.fesPhoto}"></p>
-													<p>시작일 [[${fList.fesStartDate}]]</p>
-													<p>종료일 [[${fList.fesEndDate}]]</p>
-													<p th:text="${fList.fesDetail}">로운 얼굴이 곧 축제</p>
-													<p th:text="${fList.fesWeb}"></p>
-													<input type="hidden" th:value="${fList.fesRegDate}">
-													<p th:text="${fList.fesState}">진행중</p>
+													<span>[[${f.fesName}]]</span>
+													<p>위치: [[${f.sights.sightsName}]]</p>
+													<p>시작일 [[${f.fesStartDate}]]</p>
+													<p>종료일 [[${f.fesEndDate}]]</p>
+													<p th:text="${f.fesDetail}">로운 얼굴이 곧 축제</p>
+													<p th:text="${f.fesWeb}"></p>
+													<input type="hidden" th:value="${f.fesRegDate}">
+													<p th:text="${f.fesState}">진행중</p>
 												</div>
 											</div>
 									</th:block>
@@ -326,6 +339,9 @@ span {
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+			
+	</script>
 </th:block>
 
 </html>

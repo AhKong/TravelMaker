@@ -29,6 +29,7 @@ public class SightsController{
 		return "/sights/sightsList";
 	}
 	
+	
 	@GetMapping ("/addSights")
 	public String addSights(Model model) {
 		model.addAttribute("cateList", sightsService.selectSightsCate());
@@ -50,23 +51,15 @@ public class SightsController{
 		
 		return "redirect:/";
 	}
-	@GetMapping("/getSiList")
-
-	public @ResponseBody HashMap<String,List<Si>> getSiList(@RequestParam(name="num") String doNum) {
-		System.out.println(doNum+"<----doNum");
-		HashMap <String,List<Si>> result = new HashMap <String,List<Si>>();
-		result.put("siList",sightsService.selectSi(doNum));
-		return result;
-		
-	}
-	
 	@GetMapping("/updateSights")
 	public String updateSights() {
 		return "/sights/updateSights";
 	}
 	
 	@GetMapping("/detailSights")
-	public String detailSights() {
+	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum) {
+		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
+		System.out.println(sightsService.getDetailSights(sightsNum));
 		return "/sights/detailSights";
 	}
 	

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.FollowMapper">
+	
+	<resultMap type="Follow" id="followSelect">
+ 		<result property="followNum"  	column="follow_num"/>
+ 		<result property="mId"   	column="m_id"/>
+ 		<result property="targetId"  column="target_id"/>
+ 		<association property="member" javaType="Member">
+ 			<result property="mAvatar" column="m_avatar"/>
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<select id="followers" parameterType ="String" resultMap="followSelect">
+		SELECT 
+   			f.*, m.m_avatar
+		FROM
+   			tb_follow AS f
+		INNER JOIN
+   			tb_member AS m 
+		ON 
+ 			f.m_id = m.m_id
+		WHERE
+			f.target_id=#{mId};
+	</select>
+	
+	<select id="following" parameterType ="String" resultMap="followSelect">
+		SELECT 
+   			f.*, m.m_avatar
+		FROM
+   			tb_follow AS f
+		INNER JOIN
+   			tb_member AS m 
+		ON 
+ 			f.target_id = m.m_id
+		WHERE
+			f.m_id=#{mId};
+	</select>
+	
+</mapper>

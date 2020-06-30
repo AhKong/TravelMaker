@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.ScrapSightsMapper">
+
+ 	<resultMap type="SightsScrap" id="memberSelect">
+ 		<result property="ssNum"  	column="scrap_code"/>
+ 		<result property="mId"   	column="m_id"/>
+ 		<result property="sightsNum"  column="sights_num"/>
+ 		<result property="tNum" 	column="trip_num"/>
+ 	</resultMap>
+
+<!-- 관광지 -->
+<insert id="sInsertScrap" parameterType="SightsScrap">
+<selectKey order="BEFORE" keyProperty="ssNum" resultType="SightsScrap">
+SELECT
+			case COUNT(*)
+			WHEN 0 THEN 'scrap_code1'
+			ELSE CONCAT('scrap_code', MAX(CAST(SUBSTRING(scrap_code,11) AS DECIMAL))+1)
+			END AS ssNum
+		FROM
+			tb_scrap_sights;
+	</selectKey>
+			INSERT INTO tb_scrap_sights
+	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date)
+	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW());
+</insert>
+<!-- 그림은 조인으로 쓰기 -->
+
+<delete id="sDeleteScrap" >
+DELETE
+FROM
+tb_scrap_sights
+WHERE
+m_id = #{mId}
+AND
+sights_num = #{sightsNum};
+</delete>
+
+<select id="sSelect" resultType="SightsScrap" resultMap="memberSelect">
+SELECT
+*
+FROM
+tb_scrap_sights
+WHERE
+m_id = #{mId}
+AND
+sights_num = #{sightsNum};
+</select>
+
+</mapper>
