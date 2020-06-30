@@ -2,6 +2,7 @@ package com.cafe24.travelMaker.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.domain.SavePoint;
 @Mapper
@@ -11,5 +12,6 @@ public interface PointMapper {
 	public int isMyPoint(String mId);	
 	public int addMyPoint(Point point);
 	public int updateMyPoint(Point point); 
-
+	public Point getPointInfo(String mId);
+	public int updatePointFinal(Goods goods);
 }
