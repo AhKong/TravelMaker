@@ -36,7 +36,6 @@ public class MemberService {
 	}
 
 	public Member getMemberInfo(String mId) {
-		System.out.println(mId + "^^");
 		return memberMapper.getMemberInfo(mId);
 	}
 }

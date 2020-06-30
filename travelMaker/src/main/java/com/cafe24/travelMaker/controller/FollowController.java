@@ -21,13 +21,16 @@ public class FollowController {
 	@GetMapping("/followers")
 	public String followers(Model model, HttpSession session){
 		String loginId = (String)session.getAttribute("SID");
-		//List<Follow> followList = followService.followers(loginId);
-		//model.addAttribute("followList", followList);
-		return "/member/followers";
+		List<Follow> followList = followService.followers(loginId);
+		model.addAttribute("followList", followList);
+		return "member/followers";
 	}  
 	
 	@GetMapping("/following")
-	public String following(){
+	public String following(Model model, HttpSession session){
+		String loginId = (String)session.getAttribute("SID");
+		List<Follow> followList = followService.following(loginId);
+		model.addAttribute("followList", followList);
 		return "member/following";
 	}
 }
