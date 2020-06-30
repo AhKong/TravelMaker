@@ -28,7 +28,7 @@ $(function() {
 				var html ='';
 				var myTripList = data.result.length
 				var listInfo = data.result;
-				var tName = ${tName}
+				var tName = $(tName)
 
 				for(var i = 0; i < myTripList;i++){
 					html+='<th:block th:each="l: ${tripList}">'
