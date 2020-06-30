@@ -29,6 +29,7 @@ public class SightsController{
 		return "/sights/sightsList";
 	}
 	
+	
 	@GetMapping ("/addSights")
 	public String addSights(Model model) {
 		model.addAttribute("cateList", sightsService.selectSightsCate());

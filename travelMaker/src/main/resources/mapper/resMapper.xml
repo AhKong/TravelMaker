@@ -22,6 +22,7 @@
 		<result property ="resCloseTime" column ="res_close_time"/>	
 		<result property ="resRegTime" column ="res_reg_date"/>	
 		<result property ="resOpen" column ="resOpen"/>	
+		<result property ="btnColor" column ="btnColor"/>	
 		<association property="resCate" javaType ="ResCate">
  			<result property="resCateNum"  	column="res_cate_num"/>
  			<result property="resType"   	column="res_type"/>
@@ -102,22 +103,29 @@
 	
 	<select id="getDetailRes" parameterType="String" resultMap="resResultMap">
 		<![CDATA[
-			SELECT
-				 *,
-				(case
-					when TIMEDIFF(res_close_time,TIME(NOW())) BETWEEN  TIME('00:00:00') AND TIME('00:30:00')
-	   				then '곧 마감'
-					when res_start_time <= TIME(NOW()) AND res_close_time >= TIME(NOW()) 
-					then '영업중'
-					ELSE '영업종료'
-				END) AS resOpen 
-			FROM 
-				tb_res  
-			INNER join
-				tb_res_cate 
-			ON tb_res.res_cate_num = tb_res_cate.res_cate_num
-			WHERE 
-				res_num = #{resNum}
+			SELECT b.*,
+				(case 
+					when resOpen = '곧 마감' then 'bg-danger'
+					when resOpen = '영업중' then 'bg-warning'
+					when resOpen = '영업종료' then 'bg-default'
+					ELSE ''
+				END ) AS btnColor 
+			FROM (SELECT
+					 r.*,
+					 rc.res_type,
+					(case
+						when TIMEDIFF(res_close_time,TIME(NOW())) BETWEEN  TIME('00:00:00') AND TIME('00:30:00') then '곧 마감'
+						when res_start_time <= TIME(NOW()) AND res_close_time >= TIME(NOW()) then '영업중'
+						ELSE '영업종료'
+					END) AS resOpen
+					FROM 
+						tb_res AS r 
+					INNER join
+						tb_res_cate  AS rc
+					ON rc.res_cate_num = r.res_cate_num	
+					) AS b
+						WHERE 
+							res_num = #{resNum}
 		]]>
 	
 	</select>
