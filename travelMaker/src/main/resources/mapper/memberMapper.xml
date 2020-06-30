@@ -59,7 +59,7 @@
 		WHERE
 			m.m_id=#{mId};
 	</select>
-	
+
 	<select id="findId" parameterType = "Member" resultMap="memberSelect">
 		SELECT
 			m_id

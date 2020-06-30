@@ -28,10 +28,29 @@
 		$('.list').click(function(){
 			var cate = $(this).attr('cate');	
 		 	console.log(cate);
-		 	
+		 	var search = $('input[name=search]');
+	 		var form = $('#searchForm');
+		 	$('#searchInput').keydown(function(key){	
+		 		if(key.keyCode == 13){
+		 			
+		 			if(search.val()=='' || search.val() ==undefined){
+			 			alert('검색어를 입력하세요');
+			 			search.focus();
+			 			return false;
+			 		}
+		 			form.attr('action','');
+			 		console.log(cate,2);
+			 		if(cate =='sights'){
+			 			form.attr('action','/sights/sightsList');
+			 			
+			 		} else if (cate =='res'){
+			 			form.attr('action','/res/resList');
+			 		} 	
+			 		form.submit();	
+		 		}
+		 	})
 		 	$('#searchBtn').click(function(){
-		 		var search = $('input[name=search]');
-		 		var form = $('#searchForm');
+		 		
 		 		if(search.val()=='' || search.val() ==undefined){
 		 			alert('검색어를 입력하세요');
 		 			search.focus();
