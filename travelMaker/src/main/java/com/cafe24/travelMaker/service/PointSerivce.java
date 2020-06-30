@@ -1,8 +1,12 @@
 package com.cafe24.travelMaker.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Mail;
@@ -63,6 +67,14 @@ public class PointSerivce {
 	
 	public int updatePointFinal(Goods goods) {
 		return pointMapper.updatePointFinal(goods);
+	}
+	
+	//포인트 사용내역
+	public List<Point> pointUse(String loginId) {
+		System.out.println("pointUse PointSerivce 도착");
+		System.out.println(loginId+" <- loginID pointUse PointSerivce");
+		
+		return pointMapper.pointUse(loginId);
 	}
 	
 	

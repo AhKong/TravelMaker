@@ -5,6 +5,8 @@ public class Point {
 	private String mId;
 	private int finalPoint;
 	private String pointRegDate;
+	private Goods goods;
+	
 	public String getPointNum() {
 		return pointNum;
 	}

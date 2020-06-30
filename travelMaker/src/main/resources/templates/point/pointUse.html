@@ -57,111 +57,21 @@
                   <thead>                  
                     <tr>
                       <th style="width: 20px">0</th>
-                      <th>date</th>
-                      <th style="width: 20px; height: 20px;">goodsPhoto</th>
-                      <th>goodsName</th>
-                      <th>addPoint</th>
-                      <th>removePoint</th>
-                      <th>finalPoint</th>
+                      <th>u.point_use_reg_date</th>
+                      <th style="width: 20px; height: 20px;">g.g_photo</th>
+                      <th>g.g_name</th>
+                      <th>u.point_use_used</th>
+                      <th>g.g_amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1.</td>
+                    <tr th:each=" p : ${pointUseList}">
+                      <input type="hidden" name="pointUseNum" th:value="${p.pointUseNum}">
+                      <input type="hidden" name="mId" th:value="${loginId}">
+                      <td>숫자</td>
                       <td>2020-06-11</td>
                       <td>goodsPhoto</td>
                       <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
                       <td>0</td>
                       <td>0</td>
                     </tr>

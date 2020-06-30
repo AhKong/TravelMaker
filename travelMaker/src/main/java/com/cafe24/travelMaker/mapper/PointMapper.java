@@ -1,10 +1,13 @@
 package com.cafe24.travelMaker.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.domain.SavePoint;
+
 @Mapper
 public interface PointMapper {
 	//포인트 적립 
@@ -14,4 +17,7 @@ public interface PointMapper {
 	public int updateMyPoint(Point point); 
 	public Point getPointInfo(String mId);
 	public int updatePointFinal(Goods goods);
+	
+	//포인트 사용내역
+	public List<Point> pointUse(String loginId);
 }
