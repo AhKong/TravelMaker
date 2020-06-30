@@ -127,12 +127,12 @@ public class GoodsController{
 	public String GoodsBuyDelete(Goods goods, HttpSession session,
 			@RequestParam(name="goodsBuyAmount", required=false) String goodsBuyAmount,
 			@RequestParam(name="goodsBuyCode", required=false) String goodsBuyCode,
-			@RequestParam(name = "gCode", required = false) String gCode) {
+			@RequestParam(name = "goodsCode", required = false) String goodsCode,
+			@RequestParam(name = "goodsPayPrice", required = false) String goodsPayPrice) {
 		String loginId = (String)session.getAttribute("SID");
 		goodsService.GoodsBuyDelete(goodsBuyCode);
-		goods.setGoodsBuyAmount(goodsBuyAmount);
-		goods.setGoodsCode(gCode);
-		goodsService.deleteGoodsAmount(goods);
+		goodsService.deleteGoodsAmount(goodsBuyAmount, goodsCode);
+		goodsService.goodsBuyDeletePoint(loginId, goodsPayPrice);
 		return "redirect:/member/myPage";
 	}
 }

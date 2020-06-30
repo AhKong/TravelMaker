@@ -38,7 +38,7 @@
 		SELECT
 			 f.fes_num
 			,f.m_id
-			,f.fes_name		
+			,f.fes_name	
 			,f.fes_photo
 			,s.sights_num
 			,s.sights_name
@@ -62,7 +62,7 @@
 		SELECT
 			 f.fes_num
 			,f.m_id
-			,f.fes_name		
+			,f.fes_name	
 			,f.fes_photo
 			,s.sights_num
 			,s.sights_name
@@ -86,7 +86,7 @@
 		SELECT
 			 f.fes_num
 			,f.m_id
-			,f.fes_name		
+			,f.fes_name	
 			,f.fes_photo
 			,s.sights_num
 			,s.sights_name
@@ -111,7 +111,7 @@
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="fesName != null and fesName != ''.toString()">fes_name=#{fesName},</if>
 			<if test="fesName != null and fesName != ''.toString()">m_id=#{member.mId},</if>
-			fes_photo=#{fesPhoto},
+			<if test="fesPhoto != null and fesPhoto != ''.toString()">fes_photo=#{fesPhoto},</if>
 			<if test="fesStartDate != null and fesStartDate != ''.toString()">sights_num=#{sights.sightsNum},</if>
 			<if test="fesStartDate != null and fesStartDate != ''.toString()">fes_start_date=#{fesStartDate},</if>
 			<if test="fesEndDate != null and fesEndDate != ''.toString()">fes_end_date=#{fesEndDate},</if>
@@ -131,7 +131,7 @@
 		SELECT
 			 fes_num
 			,m_id
-			,fes_name		
+			,fes_name	
 			,fes_photo
 			,fes_start_date		
 			,fes_end_date

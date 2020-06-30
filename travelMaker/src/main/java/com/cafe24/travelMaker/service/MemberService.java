@@ -35,4 +35,9 @@ public class MemberService {
 		return memberMapper.addMember(member);
 	}
 
+
+	public Member getMemberInfo(String mId) {
+		return memberMapper.getMemberInfo(mId);
+	}
+
 }
