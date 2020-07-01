@@ -78,147 +78,6 @@
 					<li class="breadcrumb-item"><a href="#">sights</a></li>
 					<li class="breadcrumb-item active">sightsList.html</li>
 				</ol>
-			<!-- /.container-fluid -->
-		</section>
-
-		<!-- Main content -->
-		<section class="content" >
-			<input type="hidden" id="mId" th:value="${session.SID}" />
-			<!-- Default box -->
-			<div class="card">
-
-				<div class="card-body">
-					<div class="row">
-						<div class="col-12 col-md-6 col-lg-2 order-1 order-md-1">
-							<div class="warp-searchForm">
-								<form class="form-inline ">
-									<div class="input-group input-lg">
-										<input class="form-control" type="search" placeholder="Search"
-											aria-label="Search">
-										<div class="input-group-append">
-											<button class="btn btn-navbar" type="submit">
-												<i class="fas fa-search"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="sightCate">
-								<p>명소 종류</p>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 랜드마크
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 박물관
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 자연공원
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 밤문화
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 즐길거리/게임
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 스파/웰니스
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"
-							th:if="${!#lists.isEmpty(sightsList)}">
-							<h1>Best 3</h1>
-							<div class="bestSights row">
-								<div class="col-12 col-sm-4">
-									<div class=" info-box bg-light ">
-										<img src="/dist/img/avatar6.jpg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-
-											<a href="/sights/detailSights"><span>Jonna</span></a><br>
-											<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> 529건의
-											리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/test.jpeg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>HandSome</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/test2.jpeg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>Michinnom</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row" style="">
-								<span class="sightListTitle">관광명소</span>
-								<th:block th:each="l: ${sightsList}">
-									<div class="col-12">
-										<div class="sights row">
-											<div class="sightsImg col-12 col-md-2">
-												<img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}"
-													alt="User Image" width="150" height="150">
-											</div>
-											<div class="sightsDesc col-12 col-md-10">
-												<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" th:value="${l.sightsNum}" style="float: right;"
-													class="btn btn-primary">
-													<i class="fas fa-hand-point-up"></i><i
-														class="far fa-hand-point-up"></i>
-												</button>
-												<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:data-sightsNum="${l.sightsNum}" th:text="${l.sightsName}"></a><br>
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i>
-												<p th:text="${l.sightsCate.sightsType}"></p>
-												<p th:text="${l.sightsAddr}"></p>
-												<p th:text="${l.sightsDetail}"></p>
-
-											</div>
-										</div>
-									</div>
-								</th:block>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"
-							th:unless="${!#lists.isEmpty(sightsList)}">
-							<h1 th:text="|'${searchWord}'에 대한 검색 결과가 없습니다|"></h1>
-						</div>
-					</div>
-				</div>
-				<!-- /.card-body -->
->>>>>>> refs/heads/LSH
 			</div>
 		</div>
 	</div>
@@ -331,8 +190,7 @@
 										<img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}" alt="User Image" width="80%" height="150">
 									</div>
 									<div class="sightsDesc col-12 col-md-9">
-										<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" style="float: right;"
-											class="btn btn-primary">
+										<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" style="float: right;" class="btn btn-primary" th:data-sightsNum ="${l.sightsNum}">
 											<i class="fas fa-hand-point-up"></i><i
 												class="far fa-hand-point-up"></i>
 										</button>
@@ -365,11 +223,7 @@
 	<!-- /.content-wrapper -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-<script type="text/javascript" src="/dist/js/callMyTrip.js">
-<!--
-
-//-->
-</script>
+<script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
 	<script>
 		/*
 			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 

@@ -86,9 +86,8 @@ public class AjaxController {
 	public SightsScrap SightsScrap(@RequestParam(name="mId") String mId,
 									@RequestParam(name="sightsNum") String sightsNum,
 									@RequestParam(name="tNum") String tNum,
-									@RequestParam(name="tPhoto") String tPhoto,
-			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
-		
+		SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
+	
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
 		System.out.println("/SightsScrap 요청 호출 " + mId);
 		System.out.println(scrapselect+"<---------- sSelect 컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러");
