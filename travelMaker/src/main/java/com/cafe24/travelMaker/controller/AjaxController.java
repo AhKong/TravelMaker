@@ -86,6 +86,7 @@ public class AjaxController {
 	public SightsScrap SightsScrap(@RequestParam(name="mId") String mId,
 									@RequestParam(name="sightsNum") String sightsNum,
 									@RequestParam(name="tNum") String tNum,
+									@RequestParam(name="tPhoto") String tPhoto,
 			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
 		
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);

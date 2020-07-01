@@ -30,7 +30,7 @@ ON
 t.m_id = s.m_id
 WHERE
 t.m_id = #{mId}
-GROUP BY t.trip_num
+GROUP BY t.trip_num;
 </select>
 
 </mapper>

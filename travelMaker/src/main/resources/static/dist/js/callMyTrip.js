@@ -67,13 +67,13 @@ $(function() {
 		var tPhoto = radio.attr('data-tPhoto');
 		console.log(tNum,sightsNum,tPhoto);
 		
-		 /*var request = $.ajax({
+		 var request = $.ajax({
 			  url: "/ajax/SightsScrap", 
 			  method: "POST",
 			  dataType: "text",
 			  data: {"mId": mId,
 				  	sightsNum: sightsNum,
-				  	tNum : tNum
+				  	tNum : tNum,
 				  	tPhoto : tPhoto
 				  	}
 		  });
@@ -85,8 +85,8 @@ $(function() {
 		 
 			request.fail(function(jqXHR, textStatus) {
 				alert("Request failed: " + textStatus);
-			});   값 받아다가 쿼리문에 집어넣고 
-		 */
+			});   //값 받아다가 쿼리문에 집어넣고 
+		 
 		});
 	});
 		
