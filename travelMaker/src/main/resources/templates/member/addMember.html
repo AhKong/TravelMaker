@@ -167,6 +167,7 @@
 </div>
 </th:block>
  <th:block layout:fragment="customScript">
+ <script src="/dist/js/commonAjax.js"></script>
 	<script>
 		$(function(){
 			var mId = $('input[name=mId]');
@@ -201,27 +202,17 @@
 				var mIdCheck = RegExp(/^[A-Za-z0-9_\-]{8,15}$/);
 				if(mIdCheck.test(mId.val())==true){
 					$('#idRexExpMsg').css('display','none');
-					var request = $.ajax({
-						  url: "/ajax/idCheck",  
-						  method: "Post",
-						  data: {mId :mId.val()}, 
-						  dataType: "json"
-					});
-	    
-					request.done(function( data ) {
-						if(data.result =='N'){ // 아이디 중복 안되는 경우
-							idCheck = true;
-							$('#idCheckMsg').css('display','none')
-						} else {
-							$('#idCheckMsg').css('display','block')
-							idCheck = false;
-						}
-					});	
-	   
-					request.fail(function( jqXHR, textStatus ) {
-						  alert( "Request failed: " + textStatus );
-					});
-					
+					commonAjax('/ajax/idCheck',
+								{mId :mId.val()},
+								function(data){
+									if(data.result =='N'){ // 아이디 중복 안되는 경우
+										idCheck = true;
+										$('#idCheckMsg').css('display','none')
+									} else {
+										$('#idCheckMsg').css('display','block')
+										idCheck = false;
+									}
+								},'POST');	
 				} else if(mIdCheck.test(mId.val())==false) {
 					$('#idRexExpMsg').css('display','block');
 				}
@@ -342,25 +333,19 @@
 				alert('이메일을 입력하세요!');
 			 	return false;
 			}
-			var request = $.ajax({
-						  url: "/ajax/certEmail",  
-						  method: "GET",
-						  data: {email :mEmail.val()}, 
-						  dataType: "json"
-					}); 	     
-	    
-					request.done(function( data ) {
-						certCode=data.randomCode
-						console.log(data.randomCode);
-					});	
-	   
-					request.fail(function( jqXHR, textStatus ) {
-						  alert( "Request failed: " + textStatus );
-					});
-		})
+			
+			commonAjax("/ajax/certEmail"
+					, {email : email}
+					, function(data){
+						certCode=data.randomCode;
+						console.log(certCode);
+					}
+					, 'GET'
+			)
+		}) 
 		
 		$('.certCodeBtn').click(function(){
-	
+		console.log(certCode);
 			if( cert.val()==certCode && emailCheck==true){
 				alert('인증성공!');
 				certCode='success';
