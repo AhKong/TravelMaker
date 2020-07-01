@@ -65,7 +65,7 @@ public class PointService {
 		return pointMapper.updatePointFinal(goods);
 	}
 	
-	//마이페이지-포인트 사용내역
+	//마이페이지 - 포인트 사용내역
 	public List<Point> pointUseList(String loginId) {
 		System.out.println("pointUseList PointSerivce 도착");
 		System.out.println(loginId+" <- loginID pointUseList PointSerivce");
@@ -75,7 +75,7 @@ public class PointService {
 		return useList;
 	}
 	
-	//마이페이지-포인트 적립내역
+	//마이페이지 - 포인트 적립내역
 	public List<Point> pointSaveList(String loginId) {
 		System.out.println("pointSaveList PointSerivce 도착");
 		System.out.println(loginId+" <- loginID pointSaveList PointSerivce");
@@ -83,6 +83,24 @@ public class PointService {
 		System.out.println(saveList+" <- saveList pointSaveList PointSerivce");
 		
 		return saveList;
+	}
+	
+	//마이페이지 - 총 소유 포인트
+	public List<Point> getTotalPoint(String loginId) {
+		System.out.println("totalPoint PointSerivce 도착");
+		List<Point> totalPoint = pointMapper.getTotalPoint(loginId);
+		System.out.println(totalPoint+" <- totalPoint");
+		
+		return totalPoint;
+	}
+	
+	//관리자 - 회원들의 포인트 사용내역
+	public List<Point> pointUseAdminList() {
+		System.out.println("pointUseAdminList PointSerivce 도착");
+		List<Point> pointUseAdmin = pointMapper.pointUseAdminList();
+		System.out.println(pointUseAdmin+" <- pointUseAdmin pointUseAdminList PointService");
+		
+		return pointUseAdmin;
 	}
 	
 	

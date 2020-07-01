@@ -17,8 +17,9 @@
   		margin: 20px;
   		padding: 20px;
   	}
-  	table {
+  	.table {
   		width: 100%;
+  		font-size: large;
   	}
   </style>
 </th:block>
@@ -38,7 +39,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">myPage</a></li>
-              <li class="breadcrumb-item active">pointUse.html</li>
+              <li class="breadcrumb-item">pointUse</li>
             </ol>
           </div>
         </div>
@@ -50,44 +51,39 @@
       <div class="container-fluid">
         <div class="row">
           
+          <!-- Point Use List -->
           <div class="card-control col-10">
-            <div class="card card-primary">
-              <div class="card-header">
+            <div class="card">
+              <div class="card-header" style="background-color: #93DAFF;">
                 <h4 class="card-title">포인트 사용내역</h4>
               </div>
               <!-- /.card-header -->
               <div class="card-body col-12">
-                <table class="table table-bordered col-12">
-                  <colgroup>
-                	<col width="*" />
-                	<col width="*" />
-                	<col width="*" />
-                	<col width="*" />
-                	<col width="*" />
-                	<col width="*" />
-                  </colgroup>
+                <table class="table table-responsive col-12">
                   <thead>                  
                     <tr>
-                      <th style="width: 20px">#</th>
-                      <th>u.point_use_reg_date</th>
-                      <th style="width: 20px; height: 20px;">g.g_photo</th>
-                      <th>g.g_name</th>
-                      <th>g.g_amount</th>
-                      <th>u.point_use_used</th>
+                      <th >#</th>
+                      <th >날짜</th>
+                      <th style="width: 20px; height: 20px;"></th>
+                      <th >구매 상품</th>
+                      <th>구매 수량</th>
+                      <th>사용 포인트</th>
                     </tr>
                   </thead>
                   <tbody>
-                  	<th:block th:each=" u, i : ${pointUseList}">
-                      <tr th:each=" g : ${u.goods}">
-                        <input type="hidden" th:value="${u.pointUseNum}">
-                        <input type="hidden" th:value="${loginId}">
+                    <th:block th:each=" u, i : ${pointUseList}">
+                      <tr  th:each=" g : ${u.goods}">
                         <td th:text="${i.count}"></td>
                         <td th:text="${u.pointUseRegDate}"></td>
-                        <td th:text="${g.goodsPhoto}"></td>
+                        <td>
+                          <div class="goodsImg col-sm-2">
+						    <img th:src="@{/fileupload/{file}(file=${g.goodsPhoto})}" alt="Festival Image" width="150" height="150">
+						  </div>
+                        </td>
                         <td th:text="${g.goodsName}"></td>
                         <td th:text="${g.goodsAmount}"></td>
                         <td th:text="${u.pointUseUsed}"></td>
-                    </tr>
+                      </tr>
                     </th:block>
                   </tbody>
                 </table>
@@ -103,40 +99,25 @@
                 </ul>
               </div>
             </div>
-            <!-- /.card -->
-		  </div>
-          <!-- /.col 포인트 사용내역 -->
-          
-          <div class="card-control col-10">
-            <div class="card card-primary">
-              <div class="card-header">
+          	<!-- /.Point Use List -->
+
+			<!-- Point Save List -->
+            <div class="card">
+              <div class="card-header" style="background-color: #93DAFF;">
                 <h4 class="card-title">포인트 적립내역</h4>
               </div>
               <!-- /.card-header -->
               <div class="card-body col-12">
-                <table class="table table-bordered">
-                  <thead>                  
-                    <tr>
-                      <th style="width: 20px">#</th>
-                      <th>save_point_reg_date</th>
-                      <th>save_point_cause</th>
-                      <th>save_point_detail</th>
-                      <th>save_point_charge</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <th:block>
-                    <tr th:each=" s, i : ${pointSaveList}">
-                      <input type="hidden" th:value="${s.savePointNum}">
-                      <input type="hidden" th:value="${loginId}">
-                      <td th:text="${i.count}"></td>
-                      <td th:text="${s.savePointRegDate}"></td>
-                      <td th:text="${s.savePointCause}"></td>
-                      <td th:text="${s.savePointDetail}"></td>
-                      <td th:text="${s.savePointCharge}"></td>
-                    </tr>
+                <table class="table table-responsive col-12">
+                    <th:block th:each=" s, i : ${pointSaveList}" class="col-12">
+                      <tr class="pointUseTable">
+                        <td th:text="${i.count}"></td>
+                        <td th:text="${s.savePointRegDate}"></td>
+                        <td th:text="${s.savePointCause}"></td>
+                        <td th:text="${s.savePointDetail}"></td>
+                        <td th:text="${s.savePointCharge}"></td>
+                      </tr>
                     </th:block>
-                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -150,11 +131,27 @@
                 </ul>
               </div>
             </div>
-            <!-- /.card -->
 		  </div>
-          <!-- /.col 포인트 적립내역 -->
+          <!-- /.Point Save List -->
           
-         </div>
+          <!-- Total Point -->
+          <div class="card-control col-3">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4 class="card-title">총 소유 포인트</h4>
+              </div>
+              <div class="card-body col-10">
+                <th:block th:each=" g : ${getTotalPoint}">
+                  <h3 class=" float-right col-12">
+                    <strong th:text="${g.finalPoint}"></strong> 점
+                  </h3>
+                </th:block>
+              </div>
+            </div>
+		  </div>
+          <!-- /.Total Point -->
+          
+        </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>

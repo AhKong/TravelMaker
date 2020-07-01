@@ -9,6 +9,14 @@
 <th:block layout:fragment="customTitle">
 	<title> 포인트관리 화면입니다  :) </title>
 </th:block>
+<!-- 사용자 지정 css -->
+<th:block layout:fragment="customCss">
+  <style>
+  	.card-title {
+  		margin : 10px;
+  	}
+  </style>
+</th:block>
 <th:block layout:fragment="customContents">
 
   <!-- Content Wrapper. Contains page content -->
@@ -22,8 +30,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">point</a></li>
-              <li class="breadcrumb-item active">pointList.html</li>
+              <li class="breadcrumb-item">point</li>
+              <li class="breadcrumb-item active">pointList</li>
             </ol>
           </div>
         </div>
@@ -32,225 +40,46 @@
 
     <!-- Main content -->
     <section>
-      <div class="card">
+      <div class="card col-12">
         <div class="card-header">
-          <h3 class="card-title">포인트 관리</h3>
+          <a class="card-title" href="/point/pointList">포인트 적립 관리</a>
+          <a class="card-title">포인트 사용 관리</a>
         </div>
             
         <div class="card-body table-responsive">
           <div class="row">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="example1" class="table table-striped">
             <thead>
 	          <tr>
 	            <th>#</th>
+	            <th>번호</th>
+	            <th>등록시각</th>
 	            <th>아이디</th>
 	            <th>이름</th>
 	            <th>성별</th>
 	            <th>생년월일</th>
 	            <th>상품카테고리</th>
 	            <th>상품이름</th>
-	            <th>추가된포인트</th>
-	            <th>차감된포인트</th>
-	            <th>최종포인트(점)</th>
-	            <th>최종포인트등록시각</th>
+	            <th>구매수량</th>
+	            <th>차감 포인트</th>
 	          </tr>
             </thead>
             <tbody>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
-	          <tr>
-	            <th>1</th>
-	            <th>mId</th>
-	            <th>mName</th>
-	            <th>mGender</th>
-	            <th>mBirth</th>
-	            <th>allianceGoodsCate</th>
-	            <th>allianceGoodsName</th>
-	            <th>pointAdd</th>
-	            <th>pointRemove</th>
-	            <th>pointFinal</th>
-	            <th>pointRedDate</th>
-	          </tr>
+              <th:block th:each=" use, i : ${pointUseAdminList}">
+	            <tr th:each=" gUse : ${use.goods}">
+	              <th th:text="${i.count}"></th>
+	              <th th:text="${use.pointUseNum}"></th>
+	              <th th:text="${use.pointUseRegDate}"></th>
+	              <th th:text="${use.mId}"></th>
+	              <th>mName</th>
+	              <th>mGender</th>
+	              <th>mBirth</th>
+	              <th th:text="${gUse.goodsCate}"></th>
+	              <th th:text="${gUse.goodsName}"></th>
+	              <th th:text="${gUse.goodsAmount}"></th>
+	              <th th:text="${use.pointUseUsed}"></th>
+	            </tr>
+              </th:block>
 	        </tbody>
           </table>
           </div>

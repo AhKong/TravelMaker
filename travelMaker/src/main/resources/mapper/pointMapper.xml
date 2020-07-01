@@ -4,7 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.PointMapper">
  	<resultMap type="Point" id="pointSelect">
+ 		<result property="pointNum" column="point_num" />
  		<result property="mId" column="m_id" />
+ 		<result property="finalPoint" column="point_final_point" />
+ 		<result property="pointRegDate" column="point_reg_date" />
  		<result property="pointUseNum" column="point_use_num" />
  		<result property="gNum" column="g_num" />
  		<result property="pointUseUsed" column="point_use_used" />
@@ -16,6 +19,7 @@
  		<result property="savePointRegDate" column="save_point_reg_date" />
  		<association property="goods" javaType="Goods">
  			<result property="goodsPhoto" column="g_photo" />
+ 			<result property="goodsCate" column="g_cate" />
  			<result property="goodsName" column="g_name" />
  			<result property="goodsAmount" column="g_amount" />
  		</association>
@@ -94,11 +98,29 @@
 	
 	<select id="pointSaveList" parameterType="String" resultType="Point" resultMap="pointSelect">
 		SELECT 
-			save_point_num, m_id, save_point_cause, save_point_detail, 
+			m_id, save_point_cause, save_point_detail, 
 			save_point_charge, save_point_reg_date
 		FROM tb_point_save
 		WHERE m_id = #{loginId};
 	</select>
 	
+	<select id="getTotalPoint" parameterType="String" resultType="Point" resultMap="pointSelect">
+		SELECT 
+		point_num, m_id, point_final_point, point_reg_date
+		FROM tb_point_admin
+		WHERE m_id = #{loginId};
+	</select>
+	
+	<select id="pointUseAdminList" resultType="Point" resultMap="pointSelect">
+		SELECT 
+			u.point_use_num, u.m_id, u.point_use_reg_date, u.point_use_used,
+			g.g_cate, g.g_name, g.g_amount
+		FROM
+			tb_point_use_admin AS u
+			INNER JOIN 
+			tb_Alliance_g AS g
+			ON
+			u.g_num = g.g_num;
+	</select>
 	
 </mapper>
