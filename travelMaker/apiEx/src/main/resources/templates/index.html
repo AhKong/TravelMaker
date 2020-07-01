@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#search_area3').change(function(){
+		
+			var zoneVal = $(this).val();
+			
+			var request = $.ajax({
+			  url: "/apiasdaadasddsadsadsadadsasadas",
+			  method: "POST",
+			  data: { zone : zoneVal },
+			  dataType: "json"
+			});
+			 
+			request.done(function( obj ) {
+			  console.log(obj)
+			  var html = obj.category + '<table border="1">';
+			  html += '<tbody>';
+			  html += '<tr><th>시간도 띄워 얼얼얼어</th><th>날씨</th></tr>'
+			  
+			  for(var i = 0; i < obj.kamList.length; i++){
+				  html += '<tr>'
+				  html += '<td>' + obj.kamList[i].hour + '</td>';
+				  html += '<td>' + obj.kamList[i].wfkor + '</td>';
+			  	  html += '</tr>';			  
+			  }
+			  html += '</tbody>';
+			  html += '</table>';
+			  $('#view').html(html);
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="view"></div>
+	
+	<select name="zone" id="search_area3" class="search_area" title="읍면동 선택">
+						
+			<option value="4511358000" selected="selected">금암1동</option>		
+			<option value="4511359000">금암2동</option>		
+			<option value="4511357000">덕진동</option>		
+			<option value="4511364100">송천1동</option>		
+			<option value="4511364200">송천2동</option>		
+			<option value="4511366500">여의동</option>		
+			<option value="4511361100">우아1동</option>		
+			<option value="4511361200">우아2동</option>		
+			<option value="4511354000">인후1동</option>		
+			<option value="4511355000">인후2동</option>		
+			<option value="4511356000">인후3동</option>		
+			<option value="4511365000">조촌동</option>		
+			<option value="4511352500">진북동</option>		
+			<option value="4511360000">팔복동</option>		
+			<option value="4511367000">혁신동</option>		
+			<option value="4511362000">호성동</option>			
+			<option value="5000000000">제주특별시</option>
+		
+	</select>
+	
+</body>
+</html>
