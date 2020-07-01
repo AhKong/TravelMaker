@@ -85,14 +85,16 @@ public class AjaxController {
 	@ResponseBody
 	public SightsScrap SightsScrap(@RequestParam(name="mId") String mId,
 									@RequestParam(name="sightsNum") String sightsNum,
+									@RequestParam(name="tNum") String tNum,
 			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
 		
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
 		System.out.println("/SightsScrap 요청 호출 " + mId);
 		System.out.println(scrapselect+"<---------- sSelect 컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러");
-
+		System.out.println(sightsNum+"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
 			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
+			sightsScrap.setSightsNum(scrapselect.getSightsNum());
 			scrapsightsservice.sDeleteScrap(sightsScrap);
 			System.out.println("delete");
 		} else {
@@ -114,8 +116,7 @@ public class AjaxController {
 
 	@RequestMapping("/scrapModal")
 	@ResponseBody
-	public  HashMap<String,List<MyTrip>> ScrapModal(HttpSession session, @RequestParam(name="mId")String mId) {
-		System.out.println(mId);
+	public  HashMap<String,List<MyTrip>> ScrapModal(HttpSession session) {
 		String loginId = (String) session.getAttribute("SID");
 		System.out.println(loginId);
 		HashMap<String,List<MyTrip>> result = new HashMap<String,List<MyTrip>>();

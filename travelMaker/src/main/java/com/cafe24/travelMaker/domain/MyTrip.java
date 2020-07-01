@@ -12,6 +12,14 @@ public class MyTrip {
 	private String status;
 	private String rDate;
 	private String tPhoto;
+	private String sightsNum;
+	
+	public String getSightsNum() {
+		return sightsNum;
+	}
+	public void setSightsNum(String sightsNum) {
+		this.sightsNum = sightsNum;
+	}
 	public String gettNum() {
 		return tNum;
 	}
@@ -76,8 +84,7 @@ public class MyTrip {
 	public String toString() {
 		return "MyTrip [tNum=" + tNum + ", mId=" + mId + ", tName=" + tName + ", oCheck=" + oCheck + ", tUrl=" + tUrl
 				+ ", sDate=" + sDate + ", eDate=" + eDate + ", status=" + status + ", rDate=" + rDate + ", tPhoto="
-				+ tPhoto + "]";
+				+ tPhoto + ", sightsNum=" + sightsNum + "]";
 	}
-	
 	
 }

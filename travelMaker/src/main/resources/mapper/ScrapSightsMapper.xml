@@ -23,12 +23,12 @@ SELECT
 			tb_scrap_sights;
 	</selectKey>
 			INSERT INTO tb_scrap_sights
-	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date)
-	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW());
+	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date, sights_photo)
+	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW(), #{sPhoto});
 </insert>
 <!-- 그림은 조인으로 쓰기 -->
 
-<delete id="sDeleteScrap" >
+<delete id="sDeleteScrap" parameterType="com.cafe24.travelMaker.domain.SightsScrap">
 DELETE
 FROM
 tb_scrap_sights
