@@ -8,10 +8,106 @@
 		<div th:replace="fragments/leftmenu :: leftmenuFragment"></div>
 		<div id="rightcolumn">
 			<th:block layout:fragment="customContents"></th:block>
+			
 		<footer th:replace="fragments/footer :: footerFragment" th:remove="tag"></footer>
 		</div>
 	</div>
 	<!-- 사용자 지정 자바스크립트 라이브러리 파일 -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.min.js"></script>
+<script src="/dist/js/demo.js"></script>
+<script>
+	$(function(){
+		$('#left-out').click(function(e){
+		    $('.tab-menu').trigger('click')
+		})
+		$('.list').click(function(){
+			var cate = $(this).attr('cate');	
+		 	console.log(cate);
+		 	var search = $('input[name=search]');
+	 		var form = $('#searchForm');
+		 	$('#searchInput').keydown(function(key){	
+		 		if(key.keyCode == 13){
+		 			
+		 			if(search.val()=='' || search.val() ==undefined){
+			 			alert('검색어를 입력하세요');
+			 			search.focus();
+			 			return false;
+			 		}
+		 			form.attr('action','');
+			 		console.log(cate,2);
+			 		if(cate =='sights'){
+			 			form.attr('action','/sights/sightsList');
+			 			
+			 		} else if (cate =='res'){
+			 			form.attr('action','/res/resList');
+			 		} 	
+			 		form.submit();	
+		 		}
+		 	})
+		 	$('#searchBtn').click(function(){
+		 		
+		 		if(search.val()=='' || search.val() ==undefined){
+		 			alert('검색어를 입력하세요');
+		 			search.focus();
+		 			return false;
+		 		}
+		 		form.attr('action','');
+		 		console.log(cate,2);
+		 		if(cate =='sights'){
+		 			form.attr('action','/sights/sightsList');
+		 			
+		 		} else if (cate =='res'){
+		 			form.attr('action','/res/resList');
+		 		} 	
+		 		form.submit();	
+		 	})
+		})
+
+		$('#newMsg').click(function(){
+			var request = $.ajax({
+				  url: "/ajax/unReadMsgList",  
+				  method: "GET",
+				  dataType: "json"
+			}); 	     
+ 
+			request.done(function( data ) {
+				console.log(data);
+				console.log(data.result.length);
+				var msgList = $('#warp-newMsgList');
+				var html ='';
+				var newMsgCnt = data.result.length
+				var msgArr = data.result;
+				if(newMsgCnt==0){
+					html +=' <p style="margin-left:15%; margin-top:10px;"> 새로운 메세지가 없습니다</p>';
+				} else {
+					for(var i = 0; i < newMsgCnt;i++){
+						console.log(msgArr[i]);
+						html+='<a href="/msg/detailMsg/?massageNum='+msgArr[i].messageNum+'" class="dropdown-item">';
+						html+='<div class="media">'
+						html+='<img src="/fileupload/'+msgArr[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
+						html+='<div class="media-body">'
+			            html+='<h3 class="dropdown-item-title">'+ msgArr[i].mId+'</h3>';
+						html+='<p class="text-sm">'+msgArr[i].contents+'+</p>';
+					    html+='<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>'+ msgArr[i].msgSendTime+'</p>';
+					    html+='</div></div></a>'	;
+					    html+='<div class="dropdown-divider"></div>'
+					}
+				}  
+		    	msgList.html(html);
+				
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			}); 
+		});	
+	})
+</script>
 <th:block layout:fragment="customFooterScript"></th:block>
 </body>
 </html>

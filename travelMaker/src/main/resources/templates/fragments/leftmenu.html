@@ -10,7 +10,6 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">TravelMaker</span>
     </a>
-   
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
@@ -18,11 +17,10 @@
         <div class="image">
           <img src="../../dist/img/avatar6.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-
         <div class="info" style="width:150px">
-          <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>
-
+          <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>	
         </div>
+          <a href="#" id="left-out" role="button"><i class="fas fa-angle-left"></i></a>
       </div>
 
       <!-- Sidebar Menu -->
@@ -32,6 +30,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
          <li class="nav-header">사용자 페이지</li>
+         
           <li class="nav-item">
             <a href="/sights/sightsList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="sights">
               <i class="nav-icon fas fa-tachometer-alt"></i>
