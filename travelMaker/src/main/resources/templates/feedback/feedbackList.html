@@ -61,11 +61,12 @@
 		                    <th>피드백내용</th>
 		                    <th>등록아이디</th>
 		                    <th>수용여부</th>
+		                    <th>피드백</th>
 		                  </tr>
 		                </thead>
 		                <tbody>
-		                  <th:block>
-		                    <tr th:each="fb, i : ${fbList}">
+		                  <th:block th:each="fb, i : ${fbList}">
+		                    <tr>
 		                      <input type="hidden" th:value="${fb.fbSightsNum}">
 		                      <th th:text="${i.count}"></th>
 		                      <th>[[${fb.fbSightsRegDate}]]</th>
@@ -74,7 +75,7 @@
 		                      <th>[[${fb.fbSightsContents}]]</th>
 		                      <th>[[${fb.member.mId}]]</th>
 		                      <th th:if="${fb.fbSightsCheck} eq 'D' ">
-		                      	<a type="submit" class="btn btn-A btn-outline-primary" 
+		                      	<a type="submit" class="btn btn-A btn-outline-primary"
 		                      		th:href="@{/feedback/acceptFeedback(fbSightsCheck='A', fbSightsNum=${fb.fbSightsNum})}">수용</a>
 		                    	<a type="button" class="btn btn-I btn-outline-warning" 
 		                    		th:href="@{/feedback/acceptFeedback(fbSightsCheck='I', fbSightsNum=${fb.fbSightsNum})}">무시</a>
@@ -85,18 +86,46 @@
 		                    		th:href="@{/feedback/acceptFeedback(fbSightsCheck='I', fbSightsNum=${fb.fbSightsNum})}">무시</a>
 		                      </th>
 		                      <th th:if="${fb.fbSightsCheck} eq 'I' ">
-		                        <a type="submit" class="btn btn-A btn-outline-primary" 
-		                      		th:href="@{/feedback/acceptFeedback(fbSightsCheck='A', fbSightsNum=${fb.fbSightsNum})}">수용</a>
+		                        <a type="button" class="btn btn-A btn-outline-primary"
+		                       		th:href="@{/feedback/acceptFeedback(fbSightsCheck='A', fbSightsNum=${fb.fbSightsNum})}">수용</a>
 		                    	<button type="button" class="btn btn-I btn-warning">무시</button>
 		                      </th>
+		                      <th>
+		                      	<a type="submint" class="btn btn-success" th:href="@{/feedback/acceptFeedback(fbSightsNum=${fb.fbSightsNum})}">피드백하러가기
+		                      	</a>
+		                      </th>
 		                    </tr>
+		                      
+		                    <!-- modal-acceptFeedback -->
+						    <div class="modal fade" id="modal-acceptFeedback">
+						        <div class="modal-dialog">
+						          <div class="modal-content bg-primary">
+						            <div class="modal-header">
+						              <h4 class="modal-title">피드백 수용</h4>
+						              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                <span aria-hidden="true">&times;</span></button>
+						            </div>
+						            <div class="modal-body">
+						              <p>회원이 보낸 피드백을 수용하고</p>
+						              <p>등록된 정보를 수정하러 가시겠습니까 ?</p>
+						            </div>
+						            <div class="modal-footer justify-content-between">
+						              <button type="button" class="btn btn-outline-light" data-dismiss="modal">아니오</button>
+						              <a type="submit" class="btn btn-outline-light col-2" 
+						              		th:href="@{/feedback/acceptFeedback(fbSightsCheck='A', fbSightsNum=${fb.fbSightsNum})}">예</a>
+						            </div>
+						          </div>
+						        </div>
+						    </div>
+						    <!-- /.modal-acceptFeedback -->
+						    
 		                  </th:block>
 		                </tbody>
 		              </table>
                     </div>
 	              </div>
 	              <!-- /.tab-pane -->
-	
+	              
 	              <div class="tab-pane" id="resFeedback">
 	                    <div class="pane-body">
 			              <table id="example2" class="table table-bordered table-striped">

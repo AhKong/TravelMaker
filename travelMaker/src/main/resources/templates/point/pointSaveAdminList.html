@@ -15,6 +15,9 @@
   	.card-title {
   		margin : 10px;
   	}
+  	.card-body {
+  		margin: 10px;
+  	}
   </style>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -31,7 +34,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">point</li>
-              <li class="breadcrumb-item active">pointList</li>
+              <li class="breadcrumb-item active">pointSaveAdminList</li>
             </ol>
           </div>
         </div>
@@ -42,8 +45,8 @@
     <section>
       <div class="card col-12">
         <div class="card-header">
-          <a class="card-title" href="/point/pointList">포인트 적립 관리</a>
-          <a class="card-title">포인트 사용 관리</a>
+          <a class="card-title" href="/point/pointUseAdminList">포인트 사용 관리</a>
+          <a class="card-title" href="/point/pointSaveAdminList">포인트 적립 관리</a>
         </div>
             
         <div class="card-body table-responsive">
@@ -58,26 +61,24 @@
 	            <th>이름</th>
 	            <th>성별</th>
 	            <th>생년월일</th>
-	            <th>상품카테고리</th>
-	            <th>상품이름</th>
-	            <th>구매수량</th>
-	            <th>차감 포인트</th>
+	            <th>적립 사유</th>
+	            <th>사유 정보</th>
+	            <th>지급 포인트</th>
 	          </tr>
             </thead>
             <tbody>
-              <th:block th:each=" use, i : ${pointUseAdminList}">
-	            <tr th:each=" gUse : ${use.goods}">
-	              <th th:text="${i.count}"></th>
-	              <th th:text="${use.pointUseNum}"></th>
-	              <th th:text="${use.pointUseRegDate}"></th>
+              <th:block th:each=" use : ${pointSaveAdminList}">
+	            <tr th:each=" m : ${use.member}">
+	              <th></th>
+	              <th th:text="${use.savePointNum}"></th>
+	              <th th:text="${use.savePointRegDate}"></th>
 	              <th th:text="${use.mId}"></th>
-	              <th>mName</th>
-	              <th>mGender</th>
-	              <th>mBirth</th>
-	              <th th:text="${gUse.goodsCate}"></th>
-	              <th th:text="${gUse.goodsName}"></th>
-	              <th th:text="${gUse.goodsAmount}"></th>
-	              <th th:text="${use.pointUseUsed}"></th>
+	              <th th:text="${m.mName}"></th>
+	              <th th:text="${m.mGender}"></th>
+	              <th th:text="${m.mBirth}"></th>
+	              <th th:text="${use.savePointCause}"></th>
+	              <th th:text="${use.savePointDetail}"></th>
+	              <th th:text="${use.savePointCharge}"></th>
 	            </tr>
               </th:block>
 	        </tbody>

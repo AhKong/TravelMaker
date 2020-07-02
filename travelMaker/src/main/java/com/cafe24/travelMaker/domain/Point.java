@@ -6,6 +6,7 @@ public class Point {
 	private String mId;
 	private int finalPoint;
 	private String pointRegDate;
+	private Member member;
 		//포인트 사용
 	private String pointUseNum;
 	private String gNum;
@@ -42,6 +43,12 @@ public class Point {
 	}
 	public void setPointRegDate(String pointRegDate) {
 		this.pointRegDate = pointRegDate;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	public String getPointUseNum() {
 		return pointUseNum;
@@ -144,10 +151,10 @@ public class Point {
 	@Override
 	public String toString() {
 		return "Point [pointNum=" + pointNum + ", mId=" + mId + ", finalPoint=" + finalPoint + ", pointRegDate="
-				+ pointRegDate + ", pointUseNum=" + pointUseNum + ", gNum=" + gNum + ", pointUseUsed=" + pointUseUsed
-				+ ", pointUseRegDate=" + pointUseRegDate + ", goods=" + goods + ", savePointNum=" + savePointNum
-				+ ", savePointCause=" + savePointCause + ", savePointDetail=" + savePointDetail + ", savePointCharge="
-				+ savePointCharge + ", savePointRegDate=" + savePointRegDate + "]";
+				+ pointRegDate + ", member=" + member + ", pointUseNum=" + pointUseNum + ", gNum=" + gNum
+				+ ", pointUseUsed=" + pointUseUsed + ", pointUseRegDate=" + pointUseRegDate + ", goods=" + goods
+				+ ", savePointNum=" + savePointNum + ", savePointCause=" + savePointCause + ", savePointDetail="
+				+ savePointDetail + ", savePointCharge=" + savePointCharge + ", savePointRegDate=" + savePointRegDate
+				+ "]";
 	}
-	
 }

@@ -94,13 +94,22 @@ public class PointService {
 		return totalPoint;
 	}
 	
-	//관리자 - 회원들의 포인트 사용내역
+	//관리자페이지 - 회원들의 포인트 사용내역
 	public List<Point> pointUseAdminList() {
 		System.out.println("pointUseAdminList PointSerivce 도착");
 		List<Point> pointUseAdmin = pointMapper.pointUseAdminList();
 		System.out.println(pointUseAdmin+" <- pointUseAdmin pointUseAdminList PointService");
 		
 		return pointUseAdmin;
+	}
+	
+	//관리자페이지 - 회원들의 포인트 적립내역
+	public List<Point> pointSaveAdminList() {
+		System.out.println("pointSaveAdminList PointSerivce 도착");
+		List<Point> pointSaveAdmin = pointMapper.pointSaveAdminList();
+		System.out.println(pointSaveAdmin+" <- pointSaveAdmin pointSaveAdminList PointService");
+		
+		return pointSaveAdmin;
 	}
 	
 	

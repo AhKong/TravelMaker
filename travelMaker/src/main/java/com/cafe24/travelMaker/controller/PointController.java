@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.service.PointService;
@@ -33,14 +34,24 @@ public class PointController {
 		return "point/pointUse";
 	}
 	
-	//관리자 - 포인트 관리페이지
-	@GetMapping("/pointList")
+	//관리자페이지 - 회원들의 포인트 사용내역
+	@GetMapping("/pointUseAdminList")
 	public String pointUseAdminList(Model model) { 
 		System.out.println("pointUseAdminList PointController 도착");
 		List<Point> pointUseAdminList = pointService.pointUseAdminList();
 		model.addAttribute("pointUseAdminList", pointUseAdminList);
 		
-		return "point/pointList";
+		return "point/pointUseAdminList";
 	}
 	
+	//관리자페이지 - 회원들의 포인트 적립내역
+	@GetMapping("/pointSaveAdminList")
+	public String pointSaveAdminList(Model model) { 
+		System.out.println("pointSaveAdminList PointController 도착");
+		List<Point> pointSaveAdminList = pointService.pointSaveAdminList();
+		model.addAttribute("pointSaveAdminList", pointSaveAdminList);
+		
+		return "point/pointSaveAdminList";
+	}
+
 }

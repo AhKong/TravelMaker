@@ -46,9 +46,8 @@ public class FeedbackService {
 	//피드백 수용 버튼
 	public int acceptFeedback(String fbSightsCheck, String fbSightsNum) {
 		System.out.println("acceptFeedback FeedbackService 도착");
-		System.out.println(fbSightsCheck+" <- fbSightsCheck / "+fbSightsNum+" <- fbSightsNum");
 		int fbResult = feedbackMapper.acceptFeedback(fbSightsCheck, fbSightsNum);
-		System.out.println(fbResult+" <- fbResult acceptFeedback FeedbackService");
+		System.out.println(fbResult+" <- 1이면 피드백 수용/무시 변경 서비스단 완료!");
 		
 		return fbResult;
 	}

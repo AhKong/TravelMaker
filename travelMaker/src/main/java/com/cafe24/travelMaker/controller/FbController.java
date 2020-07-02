@@ -51,24 +51,23 @@ public class FbController {
 		System.out.println("(Get) feedbackList FbController 도착 ");
 		List<FeedbackSights> fbList = feedbackService.feedbackList(model);
 		System.out.println(fbList+" <- fbList feedbackList FbController");
-		
 		model.addAttribute("fbList", fbList);
-		 
 		
 		return "feedback/feedbackList";
 	}
 	
+	
 	//피드백 수용 버튼
 	@GetMapping("/acceptFeedback")
 	public String acceptFeedback(Model model, @RequestParam(name="fbSightsCheck", required=false) String fbSightsCheck,
-												@RequestParam(name="fbSightsNum", required=false) String fbSightsNum) {
+	  										  @RequestParam(name="fbSightsNum", required=false) String fbSightsNum) {
 		System.out.println("(Get) acceptFeedback FbController 도착");
 		System.out.println(fbSightsCheck+" <- fbSightsCheck / "+fbSightsNum+" <- fbSightsNum");
 		int fbResult = feedbackService.acceptFeedback(fbSightsCheck, fbSightsNum);
-		System.out.println(fbResult+" <- fbResult acceptFeedback FbController");
-		
+				
 		return "redirect:/feedback/feedbackList";
 	}
+	
 	
 	
 }

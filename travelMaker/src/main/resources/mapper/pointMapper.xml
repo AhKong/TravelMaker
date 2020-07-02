@@ -18,10 +18,16 @@
  		<result property="savePointCharge" column="save_point_charge" />
  		<result property="savePointRegDate" column="save_point_reg_date" />
  		<association property="goods" javaType="Goods">
+ 			<result property="goodsCode" column="g_num" />
  			<result property="goodsPhoto" column="g_photo" />
  			<result property="goodsCate" column="g_cate" />
  			<result property="goodsName" column="g_name" />
  			<result property="goodsAmount" column="g_amount" />
+ 		</association>
+ 		<association property="member" javaType="Member">
+ 			<result property="mName" column="m_name" />
+ 			<result property="mGender" column="m_gender" />
+ 			<result property="mBirth" column="m_birth" />
  		</association>
  	</resultMap>
  	
@@ -82,6 +88,7 @@
 			m_id=#{memberId};
 	</update>
 	
+	<!-- 마이페이지 - 포인트 사용내역 -->
 	<select id="pointUseList" parameterType="String" resultType="Point" resultMap="pointSelect">
 		SELECT 
 			u.point_use_num, u.m_id, u.point_use_reg_date, g.g_photo, g.g_name, 
@@ -89,13 +96,13 @@
 		FROM
 			tb_point_use_admin AS u
 			INNER JOIN 
-			tb_Alliance_g AS g
-			ON
-			u.g_num = g.g_num
+				tb_Alliance_g AS g
+				ON u.g_num = g.g_num
 		WHERE 
 			u.m_id = #{loginId};
 	</select>
 	
+	<!-- 마이페이지 - 포인트 적립내역 -->
 	<select id="pointSaveList" parameterType="String" resultType="Point" resultMap="pointSelect">
 		SELECT 
 			m_id, save_point_cause, save_point_detail, 
@@ -104,23 +111,43 @@
 		WHERE m_id = #{loginId};
 	</select>
 	
+	<!-- 마이페이지 - 총 소유 포인트 -->
 	<select id="getTotalPoint" parameterType="String" resultType="Point" resultMap="pointSelect">
 		SELECT 
-		point_num, m_id, point_final_point, point_reg_date
+			point_num, m_id, point_final_point, point_reg_date
 		FROM tb_point_admin
 		WHERE m_id = #{loginId};
 	</select>
 	
+	<!-- 관리자페이지 - 회원들의 포인트 사용내역 -->
 	<select id="pointUseAdminList" resultType="Point" resultMap="pointSelect">
 		SELECT 
-			u.point_use_num, u.m_id, u.point_use_reg_date, u.point_use_used,
-			g.g_cate, g.g_name, g.g_amount
+			SUBSTRING(u.point_use_num, 11), u.m_id, m.m_name, m.m_gender, m.m_birth,
+			u.point_use_reg_date, u.point_use_used, g.g_num, g.g_cate, g.g_name, 
+			g.g_amount
 		FROM
 			tb_point_use_admin AS u
 			INNER JOIN 
-			tb_Alliance_g AS g
-			ON
-			u.g_num = g.g_num;
+				tb_Alliance_g AS g
+				ON u.g_num = g.g_num
+			RIGHT OUTER join
+				tb_member AS m
+				ON u.m_id = m.m_id
+		ORDER BY u.point_use_reg_date DESC;
+	</select>
+	
+	<!-- 관리자페이지 - 회원들의 포인트 적립내역 -->
+	<select id="pointSaveAdminList" resultType="Point" resultMap="pointSelect">
+		SELECT
+			SUBSTR(s.save_point_num,12), s.save_point_reg_date, s.m_id, m.m_name,
+			m.m_gender, m.m_birth, s.save_point_cause, s.save_point_detail, 
+			s.save_point_charge 
+		FROM 
+			tb_point_save  AS s
+			INNER JOIN
+				tb_member AS m
+				ON s.m_id = m.m_id
+		ORDER BY s.save_point_reg_date DESC;
 	</select>
 	
 </mapper>

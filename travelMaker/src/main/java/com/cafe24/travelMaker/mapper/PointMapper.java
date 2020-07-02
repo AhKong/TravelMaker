@@ -25,4 +25,5 @@ public interface PointMapper {
 	
 	//관리자 - 포인트 관리페이지
 	public List<Point> pointUseAdminList();
+	public List<Point> pointSaveAdminList();
 }
