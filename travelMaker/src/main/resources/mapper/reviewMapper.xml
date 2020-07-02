@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.ReviewMapper">
+     <select id="selectTripTypeList" resultType="TripType">
+     	SELECT 
+     		trip_type_num as tripTypeNum,
+     		trip_type_name as tripTypeName
+     	FROM
+     		tb_trip_type
+     </select>                                                                                                                                     
+</mapper>

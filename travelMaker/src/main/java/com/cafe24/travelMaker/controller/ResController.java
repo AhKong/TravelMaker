@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.service.ResService;
+import com.cafe24.travelMaker.service.ReviewService;
 import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 @Controller
@@ -19,6 +20,7 @@ public class ResController {
 	@Autowired private ResService resService;
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;
+	@Autowired private ReviewService reviewService;
 
 	@GetMapping("/resList")
 	public String resList(Model model, @RequestParam (name="search") String search) {
@@ -62,6 +64,7 @@ public class ResController {
 	public String detailRes(Model model, @RequestParam(name="resNum") String resNum) {
 		System.out.println(resService.getDetailRes(resNum));
 		model.addAttribute("res",resService.getDetailRes(resNum));
+		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		return "res/detailRes";
 	}
 	
