@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.ReviewMapper">
+     <select id="selectTripTypeList" resultType="TripType">
+     	SELECT 
+     		trip_type_num as tripTypeNum,
+     		trip_type_name as tripTypeName
+     	FROM
+     		tb_trip_type
+     </select>  
+     
+     <insert id="addResReview" parameterType="ResReview">
+     	  <selectKey order ="BEFORE" keyProperty="resReviewNum" resultType ="String"> 
+		 	 SELECT 
+				case COUNT(*)
+				when 0 then 'res_review_1'
+				ELSE CONCAT('res_review_',MAX(CAST(SUBSTRING(res_review_num,12) AS DECIMAL))+1) 
+				END AS res_review_num
+			FROM
+				tb_res_review
+ 	 	 </selectKey>
+ 	 	 
+ 	 	 INSERT INTO
+			 tb_res_review(
+			 	res_review_num,
+			 	m_id, 
+				res_num,
+				res_review_title, 
+				res_review_contents, 
+				res_review_grade, 
+				res_review_photo,
+				res_travel_type,
+				res_review_visit_date
+		)VALUES (
+				#{resReviewNum},
+				#{mId},
+				#{resNum},
+				#{resReviewTitle},
+				#{resReviewContents},
+				#{resReviewGrade},
+				#{resReviewPhoto},
+				#{resTravelType},
+				#{resVisitDate}
+		)
+     </insert>  
+     
+     <insert id="addRes" parameterType="Res">
+	  <selectKey order ="BEFORE" keyProperty="resNum" resultType ="String"> 
+	 	 SELECT 
+			case COUNT(*)
+			when 0 then 'res_1'
+			ELSE CONCAT('res_',MAX(CAST(SUBSTRING(res_num,5) AS DECIMAL))+1) 
+			END AS res_num
+		FROM
+			tb_res
+ 	  </selectKey>
+ 	INSERT INTO 
+ 		tb_res(
+	 		res_num,
+	 		si_num,
+	 		m_id,
+	 		res_cate_num,
+	 		res_name,
+	 		res_lat,
+	 		res_long,
+	 		res_photo,
+	 	    res_addr,
+	 	    res_price,
+	 	    res_tel,
+	 	    res_web,
+	 	    res_detail, 
+	 	    res_start_time, 
+	 	    res_close_time
+  	 ) VALUES (
+   			#{resNum},
+   			#{siNum},
+   			#{mId}, 
+   			#{resCateNum},
+   			#{resName}, 
+   			#{resLat}, 
+   			#{resLong}, 
+   			#{resPhoto}, 
+   			#{resAddr}, 
+   			#{resPrice},
+			#{resTel}, 
+			#{resWeb}, 
+			#{resDetail}, 
+			#{resStartTime}, 
+			#{resCloseTime}
+		)
+	</insert> 
+	
+	<select id="isWritedReview" parameterType="String" resultType="int">  
+		SELECT
+			count(*)
+		FROM
+			tb_res_review
+		WHERE
+			m_id =#{mId} and res_num =#{resNum} and res_review_status='Y';
+	</select>                                                                                                                              
+</mapper>

@@ -13,7 +13,7 @@
 			height: 400px;
 		}
 		
-		#sights-map, #sights-review {
+		 #sights-review {
 			height: auto;
 			width: 81vw;
 		}
@@ -167,7 +167,7 @@
 				<div class="tab-pane fade  show active row" id="res-review" role="tabpanel" aria-labelledby="res-review-tab">
 					<div class="reviewIntroTitle">
 						<span class="reveiwIntro">review</span>
-						<button type="submit" class="btn btn-outline-danger btn-lg float-right" data-toggle="modal" data-target="#addResReview">리뷰작성</button>
+						<button type="button" id="reveiwBtn" class="btn btn-outline-danger btn-lg float-right" >리뷰작성</button>
 						<hr>
 					</div>
 					<div class="row">
@@ -178,57 +178,48 @@
 					<div class="chart col-12 col-sm-4">
 					  <h4>여행자 유형 </h4>
 					  <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose" >
-                          <label class="form-check-label">가족여행</label>
+					  <th:block  th:each="l: ${tripType}">
+					  	 <div class="form-check">
+					  	  <label class="form-check-label">
+                          	<input class="form-check-input" type="radio" name="purpose" th:value="l.tripTypeNum">
+                          	<span th:text ="${l.tripTypeName}"></span>
+                          </label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">비지니스</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">커플여행</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">친구와 여행</label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">나 홀로 여행</label>
-                        </div>
+					  </th:block>
                       </div>
 					</div>
 					<div class="col-12 col-sm-4">
 					  <h4>계절별</h4>
 					  <div class="form-group">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose" checked>
-                          <label class="form-check-label">봄(3월-5월)</label>
+	                        <label class="form-check-label">
+	                          <input class="form-check-input" type="radio" name="purpose">
+	                      	    봄(3월-5월)
+	                      	</label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">여름(6월-8월)</label>
+	                        <label class="form-check-label">
+	                          <input class="form-check-input" type="radio" name="purpose">
+	                          	여름 (6월-8월)
+	                        </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">가을(9월-11월)</label>
+	                        <label class="form-check-label">
+	                          <input class="form-check-input" type="radio" name="purpose">
+	                          	가을(9월-11월)
+	                        </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">겨울(12월-2월)</label>
+	                        <label class="form-check-label">
+	                          <input class="form-check-input" type="radio" name="purpose">
+	                       	      겨울(12월-2월)
+	                       </label>
                         </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">나 홀로 여행</label>
-                        </div>
-                      </div>
-					
+                  
+                      </div>	
 					</div>
 					</div>
 					<hr>
-
 					<div class="post">
 						<div class="card">
 							<div class="card-header">
@@ -368,8 +359,26 @@
 	/*<![CDATA[*/
 	var lat = /*[[${res.resLat}]]*/;
 	var lng = /*[[${res.resLong}]]*/;	
+	var mId = /*[[${session.SID}]]*/;
+	var isWrited =/*[[${isWrited}]]*/
 	/*]]>*/
 	
+	$('#reveiwBtn').click(function(){
+		console.log(mId);
+		if(mId == null ){
+			alert('로그인 후 이용가능한 서비스 입니다.')
+			window.location.href = '/member/login';
+			return false;
+		} else{
+			if(isWrited == '1'){
+				alert('리뷰는 한번만 작성 가능합니다 !');
+			} else {
+				$("#addResReview").modal();	
+			}
+
+			
+		}
+	})
 	console.log(1);
 	var myFn = kakaoMap(lat,lng);	
 	console.log(lat,lng)

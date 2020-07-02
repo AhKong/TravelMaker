@@ -10,8 +10,7 @@
         <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-         	        <div class="card card-warning">
-      
+         <div class="card card-warning">
               <!-- /.card-header -->
               <div class="card-body">
                 <form role="form">
@@ -120,13 +119,15 @@
       
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form">
+                <form role="form" action="/review/addResReview" method ="post" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-sm-12">
                       <!-- text input -->
+                      <input type="hidden" name="mId" th:value="${session.SID}">
+                      <input type="hidden" name="resNum" th:value="${res.resNum}">
                       <div class="form-group">
                         <label>Title</label>
-                        <input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요">
+                        <input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name ="resReviewTitle">
                       </div>
                     </div>
                   </div>
@@ -135,7 +136,7 @@
                       <!-- textarea -->
                       <div class="form-group">
                         <label>Contents</label>
-                        <textarea class="form-control" rows="3" placeholder="리뷰 내용을 입력해주세요"></textarea>
+                        <textarea class="form-control" rows="3" placeholder="리뷰 내용을 입력해주세요" name="resReviewContents"></textarea>
                       </div>
                     </div>
                   </div>
@@ -145,8 +146,7 @@
                       <div class="form-group">
                        <label>Photo</label>
                          <div class="custom-file">
-                      		<input type="file" class="custom-file-input" id="customFile">
-                      		<label class="custom-file-label" for="customFile">리뷰 작성하시면 포인트 더드림요</label>
+                      		<input type="file"  name="file">
                     	</div>
                       </div>
                     </div>
@@ -155,58 +155,40 @@
                   <div class="form-group">
                     <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i>
                       	해당 관광명소에 대한 당신의 만족도를 알려주세요! <br>(최소 1 최대 5) </label>
-                    <input type="range" class="custom-range" id="customRange1"  min="1" max="5" value="3">
+                    <input type="range" class="custom-range" id="customRange1"  min="1" max="5" value="3" name="resReviewGrade">
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
                       <!-- checkbox -->
                       <div class="form-group">
-                          <label>여행 목적은 무엇이였나요?</label>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio"  checked>
-                          <label class="form-check-label">가족여행</label>
+                        <label>여행 목적은 무엇이였나요?</label>
+                       <th:block  th:each="l: ${tripType}">
+					  	 <div class="form-check">
+					  	   <label class="form-check-label">
+                          	<input class="form-check-input" type="radio" name="resTravelType" th:value="${l.tripTypeNum}">   
+                          	<span th:text ="${l.tripTypeName}"></span>
+                      	  </label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" >
-                          <label class="form-check-label">비지니스</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" >
-                          <label class="form-check-label">커플여행</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" >
-                          <label class="form-check-label">친구와 여행</label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio">
-                          <label class="form-check-label">나 홀로 여행</label>
-                        </div>
+					  </th:block> 
                       </div>
                      </div>
                   </div>
-
                   <div class="row">
                     <div class="col-sm-12">
                       <!-- select -->
                       <div class="form-group">
                         <label>언제 방문하셨나요?</label>
-                        <select class="form-control">
-                          <option>방문날짜를 선택해주세요</option>
-                          <option>2020년 7월</option>
-                          <option>2020년 6월</option>
-                          <option>2020년 5월</option>
-                          <option>2020년 4월</option>
-                        </select>
+                        <input type="date" class="form-control" name ="resVisitDate" >
                       </div>
                     </div>
                   </div>
+                  <button type="submit" class="btn btn-primary">작성하기</button>
                 </form>
               </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">작성하기</button>
+        <button type="submit" class="btn btn-primary">작성하기</button>
       </div>
       </div>
     </div>

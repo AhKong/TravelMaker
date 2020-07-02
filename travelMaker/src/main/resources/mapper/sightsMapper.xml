@@ -80,7 +80,6 @@
  			<result property="sightsCateNum"  	column="sights_cate_num"/>
  			<result property="sightsType"   	column="sights_type"/>
  		</association>
-
 	</resultMap>
 	
 	<select id="selectSightsList" parameterType="String" resultMap ="sightsSelect">
