@@ -87,13 +87,12 @@ public class AjaxController {
 									@RequestParam(name="sightsNum") String sightsNum,
 									@RequestParam(name="tNum") String tNum,
 		SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
-	
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
+		System.out.println(sightsScrap.getSightsNum()+"---------------------- 여행넘");
 		System.out.println("/SightsScrap 요청 호출 " + mId);
-		System.out.println(scrapselect+"<---------- sSelect 컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러컨트롤러");
-		System.out.println(sightsNum+"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
-			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
+		System.out.println(scrapselect+"<---------- sSelect 스크랩");
+		System.out.println(tNum+"<<<<<<<<< TNUM");
+		if(scrapselect != null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
 			sightsScrap.setSightsNum(scrapselect.getSightsNum());
 			scrapsightsservice.sDeleteScrap(sightsScrap);
 			System.out.println("delete");
@@ -102,7 +101,6 @@ public class AjaxController {
 			System.out.println("insert");
 			//인설트
 		}
-		
 		
 		return scrapselect;
 	}
@@ -113,7 +111,8 @@ public class AjaxController {
 		
 		return null;
 	}
-
+	
+	// 모달창 리스트
 	@RequestMapping("/scrapModal")
 	@ResponseBody
 	public  HashMap<String,List<MyTrip>> ScrapModal(HttpSession session) {

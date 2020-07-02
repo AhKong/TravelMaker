@@ -23,8 +23,9 @@ SELECT
 			tb_scrap_sights;
 	</selectKey>
 			INSERT INTO tb_scrap_sights
-	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date, sights_photo)
-	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW(), #{sPhoto});
+	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date)
+	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW())
+			
 </insert>
 <!-- 그림은 조인으로 쓰기 -->
 
@@ -46,7 +47,9 @@ tb_scrap_sights
 WHERE
 m_id = #{mId}
 AND
-sights_num = #{sightsNum};
+sights_num = #{sightsNum}
+AND
+trip_num = #{tNum};
 </select>
 
 </mapper>
