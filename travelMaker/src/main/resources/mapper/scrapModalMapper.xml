@@ -15,7 +15,6 @@
 		<result property ="status" column ="trip_status"/>
 		<result property ="rDate" column ="trip_reg_date"/>
 		<result property ="tPhoto" column ="trip_photo"/>
-		<result property ="sightsNum" column ="sights_num"/>
 		
 	</resultMap>
 	

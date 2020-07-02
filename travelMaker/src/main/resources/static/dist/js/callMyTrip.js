@@ -1,19 +1,14 @@
 /**
  * 
  */
-
-$(function() {
-	
-	var mId = $('#mId').val();
-	var sightsNum = null;
+		
+	var scrap = function(mId){
 	
 	$(document).on('click','#scrapModal',function() {
 		$(".modal-backdrop").remove();
 		
 		sightsNum = $(this).attr('data-sightsNum');
-		console.log(sightsNum);
-		
-		if (mId != '' || mId == undefined) {
+		if(mId != undefined || mId != null) {
 			var request = $.ajax({
 				url : "/ajax/scrapModal",
 				method : "POST",
@@ -30,7 +25,11 @@ $(function() {
 				for(var i = 0; i < myTripList;i++){				
 					html+='<div class="col-12">'
 					html+='<div class="sights row">'
-				    html+= '<p style="text-align: center"><input type="radio" name="myTrip"  data-tNum="'+listInfo[i].tNum+'"id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
+					html+='<div class="sightsImg col-12 col-md-2">'
+					html+=' <img src="/fileupload/'+ listInfo[i].tPhoto +'"width="80" height="80">'
+					html+='</div>'
+						html+='<div class="col-12 col-md-10">'
+				    html+= '<p style="text-align: center"><input type="radio" name="myTrip" data-tPhoto="'+listInfo[i].tPhoto+'" data-tNum="'+listInfo[i].tNum+'" data-sightsNum="'+listInfo[i].sightsNum+'" id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
 				    html+= '</div> </div>'	
 				}
 			
@@ -54,8 +53,17 @@ $(function() {
 			console.log(sightsNum)
 			
 			var radio = $(this).parents('.modal-content').find('input[name="myTrip"]:checked');
-			var tNum = radio.attr('data-tNum');	
-		
+			var tNum = radio.attr('data-tNum');
+			
+			console.log(tNum+"icon");
+			
+			if($('#scrapInsertIcon').css('display') == 'none'){
+				$('#scrapInsertIcon').hide();
+				$('#scrapDeleteIcon').show();
+			}else if($('#scrapDeleteIcon').css('display') == 'none'){
+				$('#scrapInsertIcon').show();
+				$('#scrapDeleteIcon').hide();
+			}
 			 var request = $.ajax({
 				  url: "/ajax/SightsScrap", 
 				  method: "POST",
@@ -67,18 +75,16 @@ $(function() {
 			  });
 
 			 	request.done(function( data ) {
-					alert(data);
-					console.log(data);
+					//alert(data);
+					//console.log(data);
 				});	
 			 
 				request.fail(function(jqXHR, textStatus) {
 					alert("Request failed: " + textStatus);
-				});   //값 받아다가 쿼리문에 집어넣고 
-			 
-			});
-	});
-	
-	
-	});
+				}); 
+				
+		});
 		
-		
+	});
+	}
+	

@@ -133,7 +133,7 @@
 							</div>
 							<div id="small-text">
 								효자동
-								<button id="scrapIcon" style="float: right;" class="btn btn-primary">
+								<button data-toggle="modal" data-target="#scrapModal" id="scrapModal" style="float: right;" class="btn btn-primary">
 									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
 									</button>
 							</div>
@@ -151,7 +151,7 @@
 							</div>
 							<div id="small-text">
 								평화동
-								<button id="scrapIcon" style="float: right;" class="btn btn-primary">
+								<button id="scrapModal" style="float: right;" class="btn btn-primary ">
 									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
 									</button>
 							</div>
@@ -169,7 +169,7 @@
 							</div>
 							<div id="small-text">
 								삼천동
-								<button id="scrapIcon" style="float: right;" class="btn btn-primary">
+								<button id="scrapModal" style="float: right;" class="btn btn-primary">
 									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
 									</button>
 							</div>
@@ -188,16 +188,22 @@
 
 
 	<!-- /.content-wrapper -->
+<th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
 </th:block>
 <th:block layout:fragment="customFooterScript">
-	<script>
+ <script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
+	<script th:inline="javascript">
 		/*
 			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
 			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		 */
-		 /* id값으로 검색해서 테이블내 데이터 유무에 따라 그립보여줌... */
-	/*  $(function(){
+		/*<![CDATA[*/
+		var mId = /*[[${session.SID}]]*/
+		/*]]>*/
+			console.log(mId)
+			scrap(mId);
+		 /*  $(function(){
 			 
 			 $('#scrapIcon').click(function(){
 				 var mId = $('#mId').val();
@@ -224,7 +230,6 @@
 					 alert('스크랩은 회원만 가능합니다 로그인 해주세욥 ');
 					window.location.href = '/member/login';
 				 }
-				
 			 
 			});
 			 
