@@ -1,6 +1,8 @@
 package com.cafe24.travelMaker.controller;
 import java.time.LocalTime;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,10 +63,12 @@ public class ResController {
 	}
 	
 	@GetMapping("/resDetail")
-	public String detailRes(Model model, @RequestParam(name="resNum") String resNum) {
+	public String detailRes(Model model, @RequestParam(name="resNum") String resNum,HttpSession session) {
+		String mId = (String) session.getAttribute("SID");
 		System.out.println(resService.getDetailRes(resNum));
 		model.addAttribute("res",resService.getDetailRes(resNum));
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
+		model.addAttribute("isWrited", reviewService.isWritedReview(mId, resNum));
 		return "res/detailRes";
 	}
 	
