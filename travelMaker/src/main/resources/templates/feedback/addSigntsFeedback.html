@@ -54,10 +54,7 @@
               <form th:action="@{/feedback/addFeedback}" method="post">
                 <input type="hidden" class="form-control" name="fbSightsNum" th:value="${fbSightsNum}">
 				<input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
-                <div class="form-group">
-                  <label for="feedback-name" class="control-label"></label>
-                   <input type="hidden" class="form-control" name="sights.sightsNum" th:value="${sightsNum}">
-                </div>
+                <input type="hidden" class="form-control" name="sights.sightsNum" th:value="${sightsNum}">
                 <div class="form-group">
                   <label for="feedback-name" class="control-label"></label>
                   <input type="text" class="form-control" name="sights.sightsName" placeholder="피드백 보낼 관광명소/음식점 "disabled>
@@ -67,9 +64,11 @@
                     <!-- check box -->
                     <div class="form-group">
                       <div class="form-check" style="margin: 10px;">
-                        <th:block th:each=" c : ${fCode}">
-                          <input type="hidden" name="fbCode.fbCodeNum" value="${c.fbCodeNum}">
-                          <p><input type="checkbox" name="fbCode.fbReason">&nbsp;[[${c.fbReason}]] </p>
+                        <th:block th:each=" c : ${fCode}"> 
+                          <label>
+                            <input type="checkbox" name="fbCode.fbCodeNum" th:value="${c.fbCodeNum}">
+                            [[${c.fbReason}]] 
+                          </label> <br>
                         </th:block>
                       </div>
                     </div>

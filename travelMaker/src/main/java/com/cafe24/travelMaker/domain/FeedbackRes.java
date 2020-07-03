@@ -7,7 +7,7 @@ public class FeedbackRes {
 	private String fbResRegDate;
 	private String fbResCheck;
 	private Member member;
-	private Sights sights;
+	private Res res;
 	private FbCode fbCode;
 	
 	public String getFbResNum() {
@@ -40,11 +40,11 @@ public class FeedbackRes {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	public Sights getSights() {
-		return sights;
+	public Res getRes() {
+		return res;
 	}
-	public void setSights(Sights sights) {
-		this.sights = sights;
+	public void setRes(Res res) {
+		this.res = res;
 	}
 	public FbCode getFbCode() {
 		return fbCode;
@@ -56,7 +56,7 @@ public class FeedbackRes {
 	@Override
 	public String toString() {
 		return "FeedbackRes [fbResNum=" + fbResNum + ", fbResContents=" + fbResContents + ", fbResRegDate="
-				+ fbResRegDate + ", fbResCheck=" + fbResCheck + ", member=" + member + ", sights=" + sights
-				+ ", fbCode=" + fbCode + "]";
+				+ fbResRegDate + ", fbResCheck=" + fbResCheck + ", member=" + member + ", res=" + res + ", fbCode="
+				+ fbCode + "]";
 	}
 }
