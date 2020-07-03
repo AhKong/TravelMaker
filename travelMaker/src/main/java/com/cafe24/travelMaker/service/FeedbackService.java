@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.cafe24.travelMaker.domain.FbCode;
+import com.cafe24.travelMaker.domain.FeedbackRes;
 import com.cafe24.travelMaker.domain.FeedbackSights;
 import com.cafe24.travelMaker.mapper.FeedbackMapper;
 
@@ -15,41 +16,69 @@ public class FeedbackService {
 
 @Autowired FeedbackMapper feedbackMapper;
 
-	//피드백 폼으로 이동
-	public List<FbCode> formFeedback(FbCode fbCode) {
+	//회원 -> 관광명소, 음식점 피드백 등록 폼으로 이동
+	public List<FbCode> addFeedback(FbCode fbCode) {
 		System.out.println("formFeedback FeedbackService 도착");
-		List<FbCode> fCode = feedbackMapper.formFeedback(fbCode);
+		List<FbCode> fCode = feedbackMapper.addFeedback(fbCode);
 		System.out.println(fCode+" <- fCode addFeedback FeedbackService");
 		
 		return fCode;
 	}
 
-	//피드백 전송
-	public int addFeedback(FeedbackSights feedbackSights) {
-		System.out.println("addFeedback FeedbackService 도착");
-		System.out.println(feedbackSights+" <- feedbackSights addFeedback FeedbackService");
-		int num = feedbackMapper.addFeedback(feedbackSights);
-		System.out.println(num+" <- result addFeedback Feedbackservice");
+	//회원 -> 관광명소 피드백 등록
+	public int addSightsFeedback(FeedbackSights feedbackSights) {
+		System.out.println("addSightsFeedback FeedbackService 도착");
+		System.out.println(feedbackSights+" <- feedbackSights addSightsFeedback FeedbackService");
+		int num = feedbackMapper.addSightsFeedback(feedbackSights);
+		System.out.println(num+" <- 1 이면 관광명소 피드백 등록 완료!");
 		
 		return num;
 	}
 	
-	//피드백 리스트
-	public List<FeedbackSights> feedbackList(Model model){
-		System.out.println("feedbackList FeedbackService 도착");
-		List<FeedbackSights> fbList = feedbackMapper.feedbackList(model);
-		System.out.println(fbList+" <- fbList feedbackList FeedbackService");
+	//회원 -> 음식점 피드백 등록
+	public int addResFeedback(FeedbackRes feedbackRes) {
+		System.out.println("addSightsFeedback FeedbackService 도착");
+		System.out.println(feedbackRes+" <- feedbackSights addSightsFeedback FeedbackService");
+		int num = feedbackMapper.addResFeedback(feedbackRes);
+		System.out.println(num+" <- 1 이면 음식점 피드백 등록 완료!");
 		
-		return fbList;
+		return num;
 	}
 	
-	//피드백 수용 버튼
-	public int acceptFeedback(String fbSightsCheck, String fbSightsNum) {
-		System.out.println("acceptFeedback FeedbackService 도착");
-		int fbResult = feedbackMapper.acceptFeedback(fbSightsCheck, fbSightsNum);
-		System.out.println(fbResult+" <- 1이면 피드백 수용/무시 변경 서비스단 완료!");
+	//관리자 -> 관광명소 피드백 리스트
+	public List<FeedbackSights> fbSightsList(Model model){
+		System.out.println("fbSightsList FeedbackService 도착");
+		List<FeedbackSights> fbSightsList = feedbackMapper.fbSightsList(model);
+		System.out.println(fbSightsList+" <- fbSightsList FeedbackService");
 		
-		return fbResult;
+		return fbSightsList;
+	}
+	
+	//관리자 -> 음식점 피드백 리스트
+	public List<FeedbackRes> fbResList(Model model){
+		System.out.println("fbResList FeedbackService 도착");
+		List<FeedbackRes> fbResList = feedbackMapper.fbResList(model);
+		System.out.println(fbResList+" <- fbResList FeedbackService");
+		
+		return fbResList;
+	}
+	
+	//관리자 -> 관광명소 피드백 수용 버튼
+	public int acceptFbSights(String fbSightsCheck, String fbSightsNum) {
+		System.out.println("acceptFbSights FeedbackService 도착");
+		int result = feedbackMapper.acceptFbSights(fbSightsCheck, fbSightsNum);
+		System.out.println(result+" <- 1이면 피드백 수용/무시 변경 서비스단 완료!");
+		
+		return result;
+	}
+	
+	//관리자 -> 음식점 피드백 수용 버튼
+	public int acceptFbRes(String fbResCheck, String fbResNum) {
+		System.out.println("acceptFbRes FeedbackService 도착");
+		int result = feedbackMapper.acceptFbRes(fbResCheck, fbResNum);
+		System.out.println(result+" <- 1이면 피드백 수용/무시 변경 서비스단 완료!");
+		
+		return result;
 	}
 	
 }
