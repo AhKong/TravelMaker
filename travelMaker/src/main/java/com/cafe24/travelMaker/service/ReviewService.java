@@ -24,5 +24,9 @@ public class ReviewService {
 	public int isWritedReview(String mId, String resNum) {
 		return reviewMapper.isWritedReview(mId, resNum);
 	}
+	
+	public List<ResReview> resReviewList(String resNum){
+		return reviewMapper.resReviewList(resNum);
+	}
 
 }
