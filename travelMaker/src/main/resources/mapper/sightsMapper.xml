@@ -123,5 +123,4 @@
 				sights_num =#{sightsNum}
 		]]>
 	</select>
-	
 </mapper>

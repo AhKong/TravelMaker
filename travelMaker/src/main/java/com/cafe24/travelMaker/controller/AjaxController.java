@@ -87,6 +87,7 @@ public class AjaxController {
 									@RequestParam(name="sightsNum") String sightsNum,
 									@RequestParam(name="tNum") String tNum,
 		SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
+		
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
 		System.out.println(sightsScrap.getSightsNum()+"---------------------- 여행넘");
 		System.out.println("/SightsScrap 요청 호출 " + mId);

@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
 import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.domain.Sights;
+import com.cafe24.travelMaker.service.MyTripService;
 import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 
@@ -20,9 +24,9 @@ import com.cafe24.travelMaker.service.StorageService;
 public class SightsController{
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;
-	
+
 	@GetMapping("/sightsList")
-	public String sightsList(Model model,@RequestParam(name="search") String search) {
+	public String sightsList(Model model,@RequestParam(name="search") String search,HttpSession session) {
 		System.out.println(search+"<---");
 		model.addAttribute("searchWord", search);
 		model.addAttribute("sightsList", sightsService.selectSightsList(search));

@@ -22,7 +22,8 @@
 				var html ='';
 				var myTripList = data.result.length
 				var listInfo = data.result;
-				for(var i = 0; i < myTripList;i++){				
+				var i = 0;
+				for(i = 0; i < myTripList;i++){				
 					html+='<div class="col-12">'
 					html+='<div class="sights row">'
 					html+='<div class="sightsImg col-12 col-md-2">'
@@ -30,8 +31,10 @@
 					html+='</div>'
 						html+='<div class="col-12 col-md-10">'
 				    html+= '<p style="text-align: center"><input type="radio" name="myTrip" data-tPhoto="'+listInfo[i].tPhoto+'" data-tNum="'+listInfo[i].tNum+'" data-sightsNum="'+listInfo[i].sightsNum+'" id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
-				    html+= '</div> </div>'	
+				    html+= '</div> </div>'
 				}
+
+				html+= '<div onclick="location.href='+'/myTrip/editTrip'+'"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span><a><strong><i class="fas fa-plus"></i> 내여행 만들기</strong></a></div>'
 			
 				console.log(html)
 				var myTripList = $('#myTripList');
@@ -57,12 +60,17 @@
 			
 			console.log(tNum+"icon");
 			
-			if($('#scrapInsertIcon').css('display') == 'none'){
-				$('#scrapInsertIcon').hide();
-				$('#scrapDeleteIcon').show();
-			}else if($('#scrapDeleteIcon').css('display') == 'none'){
-				$('#scrapInsertIcon').show();
-				$('#scrapDeleteIcon').hide();
+		/*	var j = 0;
+			for(j=0; j < 5; j++){
+				j += j
+			}*/
+			
+			if($('#scrapInsertIcon3').css('display') != 'none'){
+				$('#scrapInsertIcon3').hide();
+				$('#scrapDeleteIcon3').show();
+			}else if($('#scrapDeleteIcon3').css('display') != 'none'){
+				$('#scrapInsertIcon3').show();
+				$('#scrapDeleteIcon3').hide();
 			}
 			 var request = $.ajax({
 				  url: "/ajax/SightsScrap", 

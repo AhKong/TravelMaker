@@ -183,7 +183,7 @@
 					</div>
 					<div class="row" >
 						<span class="sightListTitle">관광명소</span>
-						<th:block th:each="l: ${sightsList}">
+						<th:block th:each="l, i : ${sightsList}">
 							<div class="col-12 col-lg-12 col-md-12">
 								<div class="sights row">
 									<div class="sightsImg col-12 col-md-3">
@@ -191,17 +191,17 @@
 									</div>
 									<div class="sightsDesc col-12 col-md-9">
 										<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" style="float: right;" class="btn btn-primary" th:data-sightsNum ="${l.sightsNum}">
-											
+											<!-- <tb:block th:each="s: ${}"> -->
 											<!-- <th:block th:if="${l.sightsNum} == 'sights_1'">삭제 -->
-												<i id="scrapInsertIcon" class="far fa-hand-point-up"style="display: none"></i>
-												<i id="scrapDeleteIcon" class="fas fa-hand-point-up"></i>
+												<i th:id="scrapInsertIcon + ${i.count}" class="far fa-hand-point-up"></i>
+												<i th:id="scrapDeleteIcon + ${i.count}" class="fas fa-hand-point-up" style="display: none"></i>
 										
 										<!-- 	</th:block>
 											<th:block th:unless="${l.sightsNum} != ${l.sightsNum} && ${tNum} == null"> --><!-- sightsNum테이블의 sightsNum 과 scrap테이블의 sightsNum 다르거나 없으면 인설트 -->
-												<i id="scrapInsertIcon" class="far fa-hand-point-up"></i>
-												<i id="scrapDeleteIcon" class="fas fa-hand-point-up" style="display: none"></i>
+												<!-- <i id="scrapInsertIcon" class="far fa-hand-point-up"></i>
+												<i id="scrapDeleteIcon" class="fas fa-hand-point-up" style="display: none"></i> -->
 										<!-- 	</th:block> -->
-											
+											<!-- </tb:block> -->
 								
 										</button>
 										<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:data-sightsNum="${l.sightsNum}" th:text="${l.sightsName}"></a><br>
@@ -225,7 +225,7 @@
 		</div>
 		<!-- /.card-body -->
 	</div>
-	
+	x
 	<!-- /.card -->
 </section>
 <!-- /.content -->

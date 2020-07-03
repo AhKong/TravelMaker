@@ -36,7 +36,9 @@ tb_scrap_sights
 WHERE
 m_id = #{mId}
 AND
-sights_num = #{sightsNum};
+sights_num = #{sightsNum}
+AND
+trip_num = #{tNum};
 </delete>
 
 <select id="sSelect" resultType="SightsScrap" resultMap="memberSelect">
