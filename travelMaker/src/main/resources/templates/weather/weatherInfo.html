@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- jsGrid -->
+  <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<th:block layout:fragment="customTitle">
+	<title>weather</title>
+	<style>
+	.body1 {
+	background-image: url(/dist/img/trip.jpg);
+	background-position: center top;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 50px 0;
+}
+	</style>
+</th:block>
+<th:block layout:fragment="customContents">
+	 <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper body1">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid" >
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>날씨 확인(강민수)</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+            <div class="card" style="background-color: rgba( 255, 255, 255, 0.5 );">
+              <div class="card-header">
+                <h3 class="card-title">현재날짜로부터 3일동안의 날씨만 제공됩니다.</h3>
+              </div>
+              <!-- /.card-header -->
+             	<div class="row ">
+          <div class="col-lg-4 " >
+          	지역별 날씨보기  &emsp;:&emsp;
+		<select name="zone" id="search_area3" class="search_area" title="지역선택" style="width:200px;height:35px; border-color : #808080; border-width:1.5px; text-align-last: center;">	
+			<option selected="selected">::지역을 선택하세요::</option>		
+			<option value="1100000000">서울특별시</option>		
+			<option value="4200000000">강원도</option>		
+			<option value="4300000000">충청북도</option>		
+			<option value="4400000000">충청남도</option>		
+			<option value="4500000000">전라북도</option>		
+			<option value="4600000000">전라남도</option>		
+			<option value="4800000000">경상남도</option>		
+			<option value="5000000000">제주특별자치도</option>		
+			<option value="2600000000">부산광역시</option>		
+			<option value="2700000000">대구광역시</option>		
+			<option value="2800000000">인천광역시</option>		
+			<option value="2900000000">광주광역시</option>		
+			<option value="3000000000">대전광역시</option>		
+			<option value="3100000000">울산광역시</option>		
+			<option value="3600000000">세종특별자치시</option>		
+			<option value="4100000000">경기도</option>
+		</select>
+		</div>
+	</div>
+			<div class="row">
+          <div class="col-lg-4" style="text-align:center;">
+          <span id="date" style="font-size:1.5em; "></span>
+            <div id="view"></div>
+			</div>
+			
+			<div class="col-lg-4" style="text-align:center;">
+			<span id="date2" style="font-size:1.5em;"></span>
+            <div id="view2"></div>
+			</div>
+			
+			<div class="col-lg-4" style="text-align:center;">
+			<span id="date3" style="font-size:1.5em;"></span>
+            <div id="view3"></div>
+			</div>
+			
+			</div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+       
+          <!-- /.col -->
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+
+
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+<script type="text/javascript"> 
+	$(function(){
+		$('#search_area3').change(function(){
+		
+			var zoneVal = $(this).val();
+			
+			var request = $.ajax({
+			  url: "/weather/apiasdaadasddsadsadsadadsasadas",
+			  method: "POST",
+			  data: { zone : zoneVal },
+			  dataType: "json"
+			});
+			 
+			request.done(function( obj ) {
+			  console.log(obj)
+			  var html ='<table border="2";>';
+			  html += '<tbody>';
+			  html += '<tr><th style="background-color: #bbdefb">시각</th><th style="background-color: #bbdefb">기온</th><th style="background-color: #bbdefb">날씨</th><th style="background-color: #bbdefb">최고기온</th><th style="background-color: #bbdefb">최저기온</th><th style="background-color: #bbdefb">강수확률</th><th style="background-color: #bbdefb">습도</th></tr>'
+			  
+			  for(var i = 0; i < obj.kamList.length; i++){
+				  html += '<tr style="background-color: #e3f2fd">'
+				  html += '<td>' + obj.kamList[i].hour+"시" + '</td>';
+				  html += '<td>' + obj.kamList[i].temp+"C" + '</td>';
+				  html += '<td>' + obj.kamList[i].wfkor + '</td>';
+				  if(obj.kamList[i].tmn == "-999.0"){
+					  html += '<td>' + "정보없음" + '</td>';
+				  }else {
+					  html += '<td>' + obj.kamList[i].tmx+"C" + '</td>';
+				  }
+				  if(obj.kamList[i].tmn == "-999.0"){
+					  html += '<td>' + "정보없음" + '</td>';
+				  }else {
+				  	html += '<td>' + obj.kamList[i].tmn +"C"+ '</td>';
+				  }
+				  html += '<td>' + obj.kamList[i].pop+"%" + '</td>';
+				  html += '<td>' + obj.kamList[i].reh +"%"+ '</td>';
+			  	  html += '</tr>';			  
+			  }
+			  html += '</tbody>';
+			  html += '</table>';
+			  $('#view').html(html);
+			});
+			
+			request.done(function( obj ) {
+				  console.log(obj)
+				  var html ='<table border="2">';
+				  html += '<tbody>';
+				  html += '<tr><th style="background-color: #bbdefb">시각</th><th style="background-color: #bbdefb">기온</th><th style="background-color: #bbdefb">날씨</th><th style="background-color: #bbdefb">최고기온</th><th style="background-color: #bbdefb">최저기온</th><th style="background-color: #bbdefb">강수확률</th><th style="background-color: #bbdefb">습도</th></tr>'				  
+				  for(var i = 0; i < obj.kamList2.length; i++){
+					  html += '<tr style="background-color: #e3f2fd">'
+						  html += '<td>' + obj.kamList2[i].hour+"시" + '</td>';
+						  html += '<td>' + obj.kamList2[i].temp+"C" + '</td>';
+						  html += '<td>' + obj.kamList2[i].wfkor + '</td>';
+						  html += '<td>' + obj.kamList2[i].tmx+"C" + '</td>';
+						  if(obj.kamList2[i].tmn == "-999.0"){
+							  html += '<td>' + "정보없음" + '</td>';
+						  }else {
+						  	html += '<td>' + obj.kamList2[i].tmn +"C"+ '</td>';
+						  }
+						  html += '<td>' + obj.kamList2[i].pop+"%" + '</td>';
+						  html += '<td>' + obj.kamList2[i].reh +"%"+ '</td>';
+					  	  html += '</tr>';			  
+				  }
+				  html += '</tbody>';
+				  html += '</table>';
+				  $('#view2').html(html);
+				});
+			
+			request.done(function( obj ) {
+				  console.log(obj)
+				  var html = '<table border="2">';
+				  html += '<tbody>';
+				  html += '<tr><th style="background-color: #bbdefb">시각</th><th style="background-color: #bbdefb">기온</th><th style="background-color: #bbdefb">날씨</th><th style="background-color: #bbdefb">최고기온</th><th style="background-color: #bbdefb">최저기온</th><th style="background-color: #bbdefb">강수확률</th><th style="background-color: #bbdefb">습도</th></tr>'				  
+				  for(var i = 0; i < obj.kamList3.length; i++){
+					  html += '<tr style="background-color: #e3f2fd">'
+						  html += '<td>' + obj.kamList3[i].hour+"시" + '</td>';
+						  html += '<td>' + obj.kamList3[i].temp+"C" + '</td>';
+						  html += '<td>' + obj.kamList3[i].wfkor + '</td>';
+						  html += '<td>' + obj.kamList3[i].tmx+"C" + '</td>';
+						  if(obj.kamList3[i].tmn == "-999.0"){
+							  html += '<td>' + "정보없음" + '</td>';
+						  }else {
+						  	html += '<td>' + obj.kamList3[i].tmn +"C"+ '</td>';
+						  }
+						  html += '<td>' + obj.kamList3[i].pop+"%" + '</td>';
+						  html += '<td>' + obj.kamList3[i].reh +"%"+ '</td>';
+					  	  html += '</tr>';
+				  }
+				  html += '</tbody>';
+				  html += '</table>';
+				  $('#view3').html(html);
+				  
+				});
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});
+		});
+	});
+</script>
+<script type="text/javascript"> 
+todayIs();
+function todayIs() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; // Jan is 0
+    var yyyy = today.getFullYear();
+
+    if(dd<10){
+        dd = '0'+dd
+    }
+    if(mm<10){
+        mm = '0'+mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    //alert(today);
+    document.getElementById("date").innerHTML = today;
+    //$('#date').text(today);
+}
+</script>
+<script type="text/javascript"> 
+todayIs();
+function todayIs() {
+    var today = new Date();
+    var dd = today.getDate()+1;
+    var mm = today.getMonth()+1; // Jan is 0
+    var yyyy = today.getFullYear();
+
+    if(dd<10){
+        dd = '0'+dd
+    }
+    if(mm<10){
+        mm = '0'+mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    //alert(today);
+    document.getElementById("date2").innerHTML = today;
+    //$('#date').text(today);
+}
+</script>
+<script type="text/javascript"> 
+todayIs();
+function todayIs() {
+    var today = new Date();
+    var dd = today.getDate()+2;
+    var mm = today.getMonth()+1; // Jan is 0
+    var yyyy = today.getFullYear();
+
+    if(dd<10){
+        dd = '0'+dd
+    }
+    if(mm<10){
+        mm = '0'+mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    //alert(today);
+    document.getElementById("date3").innerHTML = today;
+    //$('#date').text(today);
+}
+</script>
+</th:block>
+</html>

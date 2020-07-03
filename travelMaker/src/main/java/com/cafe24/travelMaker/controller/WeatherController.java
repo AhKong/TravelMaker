@@ -13,19 +13,20 @@ import com.cafe24.travelMaker.service.WeatherService;
 
 
 @Controller
+@RequestMapping("/weather")
 public class WeatherController {
 	
 	@Autowired
 	WeatherService myService;
 	
-	@GetMapping("/weather")
+	@GetMapping("/weatherInfo")
 	public String index(Model model) {
 		KmaListDto kmaListDto = myService.myService("5000000000");
 		
 		System.out.println(kmaListDto);
 		model.addAttribute("kmaListDto", kmaListDto);
 		
-		return "/tripPlan/tripList";
+		return "/weather/weatherInfo";
 	}
 	
 	@RequestMapping(value = "/apiasdaadasddsadsadsadadsasadas", produces = "application/json")
