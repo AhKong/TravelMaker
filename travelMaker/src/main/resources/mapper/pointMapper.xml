@@ -88,6 +88,21 @@
 			m_id=#{memberId};
 	</update>
 	
+	<insert id="pointUseAdmin" parameterType="Goods">
+	<selectKey order="BEFORE" keyProperty="pointUseNum" resultType="String">
+		SELECT
+			case COUNT(*)
+			WHEN 0 THEN 'point_use_1'
+			ELSE CONCAT('point_use_', MAX(CAST(SUBSTRING(point_use_num,11) AS DECIMAL))+1)
+			END AS point_use_num
+		FROM
+			tb_point_use_admin
+	</selectKey>
+		INSERT INTO tb_point_use_admin
+				(point_use_num, m_id, g_num, point_use_used, point_use_reg_date)
+				VALUES (#{pointUseNum}, #{memberId}, #{goodsCode}, #{goodsPayPrice}, NOW())
+	</insert>
+	
 	<!-- 마이페이지 - 포인트 사용내역 -->
 	<select id="pointUseList" parameterType="String" resultType="Point" resultMap="pointSelect">
 		SELECT 

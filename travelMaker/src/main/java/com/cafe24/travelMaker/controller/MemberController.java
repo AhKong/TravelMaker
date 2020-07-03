@@ -32,7 +32,7 @@ public class MemberController{
 	@Autowired private StorageService storageService;
 	@Autowired private PointService pointService;
 	@Autowired private GoodsService goodsService;
-
+	@Autowired private FollowMapper followMapper;
 	
 	@GetMapping("/myPage")
 	public String myPage(Model model, HttpSession session, Member member) {
@@ -41,6 +41,10 @@ public class MemberController{
 		model.addAttribute("goodsList", goodsList);
 		member = memberService.getMemberInfo(loginId);
 		model.addAttribute("member", member);
+		int followersNum = followMapper.followersNum(loginId);
+		model.addAttribute("followersNum", followersNum);
+		int followingNum = followMapper.followingNum(loginId);
+		model.addAttribute("followingNum", followingNum);
 		return "/member/myPage";
 	}
 	

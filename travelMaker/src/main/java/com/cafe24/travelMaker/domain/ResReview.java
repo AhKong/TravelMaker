@@ -4,28 +4,30 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ResReview {
 	private String resReviewNum;
-	private String mId;
+	private Member member;
 	private String resNum;
 	private String resReviewTitle;
 	private String resReviewContents;
 	private String resReviewGrade;
 	private MultipartFile file;
 	private String resReviewPhoto;
-	private String resTravelType;
 	private String resReveiwRegDate;
 	private String resReveiwUpdateDate;
 	private String resVisitDate;
+	private TripType tripType;
+	
 	public String getResReviewNum() {
 		return resReviewNum;
 	}
 	public void setResReviewNum(String resReviewNum) {
 		this.resReviewNum = resReviewNum;
 	}
-	public String getmId() {
-		return mId;
+
+	public Member getMember() {
+		return member;
 	}
-	public void setmId(String mId) {
-		this.mId = mId;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	public String getResNum() {
 		return resNum;
@@ -63,11 +65,12 @@ public class ResReview {
 	public void setResReviewPhoto(String resReviewPhoto) {
 		this.resReviewPhoto = resReviewPhoto;
 	}
-	public String getResTravelType() {
-		return resTravelType;
+	
+	public TripType getTripType() {
+		return tripType;
 	}
-	public void setResTravelType(String resTravelType) {
-		this.resTravelType = resTravelType;
+	public void setTripType(TripType tripType) {
+		this.tripType = tripType;
 	}
 	public String getResReveiwRegDate() {
 		return resReveiwRegDate;
@@ -90,12 +93,12 @@ public class ResReview {
 	}
 	@Override
 	public String toString() {
-		return "ResReview [resReviewNum=" + resReviewNum + ", mId=" + mId + ", resNum=" + resNum + ", resReviewTitle="
-				+ resReviewTitle + ", resReviewContents=" + resReviewContents + ", resReviewGrade=" + resReviewGrade
-				+ ", file=" + file + ", resReviewPhoto=" + resReviewPhoto + ", resTravelType=" + resTravelType
+		return "ResReview [resReviewNum=" + resReviewNum + ", member=" + member + ", resNum=" + resNum
+				+ ", resReviewTitle=" + resReviewTitle + ", resReviewContents=" + resReviewContents
+				+ ", resReviewGrade=" + resReviewGrade + ", file=" + file + ", resReviewPhoto=" + resReviewPhoto
 				+ ", resReveiwRegDate=" + resReveiwRegDate + ", resReveiwUpdateDate=" + resReveiwUpdateDate
-				+ ", resVisitDate=" + resVisitDate + "]";
+				+ ", resVisitDate=" + resVisitDate + ", tripType=" + tripType + "]";
 	}
 
-	
+
 }

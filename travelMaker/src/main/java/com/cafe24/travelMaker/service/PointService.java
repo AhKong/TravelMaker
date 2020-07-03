@@ -64,6 +64,10 @@ public class PointService {
 	public int updatePointFinal(Goods goods) {
 		return pointMapper.updatePointFinal(goods);
 	}
+	public int pointUseAdmin(Goods goods) {
+		return pointMapper.pointUseAdmin(goods);
+	}
+	
 	
 	//마이페이지 - 포인트 사용내역
 	public List<Point> pointUseList(String loginId) {

@@ -17,6 +17,7 @@ public interface PointMapper {
 	public int updateMyPoint(Point point); 
 	public Point getPointInfo(String mId);
 	public int updatePointFinal(Goods goods);
+	public int pointUseAdmin(Goods goods);
 	
 	//마이페이지 - 포인트 사용내역
 	public List<Point> pointUseList(String loginId);

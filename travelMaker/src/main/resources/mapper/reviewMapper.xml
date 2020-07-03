@@ -3,6 +3,26 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.ReviewMapper">
+	<resultMap type="ResReview" id="resReviewResultMap" >
+		<result property ="resReviewNum" column ="res_review_num"/>
+		<result property ="resNum" column ="res_Num"/>
+		<result property ="resReviewTitle" column ="res_review_title"/>
+		<result property ="resReviewContents" column ="res_review_contents"/>
+		<result property ="resReviewGrade" column ="res_review_grade"/>
+		<result property ="resReviewPhoto" column ="res_review_photo"/>
+		<result property ="resReveiwRegDate" column ="res_review_reg_date"/>
+		<result property ="resReveiwUpdateDate" column ="res_review_update_date"/>
+		<result property ="resVisitDate" column ="res_review_visit_date"/>
+		<association property="tripType" javaType ="TripType">
+ 			<result property="tripTypeNum" column="trip_type_num"/>
+ 			<result property="tripTypeName"  column="trip_type_name"/>
+ 		</association>
+ 		<association property="member" javaType ="Member">
+ 			<result property="mId" column="m_id"/>
+ 			<result property="mAvatar"  column="m_avatar"/>
+ 		</association>
+	</resultMap>
+	
      <select id="selectTripTypeList" resultType="TripType">
      	SELECT 
      		trip_type_num as tripTypeNum,
@@ -45,53 +65,7 @@
 				#{resVisitDate}
 		)
      </insert>  
-     
-     <insert id="addRes" parameterType="Res">
-	  <selectKey order ="BEFORE" keyProperty="resNum" resultType ="String"> 
-	 	 SELECT 
-			case COUNT(*)
-			when 0 then 'res_1'
-			ELSE CONCAT('res_',MAX(CAST(SUBSTRING(res_num,5) AS DECIMAL))+1) 
-			END AS res_num
-		FROM
-			tb_res
- 	  </selectKey>
- 	INSERT INTO 
- 		tb_res(
-	 		res_num,
-	 		si_num,
-	 		m_id,
-	 		res_cate_num,
-	 		res_name,
-	 		res_lat,
-	 		res_long,
-	 		res_photo,
-	 	    res_addr,
-	 	    res_price,
-	 	    res_tel,
-	 	    res_web,
-	 	    res_detail, 
-	 	    res_start_time, 
-	 	    res_close_time
-  	 ) VALUES (
-   			#{resNum},
-   			#{siNum},
-   			#{mId}, 
-   			#{resCateNum},
-   			#{resName}, 
-   			#{resLat}, 
-   			#{resLong}, 
-   			#{resPhoto}, 
-   			#{resAddr}, 
-   			#{resPrice},
-			#{resTel}, 
-			#{resWeb}, 
-			#{resDetail}, 
-			#{resStartTime}, 
-			#{resCloseTime}
-		)
-	</insert> 
-	
+
 	<select id="isWritedReview" parameterType="String" resultType="int">  
 		SELECT
 			count(*)
@@ -99,5 +73,32 @@
 			tb_res_review
 		WHERE
 			m_id =#{mId} and res_num =#{resNum} and res_review_status='Y';
-	</select>                                                                                                                              
+	</select>         
+	
+	<select id="resReviewList" parameterType="String" resultMap="resReviewResultMap">
+		SELECT 
+			m.m_avatar,
+			r.*,
+			t.trip_type_name
+		FROM 
+			tb_res_review  AS r
+		INNER JOIN 
+			tb_member AS m 
+		INNER JOIN
+			tb_trip_type AS t
+		ON  
+		 	m.m_id = r.m_id AND r.res_travel_type = t.trip_type_num 
+		WHERE  r.res_num =#{resNum}
+	</select>     
+	<select id="getGradeCnt"  parameterType="String" resultType="ReviewGrade">
+		SELECT 
+			r.res_review_grade as grade,
+			count(*) as gradeCnt
+		FROM 
+			tb_res_review AS r
+		WHERE 
+			r.res_num ='res_'
+		GROUP BY  
+			r.res_review_grade
+	</select>                                                                                                                
 </mapper>
