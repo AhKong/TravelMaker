@@ -88,6 +88,21 @@
 			m_id=#{memberId};
 	</update>
 	
+	<insert id="pointUseAdmin" parameterType="Goods">
+	<selectKey order="BEFORE" keyProperty="pointUseNum" resultType="String">
+		SELECT
+			case COUNT(*)
+			WHEN 0 THEN 'point_use_1'
+			ELSE CONCAT('point_use_', MAX(CAST(SUBSTRING(point_use_num,11) AS DECIMAL))+1)
+			END AS point_use_num
+		FROM
+			tb_point_use_admin
+	</selectKey>
+		INSERT INTO tb_point_use_admin
+				(point_use_num, m_id, g_num, point_use_used, point_use_reg_date)
+				VALUES (#{pointUseNum}, #{memberId}, #{goodsCode}, #{goodsPayPrice}, NOW())
+	</insert>
+	
 	<!-- 마이페이지 - 포인트 사용내역 -->
 	<select id="pointUseList" parameterType="String" resultType="Point" resultMap="pointSelect">
 		SELECT 
@@ -122,7 +137,7 @@
 	<!-- 관리자페이지 - 회원들의 포인트 사용내역 -->
 	<select id="pointUseAdminList" resultType="Point" resultMap="pointSelect">
 		SELECT 
-			SUBSTRING(u.point_use_num, 11), u.m_id, m.m_name, m.m_gender, m.m_birth,
+			SUBSTRING(u.point_use_num, 11) AS point_use_num, u.m_id, m.m_name, m.m_gender, m.m_birth,
 			u.point_use_reg_date, u.point_use_used, g.g_num, g.g_cate, g.g_name, 
 			g.g_amount
 		FROM
@@ -139,7 +154,7 @@
 	<!-- 관리자페이지 - 회원들의 포인트 적립내역 -->
 	<select id="pointSaveAdminList" resultType="Point" resultMap="pointSelect">
 		SELECT
-			SUBSTR(s.save_point_num,12), s.save_point_reg_date, s.m_id, m.m_name,
+			SUBSTR(s.save_point_num,12) AS save_point_num, s.save_point_reg_date, s.m_id, m.m_name,
 			m.m_gender, m.m_birth, s.save_point_cause, s.save_point_detail, 
 			s.save_point_charge 
 		FROM 

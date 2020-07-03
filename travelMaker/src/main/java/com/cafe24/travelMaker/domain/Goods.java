@@ -18,6 +18,7 @@ public class Goods {
 	private String goodsBuyAmount;
 	private String goodsPayPrice;
 	private String goodsBuyDate;
+	private String pointUseNum;
 
 	public String getGoodsBuyCode() {
 		return goodsBuyCode;
@@ -110,13 +111,21 @@ public class Goods {
 	public void setGoodsBuyDate(String goodsBuyDate) {
 		this.goodsBuyDate = goodsBuyDate;
 	}
+	public String getPointUseNum() {
+		return pointUseNum;
+	}
+	public void setPointUseNum(String pointUseNum) {
+		this.pointUseNum = pointUseNum;
+	}
 	@Override
 	public String toString() {
 		return "Goods [goodsBuyCode=" + goodsBuyCode + ", goodsCode=" + goodsCode + ", memberId=" + memberId + ", file="
 				+ file + ", goodsPhoto=" + goodsPhoto + ", goodsCate=" + goodsCate + ", goodsName=" + goodsName
 				+ ", goodsPrice=" + goodsPrice + ", goodsDetail=" + goodsDetail + ", goodsRegDate=" + goodsRegDate
 				+ ", goodsSaleYesNo=" + goodsSaleYesNo + ", goodsAmount=" + goodsAmount + ", goodsBuyAmount="
-				+ goodsBuyAmount + ", goodsPayPrice=" + goodsPayPrice + ", goodsBuyDate=" + goodsBuyDate + "]";
+				+ goodsBuyAmount + ", goodsPayPrice=" + goodsPayPrice + ", goodsBuyDate=" + goodsBuyDate
+				+ ", pointUseNum=" + pointUseNum + "]";
 	}
+	
 }
 

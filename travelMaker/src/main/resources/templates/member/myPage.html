@@ -45,14 +45,14 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right" th:text="${member.mFollow}" style = " font-size:1.5em;"></a>
+                    <b>Followers</b> <a class="float-right" th:text="${followersNum}" style = " font-size:1.5em;"></a>
                     <button type="button" class="btn btn-default" onclick="location.href='/follow/followers'">
                   	<i class="fas fa-search"></i>
                       </button>
                   </li>
                   
                   <li class="list-group-item">
-                    <b>Following</b> <a class="float-right" th:text="${member.mFollowing}" style = " font-size:1.5em;"></a>
+                    <b>Following</b> <a class="float-right" th:text="${followingNum}" style = " font-size:1.5em;"></a>
                     <button type="button" class="btn btn-default" onclick="location.href='/follow/following'">
                   	<i class="fas fa-search"></i>
                       </button>
