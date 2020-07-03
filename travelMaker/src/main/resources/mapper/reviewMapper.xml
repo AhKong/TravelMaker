@@ -89,5 +89,16 @@
 		ON  
 		 	m.m_id = r.m_id AND r.res_travel_type = t.trip_type_num 
 		WHERE  r.res_num =#{resNum}
-	</select>                                                                                                                     
+	</select>     
+	<select id="getGradeCnt"  parameterType="String" resultType="ReviewGrade">
+		SELECT 
+			r.res_review_grade as grade,
+			count(*) as gradeCnt
+		FROM 
+			tb_res_review AS r
+		WHERE 
+			r.res_num ='res_'
+		GROUP BY  
+			r.res_review_grade
+	</select>                                                                                                                
 </mapper>

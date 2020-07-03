@@ -13,6 +13,7 @@ public interface ReviewMapper {
 	public int addResReview(ResReview resReview);
 	public int isWritedReview(String mId, String resNum);
 	public List<ResReview> resReviewList(String resNum);
+	public List<Integer> getGradeCnt(String resNum);
 	
 
 }
