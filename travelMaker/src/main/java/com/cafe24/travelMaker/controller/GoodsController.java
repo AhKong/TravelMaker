@@ -121,6 +121,7 @@ public class GoodsController{
 				goodsService.goodsBuy(goods);
 				goodsService.updateGoodsAmount(goods);
 				pointService.updatePointFinal(goods);
+				pointService.pointUseAdmin(goods);
 				return "redirect:/goods/buyGoods";
 	}
 	@GetMapping("/GoodsBuyDelete")
