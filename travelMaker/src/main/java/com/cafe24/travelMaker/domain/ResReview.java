@@ -109,6 +109,4 @@ public class ResReview {
 				+ ", resVisitDate=" + resVisitDate + ", tripType=" + tripType + ", isLiked=" + isLiked + "]";
 	}
 
-	
-
 }

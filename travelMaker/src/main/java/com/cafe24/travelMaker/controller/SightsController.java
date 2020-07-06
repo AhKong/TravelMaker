@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.domain.Sights;
 import com.cafe24.travelMaker.service.MyTripService;
+import com.cafe24.travelMaker.service.ReviewService;
 import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 
@@ -24,6 +25,7 @@ import com.cafe24.travelMaker.service.StorageService;
 public class SightsController{
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;
+	@Autowired private ReviewService reviewService;
 
 	@GetMapping("/sightsList")
 	public String sightsList(Model model,@RequestParam(name="search") String search,HttpSession session) {
@@ -63,6 +65,7 @@ public class SightsController{
 	@GetMapping("/detailSights")
 	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum) {
 		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
+		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		System.out.println(sightsService.getDetailSights(sightsNum));
 		return "/sights/detailSights";
 	}

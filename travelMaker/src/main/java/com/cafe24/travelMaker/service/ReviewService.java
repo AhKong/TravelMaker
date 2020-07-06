@@ -9,6 +9,7 @@ import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.TripType;
 import com.cafe24.travelMaker.mapper.ReviewMapper;
 import com.cafe24.travelMaker.domain.ReviewGrade;
+import com.cafe24.travelMaker.domain.SightsReview;
 
 @Service
 public class ReviewService {
@@ -27,12 +28,10 @@ public class ReviewService {
 	}
 	
 	public List<ResReview> resReviewList(String resNum,String mId){
-	
 		List<ResReview> reviewList  =  reviewMapper.resReviewList(resNum);
-		System.out.println(mId+"<000zjzdfkhk");
 		for(int i=0; i<reviewList.size();i++) {
 			//해당 리뷰에 좋아요 하지 않은 경우 
-			if(isLiked(mId,reviewList.get(i).getResReviewNum())==0) {
+			if(isLikedResReview(mId,reviewList.get(i).getResReviewNum())==0) {
 				reviewList.get(i).setLiked(false);
 			} else {
 				reviewList.get(i).setLiked(true);
@@ -41,12 +40,16 @@ public class ReviewService {
 		return reviewList;
 	}
 	
-	public int isLiked(String mId, String reviewNum) {
-		return reviewMapper.isLiked(mId, reviewNum);
+	public int isLikedResReview(String mId, String reviewNum) {
+		return reviewMapper.isLikedResReview(mId, reviewNum);
 	}
 	
-	public List<ReviewGrade> getGradeCnt(String resNum){
-		return reviewMapper.getGradeCnt(resNum);
+	public int addSightsReview(SightsReview sightsReview) {
+		return reviewMapper.addSightsReview(sightsReview);
 	}
+	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
+		return reviewMapper.getResReviewGradeCnt(resNum);
+	}
+	
 	
 }
