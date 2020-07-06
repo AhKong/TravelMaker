@@ -170,7 +170,13 @@
 						<button type="button" id="reveiwBtn" class="btn btn-outline-danger btn-lg float-right" >리뷰작성</button>
 						<hr>
 					</div>
+					<th:block th:unless="${!#lists.isEmpty(reviewList)}">
 					<div class="row">
+					   <h3>등록된 리뷰가 없네요 ! 첫 리뷰를 등록해주세요 </h3>
+					</div>
+					</th:block>
+					<th:block th:if="${!#lists.isEmpty(reviewList)}">
+					<div class="row" >
 					<div class="chart col-12 col-sm-4">
 						<h4 style="margin-left: 7px">관광지 평점</h4>
 						<canvas id="donutChart"style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
@@ -271,6 +277,8 @@
                			</div>
 					</div>
 				 </th:block>					
+					</th:block>
+					
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
 				<div class="map_wrap">
