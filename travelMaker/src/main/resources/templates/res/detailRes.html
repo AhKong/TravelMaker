@@ -265,14 +265,12 @@
           			     		</span>
           			     	</div>
           			     	<div class="card-body">
-          			     		 <a href="#" style="color:#01579B"  th:if="${rl.isLiked == true}" class="likeBtn" data-info="like"><i  class="far fa-thumbs-up fa-2x"></i> 도움이되요</a>
-          			     		 <a href="#" style="color:#01579B"  th:unless="${rl.isLiked == true}"class="unLikeBtn"><i class="fa fa-thumbs-up fa-2x"></i> 도움이되요</a>
+          			     		 <a style="color:#01579B"  class="likeBtn"  th:resReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+          			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
           			     	</div>
                			</div>
 					</div>
-					
-					</th:block>
-						
+				 </th:block>					
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
 				<div class="map_wrap">
@@ -325,6 +323,39 @@
 		var mId = /*[[${session.SID}]]*/;
 		var isWrited =/*[[${isWrited}]]*/
 	/*]]>*/
+
+	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
+		if(mId == null || mId == ''){
+			alert('로그인 후 이용가능한 서비스 입니다');
+			location.href='/member/login';
+			return false;
+		}
+		
+		console.log($(this).children().first().html())
+		console.log($(this).attr('data-info')) // 좋아요 할 것인지 or 좋아요를 취소할 것인지 
+		var dataInfo = $(this).attr('data-info');
+		var url = null;
+		var reviewNum = $(this).attr('resReviewNum')
+		console.log(reviewNum);
+	
+		if(dataInfo =='like'){
+			url = 'likeResReview';
+			$(this).attr('data-info','unlike');
+			$(this).children().first().removeClass('far fa-thumbs-up fa-2x').addClass('fa fa-thumbs-up fa-2x')
+		
+		} else {
+			url = 'unLikeResReview';
+			$(this).attr('data-info','like');
+			$(this).children().first().removeClass('fa fa-thumbs-up fa-2x').addClass('far fa-thumbs-up fa-2x')
+		}
+		
+		commonAjax('/ajax/'+url,
+				{"mId" :mId, "reviewNum" :reviewNum},
+				function(data){
+						console.log(data);
+				},'Get');	
+
+	})
 	
 	$('#reveiwBtn').click(function(){
 		console.log(mId);

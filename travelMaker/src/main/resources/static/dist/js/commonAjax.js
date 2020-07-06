@@ -3,6 +3,7 @@
  */
 
 var commonAjax = function(url, data, fn, methodType ){
+	
 	if(methodType == undefined){
 		methodType = 'POST';
 	}
