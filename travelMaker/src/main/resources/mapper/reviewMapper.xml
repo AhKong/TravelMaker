@@ -97,7 +97,7 @@
 		FROM 
 			tb_res_review AS r
 		WHERE 
-			r.res_num ='res_'
+			r.res_num =#{resNum}
 		GROUP BY  
 			r.res_review_grade
 	</select>    

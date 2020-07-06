@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.TripType;
 import com.cafe24.travelMaker.mapper.ReviewMapper;
+import com.cafe24.travelMaker.domain.ReviewGrade;
 
 @Service
 public class ReviewService {
@@ -43,5 +44,9 @@ public class ReviewService {
 	public int isLiked(String mId, String reviewNum) {
 		return reviewMapper.isLiked(mId, reviewNum);
 	}
-
+	
+	public List<ReviewGrade> getGradeCnt(String resNum){
+		return reviewMapper.getGradeCnt(resNum);
+	}
+	
 }

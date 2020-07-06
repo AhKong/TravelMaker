@@ -321,9 +321,10 @@
 		var lat = /*[[${res.resLat}]]*/;
 		var lng = /*[[${res.resLong}]]*/;	
 		var mId = /*[[${session.SID}]]*/;
-		var isWrited =/*[[${isWrited}]]*/
+		var isWrited =/*[[${isWrited}]]*/;
+		var gradeArr =/*[[${reviewCnt}]]*/
 	/*]]>*/
-
+	console.log(gradeArr)
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 		if(mId == null || mId == ''){
 			alert('로그인 후 이용가능한 서비스 입니다');
@@ -374,12 +375,16 @@
 	console.log(2);
 		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
 		var donutData = {
-			labels : [ '5점', '4점', '3점', '2점', '1점', ],
+			labels : [ ],
 			datasets : [ {
-				data : [ 700, 500, 400, 600, 300 ],
+				data : [],
 				backgroundColor : [ '#f56954', '#00a65a', '#f39c12',
 						'#00c0ef', '#3c8dbc' ],
 			} ]
+		}
+		for(var i = 0 ; i< gradeArr.length;i++){
+			donutData.labels.push(gradeArr[i].grade+'점');
+			donutData.datasets[0].data.push(gradeArr[i].gradeCnt)
 		}
 		var donutOptions = {
 			maintainAspectRatio : false,
@@ -393,7 +398,6 @@
 			options : donutOptions
 		})
 		
-	
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');
