@@ -123,7 +123,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <!-- text input -->
-                      <input type="hidden" name="mId" th:value="${session.SID}">
+                      <input type="hidden" name="member.mId" th:value="${session.SID}">
                       <input type="hidden" name="resNum" th:value="${res.resNum}">
                       <div class="form-group">
                         <label>Title</label>
@@ -165,7 +165,7 @@
                        <th:block  th:each="l: ${tripType}">
 					  	 <div class="form-check">
 					  	   <label class="form-check-label">
-                          	<input class="form-check-input" type="radio" name="resTravelType" th:value="${l.tripTypeNum}">   
+                          	<input class="form-check-input" type="radio" name="tripType.tripTypeNum" th:value="${l.tripTypeNum}">   
                           	<span th:text ="${l.tripTypeName}"></span>
                       	  </label>
                         </div>

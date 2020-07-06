@@ -55,13 +55,13 @@
 				res_review_visit_date
 		)VALUES (
 				#{resReviewNum},
-				#{mId},
+				#{member.mId},
 				#{resNum},
 				#{resReviewTitle},
 				#{resReviewContents},
 				#{resReviewGrade},
 				#{resReviewPhoto},
-				#{resTravelType},
+				#{tripType.tripTypeNum},
 				#{resVisitDate}
 		)
      </insert>  
