@@ -10,5 +10,5 @@ import com.cafe24.travelMaker.domain.MyTrip;
 @Mapper
 public interface MyTripMapper {
 
-	public List<MyTrip> selectMyTrip();
+	public List<MyTrip> selectMyTrip(String mId);
 }

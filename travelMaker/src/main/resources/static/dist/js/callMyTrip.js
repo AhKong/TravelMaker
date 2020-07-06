@@ -17,7 +17,6 @@
 			});
 
 			request.done(function(data) {
-				alert(JSON.stringify(data));
 				console.log(data.result);
 				var html ='';
 				var myTripList = data.result.length
@@ -33,10 +32,7 @@
 				    html+= '<p style="text-align: center"><input type="radio" name="myTrip" data-tPhoto="'+listInfo[i].tPhoto+'" data-tNum="'+listInfo[i].tNum+'" data-sightsNum="'+listInfo[i].sightsNum+'" id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
 				    html+= '</div> </div>'
 				}
-
-				html+= '<div onclick="location.href='+'/myTrip/editTrip'+'"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span><a><strong><i class="fas fa-plus"></i> 내여행 만들기</strong></a></div>'
 			
-				console.log(html)
 				var myTripList = $('#myTripList');
 				myTripList.html(html);
 				$("#scrapTripModal").modal();
@@ -53,25 +49,46 @@
 
 		$(document).on('click','#scrapBtn',function() {
 
+			if($(':radio[name="myTrip"]:checked').length<1){
+				alert('스크랩할 여행을 선택해주세요');
+				return false;
+			}	
+			
+			
 			console.log(sightsNum)
 			
 			var radio = $(this).parents('.modal-content').find('input[name="myTrip"]:checked');
 			var tNum = radio.attr('data-tNum');
+			var indexNum= $('#scrapModal').attr('data-indexnum');
+			console.log(indexNum+'<-----');
 			
-			console.log(tNum+"icon");
+/*			var dIcon = $('.scrapDeleteIcon').index();
+			var sIcon = $('.scrapSelectIcon').index();
 			
-		/*	var j = 0;
-			for(j=0; j < 5; j++){
-				j += j
-			}*/
 			
-			if($('#scrapInsertIcon3').css('display') != 'none'){
-				$('#scrapInsertIcon3').hide();
-				$('#scrapDeleteIcon3').show();
-			}else if($('#scrapDeleteIcon3').css('display') != 'none'){
-				$('#scrapInsertIcon3').show();
-				$('#scrapDeleteIcon3').hide();
+			//var indexD = $('.scrapDeleteIcon').index(this);
+			   $('.scrapDeleteIcon').eq(indexNum);
+			   
+			//var indexS = $('.scrapSelectIcon').index(this);
+			   $('.scrapSelectIcon').eq(indexNum);
+			   
+			  var j = $("#scrapModal").index(this); 
+			  console.log(j);
+			  console.log($('#scrapModal').eq(1))
+			  alert($('#scrapModal').index(this));
+*/
+		   
+		/*	
+			if($('.scrapInsertIcon4').css('display') != 'none'){
+				$('.scrapInsertIcon4').hide();
+				$('.scrapDeleteIcon4').show();
+			}else if($('.scrapDeleteIcon4').css('display') != 'none'){
+				$('.scrapInsertIcon4').show();
+				$('.scrapDeleteIcon4').hide();
 			}
+			*/
+			
+			
 			 var request = $.ajax({
 				  url: "/ajax/SightsScrap", 
 				  method: "POST",

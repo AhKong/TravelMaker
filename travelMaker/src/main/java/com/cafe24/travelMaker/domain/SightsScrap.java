@@ -7,6 +7,8 @@ public class SightsScrap {
 	private String sightsNum;
 	private String tNum;
 	private String sData;
+	private boolean isScrap = false;
+
 	public String getSsNum() {
 		return ssNum;
 	}
@@ -38,11 +40,18 @@ public class SightsScrap {
 		this.sData = sData;
 	}
 	
+	public boolean isScrap() {
+		return isScrap;
+	}
+	public void setScrap(boolean isScrap) {
+		this.isScrap = isScrap;
+	}
 	@Override
 	public String toString() {
-		return "ScrapSights [ssNum=" + ssNum + ", mId=" + mId + ", sightsNum=" + sightsNum + ", tNum=" + tNum
-				+ ", sData=" + sData + ", sPhoto=" + "]";
+		return "SightsScrap [ssNum=" + ssNum + ", mId=" + mId + ", sightsNum=" + sightsNum + ", tNum=" + tNum
+				+ ", sData=" + sData + ", isScrap=" + isScrap + "]";
 	}
+	
 
 
 }
