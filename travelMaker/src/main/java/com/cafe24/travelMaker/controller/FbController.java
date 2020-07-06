@@ -84,46 +84,30 @@ public class FbController {
 		return "feedback/feedbackList";
 	}
 	
-	//관리자 -> 관광명소 피드백 수용 버튼
+	//관리자 -> 관광명소 피드백 수용 -> 관광명소 수정페이지로 이동
 	@GetMapping("/acceptFbSights")
 	public String acceptFbSights(Model model, @RequestParam(name="fbSightsCheck", required=false) String fbSightsCheck,
-	  										  @RequestParam(name="fbSightsNum", required=false) String fbSightsNum) {
+	  										  @RequestParam(name="fbSightsNum", required=false) String fbSightsNum,
+	  										  @RequestParam(name="sightsNum", required=false) String sightsNum) {
 		System.out.println("(Get) acceptFbSights FbController 도착");
 		System.out.println(fbSightsCheck+" <- fbSightsCheck / "+fbSightsNum+" <- fbSightsNum");
 		int result = feedbackService.acceptFbSights(fbSightsCheck, fbSightsNum);
-				
-		return "redirect:/feedback/feedbackList";
-	}
-	
-	//관리자 -> 음식점 피드백 수용 버튼
-	@GetMapping("/acceptFbRes")
-	public String acceptFbRes(Model model, @RequestParam(name="fbResCheck", required=false) String fbResCheck,
-			@RequestParam(name="fbResNum", required=false) String fbResNum) {
-		System.out.println("(Get) acceptFbRes FbController 도착");
-		System.out.println(fbResCheck+" <- fbResCheck / "+fbResNum+" <- fbResNum");
-		int result = feedbackService.acceptFbRes(fbResCheck, fbResNum);
-		
-		return "redirect:/feedback/feedbackList";
-	}
-	
-	//관리자 -> 피드백 하러가기 버튼 -> 관광명소 수정페이지로 이동
-	@GetMapping("/updateSights")
-	public String updateSights(Model model, @RequestParam(name="sightsNum", required=false) String sightsNum,
-											@RequestParam(name="fbSightsNum", required=false) String fbSightsNum) {
-		System.out.println("(Get) updateSights FbController 도착");
 		System.out.println(sightsNum+" <- sightsNum");
 		System.out.println(fbSightsNum+" <- fbSightsNum");
 		model.addAttribute("sightsNum", sightsNum);
 		model.addAttribute("fbSightsNum", fbSightsNum);
-		
+				
 		return "/sights/updateSights";
 	}
 	
-	//관리자 -> 피드백 하러가기 버튼 -> 관광명소 수정페이지로 이동
-	@GetMapping("/updateRes")
-	public String updateRes(Model model, @RequestParam(name="resNum", required=false) String resNum,
-			@RequestParam(name="fbResNum", required=false) String fbResNum) {
-		System.out.println("(Get) updateRes FbController 도착");
+	//관리자 -> 음식점 피드백 수용 -> 음식점 수정페이지로 이동
+	@GetMapping("/acceptFbRes")
+	public String acceptFbRes(Model model, @RequestParam(name="fbResCheck", required=false) String fbResCheck,
+										   @RequestParam(name="fbResNum", required=false) String fbResNum,
+										   @RequestParam(name="resNum", required=false) String resNum) {
+		System.out.println("(Get) acceptFbRes FbController 도착");
+		System.out.println(fbResCheck+" <- fbResCheck / "+fbResNum+" <- fbResNum");
+		int result = feedbackService.acceptFbRes(fbResCheck, fbResNum);
 		System.out.println(resNum+" <- resNum");
 		System.out.println(fbResNum+" <- fbResNum");
 		model.addAttribute("resNum", resNum);
@@ -132,5 +116,28 @@ public class FbController {
 		return "/res/updateRes";
 	}
 	
+	//관리자 -> 관광명소 피드백 무시
+	@GetMapping("/ignoreFbSights")
+	public String ignoreFbSights(Model model, @RequestParam(name="fbSightsCheck", required=false) String fbSightsCheck,
+	  										  @RequestParam(name="fbSightsNum", required=false) String fbSightsNum,
+	  										  @RequestParam(name="sightsNum", required=false) String sightsNum) {
+		System.out.println("(Get) ignoreFbSights FbController 도착");
+		System.out.println(fbSightsCheck+" <- fbSightsCheck / "+fbSightsNum+" <- fbSightsNum");
+		int result = feedbackService.acceptFbSights(fbSightsCheck, fbSightsNum);
+				
+		return "redirect:/feedback/feedbackList";
+	}
+
+	//관리자 -> 음식점 피드백 무시
+	@GetMapping("/ignoreFbRes")
+	public String ignoreFbRes(Model model, @RequestParam(name="fbResCheck", required=false) String fbResCheck,
+										   @RequestParam(name="fbResNum", required=false) String fbResNum,
+										   @RequestParam(name="resNum", required=false) String resNum) {
+		System.out.println("(Get) ignoreFbRes FbController 도착");
+		System.out.println(fbResCheck+" <- fbResCheck / "+fbResNum+" <- fbResNum");
+		int result = feedbackService.acceptFbRes(fbResCheck, fbResNum);
+		
+		return "redirect:/feedback/feedbackList";
+	}
 	
 }

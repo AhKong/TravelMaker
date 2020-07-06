@@ -102,6 +102,7 @@
 			fb_res_num = #{fbResNum};
 	</update>
 	
+	
 	<update id="acceptFbSights" parameterType="String">
 		UPDATE tb_fb_sights
 		SET

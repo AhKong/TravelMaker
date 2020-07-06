@@ -61,7 +61,6 @@
 		                    <th>피드백내용</th>
 		                    <th>등록아이디</th>
 		                    <th>수용여부</th>
-		                    <th>피드백</th>
 		                  </tr>
 		                </thead>
 		                <tbody>
@@ -76,25 +75,20 @@
 		                      <th>[[${fs.fbSightsContents}]]</th>
 		                      <th>[[${fs.member.mId}]]</th>
 		                      <th th:if="${fs.fbSightsCheck} eq 'D' ">
-		                      	<a type="submit" class="btn btn-A btn-outline-primary"
-		                      		th:href="@{/feedback/acceptFbSights(fbSightsCheck='A', fbSightsNum=${fs.fbSightsNum})}">수용</a>
+		                      	<a type="submit" class="btn btn-A btn-outline-success"
+		                      		th:href="@{/feedback/acceptFbSights(fbSightsCheck='A', fbSightsNum=${fs.fbSightsNum}, sightsNum=${fs.sights.sightsNum})}">수용</a>
 		                    	<a type="button" class="btn btn-I btn-outline-warning" 
-		                    		th:href="@{/feedback/acceptFbSights(fbSightsCheck='I', fbSightsNum=${fs.fbSightsNum})}">무시</a>
+		                    		th:href="@{/feedback/ignoreFbSights(fbSightsCheck='I', fbSightsNum=${fs.fbSightsNum})}">무시</a>
 		                      </th>
 		                      <th th:if="${fs.fbSightsCheck} eq 'A' ">
-		                      	<button type="button" class="btn btn-A btn-primary">수용</button>
+		                      	<button type="button" class="btn btn-A btn-success">수용</button>
 		                    	<a type="button" class="btn btn-I btn-outline-warning" 
-		                    		th:href="@{/feedback/acceptFbSights(fbSightsCheck='I', fbSightsNum=${fs.fbSightsNum})}">무시</a>
+		                    		th:href="@{/feedback/ignoreFbSights(fbSightsCheck='I', fbSightsNum=${fs.fbSightsNum})}">무시</a>
 		                      </th>
 		                      <th th:if="${fs.fbSightsCheck} eq 'I' ">
-		                        <a type="button" class="btn btn-A btn-outline-primary"
-		                       		th:href="@{/feedback/acceptFbSights(fbSightsCheck='A', fbSightsNum=${fs.fbSightsNum})}">수용</a>
+		                        <a type="button" class="btn btn-A btn-outline-success"
+		                       		th:href="@{/feedback/acceptFbSights(fbSightsCheck='A', fbSightsNum=${fs.fbSightsNum}, sightsNum=${fs.sights.sightsNum})}">수용</a>
 		                    	<button type="button" class="btn btn-I btn-warning">무시</button>
-		                      </th>
-		                      <th>
-		                      	<a type="submint" class="btn btn-success" id="btnSightsfb"
-		                      		th:href="@{/feedback/updateSights(fbSightsNum=${fs.fbSightsNum}, sightsNum=${fs.sights.sightsNum})}">피드백하러가기
-		                      	</a>
 		                      </th>
 		                    </tr>
 		                  </th:block>
@@ -116,7 +110,6 @@
 		                    <th>피드백내용</th>
 		                    <th>등록아이디</th>
 		                    <th>수용여부</th>
-		                    <th>피드백</th>
 			              </tr>
 			            </thead>
 			            <tbody>
@@ -132,27 +125,22 @@
 		                      <th>[[${fr.member.mId}]]</th>
 		                      <div id="fbResCheck">
 		                      <th th:if="${fr.fbResCheck} eq 'D' ">
-		                      	<a type="submit" class="btn btn-A btn-outline-primary"
-		                      		th:href="@{/feedback/acceptFbRes(fbResCheck='A', fbResNum=${fr.fbResNum})}">수용</a>
+		                      	<a type="submit" class="btn btn-A btn-outline-success"
+		                      		th:href="@{/feedback/acceptFbRes(fbResCheck='A', fbResNum=${fr.fbResNum}, resNum=${fr.res.resNum})}">수용</a>
 		                    	<a type="button" class="btn btn-I btn-outline-warning" 
-		                    		th:href="@{/feedback/acceptFbRes(fbResCheck='I', fbResNum=${fr.fbResNum})}">무시</a>
+		                    		th:href="@{/feedback/ignoreFbRes(fbResCheck='I', fbResNum=${fr.fbResNum})}">무시</a>
 		                      </th>
 		                      <th th:if="${fr.fbResCheck} eq 'A' ">
-		                      	<button type="button" class="btn btn-A btn-primary">수용</button>
+		                      	<button type="button" class="btn btn-A btn-success">수용</button>
 		                    	<a type="button" class="btn btn-I btn-outline-warning" 
-		                    		th:href="@{/feedback/acceptFbRes(fbResCheck='I', fbResNum=${fr.fbResNum})}">무시</a>
+		                    		th:href="@{/feedback/ignoreFbRes(fbResCheck='I', fbResNum=${fr.fbResNum})}">무시</a>
 		                      </th>
 		                      <th th:if="${fr.fbResCheck} eq 'I' ">
-		                        <a type="button" class="btn btn-A btn-outline-primary"
-		                       		th:href="@{/feedback/acceptFbRes(fbResCheck='A', fbResNum=${fr.fbResNum})}">수용</a>
+		                        <a type="button" class="btn btn-A btn-outline-success"
+		                       		th:href="@{/feedback/acceptFbRes(fbResCheck='A', fbResNum=${fr.fbResNum}, resNum=${fr.res.resNum})}">수용</a>
 		                    	<button type="button" class="btn btn-I btn-warning">무시</button>
 		                      </th>
 		                      </div>
-		                      <th>
-		                      	<a type="submint" class="btn btn-success" id="btnResfb"
-		                      		th:href="@{/feedback/updateRes(fbResNum=${fr.fbResNum}, resNum=${fr.res.resNum})}">피드백하러가기
-		                      	</a>
-		                      </th>
 		                    </tr>
 		                  </th:block>
 		                </tbody>

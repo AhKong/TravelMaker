@@ -63,20 +63,20 @@ public class FeedbackService {
 		return fbResList;
 	}
 	
-	//관리자 -> 관광명소 피드백 수용 버튼
+	//관리자 -> 관광명소 피드백 수용/무시 버튼
 	public int acceptFbSights(String fbSightsCheck, String fbSightsNum) {
 		System.out.println("acceptFbSights FeedbackService 도착");
 		int result = feedbackMapper.acceptFbSights(fbSightsCheck, fbSightsNum);
-		System.out.println(result+" <- 1이면 피드백 수용/무시 변경 서비스단 완료!");
+		System.out.println(result+" <- 1이면 관광명소 피드백 수용/무시 변경 서비스단 완료!");
 		
 		return result;
 	}
 	
-	//관리자 -> 음식점 피드백 수용 버튼
+	//관리자 -> 음식점 피드백 수용/무시 버튼
 	public int acceptFbRes(String fbResCheck, String fbResNum) {
 		System.out.println("acceptFbRes FeedbackService 도착");
 		int result = feedbackMapper.acceptFbRes(fbResCheck, fbResNum);
-		System.out.println(result+" <- 1이면 피드백 수용/무시 변경 서비스단 완료!");
+		System.out.println(result+" <- 1이면 음식점 피드백 수용/무시 변경 서비스단 완료!");
 		
 		return result;
 	}
