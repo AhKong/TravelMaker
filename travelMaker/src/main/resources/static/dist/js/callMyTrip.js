@@ -32,8 +32,6 @@
 				    html+= '<p style="text-align: center"><input type="radio" name="myTrip" data-tPhoto="'+listInfo[i].tPhoto+'" data-tNum="'+listInfo[i].tNum+'" data-sightsNum="'+listInfo[i].sightsNum+'" id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
 				    html+= '</div> </div>'
 				}
-
-				html+= '<div onclick="location.href='+'/myTrip/editTrip'+'"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span><a><strong><i class="fas fa-plus"></i> 내여행 만들기</strong></a></div>'
 			
 				var myTripList = $('#myTripList');
 				myTripList.html(html);
@@ -51,15 +49,22 @@
 
 		$(document).on('click','#scrapBtn',function() {
 
+			if($(':radio[name="myTrip"]:checked').length<1){
+				alert('스크랩할 여행을 선택해주세요');
+				return false;
+			}	
+			
+			
 			console.log(sightsNum)
 			
 			var radio = $(this).parents('.modal-content').find('input[name="myTrip"]:checked');
 			var tNum = radio.attr('data-tNum');
 			var indexNum= $('#scrapModal').attr('data-indexnum');
 			console.log(indexNum+'<-----');
-			/*var dIcon = $('.scrapDeleteIcon').index();
+			
+/*			var dIcon = $('.scrapDeleteIcon').index();
 			var sIcon = $('.scrapSelectIcon').index();
-			*/
+			
 			
 			//var indexD = $('.scrapDeleteIcon').index(this);
 			   $('.scrapDeleteIcon').eq(indexNum);
@@ -71,9 +76,9 @@
 			  console.log(j);
 			  console.log($('#scrapModal').eq(1))
 			  alert($('#scrapModal').index(this));
-
+*/
 		   
-			
+		/*	
 			if($('.scrapInsertIcon4').css('display') != 'none'){
 				$('.scrapInsertIcon4').hide();
 				$('.scrapDeleteIcon4').show();
@@ -81,7 +86,7 @@
 				$('.scrapInsertIcon4').show();
 				$('.scrapDeleteIcon4').hide();
 			}
-			
+			*/
 			
 			
 			 var request = $.ajax({

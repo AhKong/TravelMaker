@@ -115,21 +115,8 @@ FROM
 
 <select id="resGrade" resultType="int">
 SELECT
-ROUND((hap.total/(cnt*5)), 1)
+ROUND(AVG(res_review_grade),2)
 FROM
-(SELECT
-	(
-	 SUM(res_review_taste_grade)
-	+SUM(res_review_grade_hygiene)
-	+SUM(res_review_grade_mood)
-	+SUM(res_review_grade_kind)
-	+SUM(res_review_grade_cheap)
-	) AS total
-		,(SELECT 
-			COUNT(1)
-		From 
-			tb_res_review) AS cnt
-	FROM
-		tb_res_review) AS hap
+tb_res_review;
 </select>
 </mapper>
