@@ -69,8 +69,9 @@ public class ResController {
 		model.addAttribute("res",resService.getDetailRes(resNum));
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		model.addAttribute("isWrited", reviewService.isWritedReview(mId, resNum));
-		model.addAttribute("reviewList",reviewService.resReviewList(resNum));
-		System.out.println(reviewService.resReviewList(resNum) +"<---");
+		model.addAttribute("reviewList",reviewService.resReviewList(resNum,mId));
+		model.addAttribute("reviewCnt",reviewService.getResReviewGradeCnt(resNum));
+		System.out.println(reviewService.resReviewList(resNum,mId) +"<---");
 		return "res/detailRes";
 	}
 	

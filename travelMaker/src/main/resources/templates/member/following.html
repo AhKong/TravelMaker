@@ -33,6 +33,9 @@
 
             <div class="card">
               <!-- /.card-header -->
+              <form id="myForm" method="post" action="/member/myPage">
+              	<input type="hidden" id="memberId" name="memberId"/>
+              </form>
               <div class="card-body">
                 <table id="example1" class="table table-striped projects">
          
@@ -72,7 +75,7 @@
                           <span class="badge badge-success">Following</span>
                       </td>
                       <td class="project-actionst">
-                          <a class="btn btn-primary btn-sm" href="#">
+                          <a style="color:white" class="btn btn-primary btn-sm myPageBtn" th:data-memberId="${fl.targetId}">
                               <i class="fas fa-search"></i>
                               View
                           </a>
@@ -127,6 +130,13 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+    
+    $('.myPageBtn').click(function(){
+    	var formObj = $('#myForm');
+    	var memberId = $(this).attr('data-memberId');
+    	$('#memberId').val(memberId);
+    	formObj.submit();
     });
   });
 </script>

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Message;
+import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.service.CertSerivce;
+import com.cafe24.travelMaker.service.LikeService;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.MsgService;
@@ -33,6 +35,7 @@ public class AjaxControllerKAR {
 	@Autowired private MemberService memberService;
 	@Autowired private MsgService msgService;
 	@Autowired private SightsService sightsService;
+	@Autowired private LikeService likeService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -74,8 +77,8 @@ public class AjaxControllerKAR {
 	}
 	
 	@GetMapping("/getSiList")
-
-	public @ResponseBody HashMap<String,List<Si>> getSiList(@RequestParam(name="num") String doNum) {
+	@ResponseBody 
+	public HashMap<String,List<Si>> getSiList(@RequestParam(name="num") String doNum) {
 		System.out.println(doNum+"<----doNum");
 		HashMap <String,List<Si>> result = new HashMap <String,List<Si>>();
 		result.put("siList",sightsService.selectSi(doNum));
@@ -83,5 +86,25 @@ public class AjaxControllerKAR {
 		
 	}
 	
-
+	@GetMapping("/likeResReview")
+	@ResponseBody 
+	public  HashMap<String,String>likeResReview(ReviewLike reviewLike){
+		System.out.println(reviewLike);
+		likeService.likeResReview(reviewLike);
+		HashMap<String,String> result = new HashMap<String,String>();
+		result.put("result", "sucessLike");
+		System.out.println(result);
+		return result;
+	}
+	
+	@GetMapping("/unLikeResReview")
+	@ResponseBody 
+	public  HashMap<String,String>unLikeResReview(ReviewLike reviewLike){
+		System.out.println(reviewLike);
+		likeService.unLikeResReview(reviewLike);
+		HashMap<String,String> result = new HashMap<String,String>();
+		result.put("result", "sucessUnLike");
+		System.out.println(result);
+		return result;
+	}
 }

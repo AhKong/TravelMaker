@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.Follow;
 import com.cafe24.travelMaker.mapper.FollowMapper;
-import com.cafe24.travelMaker.mapper.MemberMapper;
 
 @Service
 public class FollowService {

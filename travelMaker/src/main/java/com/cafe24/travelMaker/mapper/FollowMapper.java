@@ -11,5 +11,4 @@ public interface FollowMapper {
 	public List<Follow> following(String mId);
 	public int followersNum(String mId);
 	public int followingNum(String mId);
-	
 }
