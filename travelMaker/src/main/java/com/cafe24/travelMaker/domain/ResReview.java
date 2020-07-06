@@ -15,6 +15,8 @@ public class ResReview {
 	private String resReveiwUpdateDate;
 	private String resVisitDate;
 	private TripType tripType;
+	private boolean isLiked = false;
+	
 	
 	public String getResReviewNum() {
 		return resReviewNum;
@@ -91,14 +93,22 @@ public class ResReview {
 	public void setResVisitDate(String resVisitDate) {
 		this.resVisitDate = resVisitDate;
 	}
+	
+	public boolean getIsLiked() {
+		return isLiked;
+	}
+	public void setLiked(boolean isLiked) {
+		this.isLiked = isLiked;
+	}
 	@Override
 	public String toString() {
 		return "ResReview [resReviewNum=" + resReviewNum + ", member=" + member + ", resNum=" + resNum
 				+ ", resReviewTitle=" + resReviewTitle + ", resReviewContents=" + resReviewContents
 				+ ", resReviewGrade=" + resReviewGrade + ", file=" + file + ", resReviewPhoto=" + resReviewPhoto
 				+ ", resReveiwRegDate=" + resReveiwRegDate + ", resReveiwUpdateDate=" + resReveiwUpdateDate
-				+ ", resVisitDate=" + resVisitDate + ", tripType=" + tripType + "]";
+				+ ", resVisitDate=" + resVisitDate + ", tripType=" + tripType + ", isLiked=" + isLiked + "]";
 	}
 
+	
 
 }

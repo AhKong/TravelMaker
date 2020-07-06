@@ -15,6 +15,6 @@ public interface ReviewMapper {
 	public int isWritedReview(String mId, String resNum);
 	public List<ResReview> resReviewList(String resNum);
 	public List<ReviewGrade> getGradeCnt(String resNum);
+	public int isLiked(String mId, String reviewNum);
 	
-
 }
