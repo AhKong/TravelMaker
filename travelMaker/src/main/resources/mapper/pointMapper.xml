@@ -19,6 +19,7 @@
  		<result property="savePointRegDate" column="save_point_reg_date" />
  		<association property="goods" javaType="Goods">
  			<result property="goodsCode" column="g_num" />
+ 			<result property="goodsBuyCode" column="g_b_num" />
  			<result property="goodsPhoto" column="g_photo" />
  			<result property="goodsCate" column="g_cate" />
  			<result property="goodsName" column="g_name" />

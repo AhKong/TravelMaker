@@ -33,8 +33,7 @@ public class GoodsController{
 	}
 	@GetMapping("/detailGoods")
 	public String detailGoods(Model model, Goods goods, Point point, @RequestParam(name="gCode",required=false) String gCode, HttpSession session) {
-		
-	
+
 		goods = goodsService.getGoodsInfo(gCode);
 		model.addAttribute("goods", goods);
 	

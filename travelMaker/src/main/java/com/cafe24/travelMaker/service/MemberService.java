@@ -2,9 +2,6 @@ package com.cafe24.travelMaker.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.mapper.MemberMapper;
 
@@ -38,6 +35,10 @@ public class MemberService {
 
 	public Member getMemberInfo(String mId) {
 		return memberMapper.getMemberInfo(mId);
+	}
+	
+	public Member followersPage(String mId) {
+		return memberMapper.followersPage(mId);
 	}
 
 }

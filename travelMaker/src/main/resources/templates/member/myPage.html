@@ -39,34 +39,35 @@
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center" th:text="${session.SID}" style = " font-size:2em;"></h3>
+                <h3 class="profile-username text-center" th:text="${member.mId}" style = " font-size:2em;"></h3>
 
                 <p class="text-muted text-center" th:text="${member.mName}"></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
                     <b>Followers</b> <a class="float-right" th:text="${followersNum}" style = " font-size:1.5em;"></a>
-                    <button type="button" class="btn btn-default" onclick="location.href='/follow/followers'">
+                    <a class="btn btn-default" th:href=@{/follow/followers(followers=${member.mId})}>
                   	<i class="fas fa-search"></i>
-                      </button>
+                      </a>
                   </li>
                   
                   <li class="list-group-item">
                     <b>Following</b> <a class="float-right" th:text="${followingNum}" style = " font-size:1.5em;"></a>
-                    <button type="button" class="btn btn-default" onclick="location.href='/follow/following'">
+                    <a class="btn btn-default" th:href=@{/follow/following(following=${member.mId})}>
                   	<i class="fas fa-search"></i>
-                      </button>
+                     </a>
                   </li>
                   <li class="list-group-item">
                     <b>my point</b> <a class="float-right" style = " font-size:1.5em;" th:text="${member.point.finalPoint}"></a>
-                    <button type="button" class="btn btn-default" onclick="location.href='/point/pointUse'">
+                    <button type="button" class="btn btn-default" onclick="location.href='/point/pointUse'"  th:if="${member.mId eq session.SID}">
                   	<i class="fas fa-search" data-toggle="modal"></i>
                       </button>
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Follow/unFollow</b></a>
-                <a href="#" class="btn btn-primary btn-block"><b>쪽지 보내기</b></a>
+                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>Follow</b></a>
+                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>unFollow</b></a>
+                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>쪽지 보내기</b></a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -126,28 +127,17 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">내 리뷰보기</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/myTrip/tripList">내 여행 계획</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/tripMemo/tripMemo">내 여행 기록</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#goodsBuyList" data-toggle="tab">상품 구매내역</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/msg/receivedMsgList">쪽지 보관함</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/member/updateMember">프로필 수정</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">작성리뷰보기</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/myTrip/tripList"  th:if="${member.mId eq session.SID}">내 여행 계획</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/tripMemo/tripMemo"  th:if="${member.mId eq session.SID}">내 여행 기록</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#goodsBuyList" data-toggle="tab"  th:if="${member.mId eq session.SID}">상품 구매내역</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/msg/receivedMsgList"  th:if="${member.mId eq session.SID}">쪽지 보관함</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/member/updateMember"  th:if="${member.mId eq session.SID}">프로필 수정</a></li>
                   
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-                
-                  <div class="tab-pane" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-                      <h1 align="center" style="color:#819FF7">궁금한 목록을 선택하세요!</h1>
-
-                    </div>
-                    <!-- /.post -->
-                  </div>
-                  <!-- /.tab-pane -->
-                  
                   <div class="active tab-pane" id="timeline">
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
@@ -156,12 +146,13 @@
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
                       <div>
+                     
                         <i class="fas fa-user bg-info"></i>
 
                         <div class="timeline-item">
                           <span class="time"><i class="far fa-clock"></i> 12:05</span>
 
-                          <h3 class="timeline-header"><a href="#">강민수</a>님이 게시글에 리뷰를 남겼습니다.</h3>
+                          <h3 class="timeline-header"><a href="#" th:text="${member.mId}"></a>님이 게시글에 리뷰를 남겼습니다.</h3>
 							<div class="timeline-body">
                             <img src="http://placehold.it/150x100" alt="...">
                             <img src="http://placehold.it/150x100" alt="...">
@@ -178,36 +169,6 @@
                           </div>
                         </div>
                       </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
-
-                       <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                          <h3 class="timeline-header"><a href="#">이승환</a>님의 게시글에 리뷰를 남겼습니다.</h3>
-							<div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                          <div class="timeline-body">
-                            	후..
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm">별점 평균</a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-
-                      </div>
-                      <!-- END timeline item -->
- 
-                     
                       <div>
                         <i class="far fa-clock bg-gray"></i>
                       </div>
@@ -288,7 +249,6 @@
    </div><!-- /.nav-tabs-custom -->
  </div>
  <!-- /.col -->
-</div>
 <!-- /.row -->
 
 </th:block>

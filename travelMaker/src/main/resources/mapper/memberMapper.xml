@@ -59,6 +59,19 @@
 		WHERE
 			m.m_id=#{mId};
 	</select>
+	
+	<select id="followersPage" parameterType ="String" resultMap="memberSelect">
+		SELECT 
+   			m.*, p.point_final_point
+		FROM
+   			tb_member AS m
+		INNER JOIN
+   			tb_point_admin AS p 
+		ON 
+ 			m.m_id = p.m_id
+		WHERE
+			m.m_id=#{mId};
+	</select>
 
 	<select id="findId" parameterType = "Member" resultMap="memberSelect">
 		SELECT

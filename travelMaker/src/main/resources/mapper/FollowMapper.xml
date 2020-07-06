@@ -57,5 +57,4 @@
 			m_id=#{mId};
 	</select>
 	
-	
 </mapper>
