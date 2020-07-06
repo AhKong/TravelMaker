@@ -43,12 +43,16 @@ public class ReviewService {
 	public int isLikedResReview(String mId, String reviewNum) {
 		return reviewMapper.isLikedResReview(mId, reviewNum);
 	}
+	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
+		return reviewMapper.getResReviewGradeCnt(resNum);
+	}
 	
 	public int addSightsReview(SightsReview sightsReview) {
 		return reviewMapper.addSightsReview(sightsReview);
 	}
-	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
-		return reviewMapper.getResReviewGradeCnt(resNum);
+	
+	public List<SightsReview> sightsReviewList(String sightsNum){
+		return reviewMapper.sightsReviewList(sightsNum);
 	}
 	
 	

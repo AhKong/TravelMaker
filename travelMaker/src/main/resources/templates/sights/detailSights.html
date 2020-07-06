@@ -213,34 +213,20 @@
 					</div>
 					<div class="chart col-12 col-sm-4">
 					  <h4>여행자 유형 </h4>
-					  <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose" checked>
-                          <label class="form-check-label">가족여행</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">비지니스</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">커플여행</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">친구와 여행</label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="purpose">
-                          <label class="form-check-label">나 홀로 여행</label>
-                        </div>
-                      </div>
+					  	  <th:block  th:each="l: ${tripType}">
+						  	 <div class="form-check">
+						  	  <label class="form-check-label">
+	                          	<input class="form-check-input" type="radio" name="purpose" th:value="l.tripTypeNum">
+	                          	<span th:text ="${l.tripTypeName}"></span>
+	                          </label>
+	                        </div>
+						  </th:block>
 					</div>
 					<div class="col-12 col-sm-4">
 					  <h4>계절별</h4>
 					  <div class="form-group">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="purpose" checked>
+                          <input class="form-check-input" type="radio" name="purpose">
                           <label class="form-check-label">봄(3월-5월)</label>
                         </div>
                         <div class="form-check">
@@ -260,102 +246,59 @@
                           <label class="form-check-label">나 홀로 여행</label>
                         </div>
                       </div>
-					
 					</div>
 					</div>
 					<hr>
-
+					<th:block th:each ="rl: ${reviewList}">
 					<div class="post">
 						<div class="card">
 							<div class="card-header">
 							   <div class="post">
                					  <div class="user-block">
-               			            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+               						<img class="img-circle img-bordered-sm" th:src="@{/fileupload/{file}(file=${rl.member.mAvatar})}"alt="user image">
                         			<span class="username">
-                               		 <a href="#">민수짱</a>님이 작성하신 리뷰입니다.
+                               		 <a href="#" th:text="${rl.member.mId}"></a>님이 작성하신 리뷰입니다.
                       				 </span>
-                           			 <span class="description">2020-05-29에 작성된 리뷰</span>
-                           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;">
-                           				<a href="#" data-toggle="modal"  data-target="#updateReview">수정</a>/
+                           			 <span class="description" th:text="|${rl.sightsReveiwRegDate}에 작성된 리뷰|">2020-05-29에 작성된 리뷰</span>
+                           			  	<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:if="${rl.member.mId eq session.SID}">
+                           				<a href="#" data-toggle="modal"  data-target="#updateResReview">수정</a>/
                            				<a class="delReview">삭제</a>
+                           			</span>
+                           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
+                           				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
                            			</span>
                         		 </div>
                   			  </div>
           			     	</div>
           			     	<div class="card-footer">
-          			     		<i class="fas fa-star" style="color:green"></i>
-          			     		<i class="fas fa-star" style="color:green"></i>
-          			     		<i class="fas fa-star" style="color:green"></i> <br>
-          			     		<span class="reveiwTitle">넘나 활기차고 살기좋은 내 인생</span>
+          			     	<th:block  th:each="num: ${#numbers.sequence(1,rl.sightsReviewGrade)}">
+          			     		<i class="fas fa-star" style="color:green" ></i>
+          			     	</th:block> <br>
+          			     		<span class="reveiwTitle" th:text="${rl.sightsReviewTitle}"></span>
           			     		<hr>
-          			     		<span class="reveiwContents">
-          			     			정말 배고프다,,,너무나도 재미있는 코딩 ^.^ 넘나 신나는것 ^^;;;;; 리뷰는 길게길게 작성해야 좋지 안그래 ??????????????????
-          			     			근데 정말 할 말 없어,,,,,,,,,,,,할밀이 없어도 너무너무 없어!!!!!이런 제앚ㅇ!!!!그래도 한줄은 넘겨보자는 마음으로 해본다,,,ㅇㅈㅇㅈ
-          			     		</span><br>
+          			     		<span class="reveiwContents" th:text="${rl.sightsReviewContents}"></span><br>
           			     		<div class="row">
                        			 <div class="col-sm-6">
-                        		  <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo" width="300">
+              						 <img class="img-fluid"  th:if ="${rl.sightsReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.sightsReviewPhoto})}" alt="Photo" width="300">
                        			 </div>
                       		  </div>
           			     		<span class="revewiPurpose">
           			     			<i class="fas fa-suitcase-rolling"></i>
-          			     			여행 유형 :<strong>비지니스</strong>
+          			     			여행 유형 :<strong th:text="${rl.tripType.tripTypeName}"></strong>
           			     		</span><br>
           			     		<span class="visitDate">
           			     			<i class="far fa-calendar-check"></i>
-          			     			<strong>2020년 5월</strong>에 다녀감
+          			     		<strong th:text="${rl.sightsVisitDate}"></strong>에 다녀감
           			     		</span>
           			     	</div>
           			     	<div class="card-body">
-          			     		 <a href="#"><i class="far fa-thumbs-up fa-2x"></i> 도움이되요</a>
+          			     		  <a style="color:#01579B"  class="likeBtn"  th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+          			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
           			     	</div>
                			</div>
 					</div>
-					<div class="post">
-						<div class="card">
-							<div class="card-header">
-							   <div class="post">
-               					  <div class="user-block">
-               			            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        			<span class="username">
-                               		 <a href="#">승연이</a>님이 작성하신 리뷰입니다.
-                      				 </span>
-                           			 <span class="description">2020-05-29에 작성된 리뷰</span>
-                           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;">
-                           				<a href="#" data-toggle="modal"  data-target="#reportSightsReview">신고</a>
-                           			</span>
-                        		 </div>
-                  			  </div>
-          			     	</div>
-          			     	<div class="card-footer">
-          			     		<i class="fas fa-star" style="color:green"></i>
-          			     		<i class="fas fa-star" style="color:green"></i>
-          			     		<i class="fas fa-star" style="color:green"></i> <br>
-          			     		<span class="reveiwTitle">넘나 활기차고 살기좋은 내 인생</span>
-          			     		<hr>
-          			     		<span class="reveiwContents">
-          			     			정말 배고프다,,,너무나도 재미있는 코딩 ^.^ 넘나 신나는것 ^^;;;;; 리뷰는 길게길게 작성해야 좋지 안그래 ??????????????????
-          			     			근데 정말 할 말 없어,,,,,,,,,,,,할밀이 없어도 너무너무 없어!!!!!이런 제앚ㅇ!!!!그래도 한줄은 넘겨보자는 마음으로 해본다,,,ㅇㅈㅇㅈ
-          			     		</span><br>
-          			     		<div class="row">
-                       			 <div class="col-sm-6">
-                        		  <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo" width="300">
-                       			 </div>
-                      		  </div>
-          			     		<span class="revewiPurpose">
-          			     			<i class="fas fa-suitcase-rolling"></i>
-          			     			여행 유형 :<strong>비지니스</strong>
-          			     		</span><br>
-          			     		<span class="visitDate">
-          			     			<i class="far fa-calendar-check"></i>
-          			     			<strong>2020년 5월</strong>에 다녀감
-          			     		</span>
-          			     	</div>
-          			     	<div class="card-body">
-          			     		 <a href="#" ><i class="far fa-thumbs-up fa-2x"></i> 도움이되요</a>
-          			     	</div>
-               			</div>
-					</div>		
+					</th:block>
+		
 				</div>
 			</div>
 		</div>

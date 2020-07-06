@@ -66,6 +66,8 @@ public class SightsController{
 	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum) {
 		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
+		model.addAttribute("reviewList",reviewService.sightsReviewList(sightsNum));
+		System.out.println(reviewService.sightsReviewList(sightsNum) +"<zlzlkdj");
 		System.out.println(sightsService.getDetailSights(sightsNum));
 		return "/sights/detailSights";
 	}

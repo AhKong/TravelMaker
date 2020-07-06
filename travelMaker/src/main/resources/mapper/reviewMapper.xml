@@ -29,10 +29,10 @@
 		<result property ="sightsReviewTitle" column ="sights_review_title"/>
 		<result property ="sightsReviewContents" column ="sights_review_contents"/>
 		<result property ="sightsReviewGrade" column ="sights_review_grade"/>
-		<result property ="sightsReviewPhoto" column ="sighst_review_photo"/>
+		<result property ="sightsReviewPhoto" column ="sights_review_photo"/>
 		<result property ="sightsReveiwRegDate" column ="sights_review_reg_date"/>
 		<result property ="sightsReveiwUpdateDate" column ="sights_review_update_date"/>
-		<result property ="sighstVisitDate" column ="sights_review_visit_date"/>
+		<result property ="sightsVisitDate" column ="sights_review_visit_date"/>
 		<association property="tripType" javaType ="TripType">
  			<result property="tripTypeNum" column="trip_type_num"/>
  			<result property="tripTypeName"  column="trip_type_name"/>
@@ -163,7 +163,7 @@
 			)	
 	
 	</insert> 
-	<select id="sightsReviewList" parameterType="String" resultMap="resReviewResultMap">
+	<select id="sightsReviewList" parameterType="String" resultMap="sightsReviewResultMap">
 		SELECT 
 			m.m_avatar,
 			s.*,
@@ -175,7 +175,7 @@
 		INNER JOIN
 			tb_trip_type AS t
 		ON  
-		 	m.m_id = s.m_id AND s.sights_travel_type = s.trip_type_num 
+		 	m.m_id = s.m_id AND s.sights_travel_type = t.trip_type_num 
 		WHERE  s.sights_num =#{sightsNum}
      </select>                                                                                            
 </mapper>
