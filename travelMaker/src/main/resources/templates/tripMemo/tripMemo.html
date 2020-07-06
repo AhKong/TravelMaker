@@ -6,9 +6,28 @@
   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
+	
 <th:block layout:fragment="customTitle">
 	<title> 내여행 기록 페이지 :)) </title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<style>
+		.tripMemo {
+			padding: 20px;
+		}
+		.reg-date {
+			font-size: 13px;
+		}
+		.timeline-body {
+			padding: 5px;
+		}
+		.form-photo {
+			margin: 20px;
+		}
+	</style>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 </th:block>
 <th:block layout:fragment="customContents">
 <div class="wrapper">
@@ -40,99 +59,77 @@
             
               <div class="card-body" style="padding: 30px; margin: 10px;">
                 <div class="tab-content">
-                
+                  
                   <!-- tripMemo 여행기록  start-->
                   <div class="tab-pan" id="tripMemo">
                     <div class="timeline timeline-inverse">
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-danger">
-                          2020-06-12
-                        </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-envelope bg-primary"></i>
-                        <div class="tripMemo timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
-                          <h3 class="timeline-header"><a href="#">전주 전동성당</a> 사람이 너무 많아서 줄서서 사진찍었다 ㅠㅠ</h3>
-                          <div class="timeline-body">
-                       		내여행기록 세부 내용~~~~~~
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-primary btn-sm">더보기</a>
-                            <div class="btn-group">
-						      <button type="button" class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#modal-deleteTripMemo"
-								name="deleteTripMemo" id="deleteTripMemo" value="deleteTripMemo">삭제</button>
-						    </div>	
-							
-					        <!-- Modal deleteTripMemo -->
-						    <div class="modal fade" id="modal-deleteTripMemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-								<div class="modal-content">
-								  <div class="modal-header">
-								    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							      </div>
-								  <div class="modal-body">
-									정말 삭제하시겠습니까? 	<br>
-							      </div>
-								  <div class="modal-footer">
-									<button type="button" class="btn btn-danger btn-sm col-sm-2 float-left" data-dismiss="modal"> 예 </button>
-						 			<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal">아니오</button>
-								  </div>
-								</div>
+                      <th:block th:each=" m : ${memoList}">
+                        <!-- timeline time label -->
+                        <div class="time-label">
+                          <span class="trip-date bg-success">
+                            [[${m.tripMemoTripdate}]]
+                          </span>
+                        </div>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <div>
+                          <i class="fas fa-envelope bg-primary"></i>
+                          <div class="tripMemo timeline-item">
+                            <span class="time" th:if="${m.tripMemoCheck} eq '비공개'">&nbsp;<i class="fas fa-key"></i>&nbsp;&nbsp;비공개</span> 
+                            <span class="time" th:if="${m.tripMemoCheck} eq '공개'">&nbsp;<i class="fas fa-users"></i>&nbsp;&nbsp;공개</span>
+                            <div class="timeline-header">
+                              <h4><a href="#">전주 전동성당</a>[[${m.tripMemoTitle}]]</h4>
+                            </div>
+                            <div class="timeline-body">
+                       		    내여행기록 세부 내용~~~~~~
+                       		  [[${m.tripMemoContents}]]
+		                      <div class="timeline-item">
+		                        <div class="form-photo bg-white">
+		                          <img th:src="@{/fileupload/{tripMemoPhoto}(tripMemoPhoto=${m.tripMemoPhoto})}" alt="tripMemoPhoto" width="150" height="100">
+		                        </div>
+		                      </div>
+		                    </div> 
+                            <div class="timeline-footer">
+                              <a href="#" class="btn btn-primary btn-sm">더보기</a>
+                              <div class="btn-group">
+						        <button type="button" class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#modal-deleteTripMemo"
+								  name="deleteTripMemo" id="deleteTripMemo" value="deleteTripMemo"><i class="far fa-trash-alt"></i>삭제</button>
 						      </div>
-							</div>
-							<!-- End Modal deleteTripMemo -->	
+                       		  <span class="reg-date float-right"><i class="far fa-clock">[[${m.tripMemoRegDate}]]</i></span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-                          <h3 class="timeline-header border-0"><a href="#">전주 한옥마을</a> 완자꼬치에 생맥주 JMT
-                          </h3>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-success">
-                          2020-06-11
-                        </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-                          <h3 class="timeline-header"><a href="#">승연이랑 전주여행</a></h3>
-                          <div class="timeline-bod">
-                            <img src="" alt="" class="">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <div>
-                        <i class="far fa-clock bg-gray"></i>
-                      </div>
+                        <!-- END timeline item -->
+                      
+                        <!-- Modal deleteTripMemo -->
+					    <div class="modal fade" id="modal-deleteTripMemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					      <div class="modal-dialog">
+					        <div class="modal-content">
+						      <div class="modal-header">
+							    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							  </div>
+							  <div class="modal-body">
+							         정말 삭제하시겠습니까? 	<br>
+							  </div>
+						      <div class="modal-footer">
+						  	    <button type="button" class="btn btn-danger btn-sm col-sm-2 float-left" data-dismiss="modal"> 예 </button>
+						   	    <button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal">아니오</button>
+						      </div>
+					        </div>
+				          </div>
+					    </div>
+					    <!-- End Modal deleteTripMemo -->	
+                      </th:block>
                     </div>
                   </div>
+                  
                   <!-- /.tab-pane End tripMemo 여행기록 -->
                   <div class="btn-tipMemo" style="padding: 20px;">
                     <div class="btn-group float-right" >
 					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTripMemo">등록하기</button>
                     </div>
 			      </div>
-                  
+			      
                   <div class="modal fade" id="addTripMemo">
 				    <div class="modal-dialog modal-lg">
 					  <div class="modal-content">
@@ -141,87 +138,88 @@
 						  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						</div>
 						<div class="modal-body" style="padding: 30px;">
-						  <div class="row col-12">
-						    <h5>기억에 남는 여행이 되셨나요? 기록을 남겨 추억을 간직하세요&nbsp;</h5>
+						  <div class="row col-12" style="padding-top:10px; padding-bottom:30px;">
+						    <h5><i class="far fa-smile-wink"></i>&nbsp;기억에 남는 여행이 되셨나요? 기록을 남겨 추억을 간직하세요&nbsp;</h5>
 						  </div>
 					      <div class="modal-form">
-						    <form role="form">
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <input type="text" class="form-control" placeholder="여행 제목을 입력해주세요">
-							      </div>
-							    </div>
-							  </div>
-							  <div class="form-group">
-							    <div class="input-group">
-							      <div class="custom-file col-12">
-							        <input type="file" class="custom-file-input" id="exampleInputFile">
-							        <label class="custom-file-label" for="exampleInputFile">여행사진</label>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <textarea class="form-control" rows="1" placeholder="여행 시작 날짜를 입력해주세요"></textarea>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <textarea class="form-control" rows="1" placeholder="여행 종료 날짜를 입력해주세요"></textarea>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <textarea class="form-control" rows="1" placeholder="날씨를 입력해주세요"></textarea>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <textarea class="form-control" rows="4" placeholder="여행 세부 내용을 기록해주세요"></textarea>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <a class="btn btn-info" href="#">내여행 불러오기</a>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="row">
-							    <div class="col-12">
-							      <div class="form-group">
-							        <div class="form-check col-4" style="margin:15px;">
-							          <input class="form-check-input" type="radio" name="tripMemoCheck" value="openTripMemo" checked>
-							          <label class="form-check-label"><i class="fas fa-lock-open">&nbsp;&nbsp;공개</i></label>
-							        </div>
-							        <div class="form-check col-4" style="margin:15px;">
-							          <input class="form-check-input" type="radio" name="tripMemoCheck" value="notOpenTripMemo">
-							          <label class="form-check-label"><i class="fas fa-lock">&nbsp;&nbsp;비공개</i></label>
+						    <form role="form" action="/tripMemo/addTripMemo" method="post">
+						        <input type="hidden" name="mId" th:value="${session.SID}">
+						  	    <div class="row">
+							      <div class="col-12">
+							        <div class="form-group">
+							          <input type="text" class="form-control" name="tripMemoTitle" placeholder="여행 기록의 제목을 입력해주세요">
 							        </div>
 							      </div>
 							    </div>
-							  </div>
+							    <div class="row">
+							      <div class="col-12">
+							        <div class="form-group">
+							          <input type="date" class="form-control" name="tripMemoTripdate" placeholder="기록하고 싶은 여행의 날짜를 입력해주세요">
+							        </div>
+							      </div>
+							    </div>
+							    <div class="row">
+							      <div class="col-12">
+							        <div class="form-group font-awesome">
+							          <select class="form-control fa" name="tripMemoWeather">
+							        	<option>여행한 날의 날씨는 어땠나요?</option>
+							        	<option value="맑음" class="far fa-sun">맑음</option>
+							        	<option value="구름" class="far fa-caret-down">구름</option>
+							        	<option value="강수" data-icon="<i class='far fa-umbrella'></i>">비</option>
+							        	<option value="fab fa-canadian-maple-leaf">바람</option>
+							          </select>
+							        </div>
+							      </div>
+							    </div>
+							    <div class="row">
+							      <div class="col-12">
+							        <div class="form-group">
+							          <textarea class="form-control" rows="5" name="tripMemoContents" placeholder="추억에 남은 여행을 기록해주세요"></textarea>
+							        </div>
+							      </div>
+							    </div>
+							    <div class="form-group">
+							      <div class="input-group">
+							        <div class="custom-file col-12">
+							          <label class="col-8"><i class="fas fa-camera-retro">&nbsp;기록하고 싶은 여행사진을 한장 올려보세요&nbsp;</i><i class="fas fa-camera-retro"></i></label>
+							          <input type="file" class="form-control col-4 float-right" name="tripMemoPhoto" accept="image/git, image/jpeg, image/png">
+							        </div>
+							      </div>
+							    </div>
+							    <div class="row">
+							      <div class="col-12">
+							        <div class="form-group">
+							          <button class="btn btn-info" name="tripNum">내여행 불러오기</button>
+							        </div>
+							      </div>
+							    </div>
+							    <div class="row">
+							      <div class="col-12">
+							        <div class="form-group">
+							          <div class="form-check col-4" style="margin:15px;">
+							            <input class="form-check-input" type="radio" name="tripMemoCheck" value="공개" checked>
+							            <label class="form-check-label"><i class="fas fa-lock-open">&nbsp;&nbsp;공개</i></label>
+							          </div>
+							          <div class="form-check col-4" style="margin:15px;">
+							            <input class="form-check-input" type="radio" name="tripMemoCheck" value="비공개">
+							            <label class="form-check-label"><i class="fas fa-lock">&nbsp;&nbsp;비공개</i></label>
+							          </div>
+							        </div>
+							      </div>
+							    </div>
+							    <div class="modal-footer justify-content-between">
+							      <button type="button" class="btn btn-default" data-dismiss="modal">등록 취소</button>
+							      <button type="submit" class="btn btn-primary"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+						        </div>
 							</form>
 						  </div>      
-						  <!-- /.modal-body -->
+						  <!-- /.modal-form -->
 						</div>          
-						<div class="modal-footer justify-content-between">
-						  <button type="button" class="btn btn-default" data-dismiss="modal">등록 취소</button>
-						  <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
-					    </div>
 					  </div>
 				    </div>
 			      </div>
 		          <!-- /.modal-addTripMemo -->
+		          
                 </div>
                 <!-- /.tab-pane -->
               </div>
@@ -256,5 +254,8 @@
 <script src="../../dist/js/demo.js"></script>
 <!-- page script -->
 
+</th:block>
+<th:block layout:fragment="customFooterScript">
+ <script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
 </th:block>
 </html>
