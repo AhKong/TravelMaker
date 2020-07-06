@@ -15,6 +15,8 @@ import com.cafe24.travelMaker.mapper.SightsMapper;
 public class SightsService {
 	
 	@Autowired private SightsMapper sightsMapper;
+
+	
 	public List<SightsCate> selectSightsCate(){
 		return sightsMapper.selectSightsCate();
 	};
@@ -37,4 +39,5 @@ public class SightsService {
 	public Sights getDetailSights(String sightsNum) {
 		return sightsMapper.getDetailSights(sightsNum);
 	}
+
 }

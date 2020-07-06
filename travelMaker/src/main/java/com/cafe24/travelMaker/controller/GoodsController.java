@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.service.GoodsService;
-import com.cafe24.travelMaker.service.PointSerivce;
+import com.cafe24.travelMaker.service.PointService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
 @RequestMapping("/goods")
 public class GoodsController{
 	
-	@Autowired private PointSerivce pointService;
+	@Autowired private PointService pointService;
 	@Autowired private GoodsService goodsService;
 	@Autowired private StorageService storageService;
 
@@ -33,8 +33,7 @@ public class GoodsController{
 	}
 	@GetMapping("/detailGoods")
 	public String detailGoods(Model model, Goods goods, Point point, @RequestParam(name="gCode",required=false) String gCode, HttpSession session) {
-		
-	
+
 		goods = goodsService.getGoodsInfo(gCode);
 		model.addAttribute("goods", goods);
 	
@@ -121,6 +120,7 @@ public class GoodsController{
 				goodsService.goodsBuy(goods);
 				goodsService.updateGoodsAmount(goods);
 				pointService.updatePointFinal(goods);
+				pointService.pointUseAdmin(goods);
 				return "redirect:/goods/buyGoods";
 	}
 	@GetMapping("/GoodsBuyDelete")

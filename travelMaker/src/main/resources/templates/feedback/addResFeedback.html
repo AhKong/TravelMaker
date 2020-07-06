@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+  <title>피드백 등록</title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<style>
+		.card-edit {
+			margin:0 auto;
+		}
+		.card-body {
+			padding: 50px;
+		}
+		.form-footer {
+			padding: 10px;
+		}
+	</style>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<div class="wrapper">
+  <div class="content-wrapper">
+  
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>피드백 등록하기</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">feedback</li>
+              <li class="breadcrumb-item">addFeedback</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row ">
+        <div class="card-edit col-md-6">
+          <div class="card">
+            <div class="card-header bg-info">
+              <h4 class="card-title">피드백 보내기</h4>
+               <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+            <div class="card-body">
+              <form th:action="@{/feedback/addResFeedback}" method="post">
+                <input type="hidden" class="form-control" name="fbResNum" th:value="${fbResNum}">
+				<input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
+                <input type="hidden" class="form-control" name="res.resNum" th:value="${resNum}">
+                <div class="form-group">
+                  <label for="feedback-name" class="control-label"></label>
+                  <input type="text" class="form-control" name="res.resName" placeholder="피드백 보낼 관광명소/음식점 "disabled>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <!-- check box -->
+                    <div class="form-group">
+                      <div class="form-check" style="margin: 10px;">
+                        <th:block th:each=" c : ${fCode}"> 
+                          <label>
+                            <input type="checkbox" name="fbCode.fbCodeNum" th:value="${c.fbCodeNum}">
+                            [[${c.fbReason}]] 
+                          </label> <br>
+                        </th:block>
+                      </div>
+                    </div>
+                  </div>
+                </div>                    
+                <div class="form-group">
+                  <label for="feedback-text" class="control-label"></label>
+                  <textarea class="form-control" name="fbResContents" rows="5" placeholder="내용을 작성해주세요"></textarea>
+                </div>
+	            <input type="hidden" class="form-control" name="fbResCheck" th:value="D">
+                <div class="form-footer">
+	              <button type="button" class="btn btn-default float-left">취소</button>
+	              <button type="submit" class="btn btn-info float-right">피드백 전송하기</button>
+	            </div>
+              </form>
+            </div>
+            <!-- /.card body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </section>
+    
+  </div>
+</div>
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+	<script>
+	
+	</script>
+</th:block>
+</html>

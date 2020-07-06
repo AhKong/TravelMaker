@@ -7,7 +7,6 @@ public class SightsScrap {
 	private String sightsNum;
 	private String tNum;
 	private String sData;
-	private String sPhoto;
 	public String getSsNum() {
 		return ssNum;
 	}
@@ -38,16 +37,11 @@ public class SightsScrap {
 	public void setsData(String sData) {
 		this.sData = sData;
 	}
-	public String getsPhoto() {
-		return sPhoto;
-	}
-	public void setsPhoto(String sPhoto) {
-		this.sPhoto = sPhoto;
-	}
+	
 	@Override
 	public String toString() {
 		return "ScrapSights [ssNum=" + ssNum + ", mId=" + mId + ", sightsNum=" + sightsNum + ", tNum=" + tNum
-				+ ", sData=" + sData + ", sPhoto=" + sPhoto + "]";
+				+ ", sData=" + sData + ", sPhoto=" + "]";
 	}
 
 

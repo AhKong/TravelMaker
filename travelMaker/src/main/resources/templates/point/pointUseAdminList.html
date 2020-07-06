@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+  <!-- jsGrid -->
+  <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+
+<th:block layout:fragment="customTitle">
+	<title> 포인트관리 화면입니다  :) </title>
+</th:block>
+<!-- 사용자 지정 css -->
+<th:block layout:fragment="customCss">
+  <style>
+  	.card-title {
+  		margin : 10px;
+  	}
+  	.card-body {
+  		margin: 10px;
+  	}
+  </style>
+</th:block>
+<th:block layout:fragment="customContents">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>포인트 관리 - 이승연</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">point</li>
+              <li class="breadcrumb-item active">pointUseAdminList</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section>
+      <div class="card col-12">
+        <div class="card-header">
+          <a class="card-title" href="/point/pointUseAdminList">포인트 사용 관리</a>
+          <a class="card-title" href="/point/pointSaveAdminList">포인트 적립 관리</a>
+        </div>
+            
+        <div class="card-body table-responsive">
+          <div class="row">
+            <table id="example1" class="table table-striped">
+            <thead>
+	          <tr>
+	            <th>#</th>
+	            <th>번호</th>
+	            <th>등록시각</th>
+	            <th>아이디</th>
+	            <th>이름</th>
+	            <th>성별</th>
+	            <th>생년월일</th>
+	            <th>상품카테고리</th>
+	            <th>상품정보</th>
+	            <th>구매수량</th>
+	            <th>사용 포인트</th>
+	          </tr>
+            </thead>
+            <tbody>
+              <th:block th:each=" use : ${pointUseAdminList}">
+	            <tr th:each=" gUse : ${use.goods}">
+	              <th></th>
+	              <th th:text="${use.pointUseNum}"></th>
+	              <th th:text="${use.pointUseRegDate}"></th>
+	              <th th:text="${use.mId}"></th>
+	              <th th:text="${use.member.mName}"></th>
+	              <th th:text="${use.member.mGender}"></th>
+	              <th th:text="${use.member.mBirth}"></th>
+	              <th th:text="${gUse.goodsCate}"></th>
+	              <th class="goodsDetail" th:data-href="@{/goods/detailGoods(gCode=${gUse.goodsCode})}">
+	              	 <button class="btn btn-outline-success">[[${gUse.goodsName}]]</button>
+	              </th>
+	              <th th:text="${gUse.goodsAmount}"></th>
+	              <th th:text="${use.pointUseUsed}"></th>
+	            </tr>
+              </th:block>
+	        </tbody>
+          </table>
+          </div>
+        </div>
+        <!-- /.card-body -->
+              
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+	<script>
+	  $(function () {
+		    $("#example1").DataTable({
+		      "responsive": true,
+		      "autoWidth": false,
+		    });
+		  });
+	  
+	  $(document).ready(function() {
+		    $(".goodsDetail").click(function() {
+		        window.location = $(this).data("href");
+		    });
+		});
+	</script>	
+</th:block>
+</html>

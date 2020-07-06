@@ -24,18 +24,21 @@ SELECT
 	</selectKey>
 			INSERT INTO tb_scrap_sights
 	(scrap_code, m_id, sights_num, trip_num, scrap_reg_date)
-	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW());
+	VALUES (#{ssNum}, #{mId}, #{sightsNum}, #{tNum}, NOW())
+			
 </insert>
 <!-- 그림은 조인으로 쓰기 -->
 
-<delete id="sDeleteScrap" >
+<delete id="sDeleteScrap" parameterType="com.cafe24.travelMaker.domain.SightsScrap">
 DELETE
 FROM
 tb_scrap_sights
 WHERE
 m_id = #{mId}
 AND
-sights_num = #{sightsNum};
+sights_num = #{sightsNum}
+AND
+trip_num = #{tNum};
 </delete>
 
 <select id="sSelect" resultType="SightsScrap" resultMap="memberSelect">
@@ -46,7 +49,9 @@ tb_scrap_sights
 WHERE
 m_id = #{mId}
 AND
-sights_num = #{sightsNum};
+sights_num = #{sightsNum}
+AND
+trip_num = #{tNum};
 </select>
 
 </mapper>

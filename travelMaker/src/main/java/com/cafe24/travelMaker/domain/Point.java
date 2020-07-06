@@ -1,10 +1,25 @@
 package com.cafe24.travelMaker.domain;
 // 포인트 관리내역  DTO
 public class Point {
+		//포인트 관리
 	private String pointNum;
 	private String mId;
 	private int finalPoint;
 	private String pointRegDate;
+	private Member member;
+		//포인트 사용
+	private String pointUseNum;
+	private String gNum;
+	private String pointUseUsed;
+	private String pointUseRegDate;
+	private Goods goods;
+		//포인트 적립
+	private String savePointNum;
+	private String savePointCause;
+	private String savePointDetail;
+	private String savePointCharge;
+	private String savePointRegDate;
+	
 	public String getPointNum() {
 		return pointNum;
 	}
@@ -28,6 +43,72 @@ public class Point {
 	}
 	public void setPointRegDate(String pointRegDate) {
 		this.pointRegDate = pointRegDate;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	public String getPointUseNum() {
+		return pointUseNum;
+	}
+	public void setPointUseNum(String pointUseNum) {
+		this.pointUseNum = pointUseNum;
+	}
+	public String getgNum() {
+		return gNum;
+	}
+	public void setgNum(String gNum) {
+		this.gNum = gNum;
+	}
+	public String getPointUseUsed() {
+		return pointUseUsed;
+	}
+	public void setPointUseUsed(String pointUseUsed) {
+		this.pointUseUsed = pointUseUsed;
+	}
+	public String getPointUseRegDate() {
+		return pointUseRegDate;
+	}
+	public void setPointUseRegDate(String pointUseRegDate) {
+		this.pointUseRegDate = pointUseRegDate;
+	}
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+	public String getSavePointNum() {
+		return savePointNum;
+	}
+	public void setSavePointNum(String savePointNum) {
+		this.savePointNum = savePointNum;
+	}
+	public String getSavePointCause() {
+		return savePointCause;
+	}
+	public void setSavePointCause(String savePointCause) {
+		this.savePointCause = savePointCause;
+	}
+	public String getSavePointDetail() {
+		return savePointDetail;
+	}
+	public void setSavePointDetail(String savePointDetail) {
+		this.savePointDetail = savePointDetail;
+	}
+	public String getSavePointCharge() {
+		return savePointCharge;
+	}
+	public void setSavePointCharge(String savePointCharge) {
+		this.savePointCharge = savePointCharge;
+	}
+	public String getSavePointRegDate() {
+		return savePointRegDate;
+	}
+	public void setSavePointRegDate(String savePointRegDate) {
+		this.savePointRegDate = savePointRegDate;
 	}
 	@Override
 	public int hashCode() {
@@ -70,8 +151,10 @@ public class Point {
 	@Override
 	public String toString() {
 		return "Point [pointNum=" + pointNum + ", mId=" + mId + ", finalPoint=" + finalPoint + ", pointRegDate="
-				+ pointRegDate + "]";
+				+ pointRegDate + ", member=" + member + ", pointUseNum=" + pointUseNum + ", gNum=" + gNum
+				+ ", pointUseUsed=" + pointUseUsed + ", pointUseRegDate=" + pointUseRegDate + ", goods=" + goods
+				+ ", savePointNum=" + savePointNum + ", savePointCause=" + savePointCause + ", savePointDetail="
+				+ savePointDetail + ", savePointCharge=" + savePointCharge + ", savePointRegDate=" + savePointRegDate
+				+ "]";
 	}
-	
-	
 }

@@ -1,6 +1,8 @@
 package com.cafe24.travelMaker.controller;
 import java.time.LocalTime;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.service.ResService;
+import com.cafe24.travelMaker.service.ReviewService;
 import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 @Controller
@@ -19,6 +22,7 @@ public class ResController {
 	@Autowired private ResService resService;
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;
+	@Autowired private ReviewService reviewService;
 
 	@GetMapping("/resList")
 	public String resList(Model model, @RequestParam (name="search") String search) {
@@ -59,9 +63,15 @@ public class ResController {
 	}
 	
 	@GetMapping("/resDetail")
-	public String detailRes(Model model, @RequestParam(name="resNum") String resNum) {
+	public String detailRes(Model model, @RequestParam(name="resNum") String resNum,HttpSession session) {
+		String mId = (String) session.getAttribute("SID");
 		System.out.println(resService.getDetailRes(resNum));
 		model.addAttribute("res",resService.getDetailRes(resNum));
+		model.addAttribute("tripType",reviewService.selectTripTypeList());
+		model.addAttribute("isWrited", reviewService.isWritedReview(mId, resNum));
+		model.addAttribute("reviewList",reviewService.resReviewList(resNum,mId));
+		model.addAttribute("reviewCnt",reviewService.getResReviewGradeCnt(resNum));
+		System.out.println(reviewService.resReviewList(resNum,mId) +"<---");
 		return "res/detailRes";
 	}
 	

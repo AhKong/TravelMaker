@@ -9,4 +9,6 @@ import com.cafe24.travelMaker.domain.Follow;
 public interface FollowMapper {
 	public List<Follow> followers(String mId);
 	public List<Follow> following(String mId);
+	public int followersNum(String mId);
+	public int followingNum(String mId);
 }

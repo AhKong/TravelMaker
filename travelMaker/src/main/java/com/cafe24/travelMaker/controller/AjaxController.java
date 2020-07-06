@@ -2,12 +2,14 @@ package com.cafe24.travelMaker.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.SightsScrap;
+import com.cafe24.travelMaker.mapper.ScrapModalMapper;
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.domain.MyTrip;
 import com.cafe24.travelMaker.domain.ResScrap;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.MailService;
@@ -29,7 +33,9 @@ import com.cafe24.travelMaker.service.ScrapSightsService;
 public class AjaxController {
 
 	@Autowired private MemberService memberService;
-	@Autowired private  ScrapSightsService scrapsightsservice;
+	@Autowired private ScrapSightsService scrapsightsservice;
+	@Autowired private ScrapModalMapper scrapModalMapper;
+
 
 	//아이디 찾기 기능
 	@RequestMapping("/findId")
@@ -79,22 +85,23 @@ public class AjaxController {
 	@ResponseBody
 	public SightsScrap SightsScrap(@RequestParam(name="mId") String mId,
 									@RequestParam(name="sightsNum") String sightsNum,
-			SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
+									@RequestParam(name="tNum") String tNum,
+		SightsScrap sightsScrap, HttpServletResponse response, HttpSession session) throws IOException {
 		
 		SightsScrap scrapselect = scrapsightsservice.sSelect(sightsScrap);
+		System.out.println(sightsScrap.getSightsNum()+"---------------------- 여행넘");
 		System.out.println("/SightsScrap 요청 호출 " + mId);
-		System.out.println(scrapselect+"<---------- sSelect");
-
-		if(scrapselect !=null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
-			System.out.println(scrapselect.getSightsNum() + "<<<<<<<<<<<< 여행번호");
-			//scrapsightsservice.sDeleteScrap(sightsScrap);
+		System.out.println(scrapselect+"<---------- sSelect 스크랩");
+		System.out.println(tNum+"<<<<<<<<< TNUM");
+		if(scrapselect != null) { // 내가 해당 관광명소에 대해 스크랩이 되어있음
+			sightsScrap.setSightsNum(scrapselect.getSightsNum());
+			scrapsightsservice.sDeleteScrap(sightsScrap);
 			System.out.println("delete");
 		} else {
-			//scrapsightsservice.sInsertScrap(sightsScrap);
+			scrapsightsservice.sInsertScrap(sightsScrap);
 			System.out.println("insert");
 			//인설트
 		}
-		
 		
 		return scrapselect;
 	}
@@ -106,10 +113,15 @@ public class AjaxController {
 		return null;
 	}
 	
-	@GetMapping("/scrapModal")
-	public String moda() {
-		
-		return null;
+	// 모달창 리스트
+	@RequestMapping("/scrapModal")
+	@ResponseBody
+	public  HashMap<String,List<MyTrip>> ScrapModal(HttpSession session) {
+		String loginId = (String) session.getAttribute("SID");
+		System.out.println(loginId);
+		HashMap<String,List<MyTrip>> result = new HashMap<String,List<MyTrip>>();
+		result.put("result",scrapModalMapper.ModalScarpList(loginId));
+		System.out.println(scrapModalMapper.ModalScarpList(loginId));
+		return result;
 	}
-
 }

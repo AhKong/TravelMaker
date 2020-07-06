@@ -17,6 +17,10 @@
   		margin: 20px;
   		padding: 20px;
   	}
+  	.table {
+  		width: 100%;
+  		font-size: large;
+  	}
   </style>
 </th:block>
 
@@ -30,12 +34,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>포인트 사용내역</h1>
+            <h1>포인트 사용내역 - 이승연</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">myPage</a></li>
-              <li class="breadcrumb-item active">pointUse.html</li>
+              <li class="breadcrumb-item">pointUse</li>
             </ol>
           </div>
         </div>
@@ -46,125 +50,41 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="card-control col-8">
-            <div class="card card-primary">
-              <div class="card-header">
+          
+          <!-- Point Use List -->
+          <div class="card-control col-10">
+            <div class="card">
+              <div class="card-header" style="background-color: #93DAFF;">
                 <h4 class="card-title">포인트 사용내역</h4>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
+              <div class="card-body col-12">
+                <table class="table table-responsive col-12">
                   <thead>                  
                     <tr>
-                      <th style="width: 20px">0</th>
-                      <th>date</th>
-                      <th style="width: 20px; height: 20px;">goodsPhoto</th>
-                      <th>goodsName</th>
-                      <th>addPoint</th>
-                      <th>removePoint</th>
-                      <th>finalPoint</th>
+                      <th>#</th>
+                      <th>날짜</th>
+                      <th style="width: 20px; height: 20px;">구매 상품</th>
+                      <th></th>
+                      <th>구매 수량</th>
+                      <th>사용 포인트</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>2020-06-11</td>
-                      <td>goodsPhoto</td>
-                      <td>가나다라마바사</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                    </tr>
+                    <th:block th:each=" u, i : ${pointUseList}">
+                      <tr  th:each=" g : ${u.goods}">
+                        <td th:text="${i.count}"></td>
+                        <td th:text="${u.pointUseRegDate}"></td>
+                        <td>
+                          <div class="goodsImg col-sm-2">
+						    <img th:src="@{/fileupload/{file}(file=${g.goodsPhoto})}" alt="Festival Image" width="150" height="150">
+						  </div>
+                        </td>
+                        <td th:text="${g.goodsName}"></td>
+                        <td th:text="${g.goodsAmount}"></td>
+                        <td th:text="${u.pointUseUsed}"></td>
+                      </tr>
+                    </th:block>
                   </tbody>
                 </table>
               </div>
@@ -179,23 +99,65 @@
                 </ul>
               </div>
             </div>
-            <!-- /.card -->
+          	<!-- /.Point Use List -->
+
+			<!-- Point Save List -->
+            <div class="card">
+              <div class="card-header" style="background-color: #93DAFF;">
+                <h4 class="card-title">포인트 적립내역</h4>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body col-12">
+                <table class="table table-responsive col-12">
+                    <th:block th:each=" s, i : ${pointSaveList}" class="col-12">
+                      <tr class="pointUseTable">
+                        <td th:text="${i.count}"></td>
+                        <td th:text="${s.savePointRegDate}"></td>
+                        <td th:text="${s.savePointCause}"></td>
+                        <td th:text="${s.savePointDetail}"></td>
+                        <td th:text="${s.savePointCharge}"></td>
+                      </tr>
+                    </th:block>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
 		  </div>
-          <!-- /.col -->
-         </div>
+          <!-- /.Point Save List -->
+          
+          <!-- Total Point -->
+          <div class="card-control col-3">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4 class="card-title">총 소유 포인트</h4>
+              </div>
+              <div class="card-body col-10">
+                <th:block th:each=" g : ${getTotalPoint}">
+                  <h3 class=" float-right col-12">
+                    <strong th:text="${g.finalPoint}"></strong> 점
+                  </h3>
+                </th:block>
+              </div>
+            </div>
+		  </div>
+          <!-- /.Total Point -->
+          
+        </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 

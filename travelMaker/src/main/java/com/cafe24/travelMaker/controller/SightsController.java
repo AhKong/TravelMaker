@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
 import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.domain.Sights;
+import com.cafe24.travelMaker.service.MyTripService;
+import com.cafe24.travelMaker.service.ReviewService;
 import com.cafe24.travelMaker.service.SightsService;
 import com.cafe24.travelMaker.service.StorageService;
 
@@ -20,9 +25,10 @@ import com.cafe24.travelMaker.service.StorageService;
 public class SightsController{
 	@Autowired private SightsService sightsService;
 	@Autowired private StorageService storageService;
-	
+	@Autowired private ReviewService reviewService;
+
 	@GetMapping("/sightsList")
-	public String sightsList(Model model,@RequestParam(name="search") String search) {
+	public String sightsList(Model model,@RequestParam(name="search") String search,HttpSession session) {
 		System.out.println(search+"<---");
 		model.addAttribute("searchWord", search);
 		model.addAttribute("sightsList", sightsService.selectSightsList(search));
@@ -59,6 +65,9 @@ public class SightsController{
 	@GetMapping("/detailSights")
 	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum) {
 		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
+		model.addAttribute("tripType",reviewService.selectTripTypeList());
+		model.addAttribute("reviewList",reviewService.sightsReviewList(sightsNum));
+		System.out.println(reviewService.sightsReviewList(sightsNum) +"<zlzlkdj");
 		System.out.println(sightsService.getDetailSights(sightsNum));
 		return "/sights/detailSights";
 	}

@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.FeedbackMapper">
-	<resultMap type="FeedbackSights" id="feedbackSelect">
+	<resultMap type="FeedbackSights" id="fbSightsSelect">
 		<result property="fbSightsNum" column="fb_sights_num" />
 		<result property="fbSightsContents" column="fb_sights_contents" />
 		<result property="fbSightsRegDate" column="fb_sights_reg_date" />
@@ -20,13 +20,72 @@
 			<result property="sightsName" column="sights_name"/>
 		</association>
 	</resultMap>
-	
+	<resultMap type="FeedbackRes" id="fbResSelect">
+		<result property="fbResNum" column="fb_res_num" />
+		<result property="fbResContents" column="fb_res_contents" />
+		<result property="fbResRegDate" column="fb_res_reg_date" />
+		<result property="fbResCheck" column="fb_res_check" />
+		<association property="member" javaType="Member">
+			<result property="mId" column="m_id"/>
+		</association>
+		<association property="fbCode" javaType="FbCode">
+			<result property="fbCodeNum" column="fb_code_num"/>
+			<result property="fbReason" column="fb_reason"/>
+		</association>
+		<association property="res" javaType="Res">
+			<result property="resNum" column="res_num"/>
+			<result property="resName" column="res_name"/>
+		</association>
+	</resultMap>
 	<resultMap type="FbCode" id="fbCodeSelect">
 		<result property="fbCodeNum" column="fb_code_num"/>
 		<result property="fbReason" column="fb_reason"/>
 	</resultMap>
 	
-	<select id="formFeedback" resultType="String" resultMap="fbCodeSelect">
+	
+	<select id="fbResList" resultType="FeedbackRes" resultMap="fbResSelect">
+		SELECT 
+			f.fb_res_num, f.fb_res_reg_date, r.res_num, r.res_name, 
+			SUBSTRING(c.fb_code_num,9) AS fb_code_num, c.fb_reason, f.m_id, f.fb_res_check
+		FROM 
+			tb_fb_res AS f
+			INNER JOIN 
+				tb_res AS r
+				ON f.res_num = r.res_num
+			INNER JOIN 
+				tb_fb_code AS c
+				ON f.fb_code_num = c.fb_code_num
+		ORDER BY f.fb_res_reg_date DESC;
+	</select>
+	
+	
+	<insert id="addResFeedback" parameterType="FeedbackRes">
+		<selectKey order="BEFORE" keyProperty="fbResNum" resultType="String">
+			<!-- keyProperty="fbResNum" 는 select 의  fbResNum 와 이름이 같아야 한다  -->
+			<!--  또한 FeedbackRes 클래스의 fb_res_num 컬럼의 변수명과 같아야 한다  -->
+			SELECT
+				(case COUNT(*) 
+				when 0 then 'fb_res_1'
+				ELSE CONCAT('fb_res_', (MAX(CAST(substring(fb_res_num,8) AS DECIMAL))+1))
+				END) AS fbResNum
+			FROM 
+				tb_fb_res
+		</selectKey>
+			INSERT INTO tb_fb_res
+			(fb_res_num, fb_res_reg_date, res_num, fb_code_num, fb_res_contents, m_id, fb_res_check)			
+			
+			VALUES ( #{fbResNum}
+					,now()
+					,#{res.resNum}
+					,#{fbCode.fbCodeNum}
+					,#{fbResContents}
+					,#{member.mId}
+					,#{fbResCheck}
+					);
+	</insert>		
+	
+	
+	<select id="addFeedback" resultType="String" resultMap="fbCodeSelect">
 		SELECT 
 			 fb_code_num
 			,fb_reason
@@ -35,7 +94,16 @@
 	</select>
 	
 	
-	<update id="acceptFeedback" parameterType="String">
+	<update id="acceptFbRes" parameterType="String">
+		UPDATE tb_fb_res
+		SET
+			fb_res_check = #{fbResCheck}
+		WHERE 
+			fb_res_num = #{fbResNum};
+	</update>
+	
+	
+	<update id="acceptFbSights" parameterType="String">
 		UPDATE tb_fb_sights
 		SET
 			fb_sights_check = #{fbSightsCheck}
@@ -44,23 +112,24 @@
 	</update>
 	
 	
-	<select id="feedbackList" resultType="String" resultMap="feedbackSelect">
+	<select id="fbSightsList" resultType="FeedbackSights" resultMap="fbSightsSelect">
 		SELECT 
-			 f.fb_sights_num, f.fb_sights_reg_date, s.sights_name, SUBSTRING(f.fb_code_num,9) AS fb_code_num
-			, c.fb_reason, f.fb_sights_contents, f.m_id, f.fb_sights_check
+			f.fb_sights_num, f.fb_sights_reg_date, s.sights_num,
+		 	s.sights_name, SUBSTRING(f.fb_code_num,9) AS fb_code_num, 
+			c.fb_reason, f.fb_sights_contents, f.m_id, f.fb_sights_check
 		FROM 
 			tb_fb_sights AS f
 			INNER JOIN 
 				tb_sights AS s ON f.sights_num = s.sights_num
 			INNER JOIN 
 				tb_fb_code AS c ON f.fb_code_num = c.fb_code_num
-		ORDER BY fb_sights_reg_date ASC;
+		ORDER BY fb_sights_reg_date DESC;
 	</select>
 
 
-	<insert id="addFeedback" parameterType="FeedbackSights">
+	<insert id="addSightsFeedback" parameterType="FeedbackSights">
 		<selectKey order="BEFORE" keyProperty="fbSightsNum" resultType="String">
-			<!-- keyProperty="sightsFbNum" 는 select 의  sightsFbNum 와 이름이 같아야 한다  -->
+			<!-- keyProperty="fbSightsNum" 는 select 의  fbSightsNum 와 이름이 같아야 한다  -->
 			<!--  또한 FeedbackSights 클래스의 fb_sights_num 컬럼의 변수명과 같아야 한다  -->
 			SELECT
 				(case COUNT(*) 

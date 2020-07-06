@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.ScrapModalMapper">
+
+<resultMap type="MyTrip" id="tripSelect"> 
+		<result property ="tNum" column ="trip_num"/>
+		<result property ="mId" column ="m_id"/>
+		<result property ="tName" column ="trip_name"/>
+		<result property ="oCheck" column ="trip_open_check"/>
+		<result property ="tUrl" column ="trip_url"/>
+		<result property ="sDate" column ="trip_start_date"/>
+		<result property ="eDate" column ="trip_end_date"/>
+		<result property ="status" column ="trip_status"/>
+		<result property ="rDate" column ="trip_reg_date"/>
+		<result property ="tPhoto" column ="trip_photo"/>
+		
+	</resultMap>
+	
+<select id="ModalScarpList" parameterType="String" resultMap="tripSelect">
+SELECT 
+*
+FROM
+tb_trip AS t
+INNER JOIN
+tb_sights AS s
+ON
+t.m_id = s.m_id
+WHERE
+t.m_id = #{mId}
+GROUP BY t.trip_num;
+</select>
+
+</mapper>

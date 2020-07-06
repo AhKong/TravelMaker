@@ -10,7 +10,6 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">TravelMaker</span>
     </a>
-   
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
@@ -18,11 +17,10 @@
         <div class="image">
           <img src="../../dist/img/avatar6.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-
         <div class="info" style="width:150px">
-          <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>
-
+          <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>	
         </div>
+          <a href="#" id="left-out" role="button"><i class="fas fa-angle-left"></i></a>
       </div>
 
       <!-- Sidebar Menu -->
@@ -31,53 +29,55 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         	<li class="nav-header">사용자 페이지</li>
-          <li class="nav-item has-treeview">
+         <li class="nav-header">사용자 페이지</li>
+         
+          <li class="nav-item">
             <a href="/sights/sightsList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="sights">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              	 !관광명소 김아름
+              <p>!관광명소 김아름</p>
             </a>
+            </li>
           <li class="nav-item">
             <a href="/res/resList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="res">
               <i class="nav-icon fas fa-th"></i>
-              	 !음식점 김아름
+              	<p>!음식점 김아름</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="/festival/ingFestivalList" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
-             	!축제 이승연
+             	<p>!축제 이승연</p>
             </a>
           </li>
             <li class="nav-item has-treeview">
 				<a href="/stats/stats" class="nav-link">
 					<i class="nav-icon fas fa-chart-pie"></i>
-              	 !통계자료 이승환
+              	 <p>!통계자료 이승환</p>
             	</a>
           	</li>
           <li class="nav-item has-treeview">
             <a href="/myTrip/tripList " class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
-              	!내 여행 이승환
+              	<p>!내 여행 이승환</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              	!문의게시판 강민수
+              	<p>!문의게시판 강민수</p>
               	<i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/question/faq" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  	!자주묻는질문 강민수
+                  	<p>!자주묻는질문 강민수</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/question/questionList" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  	!내 문의내역 강민수
+                  	<p>!내 문의내역 강민수</p>
                 </a>
               </li>
             </ul>
@@ -85,7 +85,13 @@
           <li class="nav-item has-treeview">
             <a href="/goods/buyGoods" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-	           		!상품 구매하기 강민수
+	           		<p>!상품 구매하기 강민수</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/weather/weatherInfo" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+	           		<p>!날씨확인 강민수</p>
             </a>
           </li>
           
@@ -93,65 +99,65 @@
           <li class="nav-item">
             <a href="/report/manageSightsReviewReport" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
-             	!리뷰 신고 관리 아름
+             	<p>!리뷰 신고 관리 아름</p>
                 <span class="badge badge-info ">2</span>
             </a>
           </li>
          <li class="nav-item">
             <a href="/sights/addSights" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
-             	!관광명소 등록 김아름
+             	<p>!관광명소 등록 김아름</p>
             </a>
           </li>
            <li class="nav-item">
             <a href="/res/addRes" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
-             	!음식점 등록 김아름
+             	<p>!음식점 등록 김아름</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="/feedback/feedbackList" class="nav-link">
               <i class="nav-icon fas fa-pen-fancy"></i>
-              	!피드백 관리 이승연
+              	<p>!피드백 관리 이승연</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/point/pointList" class="nav-link">
+            <a href="/point/pointUseAdminList" class="nav-link">
               <i class="nav-icon fas fa-crown"></i>
-              	!포인트 관리 이승연
+              	<p>!포인트 관리 이승연</p>
             </a>
           </li>
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-dog"></i>
-              	!회원관리 이승연
+              	<p>!회원관리 이승연</p>
                 <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/member/dormantMember" class="nav-link">
                   <i class="nav-icon far fa-grin-tears"></i>
-                  	!휴면회원관리 이승연
+                  	<p>!휴면회원관리 이승연</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/member/deleteMember" class="nav-link">
                   <i class="nav-icon far fa-angry"></i>
-                  	!탈퇴회원관리 이승연
+                  	<p>!탈퇴회원관리 이승연</p>
                 </a>
               </li>
             </ul>
             <li class="nav-item">
                 <a href="/question/answer" class="nav-link">
                   <i class="nav-icon fas fa-pen-fancy"></i>
-                  	!문의내역 답변 강민수
+                  	<p>!문의내역 답변 강민수</p>
                 </a>
               </li>
          	<li class="nav-header">제휴업체 페이지</li>
          	<li class="nav-item">
                 <a href="/goods/myRegGoods" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
-                  	!등록상품 관리 강민수
+                  	<p>!등록상품 관리 강민수</p>
                 </a>
               </li>
         </ul>

@@ -34,12 +34,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="content-title col-sm-6">
-            <h1>회원정보수정</h1>
+            <h1>회원정보수정 - 이승연</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/myPage">myPage</a></li>
-              <li class="breadcrumb-item active">updateMember.html</li>
+              <li class="breadcrumb-item"><a href="/member/myPage">myPage</a></li>
+              <li class="breadcrumb-item active">updateMember</li>
             </ol>
           </div>
         </div>
@@ -60,78 +60,79 @@
               <div class="form-group">
                 <label for="up-mId" class="label-control col-md-3">아이디</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mId" class="form-control" id="up-mId" placeholder="Id" readonly>
+                  <input type="text" name="mId" class="form-control" id="up_mId" placeholder="Id" readonly>
                 </div>
               </div>
     				  
     		  <div class="form-group form-group-lg">
                 <label for="up-mPw" class=" label-control col-md-3">비밀번호</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="password" name="mPw" class="form-control" id="up-mPw" placeholder="Password">
+                  <input type="password" name="mPw" class="form-control" id="up_mPw" placeholder="Password">
                 </div>
               </div>
                       
               <div class="form-group form-group-lg">
                 <label for="up-mPwCheck" class=" label-control col-md-3">비밀번호 확인</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="password" name="mPwCheck" class="form-control" id="up-mPwCheck" placeholder="PasswordCheck">
+                  <input type="password" name="mPwCheck" class="form-control" id="up_mPwCheck" placeholder="PasswordCheck">
                 </div>
               </div>
                      
               <div class="form-group form-group-lg">
                 <label for="up-mName" class="label-control col-md-3">이름</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mName" class="form-control" id="up-mName" placeholder="Name" >
+                  <input type="text" name="mName" class="form-control" id="up_mName" placeholder="Name" >
                 </div>
               </div>
                      
               <div class="form-group form-group-lg">
                 <label for="up-mEmail" class="label-control col-md-3">이메일</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mEmail" class="form-control" id="up-mEmail" placeholder="Email" >
+                  <input type="text" name="mEmail" class="form-control" id="up_mEmail" placeholder="Email" >
                 </div>
               </div>
                   
               <div class="form-group form-group-lg">
-              <label for="up-mTel" class=" label-control col-md-3">전화번호</label>
-              <div class="input-control col-sm-8 col-md-8 col-lg-10">
-              <input type="tel" name="mTel" class="form-control" id="up-mTel" placeholder="Tel" >
-              </div>
-              </div>
-                     
-              <div class="form-group form-group-lg">
-                <label for="up-mGender" class=" label-control col-md-3">성별</label>
-                <div id="up-mGender" class="btn-control">
-                  <button type="button" name="mGender" class="btn btn-info col-xs-3 col-sm-3 col-md-3" value="여" > 여  </button>
-                  <button type="button" name="mGender" class="btn btn-info col-xs-3 col-sm-3 col-md-3" value="남" > 남  </button>
-                </div>
-              </div>
-                     
-              <div class="form-group">
-                <label for="up-mBirth" class="label-control col-md-3">생년월일</label>
+                <label for="up-mTel" class=" label-control col-md-3">전화번호</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="date" name="mBirth" class="form-control" id="up-mBirth" placeholder="Date of Birth" >
-                </div> 
+                  <input type="tel" name="mTel" class="form-control" id="up_mTel" placeholder="Tel" >
+                </div>
               </div>
                       
               <div class="form-group">
                 <label for="up-mAddr" class="label-control col-md-3">주소</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mAddr" class="form-control" id="up-mAddr" placeholder="Address" >
+                  <input type="text" name="mAddr" class="form-control" id="up_mAddr" placeholder="Address" >
+                </div>
+              </div>
+                    
+                   
+              <div class="form-group">
+                <label for="up-mBirth" class="label-control col-md-3">생년월일</label>
+                <div class="input-control col-sm-8 col-md-8 col-lg-10">
+                  <input type="date" name="mBirth" class="form-control" id="up_mBirth" placeholder="Date of Birth" >
+                </div> 
+              </div>
+              
+              <div class="form-group form-group-lg">
+                <label for="up-mGender" class=" label-control col-md-3">성별</label>
+                <div id="up_mGender" class="btn-control">
+                  <button type="button" name="mGender1" class="btn btn-outline-info col-xs-3 col-sm-3 col-md-3" value="여" > 여  </button>
+                  <button type="button" name="mGender2" class="btn btn-outline-info col-xs-3 col-sm-3 col-md-3" value="남" > 남  </button>
                 </div>
               </div>
                       
               <div class="form-group">
                 <label for="up-mProPhoto" class="label-control col-md-3">프로필사진</label>
                 <div class="input-control col-sm-6 col-md-6 col-lg-10">
-                  <input type="text" name="mProPhoto" class="form-control" id="up-mProPhoto" placeholder="Profile-photo">
+                  <input type="file" name="mAvatar" class="form-control" id="up_mAvatar" accept="image/git, image/jpeg, image/png">
                 </div>
               </div>
-                      
+
               <div class="form-group">
                 <label for="up-mIntrod" class="label-control col-md-3">한줄소개</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mIntrod" class="form-control" id="up-mIntrod" placeholder="Profile-introduction" >
+                  <input type="text" name="mIntrod" class="form-control" id="up_mIntrod" placeholder="Profile-introduction" >
                 </div>
               </div>
                       
@@ -139,43 +140,18 @@
                 <div class="col-sm-offset-2 col-xs-6">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox">수정할 정보를 모두 확인했나요?
+                      <input type="checkbox" id="upCheck">수정할 정보를 모두 확인했나요?
                     </label>
                   </div>
                 </div>
               </div>
+              
+              
 
 			  <div class="form-button col-sm-8">
-			  	<!-- Button trigger modal -->
-			    <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
-			    
-				<!-- Modal -->
-				<div class="modal fade" id="cancleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							
-							<div class="modal-body">
-								정말 취소하시겠습니까? 	<br>
-							</div>
-							
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal"> 예 </button>
-			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End Modal -->		
-			    
-			    <button type="submit" class="btn btn-sm btn-primary" onclick="location.href='/myPage'">수정완료 :)</button>
-			    
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">계정 탈퇴하기</button>
+			  
+			    <!-- Button trigger modal -->
+				<button type="button" class="btn btn-sm btn-danger col-3" data-toggle="modal" data-target="#deleteModal">계정 탈퇴하기</button>
 
 				<!-- Modal -->
 				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -204,7 +180,36 @@
 					</div>
 				</div>
 				<!-- End Modal -->		
-					
+			  
+			  	<!-- Button trigger modal -->
+			    <button type="button" class="btn btn-sm btn-default col-3" data-toggle="modal" data-target="#cancleModal">수정 취소 !</button>
+			    
+				<!-- Modal -->
+				<div class="modal fade" id="cancleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							
+							<div class="modal-body">
+								정말 취소하시겠습니까? 	<br>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal"> 예 </button>
+			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->		
+			    
+			    <a type="submit" class="btn btn-sm btn-primary col-3" id="completeBtn" 
+			    		href="/member/myPage">수정완료 :)</a>
+			    
 			  </div>
               
             </div>
@@ -220,8 +225,8 @@
 
 </th:block>
 <th:block layout:fragment="customFooterScript">
-	
 	<script>
+	$(function(){
 		$('#deleteModal').on('shown.bs.modal', function () {
 			$('#myInput').focus()
 		})
@@ -229,7 +234,65 @@
 		$('#calcelModal').on('shown.bs.modal', function () {
 			$('#myInput').focus()
 		})
+		
+		$(document).on('click', '#completeBtn', function(){
+		
+			var up_mId = $('#up_mId').val();
+			var up_mPw = $('#up_mPw').val();
+			var up_mPwCheck = $('#up_mPwCheck').val();
+			var up_mName = $('#up_mName').val();
+			var up_mEmail = $('#up_mEmail').val();
+			var up_mTel = $('#up_mTel').val();
+			var up_mAddr = $('#up_mAddr').val();
+			var up_mBirth = $('#up_mBirth').val();
+			var up_mGender = $('#up_mGender').val();
+			var up_mAvatar = $('#up_mAvatar').val();
+			var up_mIntrod = $('#up_mIntrod').val();
+			
+			if(up_mPw == ""){
+				alert("비밀번호를 입력해주세요");
+				$('#up_mPw').focus();
+			}
+			if(up_mPwCheck == ""){
+				alert("비밀번호를 확인을 위해 한번 더 입력해주세요");
+				up_mPwCheck.focus();
+			}
+			if(up_mPwCheck != up_mPw){
+				alert("입력한 두 개의 비밀번호가 다릅니다 비밀번호를 확인해주세요");
+				up_mPwCheck.focus();
+			}
+			if(up_mName == ""){
+				alert("이름을 입력해주세요");
+				up_mName.focus();
+			}
+			if(up_mEmail == ""){
+				alert("이메일을 입력해주세요");
+				up_mEmail.focus();
+			}
+			if(up_mTel == ""){
+				alert("전화번호를 입력해주세요");
+				up_mTel.focus();
+			}
+			if(up_mAddr == ""){
+				alert("주소를 입력해주세요");
+				up_mAddr.focus();
+			}
+			if(up_mBirth == ""){
+				alert("생년월일을 입력해주세요");
+				up_mBirth.focus();
+			}
+			if(up_mGender == ""){
+				alert("성별을 선택해주세요");
+				up_mGender.focus();
+			}
+			if(up_mAvatar == ""){
+				alert("프로필 사진을 선택해주세요");
+				up_mAvatar.focus();
+			}
+		})
+		
+	})
+		
 	</script>
-	
 </th:block>
 </html>

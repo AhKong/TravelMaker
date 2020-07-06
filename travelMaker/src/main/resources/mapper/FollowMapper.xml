@@ -39,4 +39,22 @@
 			f.m_id=#{mId};
 	</select>
 	
+	<select id="followersNum" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_follow
+		WHERE
+			target_id=#{mId};
+	</select>
+	
+	<select id="followingNum" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_follow
+		WHERE
+			m_id=#{mId};
+	</select>
+	
 </mapper>

@@ -1,6 +1,5 @@
 package com.cafe24.travelMaker.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,15 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.mapper.FollowMapper;
 import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
-import com.cafe24.travelMaker.service.PointSerivce;
+import com.cafe24.travelMaker.service.PointService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
@@ -31,17 +28,32 @@ public class MemberController{
 
 	@Autowired MemberService memberService;
 	@Autowired private StorageService storageService;
-	@Autowired private PointSerivce pointService;
+	@Autowired private PointService pointService;
 	@Autowired private GoodsService goodsService;
-
+	@Autowired private FollowMapper followMapper;
 	
 	@GetMapping("/myPage")
-	public String myPage(Model model, HttpSession session, Member member) {
+	public String myPage(Model model, HttpSession session, Member member, @RequestParam(name="memberId",required=false) String memberId) {
 		String loginId = (String)session.getAttribute("SID");
 		List<Goods> goodsList = goodsService.getMyBuyGoods(loginId);
 		model.addAttribute("goodsList", goodsList);
 		member = memberService.getMemberInfo(loginId);
 		model.addAttribute("member", member);
+		int followersNum = followMapper.followersNum(loginId);
+		model.addAttribute("followersNum", followersNum);
+		int followingNum = followMapper.followingNum(loginId);
+		model.addAttribute("followingNum", followingNum);
+		return "/member/myPage";
+	}
+	
+	@PostMapping("/myPage")
+	public String myPage(Model model, Member member, @RequestParam(name="memberId",required=false) String memberId) {
+		member = memberService.followersPage(memberId);
+		model.addAttribute("member", member);
+		int followersNum = followMapper.followersNum(memberId);
+		model.addAttribute("followersNum", followersNum);
+		int followingNum = followMapper.followingNum(memberId);
+		model.addAttribute("followingNum", followingNum);
 		return "/member/myPage";
 	}
 	

@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title th:text="${searchWord}+의관광명소"></title>
+	<title th:text="|${searchWord}의 관광명소|"></title>
 </th:block>
 <th:block layout:fragment="customCss">
 	<style>
@@ -63,188 +63,190 @@
 }
 </style>
 </th:block>
-<th:block layout:fragment="customContents">
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-			<input type="hidden" id="mId" th:value="${session.SID}"/>
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1>SightsList - 관광지 리스트 (김아름)</h1>
-					</div>
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">sights</a></li>
-							<li class="breadcrumb-item active">sightsList.html</li>
-						</ol>
-					</div>
-				</div>
+<th:block layout:fragment="customContents" >
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+				<h1>SightsList - 관광지 리스트 (김아름)</h1>
 			</div>
-			<!-- /.container-fluid -->
-		</section>
-
-		<!-- Main content -->
-		<section class="content">
-			<input type="hidden" id="mId" th:value="${session.SID}" />
-			<!-- Default box -->
-			<div class="card">
-
-				<div class="card-body">
-					<div class="row">
-						<div class="col-12 col-md-6 col-lg-2 order-1 order-md-1">
-							<div class="warp-searchForm">
-								<form class="form-inline ">
-									<div class="input-group input-lg">
-										<input class="form-control" type="search" placeholder="Search"
-											aria-label="Search">
-										<div class="input-group-append">
-											<button class="btn btn-navbar" type="submit">
-												<i class="fas fa-search"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="sightCate">
-								<p>명소 종류</p>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 랜드마크
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 박물관
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 자연공원
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 밤문화
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 즐길거리/게임
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 스파/웰니스
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"
-							th:if="${!#lists.isEmpty(sightsList)}">
-							<h1>Best 3</h1>
-							<div class="bestSights row">
-								<div class="col-12 col-sm-4">
-									<div class=" info-box bg-light ">
-										<img src="/dist/img/avatar6.jpg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-
-											<a href="/sights/detailSights"><span>Jonna</span></a><br>
-											<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> 529건의
-											리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/test.jpeg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>HandSome</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/test2.jpeg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>Michinnom</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>박지훈 얼굴이 장관</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<span class="sightListTitle">관광명소</span>
-								<th:block th:each="l: ${sightsList}">
-									<div class="col-12">
-										<div class="sights row">
-											<div class="sightsImg col-12 col-md-2">
-												<img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}"
-													alt="User Image" width="150" height="150">
-											</div>
-											<div class="sightsDesc col-12 col-md-10">
-												<button  data-toggle="modal" data-target="#scrapModal" style="float: right;"
-													class="btn btn-primary scrapBtn">
-													<i class="fas fa-hand-point-up"></i><i
-														class="far fa-hand-point-up"></i>
-												</button>
-												<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:data-sightsNum="${l.sightsNum}" th:text="${l.sightsName}"></a><br>
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i>
-												<p th:text="${l.sightsCate.sightsType}"></p>
-												<p th:text="${l.sightsAddr}"></p>
-												<p th:text="${l.sightsDetail}"></p>
-
-											</div>
-										</div>
-									</div>
-								</th:block>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"
-							th:unless="${!#lists.isEmpty(sightsList)}">
-							<h1 th:text="|'${searchWord}'에 대한 검색 결과가 없습니다|"></h1>
-						</div>
-					</div>
-				</div>
-				<!-- /.card-body -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">sights</a></li>
+					<li class="breadcrumb-item active">sightsList.html</li>
+				</ol>
 			</div>
-			<th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
-			
-			<!-- /.card -->
-		</section>
-		<!-- /.content -->
+		</div>
 	</div>
+	<!-- /.container-fluid -->
+</div>
+<!-- Main content -->
+<section class="content" >
+	<!-- Default box -->
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12  col-lg-2 order-1 order-md-1">
+					<div class="warp-searchForm">
+						<form class="form-inline ">
+							<div class="input-group input-lg" style="width:100%">
+								<input class="form-control" type="search" placeholder="Search" aria-label="Search">
+								<div class="input-group-append">
+									<button class="btn btn-navbar" type="submit">
+										<i class="fas fa-search"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="sightCate">
+						<p>명소 종류</p>
+						<div class="radio">
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> 랜드마크
+							</label>
+						</div>
+						<div class="radio">
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> 박물관
+							</label>
+						</div>
+						<div class="radio">
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> 자연공원
+							</label>
+						</div>
+						<div class="radio">
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> 밤문화
+							</label>
+						</div>
+						<div class="radio">
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> 즐길거리/게임
+							</label>
+						</div>
+						<div class="radio">
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> 스파/웰니스
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-lg-10 order-2 order-md-2" th:if="${!#lists.isEmpty(sightsList)}">
+					<h1>Best 3</h1>
+					<div class="bestSights row">
+						<div class="col-12 col-sm-4">
+							<div class=" info-box bg-light ">
+								<img src="/dist/img/avatar6.jpg" alt="User Image" width="100"
+									height="150">
+								<div class="desc">
+
+									<a href="/sights/detailSights"><span>Jonna</span></a><br>
+									<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> 529건의
+									리뷰<br>
+									<p>박지훈 얼굴이 장관</p>
+									<p>주소작성하는부분이야</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="info-box bg-light">
+								<img src="/dist/img/test.jpeg" alt="User Image" width="100"
+									height="150">
+								<div class="desc">
+									<span>HandSome</span><br> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> 529건의 리뷰<br>
+									<p>박지훈 얼굴이 장관</p>
+									<p>주소작성하는부분이야</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="info-box bg-light">
+								<img src="/dist/img/test2.jpeg" alt="User Image" width="100"
+									height="150">
+								<div class="desc">
+									<span>Michinnom</span><br> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> 529건의 리뷰<br>
+									<p>박지훈 얼굴이 장관</p>
+									<p>주소작성하는부분이야</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" >
+						<span class="sightListTitle">관광명소</span>
+						<th:block th:each="l, i : ${sightsList}">
+							<div class="col-12 col-lg-12 col-md-12">
+								<div class="sights row">
+									<div class="sightsImg col-12 col-md-3">
+										<img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}" alt="User Image" width="80%" height="150">
+									</div>
+									<div class="sightsDesc col-12 col-md-9">
+										<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" style="float: right;" class="btn btn-primary" th:data-sightsNum ="${l.sightsNum}">
+											<!-- <tb:block th:each="s: ${}"> -->
+											<!-- <th:block th:if="${l.sightsNum} == 'sights_1'">삭제 -->
+												<i th:id="scrapInsertIcon + ${i.count}" class="far fa-hand-point-up"></i>
+												<i th:id="scrapDeleteIcon + ${i.count}" class="fas fa-hand-point-up" style="display: none"></i>
+										
+										<!-- 	</th:block>
+											<th:block th:unless="${l.sightsNum} != ${l.sightsNum} && ${tNum} == null"> --><!-- sightsNum테이블의 sightsNum 과 scrap테이블의 sightsNum 다르거나 없으면 인설트 -->
+												<!-- <i id="scrapInsertIcon" class="far fa-hand-point-up"></i>
+												<i id="scrapDeleteIcon" class="fas fa-hand-point-up" style="display: none"></i> -->
+										<!-- 	</th:block> -->
+											<!-- </tb:block> -->
+								
+										</button>
+										<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:data-sightsNum="${l.sightsNum}" th:text="${l.sightsName}"></a><br>
+										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+											class="fas fa-star"></i> <i class="fas fa-star"></i>
+										<p th:text="${l.sightsCate.sightsType}"></p>
+										<p th:text="${l.sightsAddr}"></p>
+										<p th:text="${l.sightsDetail}"></p>
+										<p th:text="${l.sightsNum}">
+									</div>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+				<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"
+					th:unless="${!#lists.isEmpty(sightsList)}">
+					<h1 th:text="|'${searchWord}'에 대한 검색 결과가 없습니다|"></h1>
+				</div>
+			</div>
+		</div>
+		<!-- /.card-body -->
+	</div>
+	x
+	<!-- /.card -->
+</section>
+<!-- /.content -->
+</div>
+<th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
 	<!-- /.content-wrapper -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-<script type="text/javascript" src="/dist/js/callMyTrip.js">
-<!--
-
-//-->
-</script>
-	<script>
+<script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
+	<script th:inline="javascript">
 		/*
 			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
 			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		 */
 		 /* id값으로 검색해서 테이블내 데이터 유무에 따라 그립보여줌... */
-
+	/*<![CDATA[*/
+	var mId = /*[[${session.SID}]]*/
+	/*]]>*/
+		console.log(mId)
+		scrap(mId);
 	</script>
 </th:block>
 </html>

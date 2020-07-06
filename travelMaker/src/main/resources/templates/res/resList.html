@@ -3,16 +3,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title th:text="|${search} 의 음식점 |"></title>
+	<title th:text="|${search}의 음식점|"></title>
 </th:block>
 <th:block layout:fragment="customCss">
 	<style>
-span {
+.sightsName {
 	font-size: 20px;
-	font-weight: bold
+	font-weight: bold;
+	color: black;
 }
 
-.bestRes {
+.bestSights {
 	padding-top: 10px;
 	margin-bottom: 20px;
 }
@@ -55,169 +56,177 @@ span {
 	width: 200px;
 }
 
-.sights{
-	border-bottom:1px solid #efefef;
-	margin-bottom:10px;
-	padding-bottom:10px;
-}
-.info-box{
-	height: 180px;
+.sights {
+	border-bottom: 1px solid #efefef;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 }
 </style>
 </th:block>
-<th:block layout:fragment="customContents">
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1>ResList - 음식점 리스트</h1>
-					</div>
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">res</a></li>
-							<li class="breadcrumb-item active">resList.html</li>
-						</ol>
-					</div>
-				</div>
+<th:block layout:fragment="customContents" >
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+				<h1>SightsList - 관광지 리스트 (김아름)</h1>
 			</div>
-			<!-- /.container-fluid -->
-		</section>
-
-		<!-- Main content -->
-		<section class="content">
-
-			<!-- Default box -->
-			<div class="card">
-
-				<div class="card-body">
-					<div class="row">
-						<div class="col-12 col-md-6 col-lg-2 order-1 order-md-1">
-							<div class="warp-searchForm">
-								<form class="form-inline ">
-									<div class="input-group input-lg">
-										<input class="form-control" type="search"
-											placeholder="Search" aria-label="Search">
-										<div class="input-group-append">
-											<button class="btn btn-navbar" type="submit">
-												<i class="fas fa-search"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>							
-							<div class="sightCate">
-								<p>음식점 종류</p>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 중국집
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 한식
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 일식
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 치킨/피자
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios1" value="option1"> 분식
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"  th:if="${!#lists.isEmpty(resList)}">
-							<h1>Best 3</h1>
-							<div class="bestRes row">
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light ">
-										<img src="/dist/img/ck.jpg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<a href="/res/detailRes"><span>맛난치킨</span></a><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>치킨/피자</p>
-											<p>치킨먹으려면 이 주소로 오시오</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/jok.jpg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>더 맛난 족발</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>한식</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-4">
-									<div class="info-box bg-light">
-										<img src="/dist/img/res1.jpg" alt="User Image" width="100"
-											height="150">
-										<div class="desc">
-											<span>더더 맛난 곱창</span><br> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-												class="fas fa-star"></i> 529건의 리뷰<br>
-											<p>한식</p>
-											<p>주소작성하는부분이야</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<span class="sightListTitle">음식점</span>
-								<th:block th:each="l : ${resList}">
-								<div class="col-12">
-									<div class="sights row">
-										<div class="sightsImg col-12 col-md-2">
-										 <img th:src="@{/fileupload/{file}(file=${l.resPhoto})}" alt="User Image" width="150" height="150">
-										</div>
-										<div class="sightsDesc col-12 col-md-10">
-										<a th:href="@{/res/resDetail(resNum=${l.resNum})}" class="sightsName" th:text="${l.resName}"></a><br> 
-											<i class="fas fa-star"></i> 
-											<i class="fas fa-star"></i> 
-											<i class="fas fa-star"></i> 
-											<i class="fas fa-star"></i> 
-										 	529건의 리뷰<br>
-											<p th:text=${l.resCate.resType}></p>
-											<p th:text="${l.resAddr}"></p>
-											<p th:text="${l.resDetail}">
-										</div>
-									</div>
-								</div>
-								</th:block>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"  th:unless="${!#lists.isEmpty(resList)}">
-							<h1 th:text ="|'${search}'에 대한 검색 결과가 없습니다|"> </h1>
-						</div>
-					</div>
-				</div>
-				<!-- /.card-body -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">sights</a></li>
+					<li class="breadcrumb-item active">sightsList.html</li>
+				</ol>
 			</div>
-			<!-- /.card -->
-		</section>
-		<!-- /.content -->
+		</div>
 	</div>
+	<!-- /.container-fluid -->
+</div>
+<!-- Main content -->
+<section class="content" >
+	<!-- Default box -->
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12  col-lg-2 order-1 order-md-1">
+					<div class="warp-searchForm">
+						<form class="form-inline ">
+							<div class="input-group input-lg" style="width:100%">
+								<input class="form-control" type="search" placeholder="Search" aria-label="Search">
+								<div class="input-group-append">
+									<button class="btn btn-navbar" type="submit">
+										<i class="fas fa-search"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+  					 <div class="sightCate">
+                        <p>음식점 종류</p>
+                        <div class="radio">
+                           <label> <input type="radio" name="optionsRadios"
+                              id="optionsRadios1" value="option1"> 중국집
+                           </label>
+                        </div>
+                        <div class="radio">
+                           <label> <input type="radio" name="optionsRadios"
+                              id="optionsRadios1" value="option1"> 한식
+                           </label>
+                        </div>
+                        <div class="radio">
+                           <label> <input type="radio" name="optionsRadios"
+                              id="optionsRadios1" value="option1"> 일식
+                           </label>
+                        </div>
+                        <div class="radio">
+                           <label> <input type="radio" name="optionsRadios"
+                              id="optionsRadios1" value="option1"> 치킨/피자
+                           </label>
+                        </div>
+                        <div class="radio">
+                           <label> <input type="radio" name="optionsRadios"
+                              id="optionsRadios1" value="option1"> 분식
+                           </label>
+                        </div>
+                     </div>
+				</div>
+				<div class="col-12 col-lg-10 order-2 order-md-2" th:if="${!#lists.isEmpty(resList)}">
+					<h1>Best 3</h1>
+					<div class="bestSights row">
+						<div class="col-12 col-sm-4">
+							<div class=" info-box bg-light ">
+								<img src="/dist/img/avatar6.jpg" alt="User Image" width="100"
+									height="150">
+								<div class="desc">
+
+									<a href="/sights/detailSights"><span>Jonna</span></a><br>
+									<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> 529건의
+									리뷰<br>
+									<p>박지훈 얼굴이 장관</p>
+									<p>주소작성하는부분이야</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="info-box bg-light">
+								<img src="/dist/img/test.jpeg" alt="User Image" width="100"
+									height="150">
+								<div class="desc">
+									<span>HandSome</span><br> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> 529건의 리뷰<br>
+									<p>박지훈 얼굴이 장관</p>
+									<p>주소작성하는부분이야</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="info-box bg-light">
+								<img src="/dist/img/test2.jpeg" alt="User Image" width="100"
+									height="150">
+								<div class="desc">
+									<span>Michinnom</span><br> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> 529건의 리뷰<br>
+									<p>박지훈 얼굴이 장관</p>
+									<p>주소작성하는부분이야</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" >
+						<span class="sightListTitle">음식점</span>
+						<th:block th:each="l: ${resList}">
+							<div class="col-12 col-lg-12 col-md-12">
+								<div class="sights row">
+									<div class="sightsImg col-12 col-md-3">
+										<img th:src="@{/fileupload/{file}(file=${l.resPhoto})}" alt="User Image" width="80%" height="150">
+									</div>
+									<div class="sightsDesc col-12 col-md-9">
+										<a id="sightsNum" th:href="@{/res/resDetail(resNum=${l.resNum})}" class="sightsName" th:data-sightsNum="${l.resNum}" th:text="${l.resName}"></a><br>
+										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+											class="fas fa-star"></i> <i class="fas fa-star"></i>
+										<p th:text="${l.resCate.resType}"></p>
+										<p th:text="${l.resAddr}"></p>
+										<p th:text="${l.resDetail}"></p>
+									</div>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+				<div class="col-12 col-md-12 col-lg-10 order-2 order-md-2"
+					th:unless="${!#lists.isEmpty(resList)}">
+					<h1 th:text="|'${search}'에 대한 검색 결과가 없습니다|"></h1>
+				</div>
+			</div>
+		</div>
+		<!-- /.card-body -->
+	</div>
+	
+	<!-- /.card -->
+</section>
+<!-- /.content -->
+</div>
+<th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
 	<!-- /.content-wrapper -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
+<script type="text/javascript" src="/dist/js/callMyTrip.js">
+<!--
 
+//-->
+</script>
+	<script>
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		 */
+		 /* id값으로 검색해서 테이블내 데이터 유무에 따라 그립보여줌... */
+
+	</script>
 </th:block>
 </html>
