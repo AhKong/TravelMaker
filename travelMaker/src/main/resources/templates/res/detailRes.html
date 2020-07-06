@@ -265,11 +265,8 @@
           			     		</span>
           			     	</div>
           			     	<div class="card-body">
-          			     		
-          			     		 <a href="#" style="color:#01579B" class="likeBtn" th:data-info="like"><i class="far fa-thumbs-up fa-2x"></i> 도움이되요</a>
-          			     		 <a href="#" style="color:#01579B"  class="unLikeBtn"><i class="fa fa-thumbs-up fa-2x"></i> 도움이되요</a>
-          			     		 
-          			     		 
+          			     		 <a href="#" style="color:#01579B"  th:if="${rl.isLiked == true}" class="likeBtn" data-info="like"><i  class="far fa-thumbs-up fa-2x"></i> 도움이되요</a>
+          			     		 <a href="#" style="color:#01579B"  th:unless="${rl.isLiked == true}"class="unLikeBtn"><i class="fa fa-thumbs-up fa-2x"></i> 도움이되요</a>
           			     	</div>
                			</div>
 					</div>

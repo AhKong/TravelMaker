@@ -5,7 +5,7 @@ public class ReviewLike {
 	private String mId;
 	private String reviewNum;
 	private String reviewRegDate;
-	private boolean isLiked;
+	private boolean isLiked = false;
 	
 	public String getLikeNum() {
 		return likeNum;
