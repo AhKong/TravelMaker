@@ -330,9 +330,6 @@
 			location.href='/member/login';
 			return false;
 		}
-		
-		console.log($(this).children().first().html())
-		console.log($(this).attr('data-info')) // 좋아요 할 것인지 or 좋아요를 취소할 것인지 
 		var dataInfo = $(this).attr('data-info');
 		var url = null;
 		var reviewNum = $(this).attr('resReviewNum')
