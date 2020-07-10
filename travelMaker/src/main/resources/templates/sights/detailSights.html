@@ -340,16 +340,16 @@
 		}
 		var dataInfo = $(this).attr('data-info');
 		var url = null;
-		var reviewNum = $(this).attr('resReviewNum')
+		var reviewNum = $(this).attr('sightsReviewNum')
 		console.log(reviewNum);
 	
 		if(dataInfo =='like'){
-			url = 'likeResReview';
+			url = 'likeSightsReview';
 			$(this).attr('data-info','unlike');
 			$(this).children().first().removeClass('far fa-thumbs-up fa-2x').addClass('fa fa-thumbs-up fa-2x')
 		
 		} else {
-			url = 'unLikeResReview';
+			url = 'unLikeSightsReview';
 			$(this).attr('data-info','like');
 			$(this).children().first().removeClass('fa fa-thumbs-up fa-2x').addClass('far fa-thumbs-up fa-2x')
 		}

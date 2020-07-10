@@ -15,4 +15,11 @@ public class LikeService {
 	public int unLikeResReview(ReviewLike reviewLike) {
 		return likeMapper.unLikeResReview(reviewLike);
 	}
+	
+	public int likeSightsReview(ReviewLike reviewLike) {
+		return likeMapper.likeSightsReview(reviewLike);
+	}
+	public int unLikeSightsReview(ReviewLike reviewLike) {
+		return likeMapper.unLikeSightsReview(reviewLike);
+	}
 }

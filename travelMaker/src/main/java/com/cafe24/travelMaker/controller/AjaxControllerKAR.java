@@ -97,9 +97,9 @@ public class AjaxControllerKAR {
 		return result;
 	}
 	
-	@GetMapping("/unLikeResReview")
+	@GetMapping("/unLikeSightsReview")
 	@ResponseBody 
-	public  HashMap<String,String>unLikeResReview(ReviewLike reviewLike){
+	public  HashMap<String,String>unLikeSightsReview(ReviewLike reviewLike){
 		System.out.println(reviewLike);
 		likeService.unLikeResReview(reviewLike);
 		HashMap<String,String> result = new HashMap<String,String>();
@@ -107,4 +107,27 @@ public class AjaxControllerKAR {
 		System.out.println(result);
 		return result;
 	}
+	
+	@GetMapping("/likeSightsReview")
+	@ResponseBody 
+	public  HashMap<String,String>likeSightsReview(ReviewLike reviewLike){
+		likeService.likeSightsReview(reviewLike);
+		HashMap<String,String> result = new HashMap<String,String>();
+		result.put("result", "sucessLike");
+		System.out.println(result);
+		return result;
+	}
+	
+	@GetMapping("/unLikeResReview")
+	@ResponseBody 
+	public  HashMap<String,String>unLikeResReview(ReviewLike reviewLike){
+		System.out.println(reviewLike);
+		likeService.unLikeSightsReview(reviewLike);
+		HashMap<String,String> result = new HashMap<String,String>();
+		result.put("result", "sucessUnLike");
+		System.out.println(result);
+		return result;
+	}
+	
+	
 }
