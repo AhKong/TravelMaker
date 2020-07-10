@@ -24,7 +24,7 @@ public class ReviewService {
 	}
 	
 	public int isWritedReview(String mId, String resNum) {
-		return reviewMapper.isWritedReview(mId, resNum);
+		return reviewMapper.isWritedResReview(mId, resNum);
 	}
 	
 	public List<ResReview> resReviewList(String resNum,String mId){
@@ -45,6 +45,10 @@ public class ReviewService {
 	}
 	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
 		return reviewMapper.getResReviewGradeCnt(resNum);
+	}
+	
+	public int isWritedSightsReview(String mId, String sightsNum) {
+		return reviewMapper.isWritedSightsReview(mId, sightsNum);
 	}
 	
 	public int addSightsReview(SightsReview sightsReview) {

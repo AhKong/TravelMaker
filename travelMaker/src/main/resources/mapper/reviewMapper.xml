@@ -85,7 +85,7 @@
 		)
      </insert>  
 
-	<select id="isWritedReview" parameterType="String" resultType="int">  
+	<select id="isWritedResReview" parameterType="String" resultType="int">  
 		SELECT
 			count(*)
 		FROM
@@ -163,6 +163,16 @@
 			)	
 	
 	</insert> 
+	
+	<select id="isWritedSightsReview" parameterType="String" resultType="int">  
+		SELECT
+			count(*)
+		FROM
+			tb_sights_review
+		WHERE
+			m_id =#{mId} and sights_num =#{sightsNum} and sights_review_status='Y';
+	</select> 
+	
 	<select id="sightsReviewList" parameterType="String" resultMap="sightsReviewResultMap">
 		SELECT 
 			m.m_avatar,
