@@ -62,6 +62,6 @@
 		from
 			tb_sights_review_like
 		where 
-			m_id = #{mId} and res_review_num =#{reviewNum}
+			m_id = #{mId} and sights_review_num =#{reviewNum}
 	</delete>
 </mapper>

@@ -14,7 +14,8 @@ public class LikeService {
 	@Autowired private NoticeService noticeService;
 	
 	public int likeResReview(ReviewLike reviewLike,String reviewWriter) {
-		if(reviewLike.getmId() != reviewWriter) {
+	
+		if(!reviewLike.getmId().equals(reviewWriter)) {
 			noticeService.addNoticeForLike(reviewWriter, reviewLike);
 		}
 		return likeMapper.likeResReview(reviewLike);
@@ -24,7 +25,7 @@ public class LikeService {
 	}
 	
 	public int likeSightsReview(ReviewLike reviewLike,String reviewWriter) {
-		if(reviewLike.getmId() != reviewWriter) {
+		if(!reviewLike.getmId().equals(reviewWriter)) {
 			noticeService.addNoticeForLike(reviewWriter, reviewLike);
 		}
 		return likeMapper.likeSightsReview(reviewLike);
