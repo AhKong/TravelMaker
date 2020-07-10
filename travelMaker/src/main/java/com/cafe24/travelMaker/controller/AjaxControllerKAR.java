@@ -23,6 +23,7 @@ import com.cafe24.travelMaker.service.LikeService;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.MsgService;
+import com.cafe24.travelMaker.service.NoticeService;
 import com.cafe24.travelMaker.service.SightsService;
 
 /*ajax 컨트롤러*/
@@ -36,6 +37,7 @@ public class AjaxControllerKAR {
 	@Autowired private MsgService msgService;
 	@Autowired private SightsService sightsService;
 	@Autowired private LikeService likeService;
+	@Autowired private NoticeService noticeService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -88,9 +90,9 @@ public class AjaxControllerKAR {
 	
 	@GetMapping("/likeResReview")
 	@ResponseBody 
-	public  HashMap<String,String>likeResReview(ReviewLike reviewLike){
+	public  HashMap<String,String>likeResReview(ReviewLike reviewLike,@RequestParam(name="reviewWriter")String reviewWriter){
 		System.out.println(reviewLike);
-		likeService.likeResReview(reviewLike);
+		likeService.likeResReview(reviewLike , reviewWriter);
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("result", "sucessLike");
 		System.out.println(result);
@@ -101,7 +103,7 @@ public class AjaxControllerKAR {
 	@ResponseBody 
 	public  HashMap<String,String>unLikeSightsReview(ReviewLike reviewLike){
 		System.out.println(reviewLike);
-		likeService.unLikeResReview(reviewLike);
+		likeService.unLikeSightsReview(reviewLike);
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("result", "sucessUnLike");
 		System.out.println(result);
@@ -110,11 +112,12 @@ public class AjaxControllerKAR {
 	
 	@GetMapping("/likeSightsReview")
 	@ResponseBody 
-	public  HashMap<String,String>likeSightsReview(ReviewLike reviewLike){
-		likeService.likeSightsReview(reviewLike);
+	public  HashMap<String,String>likeSightsReview(ReviewLike reviewLike,@RequestParam(name="reviewWriter")String reviewWriter){
+		
+		likeService.likeSightsReview(reviewLike,reviewWriter);
+	
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("result", "sucessLike");
-		System.out.println(result);
 		return result;
 	}
 	
@@ -122,7 +125,7 @@ public class AjaxControllerKAR {
 	@ResponseBody 
 	public  HashMap<String,String>unLikeResReview(ReviewLike reviewLike){
 		System.out.println(reviewLike);
-		likeService.unLikeSightsReview(reviewLike);
+		likeService.unLikeResReview(reviewLike);
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("result", "sucessUnLike");
 		System.out.println(result);

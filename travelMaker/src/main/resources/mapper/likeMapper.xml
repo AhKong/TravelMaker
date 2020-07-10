@@ -31,7 +31,7 @@
 		from
 			tb_res_review_like
 		where 
-			m_id = #{mId} and res_review_num =#{reviewNum}
+			m_id = #{mId} and res_review_num = #{reviewNum}
 	</delete>
 	
 	<insert id="likeSightsReview" parameterType="ReviewLike">

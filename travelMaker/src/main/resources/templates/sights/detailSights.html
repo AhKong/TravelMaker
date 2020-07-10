@@ -284,7 +284,7 @@
           			     		</span>
           			     	</div>
           			     	<div class="card-body">
-          			     		  <a style="color:#01579B"  class="likeBtn"  th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+          			     		  <a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
           			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
           			     	</div>
                			</div>
@@ -340,8 +340,8 @@
 		}
 		var dataInfo = $(this).attr('data-info');
 		var url = null;
-		var reviewNum = $(this).attr('sightsReviewNum')
-		console.log(reviewNum);
+		var reviewNum = $(this).attr('sightsReviewNum');
+		var reviewWriter =$(this).attr('sightsReviewMid');
 	
 		if(dataInfo =='like'){
 			url = 'likeSightsReview';
@@ -355,7 +355,7 @@
 		}
 		
 		commonAjax('/ajax/'+url,
-				{"mId" :mId, "reviewNum" :reviewNum},
+				{"mId" :mId, "reviewNum" :reviewNum,"reviewWriter":reviewWriter},
 				function(data){
 						console.log(data);
 				},'Get');	
