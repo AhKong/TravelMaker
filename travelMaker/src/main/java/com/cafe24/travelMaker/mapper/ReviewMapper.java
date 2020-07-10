@@ -20,4 +20,5 @@ public interface ReviewMapper {
 	
 	public int addSightsReview(SightsReview sightsReview);
 	public List<SightsReview> sightsReviewList(String sightsNum);
+	public int isLikedSightsReview(String mId,String reviewNum);
 }

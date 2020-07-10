@@ -81,20 +81,12 @@
 						리뷰</span>
 					<hr>
 					<p th:text="${sights.sightsDetail}"></p>
-					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}|">
-						 08:00 - 18 :00
-					</p>
-					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|">
-						<i class="fas fa-map-marker-alt"></i> 전주시 덕진구 금암동 1111
-					</p>
+					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}"></p>
+					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|"></p>
 					<p>이 여행지는 여성이 선호하는 여행지입니다</p>
 					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
-					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|">
-						<i class="fas fa-tv"></i> 
-					</p>
-					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|">
-
-					</p>
+					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|"></p>
+					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|"></p>
 					<p>
 						<a th:href="@{/feedback/addFeedback(sightsNum=${sights.sightsNum})}">
 							<i class="far fa-edit"></i>

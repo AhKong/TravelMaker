@@ -177,5 +177,14 @@
 		ON  
 		 	m.m_id = s.m_id AND s.sights_travel_type = t.trip_type_num 
 		WHERE  s.sights_num =#{sightsNum}
-     </select>                                                                                            
+     </select>      
+     
+     <select id="isLikedSightsReview" parameterType="String" resultType="int">
+		select 
+			count(*)
+		from
+			tb_sights_review_like
+		where
+			m_id = #{mId} and sights_review_num = #{reviewNum}	
+	</select>                                                                                       
 </mapper>

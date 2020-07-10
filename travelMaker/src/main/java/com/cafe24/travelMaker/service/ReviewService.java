@@ -51,8 +51,22 @@ public class ReviewService {
 		return reviewMapper.addSightsReview(sightsReview);
 	}
 	
-	public List<SightsReview> sightsReviewList(String sightsNum){
-		return reviewMapper.sightsReviewList(sightsNum);
+	public int isLikedSightsReview(String mId, String reviewNum) {
+		return reviewMapper.isLikedSightsReview(mId, reviewNum);
+	}
+	public List<SightsReview> sightsReviewList(String sightsNum,String mId){
+		
+		List<SightsReview> reviewList  =  reviewMapper.sightsReviewList(sightsNum);
+		for(int i=0; i<reviewList.size();i++) {
+			//해당 리뷰에 좋아요 하지 않은 경우 
+			if(isLikedSightsReview(mId,reviewList.get(i).getSightsReviewNum())==0) {
+				reviewList.get(i).setLiked(false);
+			} else {
+				reviewList.get(i).setLiked(true);
+			}
+		}
+		return reviewList;
+	
 	}
 	
 	
