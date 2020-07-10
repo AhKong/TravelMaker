@@ -254,7 +254,7 @@
                            			 <span class="description" th:text="|${rl.sightsReveiwRegDate}에 작성된 리뷰|">2020-05-29에 작성된 리뷰</span>
                            			  	<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:if="${rl.member.mId eq session.SID}">
                            				<a href="#" data-toggle="modal"  data-target="#updateResReview">수정</a>/
-                           				<a class="delReview">삭제</a>
+                           				<a class="delReview"  href="#"  th:sightsReviewNum = "${rl.sightsReviewNum}" th:sightsNum ="${sights.sightsNum}">삭제</a>
                            			</span>
                            			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
                            				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
@@ -389,9 +389,12 @@
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');
-				console.log(isDeleted)
+				var sightsReviewNum = $(this).attr('sightsReviewNum')
+				var sightsNum = $(this).attr('sightsNum')
+				console.log(sightsReviewNum)
+				console.log(sightsNum)
 				if(isDeleted == true){
-					$('.delReview').attr('href','/deleteSightsReveiw');				
+					$('.delReview').attr('href','/review/deleteSightsReview?sightsReviewNum='+sightsReviewNum+'&sightsNum='+sightsNum);				
 				} else {
 			
 				}

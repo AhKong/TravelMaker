@@ -33,6 +33,11 @@ public class ReviewService {
 		return reviewMapper.addResReview(resReview);
 	}
 	
+	public int deleteResReview(String ResReviewNum) {
+		return reviewMapper.deleteResReview(ResReviewNum);
+	}
+	
+
 	public int isWritedReview(String mId, String resNum) {
 		return reviewMapper.isWritedResReview(mId, resNum);
 	}
@@ -73,6 +78,9 @@ public class ReviewService {
 		return reviewMapper.addSightsReview(sightsReview);
 	}
 	
+	public int deleteSightsReview(String sightsReviewNum) {
+		return reviewMapper.deleteSightsReview(sightsReviewNum);
+	}
 	public int isLikedSightsReview(String mId, String reviewNum) {
 		return reviewMapper.isLikedSightsReview(mId, reviewNum);
 	}

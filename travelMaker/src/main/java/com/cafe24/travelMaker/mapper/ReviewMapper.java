@@ -17,9 +17,11 @@ public interface ReviewMapper {
 	public List<ResReview> resReviewList(String resNum);
 	public List<ReviewGrade> getResReviewGradeCnt(String resNum);
 	public int isLikedResReview(String mId, String reviewNum);
+	public int deleteResReview(String resReviewNum) ;
 	
 	public int addSightsReview(SightsReview sightsReview);
 	public List<SightsReview> sightsReviewList(String sightsNum);
 	public int isLikedSightsReview(String mId,String reviewNum);
 	public int isWritedSightsReview(String mId, String sightsNum);
+	public int deleteSightsReview(String sightsReviewNum) ;
 }

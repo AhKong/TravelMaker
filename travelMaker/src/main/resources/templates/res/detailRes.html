@@ -239,7 +239,7 @@
                            			 <span class="description" th:text ="|${rl.resReveiwRegDate} 에 작성된 리뷰|"></span>
                            			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:if="${rl.member.mId eq session.SID}">
                            				<a href="#" data-toggle="modal"  data-target="#updateResReview">수정</a>/
-                           				<a class="delReview">삭제</a>
+                           				<a href="#" class="delReview"  th:resNum ="${res.resNum}" th:resReviewNum ="${rl.resReviewNum}">삭제</a>
                            			</span>
                            			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
                            				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
@@ -410,9 +410,11 @@
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');
-				console.log(isDeleted)
+				var resReviewNum = $(this).attr('resReviewNum');
+				var resNum = $(this).attr('resNum');
+		
 				if(isDeleted == true){
-					$('.delReview').attr('href','/deleteSightsReveiw');				
+					$('.delReview').attr('href','/review/deleteResReview?resReviewNum='+resReviewNum+'&resNum='+resNum);				
 				} else {
 			
 				}
