@@ -12,8 +12,10 @@ import com.cafe24.travelMaker.domain.SavePoint;
 public interface PointMapper {
 	//포인트 적립 
 	public int savePoint(SavePoint savePoint);
-	public int isMyPoint(String mId);	
+	public int isMyPoint(String mId);
+	/* 회원가입 시 */
 	public int addMyPoint(Point point);
+	/* 그 외 적립 */
 	public int updateMyPoint(Point point); 
 	public Point getPointInfo(String mId);
 	public int updatePointFinal(Goods goods);
