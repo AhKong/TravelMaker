@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.TripType;
+import com.cafe24.travelMaker.mapper.PointMapper;
 import com.cafe24.travelMaker.mapper.ReviewMapper;
 import com.cafe24.travelMaker.domain.ReviewGrade;
 import com.cafe24.travelMaker.domain.SightsReview;
@@ -14,12 +15,21 @@ import com.cafe24.travelMaker.domain.SightsReview;
 @Service
 public class ReviewService {
 	@Autowired private ReviewMapper reviewMapper;
+	@Autowired private PointService pointService;
 	
 	public List<TripType> selectTripTypeList(){
 		return  reviewMapper.selectTripTypeList();
 	}
 	
 	public int addResReview (ResReview resReview) {
+		int point = 0;
+		System.out.println(resReview.getResReviewPhoto());
+		if("".equals(resReview.getResReviewPhoto())) {
+			point = 1000;
+		} else {
+			point = 1500;
+		}
+		pointService.setSavePointForReview(resReview.getMember().getmId(), point, resReview.getResReviewNum());
 		return reviewMapper.addResReview(resReview);
 	}
 	
@@ -52,6 +62,14 @@ public class ReviewService {
 	}
 	
 	public int addSightsReview(SightsReview sightsReview) {
+		int point = 0;
+	
+		if("".equals(sightsReview.getSightsReviewPhoto())) {
+			point = 1000;
+		} else {
+			point = 1500;
+		}
+		pointService.setSavePointForReview(sightsReview.getMember().getmId(), point, sightsReview.getSightsReviewNum());
 		return reviewMapper.addSightsReview(sightsReview);
 	}
 	

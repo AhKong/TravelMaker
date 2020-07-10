@@ -152,8 +152,8 @@ public class MemberController{
 		int result = memberService.addMember(member);
 		if(result >0) {// 회원가입 성공
  			System.out.println(result +"<----ryesult");
- 			pointService.setSavePointForJoin(member.getmId());
- 			int pointAddResult = pointService.savePoint();
+ 			
+ 			int pointAddResult = pointService.SavePointForJoin(member.getmId());
  			System.out.println(pointAddResult+"<----point 적립 성공!");
  			int pointResult = pointService.setPoint();
  			System.out.println(pointResult+"<----point insert 성공!");

@@ -20,5 +20,20 @@ public class NoticeService {
 		return noticeMapper.addNotice(this.notice);
 	}
 	
+	/* 포인트 지급시 당사자에게 포인트 적립 알림 */
+	
+	public int addNototiceForSavePoint(String mId, int point , String cause) {
+		String noticeContents = null;
+		this.notice = new Notice();
+		this.notice.setmId(mId);
+		if(cause.equals("리뷰작성")) {
+			noticeContents = "리뷰를 작성해주셔서 감사합니다! ";
+		} else if("회원가입".equals(cause)) {
+			noticeContents = "회원가입을 축하합니다! ";
+		}
+		noticeContents += point+"포인트 적립되었습니다.";
+		this.notice.setNoticeContents(noticeContents);
+		return noticeMapper.addNotice(this.notice);
+	}
 
 }
