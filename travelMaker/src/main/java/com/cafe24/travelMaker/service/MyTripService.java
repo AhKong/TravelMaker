@@ -17,5 +17,13 @@ public class MyTripService {
 		
 		return myTripMapper.selectMyTrip(mId);
 	}
+	public List<MyTrip> openList(String mId) {
+		
+		return myTripMapper.openMyTrip(mId);
+	}
+	public List<MyTrip> closeList(String mId) {
+		
+		return myTripMapper.closeMyTrip(mId);
+	}
 	
 }

@@ -25,8 +25,12 @@ public class TripPlanController {
 		String loginId = (String)session.getAttribute("SID");
 		System.out.println(loginId);
 		List<MyTrip> tripList = myTripService.sightsList(loginId);
+		List<MyTrip> openList = myTripService.openList(loginId);
+		List<MyTrip> closeList = myTripService.closeList(loginId);
 		System.out.println(tripList +"<-----");
 		model.addAttribute("myTripList", tripList);
+		model.addAttribute("openList", openList);
+		model.addAttribute("closeList", closeList);
 		return "/tripPlan/tripList";
 		
 	}

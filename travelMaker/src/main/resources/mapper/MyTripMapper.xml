@@ -25,4 +25,27 @@ WHERE
 m_id = #{mId};
 </select>
 
+<select id="openMyTrip" resultType="String" resultMap="sightList">
+SELECT
+*
+FROM
+tb_trip
+WHERE
+m_id = #{mId}
+AND
+trip_open_check = 'Y';
+</select>
+
+<select id="closeMyTrip" resultType="String" resultMap="sightList">
+SELECT
+*
+FROM
+tb_trip
+WHERE
+m_id = #{mId}
+AND
+trip_open_check = 'N';
+</select>
+
+
 </mapper>
