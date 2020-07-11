@@ -8,4 +8,6 @@ import com.cafe24.travelMaker.domain.ReviewLike;
 public interface LikeMapper {
 	public int likeResReview(ReviewLike reviewLike);
 	public int unLikeResReview(ReviewLike reviewLike);
+	public int unLikeSightsReview(ReviewLike reviewLike);
+	public int likeSightsReview(ReviewLike reviewLike);
 }

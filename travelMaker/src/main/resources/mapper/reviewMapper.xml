@@ -85,7 +85,7 @@
 		)
      </insert>  
 
-	<select id="isWritedReview" parameterType="String" resultType="int">  
+	<select id="isWritedResReview" parameterType="String" resultType="int">  
 		SELECT
 			count(*)
 		FROM
@@ -107,8 +107,9 @@
 			tb_trip_type AS t
 		ON  
 		 	m.m_id = r.m_id AND r.res_travel_type = t.trip_type_num 
-		WHERE  r.res_num =#{resNum}
-	</select>     
+		WHERE  r.res_num =#{resNum} and r.res_review_status ='Y'
+	</select>    
+	
 	<select id="getResReviewGradeCnt"  parameterType="String" resultType="ReviewGrade">
 		SELECT 
 			r.res_review_grade as grade,
@@ -116,10 +117,11 @@
 		FROM 
 			tb_res_review AS r
 		WHERE 
-			r.res_num =#{resNum}
+			r.res_num =#{resNum} and r.res_review_status ='Y'
 		GROUP BY  
-			r.res_review_grade
+			r.res_review_grade 
 	</select>    
+	
 	<select id="isLikedResReview" parameterType="String" resultType="int">
 		select 
 			count(*)
@@ -163,6 +165,17 @@
 			)	
 	
 	</insert> 
+	
+	<select id="isWritedSightsReview" parameterType="String" resultType="int">  
+		SELECT
+			count(*)
+		FROM
+			tb_sights_review
+		WHERE
+			m_id =#{mId} and sights_num =#{sightsNum} and sights_review_status='Y';
+	</select> 
+
+	
 	<select id="sightsReviewList" parameterType="String" resultMap="sightsReviewResultMap">
 		SELECT 
 			m.m_avatar,
@@ -176,6 +189,34 @@
 			tb_trip_type AS t
 		ON  
 		 	m.m_id = s.m_id AND s.sights_travel_type = t.trip_type_num 
-		WHERE  s.sights_num =#{sightsNum}
-     </select>                                                                                            
+		WHERE  s.sights_num =#{sightsNum} and s.sights_review_status ='Y'
+     </select>      
+     
+     <select id="isLikedSightsReview" parameterType="String" resultType="int">
+		select 
+			count(*)
+		from
+			tb_sights_review_like
+		where
+			m_id = #{mId} and sights_review_num = #{reviewNum} 
+	</select>  
+	 
+	<update id="deleteSightsReview" parameterType="String">
+		
+		update
+			tb_sights_review
+		set
+		    sights_review_status ='N'
+		where
+			sights_review_num = #{sightsReviewNum}
+	</update>  
+	<update id="deleteResReview" parameterType="String">
+		
+		update
+			tb_res_review
+		set
+		    res_review_status ='N'
+		where
+			res_review_num = #{resReviewNum}
+	</update>                                                                                   
 </mapper>

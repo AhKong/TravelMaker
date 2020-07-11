@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.domain.SavePoint;
+import com.cafe24.travelMaker.mapper.NoticeMapper;
 import com.cafe24.travelMaker.mapper.PointMapper;
 /**
 	포인트에 대한 모든 서비스 
@@ -15,15 +16,36 @@ import com.cafe24.travelMaker.mapper.PointMapper;
 @Service
 public class PointService {
 	@Autowired private PointMapper pointMapper;
+	@Autowired private NoticeService noticeService;
 	private SavePoint savePoint= new SavePoint();
 	private Point point = new Point();
 
-	//회원가입시 포인트 적립내용 셋팅
-	public SavePoint setSavePointForJoin(String mId) {
+	//회원가입시 포인트 적립 
+	public int SavePointForJoin(String mId) {
 		this.savePoint.setmId(mId);
 		this.savePoint.setSavePointCause("회원가입");
 		this.savePoint.setSavePointCharge(2000);
-		return this.savePoint;
+		
+		this.point.setmId(this.savePoint.getmId());
+		this.point.setFinalPoint(this.savePoint.getSavePointCharge());
+		pointMapper.addMyPoint(point);
+		noticeService.addNototiceForSavePoint(this.savePoint.getmId(), this.savePoint.getSavePointCharge(), this.savePoint.getSavePointCause());
+		return pointMapper.savePoint(this.savePoint);
+	}
+	
+	public int setSavePointForReview(String mId ,int point,String detail) {
+		this.savePoint.setmId(mId);
+		this.savePoint.setSavePointCharge(point);
+		this.savePoint.setSavePointCause("리뷰작성");
+		this.savePoint.setSavePointDetail(detail);
+		
+		this.point.setmId(mId);
+		this.point.setFinalPoint(point);
+		
+		pointMapper.updateMyPoint(this.point);
+		noticeService.addNototiceForSavePoint(this.savePoint.getmId(), this.savePoint.getSavePointCharge(), this.savePoint.getSavePointCause());
+		return pointMapper.savePoint(this.savePoint);
+
 	}
 	
 	// 회원가입 하면 포인트 관리 테이블에  insert 하려고!!

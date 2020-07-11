@@ -9,7 +9,7 @@ public class MyTrip {
 	private String tUrl;
 	private String sDate;
 	private String eDate;
-	private String status;
+	private String tStatus;
 	private String rDate;
 	private String tPhoto;
 	private String sightsNum;
@@ -63,10 +63,10 @@ public class MyTrip {
 		this.eDate = eDate;
 	}
 	public String getStatus() {
-		return status;
+		return tStatus;
 	}
 	public void setStatus(String status) {
-		this.status = status;
+		this.tStatus = status;
 	}
 	public String getrDate() {
 		return rDate;
@@ -74,16 +74,16 @@ public class MyTrip {
 	public void setrDate(String rDate) {
 		this.rDate = rDate;
 	}
-	public String gettPhoto() {
+	public String getTPhoto() {
 		return tPhoto;
 	}
-	public void settPhoto(String tPhoto) {
+	public void setTPhoto(String tPhoto) {
 		this.tPhoto = tPhoto;
 	}
 	@Override
 	public String toString() {
 		return "MyTrip [tNum=" + tNum + ", mId=" + mId + ", tName=" + tName + ", oCheck=" + oCheck + ", tUrl=" + tUrl
-				+ ", sDate=" + sDate + ", eDate=" + eDate + ", status=" + status + ", rDate=" + rDate + ", tPhoto="
+				+ ", sDate=" + sDate + ", eDate=" + eDate + ", status=" + tStatus + ", rDate=" + rDate + ", tPhoto="
 				+ tPhoto + ", sightsNum=" + sightsNum + "]";
 	}
 	

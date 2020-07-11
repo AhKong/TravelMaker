@@ -63,12 +63,12 @@ public class SightsController{
 	}
 	
 	@GetMapping("/detailSights")
-	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum) {
+	public String detailSights(Model model, @RequestParam(name="sightsNum") String sightsNum,HttpSession session) {
+		String mId = (String) session.getAttribute("SID");
 		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
-		model.addAttribute("reviewList",reviewService.sightsReviewList(sightsNum));
-		System.out.println(reviewService.sightsReviewList(sightsNum) +"<zlzlkdj");
-		System.out.println(sightsService.getDetailSights(sightsNum));
+		model.addAttribute("reviewList",reviewService.sightsReviewList(sightsNum,mId));
+		model.addAttribute("isWrited",reviewService.isWritedSightsReview(mId, sightsNum));
 		return "/sights/detailSights";
 	}
 	
