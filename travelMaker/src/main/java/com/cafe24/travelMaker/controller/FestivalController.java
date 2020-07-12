@@ -74,7 +74,7 @@ public class FestivalController {
 		return "redirect:/festival/ingFestivalList";
 	}
 	
-	//축제 리스트 (현재 진행중)
+	//회원 또는 비회원 -> 축제 리스트 (현재 진행중)
 	@GetMapping("/ingFestivalList")
 	public String ingFestivalList(Model model){
 		System.out.println("ingFestivalList FestivalController 도착");
@@ -83,6 +83,17 @@ public class FestivalController {
 		model.addAttribute("fList", fList);
 		
 		return "festival/festivalList";
+	}
+	
+	//관리자 페이지 -> 축제 리스트 (현재 진행중)
+	@GetMapping("/ingFestivalListManager")
+	public String ingFestivalListManager(Model model){
+		System.out.println("ingFestivalListManager FestivalController 도착");
+		List<Festival> fList = festivalService.ingFestivalList();
+		System.out.println(fList+" <- fList ingFestivalList FestivalController");
+		model.addAttribute("fList", fList);
+		
+		return "festival/festivalListManager";
 	}
 	
 	//축제 리스트 (진행 예정)
