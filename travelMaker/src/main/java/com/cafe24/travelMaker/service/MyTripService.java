@@ -21,9 +21,13 @@ public class MyTripService {
 		
 		return myTripMapper.openMyTrip(mId);
 	}
-	public List<MyTrip> closeList(String mId) {
+	public List<MyTrip> hideList(String mId) {
 		
-		return myTripMapper.closeMyTrip(mId);
+		return myTripMapper.hideMyTrip(mId);
+	}
+	public List<MyTrip> scrapList(String mId) {
+		
+		return myTripMapper.scrapMyTrip(mId);
 	}
 	
 }
