@@ -88,13 +88,18 @@ public class MemberController{
 	//회원정보수정
 	@PostMapping("/updateMember")
 	public String updateMember(Member member) {
+		System.out.println("(Post) updateMember MemberController 도착");
 		
 		return "member/myPage";
 	}
 	
 	//회원정보 수정
 	@GetMapping("/updateMember")
-	public String updateMember(Model model) {
+	public String updateMember(Model model, HttpSession session) {
+		System.out.println("(Get) updateMember MemberController 도착");
+		String mId = (String) session.getAttribute("SID");
+		Member beforeUpdateMember = memberService.beforeUpdateMember(mId);
+		model.addAttribute("beforeUpdateMember", beforeUpdateMember);
 		
 		return "member/updateMember";
 	}

@@ -2,6 +2,7 @@ package com.cafe24.travelMaker.mapper;
 
 
 import org.apache.ibatis.annotations.Mapper;
+
 import com.cafe24.travelMaker.domain.Member;
 
 @Mapper
@@ -13,4 +14,5 @@ public interface MemberMapper {
 	public Member findId(Member member); //아이디 찾기
 	public Member findPw(Member member); //비번 찾기
 	public Member followersPage(String mId);
+	public Member beforeUpdateMember(String mId); //수정 전 회원정보
 }

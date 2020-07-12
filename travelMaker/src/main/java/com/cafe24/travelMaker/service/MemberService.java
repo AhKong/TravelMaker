@@ -40,5 +40,9 @@ public class MemberService {
 	public Member followersPage(String mId) {
 		return memberMapper.followersPage(mId);
 	}
+	
+	public Member beforeUpdateMember(String mId) {
+		return memberMapper.getMemberInfo(mId);
+	}
 
 }
