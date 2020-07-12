@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.TripMemoMapper">
+	<resultMap type="TripMemo" id="tripMemoSelect">
+		<result property="tripMemoNum" column="trip_memo_num" />
+		<result property="mId" column="m_id" />
+		<result property="tripNum" column="trip_num" />
+		<result property="tripName" column="trip_name" />
+		<result property="tripMemoTripdate" column="trip_memo_tripdate" />
+		<result property="tripMemoWeather" column="trip_memo_weather" />
+		<result property="tripMemoTitle" column="trip_memo_title" />
+		<result property="tripMemoContents" column="trip_memo_contents" />
+		<result property="tripMemoPhoto" column="trip_memo_photo" />
+		<result property="tripMemoRegDate" column="trip_memo_reg_date" />
+		<result property="tripMemoCheck" column="trip_memo_check" />
+		<association property="myTrip" javaType="MyTrip">
+			<result property="tNum" column="trip_num"/>
+			<result property="tName" column="trip_name"/>
+		</association>
+	</resultMap>
+
+
+	<select id="tripMemoList" resultType="TripMemo" resultMap="tripMemoSelect">
+		SELECT 
+			m.trip_memo_num, m.m_id, m.trip_num, m.trip_memo_weather, m.trip_memo_title,
+			m.trip_memo_contents, m.trip_memo_photo, m.trip_memo_reg_date, m.trip_memo_tripdate,
+			m.trip_memo_check
+		FROM 
+			tb_trip_memo AS m
+			
+		ORDER BY m.trip_memo_reg_date DESC;
+	</select>
+
+
+	<insert id="addTripMemo" parameterType="TripMemo">
+		<selectKey order="BEFORE" keyProperty="tripMemoNum" resultType="String">
+			<!-- keyProperty="fbSightsNum" 는 select 의  tripMemoNum 와 이름이 같아야 한다  -->
+			<!--  또한 TripMemo 클래스의 trip_memo_num 컬럼의 변수명과 같아야 한다  -->
+			SELECT
+				(case COUNT(*)  
+				when 0 then 'trip_memo_1'
+				ELSE CONCAT('trip_memo_', (MAX(CAST(substring(trip_memo_num,11) AS DECIMAL))+1))
+				END) AS tripMemoNum
+			FROM
+				tb_trip_memo
+		</selectKey>
+			INSERT INTO tb_trip_memo
+			(trip_memo_num, m_id, trip_num, trip_memo_tripdate, trip_memo_weather, trip_memo_title,
+			 trip_memo_contents, trip_memo_photo, trip_memo_reg_date, trip_memo_check )			
+			
+			VALUES ( #{tripMemoNum}
+					,#{mId}
+					,#{tripNum}
+					,#{tripMemoTripdate}
+					,#{tripMemoWeather}
+					,#{tripMemoTitle}
+					,#{tripMemoContents}
+					,#{tripMemoPhoto}
+					,now()
+					,#{tripMemoCheck}
+					);
+	</insert>
+
+</mapper>
