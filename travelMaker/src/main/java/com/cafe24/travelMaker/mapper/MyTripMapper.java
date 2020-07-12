@@ -12,6 +12,7 @@ public interface MyTripMapper {
 
 	public List<MyTrip> selectMyTrip(String mId);
 	public List<MyTrip> openMyTrip(String mId);
-	public List<MyTrip> closeMyTrip(String mId);
+	public List<MyTrip> hideMyTrip(String mId);
+	public List<MyTrip> scrapMyTrip(String mId);
 
 }
