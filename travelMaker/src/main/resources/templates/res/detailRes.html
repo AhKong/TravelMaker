@@ -44,6 +44,9 @@
 		font-size:16px;
 		}
 
+		#detailReview{
+			margin-top:10px;
+		}
 </style>
 </th:block>
 <th:block>
@@ -248,7 +251,7 @@
 					</div>
 					</div>
 					<hr>
-			<th:block th:each ="rl: ${reviewList}">
+			 <th:block th:each ="rl: ${reviewList}">
 				<div class="col-md-12">
            		 <!-- Box Comment -->
             	<div class="card card-widget">
@@ -269,53 +272,57 @@
            			</span>
                 </div>
                 <!-- /.card-tools -->
-              </div>
+               </div>
               <!-- /.card-header -->
-		              <div class="card-body">
-		              <th:block  th:each="num: ${#numbers.sequence(1,rl.resReviewGrade)}">
-		          		<i class="fas fa-star" style="color:green" ></i>
-		          	 </th:block> <br>
-		          	 	<span class="reveiwTitle" th:text="${rl.resReviewTitle}"></span>
-		                <hr>
-						<span class="reveiwContents" th:text="${rl.resReviewContents}"></span><br>
-		            			     	
-		          			     		<div class="row">
-		                       			 <div class="col-sm-6">
-		              						 <img class="img-fluid"  th:if ="${rl.resReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.resReviewPhoto})}" alt="Photo" width="300">
-		                       			 </div>
-		                      		  </div>
-		          			     		<span class="revewiPurpose">
-		          			     			<i class="fas fa-suitcase-rolling"></i>
-		          			     			여행 유형 :<strong th:text="${rl.tripType.tripTypeName}"></strong>
-		          			     		</span><br>
-		          			     		<span class="visitDate">
-		          			     			<i class="far fa-calendar-check"></i>
-		          			     		<strong th:text="${rl.resVisitDate}"></strong>에 다녀감
-		          			     		</span><br><br>
-		             					<a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
-		          			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		                
-			              </div>
-			              <!-- /.card-body -->
-			     
+		       <div class="card-body">
+	              <th:block  th:each="num: ${#numbers.sequence(1,rl.resReviewGrade)}">
+	          		<i class="fas fa-star" style="color:green" ></i>
+	          	   </th:block> <br>
+	          	   <span class="reveiwTitle" th:text="${rl.resReviewTitle}"></span>
+	               <hr>
+				   <span class="reveiwContents" th:text="${rl.resReviewContents}"></span><br>
+				   <div class="row">
+             		  <div class="col-sm-6">
+    					  <img class="img-fluid"  th:if ="${rl.resReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.resReviewPhoto})}" alt="Photo" width="300">
+             		  </div>
+		           </div>
+		           <div id="detailReview">
+		          		<span class="visitDate">
+		          			<i class="far fa-calendar-check"></i>
+		            		<strong th:text="${rl.resVisitDate}"></strong>에 다녀감
+		          		</span>
+		          		<p class="revewiPurpose">
+		     				<i class="fas fa-suitcase-rolling"></i>
+		     				여행 유형 :<strong th:text="${rl.tripType.tripTypeName}"></strong>
+		     	  		</p>
+		           </div>
+		     	   
+		          <a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+		          	 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
+		         <button class="float-right btn btn-primary showComments" toggle="1">comments</button>
+			    </div>
+			    <div class="comments-warp" style="display:none;"> 
+				<div class="card-footer card-comments">
+                
+             	</div>
+              <div class="card-footer">
+                <form action="#" method="post">
+                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                  <!-- .img-push is used to add margin to elements next to floating images -->
+                  <div class="img-push">
+                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                  </div>
+                </form>
+              </div>
+			    </div>
 			              <!-- /.card-footer -->
-			              <div class="card-footer">
-			                <form action="#" method="post">
-			                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-			                  <!-- .img-push is used to add margin to elements next to floating images -->
-			                  <div class="img-push">
-			                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
-			                  </div>
-			                </form>
-			              </div>
-			              <!-- /.card-footer -->
-			            </div>
-			            <!-- /.card -->
-			          </div>
-			          </th:block>
-			         </th:block>
-				</div>
+	            </div>
+	            <!-- /.card -->
+	          </div>
+	          </th:block>
+	         </th:block>
 			</div>
+		  </div>
 		</div>
 	</div>
 </div>
@@ -338,6 +345,18 @@
 		var gradeArr =/*[[${reviewCnt}]]*/
 	/*]]>*/
 	console.log(gradeArr)
+	
+	$('.showComments').click(function(){
+		console.log($('.comments-warp').html());
+		if($(this).attr('toggle') =='1'){
+			$('.comments-warp').css('display','block')
+			$(this).attr('toggle','2')
+		} else {
+			$('.comments-warp').css('display','none')
+			$(this).attr('toggle','1') 
+		}
+		
+	})
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 		if(mId == null || mId == ''){
 			alert('로그인 후 이용가능한 서비스 입니다');
