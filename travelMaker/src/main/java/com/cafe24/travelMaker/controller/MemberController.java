@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
@@ -72,33 +73,49 @@ public class MemberController{
 	}
 	
 	//탈퇴회원 관리
-	@PostMapping("/deleteMember")
-	public String deleteMember(Member member) {
-		
-		return "member/myPage";
-	}
-	
-	//탈퇴회원 관리
 	@GetMapping("/deleteMember")
-	public String deleteMember(Model model) {
+	public String deleteMember(Member member) {
 		
 		return "member/deleteMember";
 	}
 	
-	//회원정보수정
+	//회원정보 수정
 	@PostMapping("/updateMember")
 	public String updateMember(Member member) {
 		System.out.println("(Post) updateMember MemberController 도착");
-		
-		return "member/myPage";
+		String mId = member.getmId();
+		Member m = memberService.getMemberInfo(mId);	//db 에서 조회한 회원정보
+		member.setmAvatar(member.getFile().getOriginalFilename());
+		System.out.println(member+" <<<--- member updateMember 폼에서 넘어온 데이터");
+		System.out.println(member.getmAvatar()+" <-- 변경 될 프로필 사진");
+		System.out.println(m.getmAvatar()+" <-- db 에서 조회된 프로필 사진");
+		System.out.println(mId+" <- mId");
+		if(m.getmAvatar().equals(member.getmAvatar()) ) {
+			storageService.delete(mId);
+			storageService.store(member.getFile());
+			int re1 = memberService.updateMember(member);
+			System.out.println(re1+" <- 1이면 사진 변경 없이 회원정보수정 완료!");
+		}
+		if(m.getmAvatar() != member.getmAvatar()) {
+			int re1 = memberService.updateMember(member);
+			int re2 = memberService.deleteMAvatar(member.getmAvatar(), mId);
+			int re3 = memberService.updateMAvatar(member.getmAvatar(), mId);
+			storageService.delete(mId);
+			storageService.store(member.getFile());
+			System.out.println(re1+" <- 1이면 사진 변경 없이 회원정보수정 완료!");
+			System.out.println(re2+" <- 1이면 프로필 사진 삭제 완료!");
+			System.out.println(re3+" <- 1이면 프로필 사진 변경 완료!");
+		}
+		return "redirect:/member/myPage";
 	}
 	
-	//회원정보 수정
+	//회원정보 수정 화면
 	@GetMapping("/updateMember")
 	public String updateMember(Model model, HttpSession session) {
 		System.out.println("(Get) updateMember MemberController 도착");
 		String mId = (String) session.getAttribute("SID");
 		Member beforeUpdateMember = memberService.beforeUpdateMember(mId);
+		System.out.println(beforeUpdateMember+" <- beforeUpdateMember");
 		model.addAttribute("beforeUpdateMember", beforeUpdateMember);
 		
 		return "member/updateMember";

@@ -22,10 +22,36 @@
  		</association>
  	</resultMap>
  	
- 	<select id="">
+ 	<update id="updateMAvatar" parameterType="String">
+ 		UPDATE tb_member 
+ 		SET m_avatar = #{mAvatar}
+ 		WHERE m_id=#{mId};
+ 		
+ 	</update>
  	
- 	</select>
+ 	<update id="deleteMAvatar" parameterType="String">
+ 		UPDATE tb_member
+ 		<trim prefix="SET">
+			<if test="mAvatar != null and mAvatar != ''.toString()">m_avatar=''</if>
+		</trim>
+		<where>
+			<if test="mId != null and mId != ''.toString()">m_id=#{mId}</if>
+		</where>
+ 	</update>
  	
+ 	<update id="updateMember" parameterType="Member">
+	 	UPDATE tb_member
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="mPw != null and mPw != ''.toString()">m_pw=#{mPw},</if>
+			<if test="mTel != null and mTel != ''.toString()">m_tel=#{mTel},</if>
+			<if test="mAddr != null and mAddr != ''.toString()">m_addr=#{mAddr},</if>
+			<if test="mIntrod != null and mIntrod != ''.toString()">m_introd=#{mIntrod},</if>
+		</trim>
+		<where>
+			<if test="mId != null and mId != ''.toString()">m_id=#{mId}</if>
+		</where>
+	</update>
+	 		
 	<insert id="addMember" parameterType="Member">
 		INSERT INTO
 			 tb_member(m_id, m_pw, level_num, m_name, m_email, m_tel, m_gender, m_birth, m_addr, m_avatar, m_introd)
