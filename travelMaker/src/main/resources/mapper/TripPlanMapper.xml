@@ -4,4 +4,20 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.TripPlanMapper">
 
+<insert id="TripNameInsert" parameterType="MyTrip">
+	<selectKey order="BEFORE" keyProperty="tNum" resultType="string">
+		SELECT
+			(case COUNT(*)
+			WHEN 0 THEN 'trip_num1'
+			ELSE CONCAT('trip_num', MAX(CAST(SUBSTRING(trip_num,9) AS DECIMAL))+1)
+			END) AS tNum 
+		FROM
+			tb_trip
+	</selectKey>
+	INSERT INTO tb_trip
+	(trip_num, m_id, trip_name, trip_open_check, trip_url, trip_start_date,trip_end_date,trip_status,trip_reg_date,trip_photo)
+	VALUE(#{tNum},#{mId},#{tName},#{oCheck},'trup_url',null,null,'',NOW(),'photo1.png')
+</insert>
+
+
 </mapper>

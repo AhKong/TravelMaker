@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.MyTrip;
 import com.cafe24.travelMaker.service.MyTripService;
+import com.cafe24.travelMaker.service.TripPlanService;
 
 
 @Controller
@@ -22,7 +23,7 @@ import com.cafe24.travelMaker.service.MyTripService;
 public class TripPlanController {
 	
 	@Autowired private MyTripService myTripService;
-	
+	@Autowired private TripPlanService tripPlanService;
 	@GetMapping("/tripList")
 	public String sightsList(Model model,HttpSession session) {// 여행 계획 리스트
 		String loginId = (String)session.getAttribute("SID");
@@ -42,9 +43,21 @@ public class TripPlanController {
 	}
 	
 	@PostMapping("/editTrip")
-	public String sightsAdd(Model model, @RequestParam(name="tripName", required=false) String tripName) {// 여행수정..
+	public String sightsAdd(Model model, @RequestParam(name="tripName", required=false) String tripName
+										,@RequestParam(name="jb-radio", required=false) String openCheck
+										,HttpSession session) {// 여행수정..
+		String loginId = (String)session.getAttribute("SID");
 		System.out.println(tripName+" <<<<<<<<<<<tripName");
 		model.addAttribute("tripName", tripName);
+		System.out.println(openCheck+" <<<<<<<<<<openCheck");
+		model.addAttribute("openCheck", openCheck);
+		
+		MyTrip myTrip = new MyTrip();
+		myTrip.setmId(loginId);
+		myTrip.setoCheck(openCheck);
+		myTrip.settName(tripName);
+		System.out.println(myTrip+" <<<<<<<<<<myTrip");
+		int TripNameInsert = tripPlanService.TripNameInsert(myTrip);
 		
 		return "/tripPlan/editTrip";
 	}

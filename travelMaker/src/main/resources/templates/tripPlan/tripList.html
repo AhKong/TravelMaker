@@ -108,11 +108,10 @@
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
-                <div class="tab-content">
-                
-                <div class="col-lg-3 tab-pane" id="allList">
+                <div class="tab-content row">
+                <div class="tab-pane" id="allList">
 					<!-- small box -->
-					<div class="small-box">
+					<div class="small-box col-md-6">
 						<div data-toggle="modal" data-target="#myModal">
 							<div id="myTripBox">
 								<div id="tripBoxText">
@@ -128,7 +127,8 @@
 					</div>
 					
 					<th:block th:each="tl : ${myTripList}">
-								<div style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
+							
+								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
 									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
@@ -139,8 +139,9 @@
 										
 									</div>
 								</div>
+							
 							</th:block>
-                                </div>
+                          </div>
       
      
                   <div class="tab-pane" id="openList">
@@ -148,9 +149,9 @@
 
               <!-- /.card-header -->
               
-                <div class="col-md-3 col-sm-6">
+                <div class="row">
 						<!-- small box -->
-						<div class="small-box">
+						<div class="small-box col-md-3">
 							<div data-toggle="modal" data-target="#myModal">
 								<div id="myTripBox">
 									<div id="tripBoxText">
@@ -165,7 +166,7 @@
 							</div>
 						</div>
 						<th:block th:each="tl : ${openList}">
-								<div style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
+								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
 									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
@@ -188,9 +189,9 @@
 
               <!-- /.card-header -->
               
-                <div class="col-md-3 col-sm-6">
+                <div class="row">
 						<!-- small box -->
-						<div class="small-box">
+						<div class="small-box col-md-3">
 							<div data-toggle="modal" data-target="#myModal">
 								<div id="myTripBox">
 									<div id="tripBoxText">
@@ -205,7 +206,7 @@
 							</div>
 						</div>
 						<th:block th:each="tl : ${openList}">
-								<div style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
+								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
 									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
@@ -229,9 +230,9 @@
 
               <!-- /.card-header -->
               
-                <div class="col-md-3 col-sm-6">
+                <div class="row">
 						<!-- small box -->
-						<div class="small-box">
+						<div class="small-box col-md-3">
 							<div data-toggle="modal" data-target="#myModal">
 								<div id="myTripBox">
 									<div id="tripBoxText">
@@ -246,7 +247,7 @@
 							</div>
 						</div>
 						<th:block th:each="tl : ${scrapList}">
-								<div style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
+								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
 									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
@@ -302,7 +303,7 @@
 								<div class="col">
 									<div>
 										<div class="custom-control custom-radio">
-											<input type="radio" value="open" name="jb-radio" id="jb-radio-1"
+											<input type="radio" value="Y" name="jb-radio" id="jb-radio-1"
 												class="custom-control-input"> <label
 												class="custom-control-label" for="jb-radio-1"></label>
 											<svg class="bi bi-unlock" width="1em" height="1em"
@@ -311,7 +312,7 @@
 												<path fill-rule="evenodd"
 													d="M9.655 8H2.333c-.264 0-.398.068-.471.121a.73.73 0 0 0-.224.296 1.626 1.626 0 0 0-.138.59V14c0 .342.076.531.14.635.064.106.151.18.256.237a1.122 1.122 0 0 0 .436.127l.013.001h7.322c.264 0 .398-.068.471-.121a.73.73 0 0 0 .224-.296 1.627 1.627 0 0 0 .138-.59V9c0-.342-.076-.531-.14-.635a.658.658 0 0 0-.255-.237A1.122 1.122 0 0 0 9.655 8zm.012-1H2.333C.5 7 .5 9 .5 9v5c0 2 1.833 2 1.833 2h7.334c1.833 0 1.833-2 1.833-2V9c0-2-1.833-2-1.833-2zM8.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
 											</svg>
-											<strong>공개</strong>
+											<strong><label for=jb-radio-1>공개</label></strong>
 											<div id="modalOpen" class="modalDetail">여행을 공유한 친구를
 												비롯하여 트립어드바이저의 모든 여행자가 볼 수 있습니다</div>
 										</div>
@@ -319,7 +320,7 @@
 
 									<div>
 										<div class="custom-control custom-radio">
-											<input type="radio" value="hide" name="jb-radio" id="jb-radio-2"
+											<input type="radio" value="N" name="jb-radio" id="jb-radio-2"
 												class="custom-control-input"> <label
 												class="custom-control-label" for="jb-radio-2"></label>
 											<svg class="bi bi-lock" width="1em" height="1em"
@@ -328,7 +329,7 @@
 												<path fill-rule="evenodd"
 													d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
 											</svg>
-											<strong>비공개</strong>
+											<strong><label for=jb-radio-2>비공개</label></strong>
 											<div id="modalOpen" class="modalDetail">귀하 및 여행을 공유한
 												친구를 제외한 트립어드바이저 사용자 및 회원에게 표시되지 않습니다.</div>
 										</div>
