@@ -3,17 +3,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="@{layout/default}">
 <th:block layout:fragment="customTitle">
-	<title>음식점 상세페이지</title>
+	<title>관광명소 상세페이지</title>
 </th:block>
 <th:block layout:fragment="customCss">
 <link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
-	<style>
+		<style>
 		.carousel-item img {
 			width: 400px;
 			height: 400px;
 		}
 		
-		 #sights-review,#sights-map {
+		#sights-map, #sights-review {
 			height: auto;
 			width: 81vw;
 		}
@@ -43,13 +43,17 @@
 		.badge{
 		font-size:16px;
 		}
+
+		#detailReview{
+			margin-top:10px;
+		}
 </style>
 </th:block>
 <th:block>
 <th:block layout:fragment="customContents">
 	<div th:replace="fragments/addReveiwModal :: addResReviewFragment"></div>
 	<div th:replace="fragments/updateReviewModal :: updateResReviewFragment"></div>
-	<div th:replace="fragments/reportReview :: reportResReviewFragment"></div>
+	<div th:replace="fragments/reportReview :: reportReviewFragment"></div>
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -61,7 +65,7 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">res</a></li>
-						<li class="breadcrumb-item active">detialRes</li>
+						<li class="breadcrumb-item active">detailRes</li>
 					</ol>
 				</div>
 			</div>
@@ -75,26 +79,23 @@
 			<div class="row">
 				<div class="col-12 col-sm-7">
 					<p class="my-3" style="font-size:30px;" th:utext="|${res.resName} <span class='badge ${res.btnColor}'>${res.resOpen}</span><br> |"></p>
-
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i> 
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i>
-					<span class="reveiwCnt">529개의 리뷰</span>
+					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
+						리뷰</span>
 					<hr>
 					<p th:text="${res.resDetail}"></p>
-					
-					<p th:utext="|<i class='far fa-clock'></i> &nbsp; ${res.resStartTime}- ${res.resCloseTime}|"></p>
-					<p th:utext="|<i class='fas fa-map-marker-alt'></i>  &nbsp; ${res.resAddr} |"></p>
-					<p>이 음식점을 주로 남성이 선호합니다</p>
-					<p>이 음식점은 주로 혼자 여행온 사람들이 즐깁니다.</p>
-					<p th:utext="|<i class='fas fa-tv'></i> ${res.resWeb}|"></p>
-					<p th:utext="|<i class='fa fa-volume-control-phone'></i> ${res.resTel}|"></p>
+					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${res.resStartTime} - ${res.resCloseTime}"></p>
+					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${res.resAddr}|"></p>
+					<p>이 여행지는 여성이 선호하는 여행지입니다</p>
+					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
+					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${res.resWeb}|"></p>
+					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${res.resTel}|"></p>
 					<p>
-						<a th:href="@{/feedback/addSightsFeedback(resNum=${res.resNum})}">
+						<a th:href="@{/feedback/addFeedback(resNum=${res.resNum})}">
 							<i class="far fa-edit"></i>
 							이 게시물에 대한 피드백 남기기 						
 						</a>
 					</p>
-
 				</div>
 				<div class="col-12 col-sm-5">
 					<div class="col-12">
@@ -158,130 +159,17 @@
 		<div class="row mt-4" style="margin-left: 20px;">
 			<nav class="w-100">
 				<div class="nav nav-tabs" id="product-tab" role="tablist">
-					<a class="nav-item nav-link" id="res-review-tab" data-toggle="tab" href="#res-review" role="tab" aria-controls="res-review" aria-selected="true">리뷰</a>
+					<a class="nav-item nav-link" id="sights-review-tab" data-toggle="tab" href="#sights-review" role="tab" aria-controls="sights-review" aria-selected="true">리뷰</a>
 					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변</a> 
-					<a class="nav-item nav-link active" id="event-tab" data-toggle="tab" href="#res-event" role="tab" aria-controls="res-event" aria-selected="false">이벤트</a>
+					<a class="nav-item nav-link active" id="festival-tab" data-toggle="tab" href="#festival" role="tab" aria-controls="festival" aria-selected="false">축제</a>
 				</div>
 			</nav>
 			<div class="tab-content p-3" id="nav-tabContent">
-				<div class="tab-pane fade  show active row" id="res-review" role="tabpanel" aria-labelledby="res-review-tab">
-					<div class="reviewIntroTitle">
-						<span class="reveiwIntro">review</span>
-						<button type="button" id="reveiwBtn" class="btn btn-outline-danger btn-lg float-right" >리뷰작성</button>
-						<hr>
-					</div>
-					<th:block th:unless="${!#lists.isEmpty(reviewList)}">
-					<div class="row">
-					   <h3>등록된 리뷰가 없네요 ! 첫 리뷰를 등록해주세요 </h3>
-					</div>
-					</th:block>
-					<th:block th:if="${!#lists.isEmpty(reviewList)}">
-					<div class="row" >
-						<div class="chart col-12 col-sm-4">
-							<h4 style="margin-left: 7px">관광지 평점</h4>
-							<canvas id="donutChart"style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-						</div>
-						<div class="chart col-12 col-sm-4">
-						  <h4>여행자 유형 </h4>
-						  <div class="form-group">
-						  <th:block  th:each="l: ${tripType}">
-						  	 <div class="form-check">
-						  	  <label class="form-check-label">
-	                          	<input class="form-check-input" type="radio" name="purpose" th:value="l.tripTypeNum">
-	                          	<span th:text ="${l.tripTypeName}"></span>
-	                          </label>
-	                        </div>
-						  </th:block>
-	                      </div>
-						</div>
-						<div class="col-12 col-sm-4">
-						  <h4>계절별</h4>
-						  <div class="form-group">
-	                        <div class="form-check">
-		                        <label class="form-check-label">
-		                          <input class="form-check-input" type="radio" name="purpose">
-		                      	    봄(3월-5월)
-		                      	</label>
-	                        </div>
-	                        <div class="form-check">
-		                        <label class="form-check-label">
-		                          <input class="form-check-input" type="radio" name="purpose">
-		                          	여름 (6월-8월)
-		                        </label>
-	                        </div>
-	                        <div class="form-check">
-		                        <label class="form-check-label">
-		                          <input class="form-check-input" type="radio" name="purpose">
-		                          	가을(9월-11월)
-		                        </label>
-	                        </div>
-	                        <div class="form-check">
-		                        <label class="form-check-label">
-		                          <input class="form-check-input" type="radio" name="purpose">
-		                       	      겨울(12월-2월)
-		                       </label>
-	                        </div>
-	                  
-	                      </div>	
-						</div>
-					</div>
-					<hr>
-					<th:block th:each ="rl: ${reviewList}"> 
-						<div class="post">
-						<div class="card">
-							<div class="card-header">
-							   <div class="post">
-               					  <div class="user-block">
-               			            <img class="img-circle img-bordered-sm" th:src="@{/fileupload/{file}(file=${rl.member.mAvatar})}"alt="user image">
-                        			<span class="username">
-                               		 <a href="#" th:text="${rl.member.mId}"></a>님이 작성하신 리뷰입니다.
-                      				 </span>
-                           			 <span class="description" th:text ="|${rl.resReveiwRegDate} 에 작성된 리뷰|"></span>
-                           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:if="${rl.member.mId eq session.SID}">
-                           				<a href="#" data-toggle="modal"  data-target="#updateResReview">수정</a>/
-                           				<a href="#" class="delReview"  th:resNum ="${res.resNum}" th:resReviewNum ="${rl.resReviewNum}">삭제</a>
-                           			</span>
-                           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
-                           				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
-                           			</span>
-                        		 </div>
-                  			  </div>
-          			     	</div>
-          			     	<div class="card-footer">
-          			     	<th:block  th:each="num: ${#numbers.sequence(1,rl.resReviewGrade)}">
-          			     		<i class="fas fa-star" style="color:green" ></i>
-          			     	</th:block>
-          			     	 <br>
-          			     		<span class="reveiwTitle" th:text="${rl.resReviewTitle}"></span>
-          			     		<hr>
-          			     		<span class="reveiwContents" th:text="${rl.resReviewContents}">
-          			     		</span><br>
-          			     		<div class="row">
-                       			 <div class="col-sm-6">
-                        		  <img class="img-fluid"  th:if ="${rl.resReviewPhoto !=''} " th:src="@{/fileupload/{file}(file=${rl.resReviewPhoto})}" alt="Photo" width="300">
-                       			 </div>
-                      		  </div>
-          			     		<span class="revewiPurpose">
-          			     			<i class="fas fa-suitcase-rolling"></i>
-          			     			여행 유형 :<strong th:text="${rl.tripType.tripTypeName}">비지니스</strong>
-          			     		</span><br>
-          			     		<span class="visitDate">
-          			     			<i class="far fa-calendar-check"></i>
-          			     			<strong th:text="${rl.resVisitDate}"></strong>에 다녀감
-          			     		</span>
-          			     	</div>
-          			     	<div class="card-body">
-          			     		 <a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}"  th:resReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
-          			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-          			     	</div>
-               			</div>
-					</div>
-				 </th:block>					
-					</th:block>
-					
+				<div class="tab-pane fade" id="festival" role="tabpanel" aria-labelledby="festival-tab">			
+					축제 리스트 준비중..
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-				<div class="map_wrap">
+					<div class="map_wrap">
 					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 					    <ul id="category">    
 					        <li id="CE7"  data-order="2">
@@ -307,10 +195,134 @@
 					    </ul>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="res-event" role="tabpanel" aria-labelledby="event-tab">			
-					이벤트 준비중,,
-				</div>
+				<div class="tab-pane fade  show active row" id="sights-review" role="tabpanel" aria-labelledby="sights-review-tab">
+					<div class="reviewIntroTitle">
+						<span class="reveiwIntro">review</span>
+						<button id="reveiwBtn" type="submit" class="btn btn-outline-danger btn-lg float-right" >리뷰작성</button>
+						<hr>
+					</div>
+					<th:block th:unless="${!#lists.isEmpty(reviewList)}">
+					<div class="row">
+					   <h3>등록된 리뷰가 없네요 ! 첫 리뷰를 등록해주세요 </h3>
+					</div>
+					</th:block>
+					<th:block th:if="${!#lists.isEmpty(reviewList)}">
+					
+					<div class="row">
+					<div class="chart col-12 col-sm-4">
+						<h4 style="margin-left: 7px">관광지 평점</h4>
+						<canvas id="donutChart"style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+					</div>
+					<div class="chart col-12 col-sm-4">
+					  <h4>여행자 유형 </h4>
+					  	  <th:block  th:each="l: ${tripType}">
+						  	 <div class="form-check">
+						  	  <label class="form-check-label">
+	                          	<input class="form-check-input" type="radio" name="purpose" th:value="l.tripTypeNum">
+	                          	<span th:text ="${l.tripTypeName}"></span>
+	                          </label>
+	                        </div>
+						  </th:block>
+					</div>
+					<div class="col-12 col-sm-4">
+					  <h4>계절별</h4>
+					  <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="purpose">
+                          <label class="form-check-label">봄(3월-5월)</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="purpose">
+                          <label class="form-check-label">여름(6월-8월)</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="purpose">
+                          <label class="form-check-label">가을(9월-11월)</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="purpose">
+                          <label class="form-check-label">겨울(12월-2월)</label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="purpose">
+                          <label class="form-check-label">나 홀로 여행</label>
+                        </div>
+                      </div>
+					</div>
+					</div>
+					<hr>
+			 <th:block th:each ="rl: ${reviewList}">
+				<div class="col-md-12">
+           		 <!-- Box Comment -->
+            	<div class="card card-widget">
+             	 <div class="card-header">
+             	   <div class="user-block">
+             	 	  <img class="img-circle img-bordered-sm" th:src="@{/fileupload/{file}(file=${rl.member.mAvatar})}"alt="user image">
+                  	  <span class="username"><a href="#" th:text="${rl.member.mId}"></a></span>
+                     <span class="description" th:text="|${rl.resReveiwRegDate}"></span>
+                  </div>
+                <!-- /.user-block -->
+                <div class="card-tools" style="margin-top:25px">
+           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:if="${rl.member.mId eq session.SID}">
+           				<a href="#" data-toggle="modal"  data-target="#updateResReview">수정</a>/
+           				<a class="delReview"  href="#"  th:resReviewNum = "${rl.resReviewNum}" th:resNum ="${res.resNum}">삭제</a>
+           			</span>
+           			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
+           				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
+           			</span>
+                </div>
+                <!-- /.card-tools -->
+               </div>
+              <!-- /.card-header -->
+		       <div class="card-body">
+	              <th:block  th:each="num: ${#numbers.sequence(1,rl.resReviewGrade)}">
+	          		<i class="fas fa-star" style="color:green" ></i>
+	          	   </th:block> <br>
+	          	   <span class="reveiwTitle" th:text="${rl.resReviewTitle}"></span>
+	               <hr>
+				   <span class="reveiwContents" th:text="${rl.resReviewContents}"></span><br>
+				   <div class="row">
+             		  <div class="col-sm-6">
+    					  <img class="img-fluid"  th:if ="${rl.resReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.resReviewPhoto})}" alt="Photo" width="300">
+             		  </div>
+		           </div>
+		           <div id="detailReview">
+		          		<span class="visitDate">
+		          			<i class="far fa-calendar-check"></i>
+		            		<strong th:text="${rl.resVisitDate}"></strong>에 다녀감
+		          		</span>
+		          		<p class="revewiPurpose">
+		     				<i class="fas fa-suitcase-rolling"></i>
+		     				여행 유형 :<strong th:text="${rl.tripType.tripTypeName}"></strong>
+		     	  		</p>
+		           </div>
+		     	   
+		          <a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+		          	 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
+		         <button class="float-right btn btn-primary showComments" toggle="1">comments</button>
+			    </div>
+			    <div class="comments-warp" style="display:none;"> 
+				<div class="card-footer card-comments">
+                
+             	</div>
+              <div class="card-footer">
+                <form action="#" method="post">
+                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                  <!-- .img-push is used to add margin to elements next to floating images -->
+                  <div class="img-push">
+                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                  </div>
+                </form>
+              </div>
+			    </div>
+			              <!-- /.card-footer -->
+	            </div>
+	            <!-- /.card -->
+	          </div>
+	          </th:block>
+	         </th:block>
 			</div>
+		  </div>
 		</div>
 	</div>
 </div>
@@ -333,6 +345,18 @@
 		var gradeArr =/*[[${reviewCnt}]]*/
 	/*]]>*/
 	console.log(gradeArr)
+	
+	$('.showComments').click(function(){
+		console.log($('.comments-warp').html());
+		if($(this).attr('toggle') =='1'){
+			$('.comments-warp').css('display','block')
+			$(this).attr('toggle','2')
+		} else {
+			$('.comments-warp').css('display','none')
+			$(this).attr('toggle','1') 
+		}
+		
+	})
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 		if(mId == null || mId == ''){
 			alert('로그인 후 이용가능한 서비스 입니다');
