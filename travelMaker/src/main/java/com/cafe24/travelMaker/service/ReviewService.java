@@ -17,6 +17,7 @@ public class ReviewService {
 	@Autowired private ReviewMapper reviewMapper;
 	@Autowired private PointService pointService;
 	
+	
 	public List<TripType> selectTripTypeList(){
 		return  reviewMapper.selectTripTypeList();
 	}
@@ -99,5 +100,12 @@ public class ReviewService {
 	
 	}
 	
+	public ResReview getResReviewInfo(String resReviewNum) {
+		return reviewMapper.getResReviewInfo(resReviewNum);
+	}
+	
+	public SightsReview getSightsReviewInfo(String sightsReviewNum) {
+		return reviewMapper.getSightsReviewInfo(sightsReviewNum);
+	}
 	
 }

@@ -42,6 +42,26 @@
  			<result property="mAvatar"  column="m_avatar"/>
  		</association>
 	</resultMap>
+	
+	<select id="getResReviewInfo" resultMap ="resReviewResultMap">
+		select 
+			*
+		from
+			tb_res_review
+		where 
+			res_review_num = #{resReviewNum}
+	</select>
+	
+	
+	<select id="getSightsReviewInfo" resultMap ="sightsReviewResultMap">
+		select 
+			*
+		from
+			tb_sights_review
+		where 
+			sights_review_num = #{sightsResNum}
+	</select>
+	
      <select id="selectTripTypeList" resultType="TripType">
      	SELECT 
      		trip_type_num as tripTypeNum,
