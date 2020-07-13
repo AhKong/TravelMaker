@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Message;
+import com.cafe24.travelMaker.domain.ResReviewComments;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.service.CertSerivce;
@@ -126,6 +127,16 @@ public class AjaxControllerKAR {
 	public  HashMap<String,String>unLikeResReview(ReviewLike reviewLike){
 		System.out.println(reviewLike);
 		likeService.unLikeResReview(reviewLike);
+		HashMap<String,String> result = new HashMap<String,String>();
+		result.put("result", "sucessUnLike");
+		System.out.println(result);
+		return result;
+	}
+	
+	@GetMapping("/addResReivewComment")
+	@ResponseBody 
+	public  HashMap<String,String>addResReviewComments(ResReviewComments resReviewComments){
+		System.out.println(resReviewComments+"<=---");
 		HashMap<String,String> result = new HashMap<String,String>();
 		result.put("result", "sucessUnLike");
 		System.out.println(result);

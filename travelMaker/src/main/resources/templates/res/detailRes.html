@@ -297,23 +297,24 @@
 		     	  		</p>
 		           </div>
 		     	   
-		          <a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+		          <a style="color:#01579B"  class="likeBtn" th:resReviewMid ="${rl.member.mId}" th:resReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
 		          	 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		         <button class="float-right btn btn-primary showComments" toggle="1">comments</button>
+		         <button class="float-right btn btn-primary showComments" toggle="show">comments</button>
 			    </div>
 			    <div class="comments-warp" style="display:none;"> 
 				<div class="card-footer card-comments">
                 
-             	</div>
-              <div class="card-footer">
-                <form action="#" method="post">
+             		</div>
+             	 <div class="card-footer">
+                  
                   <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                  
                   <!-- .img-push is used to add margin to elements next to floating images -->
                   <div class="img-push">
-                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                    <input type="text" class="form-control form-control-sm inputComments" placeholder="Press enter to post comment" th:resReviewNum = "${rl.resReviewNum}">
                   </div>
-                </form>
-              </div>
+                
+              	</div>
 			    </div>
 			              <!-- /.card-footer -->
 	            </div>
@@ -347,14 +348,37 @@
 	console.log(gradeArr)
 	
 	$('.showComments').click(function(){
+		var comments = $(this).parents().siblings('.comments-warp');
 		console.log($('.comments-warp').html());
-		if($(this).attr('toggle') =='1'){
-			$('.comments-warp').css('display','block')
-			$(this).attr('toggle','2')
+		if($(this).attr('toggle') =='show'){
+			comments.css('display','block');
+			$(this).attr('toggle','hidden');
 		} else {
-			$('.comments-warp').css('display','none')
-			$(this).attr('toggle','1') 
+			comments.css('display','none');
+			$(this).attr('toggle','show');
 		}
+		
+		
+		$('.inputComments').keyup(function(key){
+			var input = $(this);
+			var reviewNum = $(this).attr('resReviewNum');
+			if(key.keyCode == 13){
+				if(input.val() ==''){
+					alert('댓글을 입력하세요!');
+					input.focus();
+					return false;
+				} 
+				
+				commonAjax('/ajax/addResReivewComment',
+						{"mId" :mId, "resReviewNum" :reviewNum,"commentsContents":$(this).val()},
+						function(data){
+							console.log(data);
+							console.log(input.parents().siblings('.card-footer').html('hi'));
+						},'Get');
+			}
+		})
+		
+		$()
 		
 	})
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
@@ -366,7 +390,7 @@
 		var dataInfo = $(this).attr('data-info');
 		var url = null;
 		var reviewNum = $(this).attr('resReviewNum')
-		var reviewWriter =$(this).attr('sightsReviewMid');
+		var reviewWriter =$(this).attr('resReviewMid');
 		console.log(reviewNum);
 	
 		if(dataInfo =='like'){
