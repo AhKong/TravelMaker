@@ -44,8 +44,12 @@ public class ReviewController {
 	@GetMapping("/deleteSightsReview")
 	public  String deleteSightsReview(@RequestParam(name ="sightsReviewNum") String sightsReviewNum,
 									  @RequestParam(name ="sightsNum") String sightsNum) {
-		System.out.println(sightsNum);
-		System.out.println(sightsReviewNum);
+	
+		String fileName = reviewService.getSightsReviewInfo(sightsReviewNum).getSightsReviewPhoto();
+		
+		if(fileName !=null & !"".equals(fileName)) {
+			storageService.delete(fileName);
+		}
 		reviewService.deleteSightsReview(sightsReviewNum);
 
 		return "redirect:/sights/detailSights?sightsNum="+sightsNum;
@@ -54,8 +58,13 @@ public class ReviewController {
 	@GetMapping("/deleteResReview")
 	public  String deleteResReview(@RequestParam(name ="resReviewNum") String resReviewNum,
 									  @RequestParam(name ="resNum") String resNum) {
+	
+		String fileName = reviewService.getResReviewInfo(resReviewNum).getResReviewPhoto();
 		
-		System.out.println(resReviewNum+"<pppss");
+		if(fileName !=null & !"".equals(fileName)) {
+			storageService.delete(fileName);
+		}
+		
 		reviewService.deleteResReview(resReviewNum);
 
 		return "redirect:/res/resDetail?resNum="+resNum;

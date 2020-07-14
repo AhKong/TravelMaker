@@ -1,5 +1,6 @@
 package com.cafe24.travelMaker.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
@@ -9,6 +10,10 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.mapper.MemberMapper;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -19,7 +24,7 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class StorageService {
-
+	@Autowired MemberService memberService;
 	@Value("${service.file.uploadurl}")
 	private String fileUploadPath;
 	
@@ -77,6 +82,20 @@ public class StorageService {
 	 */
 	private Path getPath() {
 		return Paths.get("src/main/resources/static/"+fileUploadPath);
+	}
+	
+	public void delete(String fileName){
+		System.out.println(fileName +"<----fileName");
+		File file = new File("src/main/resources/static/"+fileUploadPath+"/"+fileName);	
+		if( file.exists() ){
+			if(file.delete()){
+				System.out.println("파일삭제 성공");
+			}else{
+				System.out.println("파일삭제 실패"); }
+		}else{
+			System.out.println("파일이 존재하지 않습니다."); 
+	   }
+	
 	}
 
 }

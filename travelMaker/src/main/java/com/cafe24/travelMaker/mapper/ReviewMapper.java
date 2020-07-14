@@ -24,4 +24,7 @@ public interface ReviewMapper {
 	public int isLikedSightsReview(String mId,String reviewNum);
 	public int isWritedSightsReview(String mId, String sightsNum);
 	public int deleteSightsReview(String sightsReviewNum) ;
+	public SightsReview getSightsReviewInfo(String sightsReviewNum);
+	public ResReview getResReviewInfo(String resReviewNum);
+	
 }
