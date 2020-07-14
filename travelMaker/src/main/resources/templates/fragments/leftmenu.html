@@ -13,7 +13,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex" th:if ="${session.SID != null}">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
         <div class="image">
           <img src="../../dist/img/avatar6.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
@@ -29,33 +29,33 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         <li class="nav-header">사용자 페이지</li>
-          <li class="nav-item">
+         <li class="nav-header" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3' || session.SLEVEL EQ '6'}">사용자 페이지</li>
+          <li class="nav-item" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
             <a href="/sights/sightsList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="sights">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>!관광명소 김아름</p>
             </a>
             </li>
-          <li class="nav-item">
+          <li class="nav-item" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
             <a href="/res/resList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="res">
               <i class="nav-icon fas fa-th"></i>
               	<p>!음식점 김아름</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
             <a href="/festival/ingFestivalList" class="nav-link ">
               <i class="nav-icon fas fa-icons"></i>
              	<p>!축제 이승연</p>
             </a>
           </li>
-            <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
 				<a href="/stats/stats" class="nav-link">
 					<i class="nav-icon fas fa-chart-pie"></i>
               	 <p>!통계자료 이승환</p>
             	</a>
           	</li>
            <th:block th:if ="${session.SID != null}">
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
             <a href="/myTrip/tripList " class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               	<p>!내 여행 이승환</p>
@@ -82,14 +82,14 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
             <a href="/goods/buyGoods" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
 	           		<p>!상품 구매하기 강민수</p>
             </a>
           </li>
           </th:block>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
             <a href="/weather/weatherInfo" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
 	           		<p>!날씨확인 강민수</p>
@@ -161,7 +161,7 @@
                 </a>
               </li>
              </th:block>
-             <th:block th:if="${session.SLEVEL eq '6'}">
+             <th:block th:if="${session.SLEVEL eq '6' || session.SLEVEL eq '1'}">
          	<li class="nav-header">제휴업체 페이지</li>
          	<li class="nav-item">
                 <a href="/goods/myRegGoods" class="nav-link">

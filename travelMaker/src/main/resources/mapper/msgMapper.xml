@@ -129,4 +129,41 @@
 			message_active='N'
 		WHERE message_num =#{messageNum}
 	</update>
+	
+	<update id="noticeCheckUpdate" parameterType="String" >
+		UPDATE 
+			tb_alert
+		SET
+			notice_check='Y',
+			notice_read=NOW()
+		WHERE 
+			notice_num=#{nCode}
+	</update>
+	
+	<select id="NoticeList" parameterType="String" resultType="Notice">
+		SELECT 
+			notice_num as noticeNum
+			, notice_contents as noticeContents
+			, notice_send as noticeSendTime
+			, notice_check as noticeCheck
+		FROM
+			tb_alert
+		WHERE
+			m_id=#{mId}
+	</select>
+	
+	<insert id="questionNotice" parameterType="Notice">
+		<selectKey order="BEFORE" keyProperty="noticeNum" resultType ="String"> 
+		 	 SELECT 
+				case COUNT(*)
+				when 0 then 'notice_1'
+				ELSE CONCAT('notice_',MAX(CAST(SUBSTRING(notice_num,8) AS DECIMAL))+1) 
+				END AS noticeNum
+			FROM
+				tb_alert
+			</selectKey>
+			INSERT INTO tb_alert
+				(notice_num, m_id, notice_contents, notice_send, notice_check)
+			VALUES (#{noticeNum}, #{mId}, '작성한 문의내역에 답변이 달렸습니다.', NOW(), 'N')
+	</insert>
 </mapper>
