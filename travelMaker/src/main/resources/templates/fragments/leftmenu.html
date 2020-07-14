@@ -29,26 +29,26 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         <li class="nav-header" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3' || session.SLEVEL EQ '6'}">사용자 페이지</li>
-          <li class="nav-item" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
+         <li class="nav-header">사용자 페이지</li>
+          <li class="nav-item">
             <a href="/sights/sightsList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="sights">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>!관광명소 김아름</p>
             </a>
             </li>
-          <li class="nav-item" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
+          <li class="nav-item">
             <a href="/res/resList" class="nav-link list"  data-toggle="modal" data-target="#searchModal" cate="res">
               <i class="nav-icon fas fa-th"></i>
               	<p>!음식점 김아름</p>
             </a>
           </li>
-          <li class="nav-item" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
+          <li class="nav-item">
             <a href="/festival/ingFestivalList" class="nav-link ">
               <i class="nav-icon fas fa-icons"></i>
              	<p>!축제 이승연</p>
             </a>
           </li>
-            <li class="nav-item has-treeview" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
+            <li class="nav-item has-treeview">
 				<a href="/stats/stats" class="nav-link">
 					<i class="nav-icon fas fa-chart-pie"></i>
               	 <p>!통계자료 이승환</p>

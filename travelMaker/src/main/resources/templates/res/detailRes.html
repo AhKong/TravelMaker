@@ -363,6 +363,10 @@
 			var input = $(this);
 			var reviewNum = $(this).attr('resReviewNum');
 			if(key.keyCode == 13){
+				if(mId == null || mId == undefined || mId ==''){
+					alert('로그인 후 이용 가능한 서비스 입니다.');
+					location.href ='/member/login';
+				}
 				if(input.val() ==''){
 					alert('댓글을 입력하세요!');
 					input.focus();
@@ -373,7 +377,15 @@
 						{"mId" :mId, "resReviewNum" :reviewNum,"commentsContents":$(this).val()},
 						function(data){
 							console.log(data);
-							console.log(input.parents().siblings('.card-footer').html('hi'));
+							var html ='';
+							 html +='<div class="card-comment">';
+							 html +=' <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">'
+							 html +='<div class="comment-text">';
+							 html += '<span class="username">'+mId;
+							 html += '<span class="text-muted float-right">8:03 PM Today</span>';
+							 html += ' </span><!-- /.username -->';
+							 html += '댓글내용이염2</div>  </div>'
+							console.log(input.parents().siblings('.card-footer').append(html));
 						},'Get');
 			}
 		})
@@ -463,9 +475,7 @@
 		
 				if(isDeleted == true){
 					$('.delReview').attr('href','/review/deleteResReview?resReviewNum='+resReviewNum+'&resNum='+resNum);				
-				} else {
-			
-				}
+				} 
 	
 			})
 		})
