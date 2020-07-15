@@ -1,14 +1,17 @@
 package com.cafe24.travelMaker.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.mapper.MemberMapper;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -20,6 +23,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class StorageService {
 
+	@Autowired MemberMapper memberMapper;
 	@Value("${service.file.uploadurl}")
 	private String fileUploadPath;
 	
@@ -77,6 +81,29 @@ public class StorageService {
 	 */
 	private Path getPath() {
 		return Paths.get("src/main/resources/static/"+fileUploadPath);
+	}
+	
+	/**
+	 * 업로드 된 파일 삭제
+	 */
+	public void delete(String mId){
+    	
+		Member m = memberMapper.getMemberInfo(mId);
+		
+		File file = new File("src/main/resources/static/"+fileUploadPath);		//디렉토리 
+        
+    	if( file.exists() ){
+    		if(file.equals(m.getFile().getOriginalFilename())) {
+        		if(file.delete()){
+        			System.out.println("파일삭제 성공");
+        		}else{
+        			System.out.println("파일삭제 실패");
+        		}
+    		}
+    	}else{
+    		System.out.println("파일이 존재하지 않습니다.");
+    	}
+        	
 	}
 
 }
