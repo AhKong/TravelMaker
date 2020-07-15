@@ -2,6 +2,8 @@ package com.cafe24.travelMaker.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.mapper.MemberMapper;
 
@@ -32,7 +34,6 @@ public class MemberService {
 		return memberMapper.addMember(member);
 	}
 
-
 	public Member getMemberInfo(String mId) {
 		return memberMapper.getMemberInfo(mId);
 	}
@@ -40,5 +41,22 @@ public class MemberService {
 	public Member followersPage(String mId) {
 		return memberMapper.followersPage(mId);
 	}
-
+	
+	public Member beforeUpdateMember(String mId) {	//수정 전 회원정보
+		return memberMapper.getMemberInfo(mId);
+	}
+	
+	public int updateMember(Member member) {	//회원정보 수정
+		return memberMapper.updateMember(member);
+	}
+	
+	public int deleteMAvatar(String mAvatar, String mId) {	//프로필 사진 변경 시 1)삭제
+		return memberMapper.deleteMAvatar(mAvatar, mId);
+	}
+	
+	public int updateMAvatar(String mAvatar, String mId) {	//프로필 사진 변경 시 2)재업로드
+		return memberMapper.updateMAvatar(mAvatar, mId);
+	}
+	
+	
 }
