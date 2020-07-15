@@ -35,5 +35,9 @@ public class NoticeService {
 		this.notice.setNoticeContents(noticeContents);
 		return noticeMapper.addNotice(this.notice);
 	}
+	
+	public int noticeNum(String mId) {
+		return noticeMapper.noticeNum(mId);
+	}
 
 }
