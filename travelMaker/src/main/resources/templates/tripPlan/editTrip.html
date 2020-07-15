@@ -240,6 +240,12 @@
 	max-width: 100%;
 	height: auto;
 }
+.saveBtn{
+	float: right;
+	border-radius: 5px;
+	width: 40%;
+	margin: -5px;
+}
 </style>
 
 </th:block>
@@ -267,8 +273,9 @@
 					<div class="card card-default">
 						<div class="card-header">
 							<h3 class="card-title">
-								<i class="fas fa-camera-retro"></i>[[${tripName}]]
+								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
 							</h3>
+							<button class="saveBtn"><i class="fas fa-share"></i>저장</button>
 						</div>
 						<!-- /.card-header -->
 						<div id="editBox" class="small-box">
@@ -318,19 +325,19 @@
 								</form>
 							</div>
 							<div>
-								<h3>제목 -</h3>
-							</div>
-							<div>
 								<h4>
-									생성자 : <a>이승환</a>
+									생성자ID : <a>이승환</a>
 								</h4>
 							</div>
 
 							<div data-toggle="modal" data-target="#myModalExpenses">
-								<a>여행 경비 --- </a>
+								<a>여행 경비 --- [[${sTripPlan}]]</a>
 							</div>
 							<div data-toggle="modal" data-target="#myModalMaterials">
 								<a>여행 준비물 --- </a>
+							</div>
+							<div data-toggle="modal" data-target="#myModalDetail">
+								<a>여행 상세 --- </a>
 							</div>
 						</div>
 						<div id="editBox" class="small-box">
@@ -513,6 +520,48 @@
 							</div>
 						</form>
 
+
+						<form action="/editTrip">
+							<div class="modal fade" id="myModalDetail" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<strong><i class="fas fa-book-open"></i>상세 계획!</strong>
+										</div>
+										<div class="modal-body">
+											<section class="content">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="card card-outline card-info">
+															<!-- /.card-header -->
+															<div class="card-body pad">
+																<div class="mb-3">
+																	<textarea class="textarea"
+																		placeholder="Place some text here"
+																		style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+																		name="Explanation"></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- /.col-->
+												</div>
+												<!-- ./row -->
+											</section>
+											<!-- /.content -->
+										</div>
+										<div id="modalMid">
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">미안..</button>
+												<button type="submit" class="btn btn-primary">추가하기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 					<!-- /.card -->
 				</div>
