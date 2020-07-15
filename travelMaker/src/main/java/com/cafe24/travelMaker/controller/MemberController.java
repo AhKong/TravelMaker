@@ -140,7 +140,8 @@ public class MemberController{
 				if(member.getmPw().equals(result.getmPw())) {
 					session.setAttribute("SID", result.getmId());
 		    		session.setAttribute("SLEVEL",result.getmLevel());
-		    		session.setAttribute("SNAME", result.getmName());	
+		    		session.setAttribute("SNAME", result.getmName());
+		    		session.setAttribute("SAVATAR", result.getmAvatar());
 		    		System.out.println(session.getAttribute("SID"));
 		    		System.out.println(session.getAttribute("SLEVEL"));
 		    		System.out.println(session.getAttribute("SNAME"));
