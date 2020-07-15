@@ -100,7 +100,6 @@ public class MemberController{
 			int re1 = memberService.updateMember(member);
 			int re2 = memberService.deleteMAvatar(member.getmAvatar(), mId);
 			int re3 = memberService.updateMAvatar(member.getmAvatar(), mId);
-			storageService.delete(mId);
 			storageService.store(member.getFile());
 			System.out.println(re1+" <- 1이면 사진 변경 없이 회원정보수정 완료!");
 			System.out.println(re2+" <- 1이면 프로필 사진 삭제 완료!");
