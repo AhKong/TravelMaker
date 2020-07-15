@@ -11,8 +11,13 @@ import com.cafe24.travelMaker.mapper.CommentsMapper;
 @Service
 public class CommentsService {
 	@Autowired private CommentsMapper commentsMapper;
+	@Autowired private NoticeService noticeService;
 	
-	public int addResReviewComments(ResReviewComments comments) {
+	public int addResReviewComments(ResReviewComments comments,String reviewWirter) {
+		String commentsWriter=comments.getMember().getmId();
+		if(!commentsWriter.equals(reviewWirter)) {	
+			noticeService.addNoticeForComments(commentsWriter, reviewWirter);
+		}
 		return commentsMapper.addResReviewComments(comments);
 	}
 	

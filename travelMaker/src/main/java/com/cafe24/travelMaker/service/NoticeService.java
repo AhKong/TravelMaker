@@ -35,5 +35,12 @@ public class NoticeService {
 		this.notice.setNoticeContents(noticeContents);
 		return noticeMapper.addNotice(this.notice);
 	}
+	
+	public int addNoticeForComments(String commentWirter,String reviewWirter) {
+		this.notice = new Notice();
+		this.notice.setmId(reviewWirter);
+		this.notice.setNoticeContents(commentWirter+"님이 리뷰에 댓글을 달았습니다!");
+		return noticeMapper.addNotice(this.notice);
+	}
 
 }

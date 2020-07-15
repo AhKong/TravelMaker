@@ -408,7 +408,7 @@ $(function(){
 				return false;
 			} 
 			commonAjax('/ajax/addResReivewComment',
-					{"member.mId" :mId, "resReviewNum" :reviewNum,"commentsContents":input.val()},
+					{"member.mId" :mId, "resReviewNum" :reviewNum,"commentsContents":input.val(),"reviewWirter":reviewWirter},
 					function(data){
 						var commentsList = data.commentsList;
 						var html ='';

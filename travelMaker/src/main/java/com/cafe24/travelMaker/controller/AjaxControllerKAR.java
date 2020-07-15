@@ -136,9 +136,10 @@ public class AjaxControllerKAR {
 	
 	@GetMapping("/addResReivewComment")
 	@ResponseBody 
-	public  HashMap<String,List<ResReviewComments>>addResReviewComments(ResReviewComments resReviewComments){
+	public  HashMap<String,List<ResReviewComments>>addResReviewComments(ResReviewComments resReviewComments,
+																@RequestParam(name="reviewWirter") String reviewWirter){
 		HashMap<String,List<ResReviewComments>> result = new HashMap<String,List<ResReviewComments>>();
-		int insertResult = commentsService.addResReviewComments(resReviewComments);
+		int insertResult = commentsService.addResReviewComments(resReviewComments,reviewWirter);
 		if(insertResult >0) {
 			result.put("commentsList",commentsService.getResCommentsList(resReviewComments.getResReviewNum()));
 		}
