@@ -15,10 +15,15 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex" th:if ="${session.SLEVEL EQ '1' ||  session.SLEVEL EQ '2' || session.SLEVEL EQ '3'}">
         <div class="image">
-          <img src="../../dist/img/avatar6.jpg" class="img-circle elevation-2" alt="User Image">
+<<<<<<< HEAD
+          <img class="img-circle img-bordered-sm" th:src="@{/fileupload/{file}(file=${session.SAVATAR})}"alt="user image">
+=======
+           <img class="img-circle img-bordered-sm" th:src="@{/fileupload/{file}(file=${session.SAVATAR})}"alt="user image">
+>>>>>>> refs/heads/KAR
         </div>
         <div class="info" style="width:150px">
           <a th:href="@{/member/myPage}" class="d-block" th:text="${session.SID}+강민수"></a>	
+          
         </div>
           <a href="#" id="left-out" role="button"><i class="fas fa-angle-left"></i></a>
       </div>

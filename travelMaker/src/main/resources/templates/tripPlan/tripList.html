@@ -71,6 +71,9 @@
 	padding-bottom: 50px;
 	text-align: center;
 }
+.deleteBtn{
+	float: right;
+}
 </style>
 
 </th:block>
@@ -106,12 +109,13 @@
                   <li class="nav-item"><a class="nav-link" href="#scrapList" data-toggle="tab">스크랩 여행</a></li>
                   
                 </ul>
-              </div><!-- /.card-header -->
+              </div>
               <div class="card-body">
-                <div class="tab-content row">
+                <div class="tab-content">
                 <div class="tab-pane" id="allList">
+                <div class="row">
 					<!-- small box -->
-					<div class="small-box col-md-6">
+					<div class="small-box col-md-3">
 						<div data-toggle="modal" data-target="#myModal">
 							<div id="myTripBox">
 								<div id="tripBoxText">
@@ -125,10 +129,9 @@
 							<i class="ion ion-bag"></i>
 						</div>
 					</div>
-					
-					<th:block th:each="tl : ${myTripList}">
-							
-								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
+					<th:block th:each="tl, i : ${myTripList}">
+							<div class="col-md-3">
+								<div style="cursor: pointer;" th:onclick="'location.href = \'' + @{/myTrip/editTrip(tNum=${tl.tNum},tName=${tl.tName})} + '\''">
 									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
@@ -136,19 +139,15 @@
 										<div>
 											<p th:text="${tl.tName}"></p>
 										</div>
-										
 									</div>
 								</div>
 							
+						</div>
 							</th:block>
                           </div>
-      
+					</div>
      
                   <div class="tab-pane" id="openList">
-                    <div class="card">
-
-              <!-- /.card-header -->
-              
                 <div class="row">
 						<!-- small box -->
 						<div class="small-box col-md-3">
@@ -166,8 +165,8 @@
 							</div>
 						</div>
 						<th:block th:each="tl : ${openList}">
-								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
-									<div class="small-box">
+						<div class="col-md-3">
+								<div style="cursor: pointer;" th:onclick="'location.href = \'' + @{/myTrip/editTrip(tNum=${tl.tNum},tName=${tl.tName})} + '\''">									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
 										</div>
@@ -177,18 +176,12 @@
 										
 									</div>
 								</div>
+								</div>
 							</th:block>
                   </div>
-                	
-              </div>
-              <!-- /.card-body -->
             </div>
             
             <div class="tab-pane" id="hideList">
-                    <div class="card">
-
-              <!-- /.card-header -->
-              
                 <div class="row">
 						<!-- small box -->
 						<div class="small-box col-md-3">
@@ -198,16 +191,15 @@
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span><a><strong>
 										<i class="fas fa-plus"></i> 내여행 만들기</strong></a>
 									</div>
-									
 								</div>
 							</div>
 							<div class="icon" data-toggle="modal" data-target="#myModal">
 								<i class="ion ion-bag"></i>
 							</div>
 						</div>
-						<th:block th:each="tl : ${openList}">
-								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
-									<div class="small-box">
+						<th:block th:each="tl : ${closeList}">
+						<div class="col-md-3">
+								<div style="cursor: pointer;" th:onclick="'location.href = \'' + @{/myTrip/editTrip(tNum=${tl.tNum},tName=${tl.tName})} + '\''">									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
 										</div>
@@ -217,19 +209,13 @@
 										
 									</div>
 								</div>
+								</div>
 							</th:block>
                   </div>
-                	
-              </div>
-              <!-- /.card-body -->
             </div>
             
             
             <div class="tab-pane" id="scrapList">
-                    <div class="card">
-
-              <!-- /.card-header -->
-              
                 <div class="row">
 						<!-- small box -->
 						<div class="small-box col-md-3">
@@ -239,7 +225,6 @@
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span><a><strong>
 										<i class="fas fa-plus"></i> 내여행 만들기</strong></a>
 									</div>
-									
 								</div>
 							</div>
 							<div class="icon" data-toggle="modal" data-target="#myModal">
@@ -247,6 +232,7 @@
 							</div>
 						</div>
 						<th:block th:each="tl : ${scrapList}">
+						
 								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
 									<div class="small-box">
 										<div>
@@ -259,10 +245,6 @@
 									</div>
 								</div>
 							</th:block>
-                  </div>
-                	
-              </div>
-              <!-- /.card-body -->
             </div>
             </div>
             
@@ -314,7 +296,7 @@
 											</svg>
 											<strong><label for=jb-radio-1>공개</label></strong>
 											<div id="modalOpen" class="modalDetail">여행을 공유한 친구를
-												비롯하여 트립어드바이저의 모든 여행자가 볼 수 있습니다</div>
+												비롯하여 트레블메이커의 모든 여행자가 볼 수 있습니다</div>
 										</div>
 									</div>
 
@@ -331,7 +313,7 @@
 											</svg>
 											<strong><label for=jb-radio-2>비공개</label></strong>
 											<div id="modalOpen" class="modalDetail">귀하 및 여행을 공유한
-												친구를 제외한 트립어드바이저 사용자 및 회원에게 표시되지 않습니다.</div>
+												친구를 제외한 트레블메이커 사용자 및 회원에게 표시되지 않습니다.</div>
 										</div>
 									</div>
 								</div>

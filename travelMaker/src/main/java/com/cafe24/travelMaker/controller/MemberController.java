@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.domain.Res;
+import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.mapper.FollowMapper;
 import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.PointService;
+import com.cafe24.travelMaker.service.ReviewService;
 import com.cafe24.travelMaker.service.StorageService;
 
 @Controller
@@ -32,6 +34,7 @@ public class MemberController{
 	@Autowired private PointService pointService;
 	@Autowired private GoodsService goodsService;
 	@Autowired private FollowMapper followMapper;
+	@Autowired private ReviewService reviewService;
 	
 	@GetMapping("/myPage")
 	public String myPage(Model model, HttpSession session, Member member, @RequestParam(name="memberId",required=false) String memberId) {
@@ -44,6 +47,8 @@ public class MemberController{
 		model.addAttribute("followersNum", followersNum);
 		int followingNum = followMapper.followingNum(loginId);
 		model.addAttribute("followingNum", followingNum);
+		List<ResReview> followersResReviewList = reviewService.followersResReviewList(loginId);
+		model.addAttribute("followersResReviewList", followersResReviewList);
 		return "/member/myPage";
 	}
 	
@@ -55,6 +60,8 @@ public class MemberController{
 		model.addAttribute("followersNum", followersNum);
 		int followingNum = followMapper.followingNum(memberId);
 		model.addAttribute("followingNum", followingNum);
+		List<ResReview> followersResReviewList = reviewService.followersResReviewList(memberId);
+		model.addAttribute("followersResReviewList", followersResReviewList);
 		return "/member/myPage";
 	}
 	
@@ -140,11 +147,13 @@ public class MemberController{
 				if(member.getmPw().equals(result.getmPw())) {
 					session.setAttribute("SID", result.getmId());
 		    		session.setAttribute("SLEVEL",result.getmLevel());
-		    		session.setAttribute("SNAME", result.getmName());	
+		    		session.setAttribute("SNAME", result.getmName());
+		    		session.setAttribute("SAVATAR", result.getmAvatar());
 		    		System.out.println(session.getAttribute("SID"));
 		    		System.out.println(session.getAttribute("SLEVEL"));
 		    		System.out.println(session.getAttribute("SNAME"));
 		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
+		    		
 		    		return "redirect:/";
 				}
 			}

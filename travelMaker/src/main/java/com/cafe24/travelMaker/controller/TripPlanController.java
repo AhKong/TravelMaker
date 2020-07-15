@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.MyTrip;
+import com.cafe24.travelMaker.domain.TripPlan;
 import com.cafe24.travelMaker.service.MyTripService;
 import com.cafe24.travelMaker.service.TripPlanService;
 
@@ -56,9 +57,24 @@ public class TripPlanController {
 		myTrip.setmId(loginId);
 		myTrip.setoCheck(openCheck);
 		myTrip.settName(tripName);
-		System.out.println(myTrip+" <<<<<<<<<<myTrip");
+		System.out.println(myTrip+" <<<<<<<<<< POSTeditTrip - myTrip");
 		int TripNameInsert = tripPlanService.TripNameInsert(myTrip);
+		System.out.println(TripNameInsert + "<< tripnameinsertttttttttttttt");
+		return "/tripPlan/editTrip";
+	}
+	
+	@GetMapping("/editTrip")
+	public String sightsEdit(Model model,HttpSession session,
+									@RequestParam(name="tNum", required = false) String tNum,
+									@RequestParam(name="tName", required=false) String tName) {
+		String loginId = (String)session.getAttribute("SID");
+		String myTripNum = tripPlanService.myTripNum(tNum);
+		System.out.println(myTripNum+" GETeditTrip- myTripNum");
+		model.addAttribute("tripName", tName);
 		
+		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
+		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ");
+		model.addAttribute("sTripPlan", selectTripPlan);
 		return "/tripPlan/editTrip";
 	}
 	

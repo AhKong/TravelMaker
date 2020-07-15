@@ -12,10 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.cafe24.travelMaker.service.MsgService;
+import com.cafe24.travelMaker.service.NoticeService;
 
 @Component
 public class MsgIntercepter extends HandlerInterceptorAdapter{
 	@Autowired private MsgService msgService;
+	@Autowired private NoticeService noticeService;
 
 	
     @Override
@@ -25,8 +27,8 @@ public class MsgIntercepter extends HandlerInterceptorAdapter{
 		  String sessionId = (String) session.getAttribute("SID"); // 다운 캐스팅
 		  if(sessionId !=null) {
 			  session.setAttribute("unReadMsgCtn", msgService.countUnReadMsg(sessionId));
+			  session.setAttribute("noticeNum", noticeService.noticeNum(sessionId));
 		   }
 		  return true; 
 		  }
-
 }

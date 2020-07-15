@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.TripType;
-import com.cafe24.travelMaker.mapper.PointMapper;
 import com.cafe24.travelMaker.mapper.ReviewMapper;
 import com.cafe24.travelMaker.domain.ReviewGrade;
 import com.cafe24.travelMaker.domain.SightsReview;
@@ -108,4 +108,7 @@ public class ReviewService {
 		return reviewMapper.getSightsReviewInfo(sightsReviewNum);
 	}
 	
+	public List<ResReview> followersResReviewList(String mId) {
+		return reviewMapper.followersResReviewList(mId);
+	}
 }
