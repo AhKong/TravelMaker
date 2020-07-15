@@ -10,4 +10,5 @@ public interface CommentsMapper {
 	public int addResReviewComments(ResReviewComments comments);
 	public ResReviewComments getResReivewComments(String commentsNum);
 	public List<ResReviewComments> getResCommentsList(String resReviewNum);
+	public int deleletResReviewComments(String commentsNum);
 }

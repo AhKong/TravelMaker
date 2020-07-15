@@ -23,4 +23,7 @@ public class CommentsService {
 	public List<ResReviewComments> getResCommentsList(String resReviewNum){
 		return commentsMapper.getResCommentsList(resReviewNum);
 	}
+	public int deleletResReviewComments(String commentsNum) {
+		return commentsMapper.deleletResReviewComments(commentsNum);
+	}
 }

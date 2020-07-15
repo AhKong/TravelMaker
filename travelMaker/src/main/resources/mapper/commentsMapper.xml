@@ -60,8 +60,17 @@
 		ON
 		    c.m_id = m.m_id
 		WHERE
-			c.res_review_num = #{resReviewNum}
+			c.res_review_num = #{resReviewNum} and c.comment_active='Y'
 		ORDER BY 
 		 	c.comment_reg_date DESC 
 	</select>
+	
+	<update id="deleletResReviewComments" parameterType="String">
+		UPDATE 
+			tb_res_comment
+		SET
+			comment_active='N'
+		WHERE
+			res_comment_num = #{commentsNum}
+	</update>
 </mapper>

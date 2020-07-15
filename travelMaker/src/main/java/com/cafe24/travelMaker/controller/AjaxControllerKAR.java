@@ -154,4 +154,15 @@ public class AjaxControllerKAR {
 		return result;
 	}
 	
+	@GetMapping("/deleteResReivewComment")
+	@ResponseBody 
+	public HashMap<String,String> deleteResReivewComment( @RequestParam(name="commentsNum") String commentsNum){
+		HashMap<String,String> result = new HashMap<String,String>();
+		int deleteResult = commentsService.deleletResReviewComments(commentsNum);
+		if(deleteResult>0) {
+			result.put("result", "success");
+		}
+		return result;
+	}
+	
 }

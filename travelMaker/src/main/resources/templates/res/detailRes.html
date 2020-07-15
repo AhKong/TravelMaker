@@ -303,7 +303,6 @@
 			    </div>
 			    <div class="comments-warp" style="display:none;"> 
 					<div class="card-footer card-comments">
-                		<p>이거 뽑아내라 아름아,,ㅎㅇㅌ!!!!</p>
              		</div>
              	 <div class="card-footer">
                   
@@ -338,6 +337,7 @@
 <script src="/dist/js/kakaoMap.js"></script>
 <script src="/dist/js/commonAjax.js"></script>
 <script th:inline="javascript">
+
 $(function(){
 	
 	/*<![CDATA[*/
@@ -363,23 +363,28 @@ $(function(){
 					function(data){
 						var commentsList = data.commentsList;
 						var html ='';
-						 for(var i =0; i<commentsList.length;i++){
-							 html +='<div class="card-comment">';
-							 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
-							 html +='<div class="comment-text">';
-							 html += '<span class="username">'+commentsList[i].member.mId;
-							 if(reviewWirter ==commentsList[i].member.mId ){
-								 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
+						if(commentsList.length >0){
+							for(var i =0; i<commentsList.length;i++){
+								 html +='<div class="card-comment">';
+								 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
+								 html +='<div class="comment-text">';
+								 html += '<span class="username">'+commentsList[i].member.mId;
+								 if(reviewWirter ==commentsList[i].member.mId ){
+									 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
+								 }
+								 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
+								 html += ' </span><!-- /.username -->';
+								 if(commentsList[i].member.mId == mId){
+									 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
+								 }
+							
+								 html += commentsList[i].commentsContents+'</div></div>'	 
 							 }
-							 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
-							 html += ' </span><!-- /.username -->';
-							 if(commentsList[i].member.mId == mId){
-								 html += '<span class="text-muted float-right">삭제</span>';
-							 }
-						
-							 html += commentsList[i].commentsContents+'</div></div>'	 
-						 }
-						 commentList.html(html)
+						} else {
+							html ='<p> 아직 댓글이 없습니다 첫 댓글을 남겨주세요!</p>'
+						}
+						 
+						commentList.html(html)	
 					},'Get'); 
 			
 		} else {
@@ -418,7 +423,7 @@ $(function(){
 							 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
 							 html += ' </span><!-- /.username -->';
 							 if(commentsList[i].member.mId == mId){
-								 html += '<span class="text-muted float-right">삭제</span>';
+								 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
 							 }
 						
 							 html += commentsList[i].commentsContents+'</div></div>'	 	 
@@ -520,6 +525,21 @@ $(function(){
 			})
 		})
 	})
+	
+	  $(document).on('click','.deleteComments',function(){
+	 	var commentsNum = $(this).attr('commentsNum');
+	 	var deleteComment = $(this);
+	 	var isDeleted = confirm('진짜 삭제하시겠어요?');
+	 	if(isDeleted==true){
+	 		commonAjax('/ajax/deleteResReivewComment',
+					{"commentsNum":commentsNum},
+					function(data){
+						deleteComment.parents('.card-comment').remove();			
+					},'Get'); 
+	 		
+	 	}
+   })
+
 </script>
 </th:block>
 </html>
