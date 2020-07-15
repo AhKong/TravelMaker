@@ -12,6 +12,9 @@ public class NoticeService {
 	@Autowired private NoticeMapper noticeMapper;
 	private Notice notice;
 	
+	public int noticeNum(String mId) {
+		return noticeMapper.noticeNum(mId);
+	}
 	/* 리뷰 작성자한테 리뷰 좋아요 알림 */
 	public int addNoticeForLike(String reviewWriter,ReviewLike reviewLike) {
 		this.notice = new Notice();
