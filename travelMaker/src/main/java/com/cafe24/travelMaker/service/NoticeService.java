@@ -12,6 +12,9 @@ public class NoticeService {
 	@Autowired private NoticeMapper noticeMapper;
 	private Notice notice;
 	
+	public int noticeNum(String mId) {
+		return noticeMapper.noticeNum(mId);
+	}
 	/* 리뷰 작성자한테 리뷰 좋아요 알림 */
 	public int addNoticeForLike(String reviewWriter,ReviewLike reviewLike) {
 		this.notice = new Notice();
@@ -34,6 +37,15 @@ public class NoticeService {
 		noticeContents += point+"포인트 적립되었습니다.";
 		this.notice.setNoticeContents(noticeContents);
 		return noticeMapper.addNotice(this.notice);
+	}
+	
+
+	public int addNoticeForComments(String commentWirter,String reviewWirter) {
+		this.notice = new Notice();
+		this.notice.setmId(reviewWirter);
+		this.notice.setNoticeContents(commentWirter+"님이 리뷰에 댓글을 달았습니다!");
+		return noticeMapper.addNotice(this.notice);
+
 	}
 
 }

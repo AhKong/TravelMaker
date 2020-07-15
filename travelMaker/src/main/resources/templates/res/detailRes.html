@@ -299,19 +299,18 @@
 		     	   
 		          <a style="color:#01579B"  class="likeBtn" th:resReviewMid ="${rl.member.mId}" th:resReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
 		          	 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		         <button class="float-right btn btn-primary showComments" toggle="show">comments</button>
+		         <button class="float-right btn btn-primary showComments" toggle="show" th:resReviewNum="${rl.resReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
 			    </div>
 			    <div class="comments-warp" style="display:none;"> 
-				<div class="card-footer card-comments">
-                
+					<div class="card-footer card-comments">
              		</div>
              	 <div class="card-footer">
                   
-                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-                  
+                  <img class="img-fluid img-circle img-sm" th:src="@{/fileupload/{file}(file=${session.SAVATAR})}" alt="Alt Text">
+   
                   <!-- .img-push is used to add margin to elements next to floating images -->
                   <div class="img-push">
-                    <input type="text" class="form-control form-control-sm inputComments" placeholder="Press enter to post comment" th:resReviewNum = "${rl.resReviewNum}">
+                    <input type="text" class="form-control form-control-sm inputComments" placeholder="Press enter to post comment" th:resReviewNum = "${rl.resReviewNum}" th:reviewWriter ="${rl.member.mId}">
                   </div>
                 
               	</div>
@@ -338,6 +337,9 @@
 <script src="/dist/js/kakaoMap.js"></script>
 <script src="/dist/js/commonAjax.js"></script>
 <script th:inline="javascript">
+
+$(function(){
+	
 	/*<![CDATA[*/
 		var lat = /*[[${res.resLat}]]*/;
 		var lng = /*[[${res.resLong}]]*/;	
@@ -345,55 +347,98 @@
 		var isWrited =/*[[${isWrited}]]*/;
 		var gradeArr =/*[[${reviewCnt}]]*/
 	/*]]>*/
-	console.log(gradeArr)
-	
+
 	$('.showComments').click(function(){
 		var comments = $(this).parents().siblings('.comments-warp');
-		console.log($('.comments-warp').html());
+		var reviewNum = $(this).attr('resReviewNum');
+		var commentList = comments.children('.card-comments');
+		var reviewWirter =  $(this).attr('reviewWriter');
+		console.log(reviewWirter +"<---리뷰 작성자")
 		if($(this).attr('toggle') =='show'){
 			comments.css('display','block');
 			$(this).attr('toggle','hidden');
+		
+			commonAjax('/ajax/getResCommentsList',
+					{"resReviewNum" :reviewNum},
+					function(data){
+						var commentsList = data.commentsList;
+						var html ='';
+						if(commentsList.length >0){
+							for(var i =0; i<commentsList.length;i++){
+								 html +='<div class="card-comment">';
+								 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
+								 html +='<div class="comment-text">';
+								 html += '<span class="username">'+commentsList[i].member.mId;
+								 if(reviewWirter ==commentsList[i].member.mId ){
+									 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
+								 }
+								 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
+								 html += ' </span><!-- /.username -->';
+								 if(commentsList[i].member.mId == mId){
+									 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
+								 }
+							
+								 html += commentsList[i].commentsContents+'</div></div>'	 
+							 }
+						} else {
+							html ='<p> 아직 댓글이 없습니다 첫 댓글을 남겨주세요!</p>'
+						}
+						 
+						commentList.html(html)	
+					},'Get'); 
+			
 		} else {
 			comments.css('display','none');
 			$(this).attr('toggle','show');
 		}
+	})
 		
-		
-		$('.inputComments').keyup(function(key){
-			var input = $(this);
-			var reviewNum = $(this).attr('resReviewNum');
-			if(key.keyCode == 13){
-				if(mId == null || mId == undefined || mId ==''){
-					alert('로그인 후 이용 가능한 서비스 입니다.');
-					location.href ='/member/login';
-				}
-				if(input.val() ==''){
-					alert('댓글을 입력하세요!');
-					input.focus();
-					return false;
-				} 
-				
-				commonAjax('/ajax/addResReivewComment',
-						{"mId" :mId, "resReviewNum" :reviewNum,"commentsContents":$(this).val()},
-						function(data){
-							console.log(data);
-							var html ='';
-							 html +='<div class="card-comment">';
-							 html +=' <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">'
-							 html +='<div class="comment-text">';
-							 html += '<span class="username">'+mId;
-							 html += '<span class="text-muted float-right">8:03 PM Today</span>';
-							 html += ' </span><!-- /.username -->';
-							 html += '댓글내용이염2</div>  </div>'
-							console.log(input.parents().siblings('.card-footer').append(html));
-						},'Get');
+	$('.inputComments').keydown(function(key){
+		var input = $(this);
+		var reviewNum = $(this).attr('resReviewNum');
+		var reviewWirter =  $(this).attr('reviewWriter');
+		if(key.keyCode == 13){
+			 if(mId == null || mId == undefined || mId ==''){
+				alert('로그인 후 이용 가능한 서비스 입니다.');
+				location.href ='/member/login';
 			}
-		})
-		
-		$()
+			if(input.val() ==''){
+				alert('댓글을 입력하세요!');
+				input.focus();
+				return false;
+			} 
+			commonAjax('/ajax/addResReivewComment',
+					{"member.mId" :mId, "resReviewNum" :reviewNum,"commentsContents":input.val(),"reviewWirter":reviewWirter},
+					function(data){
+						var commentsList = data.commentsList;
+						var html ='';
+						 for(var i =0; i<commentsList.length;i++){
+							 html +='<div class="card-comment">';
+							 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
+							 html +='<div class="comment-text">';
+							 html += '<span class="username">'+commentsList[i].member.mId;
+							 if(reviewWirter ==commentsList[i].member.mId ){
+								 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
+							 }
+							 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
+							 html += ' </span><!-- /.username -->';
+							 if(commentsList[i].member.mId == mId){
+								 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
+							 }
+						
+							 html += commentsList[i].commentsContents+'</div></div>'	 	 
+						 }
+					
+						input.val('');
+						input.parents().siblings('.card-footer').html(html)
+						
+					},'Get'); 
+		}
+	
 		
 	})
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
+	
 		if(mId == null || mId == ''){
 			alert('로그인 후 이용가능한 서비스 입니다');
 			location.href='/member/login';
@@ -479,30 +524,22 @@
 	
 			})
 		})
-	
-		$(function(){
-			$('input[name=declareCode]').click(function(){
-				var declareCode = $(this).val();
-				var declareDesc =$('textarea[name=declareDesc]'); 
-				if(declareCode == "5"){
-					declareDesc.css('display','block');
-				} else {
-					declareDesc.css('display','none');
-				}	
-			})
-			
-			$('#reportBtn').click(function(){
-				var selected = $('input[name=declareCode]:checked').val()
-				console.log(selected);
-				var declareDesc =$('textarea[name=declareDesc]'); 
-				if(selected == "5" && declareDesc.val()==''){
-					alert('신고 사유를 작성해주세요.');
-					declareDesc.focus();
-					return;
-				} 	
-				$('#declareForm').submit();
-			})
 	})
+	
+	  $(document).on('click','.deleteComments',function(){
+	 	var commentsNum = $(this).attr('commentsNum');
+	 	var deleteComment = $(this);
+	 	var isDeleted = confirm('진짜 삭제하시겠어요?');
+	 	if(isDeleted==true){
+	 		commonAjax('/ajax/deleteResReivewComment',
+					{"commentsNum":commentsNum},
+					function(data){
+						deleteComment.parents('.card-comment').remove();			
+					},'Get'); 
+	 		
+	 	}
+   })
+
 </script>
 </th:block>
 </html>

@@ -25,4 +25,13 @@
 			#{noticeContents});
 	</insert>
 	
+	<select id="noticeNum" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_alert
+		WHERE
+			m_id=#{mId} AND notice_check='N';
+	</select>
+	
 </mapper>

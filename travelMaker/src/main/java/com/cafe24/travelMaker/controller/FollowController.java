@@ -1,6 +1,7 @@
 package com.cafe24.travelMaker.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,10 @@ public class FollowController {
 	@Autowired private FollowService followService;
 	
 	@GetMapping("/followers")
-	public String followers(Model model, @RequestParam(name="followers", required=false) String followers){
+	public String followers(Model model, @RequestParam(name="followers", required=false) String followers, @RequestParam(name="memberId", required=false) String memberId){
 		List<Follow> followList = followService.followers(followers);
 		model.addAttribute("followList", followList);
+		
 		return "member/followers";
 	}  
 	
@@ -29,4 +31,6 @@ public class FollowController {
 		model.addAttribute("followList", followList);
 		return "member/following";
 	}
+	
+	
 }
