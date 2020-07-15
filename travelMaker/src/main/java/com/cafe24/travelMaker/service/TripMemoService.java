@@ -6,12 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.TripMemo;
+import com.cafe24.travelMaker.domain.TripPlan;
 import com.cafe24.travelMaker.mapper.TripMemoMapper;
 
 @Service
 public class TripMemoService {
 
 	@Autowired TripMemoMapper tripMemoMapper;
+	
+	//내여행기록 리스트
+	public List<TripMemo> tripMemoList() {
+		System.out.println("tripMemoList TripMemoController 도착");
+		List<TripMemo> memoList = tripMemoMapper.tripMemoList();
+		System.out.println(memoList+" <- memoList");
+		
+		return memoList;
+	}
 	
 	//내여행기록 등록
 	public int addTripMemo(TripMemo tripMemo) {
@@ -22,12 +32,10 @@ public class TripMemoService {
 		return result;
 	}
 	
-	//내여행기록 리스트
-	public List<TripMemo> tripMemoList() {
-		System.out.println("tripMemoList TripMemoController 도착");
-		List<TripMemo> memoList = tripMemoMapper.tripMemoList();
-		System.out.println(memoList+" <- memoList");
+	//기록 등록 시 내여행계획 불러오기
+	public List<TripPlan> getTripPlanList(String mId){
+		System.out.println("getTripPlanList TripMemoService 도착");
 		
-		return memoList;
+		return tripMemoMapper.getTripPlanList(mId);
 	}
 }

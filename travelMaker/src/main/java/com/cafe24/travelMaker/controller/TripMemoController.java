@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.travelMaker.domain.TripMemo;
+import com.cafe24.travelMaker.domain.TripPlan;
 import com.cafe24.travelMaker.service.TripMemoService;
 
 @Controller
@@ -30,10 +31,11 @@ public class TripMemoController {
 	
 	//내여행기록 등록
 	@PostMapping("/addTripMemo")
-	public String addTripMemo(TripMemo tripMemo) {
+	public String addTripMemo(TripMemo tripMemo, String mId) {
 		System.out.println("addTripMemo TripMemoController 도착");
 		System.out.println(tripMemo.getmId()+" <- tripMemo.getmId()");
 		int result = tripMemoService.addTripMemo(tripMemo);
+		List<TripPlan> getTripPlanList = tripMemoService.getTripPlanList(mId);
 		
 		return "redirect:/tripMemo/tripMemo";
 	}

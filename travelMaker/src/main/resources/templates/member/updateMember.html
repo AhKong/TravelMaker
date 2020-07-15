@@ -205,33 +205,36 @@
 			$('#myInput').focus()
 		})
 		
-		var up_mPw = $('#up_mPw').val();
-		var up_mPwCheck = $('#up_mPwCheck').val();
-		var up_mTel = $('#up_mTel').val();
-		var up_mAddr = $('#up_mAddr').val();
-		var up_mAvatar = $('#up_mAvatar').val();
-		var up_mIntrod = $('#up_mIntrod').val();
-		var pwCheck = false;
-		var pwCheck2 = false ; //비밀번호 재확인 일치 여부
+		var up_mPw = $('#up_mPw');
+		var up_mPwCheck = $('#up_mPwCheck');
+		var up_mTel = $('#up_mTel');
+		var up_mAddr = $('#up_mAddr');
+		var up_mAvatar = $('#up_mAvatar');
+		var up_mIntrod = $('#up_mIntrod');
 		
 		$('#completeBtn').click(function(){
 			
-			if(up_mPwCheck != up_mPw){
+			if(up_mPw.val() == ''){
+				alert("비밀번호를 입력해주세요");
+				up_mPwCheck.focus();
+				return false;
+			}
+			if(up_mPwCheck.val() != up_mPw.val()){
 				alert("입력한 두 개의 비밀번호가 다릅니다 비밀번호를 확인해주세요");
 				up_mPwCheck.focus();
 				return false;
 			}
-			if(up_mEmail == ""){
+			if(up_mEmail.val() == ""){
 				alert("이메일을 입력해주세요");
 				up_mEmail.focus();
 				return false;
 			}
-			if(up_mTel == ""){
+			if(up_mTel.val() == ""){
 				alert("전화번호를 입력해주세요");
 				up_mTel.focus();
 				return false;
 			}
-			if(up_mAddr == ""){
+			if(up_mAddr.val() == ""){
 				alert("주소를 입력해주세요");
 				up_mAddr.focus();
 				return false;
