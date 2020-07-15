@@ -20,6 +20,7 @@ import com.cafe24.travelMaker.domain.ResReviewComments;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
 import com.cafe24.travelMaker.service.CertSerivce;
+import com.cafe24.travelMaker.service.CommentsService;
 import com.cafe24.travelMaker.service.LikeService;
 import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
@@ -38,7 +39,7 @@ public class AjaxControllerKAR {
 	@Autowired private MsgService msgService;
 	@Autowired private SightsService sightsService;
 	@Autowired private LikeService likeService;
-	@Autowired private NoticeService noticeService;
+	@Autowired private CommentsService commentsService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -135,13 +136,22 @@ public class AjaxControllerKAR {
 	
 	@GetMapping("/addResReivewComment")
 	@ResponseBody 
-	public  HashMap<String,String>addResReviewComments(ResReviewComments resReviewComments){
-		System.out.println(resReviewComments+"<=---");
-		HashMap<String,String> result = new HashMap<String,String>();
-		result.put("result", "sucessUnLike");
-		System.out.println(result);
+	public  HashMap<String,List<ResReviewComments>>addResReviewComments(ResReviewComments resReviewComments){
+		HashMap<String,List<ResReviewComments>> result = new HashMap<String,List<ResReviewComments>>();
+		int insertResult = commentsService.addResReviewComments(resReviewComments);
+		if(insertResult >0) {
+			result.put("commentsList",commentsService.getResCommentsList(resReviewComments.getResReviewNum()));
+		}
 		return result;
 	}
 	
+	@GetMapping("/getResCommentsList")
+	@ResponseBody 
+	public HashMap<String,List<ResReviewComments>> getResCommentsList( @RequestParam(name="resReviewNum") String resReviewNum){
+		System.out.println("resReviewNum?"+resReviewNum);	
+		HashMap<String,List<ResReviewComments>> result = new HashMap<String,List<ResReviewComments>>();
+		result.put("commentsList",commentsService.getResCommentsList(resReviewNum));
+		return result;
+	}
 	
 }
