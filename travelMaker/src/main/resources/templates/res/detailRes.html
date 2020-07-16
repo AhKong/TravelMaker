@@ -7,47 +7,7 @@
 </th:block>
 <th:block layout:fragment="customCss">
 <link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
-		<style>
-		.carousel-item img {
-			width: 400px;
-			height: 400px;
-		}
-		
-		#sights-map, #sights-review {
-			height: auto;
-			width: 81vw;
-		}
-		
-		.chart {
-			width: 400px;
-		
-		}
-		
-		.reveiwIntro{
-			font-size: 30px;
-		}
-		
-		.reviewIntroTitle {
-			width: 100%;
-			font-size:24px
-		}
-		
-		.form-check{
-			margin-top:13px;
-		}
-		
-		.reveiwTitle{
-			font-size:20px;
-			font-weight:bold;
-		}
-		.badge{
-		font-size:16px;
-		}
-
-		#detailReview{
-			margin-top:10px;
-		}
-</style>
+<link rel="stylesheet" href="/dist/css/postDetailCss.css">
 </th:block>
 <th:block>
 <th:block layout:fragment="customContents">
@@ -169,31 +129,7 @@
 					축제 리스트 준비중..
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-					<div class="map_wrap">
-					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-					    <ul id="category">    
-					        <li id="CE7"  data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					         	   카페
-					        </li>  
-					        <li id="CS2" data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					                        편의점
-					        </li>  
-					        <li id="AT4"data-order="2"> 
-					            <span class="category_bg pharmacy"></span>
-					                       관광명소
-					        </li> 
-					        <li id="FD6"data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					                        음식점
-					        </li>     
-					        <li id="AD5"data-order="2"> 
-					            <span class="category_bg pharmacy"></span>
-					                        숙박
-					        </li>     
-					    </ul>
-					</div>
+					<div th:replace="fragments/kakaoMap :: kakaoMapFragment"></div>
 				</div>
 				<div class="tab-pane fade  show active row" id="sights-review" role="tabpanel" aria-labelledby="sights-review-tab">
 					<div class="reviewIntroTitle">
@@ -336,6 +272,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474&libraries=services"></script>
 <script src="/dist/js/kakaoMap.js"></script>
 <script src="/dist/js/commonAjax.js"></script>
+<script src="/dist/js/postDetailJs.js"></script>
 <script th:inline="javascript">
 
 $(function(){
@@ -399,8 +336,7 @@ $(function(){
 		var reviewWirter =  $(this).attr('reviewWriter');
 		if(key.keyCode == 13){
 			 if(mId == null || mId == undefined || mId ==''){
-				alert('로그인 후 이용 가능한 서비스 입니다.');
-				location.href ='/member/login';
+				 goLogin();
 			}
 			if(input.val() ==''){
 				alert('댓글을 입력하세요!');
@@ -440,8 +376,7 @@ $(function(){
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 	
 		if(mId == null || mId == ''){
-			alert('로그인 후 이용가능한 서비스 입니다');
-			location.href='/member/login';
+			goLogin();
 			return false;
 		}
 		var dataInfo = $(this).attr('data-info');
@@ -469,49 +404,9 @@ $(function(){
 
 	})
 	
-	$('#reveiwBtn').click(function(){
-		console.log(mId);
-		if(mId == null ){
-			alert('로그인 후 이용가능한 서비스 입니다.')
-			window.location.href = '/member/login';
-			return false;
-		} else{
-			if(isWrited == '1'){
-				alert('리뷰는 한번만 작성 가능합니다 !');
-			} else {
-				$("#addResReview").modal();	
-			}
-		}
-	})
-	console.log(1);
-	var myFn = kakaoMap(lat,lng);	
-	console.log(lat,lng)
-	console.log(2);
-		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-		var donutData = {
-			labels : [ ],
-			datasets : [ {
-				data : [],
-				backgroundColor : [ '#f56954', '#00a65a', '#f39c12',
-						'#00c0ef', '#3c8dbc' ],
-			} ]
-		}
-		for(var i = 0 ; i< gradeArr.length;i++){
-			donutData.labels.push(gradeArr[i].grade+'점');
-			donutData.datasets[0].data.push(gradeArr[i].gradeCnt)
-		}
-		var donutOptions = {
-			maintainAspectRatio : false,
-			responsive : true,
-		}
-		//Create pie or douhnut chart
-		// You can switch between pie and douhnut using the method below.
-		var donutChart = new Chart(donutChartCanvas, {
-			type : 'doughnut',
-			data : donutData,
-			options : donutOptions
-		})
-		
+	showReveiwModal(mId,isWrited,$($("#addResReview")));
+	var myFn = kakaoMap(lat,lng);			
+	reveiwChart(gradeArr);
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');
