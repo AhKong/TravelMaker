@@ -50,3 +50,26 @@ var showReveiwModal = function(mId,isWrited,Obj){
 		}
 	})
 }
+
+var showCommentsList = function(commentsList,reviewWirter,mId){
+	var html ='';
+	 for(var i =0; i<commentsList.length;i++){
+		 html +='<div class="card-comment">';
+		 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
+		 html +='<div class="comment-text">';
+		 html += '<span class="username">'+commentsList[i].member.mId;
+		 if(reviewWirter ==commentsList[i].member.mId ){
+			 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
+		 }
+		 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
+		 html += ' </span><!-- /.username -->';
+		 if(commentsList[i].member.mId == mId){
+			 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
+		 }
+	
+		 html += commentsList[i].commentsContents+'</div></div>'	 	 
+	 }
+	 
+	 return html;
+
+}
