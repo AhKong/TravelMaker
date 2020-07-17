@@ -73,11 +73,14 @@ public class SightsController{
 		model.addAttribute("reviewGradeCnt",reviewService.getSightsReviewGradeCnt(sightsNum));
 		model.addAttribute("gradeAvg", reviewService.getSightsGradeAvg(sightsNum));
 		model.addAttribute("reviewCnt", reviewService.getSightsReviewCnt(sightsNum));
+		model.addAttribute("reviewPhotos", reviewService.getSightsReviewPhotos(sightsNum));
 		return "/sights/detailSights";
 	}
 	
 	@GetMapping("/moreSightsPhoto")
-	public String moreSightsPhoto() {
+	public String moreSightsPhoto(Model model, @RequestParam(name="sightsNum") String sightsNum) {
+		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
+		model.addAttribute("reviewPhotos", reviewService.getSightsReviewPhotos(sightsNum));
 		return "/sights/morePhotos";
 	}
 }

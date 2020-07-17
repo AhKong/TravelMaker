@@ -345,5 +345,16 @@
 				r.res_review_photo <> '' AND r.res_num = #{resNum} and r.res_review_status = 'Y'
 		]]>
 	</select>  
+	
+		<select id="getSightsReviewPhotos" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				s.sights_review_photo
+			FROM
+				tb_sights_review AS s
+			WHERE 
+				s.sights_review_photo <> '' AND s.sights_num = #{sightsNum} and s.sights_review_status = 'Y'
+		]]>
+	</select>  
                                                                          
 </mapper>

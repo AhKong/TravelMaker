@@ -154,5 +154,8 @@ public class ReviewService {
 	public List<String> getResReviewPhotos(String resNum){
 		return reviewMapper.getResReviewPhotos(resNum);
 	}
+	public List<String> getSightsReviewPhotos(String sightsNum){
+		return reviewMapper.getSightsReviewPhotos(sightsNum);
+	}
 	
 }

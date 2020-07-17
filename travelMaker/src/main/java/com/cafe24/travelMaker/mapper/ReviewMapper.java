@@ -33,4 +33,5 @@ public interface ReviewMapper {
 	public List<SightsReview> followersSightsReviewList(String mId);
 	public String getSightsGradeAvg(String sightsNum);
 	public String getSightsReviewCnt(String sightsNum);
+	public List<String> getSightsReviewPhotos(String sightsNum);
 }
