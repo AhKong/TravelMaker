@@ -285,10 +285,10 @@ $(function(){
 		var lng = /*[[${res.resLong}]]*/;	
 		var mId = /*[[${session.SID}]]*/;
 		var isWrited =/*[[${isWrited}]]*/;
-		var gradeArr =/*[[${reviewCnt}]]*/
+		var gradeArr =/*[[${reviewGradeCnt}]]*/
 	/*]]>*/
 	showReveiwModal(mId,isWrited,$($("#addResReview")));
-	
+	reveiwChart(gradeArr);
 	$('.showComments').click(function(){
 		showComments($(this),mId,'getResCommentsList');
 	})
@@ -329,7 +329,7 @@ $(function(){
 	
 	
 	var myFn = kakaoMap(lat,lng);			
-	reveiwChart(gradeArr);
+
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');

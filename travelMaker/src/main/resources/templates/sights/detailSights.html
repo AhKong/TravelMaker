@@ -39,10 +39,12 @@
 			<div class="row">
 				<div class="col-12 col-sm-7">
 					<p class="my-3" style="font-size:30px;" th:utext="|${sights.sightsName} <span class='badge ${sights.btnColor}'>${sights.sightsOpen}</span><br> |"></p>
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
-						리뷰</span>
-					<hr>
+					<th:block th:if="${gradeAvg != 0.0}">
+					<th:block   th:each="num: ${#numbers.sequence(1,gradeAvg)}">
+          				<i class="fas fa-star" style="color:green" ></i>	
+          	 		</th:block> <strong th:text="|(${gradeAvg})|"></strong> 
+          	 		<span class="reveiwCnt"  th:text="|${reviewCnt}개의 리뷰|"></span>
+          	 		</th:block>
 					<p th:text="${sights.sightsDetail}"></p>
 					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}"></p>
 					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|"></p>
@@ -275,7 +277,7 @@
 		var lng = /*[[${sights.sightsLong}]]*/;	
 		var mId = /*[[${session.SID}]]*/;
 		var isWrited =/*[[${isWrited}]]*/;
-		var gradeArr =/*[[${reviewCnt}]]*/
+		var gradeArr =/*[[${reviewGradeCnt}]]*/
 	/*]]>*/
 
 	$('.showComments').click(function(){

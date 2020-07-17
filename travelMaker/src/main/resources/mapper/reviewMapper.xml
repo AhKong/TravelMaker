@@ -298,7 +298,7 @@
 		GROUP BY  
 			s.sights_review_grade 
 	</select>    
-	<select id="getGradeAvg" parameterType="String" resultType="String">
+	<select id="getResGradeAvg" parameterType="String" resultType="String">
 		SELECT 
 			CAST(ROUND(AVG(res_review_grade),1) AS CHAR(3)) AS score
 		FROM 
@@ -307,7 +307,7 @@
 			res_num =#{resNum} and res_review_status = 'Y'
 		GROUP BY res_num
 	</select>   
-	<select id="getReviewCnt" parameterType="String" resultType="String">
+	<select id="getResReviewCnt" parameterType="String" resultType="String">
 		SELECT 
 			CAST(COUNT(*) AS CHAR(3)) AS score
 		FROM 
@@ -315,6 +315,24 @@
 		WHERE 
 			res_num =#{resNum} and res_review_status = 'Y'
 		GROUP BY res_num
+	</select> 
+	<select id="getSightsGradeAvg" parameterType="String" resultType="String">
+		SELECT 
+			CAST(ROUND(AVG(sights_review_grade),1) AS CHAR(3)) AS score
+		FROM 
+			tb_sights_review 
+		WHERE 
+			sights_num =#{sightsNum} and sights_review_status = 'Y'
+		GROUP BY sights_num
+	</select>   
+	<select id="getSightsReviewCnt" parameterType="String" resultType="String">
+		SELECT 
+			CAST(COUNT(*) AS CHAR(3)) AS score
+		FROM 
+			tb_sights_review 
+		WHERE 
+			sights_num =#{sightsNum} and sights_review_status = 'Y'
+		GROUP BY sights_num
 	</select>   
                                                                          
 </mapper>

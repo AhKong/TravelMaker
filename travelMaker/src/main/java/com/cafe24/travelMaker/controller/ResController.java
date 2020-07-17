@@ -1,5 +1,4 @@
 package com.cafe24.travelMaker.controller;
-import java.time.LocalTime;
 
 import javax.servlet.http.HttpSession;
 
@@ -71,9 +70,9 @@ public class ResController {
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		model.addAttribute("isWrited", reviewService.isWritedReview(mId, resNum));
 		model.addAttribute("reviewList",reviewService.resReviewList(resNum,mId));
-		model.addAttribute("reviewCnt",reviewService.getResReviewGradeCnt(resNum));
-		model.addAttribute("gradeAvg", reviewService.getGradeAvg(resNum));
-		model.addAttribute("reviewCnt", reviewService.getReviewCnt(resNum));
+		model.addAttribute("reviewGradeCnt",reviewService.getResReviewGradeCnt(resNum));
+		model.addAttribute("gradeAvg", reviewService.getResGradeAvg(resNum));
+		model.addAttribute("reviewCnt", reviewService.getResReviewCnt(resNum));
 		System.out.println(reviewService.resReviewList(resNum,mId) +"<---");
 		return "res/detailRes";
 	}

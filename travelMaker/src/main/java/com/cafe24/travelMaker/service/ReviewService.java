@@ -14,8 +14,7 @@ import com.cafe24.travelMaker.domain.SightsReview;
 public class ReviewService {
 	@Autowired private ReviewMapper reviewMapper;
 	@Autowired private PointService pointService;
-	
-	
+		
 	public List<TripType> selectTripTypeList(){
 		return  reviewMapper.selectTripTypeList();
 	}
@@ -60,8 +59,8 @@ public class ReviewService {
 	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
 		return reviewMapper.getResReviewGradeCnt(resNum);
 	}
-	public double getGradeAvg(String resNum) {
-		String gradeAvg = reviewMapper.getGradeAvg(resNum);
+	public double getResGradeAvg(String resNum) {
+		String gradeAvg = reviewMapper.getResGradeAvg(resNum);
 		double result = 0;
 		if(gradeAvg !=null) {
 		   result = Double.parseDouble(gradeAvg);
@@ -69,8 +68,8 @@ public class ReviewService {
 		return result;
 	}
 	
-	public int getReviewCnt(String resNum) {
-		String reviewCtn = reviewMapper.getReviewCnt(resNum);
+	public int getResReviewCnt(String resNum) {
+		String reviewCtn = reviewMapper.getResReviewCnt(resNum);
 		int result =0;
 
 		if(reviewCtn !=null) {
@@ -132,6 +131,24 @@ public class ReviewService {
 	
 	public List<ReviewGrade> getSightsReviewGradeCnt(String sightsNum){
 		return reviewMapper.getSightsReviewGradeCnt(sightsNum);
+	}
+	
+	public double getSightsGradeAvg(String sightsNum) {
+		String gradeAvg = reviewMapper.getSightsGradeAvg(sightsNum);
+		double result = 0;
+		if(gradeAvg !=null) {
+		   result = Double.parseDouble(gradeAvg);
+		}
+		return result;
+	}
+	
+	public int getSightsReviewCnt(String sightsNum) {
+		String reviewCtn = reviewMapper.getSightsReviewCnt(sightsNum);
+		int result =0;
+		if(reviewCtn !=null) {
+			result = Integer.parseInt(reviewCtn);
+		}
+		return result;
 	}
 	
 	

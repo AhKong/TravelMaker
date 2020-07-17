@@ -17,8 +17,8 @@ public interface ReviewMapper {
 	public List<ReviewGrade> getResReviewGradeCnt(String resNum);
 	public int isLikedResReview(String mId, String reviewNum);
 	public int deleteResReview(String resReviewNum) ;
-	public String getGradeAvg(String resNum);
-	public String getReviewCnt(String resNum);
+	public String getResGradeAvg(String resNum);
+	public String getResReviewCnt(String resNum);
 	
 	public int addSightsReview(SightsReview sightsReview);
 	public List<SightsReview> sightsReviewList(String sightsNum);
@@ -30,4 +30,6 @@ public interface ReviewMapper {
 	public List<ReviewGrade> getSightsReviewGradeCnt(String sightsNum);
 	public List<ResReview> followersResReviewList(String mId);
 	public List<SightsReview> followersSightsReviewList(String mId);
+	public String getSightsGradeAvg(String sightsNum);
+	public String getSightsReviewCnt(String sightsNum);
 }
