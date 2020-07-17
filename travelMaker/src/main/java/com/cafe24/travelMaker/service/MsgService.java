@@ -55,10 +55,4 @@ public class MsgService {
 	public int noticeCheckUpdate(String nCode) {
 		return msgMapper.noticeCheckUpdate(nCode);
 	}
-	
-	public int questionNotice(Notice notice) {
-		System.out.println(notice.toString() + "!!!!!!!!!!!!!!!!!!!!!!!!");
-		return msgMapper.questionNotice(notice);
-	}
-
 }

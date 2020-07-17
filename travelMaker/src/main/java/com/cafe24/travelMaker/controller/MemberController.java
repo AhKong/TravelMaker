@@ -67,6 +67,8 @@ public class MemberController{
 		model.addAttribute("followersResReviewList", followersResReviewList);
 		List<SightsReview> followersSightsReviewList = reviewService.followersSightsReviewList(memberId);
 		model.addAttribute("followersSightsReviewList", followersSightsReviewList);
+		int followYesNoResult = followMapper.followYesNo(memberId, loginId);
+		model.addAttribute("followYesNoResult", followYesNoResult);
 		return "/member/myPage";
 	}
 	

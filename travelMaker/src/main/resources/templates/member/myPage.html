@@ -65,8 +65,8 @@
                   </li>
                 </ul>
 				
-                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>Follow</b></a>
-                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>unFollow</b></a>
+                <a th:href=@{/follow/followInsert(memberId=${member.mId})} class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}" th:if ="${followYesNoResult EQ 0}"><b>Follow</b></a>
+                <a th:href=@{/follow/followDelete(memberId=${member.mId})} class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}" th:if ="${followYesNoResult > 0}"><b>unFollow</b></a>
                 <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>쪽지 보내기</b></a>
               </div>
               <!-- /.card-body -->

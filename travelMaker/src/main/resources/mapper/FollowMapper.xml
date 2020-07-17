@@ -57,6 +57,32 @@
 			m_id=#{mId};
 	</select>
 	
-
+	<select id="followYesNo" parameterType ="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			tb_follow
+		WHERE
+			m_id=#{lId} AND target_id=#{mId};
+	</select>
+	
+	<insert id="followInsert" parameterType="Follow">
+	<selectKey order="BEFORE" keyProperty="followNum" resultType="String">
+		SELECT
+			case COUNT(*)
+			WHEN 0 THEN 'follow_1'
+			ELSE CONCAT('follow_', MAX(CAST(SUBSTRING(follow_num,8) AS DECIMAL))+1)
+			END AS follow_num
+		FROM
+			tb_follow
+	</selectKey>
+		INSERT INTO tb_follow
+			(follow_num, m_id, target_id, follow_reg_date)
+		VALUES (#{followNum}, #{mId}, #{targetId}, NOW())
+	</insert>
+	
+	<delete id="followDelete" parameterType="Follow">
+		DELETE FROM tb_follow WHERE m_id=#{mId} AND target_id=#{targetId}
+	</delete>
 	
 </mapper>

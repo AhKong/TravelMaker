@@ -53,4 +53,14 @@ public class NoticeService {
 	public List<Notice> noticeList(String targetId){
 		return noticeMapper.noticeList(targetId);
 	}
+	
+	public int questionNotice(Notice notice) {
+		return noticeMapper.questionNotice(notice);
+	}
+	public int followNotice(String lId, String mId) {
+		this.notice = new Notice();
+		this.notice.setNoticeContents(lId+"님이 팔로우 하셨습니다.");
+		this.notice.setmId(mId);
+		return noticeMapper.followNotice(this.notice);
+	}
 }
