@@ -6,7 +6,7 @@ public class TripPlan {
 	private String tNum;
 	private String mId;
 	private String pDate;
-	private String pCost;
+	private int pCost;
 	private String pSupply;
 	private String pDetail;
 	private String pRegData;
@@ -34,10 +34,10 @@ public class TripPlan {
 	public void setpDate(String pDate) {
 		this.pDate = pDate;
 	}
-	public String getpCost() {
+	public int getpCost() {
 		return pCost;
 	}
-	public void setpCost(String pCost) {
+	public void setpCost(int pCost) {
 		this.pCost = pCost;
 	}
 	public String getpSupply() {

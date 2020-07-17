@@ -73,8 +73,10 @@ public class TripPlanController {
 		model.addAttribute("tripName", tName);
 		
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
-		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ");
-		model.addAttribute("sTripPlan", selectTripPlan);
+		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");
+
+		model.addAttribute("sTripPlan", selectTripPlan);		
+		
 		return "/tripPlan/editTrip";
 	}
 	

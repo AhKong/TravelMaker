@@ -326,19 +326,32 @@
 							</div>
 							<div>
 								<h4>
-									생성자ID : <a>이승환</a>
+									생성자ID : <a th:text="${sTripPlan[0].tNum}">이승환</a>
 								</h4>
 							</div>
-
+					<th:block th:if="${sTripPlan[0].pNum == ''}"> 
 							<div data-toggle="modal" data-target="#myModalExpenses">
-								<a>여행 경비 --- [[${sTripPlan}]]</a>
+								여행경비 : 원
 							</div>
 							<div data-toggle="modal" data-target="#myModalMaterials">
-								<a>여행 준비물 --- </a>
+								여행 준비물 : 
 							</div>
 							<div data-toggle="modal" data-target="#myModalDetail">
-								<a>여행 상세 --- </a>
+								여행 상세 : 
 							</div>
+					</th:block>
+					
+					<th:block th:unless="${sTripPlan[0].pNum == ''}">
+						<div data-toggle="modal" data-target="#myModalExpenses">
+							여행경비 : <a th:text="${sTripPlan[0].pCost}"></a>원
+						</div>
+						<div data-toggle="modal" data-target="#myModalMaterials">
+							여행 준비물 : <a th:text="${sTripPlan[0].pSupply}"> --- </a>
+						</div>
+						<div data-toggle="modal" data-target="#myModalDetail">
+							여행 상세 : <a th:text="${sTripPlan[0].pDetail}"> --- </a>
+						</div>
+					</th:block>
 						</div>
 						<div id="editBox" class="small-box">
 							<button data-toggle="modal" data-target="#myModal" type="button"
