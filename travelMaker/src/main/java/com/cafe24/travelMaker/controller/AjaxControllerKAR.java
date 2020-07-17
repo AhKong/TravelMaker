@@ -20,6 +20,7 @@ import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.domain.ResReviewComments;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
+import com.cafe24.travelMaker.domain.SightsReviewComments;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.CommentsService;
 import com.cafe24.travelMaker.service.LikeService;
@@ -149,17 +150,18 @@ public class AjaxControllerKAR {
 	@ResponseBody 
 	public  HashMap<String,List<ResReviewComments>>addResReviewComments(ResReviewComments resReviewComments,
 																@RequestParam(name="reviewWirter") String reviewWirter){
+		System.out.println(resReviewComments +"<---ㅋㅋㄹㅋ");
 		HashMap<String,List<ResReviewComments>> result = new HashMap<String,List<ResReviewComments>>();
 		int insertResult = commentsService.addResReviewComments(resReviewComments,reviewWirter);
 		if(insertResult >0) {
-			result.put("commentsList",commentsService.getResCommentsList(resReviewComments.getResReviewNum()));
+			result.put("commentsList",commentsService.getResCommentsList(resReviewComments.getReviewNum()));
 		}
 		return result;
 	}
 	
 	@GetMapping("/getResCommentsList")
 	@ResponseBody 
-	public HashMap<String,List<ResReviewComments>> getResCommentsList( @RequestParam(name="resReviewNum") String resReviewNum){
+	public HashMap<String,List<ResReviewComments>> getResCommentsList( @RequestParam(name="reviewNum") String resReviewNum){
 		System.out.println("resReviewNum?"+resReviewNum);	
 		HashMap<String,List<ResReviewComments>> result = new HashMap<String,List<ResReviewComments>>();
 		result.put("commentsList",commentsService.getResCommentsList(resReviewNum));
@@ -177,4 +179,36 @@ public class AjaxControllerKAR {
 		return result;
 	}
 	
+	@GetMapping("/addSightsReivewComments")
+	@ResponseBody 
+	public  HashMap<String,List<SightsReviewComments>>addSightsReivewComment(SightsReviewComments sightsReviewComments,
+																@RequestParam(name="reviewWirter") String reviewWirter){
+		System.out.println(sightsReviewComments +"ㅎㅇㅎㅇㅎㅇㅎㅇ");
+		HashMap<String,List<SightsReviewComments>> result = new HashMap<String,List<SightsReviewComments>>();
+		int insertResult = commentsService.addSightsReviewComments(sightsReviewComments,reviewWirter);
+		if(insertResult >0) {
+			result.put("commentsList",commentsService.getSightsCommentsList(sightsReviewComments.getReviewNum()));
+		}
+		return result;
+	}
+	
+	@GetMapping("/getSightsCommentsList")
+	@ResponseBody 
+	public HashMap<String,List<SightsReviewComments>> getSightsCommentsList( @RequestParam(name="reviewNum") String sightsReviewNum){
+		System.out.println("resReviewNum?"+sightsReviewNum);	
+		HashMap<String,List<SightsReviewComments>> result = new HashMap<String,List<SightsReviewComments>>();
+		result.put("commentsList",commentsService.getSightsCommentsList(sightsReviewNum));
+		return result;
+	}
+	
+	@GetMapping("/deleteSightsReivewComment")
+	@ResponseBody 
+	public HashMap<String,String> deleteSightsReivewComment( @RequestParam(name="commentsNum") String commentsNum){
+		HashMap<String,String> result = new HashMap<String,String>();
+		int deleteResult = commentsService.deleletSightsReviewComments(commentsNum);
+		if(deleteResult>0) {
+			result.put("result", "success");
+		}
+		return result;
+	}
 }

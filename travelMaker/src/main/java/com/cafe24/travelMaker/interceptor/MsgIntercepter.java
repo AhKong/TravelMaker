@@ -15,17 +15,21 @@ import com.cafe24.travelMaker.service.NoticeService;
 public class MsgIntercepter extends HandlerInterceptorAdapter{
 	@Autowired private MsgService msgService;
 	@Autowired private NoticeService noticeService;
-
 	
-    @Override
-    public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception { 
-		  HttpSession session = request.getSession();
-	  
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,ModelAndView modelAndView) throws Exception {
+	
+		super.postHandle(request, response, handler, modelAndView);
+		HttpSession session = request.getSession();
+		System.out.println(session+"<------sesesfd");
+		  
 		  String sessionId = (String) session.getAttribute("SID"); // 다운 캐스팅
-		  if(sessionId !=null) {
-			  session.setAttribute("unReadMsgCtn", msgService.countUnReadMsg(sessionId));
-			  session.setAttribute("noticeNum", noticeService.noticeNum(sessionId));
-		   }
-		  return true; 
+		  System.out.println(sessionId +"<----sessionId");
+		  if(sessionId !=null) { 
+			  session.setAttribute("unReadMsgCtn",msgService.countUnReadMsg(sessionId)); 
+			  session.setAttribute("noticeNum",noticeService.noticeNum(sessionId));
 		  }
+	}
+    
+
 }
