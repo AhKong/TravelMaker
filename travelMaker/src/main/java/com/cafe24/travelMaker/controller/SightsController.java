@@ -32,6 +32,7 @@ public class SightsController{
 		System.out.println(search+"<---");
 		model.addAttribute("searchWord", search);
 		model.addAttribute("sightsList", sightsService.selectSightsList(search));
+		model.addAttribute("best3", sightsService.getbestSights(search));
 		return "/sights/sightsList";
 	}
 	
@@ -69,12 +70,17 @@ public class SightsController{
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		model.addAttribute("reviewList",reviewService.sightsReviewList(sightsNum,mId));
 		model.addAttribute("isWrited",reviewService.isWritedSightsReview(mId, sightsNum));
-		model.addAttribute("reviewCnt",reviewService.getSightsReviewGradeCnt(sightsNum));
+		model.addAttribute("reviewGradeCnt",reviewService.getSightsReviewGradeCnt(sightsNum));
+		model.addAttribute("gradeAvg", reviewService.getSightsGradeAvg(sightsNum));
+		model.addAttribute("reviewCnt", reviewService.getSightsReviewCnt(sightsNum));
+		model.addAttribute("reviewPhotos", reviewService.getSightsReviewPhotos(sightsNum));
 		return "/sights/detailSights";
 	}
 	
 	@GetMapping("/moreSightsPhoto")
-	public String moreSightsPhoto() {
+	public String moreSightsPhoto(Model model, @RequestParam(name="sightsNum") String sightsNum) {
+		model.addAttribute("sights", sightsService.getDetailSights(sightsNum));
+		model.addAttribute("reviewPhotos", reviewService.getSightsReviewPhotos(sightsNum));
 		return "/sights/morePhotos";
 	}
 }

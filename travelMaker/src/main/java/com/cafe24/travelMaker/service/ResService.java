@@ -27,6 +27,10 @@ public class ResService {
 	public Res getDetailRes(String resNum) {
 		return resMapper.getDetailRes(resNum);
 	}
+	public List<Res> getbestRes(String search){
+		return resMapper.getbestRes(search);
+	}
+
 	
 
 }

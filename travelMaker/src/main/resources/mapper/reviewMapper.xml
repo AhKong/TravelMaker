@@ -297,5 +297,64 @@
 			s.sights_num =#{sightsNum} and s.sights_review_status ='Y'
 		GROUP BY  
 			s.sights_review_grade 
-	</select>                                                                                
+	</select>    
+	<select id="getResGradeAvg" parameterType="String" resultType="String">
+		SELECT 
+			CAST(ROUND(AVG(res_review_grade),1) AS CHAR(3)) AS score
+		FROM 
+			tb_res_review 
+		WHERE 
+			res_num =#{resNum} and res_review_status = 'Y'
+		GROUP BY res_num
+	</select>   
+	<select id="getResReviewCnt" parameterType="String" resultType="String">
+		SELECT 
+			CAST(COUNT(*) AS CHAR(3)) AS score
+		FROM 
+			tb_res_review 
+		WHERE 
+			res_num =#{resNum} and res_review_status = 'Y'
+		GROUP BY res_num
+	</select> 
+	<select id="getSightsGradeAvg" parameterType="String" resultType="String">
+		SELECT 
+			CAST(ROUND(AVG(sights_review_grade),1) AS CHAR(3)) AS score
+		FROM 
+			tb_sights_review 
+		WHERE 
+			sights_num =#{sightsNum} and sights_review_status = 'Y'
+		GROUP BY sights_num
+	</select>   
+	<select id="getSightsReviewCnt" parameterType="String" resultType="String">
+		SELECT 
+			CAST(COUNT(*) AS CHAR(3)) AS score
+		FROM 
+			tb_sights_review 
+		WHERE 
+			sights_num =#{sightsNum} and sights_review_status = 'Y'
+		GROUP BY sights_num
+	</select> 
+	
+	<select id="getResReviewPhotos" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				r.res_review_photo
+			FROM
+				tb_res_review AS r
+			WHERE 
+				r.res_review_photo <> '' AND r.res_num = #{resNum} and r.res_review_status = 'Y'
+		]]>
+	</select>  
+	
+		<select id="getSightsReviewPhotos" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				s.sights_review_photo
+			FROM
+				tb_sights_review AS s
+			WHERE 
+				s.sights_review_photo <> '' AND s.sights_num = #{sightsNum} and s.sights_review_status = 'Y'
+		]]>
+	</select>  
+                                                                         
 </mapper>

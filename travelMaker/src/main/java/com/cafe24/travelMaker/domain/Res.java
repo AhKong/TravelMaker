@@ -23,6 +23,8 @@ public class Res {
 	private String resOpen;	
 	private ResCate resCate;
 	private String btnColor;
+	private double avgGrade;
+	private int reviewCnt;
 	
 	public String getResNum() {
 		return resNum;
@@ -139,13 +141,23 @@ public class Res {
 	public void setResOpen(String resOpen) {
 		this.resOpen = resOpen;
 	}
-	
-	
 	public String getBtnColor() {
 		return btnColor;
 	}
 	public void setBtnColor(String btnColor) {
 		this.btnColor = btnColor;
+	}	
+	public double getAvgGrade() {
+		return avgGrade;
+	}
+	public void setAvgGrade(double avgGrade) {
+		this.avgGrade = avgGrade;
+	}
+	public int getReviewCnt() {
+		return reviewCnt;
+	}
+	public void setReviewCnt(int reviewCnt) {
+		this.reviewCnt = reviewCnt;
 	}
 	@Override
 	public String toString() {
@@ -154,11 +166,7 @@ public class Res {
 				+ ", resLong=" + resLong + ", resAddr=" + resAddr + ", resPrice=" + resPrice + ", resTel=" + resTel
 				+ ", resWeb=" + resWeb + ", resDetail=" + resDetail + ", resStartTime=" + resStartTime
 				+ ", resCloseTime=" + resCloseTime + ", resRegTime=" + resRegTime + ", resOpen=" + resOpen
-				+ ", resCate=" + resCate + ", btnColor=" + btnColor + "]";
+				+ ", resCate=" + resCate + ", btnColor=" + btnColor + ", avgGrade=" + avgGrade + ", reviewCnt="
+				+ reviewCnt + "]";
 	}
-
-	
-
-
-
 }

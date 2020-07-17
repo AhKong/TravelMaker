@@ -17,5 +17,6 @@ public interface SightsMapper {
 	public int addSights(Sights sights);
 	public List<Sights> selectSightsList(String search);
 	public Sights getDetailSights(String sightsNum);
+	public List<Sights> getbestSights(String search);
 
 }

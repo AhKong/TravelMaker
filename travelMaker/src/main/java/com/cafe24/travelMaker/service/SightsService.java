@@ -39,5 +39,7 @@ public class SightsService {
 	public Sights getDetailSights(String sightsNum) {
 		return sightsMapper.getDetailSights(sightsNum);
 	}
-
+	public List<Sights> getbestSights(String search){
+		return sightsMapper.getbestSights(search);
+	}
 }
