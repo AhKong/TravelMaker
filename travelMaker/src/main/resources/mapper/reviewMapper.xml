@@ -333,6 +333,17 @@
 		WHERE 
 			sights_num =#{sightsNum} and sights_review_status = 'Y'
 		GROUP BY sights_num
-	</select>   
+	</select> 
+	
+	<select id="getResReviewPhotos" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				r.res_review_photo
+			FROM
+				tb_res_review AS r
+			WHERE 
+				r.res_review_photo <> '' AND r.res_num = #{resNum} and r.res_review_status = 'Y'
+		]]>
+	</select>  
                                                                          
 </mapper>

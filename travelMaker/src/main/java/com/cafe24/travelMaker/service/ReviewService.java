@@ -151,5 +151,8 @@ public class ReviewService {
 		return result;
 	}
 	
+	public List<String> getResReviewPhotos(String resNum){
+		return reviewMapper.getResReviewPhotos(resNum);
+	}
 	
 }

@@ -19,6 +19,7 @@ public interface ReviewMapper {
 	public int deleteResReview(String resReviewNum) ;
 	public String getResGradeAvg(String resNum);
 	public String getResReviewCnt(String resNum);
+	public List<String> getResReviewPhotos(String resNum);
 	
 	public int addSightsReview(SightsReview sightsReview);
 	public List<SightsReview> sightsReviewList(String sightsNum);

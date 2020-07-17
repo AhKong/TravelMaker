@@ -73,12 +73,15 @@ public class ResController {
 		model.addAttribute("reviewGradeCnt",reviewService.getResReviewGradeCnt(resNum));
 		model.addAttribute("gradeAvg", reviewService.getResGradeAvg(resNum));
 		model.addAttribute("reviewCnt", reviewService.getResReviewCnt(resNum));
-		System.out.println(reviewService.resReviewList(resNum,mId) +"<---");
+		model.addAttribute("reviewPhotos", reviewService.getResReviewPhotos(resNum));
+
 		return "res/detailRes";
 	}
 	
 	@GetMapping("/moreResPhoto")
-	public String moreResPhoto() {
+	public String moreResPhoto(Model model, @RequestParam(name="resNum") String resNum) {
+		model.addAttribute("res",resService.getDetailRes(resNum));
+		model.addAttribute("reviewPhotos", reviewService.getResReviewPhotos(resNum));
 		return "res/morePhotos";
 	}
 
