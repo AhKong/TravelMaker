@@ -3,8 +3,6 @@ package com.cafe24.travelMaker.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
-import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.ReviewGrade;
 import com.cafe24.travelMaker.domain.SightsReview;
@@ -28,4 +26,5 @@ public interface ReviewMapper {
 	public SightsReview getSightsReviewInfo(String sightsReviewNum);
 	public ResReview getResReviewInfo(String resReviewNum);
 	public List<ResReview> followersResReviewList(String mId);
+	public List<SightsReview> followersSightsReviewList(String mId);
 }

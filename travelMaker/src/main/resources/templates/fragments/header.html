@@ -36,31 +36,18 @@
       </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
+        <a id ="newNotice" class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell" id="noticeList"></i>
           <span class="badge badge-warning navbar-badge" th:text="${session.noticeNum}"></span>
         </a>
         <span>강민수</span>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header" th:text="|★${session.noticeNum}개의 읽지 않은 알람★|"></span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> ㅇㅇ
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> ㅇㅇ
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> ㅎㅎ
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
+          <div id="warp-newNoticeList">
+        
+        </div>
           
-          <a href="/msg/notifyDetail" class="dropdown-item dropdown-footer">알람 전체보기</a>
+          <a href="/msg/notifyDetail" class="dropdown-item dropdown-footer">알람 더보기</a>
         </div>
       </li>
      </th:block>

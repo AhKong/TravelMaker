@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Message;
+import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.domain.ResReviewComments;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
@@ -40,6 +41,7 @@ public class AjaxControllerKAR {
 	@Autowired private SightsService sightsService;
 	@Autowired private LikeService likeService;
 	@Autowired private CommentsService commentsService;
+	@Autowired private NoticeService noticeService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -78,6 +80,15 @@ public class AjaxControllerKAR {
 		System.out.println(msgService.unReadMsgList(targetId));
 		unReadMsgList.put("result", msgService.unReadMsgList(targetId));
 		return unReadMsgList;
+	}
+	
+	@GetMapping("/noticeList")	
+	public @ResponseBody HashMap<String,List<Notice>> noticeList(HttpSession session){
+		HashMap<String,List<Notice>> noticeList = new HashMap<String,List<Notice>>();
+		String targetId = (String) session.getAttribute("SID");
+		System.out.println(noticeService.noticeList(targetId));
+		noticeList.put("result", noticeService.noticeList(targetId));
+		return noticeList;
 	}
 	
 	@GetMapping("/getSiList")

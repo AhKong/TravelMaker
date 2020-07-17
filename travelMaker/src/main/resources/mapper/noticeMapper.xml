@@ -34,4 +34,15 @@
 			m_id=#{mId} AND notice_check='N';
 	</select>
 	
+	<select id="noticeList" parameterType="String" resultType="Notice">
+	SELECT
+		CONCAT(SUBSTRING(notice_contents, 1, 8), '..') as noticeContents
+		, SUBSTRING(notice_send, 1, 10) as noticeSendTime
+	FROM
+		tb_alert
+	WHERE
+		m_id=#{mId} AND notice_check='N'
+	LIMIT 3;
+	</select>
+	
 </mapper>

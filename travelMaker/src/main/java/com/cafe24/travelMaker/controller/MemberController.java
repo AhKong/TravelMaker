@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
-import com.cafe24.travelMaker.domain.Res;
 import com.cafe24.travelMaker.domain.ResReview;
+import com.cafe24.travelMaker.domain.SightsReview;
 import com.cafe24.travelMaker.mapper.FollowMapper;
 import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
@@ -49,11 +49,14 @@ public class MemberController{
 		model.addAttribute("followingNum", followingNum);
 		List<ResReview> followersResReviewList = reviewService.followersResReviewList(loginId);
 		model.addAttribute("followersResReviewList", followersResReviewList);
+		List<SightsReview> followersSightsReviewList = reviewService.followersSightsReviewList(loginId);
+		model.addAttribute("followersSightsReviewList", followersSightsReviewList);
 		return "/member/myPage";
 	}
 	
 	@PostMapping("/myPage")
-	public String myPage(Model model, Member member, @RequestParam(name="memberId",required=false) String memberId) {
+	public String myPage(Model model, Member member, @RequestParam(name="memberId",required=false) String memberId, HttpSession session) {
+		String loginId = (String)session.getAttribute("SID");
 		member = memberService.followersPage(memberId);
 		model.addAttribute("member", member);
 		int followersNum = followMapper.followersNum(memberId);
@@ -62,6 +65,8 @@ public class MemberController{
 		model.addAttribute("followingNum", followingNum);
 		List<ResReview> followersResReviewList = reviewService.followersResReviewList(memberId);
 		model.addAttribute("followersResReviewList", followersResReviewList);
+		List<SightsReview> followersSightsReviewList = reviewService.followersSightsReviewList(memberId);
+		model.addAttribute("followersSightsReviewList", followersSightsReviewList);
 		return "/member/myPage";
 	}
 	
