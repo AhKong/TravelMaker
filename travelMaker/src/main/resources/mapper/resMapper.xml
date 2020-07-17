@@ -23,6 +23,8 @@
 		<result property ="resRegTime" column ="res_reg_date"/>	
 		<result property ="resOpen" column ="resOpen"/>	
 		<result property ="btnColor" column ="btnColor"/>	
+		<result property ="avgGrade" column ="avgGrade"/>
+		<result property ="reviewCnt" column ="reviewCnt"/>
 		<association property="resCate" javaType ="ResCate">
  			<result property="resCateNum"  	column="res_cate_num"/>
  			<result property="resType"   	column="res_type"/>
@@ -128,6 +130,42 @@
 							res_num = #{resNum}
 		]]>
 	
+	</select>
+	<select id="getbestRes" parameterType="String" resultMap ="resResultMap">
+		SELECT 
+			r.*,
+			avgGrade.score as avgGrade,
+			avgGrade.reviewCnt AS reviewCnt,
+			si.si_name,
+			rc.res_type
+		FROM
+			 tb_res AS r
+		INNER JOIN 
+			(SELECT 
+					rr.res_num,
+					ROUND(AVG(rr.res_review_grade),1) AS score,
+					COUNT(*) AS reviewCnt
+			FROM  
+				tb_res_review AS rr
+			WHERE 
+				rr.res_review_status ='Y'
+			GROUP BY 
+					rr.res_num
+			) AS avgGrade
+		INNER JOIN
+			tb_si AS si
+		INNER JOIN 
+			tb_res_cate AS rc
+		ON
+			 r.res_num = avgGrade.res_num
+			 AND si.si_num = r.si_num 
+			 AND r.res_cate_num = rc.res_cate_num
+	 	WHERE 
+			si.si_name LIKE CONCAT('%',#{search},'%')	
+		ORDER BY
+			avgGrade DESC  
+		LIMIT
+			 0,3
 	</select>
 	
 </mapper>

@@ -30,6 +30,7 @@ public class ResController {
 		System.out.println(resService.getResList(search));
 		model.addAttribute("search", search);
 		model.addAttribute("resList", resService.getResList(search));
+		model.addAttribute("best3", resService.getbestRes(search));
 		return "/res/resList";
 	}
 	
