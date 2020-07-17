@@ -285,5 +285,17 @@
 		    res_review_status ='N'
 		where
 			res_review_num = #{resReviewNum}
-	</update>                                                                                   
+	</update>    
+	
+	<select id="getSightsReviewGradeCnt"  parameterType="String" resultType="ReviewGrade">
+		SELECT 
+			s.sights_review_grade as grade,
+			count(*) as gradeCnt
+		FROM 
+			tb_sights_review AS s
+		WHERE 
+			s.sights_num =#{sightsNum} and s.sights_review_status ='Y'
+		GROUP BY  
+			s.sights_review_grade 
+	</select>                                                                                
 </mapper>

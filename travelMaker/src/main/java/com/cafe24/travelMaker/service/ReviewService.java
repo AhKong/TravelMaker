@@ -112,4 +112,9 @@ public class ReviewService {
 	public List<SightsReview> followersSightsReviewList(String mId) {
 		return reviewMapper.followersSightsReviewList(mId);
 	}
+	
+	public List<ReviewGrade> getSightsReviewGradeCnt(String sightsNum){
+		return reviewMapper.getSightsReviewGradeCnt(sightsNum);
+	}
+	
 }

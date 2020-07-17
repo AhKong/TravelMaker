@@ -69,6 +69,7 @@ public class SightsController{
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		model.addAttribute("reviewList",reviewService.sightsReviewList(sightsNum,mId));
 		model.addAttribute("isWrited",reviewService.isWritedSightsReview(mId, sightsNum));
+		model.addAttribute("reviewCnt",reviewService.getSightsReviewGradeCnt(sightsNum));
 		return "/sights/detailSights";
 	}
 	

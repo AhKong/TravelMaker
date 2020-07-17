@@ -25,6 +25,7 @@ public interface ReviewMapper {
 	public int deleteSightsReview(String sightsReviewNum) ;
 	public SightsReview getSightsReviewInfo(String sightsReviewNum);
 	public ResReview getResReviewInfo(String resReviewNum);
+	public List<ReviewGrade> getSightsReviewGradeCnt(String sightsNum);
 	public List<ResReview> followersResReviewList(String mId);
 	public List<SightsReview> followersSightsReviewList(String mId);
 }
