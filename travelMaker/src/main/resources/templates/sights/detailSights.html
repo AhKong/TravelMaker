@@ -219,7 +219,6 @@
 		          	 	<span class="reveiwTitle" th:text="${rl.sightsReviewTitle}"></span>
 		                <hr>
 						<span class="reveiwContents" th:text="${rl.sightsReviewContents}"></span><br>
-         			     	
        			     		<div class="row">
                     			 <div class="col-sm-6">
            						 <img class="img-fluid"  th:if ="${rl.sightsReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.sightsReviewPhoto})}" alt="Photo" width="300">
@@ -235,21 +234,19 @@
        			     		</span><br><br>
           					<a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
        			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		                
+		                <button class="float-right btn btn-primary showComments" toggle="show" th:reviewNum="${rl.sightsReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
 			              </div>
 			              <!-- /.card-body -->
-			     
-			              <!-- /.card-footer -->
-			              <div class="card-footer">
-			                <form action="#" method="post">
-			                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-			                  <!-- .img-push is used to add margin to elements next to floating images -->
-			                  <div class="img-push">
-			                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
-			                  </div>
-			                </form>
-			              </div>
-			              <!-- /.card-footer -->
+			     	    <div class="comments-warp" style="display:none;"> 
+							<div class="card-footer card-comments">
+		             		</div>
+		             		 <div class="card-footer">
+		                 		<img class="img-fluid img-circle img-sm" th:src="@{/fileupload/{file}(file=${session.SAVATAR})}" alt="Alt Text">
+				                  <div class="img-push">
+				                    <input type="text" class="form-control form-control-sm inputComments" placeholder="Press enter to post comment" th:reviewNum="${rl.sightsReviewNum}"th:reviewWriter ="${rl.member.mId}">
+				                  </div>
+              				</div>
+			    		</div>
 			            </div>
 			            <!-- /.card -->
 			          </div>
@@ -280,10 +277,18 @@
 		var isWrited =/*[[${isWrited}]]*/;
 		var gradeArr =/*[[${reviewCnt}]]*/
 	/*]]>*/
-	
 
-		showReveiwModal(mId,isWrited,$($("#addReview")));
-		reveiwChart(gradeArr);
+	$('.showComments').click(function(){
+		showComments($(this),mId,'getSightsCommentsList');
+	})
+
+	$('.inputComments').keydown(function(key){
+		addComments($(this),mId,'addSightsReivewComments',key);
+	})
+	
+	showReveiwModal(mId,isWrited,$($("#addReview")));
+
+//	reveiwChart(gradeArr);
 	
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 		if(mId == null || mId == ''){
@@ -315,9 +320,6 @@
 	})
 	
 	var myFn = kakaoMap(lat,lng);
-	reveiwChart(gradeArr);
-		
-	
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');
@@ -355,6 +357,11 @@
 				$('#declareForm').submit();
 			})
 	})
+	
+	$(document).on('click','.deleteComments',function(){
+	
+		deleteComments($(this),'deleteSightsReivewComment');
+   })
 </script>
 </th:block>
 </html>
