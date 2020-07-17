@@ -30,6 +30,7 @@ public class ResService {
 	public List<Res> getbestRes(String search){
 		return resMapper.getbestRes(search);
 	}
+
 	
 
 }

@@ -72,6 +72,8 @@ public class ResController {
 		model.addAttribute("isWrited", reviewService.isWritedReview(mId, resNum));
 		model.addAttribute("reviewList",reviewService.resReviewList(resNum,mId));
 		model.addAttribute("reviewCnt",reviewService.getResReviewGradeCnt(resNum));
+		model.addAttribute("gradeAvg", reviewService.getGradeAvg(resNum));
+		model.addAttribute("reviewCnt", reviewService.getReviewCnt(resNum));
 		System.out.println(reviewService.resReviewList(resNum,mId) +"<---");
 		return "res/detailRes";
 	}

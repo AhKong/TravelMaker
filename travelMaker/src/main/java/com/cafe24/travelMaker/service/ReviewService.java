@@ -60,7 +60,24 @@ public class ReviewService {
 	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
 		return reviewMapper.getResReviewGradeCnt(resNum);
 	}
+	public double getGradeAvg(String resNum) {
+		String gradeAvg = reviewMapper.getGradeAvg(resNum);
+		double result = 0;
+		if(gradeAvg !=null) {
+		   result = Double.parseDouble(gradeAvg);
+		}
+		return result;
+	}
 	
+	public int getReviewCnt(String resNum) {
+		String reviewCtn = reviewMapper.getReviewCnt(resNum);
+		int result =0;
+
+		if(reviewCtn !=null) {
+			result = Integer.parseInt(reviewCtn);
+		}
+		return result;
+	}
 	public int isWritedSightsReview(String mId, String sightsNum) {
 		return reviewMapper.isWritedSightsReview(mId, sightsNum);
 	}
@@ -116,5 +133,6 @@ public class ReviewService {
 	public List<ReviewGrade> getSightsReviewGradeCnt(String sightsNum){
 		return reviewMapper.getSightsReviewGradeCnt(sightsNum);
 	}
+	
 	
 }

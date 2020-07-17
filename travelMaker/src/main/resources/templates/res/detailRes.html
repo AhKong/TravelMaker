@@ -39,9 +39,12 @@
 			<div class="row">
 				<div class="col-12 col-sm-7">
 					<p class="my-3" style="font-size:30px;" th:utext="|${res.resName} <span class='badge ${res.btnColor}'>${res.resOpen}</span><br> |"></p>
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
-						리뷰</span>
+					<th:block th:if="${gradeAvg != 0.0}">
+					<th:block   th:each="num: ${#numbers.sequence(1,gradeAvg)}">
+          				<i class="fas fa-star" style="color:green" ></i>	
+          	 		</th:block> <strong th:text="|(${gradeAvg})|"></strong> 
+          	 		<span class="reveiwCnt"  th:text="|${reviewCnt}개의 리뷰|"></span>
+          	 		</th:block>
 					<hr>
 					<p th:text="${res.resDetail}"></p>
 					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${res.resStartTime} - ${res.resCloseTime}"></p>
