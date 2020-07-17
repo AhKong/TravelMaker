@@ -73,3 +73,76 @@ var showCommentsList = function(commentsList,reviewWirter,mId){
 	 return html;
 
 }
+
+var showComments = function(obj,mId,url){
+		var comments = obj.parents().siblings('.comments-warp');
+		var reviewNum =obj.attr('reviewNum');
+		var commentList = comments.children('.card-comments');
+		var reviewWirter = obj.attr('reviewWriter');
+
+		if(obj.attr('toggle') =='show'){
+			comments.css('display','block');
+			obj.attr('toggle','hidden');
+		
+			commonAjax('/ajax/'+url,
+					{"reviewNum" :reviewNum},
+					function(data){
+						console.log(commentList.html());
+						var commentsList = data.commentsList;
+						var html ='';
+						if(commentsList.length >0){
+							 html += showCommentsList(commentsList,reviewWirter,mId);
+						} else {
+							html ='<p> 아직 댓글이 없습니다 첫 댓글을 남겨주세요!</p>'
+						}
+						 
+						commentList.html(html)	
+					},'Get'); 
+			
+		} else {
+			comments.css('display','none');
+			obj.attr('toggle','show');
+		}
+
+}
+
+var addComments = function(obj,mId,url,key){
+	var input = obj;
+	var reviewNum = obj.attr('reviewNum');
+	var reviewWirter = obj.attr('reviewWriter');
+
+	if(key.keyCode == 13){
+		 if(mId == null || mId == undefined || mId ==''){
+			 goLogin();
+		}
+		if(input.val() ==''){
+			alert('댓글을 입력하세요!');
+			input.focus();
+			return false;
+		} 
+		commonAjax('/ajax/'+url,
+				{"member.mId" :mId, "reviewNum" :reviewNum,"commentsContents":input.val(),"reviewWirter":reviewWirter},
+				function(data){
+					var commentsList = data.commentsList;
+					var html = showCommentsList(commentsList,reviewWirter,mId);
+					input.val('');
+					input.parents().siblings('.card-footer').html(html)
+					
+				},'Get'); 
+	}
+	
+}
+
+var deleteComments = function(obj,url){
+ 	var commentsNum = obj.attr('commentsNum');
+ 	var deleteComment = obj;
+ 	var isDeleted = confirm('진짜 삭제하시겠어요?');
+ 	if(isDeleted==true){
+ 		commonAjax('/ajax/'+url,
+				{"commentsNum":commentsNum},
+				function(data){
+					deleteComment.parents('.card-comment').remove();			
+				},'Get'); 
+ 		
+ 	}
+}

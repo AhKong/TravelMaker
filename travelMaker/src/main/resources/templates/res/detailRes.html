@@ -235,7 +235,7 @@
 		     	   
 		          <a style="color:#01579B"  class="likeBtn" th:resReviewMid ="${rl.member.mId}" th:resReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
 		          	 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		         <button class="float-right btn btn-primary showComments" toggle="show" th:resReviewNum="${rl.resReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
+		         <button class="float-right btn btn-primary showComments" toggle="show" th:reviewNum="${rl.resReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
 			    </div>
 			    <div class="comments-warp" style="display:none;"> 
 					<div class="card-footer card-comments">
@@ -284,62 +284,14 @@ $(function(){
 		var isWrited =/*[[${isWrited}]]*/;
 		var gradeArr =/*[[${reviewCnt}]]*/
 	/*]]>*/
-
+	showReveiwModal(mId,isWrited,$($("#addResReview")));
+	
 	$('.showComments').click(function(){
-		var comments = $(this).parents().siblings('.comments-warp');
-		var reviewNum = $(this).attr('resReviewNum');
-		var commentList = comments.children('.card-comments');
-		var reviewWirter =  $(this).attr('reviewWriter');
-
-		if($(this).attr('toggle') =='show'){
-			comments.css('display','block');
-			$(this).attr('toggle','hidden');
-		
-			commonAjax('/ajax/getResCommentsList',
-					{"resReviewNum" :reviewNum},
-					function(data){
-						var commentsList = data.commentsList;
-						var html ='';
-						if(commentsList.length >0){
-							 html += showCommentsList(commentsList,reviewWirter,mId);
-						} else {
-							html ='<p> 아직 댓글이 없습니다 첫 댓글을 남겨주세요!</p>'
-						}
-						 
-						commentList.html(html)	
-					},'Get'); 
-			
-		} else {
-			comments.css('display','none');
-			$(this).attr('toggle','show');
-		}
+		showComments($(this),mId,'getResCommentsList');
 	})
 		
 	$('.inputComments').keydown(function(key){
-		var input = $(this);
-		var reviewNum = $(this).attr('resReviewNum');
-		var reviewWirter =  $(this).attr('reviewWriter');
-		if(key.keyCode == 13){
-			 if(mId == null || mId == undefined || mId ==''){
-				 goLogin();
-			}
-			if(input.val() ==''){
-				alert('댓글을 입력하세요!');
-				input.focus();
-				return false;
-			} 
-			commonAjax('/ajax/addResReivewComment',
-					{"member.mId" :mId, "resReviewNum" :reviewNum,"commentsContents":input.val(),"reviewWirter":reviewWirter},
-					function(data){
-						var commentsList = data.commentsList;
-						var html = showCommentsList(commentsList,reviewWirter,mId);
-						input.val('');
-						input.parents().siblings('.card-footer').html(html)
-						
-					},'Get'); 
-		}
-	
-		
+		addComments($(this),mId,'addResReivewComment',key);
 	})
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 	
@@ -372,7 +324,7 @@ $(function(){
 
 	})
 	
-	showReveiwModal(mId,isWrited,$($("#addResReview")));
+	
 	var myFn = kakaoMap(lat,lng);			
 	reveiwChart(gradeArr);
 		$(function(){

@@ -4,7 +4,7 @@ public class ResReviewComments {
 	
 	private String commentsNum;
 	private Member member;
-	private String resReviewNum;
+	private String reviewNum;
 	private String commentsContents;
 	private String commentsRegDate;
 	public String getCommentsNum() {
@@ -19,11 +19,11 @@ public class ResReviewComments {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	public String getResReviewNum() {
-		return resReviewNum;
+	public String getReviewNum() {
+		return reviewNum;
 	}
-	public void setResReviewNum(String resReviewNum) {
-		this.resReviewNum = resReviewNum;
+	public void setReviewNum(String resReviewNum) {
+		this.reviewNum = resReviewNum;
 	}
 	public String getCommentsContents() {
 		return commentsContents;
@@ -39,9 +39,8 @@ public class ResReviewComments {
 	}
 	@Override
 	public String toString() {
-		return "ResReviewComments [commentsNum=" + commentsNum + ", member=" + member + ", resReviewNum=" + resReviewNum
+		return "ResReviewComments [commentsNum=" + commentsNum + ", member=" + member + ", reviewNum=" + reviewNum
 				+ ", commentsContents=" + commentsContents + ", commentsRegDate=" + commentsRegDate + "]";
 	}
-	
 	
 }
