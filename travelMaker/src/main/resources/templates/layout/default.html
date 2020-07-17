@@ -106,6 +106,41 @@
 				  alert( "Request failed: " + textStatus );
 			}); 
 		});	
+		
+		$('#newNotice').click(function(){
+			var request = $.ajax({
+				  url: "/ajax/noticeList",  
+				  method: "GET",
+				  dataType: "json"
+			}); 	     
+ 
+			request.done(function( data ) {
+				console.log(data);
+				console.log(data.result.length);
+				var noticeList = $('#warp-newNoticeList');
+				var html ='';
+				var newNoticeCnt = data.result.length
+				var noticeArr = data.result;
+				if(newNoticeCnt==0){
+					html +=' <p style="margin-left:15%; margin-top:10px;"> 새로운 메세지가 없습니다</p>';
+				} else {
+					for(var i = 0; i < newNoticeCnt;i++){
+						console.log(noticeArr[i]);
+						html+='<div class="dropdown-divider"></div>';
+						html+='<a href="#" class="dropdown-item">';
+						html+='<i class="fas fa-envelope mr-2"></i>' + noticeArr[i].noticeContents;
+						html+='<span class="float-right text-muted text-sm">'+noticeArr[i].noticeSendTime+'</span>';
+					    html+='</a>';
+					}
+				}  
+		    	noticeList.html(html);
+				
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			}); 
+		});	
 	})
 </script>
 <th:block layout:fragment="customFooterScript"></th:block>

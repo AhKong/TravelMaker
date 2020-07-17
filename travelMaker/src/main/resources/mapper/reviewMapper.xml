@@ -46,6 +46,11 @@
  			<result property="mId" column="m_id"/>
  			<result property="mAvatar"  column="m_avatar"/>
  		</association>
+ 		<association property="sights" javaType ="Sights">
+ 			<result property="mId" column="m_id"/>
+ 			<result property="sightsName" column="sights_name"/>
+ 			<result property="sightsPhoto"  column="sights_photo"/>
+ 		</association>
 	</resultMap>
 	
 	<select id="getResReviewInfo" resultMap ="resReviewResultMap">
@@ -219,6 +224,25 @@
 			r.m_id = #{mId};
 	</select> 
 	
+	<select id="followersSightsReviewList" parameterType="String" resultType="SightsReview" resultMap="sightsReviewResultMap">  
+		SELECT
+			s.m_id,
+			s.sights_name,
+			s.sights_photo,
+			sv.sights_review_title,
+			sv.sights_review_contents,
+			sv.sights_review_grade,
+			sv.sights_review_reg_date
+		FROM
+			tb_sights  AS s
+		INNER JOIN
+			tb_sights_review AS sv
+		ON
+			s.sights_num = sv.sights_num
+		WHERE  
+			s.m_id = #{mId};
+	</select> 
+	
 	<select id="sightsReviewList" parameterType="String" resultMap="sightsReviewResultMap">
 		SELECT 
 			m.m_avatar,
@@ -261,5 +285,17 @@
 		    res_review_status ='N'
 		where
 			res_review_num = #{resReviewNum}
-	</update>                                                                                   
+	</update>    
+	
+	<select id="getSightsReviewGradeCnt"  parameterType="String" resultType="ReviewGrade">
+		SELECT 
+			s.sights_review_grade as grade,
+			count(*) as gradeCnt
+		FROM 
+			tb_sights_review AS s
+		WHERE 
+			s.sights_num =#{sightsNum} and s.sights_review_status ='Y'
+		GROUP BY  
+			s.sights_review_grade 
+	</select>                                                                                
 </mapper>

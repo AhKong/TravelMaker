@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.domain.Question;
-import com.cafe24.travelMaker.service.MsgService;
+import com.cafe24.travelMaker.service.NoticeService;
 import com.cafe24.travelMaker.service.QuestionService;
 
 @Controller
 @RequestMapping("/question")
 public class QnAController{
 	@Autowired private QuestionService questionService;
-	@Autowired private MsgService msgService;
+	@Autowired private NoticeService noticeService;
 	@GetMapping("/faq")
 	public String faq() {
 		return "/question/faq";
@@ -67,7 +67,7 @@ public class QnAController{
 		question.setqAnswer(inputDescription);
 		notice.setmId(loginId);
 		questionService.answer(question);
-		msgService.questionNotice(notice);
+		noticeService.questionNotice(notice);
 		return "redirect:/question/answer";
 	}
 	

@@ -5,9 +5,20 @@
 <mapper namespace="com.cafe24.travelMaker.mapper.CommentsMapper">
 	<resultMap type="ResReviewComments" id="resReviewCommentsResultMap">
 		<result property="commentsNum" column="res_comment_num" />
-		<result property="resReviewNum" column="res_review_num" />
+		<result property="reviewNum" column="res_review_num" />
 		<result property="commentsContents" column="comment_contents" />
 		<result property="commentsRegDate" column="comment_reg_date" />
+		<association property="member" javaType="Member">
+			<result property="mId" column="m_id"/>
+			<result property="mAvatar" column="m_avatar"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="SightsReviewComments" id="sightsReviewCommentsResultMap">
+		<result property="commentsNum" column="sights_comment_num" />
+		<result property="reviewNum" column="sights_review_num" />
+		<result property="commentsContents" column="sights_comment_contents" />
+		<result property="commentsRegDate" column="sights_comment_reg_date" />
 		<association property="member" javaType="Member">
 			<result property="mId" column="m_id"/>
 			<result property="mAvatar" column="m_avatar"/>
@@ -33,10 +44,12 @@
 		   ) VALUES (
 		   			#{commentsNum},
 		   			#{member.mId},
-		   			#{resReviewNum},
+		   			#{reviewNum},
 		   			#{commentsContents}
 		   			)
-	</insert>		
+	</insert>
+	
+			
 	<select id="getResReivewComments" parameterType="String" resultMap="resReviewCommentsResultMap"> 
 		SELECT 
 	 		c.*, m.m_avatar
@@ -73,4 +86,53 @@
 		WHERE
 			res_comment_num = #{commentsNum}
 	</update>
+	
+	<insert id="addSightsReviewComments" parameterType="SightsReviewComments">
+		<selectKey order="BEFORE" keyProperty="commentsNum" resultType="String">
+			SELECT
+				(case COUNT(*) 
+				when 0 then 'sights_comment_1'
+				ELSE CONCAT('sights_comment_', (MAX(CAST(SUBSTRING(sights_comment_num,16) AS DECIMAL))+1))
+				END) AS commentsNum
+			FROM 
+				tb_sights_comment
+		</selectKey>
+		INSERT INTO
+			 tb_sights_comment(
+			 	sights_comment_num,
+			 	m_id,
+			 	sights_review_num, 
+			 	sights_comment_contents
+		 ) VALUES (
+		 	#{commentsNum},
+		   	#{member.mId},
+		   	#{reviewNum},
+		   	#{commentsContents}
+		 )
+	</insert>
+	
+	<select id="getSightsCommentsList" parameterType="String" resultMap="sightsReviewCommentsResultMap"> 
+		SELECT 
+	 		s.*, m.m_avatar
+		FROM 
+			tb_sights_comment AS s
+		INNER JOIN 
+			tb_member AS m 
+		ON
+		    s.m_id = m.m_id
+		WHERE
+			s.sights_review_num = #{sightsReviewNum} AND s.sights_comments_active='Y'
+		ORDER BY 
+		 	s.sights_comment_reg_date DESC
+	</select>
+	
+	<update id="deleletSightsReviewComments" parameterType="String">
+		UPDATE 
+			tb_sights_comment
+		SET
+			sights_comments_active='N'
+		WHERE
+			sights_comment_num = #{commentsNum}
+	</update>
+	
 </mapper>
