@@ -140,7 +140,6 @@
 								<div class=" info-box bg-light ">
 									<img th:src="@{/fileupload/{file}(file=${best.resPhoto})}"alt="User Image" width="100" height="150">
 								<div class="desc">
-
 									<a id="sightsNum" th:href="@{/res/resDetail(resNum=${best.resNum})}" class="sightsName" th:data-sightsNum="${best.resNum}" th:text="${best.resName}"></a><br>
 									<th:block  th:each="num: ${#numbers.sequence(1,best.avgGrade)}">
 		          			  			<i class="fas fa-star" style="color:green" ></i>
@@ -153,11 +152,7 @@
 								</div>
 							</div>
 						</div>
-						
-						</th:block>
-					
-						
-					
+					</th:block>
 					<div class="row" >
 						<span class="sightListTitle">음식점</span>
 						<th:block th:each="l: ${resList}">
@@ -168,8 +163,7 @@
 									</div>
 									<div class="sightsDesc col-12 col-md-9">
 										<a id="sightsNum" th:href="@{/res/resDetail(resNum=${l.resNum})}" class="sightsName" th:data-sightsNum="${l.resNum}" th:text="${l.resName}"></a><br>
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i>
+										
 										<p th:text="${l.resCate.resType}"></p>
 										<p th:text="${l.resAddr}"></p>
 										<p th:text="${l.resDetail}"></p>
@@ -202,13 +196,7 @@
 //-->
 </script>
 	<script>
-		/*
-			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
-			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		 */
-		 /* id값으로 검색해서 테이블내 데이터 유무에 따라 그립보여줌... */
-
+		
 	</script>
 </th:block>
 </html>
