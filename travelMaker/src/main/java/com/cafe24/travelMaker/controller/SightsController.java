@@ -32,6 +32,7 @@ public class SightsController{
 		System.out.println(search+"<---");
 		model.addAttribute("searchWord", search);
 		model.addAttribute("sightsList", sightsService.selectSightsList(search));
+		model.addAttribute("best3", sightsService.getbestSights(search));
 		return "/sights/sightsList";
 	}
 	

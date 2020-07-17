@@ -22,6 +22,8 @@ public class Sights {
 	private SightsCate sightsCate;
 	private String sightsOpen;
 	private String btnColor;
+	private double avgGrade;
+	private int reviewCnt;
 	public String getSightsNum() {
 		return sightsNum;
 	}
@@ -139,6 +141,21 @@ public class Sights {
 	public void setBtnColor(String btnColor) {
 		this.btnColor = btnColor;
 	}
+	
+	public double getAvgGrade() {
+		return avgGrade;
+	}
+	public void setAvgGrade(double avgGrade) {
+		this.avgGrade = avgGrade;
+	}
+	
+	
+	public int getReviewCnt() {
+		return reviewCnt;
+	}
+	public void setReviewCnt(int reviewCnt) {
+		this.reviewCnt = reviewCnt;
+	}
 	@Override
 	public String toString() {
 		return "Sights [sightsNum=" + sightsNum + ", siNum=" + siNum + ", mId=" + mId + ", sightsCateNum="
@@ -147,6 +164,7 @@ public class Sights {
 				+ ", sightsAddr=" + sightsAddr + ", sightsWeb=" + sightsWeb + ", sightsTel=" + sightsTel
 				+ ", sightsStartTime=" + sightsStartTime + ", sightsCloseTime=" + sightsCloseTime + ", sightsRegDate="
 				+ sightsRegDate + ", sightsCate=" + sightsCate + ", sightsOpen=" + sightsOpen + ", btnColor=" + btnColor
-				+ "]";
+				+ ", avgGrade=" + avgGrade + ", reviewCnt=" + reviewCnt + "]";
 	}
+
 }
