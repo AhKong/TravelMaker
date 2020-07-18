@@ -366,7 +366,9 @@
 		left outer join 
 			tb_member as m
 		on 
-			m.m_id= sr.m_id and sr.sights_num  =#{sightsNum}
+			m.m_id= sr.m_id and 
+			sr.sights_num  =#{sightsNum} and 
+		 	sr.sights_review_status ='Y'
 		group by m.m_gender 
 	</select>
                                                                          

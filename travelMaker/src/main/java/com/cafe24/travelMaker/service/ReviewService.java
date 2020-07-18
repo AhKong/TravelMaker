@@ -164,13 +164,21 @@ public class ReviewService {
 	public String getSightsGenderPreference(String sightsNum){
 		String gender = null;
 		List<Preference>result = reviewMapper.getSightsGenderPreference(sightsNum);
-		if(result.get(0).getType() != null) {
-			if(result.get(0).getCount()>result.get(1).getCount()) {
-				gender = result.get(0).getType();
-			} else if(result.get(0).getCount()<result.get(1).getCount()){
+		if(result.size() != 1) {
+			if(result.size()==2) {
 				gender = result.get(1).getType();
-			} 
+			} else {
+				
+				if(result.get(1).getCount()>result.get(2).getCount()) {
+					gender = result.get(1).getType();
+				} else if(result.get(1).getCount()<result.get(2).getCount()){
+					gender = result.get(2).getType();
+				}  
+				gender ="all";
+			}
+					
 		}
+		
 		return gender;
 	}
 	
