@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.domain.MemberLogin;
 import com.cafe24.travelMaker.mapper.MemberMapper;
 
 @Service
@@ -89,6 +90,10 @@ public class MemberService {
 		jasypt.setPassword("ahkongnong");      //암호화 키(password)
 	    jasypt.setAlgorithm("PBEWithMD5AndDES");
 	    return jasypt;
+	}
+	
+	public int addLoginLog(MemberLogin memberLogin) {
+		return memberMapper.addLoginLog(memberLogin);
 	}
 
 }

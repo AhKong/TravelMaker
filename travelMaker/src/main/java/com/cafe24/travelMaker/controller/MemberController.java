@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.domain.MemberLogin;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.SightsReview;
 import com.cafe24.travelMaker.mapper.FollowMapper;
@@ -154,10 +155,9 @@ public class MemberController{
 		    		session.setAttribute("SLEVEL",result.getmLevel());
 		    		session.setAttribute("SNAME", result.getmName());
 		    		session.setAttribute("SAVATAR", result.getmAvatar());
-		    		System.out.println(session.getAttribute("SID"));
-		    		System.out.println(session.getAttribute("SLEVEL"));
-		    		System.out.println(session.getAttribute("SNAME"));
-		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
+		    		MemberLogin memberLogin = new MemberLogin();
+		    		memberLogin.setmId(member.getmId());
+		    		memberService.addLoginLog(memberLogin);
 		    		
 		    		return "redirect:/";
 				}
