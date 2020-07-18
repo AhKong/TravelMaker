@@ -43,9 +43,18 @@ public class MemberService {
         String encryptedPw = jasypt.encrypt(member.getmPw());  
         member.setmPw(encryptedPw);
         String encryptedTel = jasypt.encrypt(member.getmTel());  
-        member.setmPw(encryptedTel);
+        member.setmTel(encryptedTel);
         String encryptedEmail = jasypt.encrypt(member.getmEmail());  
         member.setmEmail(encryptedEmail);
+        
+        if("".equals(member.getmAvatar())) {
+        	if("남".equals(member.getmGender())) {
+        		member.setmAvatar("man.png");
+        	} else if("".equals(member.getmGender())) {
+        		member.setmAvatar("woman.png");
+        	}
+        }
+        	
 
      
 		return memberMapper.addMember(member);
