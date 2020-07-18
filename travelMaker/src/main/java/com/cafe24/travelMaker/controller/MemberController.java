@@ -163,7 +163,7 @@ public class MemberController{
 				}
 			}
 			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
-			redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
+			redirectAttr.addFlashAttribute("message","등록된 정보가 없습니다.");
 		}
 		return "redirect:/member/login";
 	}
@@ -176,7 +176,7 @@ public class MemberController{
 	}
 	
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
+	public String addMember(Member member,RedirectAttributes redirectAttr) {
 		
 		//System.out.println(result +"<----result");
 
@@ -192,6 +192,8 @@ public class MemberController{
  			System.out.println(pointAddResult+"<----point 적립 성공!");
  			int pointResult = pointService.setPoint();
  			System.out.println(pointResult+"<----point insert 성공!");
+ 			redirectAttr.addFlashAttribute("message","TravelMaker의 회원이 되신것을 환영합니다!🥳");
+ 
 		}
 		return "redirect:/member/login";
 	}

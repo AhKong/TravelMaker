@@ -29,17 +29,22 @@ public class MemberService {
 	}
 
 	public Member memberLogin(String mId) {
+		
 		StandardPBEStringEncryptor jasypt = encryptor();
 		Member member = memberMapper.getMemberInfo(mId);
-		String plainPw = jasypt.decrypt(member.getmPw()); 
-		member.setmPw(plainPw);
-		System.out.println(plainPw+"<---------복호화 된 비밀번호");	//복호화
+		System.out.println(member +"<-----------");
+	
+		if(member !=null) {
+			String plainPw = jasypt.decrypt(member.getmPw()); 
+			member.setmPw(plainPw);
+			System.out.println(plainPw+"<---------복호화 된 비밀번호");	//복호화
+		}
 		return member;
 	}
 
 	public int addMember(Member member) {
 		StandardPBEStringEncryptor jasypt = encryptor();
-        
+       
         /* 회원가입시 비밀번호, 전화번호, 이메일 정보에 대하여 암호화 */
         String encryptedPw = jasypt.encrypt(member.getmPw());  
         member.setmPw(encryptedPw);
