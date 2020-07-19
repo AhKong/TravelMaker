@@ -356,5 +356,20 @@
 				s.sights_review_photo <> '' AND s.sights_num = #{sightsNum} and s.sights_review_status = 'Y'
 		]]>
 	</select>  
+	
+	<select id="getSightsGenderPreference" parameterType="String" resultType="Preference" >
+		select 
+			 m.m_gender as type,
+			 count(m.m_gender) as count
+		from 
+			tb_sights_review as sr 
+		left outer join 
+			tb_member as m
+		on 
+			m.m_id= sr.m_id and 
+			sr.sights_num  =#{sightsNum} and 
+		 	sr.sights_review_status ='Y'
+		group by m.m_gender 
+	</select>
                                                                          
 </mapper>

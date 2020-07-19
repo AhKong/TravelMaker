@@ -125,5 +125,24 @@
 			and m_tel = #{mTel}
 			and m_email = #{mEmail};
 	</select>
+	
+	<insert id="addLoginLog" parameterType ="MemberLogin">
+		<selectKey order="BEFORE" keyProperty="logNum" resultType="String">
+			SELECT
+				case COUNT(*)
+				WHEN 0 THEN 'login_1'
+				ELSE CONCAT('login_', MAX(CAST(SUBSTRING(log_num,7) AS DECIMAL))+1)
+				END AS logNum
+			FROM
+				tb_member_login  
+		</selectKey>
+		
+		INSERT INTO 
+			tb_member_login (log_num,m_id)
+		VALUES(
+			#{logNum},#{mId}
+		)
+	
+	</insert>
 
 </mapper>

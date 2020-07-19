@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
+import com.cafe24.travelMaker.domain.MemberLogin;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.SightsReview;
 import com.cafe24.travelMaker.mapper.FollowMapper;
@@ -156,18 +157,17 @@ public class MemberController{
 		    		session.setAttribute("SLEVEL",result.getmLevel());
 		    		session.setAttribute("SNAME", result.getmName());
 		    		session.setAttribute("SAVATAR", result.getmAvatar());
-		    		System.out.println(session.getAttribute("SID"));
-		    		System.out.println(session.getAttribute("SLEVEL"));
-		    		System.out.println(session.getAttribute("SNAME"));
-		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
+		    		MemberLogin memberLogin = new MemberLogin();
+		    		memberLogin.setmId(member.getmId());
+		    		memberService.addLoginLog(memberLogin);
 		    		
 		    		return "redirect:/";
 				}
 			}
 			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
-			redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
+			redirectAttr.addFlashAttribute("message","등록된 정보가 없습니다.");
 		}
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 
 	/*회원가입 페이지 */
@@ -178,7 +178,7 @@ public class MemberController{
 	}
 	
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
+	public String addMember(Member member,RedirectAttributes redirectAttr) {
 		
 		//System.out.println(result +"<----result");
 
@@ -194,6 +194,8 @@ public class MemberController{
  			System.out.println(pointAddResult+"<----point 적립 성공!");
  			int pointResult = pointService.setPoint();
  			System.out.println(pointResult+"<----point insert 성공!");
+ 			redirectAttr.addFlashAttribute("message","TravelMaker의 회원이 되신것을 환영합니다!🥳");
+ 
 		}
 		return "redirect:/member/login";
 	}
