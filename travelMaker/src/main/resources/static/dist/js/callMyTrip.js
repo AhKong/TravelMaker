@@ -22,16 +22,18 @@
 				var myTripList = data.result.length
 				var listInfo = data.result;
 				var i = 0;
-				for(i = 0; i < myTripList;i++){				
-					html+='<div class="col-12">'
+				html+='<div class="col-12">'
 					html+='<div class="sights row">'
-					html+='<div class="sightsImg col-12 col-md-2">'
+				for(i = 0; i < myTripList;i++){		
+					html+='<div class="col-12">'
+					html+='<div class="sightsImg col-2">'
 					html+=' <img src="/fileupload/'+ listInfo[i].tPhoto +'"width="80" height="80">'
 					html+='</div>'
-						html+='<div class="col-12 col-md-10">'
+						html+='<div class="col-10">'
 				    html+= '<p style="text-align: center"><input type="radio" name="myTrip" data-tPhoto="'+listInfo[i].tPhoto+'" data-tNum="'+listInfo[i].tNum+'" data-sightsNum="'+listInfo[i].sightsNum+'" id="myTripRadio'+i+'"><label for="myTripRadio'+i+'">'+ listInfo[i].tName+'</label></p>'
-				    html+= '</div> </div>'
+				    	html+='</div> </div>'
 				}
+				html+= '</div> </div>'
 			
 				var myTripList = $('#myTripList');
 				myTripList.html(html);

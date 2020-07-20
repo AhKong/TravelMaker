@@ -320,13 +320,15 @@
 							</div>
 							<div>
 								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
+								<div>
 									<input type='date' name='userBirthday' /> ~ <input type='date'
 										name='userBirthday' />
+										</div>
 								</form>
 							</div>
 							<div>
 								<h4>
-									생성자ID : <a th:text="${sTripPlan[0].tNum}">이승환</a>
+									생성자ID : <a th:text="${sTripPlan[0].mId}"></a>
 								</h4>
 							</div>
 					<th:block th:if="${sTripPlan[0].pNum == ''}"> 
@@ -399,17 +401,14 @@
 										<div class="container">
 											<div class="row">
 												<div class="col">
-													<div>
-														<strong>설마?</strong>
-													</div>
-													<strong>진짜로 삭제하시려구여?</strong>
+													<strong>여행 계획을 삭제 하시겠습니까?</strong>
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
-												data-dismiss="modal">ㅅㄹ</button>
-											<button type="submit" class="btn btn-primary">응 삭제할래</button>
+												data-dismiss="modal">취소</button>
+											<button type="submit" class="btn btn-primary">삭제</button>
 											<!-- 삭제처리 -->
 										</div>
 									</div>
@@ -424,23 +423,20 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<strong><i class="fas fa-biohazard"></i>일정 삭제하시게??</strong>
+											<strong><i class="fas fa-biohazard"></i>일정을 삭제합니다</strong>
 										</div>
 										<div id="modalMid">
 											<div class="container">
 												<div class="row">
 													<div class="col">
-														<div>
-															<strong>여길 안간다고?</strong>
-														</div>
-														<strong>서운하게 하네...</strong>
+														<strong>일정을 삭제 하시겠습니까?.</strong>
 													</div>
 												</div>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
-													data-dismiss="modal">미안</button>
-												<button type="submit" class="btn btn-primary">ㅇㅇ</button>
+													data-dismiss="modal">취소</button>
+												<button type="submit" class="btn btn-primary">삭제</button>
 												<!-- 삭제처리 -->
 											</div>
 										</div>
