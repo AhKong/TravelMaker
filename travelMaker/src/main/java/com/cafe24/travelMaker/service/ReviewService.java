@@ -1,9 +1,12 @@
 package com.cafe24.travelMaker.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cafe24.travelMaker.domain.Preference;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.TripType;
 import com.cafe24.travelMaker.mapper.ReviewMapper;
@@ -156,6 +159,27 @@ public class ReviewService {
 	}
 	public List<String> getSightsReviewPhotos(String sightsNum){
 		return reviewMapper.getSightsReviewPhotos(sightsNum);
+	}
+	
+	public String getSightsGenderPreference(String sightsNum){
+		String gender = null;
+		List<Preference>result = reviewMapper.getSightsGenderPreference(sightsNum);
+		if(result.size() != 1) {
+			if(result.size()==2) {
+				gender = result.get(1).getType();
+			} else {
+				
+				if(result.get(1).getCount()>result.get(2).getCount()) {
+					gender = result.get(1).getType();
+				} else if(result.get(1).getCount()<result.get(2).getCount()){
+					gender = result.get(2).getType();
+				}  
+				gender ="all";
+			}
+					
+		}
+		
+		return gender;
 	}
 	
 }
