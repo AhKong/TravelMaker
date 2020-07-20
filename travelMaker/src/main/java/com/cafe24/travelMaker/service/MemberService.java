@@ -16,12 +16,29 @@ public class MemberService {
 	
 	public Member findId(Member member) { //아이디 찾기
 		System.out.println(member +" <----------Service findId");
-	return memberMapper.findId(member);  
+		StandardPBEStringEncryptor jasypt = encryptor();
+	    String encryptedTel = jasypt.encrypt(member.getmTel());  
+	    member.setmTel(encryptedTel);
+	    String encryptedEmail = jasypt.encrypt(member.getmEmail());  
+	    member.setmEmail(encryptedEmail);
+	   		
+		return memberMapper.findId(member);  
 	}
 	
-	public Member findPw(Member member) { // 비밀번호 찾기
-		System.out.println(member + " <---------- Service findPw");	
-	return memberMapper.findPw(member);
+	public Member findPw(Member member) { // 비밀번호 찾기 아이디 전화번호 이메일 
+		System.out.println(member + " <---------- Service findPw");
+		StandardPBEStringEncryptor jasypt = encryptor();
+		String encryptedTel = jasypt.encrypt(member.getmTel());  
+		member.setmTel(encryptedTel);
+		String encryptedEmail = jasypt.encrypt(member.getmEmail()); 
+		member.setmEmail(encryptedEmail);
+		
+		Member result = memberMapper.findPw(member);
+		if(result !=null) {
+			String plainPw = jasypt.decrypt(member.getmPw()); 
+			result.setmPw(plainPw);
+		}
+	return result;
 	}
 	
 	public int mIdCheck(String mId) {
@@ -79,8 +96,6 @@ public class MemberService {
 			member.setmPw(plainPw);
 			String plainTel =jasypt.decrypt(member.getmTel());  
 			member.setmTel(plainTel);
-			String plainEmail = jasypt.decrypt(member.getmEmail());
-			member.setmEmail(plainEmail);
 		}
 		return member;
 	}
@@ -91,10 +106,7 @@ public class MemberService {
 	        member.setmPw(encryptedPw);
 	        String encryptedTel = jasypt.encrypt(member.getmTel());  
 	        member.setmTel(encryptedTel);
-	        String encryptedEmail = jasypt.encrypt(member.getmEmail());  
-	        member.setmEmail(encryptedEmail);
 		//회원정보 수정 하는거 새롭게 받아서  암호화
-	        System.out.println("여기오니???");
 	        System.out.println(member +"<-------updateMember");
 	        int result = memberMapper.updateMember(member);
 	        System.out.println(result +"<----updateMemberResult");
