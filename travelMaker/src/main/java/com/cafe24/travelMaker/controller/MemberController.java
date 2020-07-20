@@ -101,23 +101,23 @@ public class MemberController{
 		String mId = member.getmId();
 		Member m = memberService.getMemberInfo(mId);	//db 에서 조회한 회원정보
 		member.setmAvatar(member.getFile().getOriginalFilename());
+		System.out.println(mId+" <- mId");
 		System.out.println(member+" <<<--- member updateMember 폼에서 넘어온 데이터");
 		System.out.println(member.getmAvatar()+" <-- 변경 될 프로필 사진");
 		System.out.println(m.getmAvatar()+" <-- db 에서 조회된 프로필 사진");
-		System.out.println(mId+" <- mId");
-		if(m.getmAvatar().equals(member.getmAvatar()) ) {
-			storageService.delete(mId);
-			storageService.store(member.getFile());
+		if(m.getmAvatar().equals(member.getmAvatar()) || "".equals(member.getmAvatar()) ) {
+			System.out.println("현재 프로필과 같은 사진입니다. ");
 			int re1 = memberService.updateMember(member);
 			System.out.println(re1+" <- 1이면 사진 변경 없이 회원정보수정 완료!");
 		}
-		if(m.getmAvatar() != member.getmAvatar()) {
+		if(m.getmAvatar() != member.getmAvatar() && !"".equals(member.getmAvatar())) {
 			int re1 = memberService.updateMember(member);
 			int re2 = memberService.deleteMAvatar(member.getmAvatar(), mId);
 			int re3 = memberService.updateMAvatar(member.getmAvatar(), mId);
+			storageService.delete(m.getmAvatar());
 			storageService.store(member.getFile());
 			System.out.println(re1+" <- 1이면 사진 변경 없이 회원정보수정 완료!");
-			System.out.println(re2+" <- 1이면 프로필 사진 삭제 완료!");
+			System.out.println(re2+" <- 1이면 프로필 사진 지우기 완료!");
 			System.out.println(re3+" <- 1이면 프로필 사진 변경 완료!");
 		}
 		return "redirect:/member/myPage";

@@ -13,13 +13,21 @@
 		}
 		.card-body {
 			padding: 50px;
-			font-size: small;
 		}
 		.label-control {
 			float: left;
+			font-size: medium;
 		}
 		.form-button {
 			margin:0 auto;
+		}
+		.pwMsg {
+			font-size: small;
+			display: none;
+			color: #ff0000;
+		}
+		.fileName {
+			font-size: small;
 		}
 		
 	</style>
@@ -66,27 +74,16 @@
                 <label for="up_mPw" class=" label-control col-md-3">비밀번호</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="password" name="mPw" class="form-control" id="up_mPw" placeholder="비밀번호를 입력하세요">
+                  <p id="pwRexExpMsg" class="pwMsg">비밀번호는 대소문자,숫자,특수기호 포함하여 8자 이상이여합니다.</p>
                 </div>
               </div>
               <div class="form-group form-group-lg">
                 <label for="up_mPwCheck" class=" label-control col-md-3">비밀번호 확인</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
                   <input type="password" name="mPwCheck" class="form-control" id="up_mPwCheck" placeholder="비밀번호를 다시 확인하세요">
+                  <p id="pwCheckMsg" class="pwMsg">비밀번호가 일치하지 않습니다. </p>
                 </div>
               </div>
-              <div class="form-group form-group-lg">
-                <label for="up_mName" class="label-control col-md-3">이름</label>
-                <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mName" class="form-control" id="up_mName" th:value="${b.mName}" >
-                </div>
-              </div>
-              <div class="form-group form-group-lg">
-                <label for="up_mEmail" class="label-control col-md-3">이메일</label>
-                <div class="input-control col-sm-8 col-md-8 col-lg-10">
-                  <input type="text" name="mEmail" class="form-control" id="up_mEmail" th:value="${b.mEmail}" >
-                </div>
-              </div>
-                  
               <div class="form-group form-group-lg">
                 <label for="up_mTel" class=" label-control col-md-3">전화번호</label>
                 <div class="input-control col-sm-8 col-md-8 col-lg-10">
@@ -99,16 +96,12 @@
                   <input type="text" name="mAddr" class="form-control" id="up_mAddr" th:value="${b.mAddr}" >
                 </div>
               </div>
-              <div class="form-group form-group-lg">
-                <label for="up_mGender" class=" label-control col-md-3">성별</label>
-                <div class="input-control col-sm-6 col-md-6 col-lg-10">
-                    <input type="text" name="mGender" class="form-control" id="up_mGender" th:value="${b.mGender}">
-                </div>
-              </div>
               <div class="form-group">
                 <label for="up_mAvatar" class="label-control col-md-3">프로필사진</label>
                 <div class="input-control col-sm-6 col-md-6 col-lg-10">
                   <input type="file" name="file" class="form-control" id="up_mAvatar" accept="image/git, image/jpeg, image/png" th:value="${b.mAvatar}">
+                  <p id="fileName">현재사진 : [[${b.mAvatar}]] 사진을 변경하지 않으면 저장되어 있는 사진으로 설정됩니다. </p>
+             		
                 </div>
               </div>
               <div class="form-group">
@@ -175,7 +168,7 @@
 							</div>
 							
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal"> 예 </button>
+								<button type="button" class="btn btn-primary btn-sm col-sm-2" onclick="location.href='/member/myPage'"> 예 </button>
 			 					<button type="button" class="btn btn-default btn-sm col-sm-2" data-dismiss="modal">아니오</button>
 							</div>
 						</div>
@@ -211,22 +204,42 @@
 		var up_mAddr = $('#up_mAddr');
 		var up_mAvatar = $('#up_mAvatar');
 		var up_mIntrod = $('#up_mIntrod');
+		var up_pwCheck = false;
+		var up_pwCheck2 = false ; //비밀번호 재확인 일치 여부
+		var upCheck = $('#upCheck');
+		
+		up_mPw.keyup(function(){
+			var mPwCheck = RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
+			if(mPwCheck.test(up_mPw.val())==true){
+				up_pwCheck = true;
+				$('#pwRexExpMsg').css('display','none')
+			} else {
+				up_pwCheck = false;
+				$('#pwRexExpMsg').css('display','block')
+			}
+		})
+		
+		up_mPwCheck.keyup(function(){
+			if(up_mPw.val() == up_mPwCheck.val()){
+				up_pwCheck2 = true;
+				$('#pwCheckMsg').css('display','none')
+				
+			} else {
+				up_pwCheck2 = false;
+				$('#pwCheckMsg').css('display','block')
+			}
+		})
 		
 		$('#completeBtn').click(function(){
 			
 			if(up_mPw.val() == ''){
-				alert("비밀번호를 입력해주세요");
-				up_mPwCheck.focus();
+				alert("비밀번호를 깜박하셨습니다!");
+				up_mPw.focus();
 				return false;
 			}
 			if(up_mPwCheck.val() != up_mPw.val()){
 				alert("입력한 두 개의 비밀번호가 다릅니다 비밀번호를 확인해주세요");
 				up_mPwCheck.focus();
-				return false;
-			}
-			if(up_mEmail.val() == ""){
-				alert("이메일을 입력해주세요");
-				up_mEmail.focus();
 				return false;
 			}
 			if(up_mTel.val() == ""){
@@ -238,6 +251,12 @@
 				alert("주소를 입력해주세요");
 				up_mAddr.focus();
 				return false;
+			}
+			console.log(upCheck.is(":checked"));
+			if(upCheck.is(":checked")==false){
+				alert("체크해주세요!"); 
+				upCheck.focus(); 
+				return false; 
 			}
 			$('#formUpdate').submit();
 		});

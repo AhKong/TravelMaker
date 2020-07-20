@@ -22,14 +22,14 @@
  		</association>
  	</resultMap>
  	
- 	<update id="updateMAvatar" parameterType="String">
+ 	<update id="updateMAvatar" parameterType="Member">
  		UPDATE tb_member 
  		SET m_avatar = #{mAvatar}
  		WHERE m_id=#{mId};
  		
  	</update>
  	
- 	<update id="deleteMAvatar" parameterType="String">
+ 	<update id="deleteMAvatar" parameterType="Member">
  		UPDATE tb_member
  		<trim prefix="SET">
 			<if test="mAvatar != null and mAvatar != ''.toString()">m_avatar=''</if>
@@ -45,7 +45,7 @@
 			<if test="mPw != null and mPw != ''.toString()">m_pw=#{mPw},</if>
 			<if test="mTel != null and mTel != ''.toString()">m_tel=#{mTel},</if>
 			<if test="mAddr != null and mAddr != ''.toString()">m_addr=#{mAddr},</if>
-			<if test="mIntrod != null and mIntrod != ''.toString()">m_introd=#{mIntrod},</if>
+			<if test="mIntrod != null and mIntrod != ''.toString()">m_introd=#{mIntrod}</if>
 		</trim>
 		<where>
 			<if test="mId != null and mId != ''.toString()">m_id=#{mId}</if>

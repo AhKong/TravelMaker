@@ -93,7 +93,7 @@ public class StorageService {
 			}else{
 				System.out.println("파일삭제 실패"); }
 		}else{
-			System.out.println("파일이 존재하지 않습니다."); 
+			System.out.println("삭제할 파일이 존재하지 않습니다."); 
 	   }
 	
 	}
