@@ -13,4 +13,5 @@ public interface ResMapper {
 	public int addRes(Res res);
 	public List<Res> getResList(String search);
 	public Res getDetailRes(String resNum);
+	public List<Res> getbestRes(String search);
 }

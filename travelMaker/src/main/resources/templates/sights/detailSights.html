@@ -7,44 +7,7 @@
 </th:block>
 <th:block layout:fragment="customCss">
 <link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
-		<style>
-		.carousel-item img {
-			width: 400px;
-			height: 400px;
-		}
-		
-		#sights-map, #sights-review {
-			height: auto;
-			width: 81vw;
-		}
-		
-		.chart {
-			width: 400px;
-		
-		}
-		
-		.reveiwIntro{
-			font-size: 30px;
-		}
-		
-		.reviewIntroTitle {
-			width: 100%;
-			font-size:24px
-		}
-		
-		.form-check{
-			margin-top:13px;
-		}
-		
-		.reveiwTitle{
-			font-size:20px;
-			font-weight:bold;
-		}
-		.badge{
-		font-size:16px;
-		}
-
-</style>
+<link rel="stylesheet" href="/dist/css/postDetailCss.css">
 </th:block>
 <th:block>
 <th:block layout:fragment="customContents">
@@ -76,14 +39,19 @@
 			<div class="row">
 				<div class="col-12 col-sm-7">
 					<p class="my-3" style="font-size:30px;" th:utext="|${sights.sightsName} <span class='badge ${sights.btnColor}'>${sights.sightsOpen}</span><br> |"></p>
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
-						리뷰</span>
-					<hr>
+					<th:block th:if="${gradeAvg != 0.0}">
+					<th:block   th:each="num: ${#numbers.sequence(1,gradeAvg)}">
+          				<i class="fas fa-star" style="color:green" ></i>	
+          	 		</th:block> <strong th:text="|(${gradeAvg})|"></strong> 
+          	 		<span class="reveiwCnt"  th:text="|${reviewCnt}개의 리뷰|"></span>
+          	 		</th:block>
 					<p th:text="${sights.sightsDetail}"></p>
 					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}"></p>
 					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|"></p>
-					<p>이 여행지는 여성이 선호하는 여행지입니다</p>
+					<th:block th:if="${genderPreference !=null}"> ️
+					<p th:if ="${genderPreference != 'all'}"  th:utext="${genderPreference =='남'?'👦🏻 남성이 선호하는 관광명소 입니다!':'👩🏻 여성이 선호하는 관광명소 입니다!'}">이 여행지는 여성이 선호하는 여행지입니다</p>
+					<p th:unless ="${genderPreference != 'all'}"> 👪  모든 성별이 선호하는 관광명소 입니다! </p>
+					</th:block>
 					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
 					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|"></p>
 					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|"></p>
@@ -102,7 +70,7 @@
 									<strong>photos</strong>
 								</h3>
 								<span class="float-right">
-									<a href="/moreSightsPhoto">사진 더보기
+									<a th:href="@{/sights/moreSightsPhoto(sightsNum=${sights.sightsNum})}">사진 더보기
 										<i class="fas fa-angle-double-right"></i>
 									</a>
 								</span>
@@ -111,29 +79,16 @@
 							<div class="card-body">
 								<div id="carouselExampleIndicators" class="carousel slide"
 									data-ride="carousel">
-									<ol class="carousel-indicators">
-										<li data-target="#carouselExampleIndicators"
-											data-slide-to="0" class="active"></li>
-										<li data-target="#carouselExampleIndicators"
-											data-slide-to="1"></li>
-										<li data-target="#carouselExampleIndicators"
-											data-slide-to="2"></li>
-									</ol>
+	
 									<div class="carousel-inner">
 										<div class="carousel-item active" style="">
-											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${sights.sightsPhoto})}"
-												alt="First slide">
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${sights.sightsPhoto})}" alt="First slide">
 										</div>
+										<th:block th:each="pl : ${reviewPhotos}">
 										<div class="carousel-item">
-											<img class="d-block w-100"
-												src="https://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap"
-												alt="Second slide">
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${pl})}" alt="First slide">
 										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100"
-												src="https://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap"
-												alt="Third slide">
-										</div>
+										</th:block>
 									</div>
 									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -166,31 +121,7 @@
 					축제 리스트 준비중..
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-					<div class="map_wrap">
-					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-					    <ul id="category">    
-					        <li id="CE7"  data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					         	   카페
-					        </li>  
-					        <li id="CS2" data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					                        편의점
-					        </li>  
-					        <li id="AT4"data-order="2"> 
-					            <span class="category_bg pharmacy"></span>
-					                       관광명소
-					        </li> 
-					        <li id="FD6"data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					                        음식점
-					        </li>     
-					        <li id="AD5"data-order="2"> 
-					            <span class="category_bg pharmacy"></span>
-					                        숙박
-					        </li>     
-					    </ul>
-					</div>
+					<div th:replace="fragments/kakaoMap :: kakaoMapFragment"></div>
 				</div>
 				<div class="tab-pane fade  show active row" id="sights-review" role="tabpanel" aria-labelledby="sights-review-tab">
 					<div class="reviewIntroTitle">
@@ -280,37 +211,34 @@
 		          	 	<span class="reveiwTitle" th:text="${rl.sightsReviewTitle}"></span>
 		                <hr>
 						<span class="reveiwContents" th:text="${rl.sightsReviewContents}"></span><br>
-		            			     	
-		          			     		<div class="row">
-		                       			 <div class="col-sm-6">
-		              						 <img class="img-fluid"  th:if ="${rl.sightsReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.sightsReviewPhoto})}" alt="Photo" width="300">
-		                       			 </div>
-		                      		  </div>
-		          			     		<span class="revewiPurpose">
-		          			     			<i class="fas fa-suitcase-rolling"></i>
-		          			     			여행 유형 :<strong th:text="${rl.tripType.tripTypeName}"></strong>
-		          			     		</span><br>
-		          			     		<span class="visitDate">
-		          			     			<i class="far fa-calendar-check"></i>
-		          			     		<strong th:text="${rl.sightsVisitDate}"></strong>에 다녀감
-		          			     		</span><br><br>
-		             					<a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
-		          			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		                
+       			     		<div class="row">
+                    			 <div class="col-sm-6">
+           						 <img class="img-fluid"  th:if ="${rl.sightsReviewPhoto !=''}" th:src="@{/fileupload/{file}(file=${rl.sightsReviewPhoto})}" alt="Photo" width="300">
+                    			 </div>
+                   		  </div>
+       			     		<span class="revewiPurpose">
+       			     			<i class="fas fa-suitcase-rolling"></i>
+       			     			여행 유형 :<strong th:text="${rl.tripType.tripTypeName}"></strong>
+       			     		</span><br>
+       			     		<span class="visitDate">
+       			     			<i class="far fa-calendar-check"></i>
+       			     		<strong th:text="${rl.sightsVisitDate}"></strong>에 다녀감
+       			     		</span><br><br>
+          					<a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
+       			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
+		                <button class="float-right btn btn-primary showComments" toggle="show" th:reviewNum="${rl.sightsReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
 			              </div>
 			              <!-- /.card-body -->
-			     
-			              <!-- /.card-footer -->
-			              <div class="card-footer">
-			                <form action="#" method="post">
-			                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-			                  <!-- .img-push is used to add margin to elements next to floating images -->
-			                  <div class="img-push">
-			                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
-			                  </div>
-			                </form>
-			              </div>
-			              <!-- /.card-footer -->
+			     	    <div class="comments-warp" style="display:none;"> 
+							<div class="card-footer card-comments">
+		             		</div>
+		             		 <div class="card-footer">
+		                 		<img class="img-fluid img-circle img-sm" th:src="@{/fileupload/{file}(file=${session.SAVATAR})}" alt="Alt Text">
+				                  <div class="img-push">
+				                    <input type="text" class="form-control form-control-sm inputComments" placeholder="Press enter to post comment" th:reviewNum="${rl.sightsReviewNum}"th:reviewWriter ="${rl.member.mId}">
+				                  </div>
+              				</div>
+			    		</div>
 			            </div>
 			            <!-- /.card -->
 			          </div>
@@ -330,37 +258,33 @@
 	<script src="/plugins/chart.js/Chart.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474&libraries=services"></script>
 	<script src="/dist/js/kakaoMap.js"></script>
-<script src="/dist/js/commonAjax.js"></script>
+	<script src="/dist/js/commonAjax.js"></script>
+	<script src="/dist/js/postDetailJs.js"></script>
 	<script th:inline="javascript">
+	
 	/*<![CDATA[*/
 		var lat = /*[[${sights.sightsLat}]]*/;
 		var lng = /*[[${sights.sightsLong}]]*/;	
 		var mId = /*[[${session.SID}]]*/;
 		var isWrited =/*[[${isWrited}]]*/;
-		var gradeArr =/*[[${reviewCnt}]]*/
+		var gradeArr =/*[[${reviewGradeCnt}]]*/
 	/*]]>*/
-	
-	
-	console.log(isWrited);
-	$('#reveiwBtn').click(function(){
-		console.log(mId);
-		if(mId == null ){
-			alert('로그인 후 이용가능한 서비스 입니다.')
-			window.location.href = '/member/login';
-			return false;
-		} else{
-			if(isWrited >0){
-				alert('리뷰는 한번만 작성 가능합니다 !');
-			} else {
-				$("#addReview").modal();	
-			}
-		}
+
+	$('.showComments').click(function(){
+		showComments($(this),mId,'getSightsCommentsList');
 	})
+
+	$('.inputComments').keydown(function(key){
+		addComments($(this),mId,'addSightsReivewComments',key);
+	})
+	
+	showReveiwModal(mId,isWrited,$($("#addReview")));
+
+    reveiwChart(gradeArr);
+	
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
-		
 		if(mId == null || mId == ''){
-			alert('로그인 후 이용가능한 서비스 입니다');
-			location.href='/member/login';
+			goLogin();
 			return false;
 		}
 		var dataInfo = $(this).attr('data-info');
@@ -388,36 +312,11 @@
 	})
 	
 	var myFn = kakaoMap(lat,lng);
-	
-		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-		var donutData = {
-			labels : [ '5점', '4점', '3점', '2점', '1점', ],
-			datasets : [ {
-				data : [ 700, 500, 400, 600, 300 ],
-				backgroundColor : [ '#f56954', '#00a65a', '#f39c12',
-						'#00c0ef', '#3c8dbc' ],
-			} ]
-		}
-		var donutOptions = {
-			maintainAspectRatio : false,
-			responsive : true,
-		}
-		//Create pie or douhnut chart
-		// You can switch between pie and douhnut using the method below.
-		var donutChart = new Chart(donutChartCanvas, {
-			type : 'doughnut',
-			data : donutData,
-			options : donutOptions
-		})
-		
-	
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');
 				var sightsReviewNum = $(this).attr('sightsReviewNum')
 				var sightsNum = $(this).attr('sightsNum')
-				console.log(sightsReviewNum)
-				console.log(sightsNum)
 				if(isDeleted == true){
 					$('.delReview').attr('href','/review/deleteSightsReview?sightsReviewNum='+sightsReviewNum+'&sightsNum='+sightsNum);				
 				} else {
@@ -450,6 +349,11 @@
 				$('#declareForm').submit();
 			})
 	})
+	
+	$(document).on('click','.deleteComments',function(){
+	
+		deleteComments($(this),'deleteSightsReivewComment');
+   })
 </script>
 </th:block>
 </html>

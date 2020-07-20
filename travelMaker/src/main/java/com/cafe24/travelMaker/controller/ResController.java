@@ -1,5 +1,4 @@
 package com.cafe24.travelMaker.controller;
-import java.time.LocalTime;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +29,7 @@ public class ResController {
 		System.out.println(resService.getResList(search));
 		model.addAttribute("search", search);
 		model.addAttribute("resList", resService.getResList(search));
+		model.addAttribute("best3", resService.getbestRes(search));
 		return "/res/resList";
 	}
 	
@@ -70,13 +70,18 @@ public class ResController {
 		model.addAttribute("tripType",reviewService.selectTripTypeList());
 		model.addAttribute("isWrited", reviewService.isWritedReview(mId, resNum));
 		model.addAttribute("reviewList",reviewService.resReviewList(resNum,mId));
-		model.addAttribute("reviewCnt",reviewService.getResReviewGradeCnt(resNum));
-		System.out.println(reviewService.resReviewList(resNum,mId) +"<---");
+		model.addAttribute("reviewGradeCnt",reviewService.getResReviewGradeCnt(resNum));
+		model.addAttribute("gradeAvg", reviewService.getResGradeAvg(resNum));
+		model.addAttribute("reviewCnt", reviewService.getResReviewCnt(resNum));
+		model.addAttribute("reviewPhotos", reviewService.getResReviewPhotos(resNum));
+
 		return "res/detailRes";
 	}
 	
 	@GetMapping("/moreResPhoto")
-	public String moreResPhoto() {
+	public String moreResPhoto(Model model, @RequestParam(name="resNum") String resNum) {
+		model.addAttribute("res",resService.getDetailRes(resNum));
+		model.addAttribute("reviewPhotos", reviewService.getResReviewPhotos(resNum));
 		return "res/morePhotos";
 	}
 

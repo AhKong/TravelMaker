@@ -76,6 +76,8 @@
 		<result property ="sightsRegDate" column ="sights_reg_time"/>
 		<result property ="sightsOpen" column ="sightsOpen"/>
 		<result property ="btnColor" column ="btnColor"/>
+		<result property ="avgGrade" column ="avgGrade"/>
+		<result property ="reviewCnt" column ="reviewCnt"/>
 		<association property="sightsCate" javaType ="SightsCate">
  			<result property="sightsCateNum"  	column="sights_cate_num"/>
  			<result property="sightsType"   	column="sights_type"/>
@@ -122,5 +124,43 @@
 			WHERE
 				sights_num =#{sightsNum}
 		]]>
+	</select>
+	
+	<select id="getbestSights" parameterType="String" resultMap ="sightsSelect">
+		SELECT 
+			s.*,
+			avgGrade.score as avgGrade,
+			avgGrade.reviewCnt AS reviewCnt,
+			si.si_name,
+			sc.sights_type
+		FROM
+			 tb_sights AS s
+		INNER JOIN 
+			(SELECT 
+					sr.sights_num AS sights_num,
+					ROUND(AVG(sr.sights_review_grade),1) AS score,
+					COUNT(*) AS reviewCnt
+			FROM  
+				tb_sights_review AS sr
+			WHERE 
+				sr.sights_review_status ='Y'
+			GROUP BY 
+				sr.sights_num
+			) AS avgGrade
+		INNER JOIN
+			tb_si AS si
+		INNER JOIN 
+			tb_sights_cate AS sc
+		ON
+			 s.sights_num = avgGrade.sights_num 
+			 AND si.si_num = s.si_num 
+			 AND s.sights_cate_num = sc.sights_cate_num
+	   WHERE 
+			si.si_name LIKE CONCAT('%',#{search},'%')
+		ORDER BY
+			avgGrade DESC  
+		LIMIT
+			 0,3
+	
 	</select>
 </mapper>

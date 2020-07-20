@@ -1,8 +1,9 @@
 package com.cafe24.travelMaker.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.mapper.NoticeMapper;
@@ -15,6 +16,7 @@ public class NoticeService {
 	public int noticeNum(String mId) {
 		return noticeMapper.noticeNum(mId);
 	}
+	
 	/* 리뷰 작성자한테 리뷰 좋아요 알림 */
 	public int addNoticeForLike(String reviewWriter,ReviewLike reviewLike) {
 		this.notice = new Notice();
@@ -47,5 +49,18 @@ public class NoticeService {
 		return noticeMapper.addNotice(this.notice);
 
 	}
-
+	
+	public List<Notice> noticeList(String targetId){
+		return noticeMapper.noticeList(targetId);
+	}
+	
+	public int questionNotice(Notice notice) {
+		return noticeMapper.questionNotice(notice);
+	}
+	public int followNotice(String lId, String mId) {
+		this.notice = new Notice();
+		this.notice.setNoticeContents(lId+"님이 팔로우 하셨습니다.");
+		this.notice.setmId(mId);
+		return noticeMapper.followNotice(this.notice);
+	}
 }

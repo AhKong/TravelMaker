@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Member;
-import com.cafe24.travelMaker.domain.Res;
+import com.cafe24.travelMaker.domain.MemberLogin;
 import com.cafe24.travelMaker.domain.ResReview;
+import com.cafe24.travelMaker.domain.SightsReview;
 import com.cafe24.travelMaker.mapper.FollowMapper;
 import com.cafe24.travelMaker.service.GoodsService;
 import com.cafe24.travelMaker.service.MemberService;
@@ -49,11 +50,14 @@ public class MemberController{
 		model.addAttribute("followingNum", followingNum);
 		List<ResReview> followersResReviewList = reviewService.followersResReviewList(loginId);
 		model.addAttribute("followersResReviewList", followersResReviewList);
+		List<SightsReview> followersSightsReviewList = reviewService.followersSightsReviewList(loginId);
+		model.addAttribute("followersSightsReviewList", followersSightsReviewList);
 		return "/member/myPage";
 	}
 	
 	@PostMapping("/myPage")
-	public String myPage(Model model, Member member, @RequestParam(name="memberId",required=false) String memberId) {
+	public String myPage(Model model, Member member, @RequestParam(name="memberId",required=false) String memberId, HttpSession session) {
+		String loginId = (String)session.getAttribute("SID");
 		member = memberService.followersPage(memberId);
 		model.addAttribute("member", member);
 		int followersNum = followMapper.followersNum(memberId);
@@ -62,6 +66,10 @@ public class MemberController{
 		model.addAttribute("followingNum", followingNum);
 		List<ResReview> followersResReviewList = reviewService.followersResReviewList(memberId);
 		model.addAttribute("followersResReviewList", followersResReviewList);
+		List<SightsReview> followersSightsReviewList = reviewService.followersSightsReviewList(memberId);
+		model.addAttribute("followersSightsReviewList", followersSightsReviewList);
+		int followYesNoResult = followMapper.followYesNo(memberId, loginId);
+		model.addAttribute("followYesNoResult", followYesNoResult);
 		return "/member/myPage";
 	}
 	
@@ -149,18 +157,17 @@ public class MemberController{
 		    		session.setAttribute("SLEVEL",result.getmLevel());
 		    		session.setAttribute("SNAME", result.getmName());
 		    		session.setAttribute("SAVATAR", result.getmAvatar());
-		    		System.out.println(session.getAttribute("SID"));
-		    		System.out.println(session.getAttribute("SLEVEL"));
-		    		System.out.println(session.getAttribute("SNAME"));
-		    		System.out.println(pointService.isMyPoint(member.getmId())+"<----내 포인트 ");
+		    		MemberLogin memberLogin = new MemberLogin();
+		    		memberLogin.setmId(member.getmId());
+		    		memberService.addLoginLog(memberLogin);
 		    		
 		    		return "redirect:/";
 				}
 			}
 			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
-			redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
+			redirectAttr.addFlashAttribute("message","등록된 정보가 없습니다.");
 		}
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 
 	/*회원가입 페이지 */
@@ -171,7 +178,7 @@ public class MemberController{
 	}
 	
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
+	public String addMember(Member member,RedirectAttributes redirectAttr) {
 		
 		//System.out.println(result +"<----result");
 
@@ -187,6 +194,8 @@ public class MemberController{
  			System.out.println(pointAddResult+"<----point 적립 성공!");
  			int pointResult = pointService.setPoint();
  			System.out.println(pointResult+"<----point insert 성공!");
+ 			redirectAttr.addFlashAttribute("message","TravelMaker의 회원이 되신것을 환영합니다!🥳");
+ 
 		}
 		return "redirect:/member/login";
 	}

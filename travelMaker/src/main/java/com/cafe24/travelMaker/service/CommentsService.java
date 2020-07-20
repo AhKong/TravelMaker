@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.ResReviewComments;
+import com.cafe24.travelMaker.domain.SightsReviewComments;
 import com.cafe24.travelMaker.mapper.CommentsMapper;
 
 @Service
@@ -30,5 +31,20 @@ public class CommentsService {
 	}
 	public int deleletResReviewComments(String commentsNum) {
 		return commentsMapper.deleletResReviewComments(commentsNum);
+	}
+	
+	public int addSightsReviewComments(SightsReviewComments comments,String reviewWirter) {
+		String commentsWriter=comments.getMember().getmId();
+		if(!commentsWriter.equals(reviewWirter)) {	
+			noticeService.addNoticeForComments(commentsWriter, reviewWirter);
+		}
+		return commentsMapper.addSightsReviewComments(comments);
+	}
+	public List<SightsReviewComments> getSightsCommentsList(String sightsReviewNum){
+		return commentsMapper.getSightsCommentsList(sightsReviewNum);
+	}
+	
+	public int deleletSightsReviewComments(String commentsNum) {
+		return commentsMapper.deleletSightsReviewComments(commentsNum);
 	}
 }

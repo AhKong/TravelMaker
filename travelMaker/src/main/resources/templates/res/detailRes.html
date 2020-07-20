@@ -7,47 +7,7 @@
 </th:block>
 <th:block layout:fragment="customCss">
 <link rel="stylesheet" href="/dist/css/kakaoMapCss.css">
-		<style>
-		.carousel-item img {
-			width: 400px;
-			height: 400px;
-		}
-		
-		#sights-map, #sights-review {
-			height: auto;
-			width: 81vw;
-		}
-		
-		.chart {
-			width: 400px;
-		
-		}
-		
-		.reveiwIntro{
-			font-size: 30px;
-		}
-		
-		.reviewIntroTitle {
-			width: 100%;
-			font-size:24px
-		}
-		
-		.form-check{
-			margin-top:13px;
-		}
-		
-		.reveiwTitle{
-			font-size:20px;
-			font-weight:bold;
-		}
-		.badge{
-		font-size:16px;
-		}
-
-		#detailReview{
-			margin-top:10px;
-		}
-</style>
+<link rel="stylesheet" href="/dist/css/postDetailCss.css">
 </th:block>
 <th:block>
 <th:block layout:fragment="customContents">
@@ -79,9 +39,12 @@
 			<div class="row">
 				<div class="col-12 col-sm-7">
 					<p class="my-3" style="font-size:30px;" th:utext="|${res.resName} <span class='badge ${res.btnColor}'>${res.resOpen}</span><br> |"></p>
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-						class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="reveiwCnt">529개의
-						리뷰</span>
+					<th:block th:if="${gradeAvg != 0.0}">
+					<th:block   th:each="num: ${#numbers.sequence(1,gradeAvg)}">
+          				<i class="fas fa-star" style="color:green" ></i>	
+          	 		</th:block> <strong th:text="|(${gradeAvg})|"></strong> 
+          	 		<span class="reveiwCnt"  th:text="|${reviewCnt}개의 리뷰|"></span>
+          	 		</th:block>
 					<hr>
 					<p th:text="${res.resDetail}"></p>
 					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${res.resStartTime} - ${res.resCloseTime}"></p>
@@ -105,7 +68,7 @@
 									<strong>photos</strong>
 								</h3>
 								<span class="float-right">
-									<a href="/moreResPhoto">사진 더보기
+									<a th:href="@{/res/moreResPhoto(resNum=${res.resNum})}">사진 더보기
 										<i class="fas fa-angle-double-right"></i>
 									</a>
 								</span>
@@ -124,19 +87,13 @@
 									</ol>
 									<div class="carousel-inner">
 										<div class="carousel-item active" style="">
-											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${res.resPhoto})}"
-												alt="First slide">
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${res.resPhoto})}" alt="First slide">
 										</div>
+										<th:block th:each="pl : ${reviewPhotos}">
 										<div class="carousel-item">
-											<img class="d-block w-100"
-												src="https://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap"
-												alt="Second slide">
+											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${pl})}" alt="First slide">
 										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100"
-												src="https://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap"
-												alt="Third slide">
-										</div>
+										</th:block>
 									</div>
 									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -169,31 +126,7 @@
 					축제 리스트 준비중..
 				</div>
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
-					<div class="map_wrap">
-					 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-					    <ul id="category">    
-					        <li id="CE7"  data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					         	   카페
-					        </li>  
-					        <li id="CS2" data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					                        편의점
-					        </li>  
-					        <li id="AT4"data-order="2"> 
-					            <span class="category_bg pharmacy"></span>
-					                       관광명소
-					        </li> 
-					        <li id="FD6"data-order="2">
-					            <span class="category_bg pharmacy"></span>
-					                        음식점
-					        </li>     
-					        <li id="AD5"data-order="2"> 
-					            <span class="category_bg pharmacy"></span>
-					                        숙박
-					        </li>     
-					    </ul>
-					</div>
+					<div th:replace="fragments/kakaoMap :: kakaoMapFragment"></div>
 				</div>
 				<div class="tab-pane fade  show active row" id="sights-review" role="tabpanel" aria-labelledby="sights-review-tab">
 					<div class="reviewIntroTitle">
@@ -299,7 +232,7 @@
 		     	   
 		          <a style="color:#01579B"  class="likeBtn" th:resReviewMid ="${rl.member.mId}" th:resReviewNum = "${rl.resReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
 		          	 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		         <button class="float-right btn btn-primary showComments" toggle="show" th:resReviewNum="${rl.resReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
+		         <button class="float-right btn btn-primary showComments" toggle="show" th:reviewNum="${rl.resReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
 			    </div>
 			    <div class="comments-warp" style="display:none;"> 
 					<div class="card-footer card-comments">
@@ -336,6 +269,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3db5bc02ace7e19d1c57294d93b2a474&libraries=services"></script>
 <script src="/dist/js/kakaoMap.js"></script>
 <script src="/dist/js/commonAjax.js"></script>
+<script src="/dist/js/postDetailJs.js"></script>
 <script th:inline="javascript">
 
 $(function(){
@@ -345,103 +279,21 @@ $(function(){
 		var lng = /*[[${res.resLong}]]*/;	
 		var mId = /*[[${session.SID}]]*/;
 		var isWrited =/*[[${isWrited}]]*/;
-		var gradeArr =/*[[${reviewCnt}]]*/
+		var gradeArr =/*[[${reviewGradeCnt}]]*/
 	/*]]>*/
-
+	showReveiwModal(mId,isWrited,$($("#addResReview")));
+	reveiwChart(gradeArr);
 	$('.showComments').click(function(){
-		var comments = $(this).parents().siblings('.comments-warp');
-		var reviewNum = $(this).attr('resReviewNum');
-		var commentList = comments.children('.card-comments');
-		var reviewWirter =  $(this).attr('reviewWriter');
-		console.log(reviewWirter +"<---리뷰 작성자")
-		if($(this).attr('toggle') =='show'){
-			comments.css('display','block');
-			$(this).attr('toggle','hidden');
-		
-			commonAjax('/ajax/getResCommentsList',
-					{"resReviewNum" :reviewNum},
-					function(data){
-						var commentsList = data.commentsList;
-						var html ='';
-						if(commentsList.length >0){
-							for(var i =0; i<commentsList.length;i++){
-								 html +='<div class="card-comment">';
-								 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
-								 html +='<div class="comment-text">';
-								 html += '<span class="username">'+commentsList[i].member.mId;
-								 if(reviewWirter ==commentsList[i].member.mId ){
-									 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
-								 }
-								 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
-								 html += ' </span><!-- /.username -->';
-								 if(commentsList[i].member.mId == mId){
-									 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
-								 }
-							
-								 html += commentsList[i].commentsContents+'</div></div>'	 
-							 }
-						} else {
-							html ='<p> 아직 댓글이 없습니다 첫 댓글을 남겨주세요!</p>'
-						}
-						 
-						commentList.html(html)	
-					},'Get'); 
-			
-		} else {
-			comments.css('display','none');
-			$(this).attr('toggle','show');
-		}
+		showComments($(this),mId,'getResCommentsList');
 	})
 		
 	$('.inputComments').keydown(function(key){
-		var input = $(this);
-		var reviewNum = $(this).attr('resReviewNum');
-		var reviewWirter =  $(this).attr('reviewWriter');
-		if(key.keyCode == 13){
-			 if(mId == null || mId == undefined || mId ==''){
-				alert('로그인 후 이용 가능한 서비스 입니다.');
-				location.href ='/member/login';
-			}
-			if(input.val() ==''){
-				alert('댓글을 입력하세요!');
-				input.focus();
-				return false;
-			} 
-			commonAjax('/ajax/addResReivewComment',
-					{"member.mId" :mId, "resReviewNum" :reviewNum,"commentsContents":input.val(),"reviewWirter":reviewWirter},
-					function(data){
-						var commentsList = data.commentsList;
-						var html ='';
-						 for(var i =0; i<commentsList.length;i++){
-							 html +='<div class="card-comment">';
-							 html+='<img src="/fileupload/'+commentsList[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
-							 html +='<div class="comment-text">';
-							 html += '<span class="username">'+commentsList[i].member.mId;
-							 if(reviewWirter ==commentsList[i].member.mId ){
-								 html += '<span style="font-size:12px;color:#ff5050"> (리뷰 작성자)</span>';
-							 }
-							 html += '<span class="text-muted float-right">'+commentsList[i].commentsRegDate+'</span>';
-							 html += ' </span><!-- /.username -->';
-							 if(commentsList[i].member.mId == mId){
-								 html += '<a class="text-muted float-right deleteComments" commentsNum ="'+commentsList[i].commentsNum+'">삭제</a>';
-							 }
-						
-							 html += commentsList[i].commentsContents+'</div></div>'	 	 
-						 }
-					
-						input.val('');
-						input.parents().siblings('.card-footer').html(html)
-						
-					},'Get'); 
-		}
-	
-		
+		addComments($(this),mId,'addResReivewComment',key);
 	})
 	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 	
 		if(mId == null || mId == ''){
-			alert('로그인 후 이용가능한 서비스 입니다');
-			location.href='/member/login';
+			goLogin();
 			return false;
 		}
 		var dataInfo = $(this).attr('data-info');
@@ -469,49 +321,9 @@ $(function(){
 
 	})
 	
-	$('#reveiwBtn').click(function(){
-		console.log(mId);
-		if(mId == null ){
-			alert('로그인 후 이용가능한 서비스 입니다.')
-			window.location.href = '/member/login';
-			return false;
-		} else{
-			if(isWrited == '1'){
-				alert('리뷰는 한번만 작성 가능합니다 !');
-			} else {
-				$("#addResReview").modal();	
-			}
-		}
-	})
-	console.log(1);
-	var myFn = kakaoMap(lat,lng);	
-	console.log(lat,lng)
-	console.log(2);
-		var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-		var donutData = {
-			labels : [ ],
-			datasets : [ {
-				data : [],
-				backgroundColor : [ '#f56954', '#00a65a', '#f39c12',
-						'#00c0ef', '#3c8dbc' ],
-			} ]
-		}
-		for(var i = 0 ; i< gradeArr.length;i++){
-			donutData.labels.push(gradeArr[i].grade+'점');
-			donutData.datasets[0].data.push(gradeArr[i].gradeCnt)
-		}
-		var donutOptions = {
-			maintainAspectRatio : false,
-			responsive : true,
-		}
-		//Create pie or douhnut chart
-		// You can switch between pie and douhnut using the method below.
-		var donutChart = new Chart(donutChartCanvas, {
-			type : 'doughnut',
-			data : donutData,
-			options : donutOptions
-		})
-		
+	
+	var myFn = kakaoMap(lat,lng);			
+
 		$(function(){
 			$('.delReview').click(function(){
 				var isDeleted = confirm('진짜 삭제하시겠어요?');

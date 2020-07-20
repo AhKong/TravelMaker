@@ -1,6 +1,6 @@
 package com.cafe24.travelMaker.domain;
 
-public class ResReviewComments {
+public class SightsReviewComments {
 	
 	private String commentsNum;
 	private Member member;

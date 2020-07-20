@@ -34,4 +34,45 @@
 			m_id=#{mId} AND notice_check='N';
 	</select>
 	
+	<select id="noticeList" parameterType="String" resultType="Notice">
+	SELECT
+		CONCAT(SUBSTRING(notice_contents, 1, 8), '..') as noticeContents
+		, SUBSTRING(notice_send, 1, 10) as noticeSendTime
+	FROM
+		tb_alert
+	WHERE
+		m_id=#{mId} AND notice_check='N'
+	LIMIT 3;
+	</select>
+	
+	<insert id="questionNotice" parameterType="Notice">
+		<selectKey order="BEFORE" keyProperty="noticeNum" resultType ="String"> 
+		 	 SELECT 
+				case COUNT(*)
+				when 0 then 'notice_1'
+				ELSE CONCAT('notice_',MAX(CAST(SUBSTRING(notice_num,8) AS DECIMAL))+1) 
+				END AS noticeNum
+			FROM
+				tb_alert
+			</selectKey>
+			INSERT INTO tb_alert
+				(notice_num, m_id, notice_contents, notice_send, notice_check)
+			VALUES (#{noticeNum}, #{mId}, '작성한 문의내역에 답변이 달렸습니다.', NOW(), 'N')
+	</insert>
+	
+	<insert id="followNotice" parameterType="Notice">
+		<selectKey order="BEFORE" keyProperty="noticeNum" resultType ="String"> 
+		 	 SELECT 
+				case COUNT(*)
+				when 0 then 'notice_1'
+				ELSE CONCAT('notice_',MAX(CAST(SUBSTRING(notice_num,8) AS DECIMAL))+1) 
+				END AS noticeNum
+			FROM
+				tb_alert
+			</selectKey>
+			INSERT INTO tb_alert
+				(notice_num, m_id, notice_contents, notice_send, notice_check)
+			VALUES (#{noticeNum}, #{mId}, #{noticeContents}, NOW(), 'N')
+	</insert>
+	
 </mapper>

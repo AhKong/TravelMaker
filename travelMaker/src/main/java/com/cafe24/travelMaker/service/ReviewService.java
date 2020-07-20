@@ -1,11 +1,12 @@
 package com.cafe24.travelMaker.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cafe24.travelMaker.domain.Res;
+import com.cafe24.travelMaker.domain.Preference;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.TripType;
 import com.cafe24.travelMaker.mapper.ReviewMapper;
@@ -16,8 +17,7 @@ import com.cafe24.travelMaker.domain.SightsReview;
 public class ReviewService {
 	@Autowired private ReviewMapper reviewMapper;
 	@Autowired private PointService pointService;
-	
-	
+		
 	public List<TripType> selectTripTypeList(){
 		return  reviewMapper.selectTripTypeList();
 	}
@@ -62,7 +62,24 @@ public class ReviewService {
 	public List<ReviewGrade> getResReviewGradeCnt(String resNum){
 		return reviewMapper.getResReviewGradeCnt(resNum);
 	}
+	public double getResGradeAvg(String resNum) {
+		String gradeAvg = reviewMapper.getResGradeAvg(resNum);
+		double result = 0;
+		if(gradeAvg !=null) {
+		   result = Double.parseDouble(gradeAvg);
+		}
+		return result;
+	}
 	
+	public int getResReviewCnt(String resNum) {
+		String reviewCtn = reviewMapper.getResReviewCnt(resNum);
+		int result =0;
+
+		if(reviewCtn !=null) {
+			result = Integer.parseInt(reviewCtn);
+		}
+		return result;
+	}
 	public int isWritedSightsReview(String mId, String sightsNum) {
 		return reviewMapper.isWritedSightsReview(mId, sightsNum);
 	}
@@ -111,4 +128,58 @@ public class ReviewService {
 	public List<ResReview> followersResReviewList(String mId) {
 		return reviewMapper.followersResReviewList(mId);
 	}
+	public List<SightsReview> followersSightsReviewList(String mId) {
+		return reviewMapper.followersSightsReviewList(mId);
+	}
+	
+	public List<ReviewGrade> getSightsReviewGradeCnt(String sightsNum){
+		return reviewMapper.getSightsReviewGradeCnt(sightsNum);
+	}
+	
+	public double getSightsGradeAvg(String sightsNum) {
+		String gradeAvg = reviewMapper.getSightsGradeAvg(sightsNum);
+		double result = 0;
+		if(gradeAvg !=null) {
+		   result = Double.parseDouble(gradeAvg);
+		}
+		return result;
+	}
+	
+	public int getSightsReviewCnt(String sightsNum) {
+		String reviewCtn = reviewMapper.getSightsReviewCnt(sightsNum);
+		int result =0;
+		if(reviewCtn !=null) {
+			result = Integer.parseInt(reviewCtn);
+		}
+		return result;
+	}
+	
+	public List<String> getResReviewPhotos(String resNum){
+		return reviewMapper.getResReviewPhotos(resNum);
+	}
+	public List<String> getSightsReviewPhotos(String sightsNum){
+		return reviewMapper.getSightsReviewPhotos(sightsNum);
+	}
+	
+	public String getSightsGenderPreference(String sightsNum){
+		String gender = null;
+		List<Preference>result = reviewMapper.getSightsGenderPreference(sightsNum);
+		if(result.size() != 1) {
+			if(result.size()==2) {
+				gender = result.get(1).getType();
+			} else {
+				
+				if(result.get(1).getCount()>result.get(2).getCount()) {
+					gender = result.get(1).getType();
+				} else if(result.get(1).getCount()<result.get(2).getCount()){
+					gender = result.get(2).getType();
+				}  
+				gender ="all";
+			}
+					
+		}
+		
+		return gender;
+	}
+	
 }
