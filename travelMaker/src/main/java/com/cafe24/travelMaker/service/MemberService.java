@@ -29,7 +29,6 @@ public class MemberService {
 	}
 
 	public Member memberLogin(String mId) {
-		
 		StandardPBEStringEncryptor jasypt = encryptor();
 		Member member = memberMapper.getMemberInfo(mId);
 		System.out.println(member +"<-----------");
@@ -60,9 +59,7 @@ public class MemberService {
         		member.setmAvatar("woman.png");
         	}
         }
-        	
-
-     
+             
 		return memberMapper.addMember(member);
 	}
 
@@ -74,12 +71,34 @@ public class MemberService {
 		return memberMapper.followersPage(mId);
 	}
 	
-	public Member beforeUpdateMember(String mId) {	//수정 전 회원정보
-		return memberMapper.getMemberInfo(mId);
+	public Member beforeUpdateMember(String mId) {	//수정 전 회원정보 가져오는거고  복호화
+		StandardPBEStringEncryptor jasypt = encryptor();
+		Member member = memberMapper.getMemberInfo(mId);
+		if(member !=null) {
+			String plainPw = jasypt.decrypt(member.getmPw()); 
+			member.setmPw(plainPw);
+			String plainTel =jasypt.decrypt(member.getmTel());  
+			member.setmTel(plainTel);
+			String plainEmail = jasypt.decrypt(member.getmEmail());
+			member.setmEmail(plainEmail);
+		}
+		return member;
 	}
 	
-	public int updateMember(Member member) {	//회원정보 수정
-		return memberMapper.updateMember(member);
+	public int updateMember(Member member) {	
+		StandardPBEStringEncryptor jasypt = encryptor();
+		 String encryptedPw = jasypt.encrypt(member.getmPw());  
+	        member.setmPw(encryptedPw);
+	        String encryptedTel = jasypt.encrypt(member.getmTel());  
+	        member.setmTel(encryptedTel);
+	        String encryptedEmail = jasypt.encrypt(member.getmEmail());  
+	        member.setmEmail(encryptedEmail);
+		//회원정보 수정 하는거 새롭게 받아서  암호화
+	        System.out.println("여기오니???");
+	        System.out.println(member +"<-------updateMember");
+	        int result = memberMapper.updateMember(member);
+	        System.out.println(result +"<----updateMemberResult");
+		return result;
 	}
 	
 	public int deleteMAvatar(String mAvatar, String mId) {	//프로필 사진 변경 시 1)삭제
