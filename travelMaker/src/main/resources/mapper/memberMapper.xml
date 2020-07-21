@@ -22,6 +22,14 @@
  		</association>
  	</resultMap>
  	
+ 	<select id="getDeleteMemberList" parameterType="Member" resultMap="memberSelect">
+ 	
+ 	</select>
+ 	
+ 	<delete id="deleteMember">
+ 	
+ 	</delete>
+ 	
  	<update id="updateMAvatar" parameterType="Member">
  		UPDATE tb_member 
  		SET m_avatar = #{mAvatar}
