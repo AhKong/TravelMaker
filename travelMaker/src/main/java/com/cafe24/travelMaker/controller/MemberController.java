@@ -87,11 +87,29 @@ public class MemberController{
 		return "/member/memberFindPw";
 	}
 	
-	//탈퇴회원 관리
+	//탈퇴회원 조회 - 관리자 페이지
 	@GetMapping("/deleteMember")
-	public String deleteMember(Member member) {
+	public String getDeleteMemberList(Member member) {
+		System.out.println("하잉용 김로운 아프지 마세요");
+		
 		
 		return "member/deleteMember";
+	}
+	
+	//탈퇴
+	@GetMapping("/deleteMember")
+	public String deleteMember(Member member) {
+		System.out.println("하잉용 김로운 아프지 마세요");
+		
+		
+		return "member/deleteMember";
+	}
+	
+	//탈퇴 회유 시 최초1회 포인트 지급
+	@GetMapping("/conciliateDeleteMember")
+	public String conciliateDeleteMember(Member member) {
+		
+		return "member/myPage";
 	}
 	
 	//회원정보 수정

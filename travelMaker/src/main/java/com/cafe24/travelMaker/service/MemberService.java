@@ -132,4 +132,8 @@ public class MemberService {
 		return memberMapper.addLoginLog(memberLogin);
 	}
 
+	public int getDeleteMemberList(Member member) {
+		System.out.println(" 하이용 탈퇴 서비스 입ㄴ디ㅏ ");
+		return memberMapper.getDeleteMemberList(member);
+	}
 }
