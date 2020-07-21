@@ -35,10 +35,12 @@ public class CommentsService {
 	
 	public int addSightsReviewComments(SightsReviewComments comments,String reviewWirter) {
 		String commentsWriter=comments.getMember().getmId();
-		if(!commentsWriter.equals(reviewWirter)) {	
-			noticeService.addNoticeForComments(commentsWriter, reviewWirter);
+		int result  = commentsMapper.addSightsReviewComments(comments);
+		if(!commentsWriter.equals(reviewWirter) && result >0) {	
+			result =+ noticeService.addNoticeForComments(commentsWriter, reviewWirter);
 		}
-		return commentsMapper.addSightsReviewComments(comments);
+		
+		return result;
 	}
 	public List<SightsReviewComments> getSightsCommentsList(String sightsReviewNum){
 		return commentsMapper.getSightsCommentsList(sightsReviewNum);

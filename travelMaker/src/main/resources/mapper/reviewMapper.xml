@@ -367,9 +367,9 @@
 			tb_member as m
 		on 
 			m.m_id= sr.m_id and 
-			sr.sights_num  =#{sightsNum} and 
+			sr.sights_num  =${sightsNum} and 
 		 	sr.sights_review_status ='Y'
-		group by m.m_gender 
+		group by m.m_gender HAVING m.m_gender IS NOT null
 	</select>
                                                                          
 </mapper>
