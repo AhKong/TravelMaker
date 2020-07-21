@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.IndexTop3Mapper">
+
+<resultMap type="Sights" id="sgSelect"> 
+		<result property ="sightsNum" column ="sights_num"/>
+		<result property ="siNum" column ="si_num"/>
+		<result property ="mId" column ="m_id"/>
+		<result property ="sightsCateNum" column ="sights_cate_num"/>
+		<result property ="sightsName" column ="sights_name"/>
+		<result property ="sightsPhoto" column ="sights_photo"/>
+		<result property ="sightsDetail" column ="sights_detail"/>
+		<result property ="sightsLat" column ="sights_lat"/>
+		<result property ="sightsLong" column ="sights_long"/>
+		<result property ="sightsAddr" column ="sights_addr"/>
+		<result property ="sightsWeb" column ="sights_web"/>
+		<result property ="sightsTel" column ="sights_tel"/>
+		<result property ="sightsStartTime" column ="sights_start_time"/>
+		<result property ="sightsCloseTime" column ="sights_close_time"/>
+		<result property ="sightsRegDate" column ="sights_reg_time"/>
+		<result property ="sightsOpen" column ="sightsOpen"/>
+		<result property ="btnColor" column ="btnColor"/>
+		<result property ="avgGrade" column ="avgGrade"/>
+		<result property ="reviewCnt" column ="reviewCnt"/>
+		<association property="sightsCate" javaType ="SightsCate">
+ 			<result property="sightsCateNum"  	column="sights_cate_num"/>
+ 			<result property="sightsType"   	column="sights_type"/>
+ 		</association>
+	</resultMap>
+
+<select id="indexTop3" resultMap ="sgSelect">
+SELECT
+s.*,
+avgGrade.score as avgGrade,
+avgGrade.reviewCnt AS reviewCnt
+FROM
+tb_sights AS s
+INNER JOIN
+(SELECT sr.sights_num AS sights_num,
+					ROUND(AVG(sr.sights_review_grade),1) AS score,
+					COUNT(*) AS reviewCnt
+			FROM  
+				tb_sights_review AS sr
+			WHERE 
+				sr.sights_review_status ='Y'
+			GROUP BY 
+				sr.sights_num
+			) AS avgGrade
+			ORDER BY
+			avgGrade DESC  
+		LIMIT
+			 0,3;
+</select>
+
+</mapper>
