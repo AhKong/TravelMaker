@@ -132,8 +132,15 @@ public class MemberService {
 		return memberMapper.addLoginLog(memberLogin);
 	}
 
+	//탈퇴회원 조회
 	public int getDeleteMemberList(Member member) {
-		System.out.println(" 하이용 탈퇴 서비스 입ㄴ디ㅏ ");
+		System.out.println("하잉용 탈퇴회원 조회 서비스단 입니다~ ");
 		return memberMapper.getDeleteMemberList(member);
+	}
+	
+	//탈퇴처리
+	public int deleteMember(String mId) {
+		System.out.println("잠시만요 너무 서운해용 탈퇴하지 말아주세요 ㅠ deleteMember MemberService");
+		return memberMapper.deleteMember(mId);
 	}
 }

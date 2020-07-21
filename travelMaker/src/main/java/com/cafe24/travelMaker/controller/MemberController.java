@@ -87,31 +87,6 @@ public class MemberController{
 		return "/member/memberFindPw";
 	}
 	
-	//탈퇴회원 조회 - 관리자 페이지
-	@GetMapping("/deleteMember")
-	public String getDeleteMemberList(Member member) {
-		System.out.println("하잉용 김로운 아프지 마세요");
-		
-		
-		return "member/deleteMember";
-	}
-	
-	//탈퇴
-	@GetMapping("/deleteMember")
-	public String deleteMember(Member member) {
-		System.out.println("하잉용 김로운 아프지 마세요");
-		
-		
-		return "member/deleteMember";
-	}
-	
-	//탈퇴 회유 시 최초1회 포인트 지급
-	@GetMapping("/conciliateDeleteMember")
-	public String conciliateDeleteMember(Member member) {
-		
-		return "member/myPage";
-	}
-	
 	//회원정보 수정
 	@PostMapping("/updateMember")
 	public String updateMember(Member member) {
@@ -151,6 +126,33 @@ public class MemberController{
 		model.addAttribute("beforeUpdateMember", beforeUpdateMember);
 		
 		return "member/updateMember";
+	}
+
+	//탈퇴회원 조회 - 관리자 페이지
+	@GetMapping("/getDeleteMemberList")
+	public String getDeleteMemberList(Member member) {
+		System.out.println("getDeleteMemberList 김로운 아프지 마세요 무조건 건강해");
+		
+		return "member/deleteMember";
+	}
+	
+	//탈퇴
+	@GetMapping("/deleteMember")
+	public String deleteMember(HttpSession session, Model model) {
+		System.out.println("deleteMember 김로운 아프지 마세요 무조건 건강해");
+		String mId = (String) session.getAttribute("SID");
+		int result = memberService.deleteMember(mId);
+		System.out.println(result+" <- 1이면 탈퇴완료 ㅠㅠ 탈퇴하지 마세요");
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	//탈퇴 회유 시 최초1회 포인트 지급
+	@GetMapping("/conciliateDeleteMember")
+	public String conciliateDeleteMember(Member member) {
+		
+		return "member/myPage";
 	}
 	
 	//휴면회원 관리

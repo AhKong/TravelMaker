@@ -23,17 +23,25 @@
  	</resultMap>
  	
  	<select id="getDeleteMemberList" parameterType="Member" resultMap="memberSelect">
- 	
+ 		
  	</select>
  	
- 	<delete id="deleteMember">
- 	
- 	</delete>
+ 	<update id="deleteMember" parameterType="Member">
+ 		UPDATE
+			tb_member
+		SET
+			level_num = '5'
+		WHERE 
+			m_id = #{mId};
+ 	</update>
  	
  	<update id="updateMAvatar" parameterType="Member">
- 		UPDATE tb_member 
- 		SET m_avatar = #{mAvatar}
- 		WHERE m_id=#{mId};
+ 		UPDATE 
+ 			tb_member 
+ 		SET 
+ 			m_avatar = #{mAvatar}
+ 		WHERE 
+ 			m_id=#{mId};
  		
  	</update>
  	
