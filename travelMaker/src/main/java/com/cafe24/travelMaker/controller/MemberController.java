@@ -210,6 +210,7 @@ public class MemberController{
 		session.setAttribute("SID", "id002");
 		session.setAttribute("SLEVEL","1");
 		session.setAttribute("SNAME", "강민수");
+		session.setAttribute("SAVATAR", "man.png");
 		return "redirect:/";
 	}
 
@@ -218,6 +219,7 @@ public class MemberController{
 		session.setAttribute("SID", "id005");
 		session.setAttribute("SLEVEL","6");
 		session.setAttribute("SNAME", "이승환");
+		session.setAttribute("SAVATAR", "man.png");
 		return "redirect:/";
 	}
 }
