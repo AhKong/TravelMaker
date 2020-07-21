@@ -143,7 +143,7 @@ public class MemberController{
 		String mId = (String) session.getAttribute("SID");
 		int result = memberService.deleteMember(mId);
 		System.out.println(result+" <- 1이면 탈퇴완료 ㅠㅠ 탈퇴하지 마세요");
-		session.invalidate();
+		session.invalidate();	//세션종료. 로그아웃되면서 인덱스로 이동!
 		
 		return "redirect:/";
 	}
