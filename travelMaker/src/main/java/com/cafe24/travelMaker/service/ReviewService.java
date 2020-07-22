@@ -164,7 +164,6 @@ public class ReviewService {
 	public String getSightsGenderPreference(String sightsNum){
 		String gender = null;
 		List<Preference>result = reviewMapper.getSightsGenderPreference(sightsNum);
-		System.out.println(result.size() +"<ttttt");
 		if(result.size() !=0) {
 			if(result.size()==1) {
 				gender = result.get(0).getType();
@@ -174,7 +173,9 @@ public class ReviewService {
 				} else if(result.get(0).getCount()<result.get(1).getCount()){
 					gender = result.get(1).getType();
 				}  
-				gender ="all";
+				else {
+					gender ="all";
+				}
 			}
 					
 		}
@@ -182,4 +183,24 @@ public class ReviewService {
 		return gender;
 	}
 	
+	public String getResGenderPreference(String resNum){
+		String gender = null;
+		List<Preference>result = reviewMapper.getResGenderPreference(resNum);
+		if(result.size() !=0) {
+			if(result.size()==1) {
+				gender = result.get(0).getType();
+			} else {
+				if(result.get(0).getCount()>result.get(1).getCount()) {
+					gender = result.get(0).getType();
+				} else if(result.get(0).getCount()<result.get(1).getCount()){
+					gender = result.get(1).getType();
+				} else {
+					gender ="all";
+				}
+			}
+					
+		}
+		
+		return gender;
+	}
 }

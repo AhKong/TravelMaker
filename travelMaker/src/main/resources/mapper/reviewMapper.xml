@@ -371,5 +371,19 @@
 		 	sr.sights_review_status ='Y'
 		group by m.m_gender HAVING m.m_gender IS NOT null
 	</select>
+	<select id="getResGenderPreference" parameterType="String" resultType="Preference" >
+		select 
+			 m.m_gender as type,
+			 count(m.m_gender) as count
+		from 
+			tb_res_review as r
+		left outer join 
+			tb_member as m
+		on 
+			m.m_id= r.m_id and 
+			r.res_num  =#{resNum} and 
+		 	r.res_review_status ='Y'
+		group by m.m_gender HAVING m.m_gender IS NOT null
+	</select>
                                                                          
 </mapper>
