@@ -4,10 +4,10 @@
 			width: 400px;
 			height: 400px;
 		}
-		
+	
 		#sights-map, #sights-review {
-			height: auto;
-			width: 81vw;
+			height:auto;
+			width: 80vw;
 		}
 		
 		.chart {
