@@ -231,12 +231,12 @@
 		
 		$('#completeBtn').click(function(){
 			
-			if(up_mPw.val() == ''){
-				alert("비밀번호를 깜박하셨습니다!");
+			if(up_pwCheck == false){
+				alert("비밀번호를 다시 확인해주세요");
 				up_mPw.focus();
 				return false;
 			}
-			if(up_mPwCheck.val() != up_mPw.val()){
+			if(up_pwCheck2 == false){
 				alert("입력한 두 개의 비밀번호가 다릅니다 비밀번호를 확인해주세요");
 				up_mPwCheck.focus();
 				return false;

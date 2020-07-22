@@ -128,55 +128,18 @@ span {
            <!-- /.card-body -->
 						
            <div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
-             <h1>현재 진행중인 축제</h1>
-             <div class="ing-festival row">
-               <div class="col-12 col-sm-4">
-                 <div class=" info-box bg-light ">
-                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100" height="150">
-                     <div class="desc">
-                       <span>festivalName1</span>
-                       <p>로운 얼굴이 축제</p>
-                       <p>상세설명:</p>
-                       <p>시작일:</p>
-                       <p>종료일:</p>
-                     </div>
-                   </div> 
-                 </div>
-               <div class="col-12 col-sm-4">
-                 <div class=" info-box bg-light ">
-                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100" height="150">
-                     <div class="desc">
-                       <span>festivalName1</span>
-                       <p>로운 얼굴이 축제</p>
-                       <p>상세설명:</p>
-                       <p>시작일:</p>
-                       <p>종료일:</p>
-                     </div>
-                   </div> 
-                 </div>
-               <div class="col-12 col-sm-4">
-                 <div class=" info-box bg-light ">
-                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100" height="150">
-                     <div class="desc">
-                       <span>festivalName1</span>
-                       <p>로운 얼굴이 축제</p>
-                       <p>상세설명:</p>
-                       <p>시작일:</p>
-                       <p>종료일:</p>
-                     </div>
-                   </div> 
-                 </div>
-               </div>
+           
+             <!-- 축제 정보 상단에 3가지 보여줄 자리 -->
                
                <div class="row">
                  <div class="festivalListTitle">
-                   <h2>축제 정보 더보기</h2>
+                   <h2>축제 정보</h2>
                  </div>	
                  <div th:each=" f : ${fList}"  class="col-12 col-md-12 col-lg-12">
                    <th:block th:each=" m : ${f.member}">										
                      <div class="festival row bg-light">
                        <div class="sightsImg col-sm-2 col-md-3">
-                         <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="150" height="150">
+                         <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="300" height="300">
                        </div>
                        <div class="festivalDesc col-sm-6 col-md-8">
                          <input type="hidden" th:value="${f.fesNum}">
