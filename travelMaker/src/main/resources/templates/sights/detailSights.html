@@ -46,14 +46,15 @@
           	 		<span class="reveiwCnt"  th:text="|${reviewCnt}개의 리뷰|"></span>
           	 		</th:block>
 					<p th:text="${sights.sightsDetail}"></p>
-					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}"></p>
+					<p th:if ="${sights.sightsStartTime != ''}" th:utext="|<i class='far fa-clock'></i>  &nbsp; ${sights.sightsStartTime} - ${sights.sightsCloseTime}"></p>
+					<p th:unless ="${sights.sightsStartTime != ''}"><i class="far fa-clock"></i> 24시간 이용 가능합니다! </p>
 					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${sights.sightsAddr}|"></p>
-					<th:block th:if="${genderPreference !=null}"> ️
-					<p th:if ="${genderPreference != 'all'}"  th:utext="${genderPreference =='남'?'👦🏻 남성이 선호하는 관광명소 입니다!':'👩🏻 여성이 선호하는 관광명소 입니다!'}">이 여행지는 여성이 선호하는 여행지입니다</p>
-					<p th:unless ="${genderPreference != 'all'}"> 👪  모든 성별이 선호하는 관광명소 입니다! </p>
-					</th:block>
+					<th:block th:if="${genderPreference !=null}"> 
+					<p th:if ="${genderPreference != 'all'}"  th:utext="|<i class='fas fa-heart' style='color:#FF9E9B'></i><strong> ${genderPreference}성</strong>이 선호하는 여행지입니다|">이 여행지는 여성이 선호하는 여행지입니다</p>
+					<p th:unless ="${genderPreference != 'all'}"> <i class="fas fa-heart" style="color:#FF9E9B"> </i>&nbsp;모든 성별이 선호하는 관광명소 입니다! </p>
+					</th:block>			
 					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
-					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|"></p>
+					<a th:href="@{${sights.sightsWeb}}" th:if=" ${sights.sightsWeb != '' }" th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|"></a>
 					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|"></p>
 					<p>
 						<a th:href="@{/feedback/addFeedback(sightsNum=${sights.sightsNum})}">
@@ -113,13 +114,10 @@
 				<div class="nav nav-tabs" id="product-tab" role="tablist">
 					<a class="nav-item nav-link" id="sights-review-tab" data-toggle="tab" href="#sights-review" role="tab" aria-controls="sights-review" aria-selected="true">리뷰</a>
 					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변</a> 
-					<a class="nav-item nav-link active" id="festival-tab" data-toggle="tab" href="#festival" role="tab" aria-controls="festival" aria-selected="false">축제</a>
 				</div>
 			</nav>
 			<div class="tab-content p-3" id="nav-tabContent">
-				<div class="tab-pane fade" id="festival" role="tabpanel" aria-labelledby="festival-tab">			
-					축제 리스트 준비중..
-				</div>
+			
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
 					<div th:replace="fragments/kakaoMap :: kakaoMapFragment"></div>
 				</div>
@@ -135,9 +133,6 @@
 					</div>
 					</th:block>
 						<th:block th:if="${!#lists.isEmpty(reviewList)}">
-				
-	
-					
 					<div class="row">
 					<div class="chart col-12 col-sm-4">
 						<h4 style="margin-left: 7px">관광지 평점</h4>
@@ -226,7 +221,7 @@
        			     		</span><br><br>
           					<a style="color:#01579B"  class="likeBtn" th:sightsReviewMid ="${rl.member.mId}" th:sightsReviewNum = "${rl.sightsReviewNum}" th:data-info ="${rl.isLiked ? 'unlike':'like'}">
        			     		 <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"></i> 도움이되요</a>
-		                <button class="float-right btn btn-primary showComments" toggle="show" th:reviewNum="${rl.sightsReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
+		               		 <button class="float-right btn btn-primary showComments" toggle="show" th:reviewNum="${rl.sightsReviewNum}" th:reviewWriter ="${rl.member.mId}">comments</button>
 			              </div>
 			              <!-- /.card-body -->
 			     	    <div class="comments-warp" style="display:none;"> 
