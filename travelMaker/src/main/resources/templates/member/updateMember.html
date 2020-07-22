@@ -5,7 +5,6 @@
 <th:block layout:fragment="customTitle">
 	<title>회원정보수정</title>
 </th:block>
-
 <th:block layout:fragment="customCss">
 		<style>
 		.card-edit {
@@ -29,10 +28,8 @@
 		.fileName {
 			font-size: small;
 		}
-		
 	</style>
 </th:block>
-
 <th:block layout:fragment="customContents">
   <!-- Content Wrapper. updateMember page content -->
   <div class="content-wrapper">
@@ -132,6 +129,7 @@
 								</button>
 							</div>
 							
+							<!-- 회원 탈퇴 모달 내용 -->
 							<div class="modal-body">
 								TravelMaker 는 30000000건의 리뷰와 							<br>
 								22222건의 여행기록을 가지고 있고									<br>
@@ -140,11 +138,12 @@
 								지금 탈퇴하기를 멈추면 2000점의 포인트를 받을 수 있습니다					<br>
 								정말 계정을 탈퇴하시겠습니까?										<br>
 							</div>
-							
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary btn-sm col-sm-2" data-dismiss="modal"> 2000 포인트 받고 탈퇴 안하기  </button>
-		 						<a type="button" class="btn btn-danger btn-sm col-sm-2" href="/member/deleteMember"> 미안 </a>
-							</div>
+							<th:block>
+						  	  <div class="modal-footer">
+								<a type="button" class="btn btn-primary btn-sm col-sm-4" href="/member/conciliateDeleteMember"> 2000 포인트 받고 탈퇴 안하기  </a>
+		 						<a type="button" class="btn btn-danger btn-sm col-sm-2" th:href="@{/member/deleteMember}"> 미안 </a>
+							  </div>
+							</th:block>
 						</div>
 					</div>
 				</div>
@@ -232,12 +231,12 @@
 		
 		$('#completeBtn').click(function(){
 			
-			if(up_mPw.val() == ''){
-				alert("비밀번호를 깜박하셨습니다!");
+			if(up_pwCheck == false){
+				alert("비밀번호를 다시 확인해주세요");
 				up_mPw.focus();
 				return false;
 			}
-			if(up_mPwCheck.val() != up_mPw.val()){
+			if(up_pwCheck2 == false){
 				alert("입력한 두 개의 비밀번호가 다릅니다 비밀번호를 확인해주세요");
 				up_mPwCheck.focus();
 				return false;

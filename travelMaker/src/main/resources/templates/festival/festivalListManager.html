@@ -248,7 +248,7 @@ span {
              <div class="ing-festival row">
                <div class="col-12 col-sm-4">
                  <div class=" info-box bg-light">
-                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100" height="150">
+                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="200" height="250">
                      <div class="desc">
                        <span>festivalName1</span>
                        <p>로운 얼굴이 축제</p>
@@ -260,7 +260,7 @@ span {
                  </div>
                <div class="col-12 col-sm-4">
                  <div class=" info-box bg-light">
-                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100" height="150">
+                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="200" height="250">
                      <div class="desc">
                        <span>festivalName1</span>
                        <p>로운 얼굴이 축제</p>
@@ -272,7 +272,7 @@ span {
                  </div>
                <div class="col-12 col-sm-4">
                  <div class=" info-box bg-light">
-                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="100" height="150">
+                   <img src="/dist/img/festivalSample.PNG" alt="Festival Image" width="200" height="250">
                      <div class="desc">
                        <span>festivalName1</span>
                        <p>로운 얼굴이 축제</p>
@@ -292,7 +292,7 @@ span {
                    <th:block th:each=" m : ${f.member}">										
                      <div class="festival row bg-light">
                        <div class="sightsImg col-12 col-sm-2 col-md-3">
-                         <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="150" height="150">
+                         <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="300" height="300">
                        </div>
                        <div class="festivalDesc col-12 col-sm-6 col-md-8">
                          <input type="hidden" th:value="${f.fesNum}">
@@ -300,10 +300,10 @@ span {
                          <p>위치: [[${f.sights.sightsName}]]</p>
                          <p>시작일 [[${f.fesStartDate}]]</p>
                          <p>종료일 [[${f.fesEndDate}]]</p>
-                         <p th:text="${f.fesDetail}">로운 얼굴이 곧 축제</p>
+                         <p th:text="${f.fesDetail}"></p>
                          <p th:text="${f.fesWeb}"></p>
                          <input type="hidden" th:value="${f.fesRegDate}">
-                         <p th:text="${f.fesState}">진행중</p>
+                         <p th:text="${f.fesState}"></p>
                        </div>
                      </div>
                    </th:block>

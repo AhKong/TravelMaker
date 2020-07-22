@@ -74,7 +74,7 @@ public class ResController {
 		model.addAttribute("gradeAvg", reviewService.getResGradeAvg(resNum));
 		model.addAttribute("reviewCnt", reviewService.getResReviewCnt(resNum));
 		model.addAttribute("reviewPhotos", reviewService.getResReviewPhotos(resNum));
-
+		model.addAttribute("genderPreference", reviewService.getResGenderPreference(resNum));
 		return "res/detailRes";
 	}
 	

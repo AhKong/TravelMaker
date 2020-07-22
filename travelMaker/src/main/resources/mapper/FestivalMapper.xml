@@ -22,6 +22,18 @@
 		</association>
 	</resultMap>
 	
+	<update id="updateFestivalState">
+		<![CDATA[
+			UPDATE
+				tb_festival AS f
+			SET f.fes_state = case
+								when f.fes_start_date <= NOW() AND f.fes_end_date >= NOW() then '진행중'
+								when f.fes_start_date > NOW() AND f.fes_end_date > NOW() then '진행예정'
+								when f.fes_start_date < NOW() AND f.fes_end_date < NOW() then '진행종료'
+								ELSE f.fes_state
+								END;
+		]]>
+	</update>
 	
 	<delete id="deleteFestival" parameterType="String">
 		DELETE

@@ -22,10 +22,26 @@
  		</association>
  	</resultMap>
  	
+ 	<select id="getDeleteMemberList" parameterType="Member" resultMap="memberSelect">
+ 		
+ 	</select>
+ 	
+ 	<update id="deleteMember" parameterType="Member">
+ 		UPDATE
+			tb_member
+		SET
+			level_num = '5'
+		WHERE 
+			m_id = #{mId};
+ 	</update>
+ 	
  	<update id="updateMAvatar" parameterType="Member">
- 		UPDATE tb_member 
- 		SET m_avatar = #{mAvatar}
- 		WHERE m_id=#{mId};
+ 		UPDATE 
+ 			tb_member 
+ 		SET 
+ 			m_avatar = #{mAvatar}
+ 		WHERE 
+ 			m_id=#{mId};
  		
  	</update>
  	
@@ -88,7 +104,7 @@
 		ON 
  			m.m_id = p.m_id
 		WHERE
-			m.m_id=#{mId};
+			m.m_id=#{mId} and m.level_num NOT IN ('5','7')
 	</select>
 	
 	<select id="followersPage" parameterType ="String" resultMap="memberSelect">
