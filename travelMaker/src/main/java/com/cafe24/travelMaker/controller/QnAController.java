@@ -58,14 +58,15 @@ public class QnAController{
 	@GetMapping("/answerSuccess")
 	public String answerSuccess(Question question, HttpSession session, Notice notice,
 			@RequestParam(name = "qCode", required = false) String qCode,
-			@RequestParam(name = "inputDescription", required = false) String inputDescription) {
+			@RequestParam(name = "inputDescription", required = false) String inputDescription,
+			@RequestParam(name = "memberId", required = false) String memberId) {
 		System.out.println(question + " <-- question answer()");
 		System.out.println(qCode + " <-- qCode answer()");
 		System.out.println(inputDescription + " <-- inputDescription answer()");
-		String loginId = (String)session.getAttribute("SID");
+		System.out.println(memberId + " <-- inputDescription answer()");
 		question.setQuestionCode(qCode);
 		question.setqAnswer(inputDescription);
-		notice.setmId(loginId);
+		notice.setmId(memberId);
 		questionService.answer(question);
 		noticeService.questionNotice(notice);
 		return "redirect:/question/answer";
@@ -77,7 +78,7 @@ public class QnAController{
 	}
 	
 	@GetMapping("/answerForm")
-	public String answerForm(Model model, Question question, @RequestParam(name="qCode", required=false) String qCode) {
+	public String answerForm(Model model, Question question, @RequestParam(name="qCode", required=false) String qCode, @RequestParam(name="mId", required=false) String mId) {
 		question = questionService.getQuestionInfo(qCode);
 		model.addAttribute("question", question);
 		return "/question/answerForm";
