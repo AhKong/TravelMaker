@@ -127,7 +127,7 @@ span {
              <div class="festivalCate">
                <p>관리자 페이지</p>
                <div class="btn-group col-8">
-                 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-addFestival"
+                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-addFestival"
                          name="addFestivalBtn" id="addFestivalBtn" value="addFestival"> 축제 등록
                  </button>
                </div>
@@ -147,13 +147,14 @@ span {
                    <div class="modal-body">
                      <p><i class="fas fa-headphones"></i>&nbsp;새로운 축제를 등록해주세요&nbsp;<i class="fas fa-headphones"></i></p>
                      <div class="modal-form">
-                       <form action="/festival/addFestival" method="post" enctype="multipart/form-data">
+                       <form id="addFestivalForm" action="/festival/addFestival" method="post" enctype="multipart/form-data">
+                       
                          <input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
                          <div class="row">
                            <div class="col-12">
                              <div class="form-group">
                                <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
-                               <input type="text" class="form-control" name="fesName" placeholder="축제 이름을 입력하세요">
+                               <input type="text" class="form-control" name="fesName" id="fesName" placeholder="축제 이름을 입력하세요">
                              </div>
                            </div>
                          </div>
@@ -169,7 +170,8 @@ span {
                            <div class="col-12">
                              <div class="form-group">
                                <label><i class="fas fa-music"></i>&nbsp;festival-sightsName</label><br/>
-                               <select name="sights.sightsNum" class="col-md-6 col-sm-8">
+                               <select name="sights.sightsNum" id="sightsNum" class="col-md-6 col-sm-8">
+                                 <option value="default">관광명소를 선택해주세요</option>
                                  <th:block th:each="f: ${fList}">
                                    <option th:value="${f.sights.sightsNum}">[[${f.sights.sightsNum}]] : [[${f.sights.sightsName}]]</option>
                                  </th:block>
@@ -181,7 +183,7 @@ span {
                            <div class="col-12">
                              <div class="form-group">
                                <label><i class="fas fa-music"></i>&nbsp;festival-startDate</label>
-                               <input type="date" class="form-control" name="fesStartDate" placeholder="축제 시작날짜를 입력하세요">
+                               <input type="date" class="form-control" name="fesStartDate" id="fesStartDate" placeholder="축제 시작날짜를 입력하세요">
                              </div>
                            </div>
                          </div>
@@ -189,7 +191,7 @@ span {
                            <div class="col-12">
                              <div class="form-group">
                                <label><i class="fas fa-music"></i>&nbsp;festival-endDate</label>
-                               <input type="date"  class="form-control" name="fesEndDate" placeholder="축제 종료날짜를 입력하세요">
+                               <input type="date"  class="form-control" name="fesEndDate" id="fesEndDate" placeholder="축제 종료날짜를 입력하세요">
                              </div>
                            </div>
                          </div>
@@ -197,7 +199,7 @@ span {
                            <div class="col-12">
                              <div class="form-group">
                                <label><i class="fas fa-music"></i>&nbsp;festival-description</label><i class="fas fa-music"></i>
-                               <textarea class="form-control" rows="3" name="fesDetail" placeholder="축제 상세설명을 입력하세요"></textarea>
+                               <textarea class="form-control" rows="3" name="fesDetail" id="fesDetail" placeholder="축제 상세설명을 입력하세요"></textarea>
                              </div>
                            </div>
                          </div>
@@ -205,7 +207,7 @@ span {
                            <div class="col-12">
                              <div class="form-group">
                                <label><i class="fas fa-music"></i>&nbsp;festival-webSite</label>
-                               <textarea class="form-control" rows="1" name="fesWeb" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
+                               <textarea class="form-control" rows="1" name="fesWeb" id="fesWeb" placeholder="축제 웹사이트 주소를 입력하세요"></textarea>
                              </div>
                            </div>
                          </div>
@@ -214,23 +216,23 @@ span {
                              <!-- radio -->
                              <div class="radio-group">
                                <div class="form-check">
-                                 <input class="form-check-input" type="radio" name="fesState" value="진행중" checked>
+                                 <input class="form-check-input" type="radio" name="fesState" id="fesState" value="진행중" checked>
                                  <label class="form-check-label">현재 진행중인 축제</label>
                                </div>
                                <div class="form-check">
-                                 <input class="form-check-input" type="radio" name="fesState" value="진행예정">
+                                 <input class="form-check-input" type="radio" name="fesState" id="fesState" value="진행예정">
                                  <label class="form-check-label">진행 예정인 축제</label>
                                </div>
                                <div class="form-check">
-                                 <input class="form-check-input" type="radio" name="fesState" value="진행종료">
+                                 <input class="form-check-input" type="radio" name="fesState" id="fesState" value="진행종료">
                                  <label class="form-check-label">진행 종료된 축제</label>
                                </div>
                              </div>
                            </div>
                          </div>	
                          <div class="modal-footer justify-content-between">
-                           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">등록 취소</button>
-                           <button type="submit" class="btn btn-primary"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+                           <button type="button" class="btn btn-default" data-dismiss="modal">등록 취소</button>
+                           <button type="submit" class="btn btn-primary" id="completeBtn"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
                          </div>
                        </form>
                      </div>
@@ -290,13 +292,14 @@ span {
                  </div>	
                  <div th:each=" f : ${fList}"  class="col-12 col-md-12 col-lg-12">
                    <th:block th:each=" m : ${f.member}">										
-                     <div class="festival row bg-light">
+                     <div class="festivalList row bg-light">
                        <div class="sightsImg col-12 col-sm-2 col-md-3">
                          <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="300" height="300">
                        </div>
                        <div class="festivalDesc col-12 col-sm-6 col-md-8">
+                         <a th:href="@{/festival/updateFestival(fesNum=${f.fesNum})}" class="btn btn-info float-right btn-lg"> 수정하기 </a>
                          <input type="hidden" th:value="${f.fesNum}">
-                         <span>[[${f.fesName}]]</span>
+                         <h3>[[${f.fesName}]]</h3>
                          <p>위치: [[${f.sights.sightsName}]]</p>
                          <p>시작일 [[${f.fesStartDate}]]</p>
                          <p>종료일 [[${f.fesEndDate}]]</p>
@@ -324,8 +327,60 @@ span {
 
 <th:block layout:fragment="customFooterScript">
 	<script>
+		$(function(){
 			
+			var fesName = $('#fesName');
+			var file = $('#inputFile');
+			var sightsNum = $('#sightsNum');
+			var fesStartDate = $('#fesStartDate');
+			var fesEndDate = $('#fesEndDate');
+			var fesDetail = $('#fesDetail');
+			var fesWeb = $('#fesWeb');
+			var fesState = $('#fesState');
+			
+			$('#completeBtn').click(function(){
+			
+				if(fesName.val() == ''){
+					alert("축제 이름을 입력해주세요!");
+					fesName.focus();
+					return false;
+				}
+				if(file.val() == ''){
+					alert("축제 사진이 선택되지 않았습니다!");
+					file.focus();
+					return false;
+				}
+				if(sightsNum.val() == default){
+					alert("관광명소를 선택해주세요!");
+					sightsNum.focus();
+					return false;
+				}
+				if(fesStartDate.val() == '' || fesStartDate.val() == null){
+					alert("축제 시작날짜를 선택해주세요!");
+					fesStartDate.focus();
+					return false;
+				}
+				if(fesEndDate.val() == ''){
+					alert("축제 종료날짜를 선택해주세요");
+					fesEndDate.focus();
+					return false;
+				}
+				if(fesDetail.val() == ''){
+					alert("축제 상세설명을 회원들이 볼 수 있도록 입력해주세요 :))");
+					fesDetail.focus();
+					return false;
+				}
+				if(fesWeb.val() == ''){
+					alert("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				}
+				if(fesState.val() == ''){
+					alert("축제의 현재 진행 상태를 선택해주세요!");
+					fesState.focus();
+					return false;
+				} 
+				$('#addFestivalForm').submit();
+			});
+		})
 	</script>
 </th:block>
-
 </html>

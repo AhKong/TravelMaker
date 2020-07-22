@@ -37,7 +37,7 @@ public class FestivalController {
 		System.out.println(result+" <- result addFestival FestivalController");
 		System.out.println(festival.getMember().toString()+" <- festival.getMember().toString() addFestival FestivalController");
 		
-		return "redirect:/festival/ingFestivalList";
+		return "redirect:/festival/ingFestivalListManager";
 	}
 	
 	//축제 수정 화면으로 이동 
