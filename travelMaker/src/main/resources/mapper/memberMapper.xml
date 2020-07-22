@@ -104,7 +104,7 @@
 		ON 
  			m.m_id = p.m_id
 		WHERE
-			m.m_id=#{mId};
+			m.m_id=#{mId} and m.level_num NOT IN ('5','7')
 	</select>
 	
 	<select id="followersPage" parameterType ="String" resultMap="memberSelect">
