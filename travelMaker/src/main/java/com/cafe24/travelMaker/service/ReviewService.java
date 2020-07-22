@@ -173,7 +173,9 @@ public class ReviewService {
 				} else if(result.get(0).getCount()<result.get(1).getCount()){
 					gender = result.get(1).getType();
 				}  
-				gender ="all";
+				else {
+					gender ="all";
+				}
 			}
 					
 		}
@@ -192,8 +194,9 @@ public class ReviewService {
 					gender = result.get(0).getType();
 				} else if(result.get(0).getCount()<result.get(1).getCount()){
 					gender = result.get(1).getType();
-				}  
-				gender ="all";
+				} else {
+					gender ="all";
+				}
 			}
 					
 		}
