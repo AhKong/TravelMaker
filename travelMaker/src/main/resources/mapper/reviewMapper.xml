@@ -221,7 +221,7 @@
 		ON
 			r.res_num = rv.res_num
 		WHERE  
-			r.m_id = #{mId};
+			rv.m_id = #{mId} and rv.res_review_status = 'Y';
 	</select> 
 	
 	<select id="followersSightsReviewList" parameterType="String" resultType="SightsReview" resultMap="sightsReviewResultMap">  
@@ -240,7 +240,7 @@
 		ON
 			s.sights_num = sv.sights_num
 		WHERE  
-			s.m_id = #{mId};
+			sv.m_id = #{mId} and sv.sights_review_status = 'Y';
 	</select> 
 	
 	<select id="sightsReviewList" parameterType="String" resultMap="sightsReviewResultMap">
