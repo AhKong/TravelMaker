@@ -33,14 +33,14 @@ public class ReportController {
 		System.out.println(reviewReport +"<-----요ㅕ기여기!!");
 		reviewReport.setReviewType("Sights");
 		reportService.reportSightsReivew(reviewReport);
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 	@PostMapping("/resReveiw")
 	public String addResReviewReport(ReviewReport reviewReport) {
 		reviewReport.setReviewType("Res");
 		reportService.reportResReivew(reviewReport);
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 }

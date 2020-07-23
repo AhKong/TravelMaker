@@ -3,9 +3,9 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default}">
 <th:block layout:fragment="customContents">
-<div th:replace="fragments/sendMsg :: sendMsgModalFragement"></div>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  	<div th:replace="fragments/reportReview :: reportedReviewFragment"></div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -101,6 +101,7 @@
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/dist/js/commonAjax.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -117,6 +118,48 @@
       "responsive": true,
     });
   });
+  
+  $('.showReview').click(function(){
+	  console.log($(this).html())
+	  var reviewNum = $(this).attr('reviewNum');
+	  var reviewType = $(this).attr('reviewType');
+	  console.log(reviewNum);
+	  console.log(reviewType);
+	  var url = null;
+	  if(reviewType =='Res'){
+		  url ='getReportedResReview';
+	  }else {
+		  url ='getReportedSightsReview';
+	  }
+	  commonAjax('/ajax/'+url,
+				{"reviewNum":reviewNum},
+				function(data){
+					var result = data.result;
+					console.log(result);
+					var html = '';
+					if(reviewType=='Res'){
+						html += '<strong>작성자 </strong>'+result.member.mId+'</span><br><hr>'
+						html += '<strong>제목</strong>'+result.resReviewTitle+'</span><br>';
+						html +='<strong>내용</strong>'+result.resReviewContents+'</span><br>';
+						if(result.resReviewPhoto !=''){
+							html += '<img class="img-fluid" src="/fileupload/'+result.resReviewPhoto+'alt="Photo" width="300">'
+						}
+						html += '<span><i class="fas fa-suitcase-rolling"></i>여행 유형 :<strong>'+result.tripType.tripTypeName+'</strong></span><br>'
+						html += '<span><i class="far fa-calendar-check"></i><strong>'+result.resVisitDate+'</strong>에 다녀감 </span><br><br>'	
+					} else {
+						html += '<strong>작성자 </strong>:<span>'+result.member.mId+'</span><br><hr>'
+						html += '<strong>제목</strong>: <span>'+result.sightsReviewTitle+'</span><hr>';
+						html +='<strong>내용</strong>: <span>'+result.sightsReviewContents+'</span><hr>';
+						if(result.sightsReviewPhoto !=''){
+							html += '<img class="img-fluid" src="/fileupload/'+result.sightsReviewPhoto+'"alt="Photo" width="300"><br>'
+						}
+						html += '<span><i class="fas fa-suitcase-rolling"></i>여행 유형 :<strong>'+result.tripType.tripTypeName+'</strong></span><br>'
+						html += '<span><i class="far fa-calendar-check"></i><strong>'+result.sightsVisitDate+'</strong>에 다녀감 </span><br><br>'	
+					}
+					$('.modal-body').html(html);
+				},'Get'); 
+	  $('#showReportedReview').modal();
+  })
   </script>
 </th:block>	
 </html>
