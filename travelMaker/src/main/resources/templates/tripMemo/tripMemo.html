@@ -85,14 +85,14 @@
                             <span class="time" th:if="${m.tripMemoCheck} eq '비공개'">&nbsp;<i class="fas fa-key"></i>&nbsp;&nbsp;비공개</span> 
                             <span class="time" th:if="${m.tripMemoCheck} eq '공개'">&nbsp;<i class="fas fa-users"></i>&nbsp;&nbsp;공개</span>
                             <div class="timeline-header">
-                              <h4><a href="#">전주 전동성당</a>[[${m.tripMemoTitle}]]</h4>
+                              <h4><a href="#">[[${m.tripMemoTitle}]]</a></h4>
                             </div>
                             <div class="timeline-body">
-                       		    내여행기록 세부 내용~~~~~~
+                              <a type="button" class="btn btn-info float-right btn-lg">수정하기 </a>
                        		  [[${m.tripMemoContents}]]
 		                      <div class="timeline-item">
 		                        <div class="form-photo bg-white">
-		                          <img th:src="@{/fileupload/{tripMemoPhoto}(tripMemoPhoto=${m.tripMemoPhoto})}" alt="tripMemoPhoto" width="150" height="100">
+		                          <img th:src="@{/fileupload/{tripMemoPhoto}(tripMemoPhoto=${m.tripMemoPhoto})}" alt="tripMemoPhoto" width="200" height="200">
 		                        </div>
 		                      </div>
 		                    </div> 

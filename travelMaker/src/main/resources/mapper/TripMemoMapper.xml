@@ -33,7 +33,7 @@
 		FROM 
 			tb_trip_memo AS m
 			
-		ORDER BY m.trip_memo_reg_date DESC;
+		ORDER BY m.trip_memo_tripdate DESC;
 	</select>
 
 
