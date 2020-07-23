@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.ReportType;
+import com.cafe24.travelMaker.domain.ReviewReport;
 import com.cafe24.travelMaker.mapper.ReportMapper;
 
 @Service
@@ -15,5 +16,8 @@ public class ReportService {
 	
 	public List<ReportType> getReportType(){
 		return reportMapper.getReportType();
+	}
+	public int reportSightsReivew(ReviewReport reviewReport) {
+		return reportMapper.reportSightsReivew(reviewReport);
 	}
 }

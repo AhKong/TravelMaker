@@ -9,4 +9,33 @@
 		report_type_name as reportTypeName
 	FROM tb_report_tpye
 </select>
+
+<insert id="reportSightsReivew" parameterType="ReviewReport">
+		<selectKey order ="BEFORE" keyProperty="reviewReportNum" resultType ="String"> 
+		 	SELECT 
+				case COUNT(*)
+				when 0 then 'review_report_1'
+				ELSE CONCAT('review_report_',MAX(CAST(SUBSTRING(review_report_num,15) AS DECIMAL))+1) 
+				END AS review_report_num
+			FROM
+				tb_review_report
+			</selectKey>
+			INSERT INTO 
+				tb_review_report(
+					review_report_num,
+					m_id, 
+					sights_review_num,
+					report_type_num,
+					review_report_contents, 
+					review_type
+				)VALUES (
+					#{reviewReportNum},
+					#{mId},
+					#{reviewNum},
+					#{reportType.reportTypeNum},
+					#{reportContents},
+					#{reviewType}
+				)
+			
+	</insert>
 </mapper>
