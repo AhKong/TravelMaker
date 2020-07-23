@@ -44,10 +44,12 @@ INNER JOIN
 			FROM  
 				tb_sights_review AS sr
 			WHERE 
-				sr.sights_review_status ='Y'
+				sr.sights_review_status ='Y' 
 			GROUP BY 
 				sr.sights_num
 			) AS avgGrade
+			where
+			s.sights_active ='Y'
 			ORDER BY
 			avgGrade DESC  
 		LIMIT

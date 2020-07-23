@@ -240,11 +240,19 @@
 	max-width: 100%;
 	height: auto;
 }
+.deleteBtn{
+	float: right;
+	border-radius: 5px;
+	width: 25%;
+	margin: -5px;
+	margin-left: 5px;
+}
 .saveBtn{
 	float: right;
 	border-radius: 5px;
-	width: 40%;
+	width: 25%;
 	margin: -5px;
+	margin-left: 5px;
 }
 </style>
 
@@ -262,8 +270,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Trip</a></li>
-							<li class="breadcrumb-item active">editTrip</li>
+							<li class="breadcrumb-item"><a href="#">tripPlan</a></li>
+							<li class="breadcrumb-item active">editTrip.html</li>
 						</ol>
 					</div>
 				</div>
@@ -275,18 +283,12 @@
 							<h3 class="card-title">
 								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
 							</h3>
+							<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${tNum}">삭제</button>
 							<button class="saveBtn"><i class="fas fa-share"></i>저장</button>
 						</div>
 						<!-- /.card-header -->
 						<div id="editBox" class="small-box">
-							<button data-toggle="modal" data-target="#deleteModal"
-								type="button" class="close">&times;</button>
-							<!-- 클릭시 삭제  -->
-							<div>
-								<h5>
-									<i class="icon fas fa-info"></i> 이름!
-								</h5>
-							</div>
+							
 							<div>
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 									class="img-rounded">
@@ -328,11 +330,11 @@
 							</div>
 							<div>
 								<h4>
-									<!-- 작성자 아이디 다른곳에서 받아오세요 -->
+									<!-- 작성자 아이디 다른곳에서 받아오세요 -->  생성자<a th:text="${sTripPlan[0].mId}"></a>
 								</h4>
 							</div>
 						
-					<th:block th:if="${#lists.isEmpty(sTripPlan)}"> 
+					<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
 							<div data-toggle="modal" data-target="#myModalExpenses">
 								여행경비 : 원
 							</div>
@@ -344,15 +346,15 @@
 							</div>
 					</th:block>
 				
-					<th:block th:unless="${#lists.isEmpty(sTripPlan)}">
+					<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
 						<div data-toggle="modal" data-target="#myModalExpenses">
-							여행경비 : <a th:text="${sTripPlan[0].pCost}"></a>원
+							여행경비 : <a th:text="${selectTripPlan[0].pCost}"></a>원
 						</div>
 						<div data-toggle="modal" data-target="#myModalMaterials">
-							여행 준비물 : <a th:text="${sTripPlan[0].pSupply}"> --- </a>
+							여행 준비물 : <a th:text="${selectTripPlan[0].pSupply}"> --- </a>
 						</div>
 						<div data-toggle="modal" data-target="#myModalDetail">
-							여행 상세 : <a th:text="${sTripPlan[0].pDetail}"> --- </a>
+							여행 상세 : <a th:text="${selectTripPlan[0].pDetail}"> --- </a>
 						</div>
 					</th:block>
 						</div>
@@ -395,7 +397,7 @@
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										<strong id="modalText"><i class="fas fa-biohazard"></i>여행
+										<strong id="modalText"><i class="fas fa-exclamation"></i> 여행
 											계획 삭제입니다. </strong>
 									</div>
 									<div id="modalMid">
@@ -409,7 +411,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">취소</button>
-											<button type="submit" class="btn btn-primary">삭제</button>
+											<a th:href="@{/myTrip/deleteTripPlan(tNum=${tNum})}" class="btn btn-primary" >삭제</a>
 											<!-- 삭제처리 -->
 										</div>
 									</div>
@@ -893,6 +895,15 @@
 		// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 		
 		}  */
+		$(function(){
+			$('#deleteModal').on('show.bs.modal', function (e) {
+				  var tNum = $(this).data('tNum');
+				  
+				  console.log('!!!');
+				  console.log(tNum);
+			})			
+		});
+		
 	</script>
 
 </th:block>

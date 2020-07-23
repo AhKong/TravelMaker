@@ -13,13 +13,16 @@ public class MainController {
 
 	@Autowired private IndexTop3Service indexTop3Service;
 	
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String main(Model model){	
 		indexTop3Service.indexTop3();
 		System.out.println(indexTop3Service.indexTop3()+"indexxxxxxxxxxxxxxx");
 		model.addAttribute("indexTop3", indexTop3Service.indexTop3());
-		return "index";
+		return "/index";
 	}
 	
-
+	@GetMapping("/")
+	public String mainInfo() {
+		return "indexInfo";
+	}
 }

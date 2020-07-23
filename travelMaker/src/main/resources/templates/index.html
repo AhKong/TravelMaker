@@ -12,6 +12,9 @@
 #small-text{
 	color: #fff;
 }
+#h3{
+	margin-top: 200px;
+}
 #top3Box {
 	padding-left: 20px;
 	padding-right: 20px;
@@ -28,9 +31,6 @@
 	background-size: cover;
 	height: 100%;
 }
-#h3{
-	color: #fff;
-}
 #recommend {
 	margin-left: 20px;
 }
@@ -42,7 +42,7 @@
 }
 
 #indexing {
-	background-image: url(/dist/img/landscape.jpg);
+	background-image: url(/dist/img/10441364265_437101265e_b.jpg);
 	background-position: center top;
 	background-size: 100%;
 	/* padding-bottom: 480px;*/
@@ -50,7 +50,6 @@
 	padding: 50px 0;
 }
 #index{
-	padding-top: 200px;
 }
 #h1 {
 	text-align: center;
@@ -81,8 +80,8 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Trip</a></li>
-						<li class="breadcrumb-item active">tripList</li>
+						<li class="breadcrumb-item"><a href="#">main</a></li>
+						<li class="breadcrumb-item active">index.html</li>
 					</ol>
 				</div>
 			</div>
@@ -90,7 +89,7 @@
 
 		<div id="indexing">
 			<div id="h1">
-				<h1>당신의 영원한 여행 메이트, TavelMaker에 오신걸 환영합니다</h1>
+				<h1>당신의 영원한 여행 메이트, TavelMaker에 오신걸 환영합니다 !</h1>
 			</div>
 
 			<div class="row">
@@ -113,7 +112,7 @@
 					<!-- Small boxes (Stat box) -->
 					<div class="row">
 						<th:block th:each ="it : ${indexTop3}">
-							<div class="col-lg-4 col-7" id="top3Box">
+							<div class="col-lg-4 col-12" id="top3Box">
 							 <div class=" info-box bg-light ">
 								<img th:src="@{/fileupload/{file}(file=${it.sightsPhoto})}"alt="User Image" width="60%">
 								<div class="desc">
