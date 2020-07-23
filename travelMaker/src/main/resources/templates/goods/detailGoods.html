@@ -64,7 +64,7 @@
               <hr>
               <div class="form-group">
                 <label for="inputName" style = "color: #148CFF;">한줄설명</label>
-                <input type="text" id="goodsDescription" class="form-control" th:value="${goods.goodsDetail}" readonly >
+                <textarea rows="4" id="goodsDescription" class="form-control" th:text="${goods.goodsDetail}" readonly ></textarea>
               </div>
               <hr>
               <div class="form-group">
