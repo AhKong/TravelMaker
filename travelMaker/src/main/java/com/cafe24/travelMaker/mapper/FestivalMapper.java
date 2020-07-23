@@ -19,6 +19,9 @@ public interface FestivalMapper {
 	//축제 수정
 	public int updateFestival(Festival festival);
 	
+	//축제 상태 업데이트
+	public int updateFestivalState();
+
 	//축제 리스트 (현재 진행중)
 	public List<Festival> ingFestivalList();
 	

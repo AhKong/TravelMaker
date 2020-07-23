@@ -51,10 +51,11 @@ public class MemberService {
 		System.out.println(member +"<-----------");
 	
 		if(member !=null) {
-			String plainPw = jasypt.decrypt(member.getmPw()); 
+			String plainPw = jasypt.decrypt(member.getmPw());
 			member.setmPw(plainPw);
-			System.out.println(plainPw+"<---------복호화 된 비밀번호");	//복호화
 		}
+		
+		System.out.println(member +"<------복호화된 멤버 정보");
 		return member;
 	}
 
@@ -81,7 +82,18 @@ public class MemberService {
 	}
 
 	public Member getMemberInfo(String mId) {
-		return memberMapper.getMemberInfo(mId);
+		
+		Member result = memberMapper.getMemberInfo(mId);
+		if(result !=null) {
+
+			StandardPBEStringEncryptor jasypt = encryptor();
+			String plainEmail = jasypt.decrypt(result.getmEmail()); 
+			result.setmEmail(plainEmail);
+			String plainTel = jasypt.decrypt(result.getmTel()); 
+			result.setmTel(plainTel);
+	
+		}
+		return result;
 	}
 	
 	public Member followersPage(String mId) {
@@ -132,4 +144,15 @@ public class MemberService {
 		return memberMapper.addLoginLog(memberLogin);
 	}
 
+	//탈퇴회원 조회
+	public int getDeleteMemberList(Member member) {
+		System.out.println("하잉용 탈퇴회원 조회 서비스단 입니다~ ");
+		return memberMapper.getDeleteMemberList(member);
+	}
+	
+	//탈퇴처리
+	public int deleteMember(String mId) {
+		System.out.println("잠시만요 너무 서운해용 탈퇴하지 말아주세요 ㅠ deleteMember MemberService");
+		return memberMapper.deleteMember(mId);
+	}
 }

@@ -92,7 +92,7 @@
 			tb_sights  AS s 
 			INNER JOIN tb_si AS si 
 			INNER JOIN tb_sights_cate AS sc
-			ON s.si_num = si.si_num AND sc.sights_cate_num = s.sights_cate_num
+			ON s.si_num = si.si_num AND sc.sights_cate_num = s.sights_cate_num and s.sights_active ='Y'
 		WHERE 
 			si.si_name LIKE CONCAT('%',#{search},'%')
 	</select>
@@ -156,7 +156,7 @@
 			 AND si.si_num = s.si_num 
 			 AND s.sights_cate_num = sc.sights_cate_num
 	   WHERE 
-			si.si_name LIKE CONCAT('%',#{search},'%')
+			si.si_name LIKE CONCAT('%',#{search},'%') and s.sights_active ='Y'
 		ORDER BY
 			avgGrade DESC  
 		LIMIT

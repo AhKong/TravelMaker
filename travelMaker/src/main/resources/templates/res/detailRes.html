@@ -49,7 +49,10 @@
 					<p th:text="${res.resDetail}"></p>
 					<p th:utext="|<i class='far fa-clock'></i>  &nbsp; ${res.resStartTime} - ${res.resCloseTime}"></p>
 					<p th:uText="|<i class='fas fa-map-marker-alt'></i> &nbsp;  ${res.resAddr}|"></p>
-					<p>이 여행지는 여성이 선호하는 여행지입니다</p>
+					<th:block th:if="${genderPreference !=null}"> 
+						<p th:if ="${genderPreference != 'all'}"  th:utext="|<i class='fas fa-heart' style='color:#FF9E9B'></i><strong> ${genderPreference}성</strong>이 선호하는 여행지입니다|">이 여행지는 여성이 선호하는 여행지입니다</p>
+						<p th:unless ="${genderPreference != 'all'}"> <i class="fas fa-heart" style="color:#FF9E9B"> </i>&nbsp;모든 성별이 선호하는 음식점 입니다! </p>
+					</th:block>	
 					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
 					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${res.resWeb}|"></p>
 					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${res.resTel}|"></p>
@@ -75,16 +78,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<div id="carouselExampleIndicators" class="carousel slide"
-									data-ride="carousel">
-									<ol class="carousel-indicators">
-										<li data-target="#carouselExampleIndicators"
-											data-slide-to="0" class="active"></li>
-										<li data-target="#carouselExampleIndicators"
-											data-slide-to="1"></li>
-										<li data-target="#carouselExampleIndicators"
-											data-slide-to="2"></li>
-									</ol>
+								<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 									<div class="carousel-inner">
 										<div class="carousel-item active" style="">
 											<img class="d-block w-100" th:src="@{/fileupload/{file}(file=${res.resPhoto})}" alt="First slide">
@@ -118,13 +112,10 @@
 				<div class="nav nav-tabs" id="product-tab" role="tablist">
 					<a class="nav-item nav-link" id="sights-review-tab" data-toggle="tab" href="#sights-review" role="tab" aria-controls="sights-review" aria-selected="true">리뷰</a>
 					<a class="nav-item nav-link" id="sights-map-tab" data-toggle="tab" href="#sights-map" role="tab" aria-controls="sights-map" aria-selected="false">주변</a> 
-					<a class="nav-item nav-link active" id="festival-tab" data-toggle="tab" href="#festival" role="tab" aria-controls="festival" aria-selected="false">축제</a>
 				</div>
 			</nav>
 			<div class="tab-content p-3" id="nav-tabContent">
-				<div class="tab-pane fade" id="festival" role="tabpanel" aria-labelledby="festival-tab">			
-					축제 리스트 준비중..
-				</div>
+
 				<div class="tab-pane fade" id="sights-map" role="tabpanel" aria-labelledby="sights-map-tab">
 					<div th:replace="fragments/kakaoMap :: kakaoMapFragment"></div>
 				</div>
