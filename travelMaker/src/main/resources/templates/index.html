@@ -57,7 +57,9 @@
 	margin-bottom: 60px;
 	margin-top: 60px;
 }
-
+.desc{
+	margin-left:20px;
+}
 @media screen and (max-width: 576px) {
 	.serch-input-group{width: 90% !important; margin: auto !important;}
 	#indexing{
@@ -110,59 +112,24 @@
 				<div class="container-fluid">
 					<!-- Small boxes (Stat box) -->
 					<div class="row">
-						<div class="col-lg-4 col-7" id="top3Box">
-							<!-- small box -->
-							<div class="small-box1">
-								<div>
-									<img style="cursor: pointer;"
-										onclick="location.href='/sights/detailSights?sightsNum=sights_1'" id="img"
-										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
+						<th:block th:each ="it : ${indexTop3}">
+							<div class="col-lg-4 col-7" id="top3Box">
+							 <div class=" info-box bg-light ">
+								<img th:src="@{/fileupload/{file}(file=${it.sightsPhoto})}"alt="User Image" width="60%">
+								<div class="desc">
+									<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${it.sightsNum})}" class="sightsName" th:data-sightsNum="${it.sightsNum}" th:text="${it.sightsName}"></a><br>
+									<th:block  th:each="num: ${#numbers.sequence(1,it.avgGrade)}">
+		          			  			<i class="fas fa-star" style="color:green"></i>
+		          	 				</th:block>
+		          	 				<strong th:text="| (${it.avgGrade})|"></strong>
+		          	 				 <br>
+									 <span th:text="|${it.reviewCnt}건의 리뷰|"></span><br>
+									 <p th:text ="${it.sightsCate.sightsType}"></p>
 								</div>
 							</div>
-							<div id="small-text">
-								효자동
-								<button data-toggle="modal" data-target="#scrapModal" id="scrapModal" style="float: right;" class="btn btn-primary">
-									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
-									</button>
-							</div>
-							<div id="small-text">평점 리뷰 0000개 </div>
 						</div>
-						<!-- ./col -->
-						<div class="col-lg-4 col-7" id="top3Box">
-							<!-- small box -->
-							<div class="small-box1">
-								<div>
-									<img style="cursor: pointer;"
-										onclick="location.href='/sights/detailSights?sightsNum=sights_1'" id="img"
-										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
-								</div>
-							</div>
-							<div id="small-text">
-								평화동
-								<button id="scrapModal" style="float: right;" class="btn btn-primary ">
-									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
-									</button>
-							</div>
-							<div id="small-text">평점 리뷰 0000개</div>
-						</div>
-						<!-- ./col -->
-						<div class="col-lg-4 col-7" id="top3Box">
-							<!-- small box -->
-							<div class="small-box1">
-								<div>
-									<img style="cursor: pointer;"
-										onclick="location.href='/sights/detailSights?sightsNum=sights_1'" id="img"
-										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
-								</div>
-							</div>
-							<div id="small-text">
-								삼천동
-								<button id="scrapModal" style="float: right;" class="btn btn-primary">
-									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
-									</button>
-							</div>
-							<div id="small-text">평점 리뷰 0000개</div>
-						</div>
+						</th:block>		
+						
 					</div>
 				</div>
 				<!-- ./col -->
