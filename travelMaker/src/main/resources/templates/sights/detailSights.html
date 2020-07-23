@@ -193,7 +193,7 @@
            				<a class="delReview"  href="#"  th:sightsReviewNum = "${rl.sightsReviewNum}" th:sightsNum ="${sights.sightsNum}">삭제</a>
            			</span>
            			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
-           				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
+           				<a href="#" id="report" >신고</a>
            			</span>
                 </div>
                 <!-- /.card-tools -->
@@ -272,12 +272,30 @@
 	$('.inputComments').keydown(function(key){
 		addComments($(this),mId,'addSightsReivewComments',key);
 	})
+	$('#report').click(function(){
 	
+		commonAjax('/ajax/getReportTypeList',
+				{"none":"none"},
+				function(data){
+					var reportCodeList = $('#reportCodeList');
+					var result = data.result;
+					var html = '';
+					for(var i = 0; i<result.length; i++){
+						html += '<label>'
+						html += '<input type ="radio" name="reportcode" value="'+result[i].reportTypeNum+'">'+result[i].reportTypeName;
+						html += '</label><br>'
+					}
+					
+					reportCodeList.html(html);
+				},'Get'); 
+		
+		$('#reportSightsReview').modal();
+	})
 	showReveiwModal(mId,isWrited,$($("#addReview")));
-
+	
     reveiwChart(gradeArr);
 	
-	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
+    $('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 		if(mId == null || mId == ''){
 			goLogin();
 			return false;
@@ -303,7 +321,6 @@
 				function(data){
 						console.log(data);
 				},'Get');	
-
 	})
 	
 	var myFn = kakaoMap(lat,lng);
@@ -317,7 +334,6 @@
 				} else {
 			
 				}
-	
 			})
 		})
 	
@@ -343,10 +359,8 @@
 				} 	
 				$('#declareForm').submit();
 			})
-	})
-	
+	})	
 	$(document).on('click','.deleteComments',function(){
-	
 		deleteComments($(this),'deleteSightsReivewComment');
    })
 </script>

@@ -10,9 +10,9 @@
         <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-		<form id="reviewReportForm" action="/reportSightsReveiw" method ="post">
-			<input type="hidden" name="contentCode">
-			<input type="hidden" name="userId">
+		<form id="/report/sightsReview" action="/reportSightsReveiw" method ="post">
+			<input type="hidden" name="userId" th:value="${session.SID}">
+			<div id="reportCodeList">
 			<label>
 				<input type="radio"  name="declareCode" value="1"> 개인 정보 노출
 			</label>
@@ -33,6 +33,7 @@
 			<label>
 				<input type="radio" name="declareCode" value="5">기타
 			</label>
+		  </div>
 			<br>
 			<label>
 				<textarea name="declareDesc" style ="display:hidden" class="form-control"></textarea>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Message;
 import com.cafe24.travelMaker.domain.Notice;
+import com.cafe24.travelMaker.domain.ReportType;
 import com.cafe24.travelMaker.domain.ResReviewComments;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
@@ -28,6 +29,7 @@ import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.MsgService;
 import com.cafe24.travelMaker.service.NoticeService;
+import com.cafe24.travelMaker.service.ReportService;
 import com.cafe24.travelMaker.service.SightsService;
 
 /*ajax 컨트롤러*/
@@ -43,6 +45,7 @@ public class AjaxControllerKAR {
 	@Autowired private LikeService likeService;
 	@Autowired private CommentsService commentsService;
 	@Autowired private NoticeService noticeService;
+	@Autowired private ReportService reportService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -209,6 +212,19 @@ public class AjaxControllerKAR {
 		if(deleteResult>0) {
 			result.put("result", "success");
 		}
+		return result;
+	}
+	
+	@GetMapping("/getReportTypeList")
+	@ResponseBody 
+	public HashMap<String,List<ReportType>> getReportTypeList(@RequestParam(name="none") String commentsNum){
+		System.out.println(1);
+		HashMap<String,List<ReportType>> result = new HashMap<String,List<ReportType>>();
+		System.out.println(2);
+			System.out.println(reportService.getReportType());
+			System.out.println(3);
+			result.put("result",reportService.getReportType() );
+		
 		return result;
 	}
 }
