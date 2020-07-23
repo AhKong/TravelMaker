@@ -392,5 +392,40 @@
 		 	r.res_review_status ='Y'
 		group by m.m_gender HAVING m.m_gender IS NOT null
 	</select>
-                                                                         
+	
+	<update id="changeResReivewStatus" parameterType="String">
+		UPDATE
+			 tb_res_review
+		SET
+			res_review_status='B'
+		WHERE 
+			res_review_num = #{reviewNum}	
+	</update>
+     
+    <update id="changeSightsReivewStatus" parameterType="String" >
+		UPDATE
+			 tb_sights_review
+		SET
+			sights_review_status='B'
+		WHERE 
+			sights_review_num = #{reviewNum}	
+	</update>     
+	
+	<select id="findResReviewWriter" parameterType="String" resultType="String">
+		SELECT 
+			m_id 
+		FROM
+			tb_res_review
+		WHERE 
+			res_review_num =#{reviewNum}
+	</select>  
+	
+	<select id="findSightsReviewWriter" parameterType="String" resultType="String">
+		SELECT 
+			m_id 
+		FROM
+			tb_sights_review
+		WHERE 
+			sights_review_num =#{reviewNum}
+	</select>                                                              
 </mapper>

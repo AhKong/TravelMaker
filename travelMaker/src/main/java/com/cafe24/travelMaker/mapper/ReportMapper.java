@@ -15,4 +15,5 @@ public interface ReportMapper {
 	public int reportResReivew(ReviewReport reviewReport);
 	public int isReportedReview(String mId, String reviewNum);
 	public List<ReviewReport> reportList(String reviewType);
+	public int chagneReportPro(String reportNum);
 }

@@ -17,7 +17,7 @@
 <th:block layout:fragment="reportList">
 	<tr th:each ="rl :${reportList}">
 	  <th>
-	  	<a class ="showReview" href='#' th:text="${rl.reviewReportNum}" th:reviewNum = "${rl.reviewNum}" th:reviewType="${rl.reviewType}"></a>
+	  	<a class ="showReview" href='#' th:reportNum ="${rl.reviewReportNum}" th:text="${rl.reviewReportNum}" th:reviewNum = "${rl.reviewNum}" th:reviewType="${rl.reviewType}"></a>
 	  </th>
 	  <td th:text="${rl.mId}"></td>
 	  <td th:text="${rl.reviewNum}"></td>

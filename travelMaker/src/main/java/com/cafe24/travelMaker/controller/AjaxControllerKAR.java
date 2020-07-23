@@ -248,4 +248,21 @@ public class AjaxControllerKAR {
 		result.put("result", reviewService.getSightsReviewInfo(reviewNum));
 		return result;
 	}
+	
+	@GetMapping("/acceptReviewReport")
+	@ResponseBody 
+	public HashMap<String,String> acceptReviewReport(@RequestParam(name="reviewNum") String reviewNum,
+													@RequestParam(name="reviewType") String reviewType,
+													@RequestParam(name="reportNum") String reportNum ){
+		System.out.println(reportNum +"<,,,,dsfasdfs");
+		HashMap<String,String> result = new HashMap<String,String>();
+		if(reviewType.equals("Res")) {
+			reviewService.changeResReivewStatus(reviewNum);
+		} else {
+			reviewService.changeSightsReivewStatus(reviewNum);
+		}
+		reportService.chagneReportPro(reportNum,reviewType,reviewNum);
+		result.put("result", "신고처리 완료하였습니다!");
+		return result;
+	}
 }

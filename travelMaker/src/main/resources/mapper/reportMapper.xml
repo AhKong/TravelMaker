@@ -101,4 +101,13 @@
 		ON 
 			t.report_type_num = r.report_type_num AND review_type=#{reviewType};
 	</select>
+	
+	<update id="chagneReportPro" parameterType="String">
+		UPDATE 
+			tb_review_report
+		SET
+			review_report_reg_pro='Y'
+
+		WHERE review_report_num = #{reportNum}
+	</update>
 </mapper>

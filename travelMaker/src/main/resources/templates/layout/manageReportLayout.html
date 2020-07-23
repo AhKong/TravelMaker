@@ -123,13 +123,17 @@
 	  console.log($(this).html())
 	  var reviewNum = $(this).attr('reviewNum');
 	  var reviewType = $(this).attr('reviewType');
-	  console.log(reviewNum);
-	  console.log(reviewType);
+	  var reportNum =$(this).attr('reportNum');
+	  $('#reportOKBtn').attr('reviewNum',reviewNum );
+	  $('#reportOKBtn').attr('reportNum',reportNum );
+	  console.log(reportNum);
 	  var url = null;
 	  if(reviewType =='Res'){
 		  url ='getReportedResReview';
+		  $('#reportOKBtn').attr('reviewType','Res');
 	  }else {
 		  url ='getReportedSightsReview';
+		  $('#reportOKBtn').attr('reviewType','Sights');
 	  }
 	  commonAjax('/ajax/'+url,
 				{"reviewNum":reviewNum},
@@ -159,6 +163,19 @@
 					$('.modal-body').html(html);
 				},'Get'); 
 	  $('#showReportedReview').modal();
+  })
+  
+  $('#reportOKBtn').click(function(){
+		var reviewType = $(this).attr('reviewType');
+		var reviewNum =$(this).attr('reviewNum');
+		var reportNum =$(this).attr('reportNum');
+		console.log(reportNum);
+		commonAjax('/ajax/acceptReviewReport',
+				{"reviewNum":reviewNum,"reviewType":reviewType,"reportNum":reportNum},
+				function(data){
+					alert(data.result);
+					location.reload();
+				},'Get'); 
   })
   </script>
 </th:block>	

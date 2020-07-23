@@ -203,4 +203,19 @@ public class ReviewService {
 		
 		return gender;
 	}
+	
+	public int changeResReivewStatus(String reviewNum) {
+		return reviewMapper.changeResReivewStatus(reviewNum);
+	}
+	
+	public int changeSightsReivewStatus(String reviewNum) {
+		return reviewMapper.changeSightsReivewStatus(reviewNum);
+	}
+	
+	public String findSightsReviewWriter(String reviewNum) {
+		return reviewMapper.findSightsReviewWriter(reviewNum);
+	}
+	public String findResReviewWriter(String reviewNum) {
+		return reviewMapper.findResReviewWriter(reviewNum);
+	}
 }

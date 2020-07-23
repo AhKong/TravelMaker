@@ -49,6 +49,12 @@ public class NoticeService {
 		return noticeMapper.addNotice(this.notice);
 
 	}
+	public int addNoticeForReport(String reviewWriter) {
+		this.notice = new Notice();
+		this.notice.setmId(reviewWriter);
+		this.notice.setNoticeContents("회원님의 리뷰가 신고접수되어 삭제되었음을 알려드립니다.");
+		return noticeMapper.addNotice(this.notice);
+	}
 	
 	public List<Notice> noticeList(String targetId){
 		return noticeMapper.noticeList(targetId);
