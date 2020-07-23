@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/manageReportLayout}">
-<div th:replace="fragments/reportReview :: showReportedSightsReviewFragement"></div>
+<div th:replace="fragments/reportReview :: showReportedReview"></div>
  <th:block layout:fragment="reportTitle">
  	<h1>리뷰신고내역(음식점)</h1>
  </th:block>
@@ -15,24 +15,16 @@
 	<h3 class="card-title">리뷰신고내역(음식점)</h3>
 </th:block>
 <th:block layout:fragment="reportList">
-	<tr>
-	  <td>1</td>
-	  <td>
-	  	id001	
-	  </td>
-	  <td><a href="#" data-toggle="modal" data-target="#showReportedSightsReview">res_review_1</a></td>
-	  <td> 4</td>
-	  <td>X</td>
+	<tr th:each ="rl :${reportList}">
+	  <td th:text="${rl.reviewReportNum}"></td>
+	  <td th:text="${rl.mId}"></td>
+	  <td th:text="${rl.reviewNum}"></td>
+	  <td th:text="${rl.reportType.reportTypeName}"></td>
+	  <td th:text="${rl.reportPro}"></td>
+	  <td th:text="${rl.reviewRegDate}"></td>
+	  
 	</tr>
-	<tr>
-	  <td>1</td>
-	  <td>
-	  	id001	
-	  </td>
-	  <td>res_review_1</td>
-	  <td> 4</td>
-	  <td>X</td>
-	</tr>
+
 </th:block>
            
 </html>

@@ -27,4 +27,8 @@ public class ReportService {
 	public int reportResReivew(ReviewReport reviewReport) {
 		return reportMapper.reportResReivew(reviewReport);
 	}
+	
+	public List<ReviewReport> reportList(String reviewType){
+		return reportMapper.reportList(reviewType);
+	}
 }

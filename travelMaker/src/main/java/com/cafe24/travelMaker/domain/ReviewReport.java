@@ -7,6 +7,8 @@ public class ReviewReport {
 	private ReportType reportType;
 	private String reportContents;
 	private String reviewType;
+	private String reviewRegDate;
+	private String reportPro;
 	public String getReviewReportNum() {
 		return reviewReportNum;
 	}
@@ -43,11 +45,25 @@ public class ReviewReport {
 	public void setReviewType(String reviewType) {
 		this.reviewType = reviewType;
 	}
+	
+	public String getReviewRegDate() {
+		return reviewRegDate;
+	}
+	public void setReviewRegDate(String reviewRegDate) {
+		this.reviewRegDate = reviewRegDate;
+	}
+	public String getReportPro() {
+		return reportPro;
+	}
+	public void setReportPro(String reportPro) {
+		this.reportPro = reportPro;
+	}
 	@Override
 	public String toString() {
 		return "ReviewReport [reviewReportNum=" + reviewReportNum + ", mId=" + mId + ", reviewNum=" + reviewNum
 				+ ", reportType=" + reportType + ", reportContents=" + reportContents + ", reviewType=" + reviewType
-				+ "]";
+				+ ", reviewRegDate=" + reviewRegDate + ", reportPro=" + reportPro + "]";
 	}
-
+	
+	
 }

@@ -2,6 +2,7 @@ package com.cafe24.travelMaker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,14 @@ public class ReportController {
 	
 	@Autowired private ReportService reportService;
 	@GetMapping("/manageResReviewReport")
-	public String manageResReviewReport() {
+	public String manageResReviewReport(Model model) {
+		model.addAttribute("reportList",reportService.reportList("Res"));
 		return "/report/manageResReviewReport";
 	}
 	
 	@GetMapping("/manageSightsReviewReport")
-	public String manageSightsReviewReport() {
+	public String manageSightsReviewReport(Model model) {
+		model.addAttribute("reportList",reportService.reportList("Sights"));
 		return "/report/manageSightsReviewReport";
 	}
 	
