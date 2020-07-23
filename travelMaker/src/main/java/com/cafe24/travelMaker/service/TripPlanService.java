@@ -22,4 +22,13 @@ public class TripPlanService {
 	public List<TripPlan> selectTripPlan(String mId, String tNum) {
 		return tripPlanMapper.selectTripPlan(mId, tNum);
 	}
+	public List<TripPlan> sTripPlan(){
+		return tripPlanMapper.sTripPlan();
+	}
+	public int deleteTripPlan(String mId, String tNum) {
+		return tripPlanMapper.deleteTripPlan(mId, tNum);
+	}
+	public String sTripMid(String tNum) {
+		return tripPlanMapper.sTripMid(tNum);
+	}
 }

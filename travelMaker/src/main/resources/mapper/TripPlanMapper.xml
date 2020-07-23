@@ -51,4 +51,29 @@ select
 	trip_num = #{tNum};
 </select>
 
+<select id="sTripPlan" resultMap="tripPlanSelect">
+SELECT
+*
+FROM
+tb_trip_plan;
+</select>
+
+<delete id="deleteTripPlan" parameterType="String">
+DELETE
+FROM
+tb_trip
+WHERE
+trip_Num = #{tNum};
+</delete>
+
+<select id="sTripMid" parameterType="String" resultType="String">
+SELECT
+m_id
+FROM
+tb_trip
+where
+trip_Num = #{tNum};
+</select>
+
+
 </mapper>

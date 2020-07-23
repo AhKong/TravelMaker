@@ -1,7 +1,10 @@
 package com.cafe24.travelMaker.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,18 +69,42 @@ public class TripPlanController {
 	@GetMapping("/editTrip")
 	public String sightsEdit(Model model,HttpSession session,
 									@RequestParam(name="tNum", required = false) String tNum,
-									@RequestParam(name="tName", required=false) String tName) {
+									@RequestParam(name="tName", required = false) String tName) {
 		String loginId = (String)session.getAttribute("SID");
 		String myTripNum = tripPlanService.myTripNum(tNum);
 		System.out.println(myTripNum+" GETeditTrip- myTripNum");
 		model.addAttribute("tripName", tName);
 		
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
-		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");
-
-		model.addAttribute("sTripPlan", selectTripPlan);		
+		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");		
+		model.addAttribute("selectTripPlan", selectTripPlan);	
 		
+		
+		List<TripPlan> sTripPlan = tripPlanService.sTripPlan();
+		model.addAttribute("sTripPlan", sTripPlan);
 		return "/tripPlan/editTrip";
+	}
+	
+	@GetMapping("/deleteTripPlan")
+	public String deleteTripPlan(HttpSession session,MyTrip myTrip, HttpServletResponse response,
+									@RequestParam(name="tNum", required = false) String tNum,
+									@RequestParam(name="mId", required = false) String mId) throws IOException {
+		String loginId = (String) session.getAttribute("SID");
+		String insertId = tripPlanService.sTripMid(mId);
+		System.out.println(insertId+"<<<<<<<<< select mIdd");
+		
+		if(loginId == insertId) { 
+			int dTripPlan = tripPlanService.deleteTripPlan(loginId, tNum);
+			System.out.println(dTripPlan+"<<<<<<<<<<<<<<<<<<<<<<<< 삭제성공ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+		}else {
+			
+			  response.setContentType("text/html; charset=UTF-8"); PrintWriter out =  response.getWriter();
+			  out.println("<script>alert('여행계획 삭제는 생성한 사람만 가능합니다.');</script>");
+			  out.flush();
+		}
+		
+
+		return "/myTrip/tripList";
 	}
 	
 }

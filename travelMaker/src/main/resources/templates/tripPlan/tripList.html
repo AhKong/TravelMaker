@@ -90,8 +90,8 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Trip</a></li>
-						<li class="breadcrumb-item active">tripList</li>
+						<li class="breadcrumb-item"><a href="#">tripPlan</a></li>
+						<li class="breadcrumb-item active">tripList.html</li>
 					</ol>
 				</div>
 			</div>
@@ -131,7 +131,7 @@
 					</div>
 					<th:block th:each="tl, i : ${myTripList}">
 							<div class="col-md-3">
-								<div style="cursor: pointer;" th:onclick="'location.href = \'' + @{/myTrip/editTrip(tNum=${tl.tNum},tName=${tl.tName})} + '\''">
+								<div style="cursor: pointer;" th:onclick="'location.href = \'' + @{/myTrip/editTrip(tNum=${tl.tNum},tName=${tl.tName},mId=${tl.mId})} + '\''">
 									<div class="small-box">
 										<div>
 											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
@@ -383,29 +383,7 @@
 			});
 // 모달창 인풋박스 데이터값 체크박스 값 여행수정페이지 
 
-						 $(function () {
-							    $('#example2').DataTable({
-							      "paging": true,
-							      "lengthChange": false,
-							      "searching": false,
-							      "ordering": true,
-							      "info": true,
-							      "autoWidth": false,
-							      "responsive": true,
-							    });
-							    
-							    $('.modalDelBtn').click(function(){
-							    	var goodsBuyCode = $(this).attr('data-goodsBuyCode')
-							    	var goodsBuyAmount = $(this).attr('data-goodsBuyAmount')
-							    	var goodsCode = $(this).attr('data-goodsCode')
-							    	var goodsPayPrice = $(this).attr('data-goodsPayPrice')
-							    	console.log(goodsBuyCode);
-							    	console.log(goodsBuyAmount);
-							    	console.log(goodsCode);
-							    	console.log(goodsPayPrice);
-							    	$('.deleteBtn').attr('href','/goods/GoodsBuyDelete?goodsBuyCode='+goodsBuyCode+'&goodsBuyAmount='+goodsBuyAmount+'&goodsCode='+goodsCode+'&goodsPayPrice='+goodsPayPrice)
-							    });
-							  });
+						
 	</script>
 </th:block>
 </html>

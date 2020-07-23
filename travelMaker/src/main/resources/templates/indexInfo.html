@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="@{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>index 화면 입니다 :)</title>
+<style>
+.button{
+	float: right;
+}
+.info{
+	padding-left: 10px;
+}
+
+
+
+</style>
+</th:block>
+<th:block layout:fragment="customContents">
+
+	<div class="content-wrapper">
+		<input type="hidden" id="mId" th:value="${session.SID}"/>
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Index Info</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">index</a></li>
+						<li class="breadcrumb-item active">info.html</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+			<div class="col-12">
+				<h4 class="info"><strong>팀장 김아름</strong></h4>
+				<div class=" info-box bg-light info">
+					상세설명?
+				</div>
+			</div>
+			<div class="col-12">
+				<h4 class="info"><strong>팀원 이승연</strong></h4>
+				<div class=" info-box bg-light info">
+					상세설명?
+				</div>
+			</div><div class="col-12">
+				<h4 class="info"><strong>팀원 강민수</strong></h4>
+				<div class=" info-box bg-light info">
+					상세설명?
+				</div>
+			</div><div class="col-12">
+				<h4 class="info"><strong>팀원 이승환</strong></h4>
+				<div class=" info-box bg-light info">
+<pre>아이디 찾기 - 회원가입시 입력한 이름, 전화번호, 이메일 인증을 통해 아이디 찾기
+비밀번호 찾기  - 회원가입시 입력한 아이디, 전화번호, 이메일 인증을 통해 비밀번호 찾기
+스크랩 - 관광지, 음식점 스크랩
+내 여행 리스트 - 전체 여행, 공개여행, 비공개 여행, 스크랩 관광명소, 공개/비공개 여행 만들기
+내여행 계획 - 여행 상세 계획,친구초대</pre>
+				</div>
+			</div>
+			<div>
+				<a type="button" href="/main" class="btn btn-primary button">main</a>
+			</div>
+	</div>
+
+
+	<!-- /.content-wrapper -->
+<th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
+</th:block>
+<th:block layout:fragment="customFooterScript">
+ <script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
+	<script th:inline="javascript">
+		/*
+			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
+			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		 */
+		/*<![CDATA[*/
+		var mId = /*[[${session.SID}]]*/
+		/*]]>*/
+			console.log(mId)
+			scrap(mId);
+		
+	</script>
+</th:block>
+</html>

@@ -10,32 +10,12 @@
         <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-		<form id="reviewReportForm" action="/reportSightsReveiw" method ="post">
-			<input type="hidden" name="contentCode">
-			<input type="hidden" name="userId">
+		<form id="sightsReviewReport" action="/report/sightsReveiw" method ="post">
+			<input type="hidden" name="mId" th:value="${session.SID}">
+			<input id="reviewNum" type="hidden" name="reviewNum" value="1">
+			<div id="reportCodeList"></div>	
 			<label>
-				<input type="radio"  name="declareCode" value="1"> 개인 정보 노출
-			</label>
-			<br>
-			
-			<label>
-				<input type="radio" name="declareCode" value="2"> 내 창작물에 대한 저작권 침해
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="3"> 비방/비하, 명예훼손, 사생활침해	
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="4">음란/청소년에게 부적합한 내용, 악성코드
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="5">기타
-			</label>
-			<br>
-			<label>
-				<textarea name="declareDesc" style ="display:hidden" class="form-control"></textarea>
+				<textarea name="reportContents" style="display:hidden;width:300px" class="form-control"></textarea>
 			</label>
 			<br>
 		</form>
@@ -58,32 +38,12 @@
         <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-		<form id="reviewReportForm" action="/reportSightsReveiw" method ="post">
-			<input type="hidden" name="contentCode">
-			<input type="hidden" name="userId">
+		<form id="reviewReportForm" action="/report/resReveiw" method ="post">
+			<input type="hidden" name="mId" th:value="${session.SID}">
+			<input id="reviewNum" type="hidden" name="reviewNum" value="1">
+			<div id="reportCodeList"></div>	
 			<label>
-				<input type="radio"  name="declareCode" value="1"> 개인 정보 노출
-			</label>
-			<br>
-			
-			<label>
-				<input type="radio" name="declareCode" value="2"> 내 창작물에 대한 저작권 침해
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="3"> 비방/비하, 명예훼손, 사생활침해	
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="4">음란/청소년에게 부적합한 내용, 악성코드
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="5">기타
-			</label>
-			<br>
-			<label>
-				<textarea name="declareDesc" style ="display:hidden" class="form-control"></textarea>
+				<textarea name="reportContents" style="display:hidden;width:300px" class="form-control"></textarea>
 			</label>
 			<br>
 		</form>
@@ -96,54 +56,27 @@
       </div>
     </div>
   </div>
-<div class="modal fade" id="reportSightsReview" th:fragment="reportReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+  <div class="modal fade" id="showReportedReview" th:fragment="reportedReviewFragment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-      	<h3>관광지 리뷰 신고하기</h3>
+      	<h3>신고된 리뷰보기</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-		<form id="reviewReportForm" action="/reportSightsReveiw" method ="post">
-			<input type="hidden" name="contentCode">
-			<input type="hidden" name="userId">
-			<label>
-				<input type="radio"  name="declareCode" value="1"> 개인 정보 노출
-			</label>
-			<br>
-			
-			<label>
-				<input type="radio" name="declareCode" value="2"> 내 창작물에 대한 저작권 침해
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="3"> 비방/비하, 명예훼손, 사생활침해	
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="4">음란/청소년에게 부적합한 내용, 악성코드
-			</label>
-			<br>
-			<label>
-				<input type="radio" name="declareCode" value="5">기타
-			</label>
-			<br>
-			<label>
-				<textarea name="declareDesc" style ="display:hidden" class="form-control"></textarea>
-			</label>
-			<br>
-		</form>
+		 <div class="card-body">
+		  
+		  </div>
                
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" id="reportBtn">신고하기</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">무시</button>
+        <button type="button" class="btn btn-primary" id="reportOKBtn">처리</button>
       </div>
       </div>
     </div>
   </div>
-
-
 
 </html>

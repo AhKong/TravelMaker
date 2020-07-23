@@ -39,4 +39,8 @@ public interface ReviewMapper {
 	public String getSightsReviewCnt(String sightsNum);
 	public List<String> getSightsReviewPhotos(String sightsNum);
 	public List<Preference> getSightsGenderPreference(String sightsNum);
+	public int changeSightsReivewStatus(String reviewNum);
+	public int changeResReivewStatus(String reviewNum);
+	public String findSightsReviewWriter(String reviewNum);
+	public String findResReviewWriter(String reviewNum);
 }

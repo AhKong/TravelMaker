@@ -29,8 +29,6 @@ ON
 	sr.m_id = m.m_id
 WHERE
 	m.m_gender = '여';
-
-
 </select>
 
 <select id="review" resultType="String">
@@ -38,7 +36,6 @@ SELECT
 	COUNT(sights_num)
 FROM
 	tb_sights_review;
-
 </select>
 
 <select id="like" resultType="int">
@@ -46,9 +43,6 @@ SELECT
 	COUNT(sights_review_like_num)
 FROM
 	tb_sights_review_like;
-
-
-
 </select>
 
 <select id="comment" resultType="int">
@@ -56,7 +50,6 @@ SELECT
 	COUNT(sights_comment_num)
 FROM
 	tb_sights_comment;
-
 </select>
 
 <select id="grade" resultType="int">
@@ -78,7 +71,6 @@ ON
 	rReview.m_id = m.m_id
 WHERE
 	m.m_gender = '남';
-
 </select>
 
 <select id="resGenderG" resultType="int">
