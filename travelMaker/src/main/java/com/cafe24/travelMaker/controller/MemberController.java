@@ -130,22 +130,25 @@ public class MemberController{
 
 	//탈퇴회원 조회 - 관리자 페이지
 	@GetMapping("/getDeleteMemberList")
-	public String getDeleteMemberList(Member member) {
-		System.out.println("getDeleteMemberList 김로운 아프지 마세요 무조건 건강해");
+	public String getDeleteMemberList(Model model) {
+		System.out.println("getDeleteMemberList MemberController 도착");
+		List<Member> getDeleteMemberList = memberService.getDeleteMemberList();
+		System.out.println(getDeleteMemberList+" <- getDeleteMemberList");
+		model.addAttribute("getDeleteMemberList", getDeleteMemberList);
 		
-		return "member/deleteMember";
+		return "member/getDeleteMemberList";
 	}
 	
 	//탈퇴
 	@GetMapping("/deleteMember")
 	public String deleteMember(HttpSession session, Model model) {
-		System.out.println("deleteMember 김로운 아프지 마세요 무조건 건강해");
+		System.out.println("deleteMember MemberController 도착");
 		String mId = (String) session.getAttribute("SID");
 		int result = memberService.deleteMember(mId);
 		System.out.println(result+" <- 1이면 탈퇴완료 ㅠㅠ 탈퇴하지 마세요");
 		session.invalidate();	//세션종료. 로그아웃되면서 인덱스로 이동!
 		
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 	//탈퇴 회유 시 최초1회 포인트 지급
@@ -157,7 +160,11 @@ public class MemberController{
 	
 	//휴면회원 관리
 	@GetMapping("/dormantMember")
-	public String dormantMember() {
+	public String dormantMember(Model model) {
+		System.out.println("dormantMember MemberController 도착");
+		List<Member> selectDormantMember = memberService.selectDormantMember();	/////수정해야함
+		List<Member> getDormantMemberList = memberService.getDormantMemberList();
+		model.addAttribute("getDormantMemberList", getDormantMemberList);
 		
 		return "member/dormantMember";
 	}
