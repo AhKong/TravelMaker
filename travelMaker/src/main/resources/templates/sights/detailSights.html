@@ -276,21 +276,26 @@
 		var reviewNum = $(this).attr('reviewNum');
 		console.log(reviewNum);
 		$('#reviewNum').val(reviewNum)
-		commonAjax('/ajax/getReportTypeList',
-				{"none":"none"},
+		commonAjax('/ajax/getReadyForReport',
+				{"mId":mId,"reviewNum":reviewNum},
 				function(data){
-					var reportCodeList = $('#reportCodeList');
-					var result = data.result;
-					var html = '';
-					for(var i = 0; i<result.length; i++){
-						html += '<label>'
-						html += '<input type ="radio" class="reportCode" name="reportType.reportTypeNum" value="'+result[i].reportTypeNum+'">'+result[i].reportTypeName;
-						html += '</label><br>'
+					if(data.result == null){
+						alert('이미 신고한 리뷰입니다');
+					} else {
+						var reportCodeList = $('#reportCodeList');
+						var result = data.result;
+						var html = '';
+						for(var i = 0; i<result.length; i++){
+							html += '<label>'
+							html += '<input type ="radio" class="reportCode" name="reportType.reportTypeNum" value="'+result[i].reportTypeNum+'">'+result[i].reportTypeName;
+							html += '</label><br>'
+						}
+						reportCodeList.html(html);
+						$('#reportSightsReview').modal();
 					}
-					reportCodeList.html(html);
 				},'Get'); 
 		
-		$('#reportSightsReview').modal();
+
 	})
 	showReveiwModal(mId,isWrited,$($("#addReview")));
 	
@@ -366,7 +371,7 @@
 				} 	
 				
 				$('#sightsReviewReport').submit();
-			
+				alert('신고가 접수되었습니다. 감사합니다!')
 				 
 			})
 	})	

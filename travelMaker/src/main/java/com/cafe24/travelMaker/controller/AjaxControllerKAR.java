@@ -215,16 +215,17 @@ public class AjaxControllerKAR {
 		return result;
 	}
 	
-	@GetMapping("/getReportTypeList")
+	@GetMapping("/getReadyForReport")
 	@ResponseBody 
-	public HashMap<String,List<ReportType>> getReportTypeList(@RequestParam(name="none") String commentsNum){
-		System.out.println(1);
+	public HashMap<String,List<ReportType>> getReadyForReport(@RequestParam(name="mId") String mId, 
+															  @RequestParam(name="reviewNum") String reviewNum){
 		HashMap<String,List<ReportType>> result = new HashMap<String,List<ReportType>>();
-		System.out.println(2);
-			System.out.println(reportService.getReportType());
-			System.out.println(3);
+		int isReported = reportService.isReportedReview(mId, reviewNum);
+		if(isReported >0) {
+			result.put("result",null);
+		} else {
 			result.put("result",reportService.getReportType() );
-		
+		}
 		return result;
 	}
 }

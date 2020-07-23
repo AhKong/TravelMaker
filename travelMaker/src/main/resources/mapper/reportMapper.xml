@@ -38,4 +38,12 @@
 				)
 			
 	</insert>
+	
+	<select id ="isReportedReview" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			 tb_review_report
+		WHERE m_id =#{mId} AND (res_review_num =#{reviewNum} OR sights_review_num =#{reviewNum})	
+	</select>
 </mapper>

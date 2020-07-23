@@ -12,4 +12,5 @@ import com.cafe24.travelMaker.domain.ReviewReport;
 public interface ReportMapper {
 	public List<ReportType> getReportType();
 	public int reportSightsReivew(ReviewReport reviewReport);
+	public int isReportedReview(String mId, String reviewNum);
 }
