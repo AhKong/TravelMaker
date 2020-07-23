@@ -33,4 +33,11 @@ public class ReportController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/resReveiw")
+	public String addResReviewReport(ReviewReport reviewReport) {
+		reviewReport.setReviewType("Res");
+		reportService.reportResReivew(reviewReport);
+		return "redirect:/";
+	}
+	
 }

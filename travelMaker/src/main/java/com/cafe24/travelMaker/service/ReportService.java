@@ -23,4 +23,8 @@ public class ReportService {
 	public int isReportedReview(String mId, String reviewNum) {
 		return reportMapper.isReportedReview(mId, reviewNum);
 	}
+	
+	public int reportResReivew(ReviewReport reviewReport) {
+		return reportMapper.reportResReivew(reviewReport);
+	}
 }
