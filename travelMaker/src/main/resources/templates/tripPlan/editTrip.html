@@ -328,10 +328,11 @@
 							</div>
 							<div>
 								<h4>
-									생성자ID : <a th:text="${sTripPlan[0].mId}"></a>
+									<!-- 작성자 아이디 다른곳에서 받아오세요 -->
 								</h4>
 							</div>
-					<th:block th:if="${sTripPlan[0].pNum == ''}"> 
+						
+					<th:block th:if="${#lists.isEmpty(sTripPlan)}"> 
 							<div data-toggle="modal" data-target="#myModalExpenses">
 								여행경비 : 원
 							</div>
@@ -342,8 +343,8 @@
 								여행 상세 : 
 							</div>
 					</th:block>
-					
-					<th:block th:unless="${sTripPlan[0].pNum == ''}">
+				
+					<th:block th:unless="${#lists.isEmpty(sTripPlan)}">
 						<div data-toggle="modal" data-target="#myModalExpenses">
 							여행경비 : <a th:text="${sTripPlan[0].pCost}"></a>원
 						</div>
