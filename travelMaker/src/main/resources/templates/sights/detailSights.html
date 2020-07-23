@@ -193,7 +193,7 @@
            				<a class="delReview"  href="#"  th:sightsReviewNum = "${rl.sightsReviewNum}" th:sightsNum ="${sights.sightsNum}">삭제</a>
            			</span>
            			<span class="float-right" style="font-size: 15px !important; margin-top: -15px;" th:unless="${rl.member.mId eq session.SID}">
-           				<a href="#" data-toggle="modal"  data-target="#reportResReview">신고</a>
+           				<a href="#" class="report" th:reviewNum ="${rl.sightsReviewNum}">신고</a>
            			</span>
                 </div>
                 <!-- /.card-tools -->
@@ -272,12 +272,37 @@
 	$('.inputComments').keydown(function(key){
 		addComments($(this),mId,'addSightsReivewComments',key);
 	})
-	
-	showReveiwModal(mId,isWrited,$($("#addReview")));
+	$('.report').click(function(){
+		
+		var reviewNum = $(this).attr('reviewNum');
+		console.log(reviewNum);
+		$('#reviewNum').val(reviewNum)
+		commonAjax('/ajax/getReadyForReport',
+				{"mId":mId,"reviewNum":reviewNum},
+				function(data){
+					if(data.result == null){
+						alert('이미 신고한 리뷰입니다');
+					} else {
+						var reportCodeList = $('#reportCodeList');
+						var result = data.result;
+						var html = '';
+						for(var i = 0; i<result.length; i++){
+							html += '<label>'
+							html += '<input type ="radio" class="reportCode" name="reportType.reportTypeNum" value="'+result[i].reportTypeNum+'">'+result[i].reportTypeName;
+							html += '</label><br>'
+						}
+						reportCodeList.html(html);
+						$('#reportSightsReview').modal();
+					}
+				},'Get'); 
+		
 
+	})
+	showReveiwModal(mId,isWrited,$($("#addReview")));
+	
     reveiwChart(gradeArr);
 	
-	$('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
+    $('.likeBtn').click(function(){ // 좋아요 버튼을 눌렀을때 
 		if(mId == null || mId == ''){
 			goLogin();
 			return false;
@@ -303,7 +328,6 @@
 				function(data){
 						console.log(data);
 				},'Get');	
-
 	})
 	
 	var myFn = kakaoMap(lat,lng);
@@ -317,7 +341,6 @@
 				} else {
 			
 				}
-	
 			})
 		})
 	
@@ -333,20 +356,27 @@
 			})
 			
 			$('#reportBtn').click(function(){
-				var selected = $('input[name=declareCode]:checked').val()
+				 var queryString = $("#sightsReviewReport").serialize();
+				 console.log(queryString);
+
+				var selected = $('.reportCode:checked').val()
 				console.log(selected);
-				var declareDesc =$('textarea[name=declareDesc]'); 
-				if(selected == "5" && declareDesc.val()==''){
+				if(selected ==undefined){
+					alert('신고 사유를 선택해주세요!');
+				}
+				var reportContents =$('textarea[name=reportContents]'); 
+				if(selected == 'report_type_6' && reportContents.val()==''){
 					alert('신고 사유를 작성해주세요.');
-					declareDesc.focus();
+					reportContents.focus();
 					return;
 				} 	
-				$('#declareForm').submit();
+				
+				$('#sightsReviewReport').submit();
+				alert('신고가 접수되었습니다. 감사합니다!')
+				 
 			})
-	})
-	
+	})	
 	$(document).on('click','.deleteComments',function(){
-	
 		deleteComments($(this),'deleteSightsReivewComment');
    })
 </script>

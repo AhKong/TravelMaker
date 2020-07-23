@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Message;
 import com.cafe24.travelMaker.domain.Notice;
+import com.cafe24.travelMaker.domain.ReportType;
+import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.ResReviewComments;
 import com.cafe24.travelMaker.domain.ReviewLike;
 import com.cafe24.travelMaker.domain.Si;
+import com.cafe24.travelMaker.domain.SightsReview;
 import com.cafe24.travelMaker.domain.SightsReviewComments;
 import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.CommentsService;
@@ -28,6 +31,8 @@ import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.MsgService;
 import com.cafe24.travelMaker.service.NoticeService;
+import com.cafe24.travelMaker.service.ReportService;
+import com.cafe24.travelMaker.service.ReviewService;
 import com.cafe24.travelMaker.service.SightsService;
 
 /*ajax 컨트롤러*/
@@ -43,6 +48,8 @@ public class AjaxControllerKAR {
 	@Autowired private LikeService likeService;
 	@Autowired private CommentsService commentsService;
 	@Autowired private NoticeService noticeService;
+	@Autowired private ReportService reportService;
+	@Autowired private ReviewService reviewService;
 	
 	@GetMapping("/certEmail")
 	@ResponseBody
@@ -209,6 +216,53 @@ public class AjaxControllerKAR {
 		if(deleteResult>0) {
 			result.put("result", "success");
 		}
+		return result;
+	}
+	
+	@GetMapping("/getReadyForReport")
+	@ResponseBody 
+	public HashMap<String,List<ReportType>> getReadyForReport(@RequestParam(name="mId") String mId, 
+															  @RequestParam(name="reviewNum") String reviewNum){
+		HashMap<String,List<ReportType>> result = new HashMap<String,List<ReportType>>();
+		int isReported = reportService.isReportedReview(mId, reviewNum);
+		if(isReported >0) {
+			result.put("result",null);
+		} else {
+			result.put("result",reportService.getReportType() );
+		}
+		return result;
+	}
+	
+	@GetMapping("/getReportedResReview")
+	@ResponseBody 
+	public HashMap<String,ResReview> getReportedResReview(@RequestParam(name="reviewNum") String reviewNum) {
+		HashMap<String,ResReview> result = new HashMap<String,ResReview>();
+		result.put("result", reviewService.getResReviewInfo(reviewNum));		
+		return result;
+	}
+	
+	@GetMapping("/getReportedSightsReview")
+	@ResponseBody 
+	public HashMap<String,SightsReview> getReportedSightsReview(@RequestParam(name="reviewNum") String reviewNum){
+		HashMap<String,SightsReview> result = new HashMap<String,SightsReview>();
+		result.put("result", reviewService.getSightsReviewInfo(reviewNum));
+		return result;
+	}
+	
+	@GetMapping("/acceptReviewReport")
+	@ResponseBody 
+	public HashMap<String,String> acceptReviewReport(@RequestParam(name="reviewNum") String reviewNum,
+													@RequestParam(name="reviewType") String reviewType,
+													@RequestParam(name="reportNum") String reportNum ){
+		System.out.println(reportNum +"<,,,,dsfasdfs");
+		HashMap<String,String> result = new HashMap<String,String>();
+		if(reviewType.equals("Res")) {
+			reviewService.changeResReivewStatus(reviewNum);
+		} else {
+			reviewService.changeSightsReivewStatus(reviewNum);
+		}
+		reportService.chagneReportPro(reportNum,reviewType,reviewNum);
+		result.put("result", "신고처리 완료하였습니다!");
 		return result;
 	}
 }

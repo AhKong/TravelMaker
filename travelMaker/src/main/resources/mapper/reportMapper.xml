@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.ReportMapper">
+
+	<resultMap type="ReviewReport" id="reportResultMap">
+ 		<result property="reviewReportNum" column="review_report_num" />
+ 		<result property="mId" column="m_id" />
+		<result property="reviewNum" column="sights_review_num" />
+		<result property="reviewNum" column="res_review_num" />
+		<result property="reportContents" column="review_report_contents" />
+		<result property="reviewRegDate" column="review_report_reg_date" />
+		<result property="reportPro" column="review_report_reg_pro" />
+		<result property="reviewType" column="review_type" />
+ 		<association property="reportType" javaType ="ReportType">
+ 			<result property="reportTypeNum" column="report_type_num" />
+ 			<result property="reportTypeName" column="report_type_name" />
+ 		</association>
+ 	</resultMap>
+<select id="getReportType" resultType="ReportType">
+	SELECT
+		report_type_num as reportTypeNum, 
+		report_type_name as reportTypeName
+	FROM tb_report_tpye
+</select>
+
+<insert id="reportSightsReivew" parameterType="ReviewReport">
+		<selectKey order ="BEFORE" keyProperty="reviewReportNum" resultType ="String"> 
+		 	SELECT 
+				case COUNT(*)
+				when 0 then 'review_report_1'
+				ELSE CONCAT('review_report_',MAX(CAST(SUBSTRING(review_report_num,15) AS DECIMAL))+1) 
+				END AS review_report_num
+			FROM
+				tb_review_report
+			</selectKey>
+			INSERT INTO 
+				tb_review_report(
+					review_report_num,
+					m_id, 
+					sights_review_num,
+					report_type_num,
+					review_report_contents, 
+					review_type
+				)VALUES (
+					#{reviewReportNum},
+					#{mId},
+					#{reviewNum},
+					#{reportType.reportTypeNum},
+					#{reportContents},
+					#{reviewType}
+				)
+			
+	</insert>
+	
+	<insert id="reportResReivew" parameterType="ReviewReport">
+		<selectKey order ="BEFORE" keyProperty="reviewReportNum" resultType ="String"> 
+		 	SELECT 
+				case COUNT(*)
+				when 0 then 'review_report_1'
+				ELSE CONCAT('review_report_',MAX(CAST(SUBSTRING(review_report_num,15) AS DECIMAL))+1) 
+				END AS review_report_num
+			FROM
+				tb_review_report
+			</selectKey>
+			INSERT INTO 
+				tb_review_report(
+					review_report_num,
+					m_id, 
+					res_review_num,
+					report_type_num,
+					review_report_contents, 
+					review_type
+				)VALUES (
+					#{reviewReportNum},
+					#{mId},
+					#{reviewNum},
+					#{reportType.reportTypeNum},
+					#{reportContents},
+					#{reviewType}
+				)
+			
+	</insert>
+	
+	<select id ="isReportedReview" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			 tb_review_report
+		WHERE m_id =#{mId} AND (res_review_num =#{reviewNum} OR sights_review_num =#{reviewNum})	
+	</select>
+	
+	<select id="reportList"  parameterType="String" resultMap="reportResultMap">
+		SELECT
+			 *
+		FROM 
+			tb_review_report AS r 
+		INNER JOIN 
+			tb_report_type AS t 
+		ON 
+			t.report_type_num = r.report_type_num AND review_type=#{reviewType};
+	</select>
+	
+	<update id="chagneReportPro" parameterType="String">
+		UPDATE 
+			tb_review_report
+		SET
+			review_report_reg_pro='Y'
+
+		WHERE review_report_num = #{reportNum}
+	</update>
+</mapper>

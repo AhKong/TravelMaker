@@ -55,9 +55,12 @@
 	
 	<select id="getResReviewInfo" resultMap ="resReviewResultMap">
 		select 
-			*
+			r.*,t.trip_type_name
 		from
-			tb_res_review
+			tb_res_review AS r 
+		inner join 
+			tb_trip_type AS t 
+		ON r.res_travel_type = t.trip_type_num
 		where 
 			res_review_num = #{resReviewNum}
 	</select>
@@ -65,11 +68,15 @@
 	
 	<select id="getSightsReviewInfo" resultMap ="sightsReviewResultMap">
 		select 
-			*
+			s.*,t.trip_type_name
 		from
-			tb_sights_review
+			tb_sights_review AS s 
+		inner join 
+			tb_trip_type AS t 
+		ON 
+		s.sights_travel_type = t.trip_type_num
 		where 
-			sights_review_num = #{sightsResNum}
+			s.sights_review_num = #{sightsResNum}
 	</select>
 	
      <select id="selectTripTypeList" resultType="TripType">
@@ -385,5 +392,40 @@
 		 	r.res_review_status ='Y'
 		group by m.m_gender HAVING m.m_gender IS NOT null
 	</select>
-                                                                         
+	
+	<update id="changeResReivewStatus" parameterType="String">
+		UPDATE
+			 tb_res_review
+		SET
+			res_review_status='B'
+		WHERE 
+			res_review_num = #{reviewNum}	
+	</update>
+     
+    <update id="changeSightsReivewStatus" parameterType="String" >
+		UPDATE
+			 tb_sights_review
+		SET
+			sights_review_status='B'
+		WHERE 
+			sights_review_num = #{reviewNum}	
+	</update>     
+	
+	<select id="findResReviewWriter" parameterType="String" resultType="String">
+		SELECT 
+			m_id 
+		FROM
+			tb_res_review
+		WHERE 
+			res_review_num =#{reviewNum}
+	</select>  
+	
+	<select id="findSightsReviewWriter" parameterType="String" resultType="String">
+		SELECT 
+			m_id 
+		FROM
+			tb_sights_review
+		WHERE 
+			sights_review_num =#{reviewNum}
+	</select>                                                              
 </mapper>
