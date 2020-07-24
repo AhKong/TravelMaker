@@ -54,10 +54,9 @@
               <form th:action="@{/feedback/addFeedback}" method="post">
                 <input type="hidden" class="form-control" name="fbSightsNum" th:value="${fbSightsNum}">
 				<input type="hidden" class="form-control" name="member.mId" th:value="${session.SID}">
-                <input type="hidden" class="form-control" name="sights.sightsNum" th:value="${sightsNum}">
                 <div class="form-group">
                   <label for="feedback-name" class="control-label"></label>
-                  <input type="text" class="form-control" name="sights.sightsName" placeholder="피드백 보낼 관광명소/음식점 "disabled>
+                  <input type="text" class="form-control" name="sights.sightsName" th:value="${sightsNum}" disabled>
                 </div>
                 <div class="row">
                   <div class="col-12">
