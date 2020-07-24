@@ -57,7 +57,7 @@
 					<a th:href="@{${sights.sightsWeb}}" th:if=" ${sights.sightsWeb != '' }" th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${sights.sightsWeb}|"></a>
 					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${sights.sightsTel}|"></p>
 					<p>
-						<a th:href="@{/feedback/addFeedback(sightsNum=${sights.sightsNum})}">
+						<a th:href="@{/feedback/addSightsFeedback(sightsNum=${sights.sightsNum})}">
 							<i class="far fa-edit"></i>
 							이 게시물에 대한 피드백 남기기 						
 						</a>

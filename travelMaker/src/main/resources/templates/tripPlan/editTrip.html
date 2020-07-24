@@ -283,7 +283,7 @@
 							<h3 class="card-title">
 								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
 							</h3>
-							<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${tNum}">삭제</button>
+							<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${selectTripPlan[0].tNum}">삭제</button>
 							<button class="saveBtn"><i class="fas fa-share"></i>저장</button>
 						</div>
 						<!-- /.card-header -->
@@ -321,14 +321,6 @@
 								</table>
 							</div>
 							<div>
-								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
-								<div>
-									<input type='date' name='userBirthday' /> ~ <input type='date'
-										name='userBirthday' />
-										</div>
-								</form>
-							</div>
-							<div>
 								<h4>
 									<!-- 작성자 아이디 다른곳에서 받아오세요 -->  생성자<a th:text="${sTripPlan[0].mId}"></a>
 								</h4>
@@ -361,7 +353,6 @@
 						<div id="editBox" class="small-box">
 							<button data-toggle="modal" data-target="#myModal" type="button"
 								class="close">&times;</button>
-							<!-- 클릭시 삭제  -->
 							<div>
 								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
 									<input type='date' name='userBirthday' />
@@ -411,7 +402,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">취소</button>
-											<a th:href="@{/myTrip/deleteTripPlan(tNum=${tNum})}" class="btn btn-primary" >삭제</a>
+											<a th:href="@{/myTrip/deleteTripPlan(tNum=${selectTripPlan[0].tNum},mId=${selectTripPlan[0])}" class="btn btn-primary" >삭제</a>
 											<!-- 삭제처리 -->
 										</div>
 									</div>

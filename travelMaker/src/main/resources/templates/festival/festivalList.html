@@ -139,7 +139,7 @@ span {
                    <th:block th:each=" m : ${f.member}">										
                      <div class="festival row bg-light">
                        <div class="sightsImg col-sm-2 col-md-3">
-                         <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="300" height="300">
+                         <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="250" height="250">
                        </div>
                        <div class="festivalDesc col-sm-6 col-md-8">
                          <input type="hidden" th:value="${f.fesNum}">

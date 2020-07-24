@@ -59,11 +59,7 @@ tb_trip_plan;
 </select>
 
 <delete id="deleteTripPlan" parameterType="String">
-DELETE
-FROM
-tb_trip
-WHERE
-trip_Num = #{tNum};
+CALL trip_delete(#{tNum});
 </delete>
 
 <select id="sTripMid" parameterType="String" resultType="String">
