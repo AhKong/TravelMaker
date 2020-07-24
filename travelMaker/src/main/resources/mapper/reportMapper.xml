@@ -22,7 +22,7 @@
 	SELECT
 		report_type_num as reportTypeNum, 
 		report_type_name as reportTypeName
-	FROM tb_report_tpye
+	FROM tb_report_type
 </select>
 
 <insert id="reportSightsReivew" parameterType="ReviewReport">

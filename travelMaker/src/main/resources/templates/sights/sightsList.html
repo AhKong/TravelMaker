@@ -101,14 +101,7 @@
 										<img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}" alt="User Image" width="80%" height="150">
 									</div>
 									<div class="sightsDesc col-12 col-md-9">
-										<button id="scrapModal" data-toggle="modal" data-target="#scrapModal"  th:data-indexnum="${i.index}" style="float: right;" class="btn btn-primary" th:data-sightsNum ="${l.sightsNum}">
-											<!-- <tb:block th:each="s: ${}"> -->
-											<!-- <th:block th:if="${l.sightsNum} == 'sights_1'">삭제 -->
-												<i th:class="|far fa-hand-point-up scrapInsertIcon${i.index+1}|"></i>
-												<i th:class="|fas fa-hand-point-up scrapDeleteIcon${i.index+1}|" style="display: none"></i>
-										<!-- <i class="icon" th:class="${rl.isLiked ? 'fa fa-thumbs-up fa-2x' : 'far fa-thumbs-up fa-2x'}"> -->
-								
-										</button>
+										<i class="far fa-heart" style="color:red"></i>
 										<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:data-sightsNum="${l.sightsNum}" th:text="${l.sightsName}"></a><br>
 										
 										<p th:text="${l.sightsCate.sightsType}"></p>
