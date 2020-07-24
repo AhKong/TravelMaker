@@ -55,7 +55,7 @@ public class TripPlanController {
 		model.addAttribute("tripName", tripName);
 		System.out.println(openCheck+" <<<<<<<<<<openCheck");
 		model.addAttribute("openCheck", openCheck);
-		
+		//모달에서 넘어올때 설정한 날자 데이터값 인설트 시켜야행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		MyTrip myTrip = new MyTrip();
 		myTrip.setmId(loginId);
 		myTrip.setoCheck(openCheck);
@@ -72,8 +72,12 @@ public class TripPlanController {
 									@RequestParam(name="tName", required = false) String tName) {
 		String loginId = (String)session.getAttribute("SID");
 		String myTripNum = tripPlanService.myTripNum(tNum);
+		List<TripPlan> myTripPlan = tripPlanService.sTripPlan();
+		System.out.println(myTripPlan+"<<<<<<<<<<<<<<<<<<<<<<<<<--------------myTripPlan");
 		System.out.println(myTripNum+" GETeditTrip- myTripNum");
+		model.addAttribute("myTripPlan", myTripPlan);
 		model.addAttribute("tripName", tName);
+		model.addAttribute("myTripSelect", tripPlanService.sTripPlan());
 		
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
 		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");		
@@ -86,25 +90,23 @@ public class TripPlanController {
 	}
 	
 	@GetMapping("/deleteTripPlan")
-	public String deleteTripPlan(HttpSession session,MyTrip myTrip, HttpServletResponse response,
+	public String deleteTripPlan(HttpSession session, HttpServletResponse response,
 									@RequestParam(name="tNum", required = false) String tNum,
 									@RequestParam(name="mId", required = false) String mId) throws IOException {
 		String loginId = (String) session.getAttribute("SID");
-		String insertId = tripPlanService.sTripMid(mId);
-		System.out.println(insertId+"<<<<<<<<< select mIdd");
-		
-		if(loginId == insertId) { 
-			int dTripPlan = tripPlanService.deleteTripPlan(loginId, tNum);
+		System.out.println(mId + " <<,MMMMMMMMMMMMMMMMMMMMMMMMMMM");
+		System.out.println(loginId+" <<loginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginIdloginId");
+		if(loginId .equals(mId)) {
+			int dTripPlan = tripPlanService.deleteTripPlan(tNum);
 			System.out.println(dTripPlan+"<<<<<<<<<<<<<<<<<<<<<<<< 삭제성공ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
 		}else {
-			
 			  response.setContentType("text/html; charset=UTF-8"); PrintWriter out =  response.getWriter();
 			  out.println("<script>alert('여행계획 삭제는 생성한 사람만 가능합니다.');</script>");
 			  out.flush();
 		}
 		
 
-		return "/myTrip/tripList";
+		return "/tripPlan/tripList";
 	}
 	
 }

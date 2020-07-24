@@ -25,8 +25,8 @@ public class TripPlanService {
 	public List<TripPlan> sTripPlan(){
 		return tripPlanMapper.sTripPlan();
 	}
-	public int deleteTripPlan(String mId, String tNum) {
-		return tripPlanMapper.deleteTripPlan(mId, tNum);
+	public int deleteTripPlan(String tNum) {
+		return tripPlanMapper.deleteTripPlan(tNum);
 	}
 	public String sTripMid(String tNum) {
 		return tripPlanMapper.sTripMid(tNum);
