@@ -32,13 +32,13 @@
 
 <select id="indexTop3" resultMap ="sgSelect">
 SELECT
-s.*,
-avgGrade.score as avgGrade,
-avgGrade.reviewCnt AS reviewCnt
+	s.*,
+	avgGrade.score as avgGrade,
+	avgGrade.reviewCnt AS reviewCnt
 FROM
 tb_sights AS s
 INNER JOIN
-(SELECT sr.sights_num AS sights_num,
+		  (SELECT sr.sights_num AS sights_num,
 					ROUND(AVG(sr.sights_review_grade),1) AS score,
 					COUNT(*) AS reviewCnt
 			FROM  
@@ -48,10 +48,11 @@ INNER JOIN
 			GROUP BY 
 				sr.sights_num
 			) AS avgGrade
+			ON avgGrade.sights_num = s.sights_num
 			where
 			s.sights_active ='Y'
 			ORDER BY
-			avgGrade DESC  
+			avgGrade DESC , reviewCnt DESC
 		LIMIT
 			 0,3;
 </select>

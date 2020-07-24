@@ -15,8 +15,7 @@ public class MainController {
 	
 	@GetMapping("/main")
 	public String main(Model model){	
-		indexTop3Service.indexTop3();
-		System.out.println(indexTop3Service.indexTop3()+"indexxxxxxxxxxxxxxx");
+
 		model.addAttribute("indexTop3", indexTop3Service.indexTop3());
 		return "/index";
 	}
