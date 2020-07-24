@@ -55,7 +55,7 @@ public class TripPlanController {
 		model.addAttribute("tripName", tripName);
 		System.out.println(openCheck+" <<<<<<<<<<openCheck");
 		model.addAttribute("openCheck", openCheck);
-		
+		//모달에서 넘어올때 설정한 날자 데이터값 인설트 시켜야행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		MyTrip myTrip = new MyTrip();
 		myTrip.setmId(loginId);
 		myTrip.setoCheck(openCheck);
