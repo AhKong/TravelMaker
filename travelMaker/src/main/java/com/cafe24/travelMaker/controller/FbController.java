@@ -139,5 +139,4 @@ public class FbController {
 		
 		return "redirect:/feedback/feedbackList";
 	}
-	
 }
