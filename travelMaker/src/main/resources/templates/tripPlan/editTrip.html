@@ -247,12 +247,26 @@
 	margin: -5px;
 	margin-left: 5px;
 }
-.saveBtn{
+.insertBtn{
 	float: right;
 	border-radius: 5px;
 	width: 25%;
 	margin: -5px;
 	margin-left: 5px;
+}
+.updateBtn{
+	float: right;
+	border-radius: 5px;
+	width: 25%;
+	margin: -5px;
+	margin-left: 5px;
+}
+.tripPaln{
+	width: 100%;
+}
+.palnDetail{
+	width: 100%;
+	padding-bottom: 200px;
 }
 </style>
 
@@ -283,12 +297,26 @@
 							<h3 class="card-title">
 								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
 							</h3>
-							<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${selectTripPlan[0].tNum}">삭제</button>
-							<button class="saveBtn"><i class="fas fa-share"></i>저장</button>
-						</div>
-						<!-- /.card-header -->
-						<div id="editBox" class="small-box">
+							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
+								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal">삭제</button>
+							</th:block>
+							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${selectTripPlan[0].tNum}">삭제</button>
+							</th:block>
 							
+							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
+							<button class="insertBtn"><i class="fas fa-share"></i>인설트저장</button>
+							</th:block>
+							
+							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+							<button class="updateBtn"><i class="fas fa-share"></i>update저장</button>
+							</th:block>
+						</div>
+
+						<div id="editBox" class="small-box">
+							<div>
+								<a th:text="${mTrip[0].sDate}">시작날짜</a> - <a th:text="${mTrip[0].eDate}"> 종료날짜</a>
+							</div>
 							<div>
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 									class="img-rounded">
@@ -320,33 +348,49 @@
 									</tbody>
 								</table>
 							</div>
-							<div>
-								<h4>
-									<!-- 작성자 아이디 다른곳에서 받아오세요 -->  생성자<a th:text="${sTripPlan[0].mId}"></a>
-								</h4>
-							</div>
+							<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
+								<div>
+									<h4>
+										생성자 : <a th:text="${sTripPlan[0].mId}"></a>
+									</h4>
+								</div>
+							</th:block>
+							
+							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+								<div>
+									<h4>
+										 생성자<a th:text="${sTripPlan[0].mId}"></a>
+									</h4>
+								</div>
+							</th:block>
 						
 					<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
-							<div data-toggle="modal" data-target="#myModalExpenses">
-								여행경비 : 원
+							<div>
+								여행경비 : <input class="tripPaln">
 							</div>
-							<div data-toggle="modal" data-target="#myModalMaterials">
-								여행 준비물 : 
+							<div>
+								여행 준비물 : <input class="tripPaln">
 							</div>
-							<div data-toggle="modal" data-target="#myModalDetail">
-								여행 상세 : 
+							<div>
+								여행 상세 :
+							</div>
+							<div>
+								<textarea class="palnDetail"></textarea>
 							</div>
 					</th:block>
 				
 					<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-						<div data-toggle="modal" data-target="#myModalExpenses">
-							여행경비 : <a th:text="${selectTripPlan[0].pCost}"></a>원
+						<div class="planPay">
+							여행경비(원) : <input class="tripPaln" th:value="${selectTripPlan[0].pCost}">
 						</div>
-						<div data-toggle="modal" data-target="#myModalMaterials">
-							여행 준비물 : <a th:text="${selectTripPlan[0].pSupply}"> --- </a>
+						<div>
+							여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}"> 
 						</div>
-						<div data-toggle="modal" data-target="#myModalDetail">
-							여행 상세 : <a th:text="${selectTripPlan[0].pDetail}"> --- </a>
+						<div>
+							여행 상세 : 
+						</div>
+						<div>
+							<textarea class="palnDetail" th:value="${selectTripPlan[0].pDetail}"></textarea>
 						</div>
 					</th:block>
 						</div>
@@ -402,7 +446,12 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">취소</button>
-											<a th:href="@{/myTrip/deleteTripPlan(tNum=${selectTripPlan[0].tNum},mId=${selectTripPlan[0])}" class="btn btn-primary" >삭제</a>
+											<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
+												<a class="btn btn-primary">삭제</a>
+											</th:block>
+											<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+												<a th:href="@{/myTrip/deleteTripPlan(tNum=${selectTripPlan[0].tNum}, mId=${selectTripPlan[0].mId})}" class="btn btn-primary" >삭제</a>
+											</th:block>
 											<!-- 삭제처리 -->
 										</div>
 									</div>
