@@ -74,8 +74,8 @@
 	VALUES (#{goodsCode}, #{memberId}, #{goodsPhoto}, #{goodsCate}, #{goodsName}, #{goodsPrice}, #{goodsDetail}, NOW(), "판매중", #{goodsAmount});
 	</insert>
 	
-	<delete id="deleteGoods" parameterType="String">
-		DELETE FROM tb_Alliance_g WHERE g_num=#{gCode}
+	<delete id="deleteGoods" statementType="CALLABLE">
+		CALL delete_Alliance_g(#{gCode})
 	</delete>
 	
 	<update id="goodsModify" parameterType="String">

@@ -21,15 +21,13 @@ public class Member {
 	private List<Goods> goodsList;
 	private int mFollowing;
 	private Point point;
+	private String dropNum;			//탈퇴회원관리
+	private String dropReasonCheck;
+	private String dropContents;
+	private String dropDate;
+	private String mDormantRegDate;	//휴면회원관리
+	private String mDormantCanCelDate;
 	
-	public List<Goods> getGoodsList() {
-		return goodsList;
-	}
-	public void setGoodsList(List<Goods> goodsList) {
-		this.goodsList = goodsList;
-	}
-
-	private int mFollow;
 	public String getmId() {
 		return mId;
 	}
@@ -108,11 +106,11 @@ public class Member {
 	public void setmIntrod(String mIntrod) {
 		this.mIntrod = mIntrod;
 	}
-	public int getmFollow() {
-		return mFollow;
+	public List<Goods> getGoodsList() {
+		return goodsList;
 	}
-	public void setmFollow(int mFollow) {
-		this.mFollow = mFollow;
+	public void setGoodsList(List<Goods> goodsList) {
+		this.goodsList = goodsList;
 	}
 	public int getmFollowing() {
 		return mFollowing;
@@ -126,12 +124,50 @@ public class Member {
 	public void setPoint(Point point) {
 		this.point = point;
 	}
+	public String getDropNum() {
+		return dropNum;
+	}
+	public void setDropNum(String dropNum) {
+		this.dropNum = dropNum;
+	}
+	public String getDropReasonCheck() {
+		return dropReasonCheck;
+	}
+	public void setDropReasonCheck(String dropReasonCheck) {
+		this.dropReasonCheck = dropReasonCheck;
+	}
+	public String getDropContents() {
+		return dropContents;
+	}
+	public void setDropContents(String dropContents) {
+		this.dropContents = dropContents;
+	}
+	public String getDropDate() {
+		return dropDate;
+	}
+	public void setDropDate(String dropDate) {
+		this.dropDate = dropDate;
+	}
+	public String getmDormantRegDate() {
+		return mDormantRegDate;
+	}
+	public void setmDormantRegDate(String mDormantRegDate) {
+		this.mDormantRegDate = mDormantRegDate;
+	}
+	public String getmDormantCanCelDate() {
+		return mDormantCanCelDate;
+	}
+	public void setmDormantCanCelDate(String mDormantCanCelDate) {
+		this.mDormantCanCelDate = mDormantCanCelDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [mId=" + mId + ", mPw=" + mPw + ", mLevel=" + mLevel + ", mName=" + mName + ", mEmail=" + mEmail
 				+ ", mTel=" + mTel + ", mGender=" + mGender + ", mBirth=" + mBirth + ", mAddr=" + mAddr + ", mRegDate="
 				+ mRegDate + ", file=" + file + ", mAvatar=" + mAvatar + ", mIntrod=" + mIntrod + ", goodsList="
-				+ goodsList + ", mFollowing=" + mFollowing + ", point=" + point + ", mFollow=" + mFollow + "]";
+				+ goodsList + ", mFollowing=" + mFollowing + ", point=" + point + ", dropNum=" + dropNum
+				+ ", dropReasonCheck=" + dropReasonCheck + ", dropContents=" + dropContents + ", dropDate=" + dropDate
+				+ ", mDormantRegDate=" + mDormantRegDate + ", mDormantCanCelDate=" + mDormantCanCelDate + "]";
 	}
-
 }

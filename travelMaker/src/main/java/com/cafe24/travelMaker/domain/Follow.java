@@ -5,6 +5,7 @@ public class Follow {
 	private String mId;
 	private String targetId;
 	private Member member;
+	private String followLegDate;
 	public String getFollowNum() {
 		return followNum;
 	}
@@ -29,9 +30,15 @@ public class Follow {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	public String getFollowLegDate() {
+		return followLegDate;
+	}
+	public void setFollowLegDate(String followLegDate) {
+		this.followLegDate = followLegDate;
+	}
 	@Override
 	public String toString() {
 		return "Follow [followNum=" + followNum + ", mId=" + mId + ", targetId=" + targetId + ", member=" + member
-				+ "]";
+				+ ", followLegDate=" + followLegDate + "]";
 	}
 }

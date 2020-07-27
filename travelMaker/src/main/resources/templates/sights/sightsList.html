@@ -6,62 +6,7 @@
 	<title th:text="|${searchWord}의 관광명소|"></title>
 </th:block>
 <th:block layout:fragment="customCss">
-	<style>
-.sightsName {
-	font-size: 20px;
-	font-weight: bold;
-	color: black;
-}
-
-.bestSights {
-	padding-top: 10px;
-	margin-bottom: 20px;
-}
-
-.desc {
-	display: block;
-	padding-left: 10px;
-	margin-top: 10px;
-}
-
-.radio {
-	margin-top: 10px;
-}
-
-.sightListTitle {
-	font-size: 35px;
-	padding-bottom: 30px;
-}
-
-.post {
-	margin-top: 15px;
-}
-
-.sightCate {
-	margin-top: 40px;
-	border-top: 1px solid black;
-	padding-top: 10px;
-}
-
-.sightCate p {
-	font-size: 20px;
-}
-
-.warp-searchForm {
-	margin-left: 13%;
-	margin-top: 20px;
-}
-
-.warp-searchForm input {
-	width: 200px;
-}
-
-.sights {
-	border-bottom: 1px solid #efefef;
-	margin-bottom: 10px;
-	padding-bottom: 10px;
-}
-</style>
+<link rel="stylesheet" href="/dist/css/postListCss.css">
 </th:block>
 <th:block layout:fragment="customContents" >
 <!-- Content Wrapper. Contains page content -->
@@ -90,20 +35,9 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-12  col-lg-2 order-1 order-md-1">
-					<div class="warp-searchForm">
-						<form class="form-inline ">
-							<div class="input-group input-lg" style="width:100%">
-								<input class="form-control" type="search" placeholder="Search" aria-label="Search">
-								<div class="input-group-append">
-									<button class="btn btn-navbar" type="submit">
-										<i class="fas fa-search"></i>
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="sightCate">
-						<p>명소 종류</p>
+					<div class="sightCates">
+						<h4>명소 종류</h4>
+						
 						<div class="radio">
 							<label> <input type="radio" name="optionsRadios"
 								id="optionsRadios1" value="option1"> 랜드마크
@@ -137,49 +71,26 @@
 					</div>
 				</div>
 				<div class="col-12 col-lg-10 order-2 order-md-2" th:if="${!#lists.isEmpty(sightsList)}">
-					<h1>Best 3</h1>
+					<p><span style="font-size:35px">Best 3</span> 리뷰 평점 평균 기준</p>
 					<div class="bestSights row">
-						<div class="col-12 col-sm-4">
-							<div class=" info-box bg-light ">
-								<img src="/dist/img/avatar6.jpg" alt="User Image" width="100"
-									height="150">
+						<th:block th:each ="best : ${best3}">
+							<div class="col-12 col-sm-4">
+							 <div class=" info-box bg-light " style="height:200px">
+								<img th:src="@{/fileupload/{file}(file=${best.sightsPhoto})}"alt="User Image" width="100" height="150">
 								<div class="desc">
-
-									<a href="/sights/detailSights"><span>Jonna</span></a><br>
-									<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-										class="fas fa-star"></i> <i class="fas fa-star"></i> 529건의
-									리뷰<br>
-									<p>박지훈 얼굴이 장관</p>
-									<p>주소작성하는부분이야</p>
+									<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${best.sightsNum})}" class="sightsName" th:data-sightsNum="${best.sightsNum}" th:text="${best.sightsName}"></a><br>
+									<th:block  th:each="num: ${#numbers.sequence(1,best.avgGrade)}">
+		          			  			<i class="fas fa-star" style="color:green" ></i>
+		          	 				</th:block>
+		          	 				<strong th:text="| (${best.avgGrade})|"></strong>
+		          	 				 <br>
+									 <span th:text="|${best.reviewCnt}건의 리뷰|"></span><br>
+									 <p th:text ="${best.sightsCate.sightsType}"></p>
+									 <p th:text ="${best.sightsAddr}"></p>
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-sm-4">
-							<div class="info-box bg-light">
-								<img src="/dist/img/test.jpeg" alt="User Image" width="100"
-									height="150">
-								<div class="desc">
-									<span>HandSome</span><br> <i class="fas fa-star"></i> <i
-										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-										class="fas fa-star"></i> 529건의 리뷰<br>
-									<p>박지훈 얼굴이 장관</p>
-									<p>주소작성하는부분이야</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-sm-4">
-							<div class="info-box bg-light">
-								<img src="/dist/img/test2.jpeg" alt="User Image" width="100"
-									height="150">
-								<div class="desc">
-									<span>Michinnom</span><br> <i class="fas fa-star"></i> <i
-										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-										class="fas fa-star"></i> 529건의 리뷰<br>
-									<p>박지훈 얼굴이 장관</p>
-									<p>주소작성하는부분이야</p>
-								</div>
-							</div>
-						</div>
+						</th:block>				
 					</div>
 					<div class="row" >
 						<span class="sightListTitle">관광명소</span>
@@ -190,27 +101,12 @@
 										<img th:src="@{/fileupload/{file}(file=${l.sightsPhoto})}" alt="User Image" width="80%" height="150">
 									</div>
 									<div class="sightsDesc col-12 col-md-9">
-										<button id="scrapModal" data-toggle="modal" data-target="#scrapModal" style="float: right;" class="btn btn-primary" th:data-sightsNum ="${l.sightsNum}">
-											<!-- <tb:block th:each="s: ${}"> -->
-											<!-- <th:block th:if="${l.sightsNum} == 'sights_1'">삭제 -->
-												<i th:id="scrapInsertIcon + ${i.count}" class="far fa-hand-point-up"></i>
-												<i th:id="scrapDeleteIcon + ${i.count}" class="fas fa-hand-point-up" style="display: none"></i>
-										
-										<!-- 	</th:block>
-											<th:block th:unless="${l.sightsNum} != ${l.sightsNum} && ${tNum} == null"> --><!-- sightsNum테이블의 sightsNum 과 scrap테이블의 sightsNum 다르거나 없으면 인설트 -->
-												<!-- <i id="scrapInsertIcon" class="far fa-hand-point-up"></i>
-												<i id="scrapDeleteIcon" class="fas fa-hand-point-up" style="display: none"></i> -->
-										<!-- 	</th:block> -->
-											<!-- </tb:block> -->
-								
-										</button>
+										<i class="far fa-heart" style="color:red"></i>
 										<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${l.sightsNum})}" class="sightsName" th:data-sightsNum="${l.sightsNum}" th:text="${l.sightsName}"></a><br>
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i>
+										
 										<p th:text="${l.sightsCate.sightsType}"></p>
 										<p th:text="${l.sightsAddr}"></p>
 										<p th:text="${l.sightsDetail}"></p>
-										<p th:text="${l.sightsNum}">
 									</div>
 								</div>
 							</div>
@@ -225,7 +121,6 @@
 		</div>
 		<!-- /.card-body -->
 	</div>
-	x
 	<!-- /.card -->
 </section>
 <!-- /.content -->
@@ -236,12 +131,6 @@
 <th:block layout:fragment="customFooterScript">
 <script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
 	<script th:inline="javascript">
-		/*
-			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
-			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		 */
-		 /* id값으로 검색해서 테이블내 데이터 유무에 따라 그립보여줌... */
 	/*<![CDATA[*/
 	var mId = /*[[${session.SID}]]*/
 	/*]]>*/

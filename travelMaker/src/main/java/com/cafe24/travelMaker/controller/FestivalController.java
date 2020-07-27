@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.travelMaker.service.FestivalService;
 import com.cafe24.travelMaker.service.StorageService;
@@ -38,7 +37,7 @@ public class FestivalController {
 		System.out.println(result+" <- result addFestival FestivalController");
 		System.out.println(festival.getMember().toString()+" <- festival.getMember().toString() addFestival FestivalController");
 		
-		return "redirect:/festival/ingFestivalList";
+		return "redirect:/festival/ingFestivalListManager";
 	}
 	
 	//축제 수정 화면으로 이동 
@@ -74,15 +73,28 @@ public class FestivalController {
 		return "redirect:/festival/ingFestivalList";
 	}
 	
-	//축제 리스트 (현재 진행중)
+	//회원 또는 비회원 -> 축제 리스트 (현재 진행중)
 	@GetMapping("/ingFestivalList")
 	public String ingFestivalList(Model model){
 		System.out.println("ingFestivalList FestivalController 도착");
+		festivalService.updateFestivalState();					//현 시점에서 축제 상태 업데이트~!
 		List<Festival> fList = festivalService.ingFestivalList();
 		System.out.println(fList+" <- fList ingFestivalList FestivalController");
 		model.addAttribute("fList", fList);
 		
 		return "festival/festivalList";
+	}
+	
+	//관리자 페이지 -> 축제 리스트 (현재 진행중)
+	@GetMapping("/ingFestivalListManager")
+	public String ingFestivalListManager(Model model){
+		System.out.println("ingFestivalListManager FestivalController 도착");
+		festivalService.updateFestivalState();					//현 시점에서 축제 상태 업데이트~!
+		List<Festival> fList = festivalService.ingFestivalList();
+		System.out.println(fList+" <- fList ingFestivalList FestivalController");
+		model.addAttribute("fList", fList);
+		
+		return "festival/festivalListManager";
 	}
 	
 	//축제 리스트 (진행 예정)

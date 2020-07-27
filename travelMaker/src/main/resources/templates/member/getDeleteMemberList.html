@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- IonIcons -->
+  
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<th:block layout:fragment="customTitle">
+	<title> 탈퇴회원관리 화면입니다  :) </title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<div id="wrapper">
+  <div id="rightcolumn">
+  <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>탈퇴회원 관리 - 이승연</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/deleteMember">member</a></li>
+                <li class="breadcrumb-item active">deleteMember</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">탈퇴회원리스트</h3>
+          </div>
+          <!-- /.card-header -->
+          
+          <div class="card-body table-responsive">
+            <div class="row">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                      <th>번호</th>
+                      <th>아이디</th>
+                      <th>이름</th>
+                      <th>이메일</th>
+                      <th>성별</th>
+                      <th>생년월일</th>
+                      <th>회원가입날짜</th>
+                      <th>탈퇴날짜</th>
+                      <th>탈퇴사유</th>
+                      <th>기타내용</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each=" d : ${getDeleteMemberList}">
+                      <td>[[${d.dropNum}]]</td>
+                      <td>[[${d.mId}]]</td>
+                      <td>[[${d.mName}]]</td>
+                      <td>[[${d.mEmail}]]</td>
+                      <td>[[${d.mGender}]]</td>
+                      <td>[[${d.mBirth}]]</td>
+                      <td>[[${d.mRegDate}]]</td>
+                      <td>[[${d.dropDate}]]</td>
+                      <td>[[${d.dropReasonCheck}]]</td>
+                      <td>[[${d.dropContents}]]</td>
+                    </tr>
+                  </tbody>
+               </table>
+             </div>
+           </div>
+           <!-- /.card-body -->
+         </div>
+         <!-- /.card -->
+      </section>
+    </div>
+  </div>
+</div>
+</th:block>		
+<th:block layout:fragment="customFooterScript">
+
+	<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+</th:block>
+</html>

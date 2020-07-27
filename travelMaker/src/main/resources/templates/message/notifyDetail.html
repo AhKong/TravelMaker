@@ -34,35 +34,36 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-striped projects">
+                <table id="example1" class="table table-striped projects" style="text-align:center">
          
               <thead>
                   <tr>
+                  	  <th style="visibility:hidden;position:absolute;">알람번호</th>
                       <th style="width: 10%">
                           	번호
+                         <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i>
                       </th>
-                      <th style="width: 75%">
+                      <th style="width: 60%">
                           	내용
+                         <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i>
                       </th>
-                      <th style="width: 15%" >
+                      <th style="width: 20%">
                       		날짜
+                      	 <i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i>
+                      </th>
+                      <th style="width: 10%">
+                      		읽음 여부
+                      	<i class="fas fa-arrow-up btn-xs" ><i class="fas fa-arrow-down btn-xs" ></i></i>
+                      </th>
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                        1
-                      </td>
-                      <td>
-                          <a>민수 </a>
-                      </td>
-                      <td>
-                          <ul class="list-inline">
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                          </ul>
-                      </td>
+                  <tr th:each="nl, i : ${NoticeList}">
+                  	  <td th:text="${nl.noticeNum}" style="visibility:hidden;position:absolute;"></td>
+                      <td th:text="${i.count}"></td>
+                      <td th:text="${nl.noticeContents}"></td>
+                      <td th:text="${nl.noticeSendTime}"></td>
+                      <td><a th:href="@{/msg/noticeCheckUpdate(nCode=${nl.noticeNum})}" class="badge badge-success" th:text="${nl.noticeCheck}" style="font-size: 1.5em;"></a></td>
                   </tr>
               </tbody>
           </table>

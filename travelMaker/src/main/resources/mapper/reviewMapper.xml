@@ -21,6 +21,11 @@
  			<result property="mId" column="m_id"/>
  			<result property="mAvatar"  column="m_avatar"/>
  		</association>
+ 		<association property="res" javaType ="Res">
+ 			<result property="mId" column="m_id"/>
+ 			<result property="resName" column="res_name"/>
+ 			<result property="resPhoto"  column="res_photo"/>
+ 		</association>
 	</resultMap>
 	
 	<resultMap type="SightsReview" id="sightsReviewResultMap" >
@@ -41,7 +46,39 @@
  			<result property="mId" column="m_id"/>
  			<result property="mAvatar"  column="m_avatar"/>
  		</association>
+ 		<association property="sights" javaType ="Sights">
+ 			<result property="mId" column="m_id"/>
+ 			<result property="sightsName" column="sights_name"/>
+ 			<result property="sightsPhoto"  column="sights_photo"/>
+ 		</association>
 	</resultMap>
+	
+	<select id="getResReviewInfo" resultMap ="resReviewResultMap">
+		select 
+			r.*,t.trip_type_name
+		from
+			tb_res_review AS r 
+		inner join 
+			tb_trip_type AS t 
+		ON r.res_travel_type = t.trip_type_num
+		where 
+			res_review_num = #{resReviewNum}
+	</select>
+	
+	
+	<select id="getSightsReviewInfo" resultMap ="sightsReviewResultMap">
+		select 
+			s.*,t.trip_type_name
+		from
+			tb_sights_review AS s 
+		inner join 
+			tb_trip_type AS t 
+		ON 
+		s.sights_travel_type = t.trip_type_num
+		where 
+			s.sights_review_num = #{sightsResNum}
+	</select>
+	
      <select id="selectTripTypeList" resultType="TripType">
      	SELECT 
      		trip_type_num as tripTypeNum,
@@ -85,7 +122,7 @@
 		)
      </insert>  
 
-	<select id="isWritedReview" parameterType="String" resultType="int">  
+	<select id="isWritedResReview" parameterType="String" resultType="int">  
 		SELECT
 			count(*)
 		FROM
@@ -107,8 +144,9 @@
 			tb_trip_type AS t
 		ON  
 		 	m.m_id = r.m_id AND r.res_travel_type = t.trip_type_num 
-		WHERE  r.res_num =#{resNum}
-	</select>     
+		WHERE  r.res_num =#{resNum} and r.res_review_status ='Y'
+	</select>    
+	
 	<select id="getResReviewGradeCnt"  parameterType="String" resultType="ReviewGrade">
 		SELECT 
 			r.res_review_grade as grade,
@@ -116,10 +154,11 @@
 		FROM 
 			tb_res_review AS r
 		WHERE 
-			r.res_num =#{resNum}
+			r.res_num =#{resNum} and r.res_review_status ='Y'
 		GROUP BY  
-			r.res_review_grade
+			r.res_review_grade 
 	</select>    
+	
 	<select id="isLikedResReview" parameterType="String" resultType="int">
 		select 
 			count(*)
@@ -163,6 +202,54 @@
 			)	
 	
 	</insert> 
+	
+	<select id="isWritedSightsReview" parameterType="String" resultType="int">  
+		SELECT
+			count(*)
+		FROM
+			tb_sights_review
+		WHERE
+			m_id =#{mId} and sights_num =#{sightsNum} and sights_review_status='Y';
+	</select> 
+	
+	<select id="followersResReviewList" parameterType="String" resultType="ResReview" resultMap="resReviewResultMap">  
+		SELECT
+			r.m_id,
+			r.res_name,
+			r.res_photo,
+			rv.res_review_title,
+			rv.res_review_contents,
+			rv.res_review_grade,
+			rv.res_review_reg_date
+		FROM
+			tb_res  AS r
+		INNER JOIN
+			tb_res_review AS rv
+		ON
+			r.res_num = rv.res_num
+		WHERE  
+			rv.m_id = #{mId} and rv.res_review_status = 'Y';
+	</select> 
+	
+	<select id="followersSightsReviewList" parameterType="String" resultType="SightsReview" resultMap="sightsReviewResultMap">  
+		SELECT
+			s.m_id,
+			s.sights_name,
+			s.sights_photo,
+			sv.sights_review_title,
+			sv.sights_review_contents,
+			sv.sights_review_grade,
+			sv.sights_review_reg_date
+		FROM
+			tb_sights  AS s
+		INNER JOIN
+			tb_sights_review AS sv
+		ON
+			s.sights_num = sv.sights_num
+		WHERE  
+			sv.m_id = #{mId} and sv.sights_review_status = 'Y';
+	</select> 
+	
 	<select id="sightsReviewList" parameterType="String" resultMap="sightsReviewResultMap">
 		SELECT 
 			m.m_avatar,
@@ -176,6 +263,169 @@
 			tb_trip_type AS t
 		ON  
 		 	m.m_id = s.m_id AND s.sights_travel_type = t.trip_type_num 
-		WHERE  s.sights_num =#{sightsNum}
-     </select>                                                                                            
+		WHERE  s.sights_num =#{sightsNum} and s.sights_review_status ='Y'
+     </select>      
+     
+     <select id="isLikedSightsReview" parameterType="String" resultType="int">
+		select 
+			count(*)
+		from
+			tb_sights_review_like
+		where
+			m_id = #{mId} and sights_review_num = #{reviewNum} 
+	</select>  
+	 
+	<update id="deleteSightsReview" parameterType="String">
+		
+		update
+			tb_sights_review
+		set
+		    sights_review_status ='N'
+		where
+			sights_review_num = #{sightsReviewNum}
+	</update>  
+	<update id="deleteResReview" parameterType="String">
+		
+		update
+			tb_res_review
+		set
+		    res_review_status ='N'
+		where
+			res_review_num = #{resReviewNum}
+	</update>    
+	
+	<select id="getSightsReviewGradeCnt"  parameterType="String" resultType="ReviewGrade">
+		SELECT 
+			s.sights_review_grade as grade,
+			count(*) as gradeCnt
+		FROM 
+			tb_sights_review AS s
+		WHERE 
+			s.sights_num =#{sightsNum} and s.sights_review_status ='Y'
+		GROUP BY  
+			s.sights_review_grade 
+	</select>    
+	<select id="getResGradeAvg" parameterType="String" resultType="String">
+		SELECT 
+			CAST(ROUND(AVG(res_review_grade),1) AS CHAR(3)) AS score
+		FROM 
+			tb_res_review 
+		WHERE 
+			res_num =#{resNum} and res_review_status = 'Y'
+		GROUP BY res_num
+	</select>   
+	<select id="getResReviewCnt" parameterType="String" resultType="String">
+		SELECT 
+			CAST(COUNT(*) AS CHAR(3)) AS score
+		FROM 
+			tb_res_review 
+		WHERE 
+			res_num =#{resNum} and res_review_status = 'Y'
+		GROUP BY res_num
+	</select> 
+	<select id="getSightsGradeAvg" parameterType="String" resultType="String">
+		SELECT 
+			CAST(ROUND(AVG(sights_review_grade),1) AS CHAR(3)) AS score
+		FROM 
+			tb_sights_review 
+		WHERE 
+			sights_num =#{sightsNum} and sights_review_status = 'Y'
+		GROUP BY sights_num
+	</select>   
+	<select id="getSightsReviewCnt" parameterType="String" resultType="String">
+		SELECT 
+			CAST(COUNT(*) AS CHAR(3)) AS score
+		FROM 
+			tb_sights_review 
+		WHERE 
+			sights_num =#{sightsNum} and sights_review_status = 'Y'
+		GROUP BY sights_num
+	</select> 
+	
+	<select id="getResReviewPhotos" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				r.res_review_photo
+			FROM
+				tb_res_review AS r
+			WHERE 
+				r.res_review_photo <> '' AND r.res_num = #{resNum} and r.res_review_status = 'Y'
+		]]>
+	</select>  
+	
+		<select id="getSightsReviewPhotos" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				s.sights_review_photo
+			FROM
+				tb_sights_review AS s
+			WHERE 
+				s.sights_review_photo <> '' AND s.sights_num = #{sightsNum} and s.sights_review_status = 'Y'
+		]]>
+	</select>  
+	
+	<select id="getSightsGenderPreference" parameterType="String" resultType="Preference" >
+		select 
+			 m.m_gender as type,
+			 count(m.m_gender) as count
+		from 
+			tb_sights_review as sr 
+		left outer join 
+			tb_member as m
+		on 
+			m.m_id= sr.m_id and 
+			sr.sights_num  =#{sightsNum} and 
+		 	sr.sights_review_status ='Y'
+		group by m.m_gender HAVING m.m_gender IS NOT null
+	</select>
+	<select id="getResGenderPreference" parameterType="String" resultType="Preference" >
+		select 
+			 m.m_gender as type,
+			 count(m.m_gender) as count
+		from 
+			tb_res_review as r
+		left outer join 
+			tb_member as m
+		on 
+			m.m_id= r.m_id and 
+			r.res_num  =#{resNum} and 
+		 	r.res_review_status ='Y'
+		group by m.m_gender HAVING m.m_gender IS NOT null
+	</select>
+	
+	<update id="changeResReivewStatus" parameterType="String">
+		UPDATE
+			 tb_res_review
+		SET
+			res_review_status='B'
+		WHERE 
+			res_review_num = #{reviewNum}	
+	</update>
+     
+    <update id="changeSightsReivewStatus" parameterType="String" >
+		UPDATE
+			 tb_sights_review
+		SET
+			sights_review_status='B'
+		WHERE 
+			sights_review_num = #{reviewNum}	
+	</update>     
+	
+	<select id="findResReviewWriter" parameterType="String" resultType="String">
+		SELECT 
+			m_id 
+		FROM
+			tb_res_review
+		WHERE 
+			res_review_num =#{reviewNum}
+	</select>  
+	
+	<select id="findSightsReviewWriter" parameterType="String" resultType="String">
+		SELECT 
+			m_id 
+		FROM
+			tb_sights_review
+		WHERE 
+			sights_review_num =#{reviewNum}
+	</select>                                                              
 </mapper>

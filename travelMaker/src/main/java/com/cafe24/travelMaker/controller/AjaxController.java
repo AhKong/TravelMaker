@@ -9,21 +9,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.travelMaker.domain.SightsScrap;
 import com.cafe24.travelMaker.mapper.ScrapModalMapper;
-import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.domain.MyTrip;
 import com.cafe24.travelMaker.domain.ResScrap;
-import com.cafe24.travelMaker.service.CertSerivce;
-import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.ScrapSightsService;
 

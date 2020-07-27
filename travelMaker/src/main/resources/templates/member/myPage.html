@@ -64,9 +64,9 @@
                       </button>
                   </li>
                 </ul>
-
-                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>Follow</b></a>
-                <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>unFollow</b></a>
+				
+                <a th:href=@{/follow/followInsert(memberId=${member.mId})} class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}" th:if ="${followYesNoResult EQ 0}"><b>Follow</b></a>
+                <a th:href=@{/follow/followDelete(memberId=${member.mId})} class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}" th:if ="${followYesNoResult > 0}"><b>unFollow</b></a>
                 <a href="#" class="btn btn-primary btn-block" th:unless="${member.mId eq session.SID}"><b>쪽지 보내기</b></a>
               </div>
               <!-- /.card-body -->
@@ -127,7 +127,8 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">작성리뷰보기</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">음식점 작성리뷰보기</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline2" data-toggle="tab">관광지 작성리뷰보기</a></li>
                   <li class="nav-item"><a class="nav-link" href="/myTrip/tripList"  th:if="${member.mId eq session.SID}">내 여행 계획</a></li>
                   <li class="nav-item"><a class="nav-link" href="/tripMemo/tripMemo"  th:if="${member.mId eq session.SID}">내 여행 기록</a></li>
                   <li class="nav-item"><a class="nav-link" href="#goodsBuyList" data-toggle="tab"  th:if="${member.mId eq session.SID}">상품 구매내역</a></li>
@@ -138,46 +139,69 @@
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
+                
                   <div class="active tab-pane" id="timeline">
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
-                      <!-- timeline time label -->
-                     
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
+                      <th:block th:each=" rrl : ${followersResReviewList}">
                       <div>
-                     
                         <i class="fas fa-user bg-info"></i>
-
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
+                          <span class="time"><i class="far fa-clock" th:text="${rrl.resReveiwRegDate}"></i></span>
                           <h3 class="timeline-header"><a href="#" th:text="${member.mId}"></a>님이 게시글에 리뷰를 남겼습니다.</h3>
+                          <strong class="timeline-body" th:text="${rrl.res.resName}"></strong>
 							<div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
+                            <img th:src="@{/fileupload/{file}(file=${rrl.res.resPhoto})}" style="width:25%">
                           </div>
-                          <strong class="timeline-body" >
-                            	제목
-                          </strong>
-                          <div class="timeline-body">
-                            	내용
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm">별점 평균</a>
+                          <strong class="timeline-body" th:text="${rrl.resReviewTitle}"></strong>
+                          <div class="timeline-body" th:text="${rrl.resReviewContents}"></div>
+                          <div class="timeline-footer" >
+                            <a href="#" class="btn btn-warning btn-flat btn-sm" th:text="|별점 ${rrl.resReviewGrade}점|" style="font-weight:bold;"></a>
                           </div>
                         </div>
                       </div>
+                      </th:block>
                       <div>
                         <i class="far fa-clock bg-gray"></i>
                       </div>
                     </div>
                   </div>
                   
-                  <div class="tab-pane" id="aa">
-                    	ㄱㄱ
+                  <div class="active tab-pane" id="timeline2">
+                    <!-- The timeline -->
+                    <div class="timeline timeline-inverse">
+                      <!-- timeline time label -->
+                     
+                      <!-- /.timeline-label -->
+                      <!-- timeline item -->
+                      <th:block th:each=" srl : ${followersSightsReviewList}">
+                      <div>
+                     
+                        <i class="fas fa-user bg-info"></i>
+
+                        <div class="timeline-item">
+                          <span class="time"><i class="far fa-clock" th:text="${srl.sightsReveiwRegDate}"></i></span>
+
+                          <h3 class="timeline-header"><a href="#" th:text="${member.mId}"></a>님이 게시글에 리뷰를 남겼습니다.</h3>
+                          <strong class="timeline-body" th:text="${srl.sights.sightsName}"></strong>
+							<div class="timeline-body">
+                            <img th:src="@{/fileupload/{file}(file=${srl.sights.sightsPhoto})}" style="width:25%">
+                          </div>
+                          <strong class="timeline-body" th:text="${srl.sightsReviewTitle}"></strong>
+                          <div class="timeline-body" th:text="${srl.sightsReviewContents}"></div>
+                          <div class="timeline-footer" >
+                            <a href="#" class="btn btn-warning btn-flat btn-sm" th:text="|별점 ${srl.sightsReviewGrade}점|" style="font-weight:bold;"></a>
+                          </div>
+                        </div>
+                      </div>
+                      </th:block>
+                      <div>
+                        <i class="far fa-clock bg-gray"></i>
+                      </div>
+                    </div>
                   </div>
+                  
+                
 
 				 
                   

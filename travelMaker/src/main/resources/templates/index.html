@@ -12,6 +12,9 @@
 #small-text{
 	color: #fff;
 }
+#h3{
+	margin-top: 200px;
+}
 #top3Box {
 	padding-left: 20px;
 	padding-right: 20px;
@@ -28,9 +31,6 @@
 	background-size: cover;
 	height: 100%;
 }
-#h3{
-	color: #fff;
-}
 #recommend {
 	margin-left: 20px;
 }
@@ -42,7 +42,7 @@
 }
 
 #indexing {
-	background-image: url(/dist/img/landscape.jpg);
+	background-image: url(/dist/img/10441364265_437101265e_b.jpg);
 	background-position: center top;
 	background-size: 100%;
 	/* padding-bottom: 480px;*/
@@ -50,13 +50,15 @@
 	padding: 50px 0;
 }
 #index{
-	padding-top: 200px;
 }
 #h1 {
 	text-align: center;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
+	margin-top: 60px;
 }
-
+.desc{
+	margin-left:20px;
+}
 @media screen and (max-width: 576px) {
 	.serch-input-group{width: 90% !important; margin: auto !important;}
 	#indexing{
@@ -78,8 +80,8 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Trip</a></li>
-						<li class="breadcrumb-item active">tripList</li>
+						<li class="breadcrumb-item"><a href="#">main</a></li>
+						<li class="breadcrumb-item active">index.html</li>
 					</ol>
 				</div>
 			</div>
@@ -87,28 +89,15 @@
 
 		<div id="indexing">
 			<div id="h1">
-				<h1>TravelMaker</h1>
+				<h1>당신의 영원한 여행 메이트, TavelMaker에 오신걸 환영합니다 !</h1>
 			</div>
 
 			<div class="row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10 serch-input-group">
 					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search for..." id="searchText" style="height: 55px">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" id="searchBtn"
-								style="height: 55px">
-								<svg class="bi bi-search" width="1em" height="1em"
-									viewBox="0 0 16 16" fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd"
-										d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-								<path fill-rule="evenodd"
-										d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-							</svg>
-							</button>
-						</span> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						
+						
 					</div>
 				</div>
 				<div class="col-sm-1"></div>
@@ -122,59 +111,24 @@
 				<div class="container-fluid">
 					<!-- Small boxes (Stat box) -->
 					<div class="row">
-						<div class="col-lg-4 col-7" id="top3Box">
-							<!-- small box -->
-							<div class="small-box1">
-								<div>
-									<img style="cursor: pointer;"
-										onclick="location.href='/sights/detailSights?sightsNum=sights_1'" id="img"
-										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
+						<th:block th:each ="it : ${indexTop3}">
+							<div class="col-lg-4 col-12" id="top3Box">
+							 <div class=" info-box bg-light ">
+								<img th:src="@{/fileupload/{file}(file=${it.sightsPhoto})}"alt="User Image" width="60%">
+								<div class="desc">
+									<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${it.sightsNum})}" class="sightsName" th:data-sightsNum="${it.sightsNum}" th:text="${it.sightsName}"></a><br>
+									<th:block  th:each="num: ${#numbers.sequence(1,it.avgGrade)}">
+		          			  			<i class="fas fa-star" style="color:green"></i>
+		          	 				</th:block>
+		          	 				<strong th:text="| (${it.avgGrade})|"></strong>
+		          	 				 <br>
+									 <span th:text="|${it.reviewCnt}건의 리뷰|"></span><br>
+									 <p th:text ="${it.sightsCate.sightsType}"></p>
 								</div>
 							</div>
-							<div id="small-text">
-								효자동
-								<button data-toggle="modal" data-target="#scrapModal" id="scrapModal" style="float: right;" class="btn btn-primary">
-									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
-									</button>
-							</div>
-							<div id="small-text">평점 리뷰 0000개 </div>
 						</div>
-						<!-- ./col -->
-						<div class="col-lg-4 col-7" id="top3Box">
-							<!-- small box -->
-							<div class="small-box1">
-								<div>
-									<img style="cursor: pointer;"
-										onclick="location.href='/sights/detailSights?sightsNum=sights_1'" id="img"
-										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
-								</div>
-							</div>
-							<div id="small-text">
-								평화동
-								<button id="scrapModal" style="float: right;" class="btn btn-primary ">
-									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
-									</button>
-							</div>
-							<div id="small-text">평점 리뷰 0000개</div>
-						</div>
-						<!-- ./col -->
-						<div class="col-lg-4 col-7" id="top3Box">
-							<!-- small box -->
-							<div class="small-box1">
-								<div>
-									<img style="cursor: pointer;"
-										onclick="location.href='/sights/detailSights?sightsNum=sights_1'" id="img"
-										src="/dist/img/photo4.jpg" alt="여행이미지" class="img-rounded">
-								</div>
-							</div>
-							<div id="small-text">
-								삼천동
-								<button id="scrapModal" style="float: right;" class="btn btn-primary">
-									<i class="fas fa-hand-point-up"></i><i class="far fa-hand-point-up"></i>
-									</button>
-							</div>
-							<div id="small-text">평점 리뷰 0000개</div>
-						</div>
+						</th:block>		
+						
 					</div>
 				</div>
 				<!-- ./col -->

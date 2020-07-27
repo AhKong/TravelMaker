@@ -1,10 +1,24 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>TravelMaker</title>
+  <style>
+  #mEmailRegExpMsg{
+ 		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ 	}
+ #mTelRegExpMsg{
+  		display:none;
+ 		color:#ff0000;
+ 		font-size:12px;
+ }
+  #login{
+  float: right;
+  }
+  </style>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,54 +36,77 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>TravelMaker</b></a>
+    <a href="/"><b>TravelMaker</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">이름,주번 입력하시고 아이디를 받을 이메일주소를 입력하세여</p>
+      <p class="login-box-msg">아이디 찾기</p>
 
-      <form action="login" method="Get">
+    <!--  <td th:text="${mId}"></td> -->
+              
+      <form id="findId" action="/findId" method="POST">
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="이름">
+          <input id="findIdName" type="text" class="form-control" placeholder="이름" name="mName">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="주민등록번호">
+          <input id="findIdTel" type="text" class="form-control" placeholder="전화번호" name="mTel">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fa fa-mobile"></span>
             </div>
           </div>
         </div>
+          <p id="mTelRegExpMsg"> 010-1999-0529 와 같은 형식이여야 합니다. </p>
+        
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="아이디 받을 이메일">
+          <input type="email" class="form-control" placeholder="Email" name="mEmail">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
+         	<button type="button" class="btn btn-default certEmailBtn">메일전송</button>  
         </div>
-        <div class="row">
+        <p id="mEmailRegExpMsg">옳바른 이메일 형식이 아닙니다. </p>
+      <div class="input-group mb-3">
+          <input type="email" class="form-control certCode" placeholder="인증코드">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+         	<button type="button" class="btn btn-default certCodeBtn" data-toggle="modal" data-target="#certEmailModal">인증하기</button>  
+        </div>
+        
+        
+      </form>
+      <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">확인</button>
+            <button id="findIdBtn" type="button" class="btn btn-primary btn-block">확인</button>
           </div>
           <!-- /.col -->
-        </div>
-      </form>
-
-      <p class="mt-3 mb-1">
-        <a href="login">Login </a>
-        <a href="addMember" class="text-center">sing up</a>
-      </p>
+       </div>
+      <div>
+	      <p class="mt-3 mb-1">
+	        <a href="/member/join" class="text-center">sing up</a>
+	        <a id="login" href="/member/login">Login </a>
+	      </p>
+	      
+	  
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
+</div>
+
+						
 <!-- /.login-box -->
 
 <!-- jQuery -->
@@ -80,4 +117,147 @@
 <script src="../../dist/js/adminlte.min.js"></script>
 
 </body>
+
+<script type="text/javascript" th:inline="javascript">
+
+ 	
+$(function(){
+	var mName =$('input[name=mName]');
+	var mTel =$('input[name=mTel]');
+
+	var mEmail =$('input[name=mEmail]');
+	var cert =$('.certCode');
+	var mTel =$('input[name=mTel]');
+	var pwCheck2 = false ; //비밀번호 재확인 일치 여부
+	var emailCheck = false;
+	var telCheck = false;
+	var certCode='';
+
+	
+	mEmail.keyup(function(){
+		var mEmailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		if(mEmailCheck.test(mEmail.val())==true){
+			$('#mEmailRegExpMsg').css('display','none');
+			emailCheck = true;
+		} else {
+			$('#mEmailRegExpMsg').css('display','block');
+			emailCheck=false;
+		}
+	})
+	
+	mTel.keyup(function(){
+		var mTelCheck = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+		if(mTelCheck.test(mTel.val())==true){
+			$('#mTelRegExpMsg').css('display','none');
+			telCheck = true;
+		} else{
+			$('#mTelRegExpMsg').css('display','block');
+			telCheck = false;
+		}
+	})
+	
+		$('#findIdBtn').click(function(){
+			var name;
+			var telNo;
+			var email;
+			var emailChk = false;
+			
+			if($('#findIdName').val() == ''){
+				alert('이름을 입력하세요');
+				findIdName.focus();
+				return;
+			}	
+			
+			if($('#findIdTel').val() == ''){
+				alert('전화번호를 입력하세요');
+				findIdTel.focus();
+				return;
+			}
+			if($('#findPwEmail').val() == ''){
+				alert('이메일을 입력해주세요');
+				findPwEmail.focus();
+				return;
+			}
+
+			if(emailCheck==false){
+				alert('이메일을 다시 확인하세요');
+				mEmail.focus();
+				return false;
+			}
+			
+			if(certCode!=='success'){
+				console.log(certCode);
+				alert('이메일 인증을 해주세요');
+				return false;
+			}
+			
+		
+			var request = $.ajax({
+				  url: "/ajax/findId",  
+				  method: "POST",
+				  data: {mName: mName.val(),
+					     mEmail: mEmail.val() ,
+					     mTel: mTel.val() 
+					     }, 
+				  dataType: "json"
+			});
+
+			request.done(function( data ) {
+				console.log(data.result);
+				if(data.result == 'none'){
+					alert('등록된 회원 정보가 아닙니다!');
+				} else{
+					alert('회원님의 아이디는 ' + data.result+ '입니다')
+					window.location.href = '/member/login';
+				}
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			});	
+		
+          })
+			
+
+
+	$('.certEmailBtn').click(function(){
+		var email = mEmail.val();
+		if(email ==''){
+			alert('이메일을 입력하세요!');
+		 	return false;
+		}
+		
+		var request = $.ajax({
+					  url: "/ajax/certEmail",  
+					  method: "GET",
+					  data: {email :mEmail.val()}, 
+					  dataType: "json"
+				}); 	     
+    
+				request.done(function( data ) {
+					certCode=data.randomCode
+					console.log(data.randomCode);
+				});	
+   
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+				});
+	})
+	
+	$('.certCodeBtn').click(function(){
+
+		if( cert.val()==certCode && emailCheck==true){
+			alert('인증성공!');
+			certCode='success';
+		} else if(emailCheck ==false) {
+			alert('이메일을 다시 확인해주세요');
+			mEmail.focus();
+			return false;
+		}
+	})
+})
+
+ 	
+</script>
+
 </html>

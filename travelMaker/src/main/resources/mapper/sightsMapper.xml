@@ -3,7 +3,6 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.travelMaker.mapper.SightsMapper">
-
 	<select id="selectSightsCate" resultType="SightsCate">
 		select 
 			sights_cate_num as sightsCateNum,
@@ -76,6 +75,8 @@
 		<result property ="sightsRegDate" column ="sights_reg_time"/>
 		<result property ="sightsOpen" column ="sightsOpen"/>
 		<result property ="btnColor" column ="btnColor"/>
+		<result property ="avgGrade" column ="avgGrade"/>
+		<result property ="reviewCnt" column ="reviewCnt"/>
 		<association property="sightsCate" javaType ="SightsCate">
  			<result property="sightsCateNum"  	column="sights_cate_num"/>
  			<result property="sightsType"   	column="sights_type"/>
@@ -90,7 +91,7 @@
 			tb_sights  AS s 
 			INNER JOIN tb_si AS si 
 			INNER JOIN tb_sights_cate AS sc
-			ON s.si_num = si.si_num AND sc.sights_cate_num = s.sights_cate_num
+			ON s.si_num = si.si_num AND sc.sights_cate_num = s.sights_cate_num and s.sights_active ='Y'
 		WHERE 
 			si.si_name LIKE CONCAT('%',#{search},'%')
 	</select>
@@ -122,5 +123,42 @@
 			WHERE
 				sights_num =#{sightsNum}
 		]]>
+	</select>
+	
+	<select id="getbestSights" parameterType="String" resultMap ="sightsSelect">
+		SELECT 
+			s.*,
+			avgGrade.score as avgGrade,
+			avgGrade.reviewCnt AS reviewCnt,
+			si.si_name,
+			sc.sights_type
+		FROM
+			 tb_sights AS s
+		INNER JOIN 
+			(SELECT 
+					sr.sights_num AS sights_num,
+					ROUND(AVG(sr.sights_review_grade),1) AS score,
+					COUNT(*) AS reviewCnt
+			FROM  
+				tb_sights_review AS sr
+			WHERE 
+				sr.sights_review_status ='Y'
+			GROUP BY 
+				sr.sights_num
+			) AS avgGrade
+		INNER JOIN
+			tb_si AS si
+		INNER JOIN 
+			tb_sights_cate AS sc
+		ON
+			 s.sights_num = avgGrade.sights_num 
+			 AND si.si_num = s.si_num 
+			 AND s.sights_cate_num = sc.sights_cate_num
+	  	WHERE 
+			si.si_name LIKE CONCAT('%',#{search},'%') and s.sights_active ='Y'
+		ORDER BY
+			avgGrade DESC , reviewCnt DESC
+		LIMIT
+			 0,3;
 	</select>
 </mapper>

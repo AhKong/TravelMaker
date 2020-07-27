@@ -31,6 +31,37 @@
 		from
 			tb_res_review_like
 		where 
-			m_id = #{mId} and res_review_num =#{reviewNum}
+			m_id = #{mId} and res_review_num = #{reviewNum}
+	</delete>
+	
+	<insert id="likeSightsReview" parameterType="ReviewLike">
+		<selectKey order ="BEFORE" keyProperty="likeNum" resultType ="String"> 
+		 	SELECT 
+				case COUNT(*)
+				when 0 then 'sights_review_like_1'
+				ELSE CONCAT('sights_review_like_',MAX(CAST(SUBSTRING(sights_review_like_num,20) AS DECIMAL))+1) 
+				END AS sights_review_like_num
+			FROM
+				tb_sights_review_like
+			</selectKey>
+			INSERT INTO
+				 tb_sights_review_like(
+				 	sights_review_like_num,
+					m_id,
+				    sights_review_num
+			) VALUES (
+				#{likeNum},
+				#{mId},
+				#{reviewNum}
+			)
+	</insert>
+	
+	<delete id ="unLikeSightsReview" parameterType="ReviewLike">
+		delete 
+			
+		from
+			tb_sights_review_like
+		where 
+			m_id = #{mId} and sights_review_num =#{reviewNum}
 	</delete>
 </mapper>

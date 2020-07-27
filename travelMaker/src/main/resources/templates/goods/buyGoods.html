@@ -64,31 +64,15 @@
                     <td th:text="${gl.goodsPrice}"></td>
                     <td th:text="${gl.goodsAmount}"></td>
                     <td th:text="${gl.goodsRegDate}"></td>
-                    <td><a th:href="@{/goods/detailGoods(gCode=${gl.goodsCode})}" class="btn btn-primary"><i class="fas fa-search"></i></a></td>
+                    <td><a style="color:white" class="btn btn-primary" th:if="${gl.goodsAmount} == 0">매진</a>
+                    <a th:href="@{/goods/detailGoods(gCode=${gl.goodsCode})}" class="btn btn-primary" th:if="${gl.goodsAmount} != 0"><i class="fas fa-search"></i></a></td>
 					<td><span class="badge badge-success" th:text="${gl.goodsSaleYesNo}"></span></td>
                   </tr>
                   </tbody>
-         	
-         		
                 </table>
-                	
                 </div>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-       
-          <!-- /.col -->
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-
-
 </th:block>
 <th:block layout:fragment="customFooterScript">
 	<!-- jQuery -->

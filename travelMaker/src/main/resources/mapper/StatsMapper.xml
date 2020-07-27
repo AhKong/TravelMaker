@@ -29,8 +29,6 @@ ON
 	sr.m_id = m.m_id
 WHERE
 	m.m_gender = '여';
-
-
 </select>
 
 <select id="review" resultType="String">
@@ -38,7 +36,6 @@ SELECT
 	COUNT(sights_num)
 FROM
 	tb_sights_review;
-
 </select>
 
 <select id="like" resultType="int">
@@ -46,9 +43,6 @@ SELECT
 	COUNT(sights_review_like_num)
 FROM
 	tb_sights_review_like;
-
-
-
 </select>
 
 <select id="comment" resultType="int">
@@ -56,26 +50,13 @@ SELECT
 	COUNT(sights_comment_num)
 FROM
 	tb_sights_comment;
-
 </select>
 
 <select id="grade" resultType="int">
 SELECT
-	ROUND((hap.total/(cnt*4)), 1)
+ROUND(AVG(sights_review_grade),2)
 FROM
-	(SELECT
-		(
-		 SUM(sights_review_grade_traffic)
-		+SUM(sights_review_grade_satis)
-		+SUM(sights_review_grade_amenity)
-		+SUM(sights_review_grade_revisit)
-		) AS total
-			,(SELECT 
-				COUNT(1)
-			From 
-				tb_sights_review) AS cnt
-		FROM
-			tb_sights_review) AS hap
+tb_sights_review;
 </select>
 
 <!-- 음식점 -->
@@ -90,7 +71,6 @@ ON
 	rReview.m_id = m.m_id
 WHERE
 	m.m_gender = '남';
-
 </select>
 
 <select id="resGenderG" resultType="int">
@@ -115,21 +95,8 @@ FROM
 
 <select id="resGrade" resultType="int">
 SELECT
-ROUND((hap.total/(cnt*5)), 1)
+ROUND(AVG(res_review_grade),2)
 FROM
-(SELECT
-	(
-	 SUM(res_review_taste_grade)
-	+SUM(res_review_grade_hygiene)
-	+SUM(res_review_grade_mood)
-	+SUM(res_review_grade_kind)
-	+SUM(res_review_grade_cheap)
-	) AS total
-		,(SELECT 
-			COUNT(1)
-		From 
-			tb_res_review) AS cnt
-	FROM
-		tb_res_review) AS hap
+tb_res_review;
 </select>
 </mapper>

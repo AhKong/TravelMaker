@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.travelMaker.mapper.TripPlanMapper">
+
+
+<resultMap type="TripPlan" id="tripPlanSelect"> 
+		<result property ="pNum" column ="trip_plan_num"/>
+		<result property ="tNum" column ="trip_num"/>
+		<result property ="mId" column ="m_id"/>
+		<result property ="pDate" column ="trip_plan_date"/>
+		<result property ="pCost" column ="trip_Plan_cost"/>
+		<result property ="pSupply" column ="trip_plan_supply"/>
+		<result property ="pDetail" column ="trip_plan_detail"/>
+		<result property ="pRegData" column ="trip_paln_reg_date"/>	
+	</resultMap>
+
+
+<insert id="TripNameInsert" parameterType="MyTrip">
+	<selectKey order="BEFORE" keyProperty="tNum" resultType="string">
+		SELECT
+			(case COUNT(*)
+			WHEN 0 THEN 'trip_num1'
+			ELSE CONCAT('trip_num', MAX(CAST(SUBSTRING(trip_num,9) AS DECIMAL))+1)
+			END) AS tNum 
+		FROM
+			tb_trip
+	</selectKey>
+	INSERT INTO tb_trip
+	(trip_num, m_id, trip_name, trip_open_check, trip_url, trip_start_date,trip_end_date,trip_status,trip_reg_date,trip_photo)
+	VALUE(#{tNum},#{mId},#{tName},#{oCheck},'trup_url',null,null,'',NOW(),'photo1.png')
+</insert>
+<select id="myTripNum" resultType="String">
+	select
+	*
+	from
+	tb_trip
+	where
+	trip_num = #{tNum}
+</select>
+
+<select id="selectTripPlan" parameterType="String" resultMap="tripPlanSelect">
+select
+	*
+	from
+	tb_trip_plan
+	where
+	m_id = #{mId}
+	and
+	trip_num = #{tNum};
+</select>
+
+<select id="sTripPlan" resultMap="tripPlanSelect">
+SELECT
+*
+FROM
+tb_trip_plan;
+</select>
+
+<delete id="deleteTripPlan" parameterType="String">
+CALL trip_delete(#{tNum});
+</delete>
+
+<select id="sTripMid" parameterType="String" resultType="String">
+SELECT
+m_id
+FROM
+tb_trip
+where
+trip_Num = #{tNum};
+</select>
+
+
+</mapper>

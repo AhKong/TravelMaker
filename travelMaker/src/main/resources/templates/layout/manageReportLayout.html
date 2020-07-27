@@ -3,9 +3,9 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default}">
 <th:block layout:fragment="customContents">
-<div th:replace="fragments/sendMsg :: sendMsgModalFragement"></div>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  	<div th:replace="fragments/reportReview :: reportedReviewFragment"></div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -39,12 +39,12 @@
       			 <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                  <a href="/manageSightsReviewReport" class="nav-link">
+                  <a href="/report/manageSightsReviewReport" class="nav-link">
                     <i class="fas fa-inbox"></i> 리뷰신고내역(관광명소)
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/manageResReviewReport" class="nav-link">
+                  <a href="/report/manageResReviewReport" class="nav-link">
                      <i class="fas fa-inbox"></i> 리뷰신고내역(음식점)
                   </a>
                 </li>
@@ -56,24 +56,19 @@
        
             <div class="col-12 col-md-12 col-lg-10 order-2 order-md-2">
               <div class="card">
-              <div class="card-header">
-           			<div class="btn-group float-right">
-                        <button type="button" class="btn btn-primary">미처리</button>    
-                        <button type="button" class="btn btn-primary">처리</button>
-                        <button type="button" class="btn btn-primary">전체</button>
-                    </div>
-      			</div>
+   
             
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>No</th>
+                    <th>신고번호</th>
                     <th>신고자</th>
                     <th>신고리뷰번호</th>
                     <th>신고사유</th>
                     <th>처리여부</th>
+                    <th>신고시각</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -100,6 +95,7 @@
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/dist/js/commonAjax.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -116,6 +112,65 @@
       "responsive": true,
     });
   });
+  
+  $('.showReview').click(function(){
+	  console.log($(this).html())
+	  var reviewNum = $(this).attr('reviewNum');
+	  var reviewType = $(this).attr('reviewType');
+	  var reportNum =$(this).attr('reportNum');
+	  $('#reportOKBtn').attr('reviewNum',reviewNum );
+	  $('#reportOKBtn').attr('reportNum',reportNum );
+	  console.log(reportNum);
+	  var url = null;
+	  if(reviewType =='Res'){
+		  url ='getReportedResReview';
+		  $('#reportOKBtn').attr('reviewType','Res');
+	  }else {
+		  url ='getReportedSightsReview';
+		  $('#reportOKBtn').attr('reviewType','Sights');
+	  }
+	  commonAjax('/ajax/'+url,
+				{"reviewNum":reviewNum},
+				function(data){
+					var result = data.result;
+					console.log(result);
+					var html = '';
+					if(reviewType=='Res'){
+						html += '<strong>작성자 </strong>'+result.member.mId+'</span><br><hr>'
+						html += '<strong>제목</strong>'+result.resReviewTitle+'</span><br>';
+						html +='<strong>내용</strong>'+result.resReviewContents+'</span><br>';
+						if(result.resReviewPhoto !=''){
+							html += '<img class="img-fluid" src="/fileupload/'+result.resReviewPhoto+'alt="Photo" width="300">'
+						}
+						html += '<span><i class="fas fa-suitcase-rolling"></i>여행 유형 :<strong>'+result.tripType.tripTypeName+'</strong></span><br>'
+						html += '<span><i class="far fa-calendar-check"></i><strong>'+result.resVisitDate+'</strong>에 다녀감 </span><br><br>'	
+					} else {
+						html += '<strong>작성자 </strong>:<span>'+result.member.mId+'</span><br><hr>'
+						html += '<strong>제목</strong>: <span>'+result.sightsReviewTitle+'</span><hr>';
+						html +='<strong>내용</strong>: <span>'+result.sightsReviewContents+'</span><hr>';
+						if(result.sightsReviewPhoto !=''){
+							html += '<img class="img-fluid" src="/fileupload/'+result.sightsReviewPhoto+'"alt="Photo" width="300"><br>'
+						}
+						html += '<span><i class="fas fa-suitcase-rolling"></i>여행 유형 :<strong>'+result.tripType.tripTypeName+'</strong></span><br>'
+						html += '<span><i class="far fa-calendar-check"></i><strong>'+result.sightsVisitDate+'</strong>에 다녀감 </span><br><br>'	
+					}
+					$('.modal-body').html(html);
+				},'Get'); 
+	  $('#showReportedReview').modal();
+  })
+  
+  $('#reportOKBtn').click(function(){
+		var reviewType = $(this).attr('reviewType');
+		var reviewNum =$(this).attr('reviewNum');
+		var reportNum =$(this).attr('reportNum');
+		console.log(reportNum);
+		commonAjax('/ajax/acceptReviewReport',
+				{"reviewNum":reviewNum,"reviewType":reviewType,"reportNum":reportNum},
+				function(data){
+					alert(data.result);
+					location.reload();
+				},'Get'); 
+  })
   </script>
 </th:block>	
 </html>

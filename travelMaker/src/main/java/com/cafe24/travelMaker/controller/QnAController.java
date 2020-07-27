@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.domain.Question;
+import com.cafe24.travelMaker.service.NoticeService;
 import com.cafe24.travelMaker.service.QuestionService;
 
 @Controller
 @RequestMapping("/question")
 public class QnAController{
 	@Autowired private QuestionService questionService;
+	@Autowired private NoticeService noticeService;
 	@GetMapping("/faq")
 	public String faq() {
 		return "/question/faq";
@@ -53,15 +56,19 @@ public class QnAController{
 	}
 	
 	@GetMapping("/answerSuccess")
-	public String answerSuccess(Question question, 
+	public String answerSuccess(Question question, HttpSession session, Notice notice,
 			@RequestParam(name = "qCode", required = false) String qCode,
-			@RequestParam(name = "inputDescription", required = false) String inputDescription) {
+			@RequestParam(name = "inputDescription", required = false) String inputDescription,
+			@RequestParam(name = "memberId", required = false) String memberId) {
 		System.out.println(question + " <-- question answer()");
 		System.out.println(qCode + " <-- qCode answer()");
 		System.out.println(inputDescription + " <-- inputDescription answer()");
+		System.out.println(memberId + " <-- inputDescription answer()");
 		question.setQuestionCode(qCode);
 		question.setqAnswer(inputDescription);
+		notice.setmId(memberId);
 		questionService.answer(question);
+		noticeService.questionNotice(notice);
 		return "redirect:/question/answer";
 	}
 	
@@ -71,7 +78,7 @@ public class QnAController{
 	}
 	
 	@GetMapping("/answerForm")
-	public String answerForm(Model model, Question question, @RequestParam(name="qCode", required=false) String qCode) {
+	public String answerForm(Model model, Question question, @RequestParam(name="qCode", required=false) String qCode, @RequestParam(name="mId", required=false) String mId) {
 		question = questionService.getQuestionInfo(qCode);
 		model.addAttribute("question", question);
 		return "/question/answerForm";

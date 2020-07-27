@@ -15,6 +15,7 @@ public class SightsReview {
 	private String sightsReveiwUpdateDate;
 	private String sightsVisitDate;
 	private TripType tripType;
+	private Sights sights;
 	private boolean isLiked = false;
 	public String getSightsReviewNum() {
 		return sightsReviewNum;
@@ -94,6 +95,12 @@ public class SightsReview {
 	public void setLiked(boolean isLiked) {
 		this.isLiked = isLiked;
 	}
+	public Sights getSights() {
+		return sights;
+	}
+	public void setSights(Sights sights) {
+		this.sights = sights;
+	}
 	@Override
 	public String toString() {
 		return "SightsReview [sightsReviewNum=" + sightsReviewNum + ", member=" + member + ", sightsNum=" + sightsNum
@@ -101,8 +108,6 @@ public class SightsReview {
 				+ ", sightsReviewGrade=" + sightsReviewGrade + ", file=" + file + ", sightsReviewPhoto="
 				+ sightsReviewPhoto + ", sightsReveiwRegDate=" + sightsReveiwRegDate + ", sightsReveiwUpdateDate="
 				+ sightsReveiwUpdateDate + ", sightsVisitDate=" + sightsVisitDate + ", tripType=" + tripType
-				+ ", isLiked=" + isLiked + "]";
+				+ ", sights=" + sights + ", isLiked=" + isLiked + "]";
 	}
-	
-	
 }
