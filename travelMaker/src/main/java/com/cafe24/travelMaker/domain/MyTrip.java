@@ -53,8 +53,8 @@ public class MyTrip {
 	public String getsDate() {
 		return sDate;
 	}
-	public void setsDate(String sDate) {
-		this.sDate = sDate;
+	public void setsDate(String startDate) {
+		this.sDate = startDate;
 	}
 	public String geteDate() {
 		return eDate;

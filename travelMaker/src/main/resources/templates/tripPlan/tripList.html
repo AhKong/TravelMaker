@@ -268,11 +268,11 @@
 						<div>
 							<strong>여행이름</strong>
 						</div>
-
+						<!-- <a th:value="${sDate},${eData}"> </a> -->
 						<div class=" col-lg-12">
 							<input id="modalinput" class="form-control input-lg" type="text" placeholder="여행명" name="tripName">
 								<div>
-									<input id="startDate" type='date' name='tripDate' /> ~ <input id="endDate" type='date' name='tripDate' />
+									<input id="startDate" type="date" name="startDate" /> ~ <input id="endDate" type="date" name="endDate" value="0000-00-00"/>
 								</div>
 						</div>
 					</div>
@@ -326,7 +326,7 @@
 
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">닫기</button>
-							<button id="makeBtn" type="submit" class="btn btn-primary">만들기</button>
+							<button id="makeBtn" type="submit" class="btn btn-primary" >만들기</button>
 
 						</div>
 					</div>
@@ -364,25 +364,48 @@
 		 
 		 $(function(){
 			 
-			 var inVal = $('radio[name=jb-radio]').val;
-				var raVal = $('modalinput').val
+			var inVal = $('radio[name=jb-radio]').val;
+			var raVal = $('modalinput').val
 			console.log(inVal);
 			console.log(raVal);
 			 
 			 
-				$('#makeBtn').click(function(){
-										
-					if($('#modalinput').val() == ''){
-						alert('여행이름을 해주세요');
-						modalinput.focus();
-						return false;
-					}
-					if($(':radio[name="jb-radio"]:checked').length < 1){
-						alert('여행 공개여부를 선택해주세요');						
-						event.preventDefault();
-					}
-		          }) 
+			$('#makeBtn').click(function(){
+									
+				if($('#modalinput').val() == ''){
+					alert('여행이름을 해주세요');
+					modalinput.focus();
+					return false;
+				}
+				if($(':radio[name="jb-radio"]:checked').length < 1){
+					alert('여행 공개여부를 선택해주세요');						
+					event.preventDefault();
+				}
 			});
+				
+				
+				
+				/* if($('#startDate').val() > $('#endDate').val){
+			} */    
+
+		
+		$('#endDate').change(function(){
+			var startDate = $('#startDate').val();
+			var endDate = $('#endDate').val();
+			console.log(startDate);
+			console.log(endDate);
+			
+			if(endDate != null || endDate != '' || endDate != Nan || endDate != undefined){
+				if(startDate > endDate){
+					alert('시작 날짜와 종료날짜를 정확히 입력하세요');
+					$('#endDate').val('');
+				}
+			}
+		});
+				
+				
+				
+	});
 // 모달창 인풋박스 데이터값 체크박스 값 여행수정페이지 
 
 						
