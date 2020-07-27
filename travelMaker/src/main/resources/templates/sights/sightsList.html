@@ -75,7 +75,7 @@
 					<div class="bestSights row">
 						<th:block th:each ="best : ${best3}">
 							<div class="col-12 col-sm-4">
-							 <div class=" info-box bg-light " style="height:200px">
+							 <div class=" info-box bg-light">
 								<img th:src="@{/fileupload/{file}(file=${best.sightsPhoto})}"alt="User Image" width="100" height="150">
 								<div class="desc">
 									<a id="sightsNum" th:href="@{/sights/detailSights(sightsNum=${best.sightsNum})}" class="sightsName" th:data-sightsNum="${best.sightsNum}" th:text="${best.sightsName}"></a><br>
