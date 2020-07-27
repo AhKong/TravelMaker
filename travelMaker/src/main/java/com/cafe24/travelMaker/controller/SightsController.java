@@ -75,6 +75,7 @@ public class SightsController{
 		model.addAttribute("reviewCnt", reviewService.getSightsReviewCnt(sightsNum));
 		model.addAttribute("reviewPhotos", reviewService.getSightsReviewPhotos(sightsNum));
 		model.addAttribute("genderPreference", reviewService.getSightsGenderPreference(sightsNum));
+		model.addAttribute("typePreference", reviewService.getSightsTypePreference(sightsNum));
 	
 		return "/sights/detailSights";
 	}

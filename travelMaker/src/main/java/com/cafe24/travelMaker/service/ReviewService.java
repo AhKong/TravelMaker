@@ -218,4 +218,11 @@ public class ReviewService {
 	public String findResReviewWriter(String reviewNum) {
 		return reviewMapper.findResReviewWriter(reviewNum);
 	}
+	
+	public String getResTypePreference(String resNum) {
+		return reviewMapper.getResTypePreference(resNum).getType();
+	}
+	public  String getSightsTypePreference(String sightsNum) {
+		return reviewMapper.getSightsTypePreference(sightsNum).getType();
+	}
 }
