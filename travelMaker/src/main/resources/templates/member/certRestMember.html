@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/loginJoinLayout.html}">
+<th:block layout:fragment="customTitle">
+	 <title>Welcome To TravleMaker</title>
+</th:block>
+<th:block layout:fragment="customCss">
+
+  <style>
+      html,body{
+    	margin:0;
+    	padding:0;
+    }
+ 	label{
+ 		padding-right:10px;
+ 		padding-top:5px;
+ 	}
+
+   </style>
+ </th:block>
+
+<th:block layout:fragment="customContents">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="/"><b>Travel</b>Maker</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p style="color:black"class="login-box-msg" th:utext="|<b>휴면 계정 이메일 인증</b> <br> ${email} <br>인증코드를 전송하였습니다|"></p>
+      <form action="/member/certRestMember" id="certForm" method="post">
+	      <div class="input-group mb-3">
+	      	  <input type="hidden" name="mId" th:value="${mId}">
+	          <input id="certCode" type="text" class="form-control" placeholder="인증코드">
+	          <div class="input-group-append">
+	            <div class="input-group-text">
+	              <span class="fas fa-envelope"></span>
+	            </div>
+	          </div>
+	         	<button type="button" class="btn btn-default certCodeBtn" >인증하기</button>  
+	        </div>
+        </form>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+</th:block>
+ <th:block layout:fragment="customScript">
+ <script src="/dist/js/commonAjax.js"></script>
+	<script th:inline="javascript">
+
+		/*<![CDATA[*/
+			var email =/*[[${email}]]*/
+			var randomCode =/*[[${randomCode}]]*/
+		/*]]>*/
+		
+		console.log(randomCode);
+		$(function(){
+			$('.certCodeBtn').click(function(){
+				var certCode = $('#certCode');
+				if(certCode.val()==''){
+					alert('인증코드를 입력하세요!');
+					certCode.focus();
+					return false;
+				}
+				if(certCode.val() !=randomCode){
+					alert('인증코드가 일치하지 않습니다!');
+					certCode.focus();
+					return false;
+				}
+				
+				$('#certForm').submit();
+			})
+		})
+	</script>
+</th:block>
+
+</html>

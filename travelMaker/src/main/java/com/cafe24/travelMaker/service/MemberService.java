@@ -86,6 +86,7 @@ public class MemberService {
 			result.setmEmail(plainEmail);
 			String plainTel = jasypt.decrypt(result.getmTel()); 
 			result.setmTel(plainTel);
+			System.out.println(result+"<----zzzz");
 		}
 		return result;
 	}
@@ -158,5 +159,8 @@ public class MemberService {
 	public List<Member> selectDormantMember() {		//휴면회원 대상자 조회
 		System.out.println("selectDormantMember MemberService 도착");
 		return memberMapper.selectDormantMember();
+	}	
+	public int updateRestMember(String mId) {
+		return memberMapper.updateRestMember(mId);
 	}
 }

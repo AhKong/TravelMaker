@@ -26,5 +26,6 @@ public interface MemberMapper {
 	public List<Member> getDormantMemberList();			  //휴면회원 조회
 	public List<Member> selectDormantMember();			  //휴면처리 대상자 조회
 	public int addLoginLog(MemberLogin memberLogin);
+	public int updateRestMember(String mId);
 	
 }

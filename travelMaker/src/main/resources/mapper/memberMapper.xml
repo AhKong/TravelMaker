@@ -195,5 +195,15 @@
 		)
 	
 	</insert>
+	
+	<update id="updateRestMember" parameterType="String">
+		UPDATE
+			tb_member
+		SET
+			level_num='2'
+		WHERE 
+		 m_id =#{mId}
+	
+	</update>
 
 </mapper>
