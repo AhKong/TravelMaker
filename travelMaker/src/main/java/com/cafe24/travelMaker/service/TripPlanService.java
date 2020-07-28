@@ -31,11 +31,13 @@ public class TripPlanService {
 	public String sTripMid(String tNum) {
 		return tripPlanMapper.sTripMid(tNum);
 	}
-	public List<MyTrip> sMyTrip(String tNum) {
+	public MyTrip sMyTrip(String tNum) {
 		return tripPlanMapper.sMyTrip(tNum);
-		
 	}
 	public String selectTnum() {
 		return tripPlanMapper.selectTnum();
+	}
+	public String planInsert(String mId, String pCost, String pSupply, String pDetail, String tNum) {
+		return tripPlanMapper.planInsert(mId,pCost,pSupply,pDetail,tNum);
 	}
 }

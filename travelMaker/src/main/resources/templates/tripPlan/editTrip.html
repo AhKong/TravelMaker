@@ -253,6 +253,7 @@
 	width: 25%;
 	margin: -5px;
 	margin-left: 5px;
+	text-align: center;
 }
 .updateBtn{
 	float: right;
@@ -260,13 +261,14 @@
 	width: 25%;
 	margin: -5px;
 	margin-left: 5px;
+	text-align: center;
 }
 .tripPaln{
 	width: 100%;
 }
 .palnDetail{
 	width: 100%;
-	padding-bottom: 200px;
+	padding-bottom: 120px;
 }
 </style>
 
@@ -297,26 +299,13 @@
 							<h3 class="card-title">
 								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
 							</h3>
-							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
-								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal">삭제</button>
-							</th:block>
-							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${selectTripPlan[0].tNum}">삭제</button>
-							</th:block>
 							
-							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
-							<button class="insertBtn"><i class="fas fa-share"></i>인설트저장</button>
-							</th:block>
-							
-							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-							<button class="updateBtn"><i class="fas fa-share"></i>update저장</button>
-							</th:block>
 						</div>
 
 						<div id="editBox" class="small-box">
-							<div>
-								<a th:text="${mTrip[0].sDate}">시작날짜</a> - <a th:text="${mTrip[0].eDate}"> 종료날짜</a>
-							</div>
+								<div>
+									<a th:text="${mTrip.sDate}"></a> ~ <a th:text="${mTrip.eDate}"> </a>
+								</div>
 							<div>
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 									class="img-rounded">
@@ -363,36 +352,51 @@
 									</h4>
 								</div>
 							</th:block>
-						
-					<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
-							<div>
-								여행경비 : <input class="tripPaln">
+							
+					<form th:action="@{/myTrip/PlanInsert}" method="Post">
+						<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
+						<input type="hidden" name="tNum" th:value="${tNum}">
+								<div>
+									여행경비 : <input type="text" class="tripPaln" name="planCost">
+								</div>
+								<div>
+									여행 준비물 : <input type="text" class="tripPaln" name="supply">
+								</div>
+								<div>
+									여행 상세 :
+								</div>
+								<div>
+									<textarea class="palnDetail" name="detail"></textarea>
+								</div>
+						</th:block>
+					
+						<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+							<input type="hidden" name="tNum" th:value="${tNum}">
+							<div class="planPay">
+								여행경비(원) : <input class="tripPaln" th:value="${selectTripPlan[0].pCost}" name="planCost">
 							</div>
 							<div>
-								여행 준비물 : <input class="tripPaln">
+								여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}" name="planSupply"> 
 							</div>
 							<div>
-								여행 상세 :
+								여행 상세 : 
 							</div>
 							<div>
-								<textarea class="palnDetail"></textarea>
+								<textarea class="palnDetail" th:value="${selectTripPlan[0].pDetail}" name="planDetail"></textarea>
 							</div>
-					</th:block>
-				
-					<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-						<div class="planPay">
-							여행경비(원) : <input class="tripPaln" th:value="${selectTripPlan[0].pCost}">
-						</div>
-						<div>
-							여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}"> 
-						</div>
-						<div>
-							여행 상세 : 
-						</div>
-						<div>
-							<textarea class="palnDetail" th:value="${selectTripPlan[0].pDetail}"></textarea>
-						</div>
-					</th:block>
+						</th:block>
+					
+							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
+								<button id="selectTripPlan" class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:value="${tNum}">입력</button>
+								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal">삭제</button>
+							</th:block>
+							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${selectTripPlan[0].tNum}">삭제</button>
+							</th:block>
+							
+								<!-- <button type="submit" class="insertBtn btn btn-primary" style="color: white;" th:data-tNum="${selectTripPlan[0].tNum}"><i class="fas fa-share"></i>인설트저장</button> -->
+							
+					</form>
 						</div>
 						<div id="editBox" class="small-box">
 							<button data-toggle="modal" data-target="#myModal" type="button"
@@ -938,11 +942,14 @@
 		$(function(){
 			$('#deleteModal').on('show.bs.modal', function (e) {
 				  var tNum = $(this).data('tNum');
-				  
-				  console.log('!!!');
-				  console.log(tNum);
-			})			
+
+			})
+			
+			console.log($('#selectTripPlan').val());
 		});
+	
+		
+		
 		
 	</script>
 
