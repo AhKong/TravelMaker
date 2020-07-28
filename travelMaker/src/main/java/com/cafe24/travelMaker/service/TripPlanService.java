@@ -31,4 +31,11 @@ public class TripPlanService {
 	public String sTripMid(String tNum) {
 		return tripPlanMapper.sTripMid(tNum);
 	}
+	public List<MyTrip> sMyTrip(String tNum) {
+		return tripPlanMapper.sMyTrip(tNum);
+		
+	}
+	public String selectTnum() {
+		return tripPlanMapper.selectTnum();
+	}
 }

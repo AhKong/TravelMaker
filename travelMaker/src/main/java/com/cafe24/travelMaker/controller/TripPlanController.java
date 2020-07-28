@@ -2,6 +2,7 @@ package com.cafe24.travelMaker.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,20 +50,35 @@ public class TripPlanController {
 	@PostMapping("/editTrip")
 	public String sightsAdd(Model model, @RequestParam(name="tripName", required=false) String tripName
 										,@RequestParam(name="jb-radio", required=false) String openCheck
+										,@RequestParam(name="startDate", required=false) String startDate
+										,@RequestParam(name="endDate", required=false) String endDate
 										,HttpSession session) {// 여행수정..
 		String loginId = (String)session.getAttribute("SID");
 		System.out.println(tripName+" <<<<<<<<<<<tripName");
 		model.addAttribute("tripName", tripName);
 		System.out.println(openCheck+" <<<<<<<<<<openCheck");
 		model.addAttribute("openCheck", openCheck);
-		//모달에서 넘어올때 설정한 날자 데이터값 인설트 시켜야행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 		MyTrip myTrip = new MyTrip();
 		myTrip.setmId(loginId);
 		myTrip.setoCheck(openCheck);
 		myTrip.settName(tripName);
+		myTrip.setsDate(startDate);
+		myTrip.seteDate(endDate);
 		System.out.println(myTrip+" <<<<<<<<<< POSTeditTrip - myTrip");
 		int TripNameInsert = tripPlanService.TripNameInsert(myTrip);
 		System.out.println(TripNameInsert + "<< tripnameinsertttttttttttttt");
+		
+		String selectTnum = tripPlanService.selectTnum();
+		System.out.println(selectTnum);
+		
+		
+		List<TripPlan> sTripPlan = tripPlanService.sTripPlan();
+		model.addAttribute("sTripPlan", sTripPlan);
+		
+		
+		List<MyTrip> mTrip = tripPlanService.sMyTrip(selectTnum);
+		model.addAttribute("mTrip", mTrip);
 		return "/tripPlan/editTrip";
 	}
 	
@@ -81,11 +97,18 @@ public class TripPlanController {
 		
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
 		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");		
-		model.addAttribute("selectTripPlan", selectTripPlan);	
+		model.addAttribute("selectTripPlan", tripPlanService.selectTripPlan(loginId, tNum));	
 		
 		
 		List<TripPlan> sTripPlan = tripPlanService.sTripPlan();
 		model.addAttribute("sTripPlan", sTripPlan);
+		
+		String selectTnum = tripPlanService.selectTnum();
+		System.out.println(selectTnum);
+		
+		List<MyTrip> mTrip = tripPlanService.sMyTrip(selectTnum);
+		model.addAttribute("mTrip", mTrip);
+		System.out.println(mTrip + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		return "/tripPlan/editTrip";
 	}
 	

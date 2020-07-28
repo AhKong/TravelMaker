@@ -378,6 +378,7 @@
 		 	sr.sights_review_status ='Y'
 		group by m.m_gender HAVING m.m_gender IS NOT null
 	</select>
+	
 	<select id="getResGenderPreference" parameterType="String" resultType="Preference" >
 		select 
 			 m.m_gender as type,
@@ -427,5 +428,39 @@
 			tb_sights_review
 		WHERE 
 			sights_review_num =#{reviewNum}
-	</select>                                                              
+	</select>      
+	
+	<select id="getSightsTypePreference" parameterType="String" resultType="Preference" >
+		SELECT 
+			  t.trip_type_name as type,
+			 COUNT(sr.sights_travel_type) AS count
+		from 
+			tb_sights_review as sr 
+		INNER join
+			tb_trip_type AS t 
+		ON t.trip_type_num = sr.sights_travel_type
+		WHERE 
+			sr.sights_num  =#{sightsNum} and 
+		 	sr.sights_review_status ='Y'
+		group by sr.sights_travel_type 
+		ORDER BY count DESC
+		LIMIT 1;
+	</select> 
+	
+	<select id="getResTypePreference" parameterType="String" resultType="Preference" >
+		SELECT 
+			 t.trip_type_name as type,
+			 COUNT(sr.res_travel_type) AS count
+		from 
+			tb_res_review as sr 
+		INNER join
+			tb_trip_type AS t 
+		ON t.trip_type_num = sr.res_travel_type
+		WHERE 
+			sr.res_num  = #{resNum} and 
+		 	sr.res_review_status ='Y'
+		group by sr.res_travel_type
+		ORDER BY count DESC
+		LIMIT 1;
+	</select>                                                        
 </mapper>

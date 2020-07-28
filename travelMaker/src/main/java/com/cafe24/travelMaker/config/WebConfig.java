@@ -24,9 +24,11 @@ public class WebConfig implements WebMvcConfigurer{
 		exlucdList.add("/ajax/**");
 		exlucdList.add("/member/login");
 		exlucdList.add("/member/join");
+		exlucdList.add("/");
 		
 		registry.addInterceptor(msgInterceptor)
 				.addPathPatterns("/**")
 				.excludePathPatterns(exlucdList);
 	}
 }
+

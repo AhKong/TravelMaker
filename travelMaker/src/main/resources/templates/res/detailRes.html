@@ -52,8 +52,8 @@
 					<th:block th:if="${genderPreference !=null}"> 
 						<p th:if ="${genderPreference != 'all'}"  th:utext="|<i class='fas fa-heart' style='color:#FF9E9B'></i><strong> ${genderPreference}성</strong>이 선호하는 여행지입니다|">이 여행지는 여성이 선호하는 여행지입니다</p>
 						<p th:unless ="${genderPreference != 'all'}"> <i class="fas fa-heart" style="color:#FF9E9B"> </i>&nbsp;모든 성별이 선호하는 음식점 입니다! </p>
-					</th:block>	
-					<p>이 여행지는 혼자 여행하는 사람들이 선호하는 여행지 입니다</p>
+					</th:block>
+					<p th:if="${typePreference !='' || typePreference !=null }" th:utext="|<i class='far fa-thumbs-up'></i> 인기 있는 여행 타입은: ${typePreference} 입니다|"></p>
 					<p th:utext="|<i class='fas fa-tv'></i>  &nbsp; ${res.resWeb}|"></p>
 					<p th:utext="|<i class='fa fa-volume-control-phone'></i> &nbsp; ${res.resTel}|"></p>
 					<p>

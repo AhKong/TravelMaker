@@ -43,4 +43,6 @@ public interface ReviewMapper {
 	public int changeResReivewStatus(String reviewNum);
 	public String findSightsReviewWriter(String reviewNum);
 	public String findResReviewWriter(String reviewNum);
+	public Preference getResTypePreference(String resNum);
+	public Preference getSightsTypePreference(String resNum);
 }

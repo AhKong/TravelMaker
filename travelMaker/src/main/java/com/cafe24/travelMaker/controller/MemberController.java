@@ -1,5 +1,6 @@
 package com.cafe24.travelMaker.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.travelMaker.domain.Goods;
+import com.cafe24.travelMaker.domain.Mail;
 import com.cafe24.travelMaker.domain.Member;
 import com.cafe24.travelMaker.domain.MemberLogin;
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.SightsReview;
 import com.cafe24.travelMaker.mapper.FollowMapper;
+import com.cafe24.travelMaker.service.CertSerivce;
 import com.cafe24.travelMaker.service.GoodsService;
+import com.cafe24.travelMaker.service.MailService;
 import com.cafe24.travelMaker.service.MemberService;
 import com.cafe24.travelMaker.service.PointService;
 import com.cafe24.travelMaker.service.ReviewService;
@@ -36,6 +40,8 @@ public class MemberController{
 	@Autowired private GoodsService goodsService;
 	@Autowired private FollowMapper followMapper;
 	@Autowired private ReviewService reviewService;
+	@Autowired private  MailService mailService;
+	@Autowired private  CertSerivce certService;
 	
 	@GetMapping("/myPage")
 	public String myPage(Model model, HttpSession session, Member member, @RequestParam(name="memberId",required=false) String memberId) {
@@ -180,15 +186,18 @@ public class MemberController{
 			Member result = memberService.memberLogin(member.getmId());
 			if(result !=null) {
 				if(member.getmPw().equals(result.getmPw())) {
-					session.setAttribute("SID", result.getmId());
-		    		session.setAttribute("SLEVEL",result.getmLevel());
-		    		session.setAttribute("SNAME", result.getmName());
-		    		session.setAttribute("SAVATAR", result.getmAvatar());
-		    		MemberLogin memberLogin = new MemberLogin();
-		    		memberLogin.setmId(member.getmId());
-		    		memberService.addLoginLog(memberLogin);
-		    		
-		    		return "redirect:/";
+		    		if(result.getmLevel().equals("4")) {
+		    			return "redirect:/member/restMemberCert?mId="+member.getmId();
+		    		} else {	
+		    			session.setAttribute("SID", result.getmId());
+		    			session.setAttribute("SLEVEL",result.getmLevel());
+		    			session.setAttribute("SNAME", result.getmName());
+		    			session.setAttribute("SAVATAR", result.getmAvatar());
+		    			MemberLogin memberLogin = new MemberLogin();
+		    			memberLogin.setmId(member.getmId());
+		    			memberService.addLoginLog(memberLogin);
+		    			return "redirect:/main";
+		    		}
 				}
 			}
 			//redirect 할 때 값 유지할 수 있도록 해주는것!!! 
@@ -229,7 +238,7 @@ public class MemberController{
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/adminLogin")
@@ -238,7 +247,7 @@ public class MemberController{
 		session.setAttribute("SLEVEL","1");
 		session.setAttribute("SNAME", "강민수");
 		session.setAttribute("SAVATAR", "man.png");
-		return "redirect:/";
+		return "redirect:/main";
 	}
 
 	@GetMapping("/affLogin")
@@ -247,6 +256,34 @@ public class MemberController{
 		session.setAttribute("SLEVEL","6");
 		session.setAttribute("SNAME", "이승환");
 		session.setAttribute("SAVATAR", "man.png");
-		return "redirect:/";
+		return "redirect:/main";
+	}
+	
+	@GetMapping("/restMemberCert")
+	public String restMemberCert(String mId,Model model) {
+		String mEmail = memberService.getMemberInfo(mId).getmEmail();
+		HashMap<String, Object> certEmail = certService.certEmail(mEmail); // 보낼 메일 생성, 랜덤코드 생성 
+		mailService.sendMail((Mail)certEmail.get("mail"));//메일 보내기 
+		model.addAttribute("email", memberService.getMemberInfo(mId).getmEmail());
+		model.addAttribute("randomCode", (String)certEmail.get("randomCode"));
+		model.addAttribute("mId", mId);
+		return "/member/certRestMember";
+	}
+	
+	@PostMapping("/certRestMember")
+	public String restMemberCert(@RequestParam(name="mId") String mId,HttpSession session ) {
+		System.out.println(mId +"<----mId");
+		int updateResult = memberService.updateRestMember(mId);
+		if(updateResult>0) {
+			Member member = memberService.getMemberInfo(mId);
+			session.setAttribute("SID", member.getmId());
+			session.setAttribute("SLEVEL",member.getmLevel());
+			session.setAttribute("SNAME", member.getmName());
+			session.setAttribute("SAVATAR", member.getmAvatar());
+			MemberLogin memberLogin = new MemberLogin();
+			memberLogin.setmId(member.getmId());
+			memberService.addLoginLog(memberLogin);
+		}
+		return "redirect:/main";
 	}
 }

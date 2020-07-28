@@ -49,21 +49,17 @@ public class MemberService {
 	public Member memberLogin(String mId) {
 		StandardPBEStringEncryptor jasypt = encryptor();
 		Member member = memberMapper.getMemberInfo(mId);
-		System.out.println(member +"<-----------");
-	
+		/*로그인시 입력한 비밀번호와  DB에 암호화된 비밀번호의 일치여부를 확인하기 위한 복호화 */
 		if(member !=null) {
 			String plainPw = jasypt.decrypt(member.getmPw());
 			member.setmPw(plainPw);
 		}
-		
-		System.out.println(member +"<------복호화된 멤버 정보");
 		return member;
 	}
 
 	public int addMember(Member member) {
+		/* 회원가입시 비밀번호, 전화번호, 이메일 정보에 대하여 암호화 */
 		StandardPBEStringEncryptor jasypt = encryptor();
-       
-        /* 회원가입시 비밀번호, 전화번호, 이메일 정보에 대하여 암호화 */
         String encryptedPw = jasypt.encrypt(member.getmPw());  
         member.setmPw(encryptedPw);
         String encryptedTel = jasypt.encrypt(member.getmTel());  
@@ -83,16 +79,14 @@ public class MemberService {
 	}
 
 	public Member getMemberInfo(String mId) {
-		
 		Member result = memberMapper.getMemberInfo(mId);
 		if(result !=null) {
-
 			StandardPBEStringEncryptor jasypt = encryptor();
 			String plainEmail = jasypt.decrypt(result.getmEmail()); 
 			result.setmEmail(plainEmail);
 			String plainTel = jasypt.decrypt(result.getmTel()); 
 			result.setmTel(plainTel);
-	
+			System.out.println(result+"<----zzzz");
 		}
 		return result;
 	}
@@ -165,5 +159,8 @@ public class MemberService {
 	public List<Member> selectDormantMember() {		//휴면회원 대상자 조회
 		System.out.println("selectDormantMember MemberService 도착");
 		return memberMapper.selectDormantMember();
+	}	
+	public int updateRestMember(String mId) {
+		return memberMapper.updateRestMember(mId);
 	}
 }
