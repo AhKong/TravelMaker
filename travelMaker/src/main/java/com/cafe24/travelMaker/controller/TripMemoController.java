@@ -40,6 +40,4 @@ public class TripMemoController {
 		return "redirect:/tripMemo/tripMemo";
 	}
 	
-	
-	
 }

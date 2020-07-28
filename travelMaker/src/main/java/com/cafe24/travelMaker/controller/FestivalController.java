@@ -2,6 +2,8 @@ package com.cafe24.travelMaker.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +54,6 @@ public class FestivalController {
 		model.addAttribute("festival", festival);
 		model.addAttribute("upList", upList);
 		
-		
 		return "festival/updateFestival";
 	}
 	
@@ -70,14 +71,14 @@ public class FestivalController {
 		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalController");
 		System.out.println(result+" <- result updateFestival FestivalController");
 		
-		return "redirect:/festival/ingFestivalList";
+		return "redirect:/festival/festivalListManager";
 	}
 	
 	//회원 또는 비회원 -> 축제 리스트 (현재 진행중)
 	@GetMapping("/ingFestivalList")
 	public String ingFestivalList(Model model){
 		System.out.println("ingFestivalList FestivalController 도착");
-		festivalService.updateFestivalState();					//현 시점에서 축제 상태 업데이트~!
+		festivalService.updateFestivalState();					//현 시점에서의 축제 상태 업데이트~!
 		List<Festival> fList = festivalService.ingFestivalList();
 		System.out.println(fList+" <- fList ingFestivalList FestivalController");
 		model.addAttribute("fList", fList);
@@ -87,12 +88,22 @@ public class FestivalController {
 	
 	//관리자 페이지 -> 축제 리스트 (현재 진행중)
 	@GetMapping("/ingFestivalListManager")
-	public String ingFestivalListManager(Model model){
+	public String ingFestivalListManager(Model model, HttpSession session){
 		System.out.println("ingFestivalListManager FestivalController 도착");
-		festivalService.updateFestivalState();					//현 시점에서 축제 상태 업데이트~!
-		List<Festival> fList = festivalService.ingFestivalList();
-		System.out.println(fList+" <- fList ingFestivalList FestivalController");
-		model.addAttribute("fList", fList);
+		System.out.println(session.getAttribute("SLEVEL")+" <-------SLEVEL");
+		//char loginLevel = session.getAttribute("SLEVEL").toString().charAt(0); 
+								// Object-> String-> Char 형변환, index 0번째 문자형 반환
+		//System.out.println(loginLevel+" <- loginLevel");
+		String level = session.getAttribute("SLEVEL").toString(); //String 형으로 형변환
+		System.out.println(level+" <- level");
+		if(level == "1" ) {
+			festivalService.updateFestivalState();					//현 시점에서의 축제 상태 업데이트~!
+			List<Festival> fList = festivalService.ingFestivalList();
+			System.out.println(fList+" <- fList ingFestivalList FestivalController");
+			model.addAttribute("SLEVEL", session.getAttribute("SLEVEL"));
+			System.out.println(session.getAttribute("SLEVEL")+" <- SLEVEL");
+			model.addAttribute("fList", fList); 
+		}
 		
 		return "festival/festivalListManager";
 	}
@@ -118,7 +129,6 @@ public class FestivalController {
 		
 		return "festival/festivalList";
 	}
-	
 	
 	//축제 삭제
 	@GetMapping("/deleteFestival")

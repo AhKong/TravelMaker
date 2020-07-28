@@ -32,7 +32,7 @@ public class TripMemoService {
 		return result;
 	}
 	
-	//기록 등록 시 내여행계획 불러오기
+	//기록 등록  후  내여행계획 불러오기
 	public List<TripPlan> getTripPlanList(String mId){
 		System.out.println("getTripPlanList TripMemoService 도착");
 		

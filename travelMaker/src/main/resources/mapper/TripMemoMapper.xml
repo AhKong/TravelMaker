@@ -21,10 +21,7 @@
 		</association>
 	</resultMap>
 
-	<select id="getTripPlanList" resultType="TripPlan" resultMap="tripMemoSelect">
-		
-	</select>
-	
+
 	<select id="tripMemoList" resultType="TripMemo" resultMap="tripMemoSelect">
 		SELECT 
 			m.trip_memo_num, m.m_id, m.trip_num, m.trip_memo_weather, m.trip_memo_title,
