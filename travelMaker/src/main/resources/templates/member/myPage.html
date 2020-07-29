@@ -127,8 +127,8 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">음식점 작성리뷰보기</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline2" data-toggle="tab">관광지 작성리뷰보기</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#resReview" data-toggle="tab">음식점 작성리뷰보기</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#sightsReview" data-toggle="tab">관광지 작성리뷰보기</a></li>
                   <li class="nav-item"><a class="nav-link" href="/myTrip/tripList"  th:if="${member.mId eq session.SID}">내 여행 계획</a></li>
                   <li class="nav-item"><a class="nav-link" href="/tripMemo/tripMemo"  th:if="${member.mId eq session.SID}">내 여행 기록</a></li>
                   <li class="nav-item"><a class="nav-link" href="#goodsBuyList" data-toggle="tab"  th:if="${member.mId eq session.SID}">상품 구매내역</a></li>
@@ -140,13 +140,13 @@
               <div class="card-body">
                 <div class="tab-content">
                 
-                  <div class="active tab-pane" id="timeline">
+                  <div class="active tab-pane" id="resReview">
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
                       <th:block th:each=" rrl : ${followersResReviewList}">
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
-                        <div class="timeline-item">
+                      	<div>
+                        	<i class="fas fa-user bg-info"></i>
+                        	<div class="timeline-item">
                           <span class="time"><i class="far fa-clock" th:text="${rrl.resReveiwRegDate}"></i></span>
                           <h3 class="timeline-header"><a href="#" th:text="${member.mId}"></a>님이 게시글에 리뷰를 남겼습니다.</h3>
                           <strong class="timeline-body" th:text="${rrl.res.resName}"></strong>
@@ -167,7 +167,7 @@
                     </div>
                   </div>
                   
-                  <div class="active tab-pane" id="timeline2">
+                  <div class="tab-pane" id="sightsReview">
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
                       <!-- timeline time label -->
