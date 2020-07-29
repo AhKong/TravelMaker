@@ -2,13 +2,14 @@ package com.cafe24.travelMaker.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.Goods;
 import com.cafe24.travelMaker.domain.Point;
 import com.cafe24.travelMaker.domain.SavePoint;
-import com.cafe24.travelMaker.mapper.NoticeMapper;
 import com.cafe24.travelMaker.mapper.PointMapper;
 /**
 	포인트에 대한 모든 서비스 
@@ -136,6 +137,31 @@ public class PointService {
 		System.out.println(pointSaveAdmin+" <- pointSaveAdmin pointSaveAdminList PointService");
 		
 		return pointSaveAdmin;
+	}
+	
+	//피드백 수용 시 포인트 지급
+	public int savePointForFeedback(HttpSession session, String sightsNum, String resNum, String mId) {
+		System.out.println("savePointForFeedback PointService 도착");
+		this.savePoint.setmId(mId);
+		this.savePoint.setSavePointCause("피드백 수용");
+		this.savePoint.setSavePointCharge(2000);
+		if(sightsNum != null && resNum == null) {			
+			this.savePoint.setSavePointDetail(sightsNum);
+		}else if(sightsNum == null && resNum != null) {
+			this.savePoint.setSavePointDetail(resNum);
+		}
+		int saveResult = pointMapper.savePoint(savePoint);		//포인트 적립
+		System.out.println(saveResult+" <- 1 이면 피드백 포인트 2000점 지급 완료");
+		this.point.setmId(mId);
+		this.point.setFinalPoint(2000);
+		int finalResult = pointMapper.updateMyPoint(point);		//최종포인트 업데이트
+		System.out.println(finalResult+" <- 1 이면 최종포인트 + 피드백 포인트 2000점 업데이트 완료");
+		int noticeResult = noticeService.addNototiceForSavePoint(mId, this.savePoint.getSavePointCharge(), this.savePoint.getSavePointCause());
+		System.out.println(noticeResult+" <- 1 이면 포인트 지급 알람 완료");
+		int result = saveResult+finalResult+noticeResult;
+		System.out.println(result+" <- 3 이면 피드백 수용 처리 완료!!!");
+		
+		return result;
 	}
 	
 }

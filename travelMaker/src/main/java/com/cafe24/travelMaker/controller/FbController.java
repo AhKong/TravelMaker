@@ -2,6 +2,8 @@ package com.cafe24.travelMaker.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,16 @@ import com.cafe24.travelMaker.domain.FbCode;
 import com.cafe24.travelMaker.domain.FeedbackRes;
 import com.cafe24.travelMaker.domain.FeedbackSights;
 import com.cafe24.travelMaker.service.FeedbackService;
+import com.cafe24.travelMaker.service.NoticeService;
+import com.cafe24.travelMaker.service.PointService;
 
 @Controller
 @RequestMapping("/feedback")
 public class FbController {
 
 @Autowired FeedbackService feedbackService;
+@Autowired PointService pointService;
+@Autowired NoticeService noticeService;
 	
 	//회원 -> 관광명소 피드백 등록 폼으로 이동
 	@GetMapping("/addSightsFeedback")
@@ -84,36 +90,41 @@ public class FbController {
 		return "feedback/feedbackList";
 	}
 	
-	//관리자 -> 관광명소 피드백 수용 -> 관광명소 수정페이지로 이동
-	@GetMapping("/acceptFbSights")
-	public String acceptFbSights(Model model, @RequestParam(name="fbSightsCheck", required=false) String fbSightsCheck,
-	  										  @RequestParam(name="fbSightsNum", required=false) String fbSightsNum,
-	  										  @RequestParam(name="sightsNum", required=false) String sightsNum) {
+	//관리자 -> 관광명소/음식점 피드백 수용 -> 관광명소/음식점 수정페이지로 이동
+	@GetMapping("/acceptFeedback")
+	public String acceptFbSights(Model model, HttpSession session, 
+												@RequestParam(name="fbSightsCheck", required=false) String fbSightsCheck,
+												@RequestParam(name="fbSightsNum", required=false) String fbSightsNum,
+												@RequestParam(name="sightsNum", required=false) String sightsNum,
+												@RequestParam(name="fbResCheck", required=false) String fbResCheck,
+												@RequestParam(name="fbResNum", required=false) String fbResNum,
+												@RequestParam(name="resNum", required=false) String resNum,
+												@RequestParam(name="mId", required=false) String mId) {
 		System.out.println("(Get) acceptFbSights FbController 도착");
 		System.out.println(fbSightsCheck+" <- fbSightsCheck / "+fbSightsNum+" <- fbSightsNum");
-		int result = feedbackService.acceptFbSights(fbSightsCheck, fbSightsNum);
-		System.out.println(sightsNum+" <- sightsNum");
-		System.out.println(fbSightsNum+" <- fbSightsNum");
-		model.addAttribute("sightsNum", sightsNum);
-		model.addAttribute("fbSightsNum", fbSightsNum);
-				
-		return "/sights/updateSights";
-	}
-	
-	//관리자 -> 음식점 피드백 수용 -> 음식점 수정페이지로 이동
-	@GetMapping("/acceptFbRes")
-	public String acceptFbRes(Model model, @RequestParam(name="fbResCheck", required=false) String fbResCheck,
-										   @RequestParam(name="fbResNum", required=false) String fbResNum,
-										   @RequestParam(name="resNum", required=false) String resNum) {
-		System.out.println("(Get) acceptFbRes FbController 도착");
 		System.out.println(fbResCheck+" <- fbResCheck / "+fbResNum+" <- fbResNum");
-		int result = feedbackService.acceptFbRes(fbResCheck, fbResNum);
-		System.out.println(resNum+" <- resNum");
-		System.out.println(fbResNum+" <- fbResNum");
-		model.addAttribute("resNum", resNum);
-		model.addAttribute("fbResNum", fbResNum);
-		
-		return "/res/updateRes";
+		if(sightsNum != null && resNum == null) {
+			int result = feedbackService.acceptFbSights(fbSightsCheck, fbSightsNum);	//피드백 수용여부 변경
+			pointService.savePointForFeedback(session, sightsNum, resNum, mId);			//포인트 지급 + 알람
+			System.out.println(sightsNum+" <- sightsNum");
+			System.out.println(fbSightsNum+" <- fbSightsNum");
+			model.addAttribute("sightsNum", sightsNum);
+			model.addAttribute("fbSightsNum", fbSightsNum);
+					
+			return "sights/updateSights";
+			
+		}else if(sightsNum == null && resNum != null) {
+			int result = feedbackService.acceptFbRes(fbResCheck, fbResNum);
+			System.out.println(resNum+" <- resNum");
+			System.out.println(fbResNum+" <- fbResNum");
+			model.addAttribute("resNum", resNum);
+			model.addAttribute("fbResNum", fbResNum);
+			
+			return "res/updateRes";
+			
+		}else {
+			return "redirect:/main";
+		}
 	}
 	
 	//관리자 -> 관광명소 피드백 무시

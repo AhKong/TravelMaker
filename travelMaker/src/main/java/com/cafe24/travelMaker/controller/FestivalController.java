@@ -82,18 +82,24 @@ public class FestivalController {
 		//char loginLevel = session.getAttribute("SLEVEL").toString().charAt(0); 
 				// Object-> String-> Char 형변환, index 0번째 문자형 반환
 		//System.out.println(loginLevel+" <- loginLevel");
-		System.out.println(session.getAttribute("SLEVEL")+" <--------- SLEVEL");
-		String levelNum = session.getAttribute("SLEVEL").toString(); //String 타입으로 변수 선언
-		System.out.println(levelNum+" <--------- levelNum");
 		List<Festival> fList = festivalService.ingFestivalList();
 		System.out.println(fList+" <- fList ingFestivalList FestivalController");
+		System.out.println(session.getAttribute("SLEVEL")+" <--------- SLEVEL");
+		String levelNum = session.getAttribute("SLEVEL").toString(); 
+				//String 타입으로 변수 선언, toString()은  SLEVEL 값이 null 일 때 NullPointerException 가 뜬다
+		//session.getAttribute("SLEVEL")
+		System.out.println(levelNum+" <--------- levelNum");
 		model.addAttribute("SLEVEL", session.getAttribute("SLEVEL"));
-		System.out.println(session.getAttribute("SLEVEL")+" <- SLEVEL");
 		model.addAttribute("fList", fList); 
-		if(levelNum == "1" ) {				//관리자(levelNum="1")는 관리자 페이지로
-			return "festival/festivalListManager";
+		if(levelNum != null && levelNum != "") {
+			if(levelNum == "1") {				//관리자(levelNum="1")는 관리자 페이지로
+				return "festival/festivalListManager";
+			}
+			else {				//관리자가 아니라면 회원페이지로
+				return "festival/festivalList";
+			}
 		}
-		else{				//관리자가 아니라면 회원페이지로
+		else {				//관리자가 아니라면 회원페이지로
 			return "festival/festivalList";
 		}
 	}
