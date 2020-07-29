@@ -2,6 +2,8 @@ package com.cafe24.travelMaker.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +54,6 @@ public class FestivalController {
 		model.addAttribute("festival", festival);
 		model.addAttribute("upList", upList);
 		
-		
 		return "festival/updateFestival";
 	}
 	
@@ -70,55 +71,61 @@ public class FestivalController {
 		System.out.println(festival.getFesNum()+" <- getFesNum updateFestival FestivalController");
 		System.out.println(result+" <- result updateFestival FestivalController");
 		
-		return "redirect:/festival/ingFestivalList";
+		return "redirect:/festival/festivalListManager";
 	}
 	
-	//회원 또는 비회원 -> 축제 리스트 (현재 진행중)
+	//축제 리스트 (현재 진행중인 축제 목록이 기본)
 	@GetMapping("/ingFestivalList")
-	public String ingFestivalList(Model model){
-		System.out.println("ingFestivalList FestivalController 도착");
-		festivalService.updateFestivalState();					//현 시점에서 축제 상태 업데이트~!
+	public String ingFestivalListManager(Model model, HttpSession session){
+		System.out.println("ingFestivalListManager FestivalController 도착");
+		festivalService.updateFestivalState();					//현 시점에서의 축제 상태 업데이트~!
+		//char loginLevel = session.getAttribute("SLEVEL").toString().charAt(0); 
+				// Object-> String-> Char 형변환, index 0번째 문자형 반환
+		//System.out.println(loginLevel+" <- loginLevel");
 		List<Festival> fList = festivalService.ingFestivalList();
 		System.out.println(fList+" <- fList ingFestivalList FestivalController");
-		model.addAttribute("fList", fList);
-		
-		return "festival/festivalList";
+		System.out.println(session.getAttribute("SLEVEL")+" <--------- SLEVEL");
+		String levelNum = String.valueOf(session.getAttribute("SLEVEL")); 
+		//String 타입으로 변수 선언, toString()은  SLEVEL 값이 null 일 때 NullPointerException 가 뜬다
+		//String.valueOf() 는 값이 null 일 때 "null" 으로 값을 받아온다
+		model.addAttribute("SLEVEL", levelNum);
+		model.addAttribute("fList", fList); 
+		if(levelNum != "null" && levelNum != "") {
+			if(levelNum == "1") {				//관리자(levelNum="1")는 관리자 페이지로
+				return "festival/festivalListManager";
+			}
+			else {								//관리자가 아니라면 회원페이지로
+				return "festival/festivalList";
+			}
+		}
+		else {									//관리자가 아니라면 회원페이지로
+			return "festival/festivalList";
+		}
 	}
 	
-	//관리자 페이지 -> 축제 리스트 (현재 진행중)
-	@GetMapping("/ingFestivalListManager")
-	public String ingFestivalListManager(Model model){
-		System.out.println("ingFestivalListManager FestivalController 도착");
-		festivalService.updateFestivalState();					//현 시점에서 축제 상태 업데이트~!
-		List<Festival> fList = festivalService.ingFestivalList();
-		System.out.println(fList+" <- fList ingFestivalList FestivalController");
+	//축제 리스트 (진행 예정)
+	@GetMapping("/preFestivalList")
+	public String preFestivalList(Model model, HttpSession session){
+		System.out.println("preFestivalList FestivalController 도착");
+		List<Festival> fList = festivalService.preFestivalList();
+		System.out.println(fList+" <- fList preFestivalList FestivalController");
+		model.addAttribute("SLEVEL", session.getAttribute("SLEVEL"));
 		model.addAttribute("fList", fList);
 		
 		return "festival/festivalListManager";
 	}
 	
-	//축제 리스트 (진행 예정)
-	@GetMapping("/preFestivalList")
-	public String preFestivalList(Model model){
-		System.out.println("preFestivalList FestivalController 도착");
-		List<Festival> fList = festivalService.preFestivalList();
-		System.out.println(fList+" <- fList preFestivalList FestivalController");
-		model.addAttribute("fList", fList);
-		
-		return "festival/festivalList";
-	}
-	
 	//축제 리스트 (진행 종료)
 	@GetMapping("/postFestivalList")
-	public String postFestivalList(Model model){
+	public String postFestivalList(Model model, HttpSession session){
 		System.out.println("postFestivalList FestivalController 도착");
 		List<Festival> fList = festivalService.postFestivalList();
 		System.out.println(fList+" <- fList postFestivalList FestivalController");
+		model.addAttribute("SLEVEL", session.getAttribute("SLEVEL"));
 		model.addAttribute("fList", fList);
 		
-		return "festival/festivalList";
+		return "festival/festivalListManager";
 	}
-	
 	
 	//축제 삭제
 	@GetMapping("/deleteFestival")
@@ -126,9 +133,9 @@ public class FestivalController {
 		System.out.println("deleteFestival FestivalController 도착");
 		System.out.println(fesNum+" <- fesNum deleteFestival FestivalController");
 		int result = festivalService.deleteFestival(fesNum);
-		System.out.println(result+" <- result deleteFestival FestivalController");
+		System.out.println(result+" <- 1 이면 축제 삭제 완료 ㅠㅠ");
 		
-		return "redirect:/festival/ingFestivalList";
+		return "redirect:/festival/festivalListManager";
 	}
 	
 }

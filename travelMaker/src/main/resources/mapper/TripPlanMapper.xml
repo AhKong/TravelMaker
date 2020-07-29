@@ -33,15 +33,15 @@
 	<selectKey order="BEFORE" keyProperty="tNum" resultType="string">
 		SELECT
 			(case COUNT(*)
-			WHEN 0 THEN 'trip_num1'
-			ELSE CONCAT('trip_num', MAX(CAST(SUBSTRING(trip_num,9) AS DECIMAL))+1)
+			WHEN 0 THEN 'trip_plan_num1'
+			ELSE CONCAT('trip_plan_num', MAX(CAST(SUBSTRING(trip_num,9) AS DECIMAL))+1)
 			END) AS tNum 
 		FROM
 			tb_trip
 	</selectKey>
 	INSERT INTO tb_trip
 	(trip_num, m_id, trip_name, trip_open_check, trip_url, trip_start_date,trip_end_date,trip_status,trip_reg_date,trip_photo)
-	VALUE(#{tNum},#{mId},#{tName},#{oCheck},'trip_url',#{sDate},#{eDate},'',NOW(),'photo1.png')
+	VALUE(#{tNum},#{mId},#{tName},#{oCheck},'trip_url',#{sDate},#{eDate},'',NOW(),'indexback.jpg')
 </insert>
 <select id="myTripNum" resultType="String">
 	select
@@ -74,16 +74,20 @@ tb_trip_plan;
 CALL trip_delete(#{tNum});
 </delete>
 
-<select id="sTripMid" parameterType="String" resultType="String">
+<delete id="deleteTripPlanEmpty" parameterType="String">
+CALL trip_delete_empty(#{tNum});
+</delete>
+
+<select id="sTripMid" parameterType="String" resultMap="myTripSelect">
 SELECT
-m_id
+trip_num,m_id
 FROM
 tb_trip
 where
 trip_Num = #{tNum};
 </select>
 
-<select id="selectTnum" resultType="String" resultMap="myTripSelect">
+<select id="selectTnum" resultType="String" >
 SELECT
 trip_num
 FROM
@@ -96,7 +100,7 @@ FROM
 tb_trip)
 </select>
 
-<select id="sMyTrip" parameterType="String" resultType="MyTrip" resultMap="myTripSelect">
+<select id="sMyTrip" parameterType="String" resultMap="myTripSelect">
 SELECT
 *
 FROM
@@ -104,5 +108,20 @@ tb_trip
 where
 trip_Num = #{tNum};
 </select>
+
+<insert id="planInsert" parameterType="String">
+	<selectKey order="BEFORE" keyProperty="pNum" resultType="string">
+		SELECT
+			(case COUNT(*)
+			WHEN 0 THEN 'trip_plan_num'
+			ELSE CONCAT('trip_plan_num', MAX(CAST(SUBSTRING(trip_plan_num,14) AS DECIMAL))+1)
+			END) AS pNum 
+		FROM
+			tb_trip_plan
+	</selectKey>
+	INSERT INTO tb_trip_plan
+	(trip_plan_num, trip_num, m_id, trip_plan_date, trip_plan_cost, trip_plan_supply, trip_plan_detail, trip_plan_reg_date)
+	VALUE(#{pNum},#{tNum},#{mId},NOW(),#{pCost},#{pSupply},#{pDetail},NOW())
+</insert>
 
 </mapper>

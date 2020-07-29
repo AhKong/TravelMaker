@@ -13,7 +13,40 @@ public class MyTrip {
 	private String rDate;
 	private String tPhoto;
 	private String sightsNum;
+	private String sPhoto;
+	private String sName;
 	
+	
+	public String getsPhoto() {
+		return sPhoto;
+	}
+	public void setsPhoto(String sPhoto) {
+		this.sPhoto = sPhoto;
+	}
+	public String getsName() {
+		return sName;
+	}
+	public void setsName(String sName) {
+		this.sName = sName;
+	}
+	public String gettStatus() {
+		return tStatus;
+	}
+	public void settStatus(String tStatus) {
+		this.tStatus = tStatus;
+	}
+	public String gettPhoto() {
+		return tPhoto;
+	}
+	public void settPhoto(String tPhoto) {
+		this.tPhoto = tPhoto;
+	}
+	public String getSightsPhoto() {
+		return sPhoto;
+	}
+	public void setSightsPhoto(String sightsPhoto) {
+		this.sPhoto = sightsPhoto;
+	}
 	public String getSightsNum() {
 		return sightsNum;
 	}
@@ -83,8 +116,9 @@ public class MyTrip {
 	@Override
 	public String toString() {
 		return "MyTrip [tNum=" + tNum + ", mId=" + mId + ", tName=" + tName + ", oCheck=" + oCheck + ", tUrl=" + tUrl
-				+ ", sDate=" + sDate + ", eDate=" + eDate + ", status=" + tStatus + ", rDate=" + rDate + ", tPhoto="
-				+ tPhoto + ", sightsNum=" + sightsNum + "]";
+				+ ", sDate=" + sDate + ", eDate=" + eDate + ", tStatus=" + tStatus + ", rDate=" + rDate + ", tPhoto="
+				+ tPhoto + ", sightsNum=" + sightsNum + ", sPhoto=" + sPhoto + ", sName=" + sName + "]";
 	}
+
 	
 }

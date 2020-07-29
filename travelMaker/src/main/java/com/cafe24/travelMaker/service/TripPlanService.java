@@ -28,14 +28,19 @@ public class TripPlanService {
 	public int deleteTripPlan(String tNum) {
 		return tripPlanMapper.deleteTripPlan(tNum);
 	}
-	public String sTripMid(String tNum) {
+	public List<MyTrip> sTripMid(String tNum) {
 		return tripPlanMapper.sTripMid(tNum);
 	}
-	public List<MyTrip> sMyTrip(String tNum) {
+	public MyTrip sMyTrip(String tNum) {
 		return tripPlanMapper.sMyTrip(tNum);
-		
 	}
 	public String selectTnum() {
 		return tripPlanMapper.selectTnum();
+	}
+	public int planInsert(String mId, String pCost, String pSupply, String pDetail, String tNum) {
+		return tripPlanMapper.planInsert(mId,pCost,pSupply,pDetail,tNum);
+	}
+	public int deleteTripPlanEmpty(String tNum) {
+		return tripPlanMapper.deleteTripPlanEmpty(tNum);
 	}
 }

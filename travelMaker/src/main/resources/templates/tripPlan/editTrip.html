@@ -253,6 +253,7 @@
 	width: 25%;
 	margin: -5px;
 	margin-left: 5px;
+	text-align: center;
 }
 .updateBtn{
 	float: right;
@@ -260,13 +261,14 @@
 	width: 25%;
 	margin: -5px;
 	margin-left: 5px;
+	text-align: center;
 }
 .tripPaln{
 	width: 100%;
 }
 .palnDetail{
 	width: 100%;
-	padding-bottom: 200px;
+	padding-bottom: 120px;
 }
 </style>
 
@@ -297,26 +299,13 @@
 							<h3 class="card-title">
 								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
 							</h3>
-							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
-								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal">삭제</button>
-							</th:block>
-							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-								<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" th:data-tNum="${selectTripPlan[0].tNum}">삭제</button>
-							</th:block>
 							
-							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
-							<button class="insertBtn"><i class="fas fa-share"></i>인설트저장</button>
-							</th:block>
-							
-							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-							<button class="updateBtn"><i class="fas fa-share"></i>update저장</button>
-							</th:block>
 						</div>
 
 						<div id="editBox" class="small-box">
-							<div>
-								<a th:text="${mTrip[0].sDate}">시작날짜</a> - <a th:text="${mTrip[0].eDate}"> 종료날짜</a>
-							</div>
+								<div>
+									<a th:text="${mTrip.sDate}"></a> ~ <a th:text="${mTrip.eDate}"> </a>
+								</div>
 							<div>
 								<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
 									class="img-rounded">
@@ -351,7 +340,7 @@
 							<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
 								<div>
 									<h4>
-										생성자 : <a th:text="${sTripPlan[0].mId}"></a>
+										생성자 : <a th:text="${sTripMid[0].mId}"></a>
 									</h4>
 								</div>
 							</th:block>
@@ -363,36 +352,50 @@
 									</h4>
 								</div>
 							</th:block>
-						
-					<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
-							<div>
-								여행경비 : <input class="tripPaln">
+							
+					<form th:action="@{/myTrip/PlanInsert}" method="Post">
+						<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
+						<input type="hidden" name="tNum" th:value="${tNum}">
+								<div>
+									여행경비 : <input type="text" class="tripPaln" name="planCost">
+								</div>
+								<div>
+									여행 준비물 : <input type="text" class="tripPaln" name="planSupply">
+								</div>
+								<div>
+									여행 상세 :
+								</div>
+								<div>
+									<textarea class="palnDetail" name="planDetail"></textarea>
+								</div>
+						</th:block>
+					
+						<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+							<input type="hidden" name="tNum" th:value="${tNum}">
+							<div class="planPay">
+								여행경비(원) : <input class="tripPaln" th:value="${selectTripPlan[0].pCost}" name="planCost">
 							</div>
 							<div>
-								여행 준비물 : <input class="tripPaln">
+								여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}" name="planSupply"> 
 							</div>
 							<div>
-								여행 상세 :
+								여행 상세 : 
 							</div>
 							<div>
-								<textarea class="palnDetail"></textarea>
+								<textarea class="palnDetail" th:text="${selectTripPlan[0].pDetail}" name="planDetail"></textarea>
 							</div>
-					</th:block>
-				
-					<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-						<div class="planPay">
-							여행경비(원) : <input class="tripPaln" th:value="${selectTripPlan[0].pCost}">
-						</div>
-						<div>
-							여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}"> 
-						</div>
-						<div>
-							여행 상세 : 
-						</div>
-						<div>
-							<textarea class="palnDetail" th:value="${selectTripPlan[0].pDetail}"></textarea>
-						</div>
-					</th:block>
+						</th:block>
+					
+							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
+								<button id="selectTripPlan" class="deleteBtn" th:value="${tNum}">인설트저장</button>
+							</th:block>
+							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+								<button class="deleteBtn" th:data-tNum="${selectTripPlan[0].tNum}">업데이트저장</button>
+							</th:block>
+					</form>
+					<div>
+						<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" name="mId" th:data="${sTripMid[0].mId}">삭제</button>
+					</div>
 						</div>
 						<div id="editBox" class="small-box">
 							<button data-toggle="modal" data-target="#myModal" type="button"
@@ -446,12 +449,13 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">취소</button>
-											<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
-												<a class="btn btn-primary">삭제</a>
-											</th:block>
-											<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-												<a th:href="@{/myTrip/deleteTripPlan(tNum=${selectTripPlan[0].tNum}, mId=${selectTripPlan[0].mId})}" class="btn btn-primary" >삭제</a>
-											</th:block>
+												<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
+													<a th:href="@{/myTrip/deleteTripPlan(mId=${sTripMid[0].mId}, tNum=${sTripMid[0].tNum})}" class="btn btn-primary">삭제</a>
+												</th:block>
+												
+												<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
+													<a th:href="@{/myTrip/deleteTripPlan(tNum=${selectTripPlan[0].tNum}, mId=${selectTripPlan[0].mId})}" class="btn btn-primary" >삭제</a>
+												</th:block>
 											<!-- 삭제처리 -->
 										</div>
 									</div>
@@ -459,161 +463,6 @@
 							</div>
 						</div>
 
-						<form action="/editTrip">
-
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<strong><i class="fas fa-biohazard"></i>일정을 삭제합니다</strong>
-										</div>
-										<div id="modalMid">
-											<div class="container">
-												<div class="row">
-													<div class="col">
-														<strong>일정을 삭제 하시겠습니까?.</strong>
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">취소</button>
-												<button type="submit" class="btn btn-primary">삭제</button>
-												<!-- 삭제처리 -->
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-
-						<form action="/editTrip">
-							<div class="modal fade" id="myModalExpenses" tabindex="-1"
-								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<strong><i class="fas fa-book-open"></i>여행 경비</strong>
-										</div>
-										<div class="modal-body">
-											<section class="content">
-												<div class="row">
-													<div class="col-md-12">
-														<div class="card card-outline card-info">
-															<!-- /.card-header -->
-															<div class="card-body pad">
-																<div class="mb-3">
-																	<textarea class="textarea"
-																		placeholder="Place some text here"
-																		style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-																		name="Explanation"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- /.col-->
-												</div>
-												<!-- ./row -->
-											</section>
-											<!-- /.content -->
-										</div>
-										<div id="modalMid">
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">미안..</button>
-												<button type="submit" class="btn btn-primary">추가하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-
-						<form action="/editTrip">
-							<div class="modal fade" id="myModalMaterials" tabindex="-1"
-								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<strong><i class="fas fa-book-open"></i>준비물!</strong>
-										</div>
-										<div class="modal-body">
-											<section class="content">
-												<div class="row">
-													<div class="col-md-12">
-														<div class="card card-outline card-info">
-															<!-- /.card-header -->
-															<div class="card-body pad">
-																<div class="mb-3">
-																	<textarea class="textarea"
-																		placeholder="Place some text here"
-																		style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-																		name="Explanation"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- /.col-->
-												</div>
-												<!-- ./row -->
-											</section>
-											<!-- /.content -->
-										</div>
-										<div id="modalMid">
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">미안..</button>
-												<button type="submit" class="btn btn-primary">추가하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-
-
-						<form action="/editTrip">
-							<div class="modal fade" id="myModalDetail" tabindex="-1"
-								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<strong><i class="fas fa-book-open"></i>상세 계획!</strong>
-										</div>
-										<div class="modal-body">
-											<section class="content">
-												<div class="row">
-													<div class="col-md-12">
-														<div class="card card-outline card-info">
-															<!-- /.card-header -->
-															<div class="card-body pad">
-																<div class="mb-3">
-																	<textarea class="textarea"
-																		placeholder="Place some text here"
-																		style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-																		name="Explanation"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- /.col-->
-												</div>
-												<!-- ./row -->
-											</section>
-											<!-- /.content -->
-										</div>
-										<div id="modalMid">
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">미안..</button>
-												<button type="submit" class="btn btn-primary">추가하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
 					</div>
 					<!-- /.card -->
 				</div>
@@ -938,11 +787,14 @@
 		$(function(){
 			$('#deleteModal').on('show.bs.modal', function (e) {
 				  var tNum = $(this).data('tNum');
-				  
-				  console.log('!!!');
-				  console.log(tNum);
-			})			
+
+			})
+			
+			console.log($('#selectTripPlan').val());
 		});
+	
+		
+		
 		
 	</script>
 

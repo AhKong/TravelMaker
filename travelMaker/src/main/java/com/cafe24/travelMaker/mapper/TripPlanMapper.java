@@ -16,7 +16,9 @@ public interface TripPlanMapper {
 	public List<TripPlan> selectTripPlan(String mId, String tNum);
 	public List<TripPlan> sTripPlan();
 	public int deleteTripPlan(String tNum);
-	public String sTripMid(String tNum);
-	public List<MyTrip> sMyTrip(String tNum);
+	public List<MyTrip> sTripMid(String tNum);
+	public MyTrip sMyTrip(String tNum);
 	public String selectTnum();
+	public int planInsert(String mId, String pCost, String pSupply, String pDetail,String tNum);
+	public int deleteTripPlanEmpty(String tNum);
 }

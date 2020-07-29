@@ -127,7 +127,7 @@ span {
              <div class="festivalCate">
                <p>관리자 페이지</p>
                <div class="btn-group col-8">
-                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-addFestival"
+                 <button th:if="${SLEVEL} == '1' " type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-addFestival"
                          name="addFestivalBtn" id="addFestivalBtn" value="addFestival"> 축제 등록
                  </button>
                </div>
@@ -258,7 +258,7 @@ span {
                          <img th:src="@{/fileupload/{file}(file=${f.fesPhoto})}" alt="Festival Image" width="250" height="250">
                        </div>
                        <div class="festivalDesc col-12 col-sm-6 col-md-8">
-                         <a th:href="@{/festival/updateFestival(fesNum=${f.fesNum})}" class="btn btn-info float-right btn-lg"> 수정하기 </a>
+                         <a th:if="${SLEVEL} == '1' " th:href="@{/festival/updateFestival(fesNum=${f.fesNum})}" class="btn btn-info float-right btn-lg"> 수정하기 </a>
                          <input type="hidden" th:value="${f.fesNum}">
                          <h3>[[${f.fesName}]]</h3>
                          <p>위치: [[${f.sights.sightsName}]]</p>
