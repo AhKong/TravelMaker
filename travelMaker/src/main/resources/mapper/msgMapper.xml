@@ -129,4 +129,26 @@
 			message_active='N'
 		WHERE message_num =#{messageNum}
 	</update>
+	
+	<update id="noticeCheckUpdate" parameterType="String" >
+		UPDATE 
+			tb_alert
+		SET
+			notice_check='Y',
+			notice_read=NOW()
+		WHERE 
+			notice_num=#{nCode}
+	</update>
+	
+	<select id="NoticeList" parameterType="String" resultType="Notice">
+		SELECT 
+			notice_num as noticeNum
+			, notice_contents as noticeContents
+			, notice_send as noticeSendTime
+			, notice_check as noticeCheck
+		FROM
+			tb_alert
+		WHERE
+			m_id=#{mId}
+	</select>
 </mapper>

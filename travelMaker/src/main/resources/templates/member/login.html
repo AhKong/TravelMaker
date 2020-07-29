@@ -72,7 +72,7 @@
 
  </th:block>
  <th:block layout:fragment="customScript">
- 	<script>
+ 	<script th:inline="javascript">
  		$(function(){
  			$('#loginBtn').click(function(){
  				var mId =$('input[name=mId]');
@@ -89,6 +89,16 @@
  				}
  				$('#loginForm').submit();
  			})
+ 			
+ 		/*<![CDATA[*/
+		var message = /*[[${message}]]*/;
+
+		/*]]>*/
+		
+		console.log(message);
+		if(message != null) {
+			alert(message);	
+		}	
  			
  		})
  	</script>

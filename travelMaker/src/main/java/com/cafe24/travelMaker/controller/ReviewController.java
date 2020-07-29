@@ -2,8 +2,10 @@ package com.cafe24.travelMaker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.ResReview;
 import com.cafe24.travelMaker.domain.SightsReview;
@@ -38,4 +40,33 @@ public class ReviewController {
 		return "redirect:/sights/detailSights?sightsNum="+sightsReview.getSightsNum();
 	}
 	
+	
+	@GetMapping("/deleteSightsReview")
+	public  String deleteSightsReview(@RequestParam(name ="sightsReviewNum") String sightsReviewNum,
+									  @RequestParam(name ="sightsNum") String sightsNum) {
+	
+		String fileName = reviewService.getSightsReviewInfo(sightsReviewNum).getSightsReviewPhoto();
+		
+		if(fileName !=null & !"".equals(fileName)) {
+			storageService.delete(fileName);
+		}
+		reviewService.deleteSightsReview(sightsReviewNum);
+
+		return "redirect:/sights/detailSights?sightsNum="+sightsNum;
+	}
+	
+	@GetMapping("/deleteResReview")
+	public  String deleteResReview(@RequestParam(name ="resReviewNum") String resReviewNum,
+									  @RequestParam(name ="resNum") String resNum) {
+	
+		String fileName = reviewService.getResReviewInfo(resReviewNum).getResReviewPhoto();
+		
+		if(fileName !=null & !"".equals(fileName)) {
+			storageService.delete(fileName);
+		}
+		
+		reviewService.deleteResReview(resReviewNum);
+
+		return "redirect:/res/resDetail?resNum="+resNum;
+	}
 }

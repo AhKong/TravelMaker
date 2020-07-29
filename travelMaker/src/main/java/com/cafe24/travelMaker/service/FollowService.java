@@ -19,4 +19,10 @@ public class FollowService {
 	public List<Follow> following(String mId){
 		return followMapper.following(mId);
 	}
+	public int followInsert(Follow follow) {
+		return followMapper.followInsert(follow);
+	}
+	public int followDelete(Follow follow) {
+		return followMapper.followDelete(follow);
+	}
 }

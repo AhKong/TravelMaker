@@ -43,6 +43,15 @@ public class FestivalService {
 		return result;
 	}
 	
+	//축제 상태 업데이트
+	public int updateFestivalState() {
+		System.out.println("축제 상태 없데이트 할게요!");
+		int state = festivalMapper.updateFestivalState();
+		System.out.println("축제 상태 없데이트 완료~~~! 업데이트 된 축제 row 개수 -> "+state);
+		
+		return state;
+	}
+	
 	//축제 리스트 (현재 진행중)
 	public List<Festival> ingFestivalList(){
 		System.out.println("ingFestivalList FestivalService 도착");

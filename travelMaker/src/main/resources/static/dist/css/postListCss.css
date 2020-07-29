@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.sightsName {
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+}
+
+.bestSights {
+	padding-top: 10px;
+	margin-bottom: 20px;
+	
+}
+
+.info-box{
+	height:200px;
+}
+
+.desc {
+	display: block;
+	padding-left: 10px;
+	margin-top: 10px;
+}
+
+.radio {
+	margin-top: 10px;
+}
+
+.sightListTitle {
+	font-size: 35px;
+	padding-bottom: 30px;
+}
+
+.post {
+	margin-top: 15px;
+}
+
+.sightCate {
+	margin-top: 40px;
+	border-top: 1px solid black;
+	padding-top: 10px;
+}
+
+.sightCate p {
+	font-size: 20px;
+}
+
+.warp-searchForm {
+	margin-left: 13%;
+	margin-top: 20px;
+}
+
+.warp-searchForm input {
+	width: 200px;
+}
+
+.sights {
+	border-bottom: 1px solid #efefef;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}

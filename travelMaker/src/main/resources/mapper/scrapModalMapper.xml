@@ -22,14 +22,10 @@
 SELECT 
 *
 FROM
-tb_trip AS t
-INNER JOIN
-tb_sights AS s
-ON
-t.m_id = s.m_id
+tb_trip
 WHERE
-t.m_id = #{mId}
-GROUP BY t.trip_num;
+m_id = #{mId};
+
 </select>
 
 </mapper>

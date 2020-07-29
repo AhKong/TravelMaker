@@ -21,10 +21,8 @@
 		.form-button {
 			margin:0 auto;
 		}
-		
 	</style>
 </th:block>
-
 
 <th:block layout:fragment="customContents">
   <!-- Content Wrapper. updateMember page content -->
@@ -34,7 +32,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="content-title col-sm-6">
-            <h1>축제 수정</h1>
+            <h1>관리자 페이지 축제 수정 - 이승연</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -64,7 +62,7 @@
 				  <div class="col-12">
 				    <div class="form-group">
 					  <label><i class="fas fa-music"></i>&nbsp;festival-name</label>
-					  <input type="text" class="form-control" name="fesName" th:value="${festival.fesName}">
+					  <input type="text" class="form-control" name="fesName" th:value="${festival.fesName}" readonly>
 					</div>
 			      </div>
 				</div>
@@ -73,6 +71,7 @@
 			  	    <div class="form-group">
 				      <label for="inputFile"><i class="fas fa-music"></i>&nbsp;festival-photo</label>
 				      <input type="file" class="form-control" name="file" id="inputFile" accept="image/git, image/jpeg, image/png">
+				      <p id="fileName">현재사진 : [[${festival.fesPhoto}]] 사진을 변경하지 않으면 저장되어 있는 사진으로 설정됩니다. </p>
 				    </div>
 				  </div>
 				</div>

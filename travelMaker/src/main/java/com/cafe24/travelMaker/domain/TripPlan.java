@@ -2,29 +2,19 @@ package com.cafe24.travelMaker.domain;
 
 public class TripPlan {
 
-	private String sCode;
-	private String mId;
-	private String sNum;
+	private String pNum;
 	private String tNum;
-	private String rDate;
-	private String sYesNo;
-	public String getsCode() {
-		return sCode;
+	private String mId;
+	private String pDate;
+	private int pCost;
+	private String pSupply;
+	private String pDetail;
+	private String pRegData;
+	public String getpNum() {
+		return pNum;
 	}
-	public void setsCode(String sCode) {
-		this.sCode = sCode;
-	}
-	public String getmId() {
-		return mId;
-	}
-	public void setmId(String mId) {
-		this.mId = mId;
-	}
-	public String getsNum() {
-		return sNum;
-	}
-	public void setsNum(String sNum) {
-		this.sNum = sNum;
+	public void setpNum(String pNum) {
+		this.pNum = pNum;
 	}
 	public String gettNum() {
 		return tNum;
@@ -32,22 +22,46 @@ public class TripPlan {
 	public void settNum(String tNum) {
 		this.tNum = tNum;
 	}
-	public String getrDate() {
-		return rDate;
+	public String getmId() {
+		return mId;
 	}
-	public void setrDate(String rDate) {
-		this.rDate = rDate;
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
-	public String getsTesNo() {
-		return sYesNo;
+	public String getpDate() {
+		return pDate;
 	}
-	public void setsTesNo(String sTesNo) {
-		this.sYesNo = sTesNo;
+	public void setpDate(String pDate) {
+		this.pDate = pDate;
+	}
+	public int getpCost() {
+		return pCost;
+	}
+	public void setpCost(int pCost) {
+		this.pCost = pCost;
+	}
+	public String getpSupply() {
+		return pSupply;
+	}
+	public void setpSupply(String pSupply) {
+		this.pSupply = pSupply;
+	}
+	public String getpDetail() {
+		return pDetail;
+	}
+	public void setpDetail(String pDetail) {
+		this.pDetail = pDetail;
+	}
+	public String getpRegData() {
+		return pRegData;
+	}
+	public void setpRegData(String pRegData) {
+		this.pRegData = pRegData;
 	}
 	@Override
 	public String toString() {
-		return "TripPlan [sCode=" + sCode + ", mId=" + mId + ", sNum=" + sNum + ", tNum=" + tNum + ", rDate=" + rDate
-				+ ", sTesNo=" + sYesNo + "]";
+		return "TripPlan [pNum=" + pNum + ", tNum=" + tNum + ", mId=" + mId + ", pDate=" + pDate + ", pCost=" + pCost
+				+ ", pSupply=" + pSupply + ", pDetail=" + pDetail + ", pRegData=" + pRegData + "]";
 	}
 	
 }

@@ -25,4 +25,40 @@ WHERE
 m_id = #{mId};
 </select>
 
+<select id="openMyTrip" resultType="String" resultMap="sightList">
+SELECT
+*
+FROM
+tb_trip
+WHERE
+m_id = #{mId}
+AND
+trip_open_check = 'Y';
+</select>
+
+<select id="hideMyTrip" resultType="String" resultMap="sightList">
+SELECT
+*
+FROM
+tb_trip
+WHERE
+m_id = #{mId}
+AND
+trip_open_check = 'N';
+</select>
+
+<select id="scrapMyTrip" resultType="String" resultMap="sightList">
+SELECT
+*
+FROM
+tb_scrap_sights AS sc
+INNER JOIN
+tb_sights AS s
+ON
+s.sights_num = sc.sights_num
+WHERE
+sc.m_id = #{mId};
+</select>
+
+
 </mapper>

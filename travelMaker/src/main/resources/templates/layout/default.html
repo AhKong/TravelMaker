@@ -92,13 +92,48 @@
 						html+='<img src="/fileupload/'+msgArr[i].member.mAvatar +'" alt="User Avatar" class="img-size-50 mr-3 img-circle">'
 						html+='<div class="media-body">'
 			            html+='<h3 class="dropdown-item-title">'+ msgArr[i].mId+'</h3>';
-						html+='<p class="text-sm">'+msgArr[i].contents+'+</p>';
+						html+='<p class="text-sm">'+msgArr[i].contents+'</p>';
 					    html+='<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>'+ msgArr[i].msgSendTime+'</p>';
 					    html+='</div></div></a>'	;
 					    html+='<div class="dropdown-divider"></div>'
 					}
 				}  
 		    	msgList.html(html);
+				
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			}); 
+		});	
+		
+		$('#newNotice').click(function(){
+			var request = $.ajax({
+				  url: "/ajax/noticeList",  
+				  method: "GET",
+				  dataType: "json"
+			}); 	     
+ 
+			request.done(function( data ) {
+				console.log(data);
+				console.log(data.result.length);
+				var noticeList = $('#warp-newNoticeList');
+				var html ='';
+				var newNoticeCnt = data.result.length
+				var noticeArr = data.result;
+				if(newNoticeCnt==0){
+					html +=' <p style="margin-left:15%; margin-top:10px;"> 새로운 메세지가 없습니다</p>';
+				} else {
+					for(var i = 0; i < newNoticeCnt;i++){
+						console.log(noticeArr[i]);
+						html+='<div class="dropdown-divider"></div>';
+						html+='<a href="#" class="dropdown-item">';
+						html+='<i class="fas fa-envelope mr-2"></i>' + noticeArr[i].noticeContents;
+						html+='<span class="float-right text-muted text-sm">'+noticeArr[i].noticeSendTime+'</span>';
+					    html+='</a>';
+					}
+				}  
+		    	noticeList.html(html);
 				
 			});	
 

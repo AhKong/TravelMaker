@@ -42,10 +42,19 @@
 		FROM
 			tb_point_save 
  	</selectKey>
- 		INSERT INTO tb_save_point
+ 		INSERT INTO tb_point_save
 			(save_point_num, m_id, save_point_cause, save_point_detail, save_point_charge)
 		VALUES (#{savePointNum}, #{mId} ,#{savePointCause} , #{savePointDetail}, #{savePointCharge})
  	</insert>
+ 	
+ 	<update id="updateMyPoint" parameterType="Point">
+		UPDATE 
+			tb_point_admin
+		SET
+			point_final_point = point_final_point + #{finalPoint}
+		WHERE
+			m_id=#{mId};
+	</update>
 	
 	<select id="isMyPoint" parameterType="String" resultType="int">
 		select 
@@ -88,6 +97,7 @@
 		WHERE
 			m_id=#{memberId};
 	</update>
+	
 	
 	<insert id="pointUseAdmin" parameterType="Goods">
 	<selectKey order="BEFORE" keyProperty="pointUseNum" resultType="String">

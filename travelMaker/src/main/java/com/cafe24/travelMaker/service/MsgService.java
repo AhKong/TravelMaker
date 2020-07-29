@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cafe24.travelMaker.domain.Message;
+import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.mapper.MsgMapper;
 
 @Service
@@ -47,5 +47,12 @@ public class MsgService {
 	public List<Message> unReadMsgList(String targetId){
 		return msgMapper.unReadMsgList(targetId);
 	}
-
+	
+	public List<Notice> NoticeList(String mId) {
+		return msgMapper.NoticeList(mId);
+	}
+	
+	public int noticeCheckUpdate(String nCode) {
+		return msgMapper.noticeCheckUpdate(nCode);
+	}
 }

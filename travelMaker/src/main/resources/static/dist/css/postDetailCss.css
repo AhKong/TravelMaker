@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.carousel-item img {
+			width: 400px;
+			height: 400px;
+		}
+	
+		#sights-map, #sights-review {
+			height:auto;
+			width: 80vw;
+		}
+		
+		.chart {
+			width: 400px;
+		
+		}
+		
+		.reveiwIntro{
+			font-size: 30px;
+		}
+		
+		.reviewIntroTitle {
+			width: 100%;
+			font-size:24px
+		}
+		
+		.form-check{
+			margin-top:13px;
+		}
+		
+		.reveiwTitle{
+			font-size:20px;
+			font-weight:bold;
+		}
+		.badge{
+		font-size:16px;
+		}

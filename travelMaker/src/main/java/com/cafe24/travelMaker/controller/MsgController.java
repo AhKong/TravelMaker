@@ -1,6 +1,7 @@
 package com.cafe24.travelMaker.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.cafe24.travelMaker.domain.Message;
+import com.cafe24.travelMaker.domain.Notice;
 import com.cafe24.travelMaker.service.MsgService;
 
 @Controller
@@ -49,10 +50,6 @@ public class MsgController {
 		model.addAttribute("msg",msgService.getDetailMsg(massageNum));
 		return "/message/detailMsg";
 	}
-	@GetMapping("/notifyDetail")
-	public String notifyDetail() {
-		return "/message/notifyDetail";
-	}
 	
 	@PostMapping("/sendMsg")
 	public String sendMsg(Message msg) {
@@ -76,4 +73,20 @@ public class MsgController {
 		msgService.deleteMsg(messageNum);
 		return "redirect:/msg/deleteMsgList";
 	}
+	
+	@GetMapping("/notifyDetail")
+	public String NoticeList(Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute("SID");
+		List<Notice> NoticeList = msgService.NoticeList(loginId);
+		model.addAttribute("NoticeList", NoticeList);
+		return "/message/notifyDetail";
+	}
+	
+	@GetMapping("/noticeCheckUpdate")
+	public String noticeCheckUpdate(
+		@RequestParam(name = "nCode", required = false) String nCode) {
+			System.out.println(nCode+"<----nCode");
+			msgService.noticeCheckUpdate(nCode);
+			return "redirect:/msg/notifyDetail";
+		}
 }
