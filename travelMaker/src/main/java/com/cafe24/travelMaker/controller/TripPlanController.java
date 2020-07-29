@@ -36,6 +36,7 @@ public class TripPlanController {
 		List<MyTrip> closeList = myTripService.hideList(loginId);
 		List<MyTrip> scrapList = myTripService.scrapList(loginId);
 		System.out.println(tripList +"<-----");
+		System.out.println("scrapList : "+scrapList);
 		model.addAttribute("myTripList", tripList);
 		model.addAttribute("openList", openList);
 		model.addAttribute("closeList", closeList);
@@ -77,7 +78,7 @@ public class TripPlanController {
 		
 		MyTrip mTrip = tripPlanService.sMyTrip(selectTnum);
 		model.addAttribute("mTrip", mTrip);
-		 
+		
 		return "/tripPlan/editTrip";
 	}
 	
@@ -97,19 +98,18 @@ public class TripPlanController {
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
 		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");		
 		model.addAttribute("selectTripPlan", tripPlanService.selectTripPlan(loginId, tNum));	
-		
+		System.out.println("mIdmIdmIdmId" +tripPlanService.selectTripPlan(loginId, tNum));
 		
 		List<TripPlan> sTripPlan = tripPlanService.sTripPlan();
 		model.addAttribute("sTripPlan", sTripPlan);
-		System.out.println("Test1");
 		String selectTnum = tripPlanService.selectTnum();
-		System.out.println("Test2");
-		System.out.println(selectTnum);
+
 		
 		MyTrip mTrip = tripPlanService.sMyTrip(selectTnum);
 		model.addAttribute("mTrip", mTrip);
-		
 		model.addAttribute("tNum", tNum);
+		List<MyTrip> sTripMid = tripPlanService.sTripMid(tNum);
+		model.addAttribute("sTripMid", sTripMid);
 		
 		return "/tripPlan/editTrip";
 	}
@@ -119,15 +119,24 @@ public class TripPlanController {
 									@RequestParam(name="tNum", required = false) String tNum,
 									@RequestParam(name="mId", required = false) String mId) throws IOException {
 		String loginId = (String) session.getAttribute("SID");
+		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
+		System.out.println("로그인한아이디"+loginId);
+		List<MyTrip> sTripMid = tripPlanService.sTripMid(tNum);
+		System.out.println(tNum + "&&&&&&&&&&&&&&&&&&&&&&&&&&&^^^");
+		System.out.println("DB아이디디디"+sTripMid.toString());
 		if(loginId .equals(mId)) {
-			int dTripPlan = tripPlanService.deleteTripPlan(tNum);
-			System.out.println(dTripPlan+"<<<<<<<<<<<<<<<<<<<<<<<< 삭제성공ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			if(selectTripPlan == null) {
+				int EmpTripPlan = tripPlanService.deleteTripPlanEmpty(tNum);				
+			}else {
+				int dTripPlan = tripPlanService.deleteTripPlan(tNum);
+				System.out.println(dTripPlan+"<<<<<<<<<<<<<<<<<<<<<<<< 삭제성공ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			}
 		}else {
 			  response.setContentType("text/html; charset=UTF-8"); PrintWriter out =  response.getWriter();
 			  out.println("<script>alert('여행계획 삭제는 생성한 사람만 가능합니다.');</script>");
 			  out.flush();
 		}
-		return "/tripPlan/tripList";
+		return "redirect:/myTrip/tripList";
 	}
 	
 	@PostMapping("/PlanInsert")
@@ -141,9 +150,10 @@ public class TripPlanController {
 		String myTripNum = tripPlanService.myTripNum(tNum);
 
 		System.out.println(tNum+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		String planInsert = tripPlanService.planInsert(loginId,planCost,planSupply,planDetail,tNum);
+		int planInsert = tripPlanService.planInsert(loginId,planCost,planSupply,planDetail,tNum);
 		System.out.println(planInsert+"여행 계획 인설틑ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ");
 		
-		return "/tripPlan/tripList";	
+		return "redirect:/myTrip/tripList";	
 	}
+	
 }

@@ -233,13 +233,13 @@
 						</div>
 						<th:block th:each="tl : ${scrapList}">
 						
-								<div class="col-md-3" style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'">
+								<div class="col-md-3"> <!-- style="cursor: pointer;" onclick="location.href='/myTrip/editTrip'" -->
 									<div class="small-box">
 										<div>
-											<img th:src="@{/fileupload/{file}(file=${tl.tPhoto})}" id="img" alt="trip image">
+											<img th:src="@{/fileupload/{file}(file=${tl.sightsPhoto})}" id="img" alt="trip image">
 										</div>
 										<div>
-											<p th:text="${tl.tName}"></p>
+											<p th:text="${tl.sName}"></p>
 										</div>
 										
 									</div>
