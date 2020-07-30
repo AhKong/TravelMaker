@@ -26,8 +26,8 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<a  type="button" href="/main" class="btn btn-outline-warning btn-sm mylink" >TravelMaker</a>
-					<a  type="button" href="/main" class="btn btn-outline-warning btn-sm mylink" >Blog 바로가기</a>
-					<a type="button" href="/main" class="btn btn-outline-warning btn-sm mylink">프로필페이지 바로가기</a>
+					<a  type="button" href="https://blog.naver.com/ahreum0412" class="btn btn-outline-warning btn-sm mylink" >Blog 바로가기</a>
+					<a type="button" href="https://ahkong.github.io/" class="btn btn-outline-warning btn-sm mylink">프로필페이지 바로가기</a>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -80,22 +80,7 @@
 
 
 	<!-- /.content-wrapper -->
-<th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
+
 </th:block>
-<th:block layout:fragment="customFooterScript">
- <script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
-	<script th:inline="javascript">
-		/*
-			실제 구현부는 여기서 default 는 빈 틀만 꼮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!써놓고 
-			구현은 제발 여기서!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			안그러면 충!!!!!!!!!!!!돌!!!!!!!!!!!!나!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		 */
-		/*<![CDATA[*/
-		var mId = /*[[${session.SID}]]*/
-		/*]]>*/
-			console.log(mId)
-			scrap(mId);
-		
-	</script>
-</th:block>
+
 </html>
