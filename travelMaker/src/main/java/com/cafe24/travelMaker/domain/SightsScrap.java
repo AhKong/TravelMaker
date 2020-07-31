@@ -7,10 +7,31 @@ public class SightsScrap {
 	private String sightsNum;
 	private String tNum;
 	private String sData;
+	private String sStatus;
 	private String sPhoto;
+	private String ssName;
+	private String ssPhoto;
 	private boolean isScrap = false;
 
 	
+	public String getSsPhoto() {
+		return ssPhoto;
+	}
+	public void setSsPhoto(String ssPhoto) {
+		this.ssPhoto = ssPhoto;
+	}
+	public String getsStatus() {
+		return sStatus;
+	}
+	public void setsStatus(String sStatus) {
+		this.sStatus = sStatus;
+	}
+	public String getSsName() {
+		return ssName;
+	}
+	public void setSsName(String ssName) {
+		this.ssName = ssName;
+	}
 	public String getsPhoto() {
 		return sPhoto;
 	}
@@ -57,10 +78,8 @@ public class SightsScrap {
 	@Override
 	public String toString() {
 		return "SightsScrap [ssNum=" + ssNum + ", mId=" + mId + ", sightsNum=" + sightsNum + ", tNum=" + tNum
-				+ ", sData=" + sData + ", sPhoto=" + sPhoto + ", isScrap=" + isScrap + "]";
+				+ ", sData=" + sData + ", sStatus=" + sStatus + ", sPhoto=" + sPhoto + ", ssName=" + ssName
+				+ ", ssPhoto=" + ssPhoto + ", isScrap=" + isScrap + "]";
 	}
-
 	
-
-
 }

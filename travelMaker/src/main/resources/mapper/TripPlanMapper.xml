@@ -5,123 +5,164 @@
 <mapper namespace="com.cafe24.travelMaker.mapper.TripPlanMapper">
 
 
-<resultMap type="TripPlan" id="tripPlanSelect"> 
-		<result property ="pNum" column ="trip_plan_num"/>
-		<result property ="tNum" column ="trip_num"/>
-		<result property ="mId" column ="m_id"/>
-		<result property ="pDate" column ="trip_plan_date"/>
-		<result property ="pCost" column ="trip_Plan_cost"/>
-		<result property ="pSupply" column ="trip_plan_supply"/>
-		<result property ="pDetail" column ="trip_plan_detail"/>
-		<result property ="pRegData" column ="trip_paln_reg_date"/>	
+	<resultMap type="TripPlan" id="tripPlanSelect">
+		<result property="pNum" column="trip_plan_num"/>
+		<result property="tNum" column="trip_num"/>
+		<result property="mId" column="m_id"/>
+		<result property="pDate" column="trip_plan_date"/>
+		<result property="pCost" column="trip_Plan_cost"/>
+		<result property="pSupply" column="trip_plan_supply"/>
+		<result property="pDetail" column="trip_plan_detail"/>
+		<result property="pRegData" column="trip_paln_reg_date"/>
 	</resultMap>
 
-<resultMap type="MyTrip" id="myTripSelect"> 
-	<result property ="tNum" column ="trip_num"/>
-	<result property ="mId" column ="m_id"/>
-	<result property ="tName" column ="trip_name"/>
-	<result property ="oCheck" column ="trip_open_check"/>
-	<result property ="tUrl" column ="trip_url"/>
-	<result property ="sDate" column ="trip_start_date"/>
-	<result property ="eDate" column ="trip_end_date"/>
-	<result property ="tStatus" column ="trip_status"/>
-	<result property ="rDate" column ="trip_reg_date"/>
-	<result property ="tPhoto" column ="trip_photo"/>
-</resultMap>
+	<resultMap type="MyTrip" id="myTripSelect">
+		<result property="tNum" column="trip_num"/>
+		<result property="mId" column="m_id"/>
+		<result property="tName" column="trip_name"/>
+		<result property="oCheck" column="trip_open_check"/>
+		<result property="tUrl" column="trip_url"/>
+		<result property="sDate" column="trip_start_date"/>
+		<result property="eDate" column="trip_end_date"/>
+		<result property="tStatus" column="trip_status"/>
+		<result property="rDate" column="trip_reg_date"/>
+		<result property="tPhoto" column="trip_photo"/>
+	</resultMap>
 
-<insert id="TripNameInsert" parameterType="MyTrip">
-	<selectKey order="BEFORE" keyProperty="tNum" resultType="string">
-		SELECT
+		<resultMap type="SightsScrap" id="scrapList">
+		<result property="ssNum" column="scrap_code"/>
+		<result property="mId" column="m_id"/>
+		<result property="sightsNum" column="sights_num"/>
+		<result property="tNum" column="trip_num"/>
+		<result property="sData" column="scrap_reg_date"/>
+		<result property="sStatus" column="scrap_status"/>
+		<result property="sPhoto" column="scrap_photo"/>
+		<result property="ssName" column="sights_name"/>
+		<result property="ssPhoto" column="sights_photo"/>
+	</resultMap>
+	
+	<insert id="TripNameInsert" parameterType="MyTrip">
+		<selectKey order="BEFORE" keyProperty="tNum" resultType="string">
+			SELECT
 			(case COUNT(*)
 			WHEN 0 THEN 'trip_plan_num1'
-			ELSE CONCAT('trip_plan_num', MAX(CAST(SUBSTRING(trip_num,9) AS DECIMAL))+1)
-			END) AS tNum 
-		FROM
+			ELSE
+			CONCAT('trip_plan_num', MAX(CAST(SUBSTRING(trip_num,9) AS
+			DECIMAL))+1)
+			END) AS tNum
+			FROM
 			tb_trip
-	</selectKey>
-	INSERT INTO tb_trip
-	(trip_num, m_id, trip_name, trip_open_check, trip_url, trip_start_date,trip_end_date,trip_status,trip_reg_date,trip_photo)
-	VALUE(#{tNum},#{mId},#{tName},#{oCheck},'trip_url',#{sDate},#{eDate},'',NOW(),'indexback.jpg')
-</insert>
-<select id="myTripNum" resultType="String">
-	select
-	*
-	from
-	tb_trip
-	where
-	trip_num = #{tNum}
-</select>
+		</selectKey>
+		INSERT INTO tb_trip
+		(trip_num, m_id, trip_name, trip_open_check, trip_url,
+		trip_start_date,trip_end_date,trip_status,trip_reg_date,trip_photo)
+		VALUE(#{tNum},#{mId},#{tName},#{oCheck},'trip_url',#{sDate},#{eDate},'',NOW(),'indexback.jpg')
+	</insert>
+	<select id="myTripNum" resultType="String">
+		select
+		*
+		from
+		tb_trip
+		where
+		trip_num = #{tNum}
+	</select>
 
-<select id="selectTripPlan" parameterType="String" resultMap="tripPlanSelect">
-select
-	*
-	from
-	tb_trip_plan
-	where
-	m_id = #{mId}
-	and
-	trip_num = #{tNum};
-</select>
+	<select id="selectTripPlan" parameterType="String" resultMap="tripPlanSelect">
+		select
+		*
+		from
+		tb_trip_plan
+		where
+		m_id = #{mId}
+		and
+		trip_num = #{tNum};
+	</select>
 
-<select id="sTripPlan" resultMap="tripPlanSelect">
-SELECT
-*
-FROM
-tb_trip_plan;
-</select>
-
-<delete id="deleteTripPlan" parameterType="String">
-CALL trip_delete(#{tNum});
-</delete>
-
-<delete id="deleteTripPlanEmpty" parameterType="String">
-CALL trip_delete_empty(#{tNum});
-</delete>
-
-<select id="sTripMid" parameterType="String" resultMap="myTripSelect">
-SELECT
-trip_num,m_id
-FROM
-tb_trip
-where
-trip_Num = #{tNum};
-</select>
-
-<select id="selectTnum" resultType="String" >
-SELECT
-trip_num
-FROM
-tb_trip
-WHERE
-trip_reg_date = 
-(SELECT
-MAX(trip_reg_date)
-FROM
-tb_trip)
-</select>
-
-<select id="sMyTrip" parameterType="String" resultMap="myTripSelect">
-SELECT
-*
-FROM
-tb_trip
-where
-trip_Num = #{tNum};
-</select>
-
-<insert id="planInsert" parameterType="String">
-	<selectKey order="BEFORE" keyProperty="pNum" resultType="string">
+	<select id="sTripPlan" resultMap="tripPlanSelect">
 		SELECT
+		*
+		FROM
+		tb_trip_plan;
+	</select>
+
+	<delete id="deleteTripPlan" parameterType="String">
+		CALL trip_delete(#{tNum});
+	</delete>
+
+	<delete id="deleteTripPlanEmpty" parameterType="String">
+		CALL trip_delete_empty(#{tNum});
+	</delete>
+
+	<select id="sTripMid" parameterType="String"
+		resultMap="myTripSelect">
+		SELECT
+		trip_num,m_id
+		FROM
+		tb_trip
+		where
+		trip_Num = #{tNum};
+	</select>
+
+	<select id="selectTnum" resultType="String">
+		SELECT
+		trip_num
+		FROM
+		tb_trip
+		WHERE
+		trip_reg_date =
+		(SELECT
+		MAX(trip_reg_date)
+		FROM
+		tb_trip)
+	</select>
+
+	<select id="sMyTrip" parameterType="String"	resultMap="myTripSelect">
+		SELECT
+		*
+		FROM
+		tb_trip
+		where
+		trip_Num = #{tNum};
+	</select>
+
+	<insert id="planInsert" parameterType="String">
+		<selectKey order="BEFORE" keyProperty="pNum" resultType="string">
+			SELECT
 			(case COUNT(*)
 			WHEN 0 THEN 'trip_plan_num'
-			ELSE CONCAT('trip_plan_num', MAX(CAST(SUBSTRING(trip_plan_num,14) AS DECIMAL))+1)
-			END) AS pNum 
-		FROM
+			ELSE CONCAT('trip_plan_num',
+			MAX(CAST(SUBSTRING(trip_plan_num,14) AS DECIMAL))+1)
+			END) AS pNum
+			FROM
 			tb_trip_plan
-	</selectKey>
-	INSERT INTO tb_trip_plan
-	(trip_plan_num, trip_num, m_id, trip_plan_date, trip_plan_cost, trip_plan_supply, trip_plan_detail, trip_plan_reg_date)
-	VALUE(#{pNum},#{tNum},#{mId},NOW(),#{pCost},#{pSupply},#{pDetail},NOW())
-</insert>
+		</selectKey>
+		INSERT INTO tb_trip_plan
+		(trip_plan_num, trip_num, m_id, trip_plan_date, trip_plan_cost, trip_plan_supply,
+		trip_plan_detail, trip_plan_reg_date)
+		VALUE(#{pNum},#{tNum},#{mId},NOW(),#{pCost},#{pSupply},#{pDetail},NOW())
+	</insert>
 
+	<select id="ScrapList" parameterType="String" resultMap="scrapList">
+	SELECT
+	sc.*,
+	si.sights_name,
+	si.sights_photo
+	FROM
+	tb_scrap_sights AS sc
+	INNER JOIN
+	tb_sights AS si
+	WHERE
+	sc.m_id = #{mId}
+	AND
+	sc.trip_num = #{tNum}
+	GROUP BY
+	scrap_code ASC;
+	</select>
+	
+	<update id="planUpdate" parameterType="String">
+	UPDATE tb_trip_plan
+	SET trip_plan_cost = #{pCost}, trip_plan_supply = #{pSupply}, trip_plan_detail = #{pDetail}
+	WHERE trip_plan_num = #{pNum};
+	</update>
+	
 </mapper>
