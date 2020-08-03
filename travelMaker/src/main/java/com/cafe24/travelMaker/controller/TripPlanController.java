@@ -164,6 +164,6 @@ public class TripPlanController {
 		int planUpdate = tripPlanService.planUpdate(pNum, planCost, planSupply, planDetail);
 		System.out.println(planUpdate + "updateupdateupdateupdateupdateupdateupdateupdateupdateupdateupdateupdateupdate");
 		System.out.println(pNum+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		return "/myTrip/editTrip";
+		return "redirect:/myTrip/tripList";
 	}
 }

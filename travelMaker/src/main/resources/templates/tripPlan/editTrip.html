@@ -366,7 +366,7 @@
 							</th:block>
 							
 							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-								<form th:action="@{/myTrip/PlanUpdate(pNum=${selectTripPlan[0].pNum})}" method="Post">
+								<form th:action="@{/myTrip/PlanUpdate}" method="Post">
 										<input type="hidden" name="tNum" th:value="${tNum}">
 										<div class="planPay">
 											여행경비(원) : <input class="tripPaln"
@@ -380,7 +380,7 @@
 											<textarea class="palnDetail" th:text="${selectTripPlan[0].pDetail}" name="planDetail"></textarea>
 										</div>
 							
-										<button class="saveBtn" th:data="${selectTripPlan[0].pNum}" name="pNum">update저장</button>
+										<button class="saveBtn" th:value="${selectTripPlan[0].pNum}" name="pNum">update저장</button>
 								</form>
 							</th:block>
 							
