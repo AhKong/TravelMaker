@@ -105,7 +105,7 @@ public class FbController {
 		System.out.println(fbResCheck+" <- fbResCheck / "+fbResNum+" <- fbResNum");
 		if(sightsNum != null && resNum == null) {
 			int result = feedbackService.acceptFbSights(fbSightsCheck, fbSightsNum);	//피드백 수용여부 변경
-			pointService.savePointForFeedback(session, sightsNum, resNum, mId);			//포인트 지급 + 알람
+			pointService.savePointForFeedback(sightsNum, resNum, mId);			//포인트 지급 + 알람
 			System.out.println(sightsNum+" <- sightsNum");
 			System.out.println(fbSightsNum+" <- fbSightsNum");
 			model.addAttribute("sightsNum", sightsNum);

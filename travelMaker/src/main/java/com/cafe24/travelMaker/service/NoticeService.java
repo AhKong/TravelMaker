@@ -34,7 +34,9 @@ public class NoticeService {
 		} else if("회원가입".equals(cause)) {
 			noticeContents = "회원가입을 축하합니다! ";
 		} else if("피드백 수용".equals(cause)) {
-			noticeContents = "피드백이 수용되어 피드백 포인트가 적립되었습니다! ";
+			noticeContents = "피드백이 수용되었습니다! ";
+		} else if("탈퇴 회유".equals(cause)) {
+			noticeContents = "탈퇴 회유 감사합니다 :) ";
 		}
 		noticeContents += point+"포인트 적립되었습니다.";
 		this.notice.setNoticeContents(noticeContents);
