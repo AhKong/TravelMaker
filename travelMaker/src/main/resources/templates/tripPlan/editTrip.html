@@ -247,21 +247,12 @@
 	margin: -5px;
 	margin-left: 5px;
 }
-.insertBtn{
+.saveBtn{
 	float: right;
 	border-radius: 5px;
 	width: 25%;
 	margin: -5px;
 	margin-left: 5px;
-	text-align: center;
-}
-.updateBtn{
-	float: right;
-	border-radius: 5px;
-	width: 25%;
-	margin: -5px;
-	margin-left: 5px;
-	text-align: center;
 }
 .tripPaln{
 	width: 100%;
@@ -297,7 +288,7 @@
 					<div class="card card-default">
 						<div class="card-header">
 							<h3 class="card-title">
-								<i class="fas fa-camera-retro"></i>[[${tripName}]] 
+								<i class="fas fa-camera-retro"></i>[[${tripName}]]
 							</h3>
 							
 						</div>
@@ -353,82 +344,65 @@
 								</div>
 							</th:block>
 							
-					<form th:action="@{/myTrip/PlanInsert}" method="Post">
-						<th:block th:if="${#lists.isEmpty(selectTripPlan)}"> 
-						<input type="hidden" name="tNum" th:value="${tNum}">
-								<div>
-									여행경비 : <input type="text" class="tripPaln" name="planCost">
-								</div>
-								<div>
-									여행 준비물 : <input type="text" class="tripPaln" name="planSupply">
-								</div>
-								<div>
-									여행 상세 :
-								</div>
-								<div>
-									<textarea class="palnDetail" name="planDetail"></textarea>
-								</div>
-						</th:block>
-					
-						<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-							<input type="hidden" name="tNum" th:value="${tNum}">
-							<div class="planPay">
-								여행경비(원) : <input class="tripPaln" th:value="${selectTripPlan[0].pCost}" name="planCost">
-							</div>
-							<div>
-								여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}" name="planSupply"> 
-							</div>
-							<div>
-								여행 상세 : 
-							</div>
-							<div>
-								<textarea class="palnDetail" th:text="${selectTripPlan[0].pDetail}" name="planDetail"></textarea>
-							</div>
-						</th:block>
-					
 							<th:block th:if="${#lists.isEmpty(selectTripPlan)}">
-								<button id="selectTripPlan" class="deleteBtn" th:value="${tNum}">인설트저장</button>
+								<form th:action="@{/myTrip/PlanInsert}" method="Post">
+										<input type="hidden" name="tNum" th:value="${tNum}">
+										<div>
+											여행경비 : <input type="text" class="tripPaln" name="planCost">
+										</div>
+										<div>
+											여행 준비물 : <input type="text" class="tripPaln" name="planSupply">
+										</div>
+										<div>여행 상세 :</div>
+										<div>
+											<textarea class="palnDetail" name="planDetail"></textarea>
+										</div>
+
+									
+
+										<button id="selectTripPlan" class="saveBtn" th:value="${tNum}">isnert저장</button>
+
+								</form>
 							</th:block>
+							
 							<th:block th:unless="${#lists.isEmpty(selectTripPlan)}">
-								<button class="deleteBtn" th:data-tNum="${selectTripPlan[0].tNum}">업데이트저장</button>
+								<form th:action="@{/myTrip/PlanUpdate}" method="Post">
+										<input type="hidden" name="tNum" th:value="${tNum}">
+										<div class="planPay">
+											여행경비(원) : <input class="tripPaln"
+												th:value="${selectTripPlan[0].pCost}" name="planCost">
+										</div>
+										<div>
+											여행 준비물 : <input class="tripPaln" th:value="${selectTripPlan[0].pSupply}" name="planSupply">
+										</div>
+										<div>여행 상세 :</div>
+										<div>
+											<textarea class="palnDetail" th:text="${selectTripPlan[0].pDetail}" name="planDetail"></textarea>
+										</div>
+							
+										<button class="saveBtn" th:value="${selectTripPlan[0].pNum}" name="pNum">update저장</button>
+								</form>
 							</th:block>
-					</form>
-					<div>
+							
+							
+							<div>
 						<button class="deleteBtn" data-toggle="modal" data-target="#deleteModal" name="mId" th:data="${sTripMid[0].mId}">삭제</button>
 					</div>
 						</div>
-						<div id="editBox" class="small-box">
-							<button data-toggle="modal" data-target="#myModal" type="button"
-								class="close">&times;</button>
-							<div>
-								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
-									<input type='date' name='userBirthday' />
-								</form>
-								<div style="cursor: pointer;"
-									onclick="location.href='/sights/detailSights'">
-									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
-										class="img-rounded">
+						
+						<th:block th:each="sl : ${scrapList}">
+								<div class="col-md-12">
+									<div class="small-box">
+										<div>
+											<img th:src="@{/fileupload/{file}(file=${sl.ssPhoto})}" id="img" alt="trip image" class="img-rounded"> 이미지 설정;
+										</div>
+										<div>
+											<p th:text="${sl.ssName}"></p>
+										</div>
+									</div>
 								</div>
-								스크랩한 정보
-							</div>
-						</div>
-						<div id="editBox" class="small-box">
-							<button data-toggle="modal" data-target="#myModal" type="button"
-								class="close">&times;</button>
-							<!-- 클릭시 삭제  -->
-							<div>
-								<form name="해당 폼의 이름" action="값을 보낼 주소" method="post">
-									<input type='date' name='userBirthday' />
-								</form>
-								<div style="cursor: pointer;"
-									onclick="location.href='/sights/detailSights'">
-									<img id="img" src="/dist/img/photo4.jpg" alt="여행이미지"
-										class="img-rounded">
-								</div>
-								스크랩한 정보
-							</div>
-						</div>
-						<!-- /.card-body -->
+							</th:block>	
+						
 
 						<div class="modal fade" id="deleteModal" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

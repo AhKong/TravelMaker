@@ -57,7 +57,7 @@
         
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">profile edit</h3>
+              <h2 class="card-title">profile edit</h2>
 			</div>
 			<th:block th:each=" b : ${beforeUpdateMember}">
             <form class="card-body" th:action="@{/member/updateMember}" method="post" id="formUpdate"  enctype="multipart/form-data">
@@ -97,8 +97,7 @@
                 <label for="up_mAvatar" class="label-control col-md-3">프로필사진</label>
                 <div class="input-control col-sm-6 col-md-6 col-lg-10">
                   <input type="file" name="file" class="form-control" id="up_mAvatar" accept="image/git, image/jpeg, image/png" th:value="${b.mAvatar}">
-                  <p id="fileName">현재사진 : [[${b.mAvatar}]] 사진을 변경하지 않으면 저장되어 있는 사진으로 설정됩니다. </p>
-             		
+                  <p id="fileName">현재사진 : [[${b.mAvatar}]] <br/> 사진을 변경하지 않으면 저장되어 있는 사진으로 설정됩니다. </p>
                 </div>
               </div>
               <div class="form-group">
@@ -108,42 +107,43 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-offset-2 col-xs-6">
+                <div class="col-sm-offset-3 col-xs-6">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" id="upCheck">수정할 정보를 모두 확인했나요?
+                      <input type="checkbox" id="upCheck">       수정할 정보를 모두 확인했나요?
                     </label>
                   </div>
                 </div>
               </div>
 			  <div class="form-button col-sm-8">
-			    <!-- Button trigger modal -->
-				<button type="button" class="btn btn-sm btn-danger col-3" data-toggle="modal" data-target="#deleteModal">계정 탈퇴하기</button>
-				<!-- Modal -->
+			  
+			    <!-- 회원 탈퇴  modal -->
+				<button type="button" id="deleteBtn" class="btn btn-sm btn-danger col-3" data-toggle="modal" data-target="#deleteModal">탈퇴하기ㅠ</button>
+				
 				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
+								<h4>&nbsp; 회원 탈퇴를 원하십니까?</h4>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 							
-							<!-- 회원 탈퇴 모달 내용 -->
+							<!-- 모달 창 내용 -->
 							<div class="modal-body">
-								TravelMaker 는 30000000건의 리뷰와 							<br>
-								22222건의 여행기록을 가지고 있고									<br>
-								앞으로 더 많은 기능들이 추가될 것입니다								<br>
-																						<br>
-								지금 탈퇴하기를 멈추면 2000점의 포인트를 받을 수 있습니다					<br>
-								정말 계정을 탈퇴하시겠습니까?										<br>
+								TravelMaker 는 30000000건의 리뷰와 							<br/>
+								22222건의 여행기록을 가지고 있고									<br/>
+								앞으로 더 많은 기능들이 추가될 것입니다								<br/>
+																						<br/>
+								지금 탈퇴하기를 멈추면 2000점의 포인트를 받을 수 있습니다					<br/>
+								정말 계정을 탈퇴하시겠습니까?										<br/>
 							</div>
-							<th:block>
-						  	  <div class="modal-footer">
+							
+							<div class="modal-footer">
 								<a type="button" class="btn btn-primary btn-sm col-sm-4" href="/member/conciliateDeleteMember"> 2000 포인트 받고 탈퇴 안하기  </a>
-		 						<a type="button" class="btn btn-danger btn-sm col-sm-2" th:href="@{/member/deleteMember}"> 미안 </a>
-							  </div>
-							</th:block>
+		 						<a type="button" class="btn btn-danger btn-sm col-sm-2" href="/member/deleteMember"> 미안 </a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -173,8 +173,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- End Modal -->	
-			    <button type="submit" class="btn btn-sm btn-primary col-3" id="completeBtn">수정완료 :)</button>
+					
+			    <button type="submit" class="btn btn-sm btn-primary col-3" id="completeBtn"> 수정완료 :)</button>
 			  </div>
             </form>
             <!-- /.card-body -->
@@ -258,6 +258,20 @@
 				return false; 
 			}
 			$('#formUpdate').submit();
+		});
+		
+		$('#deleteBtn').click(function(){
+			
+			if(up_pwCheck == false){
+				alert("회원 탈퇴를 위해 비밀번호를 입력해주세요");
+				up_mPw.focus();
+				return false;
+			}
+			if(up_pwCheck2 == false){
+				alert("회원 탈퇴를 위해 비밀번호를 한번 더 입력해주세요");
+				up_mPwCheck.focus();
+				return false;
+			}
 		});
 	});
 		

@@ -23,8 +23,8 @@ public interface MemberMapper {
 	public int deleteMember(String mId); 				  //탈퇴
 	public List<Member> getDeleteMemberList();			  //탈퇴회원 조회
 	public String conciliateDeleteMember(Member member);  //탈퇴 회유
-	public List<Member> getDormantMemberList();			  //휴면회원 조회
 	public List<Member> selectDormantMember();			  //휴면처리 대상자 조회
+	public List<Member> getDormantMemberList();			  //휴면회원 조회
 	public int addLoginLog(MemberLogin memberLogin);
 	public int updateRestMember(String mId);
 	

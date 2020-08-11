@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.travelMaker.domain.MyTrip;
+import com.cafe24.travelMaker.domain.SightsScrap;
 import com.cafe24.travelMaker.domain.TripPlan;
 import com.cafe24.travelMaker.service.MyTripService;
 import com.cafe24.travelMaker.service.TripPlanService;
@@ -89,7 +90,6 @@ public class TripPlanController {
 		String loginId = (String)session.getAttribute("SID");
 		String myTripNum = tripPlanService.myTripNum(tNum);
 		List<TripPlan> myTripPlan = tripPlanService.sTripPlan();
-		System.out.println(myTripPlan+"<<<<<<<<<<<<<<<<<<<<<<<<<--------------myTripPlan");
 		System.out.println(myTripNum+" GETeditTrip- myTripNum");
 		model.addAttribute("myTripPlan", myTripPlan);
 		model.addAttribute("tripName", tName);
@@ -97,20 +97,21 @@ public class TripPlanController {
 		
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
 		System.out.println(selectTripPlan + " <<<< 셀렉ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌselectTripPlan");		
-		model.addAttribute("selectTripPlan", tripPlanService.selectTripPlan(loginId, tNum));	
-		System.out.println("mIdmIdmIdmId" +tripPlanService.selectTripPlan(loginId, tNum));
+		model.addAttribute("selectTripPlan", selectTripPlan);	
+		System.out.println("mIdmIdmIdmId trip plan num4" + selectTripPlan);
 		
 		List<TripPlan> sTripPlan = tripPlanService.sTripPlan();
 		model.addAttribute("sTripPlan", sTripPlan);
 		String selectTnum = tripPlanService.selectTnum();
 
-		
 		MyTrip mTrip = tripPlanService.sMyTrip(selectTnum);
 		model.addAttribute("mTrip", mTrip);
 		model.addAttribute("tNum", tNum);
 		List<MyTrip> sTripMid = tripPlanService.sTripMid(tNum);
 		model.addAttribute("sTripMid", sTripMid);
 		
+		List<SightsScrap> scrapList = tripPlanService.ScrapList(loginId, tNum);
+		model.addAttribute("scrapList", scrapList);
 		return "/tripPlan/editTrip";
 	}
 	
@@ -120,10 +121,7 @@ public class TripPlanController {
 									@RequestParam(name="mId", required = false) String mId) throws IOException {
 		String loginId = (String) session.getAttribute("SID");
 		List<TripPlan> selectTripPlan = tripPlanService.selectTripPlan(loginId, tNum);
-		System.out.println("로그인한아이디"+loginId);
 		List<MyTrip> sTripMid = tripPlanService.sTripMid(tNum);
-		System.out.println(tNum + "&&&&&&&&&&&&&&&&&&&&&&&&&&&^^^");
-		System.out.println("DB아이디디디"+sTripMid.toString());
 		if(loginId .equals(mId)) {
 			if(selectTripPlan == null) {
 				int EmpTripPlan = tripPlanService.deleteTripPlanEmpty(tNum);				
@@ -140,7 +138,7 @@ public class TripPlanController {
 	}
 	
 	@PostMapping("/PlanInsert")
-	public String planInsert(Model model,HttpSession session,
+	public String planInsert(HttpSession session,
 							@RequestParam(name="tNum", required = false) String tNum,
 							@RequestParam(name="planCost", required = false) String planCost,
 							@RequestParam(name="planSupply", required = false) String planSupply,
@@ -156,4 +154,16 @@ public class TripPlanController {
 		return "redirect:/myTrip/tripList";	
 	}
 	
+	@PostMapping("/PlanUpdate")
+	public String PlanUpdate(HttpSession session,
+								@RequestParam(name="pNum", required = false) String pNum,
+								@RequestParam(name="planCost", required = false) String planCost,
+								@RequestParam(name="planSupply", required = false) String planSupply,
+								@RequestParam(name="planDetail", required = false) String planDetail) {
+
+		int planUpdate = tripPlanService.planUpdate(pNum, planCost, planSupply, planDetail);
+		System.out.println(planUpdate + "updateupdateupdateupdateupdateupdateupdateupdateupdateupdateupdateupdateupdate");
+		System.out.println(pNum+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		return "redirect:/myTrip/tripList";
+	}
 }

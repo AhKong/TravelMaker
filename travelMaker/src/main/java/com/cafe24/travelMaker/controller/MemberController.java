@@ -137,7 +137,7 @@ public class MemberController{
 	//탈퇴회원 조회 - 관리자 페이지
 	@GetMapping("/getDeleteMemberList")
 	public String getDeleteMemberList(Model model) {
-		System.out.println("getDeleteMemberList MemberController 도착");
+		System.out.println("(Get) getDeleteMemberList MemberController 도착");
 		List<Member> getDeleteMemberList = memberService.getDeleteMemberList();
 		System.out.println(getDeleteMemberList+" <- getDeleteMemberList");
 		model.addAttribute("getDeleteMemberList", getDeleteMemberList);
@@ -148,7 +148,7 @@ public class MemberController{
 	//탈퇴
 	@GetMapping("/deleteMember")
 	public String deleteMember(HttpSession session, Model model) {
-		System.out.println("deleteMember MemberController 도착");
+		System.out.println("(Get) deleteMember MemberController 도착");
 		String mId = (String) session.getAttribute("SID");
 		int result = memberService.deleteMember(mId);
 		System.out.println(result+" <- 1이면 탈퇴완료 ㅠㅠ 탈퇴하지 마세요");
@@ -157,17 +157,22 @@ public class MemberController{
 		return "redirect:/main";
 	}
 	
-	//탈퇴 회유 시 최초1회 포인트 지급
+	//탈퇴 회유 시 최초 1회 포인트 지급
 	@GetMapping("/conciliateDeleteMember")
-	public String conciliateDeleteMember(Member member) {
+	public String conciliateDeleteMember(Member member, HttpSession session) {
+		System.out.println("(Get) conciliateDeleteMember (탈퇴 회유) MemberController 도착");
+		String mId = (String) session.getAttribute("SID");
+		System.out.println(mId+" <---------session mId 하이용");
+		int conciliate = pointService.savePointForConciliateDeleteMember(mId);	//포인트 지급 + 알람
+		System.out.println(conciliate+" <--- 3 이면 완벽..");
 		
-		return "member/myPage";
+		return "redirect:/member/myPage";
 	}
 	
 	//휴면회원 관리
 	@GetMapping("/dormantMember")
 	public String dormantMember(Model model) {
-		System.out.println("dormantMember MemberController 도착");
+		System.out.println("(Get) dormantMember MemberController 도착");
 		List<Member> selectDormantMember = memberService.selectDormantMember();	/////수정해야함
 		List<Member> getDormantMemberList = memberService.getDormantMemberList();
 		model.addAttribute("getDormantMemberList", getDormantMemberList);

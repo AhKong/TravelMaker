@@ -18,7 +18,7 @@ import com.cafe24.travelMaker.mapper.PointMapper;
 public class PointService {
 	@Autowired private PointMapper pointMapper;
 	@Autowired private NoticeService noticeService;
-	private SavePoint savePoint= new SavePoint();
+	private SavePoint savePoint = new SavePoint();
 	private Point point = new Point();
 
 	//회원가입시 포인트 적립 
@@ -93,29 +93,29 @@ public class PointService {
 	
 	
 	//마이페이지 - 포인트 사용내역
-	public List<Point> pointUseList(String loginId) {
+	public List<Point> pointUseList(String mId) {
 		System.out.println("pointUseList PointSerivce 도착");
-		System.out.println(loginId+" <- loginID pointUseList PointSerivce");
-		List<Point> useList = pointMapper.pointUseList(loginId);
+		System.out.println(mId+" <- mId pointUseList PointSerivce");
+		List<Point> useList = pointMapper.pointUseList(mId);
 		System.out.println(useList+" <- useList pointUseList PointSerivce");
 		
 		return useList;
 	}
 	
 	//마이페이지 - 포인트 적립내역
-	public List<Point> pointSaveList(String loginId) {
+	public List<Point> pointSaveList(String mId) {
 		System.out.println("pointSaveList PointSerivce 도착");
-		System.out.println(loginId+" <- loginID pointSaveList PointSerivce");
-		List<Point> saveList = pointMapper.pointSaveList(loginId);
+		System.out.println(mId+" <- mId pointSaveList PointSerivce");
+		List<Point> saveList = pointMapper.pointSaveList(mId);
 		System.out.println(saveList+" <- saveList pointSaveList PointSerivce");
 		
 		return saveList;
 	}
 	
 	//마이페이지 - 총 소유 포인트
-	public List<Point> getTotalPoint(String loginId) {
+	public List<Point> getTotalPoint(String mId) {
 		System.out.println("totalPoint PointSerivce 도착");
-		List<Point> totalPoint = pointMapper.getTotalPoint(loginId);
+		List<Point> totalPoint = pointMapper.getTotalPoint(mId);
 		System.out.println(totalPoint+" <- totalPoint");
 		
 		return totalPoint;
@@ -139,22 +139,22 @@ public class PointService {
 		return pointSaveAdmin;
 	}
 	
-	//피드백 수용 시 포인트 지급
-	public int savePointForFeedback(HttpSession session, String sightsNum, String resNum, String mId) {
+	//피드백 수용 시 포인트 지급 2000점
+	public int savePointForFeedback(String sightsNum, String resNum, String mId) {
 		System.out.println("savePointForFeedback PointService 도착");
-		this.savePoint.setmId(mId);
+		this.savePoint.setmId(mId);		//피드백 작성한 회원의 id
 		this.savePoint.setSavePointCause("피드백 수용");
 		this.savePoint.setSavePointCharge(2000);
-		if(sightsNum != null && resNum == null) {			
+		if(sightsNum != null && resNum == null) {			//관광명소 피드백 수용
 			this.savePoint.setSavePointDetail(sightsNum);
-		}else if(sightsNum == null && resNum != null) {
+		}else if(sightsNum == null && resNum != null) {		//음식점 피드백 수용
 			this.savePoint.setSavePointDetail(resNum);
 		}
-		int saveResult = pointMapper.savePoint(savePoint);		//포인트 적립
+		int saveResult = pointMapper.savePoint(savePoint);		//피드백 포인트 적립
 		System.out.println(saveResult+" <- 1 이면 피드백 포인트 2000점 지급 완료");
 		this.point.setmId(mId);
 		this.point.setFinalPoint(2000);
-		int finalResult = pointMapper.updateMyPoint(point);		//최종포인트 업데이트
+		int finalResult = pointMapper.updateMyPoint(point);		//최종 포인트 업데이트
 		System.out.println(finalResult+" <- 1 이면 최종포인트 + 피드백 포인트 2000점 업데이트 완료");
 		int noticeResult = noticeService.addNototiceForSavePoint(mId, this.savePoint.getSavePointCharge(), this.savePoint.getSavePointCause());
 		System.out.println(noticeResult+" <- 1 이면 포인트 지급 알람 완료");
@@ -164,4 +164,19 @@ public class PointService {
 		return result;
 	}
 	
+	//최초 1회 탈퇴 회유 시 포인트 지급 2000점
+	public int savePointForConciliateDeleteMember(String mId) {
+		System.out.println("savePointForConciliateDeleteMember PointService 탈퇴회유 포인트 도착");
+		this.savePoint.setmId(mId);
+		this.savePoint.setSavePointCause("탈퇴 회유");
+		this.savePoint.setSavePointCharge(2000);
+		int conciliatePoint = pointMapper.savePoint(savePoint);			//탈퇴 회유 포인트 지급
+		this.point.setmId(mId);
+		this.point.setFinalPoint(2000);
+		int conciliateUpdatePoint = pointMapper.updateMyPoint(point);	//최종 포인트 업데이트
+		int conciliateNotice = noticeService.addNototiceForSavePoint(mId, this.savePoint.getSavePointCharge(), this.savePoint.getSavePointCause());
+			//포인트 지급 알람
+		
+		return conciliatePoint+conciliateUpdatePoint+conciliateNotice;
+	}
 }

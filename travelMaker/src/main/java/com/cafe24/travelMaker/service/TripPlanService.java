@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.travelMaker.domain.MyTrip;
+import com.cafe24.travelMaker.domain.SightsScrap;
 import com.cafe24.travelMaker.domain.TripPlan;
 import com.cafe24.travelMaker.mapper.TripPlanMapper;
 
@@ -42,5 +43,11 @@ public class TripPlanService {
 	}
 	public int deleteTripPlanEmpty(String tNum) {
 		return tripPlanMapper.deleteTripPlanEmpty(tNum);
+	}
+	public List<SightsScrap> ScrapList(String mId, String tNum) {
+		return tripPlanMapper.ScrapList(mId, tNum);
+	}
+	public int planUpdate(String pNum, String pCost, String pSupply, String pDetail) {
+		return tripPlanMapper.planUpdate(pNum, pCost, pSupply, pDetail);
 	}
 }
