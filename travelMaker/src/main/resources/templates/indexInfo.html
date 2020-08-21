@@ -47,6 +47,14 @@
 .info{
 	margin-left: 10px;
 }
+.infoBox1{
+	padding-top: 40px;
+	text-decoration: underline;
+}
+.infoBox2{
+	padding-top: 40px;
+	text-decoration: underline;
+}
 
 </style>
 </th:block>
@@ -74,19 +82,24 @@
 						<div class="col-md-1.5 body">
 							<img class="img " alt="" src="dist/img/KakaoTalk_20200803_154055481.jpg">
 						</div>
-						<div class="col-md-5 body">
-						<div>
-						<i class="fas fa-user"></i> 이승환
+						<div class="col-md-5 body infoBox1">
+						<div class="">
+						<p><i class="fas fa-user"></i>이승환</p>
 						</div>
 						<div>
-						<i class="fas fa-phone"></i>1994-10-12
+						<p><i class="far fa-user"></i>1994-10-12</p>
 						</div>
 						<div>
-						<i class="fas fa-map-marker-alt"></i>주소
+						<p><i class="fas fa-map-marker-alt"></i>전라북도 전주시 효자동 용머리로 20 106동 1004호</p>
 						</div>
 						</div>
-						<div class="col-md-5 body1">
-						<i class="far fa-envelope"></i>Email
+						<div class="col-md-5 body1 infoBox2">
+						<div>
+						<p><i class="far fa-envelope"></i>Email</p>
+						</div>
+						<div>
+						<p><i class="fas fa-phone"></i>010-4963-7781</p>
+						</div>
 						</div>
 		
 					</div>
@@ -116,8 +129,6 @@
 			</div>
 	</div>
 
-
-	<!-- /.content-wrapper -->
 <th:block th:replace="fragments/scrapModal :: scrapModalFragment"></th:block>
 </th:block>
 <th:block layout:fragment="customFooterScript">
