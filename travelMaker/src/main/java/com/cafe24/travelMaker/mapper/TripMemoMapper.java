@@ -15,5 +15,8 @@ public interface TripMemoMapper {
 	public List<TripPlan> getTripPlanList(String mId);
 	
 	//내여행기록 리스트(메인화면)
-	public List<TripMemo> tripMemoList();
+	public List<TripMemo> tripMemoList(String mId);
+	
+	//내여행기록 수정
+	public int updateTripMemo(TripMemo tripMemo, String mId);
 }

@@ -15,9 +15,9 @@ public class TripMemoService {
 	@Autowired TripMemoMapper tripMemoMapper;
 	
 	//내여행기록 리스트
-	public List<TripMemo> tripMemoList() {
+	public List<TripMemo> tripMemoList(String mId) {
 		System.out.println("tripMemoList TripMemoController 도착");
-		List<TripMemo> memoList = tripMemoMapper.tripMemoList();
+		List<TripMemo> memoList = tripMemoMapper.tripMemoList(mId);
 		System.out.println(memoList+" <- memoList");
 		
 		return memoList;

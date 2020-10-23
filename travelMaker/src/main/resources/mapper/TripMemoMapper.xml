@@ -29,7 +29,7 @@
 			m.trip_memo_check
 		FROM 
 			tb_trip_memo AS m
-			
+		WHERE m.m_id = #{mId}
 		ORDER BY m.trip_memo_tripdate DESC;
 	</select>
 

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	
+<th:block layout:fragment="customTitle">
+	<title> 내여행 기록 등록 :)) </title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<style>
+		.tripMemo {
+			padding: 20px;
+		}
+		.reg-date {
+			font-size: 13px;
+		}
+		.timeline-body {
+			padding: 5px;
+		}
+		.form-photo {
+			margin: 20px;
+		}
+	</style>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+</th:block>
+<th:block layout:fragment="customContents">
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>여행기록 수정 - 이승연</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/tripMemo/tripMemo">tripMemo</a></li>
+              <li class="breadcrumb-item active"><a href="/tripMemo/addTripMemo">updateTripMemo</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="col-10">
+          <div class="col-lg-9">
+            <div class="card">
+            
+              <div class="body">
+                <div class="body-content">
+                 
+                  <div class="addTripMemo">
+					<div class="card-content">
+					  <div class="card-header bg-primary">
+					    <h4 class="card-title">내여행 기록  - 수정하기</h4>
+					  </div>
+					  <div class="card-body" style="padding: 30px;">
+					    <div class="row col-12" style="padding-top:10px; padding-bottom:30px;">
+						  <h5><i class="far fa-smile-wink"></i>&nbsp;기억에 남는 여행이 되셨나요? 기록을 남겨 추억을 간직하세요&nbsp;</h5>
+						</div>
+					    <div class="addTripMemo-form">
+						  <form role="form" action="/tripMemo/updateTripMemo" method="post">
+						    <input type="hidden" name="mId" th:value="${session.SID}">
+						    <div class="row">
+				   	          <div class="col-12">
+							    <div class="form-group">
+							      <input type="text" class="form-control" name="tripMemoTitle" placeholder="여행 기록의 제목을 입력해주세요">
+							    </div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-12">
+							    <div class="form-group">
+							      <input type="date" class="form-control" name="tripMemoTripdate" placeholder="기록하고 싶은 여행의 날짜를 입력해주세요">
+							    </div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-12">
+							    <div class="form-group font-awesome">
+							      <select class="form-control fa" name="tripMemoWeather">
+							    	<option>여행한 날의 날씨는 어땠나요?</option>
+							    	<option value="맑음" class="far fa-sun">맑음</option>
+							      	<option value="구름" class="far fa-caret-down">구름</option>
+							       	<option value="강수" data-icon="<i class='far fa-umbrella'></i>">비</option>
+							       	<option value="fab fa-canadian-maple-leaf">바람</option>
+							       	<option value="far fa-snowman">눈</option>
+							      </select>
+							    </div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-12">
+							    <div class="form-group">
+							      <textarea class="form-control" rows="5" name="tripMemoContents" placeholder="추억에 남은 여행을 기록해주세요"></textarea>
+							    </div>
+							  </div>
+							</div>
+							<div class="form-group">
+							  <div class="input-group">
+							    <div class="custom-file col-12">
+							      <label class="col-8"><i class="fas fa-camera-retro">&nbsp;기록하고 싶은 여행사진을 한장 올려보세요&nbsp;</i><i class="fas fa-camera-retro"></i></label>
+							      <input type="file" class="form-control col-4 float-right" name="tripMemoPhoto" accept="image/git, image/jpeg, image/png">
+							    </div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-12">
+							    <div class="form-group">
+							      <button type="button" class="btn btn-info" name="tripNum" >내여행 불러오기</button>
+							    </div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-12">
+							    <div class="form-group">
+							      <div class="form-check col-4" style="margin:15px;">
+							        <input class="form-check-input" type="radio" name="tripMemoCheck" value="공개" checked>
+							        <label class="form-check-label"><i class="fas fa-lock-open">&nbsp;&nbsp;공개</i></label>
+							      </div>
+							      <div class="form-check col-4" style="margin:15px;">
+							        <input class="form-check-input" type="radio" name="tripMemoCheck" value="비공개">
+							        <label class="form-check-label"><i class="fas fa-lock">&nbsp;&nbsp;비공개</i></label>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							<div class="modal-footer justify-content-between">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">등록 취소</button>
+							  <button type="submit" class="btn btn-primary"><i class="fab fa-angellist"></i>&nbsp;등록 완료 :))</button>
+						    </div>
+						  </form>
+					    </div>      
+				  	  </div>          
+			        </div>
+		  	      </div>
+		        
+                </div>
+                <!-- /.tab-pane -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- card -->
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+</th:block>
+<th:block layout:fragment="customFooterScript">
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatasbles-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+
+</th:block>
+<th:block layout:fragment="customFooterScript">
+ <script type="text/javascript" src="/dist/js/callMyTrip.js"></script>
+</th:block>
+</html>
